@@ -1,3 +1,22 @@
+### W1317（2026-11-25）：站内搜索容量余量治理（索引去重 + 语料 gzip+base64 压缩存储）
+
+> **来源**：用户 2026-11-25 指令「先处理容量余量告警」＋同日方案裁决「去重 + 压缩都做」——对象为 check_capacity_budget.py 第 4 条「站内搜索脚本」2,965,520 B / 3 MiB（余量 5.73%）。
+>
+> - **取证（先证据后结论）**：三项字节 = text-search-app.js 2,160,029 B（99.3% 为内嵌原著明文）+ search-index-zh.js 393,433 B + search-index-en.js 412,058 B；实测 zh 索引 1091 条中 991 条与 en 索引同键同值（生成器「docs 全量两份共用」）⇒ 重复载荷 363,276 B；内嵌语料 gzip 压缩比 0.439（2.15 MB → 941 KB）。
+>
+> - **修法①索引去重**：`_gen_search_index.py` 拆出 site/data/search-index-docs.js（SITE_SEARCH_INDEX_DOCS·唯一副本）；zh/en 件只存本语言页面条目并改为 `SITE_SEARCH_INDEX_DOCS.concat([...])` 定义（消费方常量名与语义不变·页面 app 零改动）；两搜索页各加一行共享件外链（共享件必须先于本语言件加载）。
+>
+> - **修法②语料压缩**：`sync_search_corpus.py` 改为 gzip(紧凑 JSON)+base64 单串（EMBEDDED_CORPUS_GZ_B64·2.16 MB → 1.27 MB）；text-search-app.js 新增 decodeCorpus()，运行时以 DecompressionStream('gzip') 解压回填 EMBEDDED_DATA.chapters（file:// 可用·零外域）；旧浏览器不支持该 API 时由 showCorpusError() 给出明确降级提示（不静默失败）；--check 改为「解码后逐条对拍」（跨平台 zlib 字节差异不致假红）。
+>
+> - **同批根修（line_check 行号语义失效）**：该工具原从站内搜索内嵌语料取行号，W1316 去空白归一后全文无换行 ⇒ 所有引文恒为 line 1、--self-test 自 W1316 起即红。改为直读权威底本 source/原文/分回/*.md 并做空白无关匹配（折行/折行内空格仍可命中），4 正 1 负自测全绿。
+>
+> - **防漂移（判据同步收紧）**：第 46 槽扩为四判据（C1 三件数据件 + 两页双外链且顺序正确 / C2 docs / C3 zh / C4 en 逐条对拍），--self-test 1 正 6 负；截图分类器登记 docs 共享件为 skip 并放宽外链正则；容量 #4 清单纳入四件（诚实口径·新增字节不得隐形）；单测 6+5 例。
+>
+> - **验证**：容量 #4 2,965,520 → 1,713,688 B（94.30% → 54.48%·余量 45.5%）；sync_search_corpus --check 零差异；第 46 槽 0 FAIL（docs 991 · zh 100 · en 138）；line_check 自测 4 正 1 负；三页浏览器实测（全文检索「孙悟空」125 处命中 · ZH 全站搜索 24 行 · EN 搜索 7 行）零 console error；node --check 通过；pytest 1639 passed / 4 skipped；verify_delivery 全量见收官链。
+>
+> - **文件**：见 file-index W1317 段（本批 30+ 件·含新增 site/data/search-index-docs.js）。
+>
+> - **状态**：容量 #4 由 94.3% 降至 54.5% · 阈值未动 · 判据零放宽（计量面反而纳入新增共享件·无豁免/白名单新增）。
 ### W1316（2026-11-25）：站内搜索语料单源化（第三份副本清零 + 生成器落地）
 
 > **来源**：用户 2026-11-25 指令「先回填台账 hash 再开批二」＋批二方向裁决「以权威 JSON 重建（推荐）」——对象为批一 triage 的 R2（2.1MB 单文件内嵌语料）与取证新发现的三副本不一致。
@@ -667,7 +686,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1316），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1317），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

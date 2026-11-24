@@ -4,7 +4,7 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-25 01:00
+生成时间：2026-11-25 04:47
 
 共 **233** 件（门禁与校验 115 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 87 · 一次性（下划线前缀） 7）
 
@@ -255,7 +255,7 @@
 | `subject_band.py` | subject_band.py — 主体检测与派生裁切（不写盘·纯函数·W988 建·W1004 由归档桶转正） |
 | `svg_text_contrast_probe.js` | W1286：**惰性加载 playwright**——自测（--self-test）是纯数据判定·不启浏览器； |
 | `sync_data_json.py` | W678 WP-6.1：dataset 生成器输出 → site/data/json 部署副本 单向同步（清单制）。 |
-| `sync_search_corpus.py` | sync_search_corpus.py — 站内搜索语料生成器（W1316 建）。 |
+| `sync_search_corpus.py` | sync_search_corpus.py — 站内搜索语料生成器（W1316 建·W1317 压缩存储）。 |
 | `tracked_files.py` | tracked_files.py — 目标提交树文件集合（W894 批·门禁实算口径的单一事实源） |
 | `version_surface.py` | version_surface.py — 版本面（跨文件字面量）幂等推进器（W1114）。 |
 | `visual_regression_probe.py` | visual_regression_probe.py — J2 视觉回归探针（W851 建·设计迁移阶段 1 验收件） |

@@ -8,13 +8,16 @@ doc 条目，且 9 条链接仍指向已改名的 `docs/11-报告复盘/`（GitH
 ·老链接点不开）——本槽把该面关进笼子。
 
 判据（全过 exit 0，任一 FAIL exit 1）：
-C1 索引数据件与页面引用双侧在位（W1223 执行批 E 起索引外置）：
-   a) site/data/search-index-zh.js 与 site/en/search-index-en.js 存在且 SEARCH_INDEX:
-      BEGIN/END 标记对齐全、常量名正确（缺任一即 FAIL——索引被手删或生成器未跑）；
-   b) 两个搜索页各含指向本语言数据件的外链 <script src="…search-index-….js">
-      （页面被重写丢引用即 FAIL——file:// 离线检索会静默退化为「无命中」）。
-C2 zh 数据件载荷 == 生成器实算载荷（逐条对拍：kind/标题/分类/摘要/URL/关键词）
-C3 en 数据件载荷 == 生成器实算载荷（同上）
+C1 三件索引数据件与两页外链双侧在位（W1223 外置·W1317 拆共享件）：
+   a) site/data/search-index-docs.js（docs/reader 共用·唯一副本）、
+      site/data/search-index-zh.js、site/en/search-index-en.js 三件存在且
+      SEARCH_INDEX: BEGIN/END 标记对齐全、常量名正确；zh/en 件必须以
+      `SITE_SEARCH_INDEX_DOCS.concat([...])` 形态定义（缺件/形态错即 FAIL）；
+   b) 两个搜索页各含两条外链 <script src="…">：共享件 + 本语言件，且共享件必须
+      **先于**本语言件（后者定义时即求值共享常量——顺序错则 ReferenceError）。
+C2 docs 共享件载荷 == 生成器实算载荷
+C3 zh 数据件载荷（本语言页面条目）== 生成器实算载荷
+C4 en 数据件载荷（本语言页面条目）== 生成器实算载荷
 
 口径与纪律：
 - 期望载荷由 `scripts/_gen_search_index.py` 的 `build_indexes()` **纯计算**得出（W809
@@ -30,7 +33,7 @@ C3 en 数据件载荷 == 生成器实算载荷（同上）
 用法：
     python scripts/check_search_index_fresh.py             # 门禁模式（= --gate）
     python scripts/check_search_index_fresh.py --gate      # 同上（verify_delivery 调用形态）
-    python scripts/check_search_index_fresh.py --self-test # 注入式自测（1 正 5 负·不触仓库）
+    python scripts/check_search_index_fresh.py --self-test # 注入式自测（1 正 6 负·不触仓库）
 
 退出码：0 全过；1 有 FAIL；2 参数/环境错误。
 """
@@ -48,36 +51,50 @@ MARKER = "---- 第 46 门禁 搜索索引新鲜度："
 BEGIN = "/* SEARCH_INDEX:BEGIN */"
 END = "/* SEARCH_INDEX:END */"
 
-# 索引数据件 → 索引常量名（W1223 执行批 E：载荷外置为本地 JS 数据件·标记对随迁）
+# 共享件常量（zh/en 件定义时引用·页面必须先加载共享件）
+SHARED_CONST = "SITE_SEARCH_INDEX_DOCS"
+SHARED_FILE = "site/data/search-index-docs.js"
+
+# 索引数据件 → 索引常量名（W1223 外置·W1317 拆 docs 共享件）
 INDEX_FILES = {
+    SHARED_FILE: "SITE_SEARCH_INDEX_DOCS",
     "site/data/search-index-zh.js": "SITE_SEARCH_INDEX_ZH",
     "site/en/search-index-en.js": "SITE_SEARCH_INDEX_EN",
 }
 
-# 搜索页 → 其索引数据件（页面必须以外链 <script src> 引用本件——C1 页面侧判据）
+# 搜索页 → (共享件, 本语言件)；页面必须以外链 <script src> 引用两件且顺序在前者
 PAGE_REFS = {
-    "site/data/search.html": "site/data/search-index-zh.js",
-    "site/en/search.html": "site/en/search-index-en.js",
+    "site/data/search.html": (SHARED_FILE, "site/data/search-index-zh.js"),
+    "site/en/search.html": (SHARED_FILE, "site/en/search-index-en.js"),
 }
 
-_CONST_RE = re.compile(r"const\s+(SITE_SEARCH_INDEX_[A-Z]+)\s*=\s*(\[.*?\]);", re.S)
+_ARRAY_RE = re.compile(r"const\s+(SITE_SEARCH_INDEX_[A-Z]+)\s*=\s*(\[.*?\]);", re.S)
+_CONCAT_RE = re.compile(
+    r"const\s+(SITE_SEARCH_INDEX_[A-Z]+)\s*=\s*" + SHARED_CONST + r"\.concat\((\[.*?\])\);",
+    re.S,
+)
 
 
 def extract_embedded(html: str):
-    """抽取索引载荷（W1223 起判据域=外部 JS 数据件·标记对随迁；实参可承载任意含标记对文本）。
+    """抽取索引载荷（实参可承载任意含标记对文本）。
 
-    返回 (常量名, 条目列表) 或 (None, None)（标记对缺失/块不可解析）。
+    返回 (常量名, 形态, 条目列表)；形态 ∈ {'plain','concat'}，块缺失/不可解析时
+    常量名与形态为 None。concat 形态 = 本语言页面条目 + 共享 docs 件（唯一副本）。
     """
     if BEGIN not in html or END not in html:
-        return None, None
+        return None, None, None
     block = html[html.find(BEGIN):html.find(END) + len(END)]
-    m = _CONST_RE.search(block)
+    m = _CONCAT_RE.search(block)
+    kind = "concat"
     if not m:
-        return None, None
+        m = _ARRAY_RE.search(block)
+        kind = "plain"
+    if not m:
+        return None, None, None
     try:
-        return m.group(1), json.loads(m.group(2))
+        return m.group(1), kind, json.loads(m.group(2))
     except ValueError:
-        return m.group(1), None
+        return m.group(1), kind, None
 
 
 def diff_entries(expected, actual, limit=3):
@@ -111,77 +128,94 @@ def diff_entries(expected, actual, limit=3):
     return diffs
 
 
-_PAGE_SRC_RE = re.compile(r"""<script[^>]*\ssrc=["'][^"']*search-index-(zh|en)\.js["']""")
+# 数据件 → (期望载荷键, 判据码, 形态要求)
+_FILE_SPEC = {
+    SHARED_FILE: ("docs", "C2", "plain"),
+    "site/data/search-index-zh.js": ("zh", "C3", "concat"),
+    "site/en/search-index-en.js": ("en", "C4", "concat"),
+}
 
 
 def check_pages(expected: dict, pages: dict) -> list[str]:
     """核心判据（纯函数形态：--self-test 复用同一判据）。
 
-    expected: {'zh': 条目列表, 'en': 条目列表}
-    pages:    判据域文件文本映射 {仓库相对路径: 文件文本}——W1223 执行批 E 起同时
-              覆盖两个搜索页与两个索引数据件（判据域=文件集·键集由 INDEX_FILES
-              与 PAGE_REFS 定义，调用方按全集传入）。
+    expected: {'docs': 条目列表, 'zh': 页面条目, 'en': 页面条目}
+    pages:    判据域文件文本映射 {仓库相对路径: 文件文本}——键集由 INDEX_FILES
+              与 PAGE_REFS 定义，调用方按全集传入。
     返回 FAIL 明细列表（空 = 全过）。
     """
     fails = []
-    # C1-a：索引数据件在位（标记对 + 常量名）并承载 C2/C3 载荷对拍
+    # C1-a/C2-C4：数据件在位（标记对 + 常量名 + 形态）并承载载荷对拍
     for path, const_name in INDEX_FILES.items():
         text = pages.get(path)
         if text is None:
             fails.append("C1 索引数据件缺失：%s" % path)
             continue
-        name, actual = extract_embedded(text)
+        name, kind, actual = extract_embedded(text)
         if name is None:
             fails.append("C1 索引块缺失或不可解析（%s/%s 标记对不齐）：%s" % (BEGIN, END, path))
             continue
         if name != const_name:
             fails.append("C1 索引常量名不符（期望 %s·实得 %s）：%s" % (const_name, name, path))
             continue
-        lang = "zh" if "SITE_SEARCH_INDEX_ZH" == const_name else "en"
-        diffs = diff_entries(expected.get(lang) or [], actual)
+        key, code, want_kind = _FILE_SPEC[path]
+        if kind != want_kind:
+            hint = ("须以 %s.concat([...]) 定义（加载共享件后求值）" % SHARED_CONST
+                    if want_kind == "concat" else "须为纯 JSON 数组定义")
+            fails.append("C1 索引件定义形态不符（%s·实得 %s）：%s" % (hint, kind, path))
+            continue
+        diffs = diff_entries(expected.get(key) or [], actual)
         if diffs:
-            fails.append("C%d 索引数据件陈旧（应重跑 python scripts/_gen_search_index.py）：%s"
-                         % (2 if lang == "zh" else 3, path))
+            fails.append("%s 索引数据件陈旧（应重跑 python scripts/_gen_search_index.py）：%s"
+                         % (code, path))
             for d in diffs:
                 fails.append("    · %s" % d)
             fails.append("    · 条目数 期望 %d·实得 %d"
-                         % (len(expected.get(lang) or []), len(actual)))
-    # C1-b：页面外链引用在位（页面被重写丢引用 ⇒ file:// 离线检索静默退化）
-    for page_rel, js_rel in PAGE_REFS.items():
+                         % (len(expected.get(key) or []), len(actual)))
+    # C1-b：页面外链引用在位且顺序正确（共享件先于本语言件）
+    for page_rel, (shared_rel, own_rel) in PAGE_REFS.items():
         html = pages.get(page_rel)
         if html is None:
             fails.append("C1 搜索页缺失：%s" % page_rel)
             continue
-        js_basename = os.path.basename(js_rel)
-        if not _PAGE_SRC_RE.search(html) or js_basename not in html:
-            fails.append('C1 页面外链引用缺失（应为 <script src="%s">）：%s' % (js_basename, page_rel))
+        shared_pos = html.find(os.path.basename(shared_rel))
+        own_pos = html.find(os.path.basename(own_rel))
+        if shared_pos < 0 or own_pos < 0:
+            fails.append('C1 页面外链引用缺失（应为 <script src="%s"> 与 "%s"）：%s'
+                         % (os.path.basename(shared_rel), os.path.basename(own_rel), page_rel))
+        elif shared_pos > own_pos:
+            fails.append("C1 页面外链顺序错误（共享件须先于本语言件，否则定义求值即 ReferenceError）：%s"
+                         % page_rel)
     return fails
 
 
 def _self_test() -> int:
-    """注入式自测：1 正 5 负，合成树用系统临时目录，不触仓库。"""
+    """注入式自测：1 正 6 负，合成树用系统临时目录，不触仓库。"""
     import shutil
     import tempfile
 
     tmp = tempfile.mkdtemp(prefix="search_index_fresh_")
     ok = True
     try:
-        exp_zh = [{"kind": "doc", "title": "甲", "category": "c", "snippet": "s", "url": "u1", "kw": ["a"]},
-                  {"kind": "page", "title": "乙", "category": "c", "snippet": "s2", "url": "u2", "kw": ["b"]}]
-        exp_en = list(exp_zh)
+        exp_docs = [{"kind": "doc", "title": "甲", "category": "c", "snippet": "s", "url": "u1", "kw": ["a"]},
+                    {"kind": "doc", "title": "乙", "category": "c", "snippet": "s2", "url": "u2", "kw": ["b"]}]
+        exp_zh = [{"kind": "page", "title": "丙", "category": "c", "snippet": "s3", "url": "u3", "kw": ["c"]}]
+        exp_en = [{"kind": "page", "title": "丁", "category": "c", "snippet": "s4", "url": "u4", "kw": ["d"]}]
 
-        def mk_js(const, items):
+        def mk_js(const, items, concat=False):
             payload = json.dumps(items, ensure_ascii=False, separators=(',', ':'))
-            return ("%s\nconst %s = %s;\n%s\n" % (BEGIN, const, payload, END))
+            expr = ("%s.concat(%s)" % (SHARED_CONST, payload)) if concat else payload
+            return ("%s\nconst %s = %s;\n%s\n" % (BEGIN, const, expr, END))
 
-        def mk_page(js_basename):
-            return ('<html><body><script src="%s"></script>'
+        def mk_page(refs):
+            tags = "".join('<script src="%s"></script>' % r for r in refs)
+            return ('<html><body>%s'
                     '<script>function renderOffline(q){return SITE_SEARCH_INDEX_ZH;}</script></body></html>\n'
-                    % js_basename)
+                    % tags)
 
         def case(label, expect_codes, pages, expected=None):
             nonlocal ok
-            got = check_pages(expected or {"zh": exp_zh, "en": exp_en}, pages)
+            got = check_pages(expected or {"docs": exp_docs, "zh": exp_zh, "en": exp_en}, pages)
             hit = []
             if expect_codes:
                 for g in got:
@@ -194,34 +228,39 @@ def _self_test() -> int:
                 print("    期望命中 %r·实得 %r" % (expect_codes, got))
 
         good = {
-            "site/data/search.html": mk_page("search-index-zh.js"),
-            "site/en/search.html": mk_page("search-index-en.js"),
-            "site/data/search-index-zh.js": mk_js("SITE_SEARCH_INDEX_ZH", exp_zh),
-            "site/en/search-index-en.js": mk_js("SITE_SEARCH_INDEX_EN", exp_en),
+            "site/data/search.html": mk_page(["search-index-docs.js", "search-index-zh.js"]),
+            "site/en/search.html": mk_page(["../data/search-index-docs.js", "search-index-en.js"]),
+            SHARED_FILE: mk_js(SHARED_CONST, exp_docs),
+            "site/data/search-index-zh.js": mk_js("SITE_SEARCH_INDEX_ZH", exp_zh, concat=True),
+            "site/en/search-index-en.js": mk_js("SITE_SEARCH_INDEX_EN", exp_en, concat=True),
         }
         # 正样本：完全一致 → 无 FAIL
         case("fresh-must-pass", [], good)
-        # 负样本 1：索引数据件缺失（生成器未跑/被删）
-        no_js = dict(good)
-        del no_js["site/data/search-index-zh.js"]
-        case("missing-index-file-must-fail-C1", ["C1"], no_js)
-        # 负样本 2：页面外链引用被删（页面重写丢引用）
+        # 负样本 1：共享件缺失（生成器未跑/被删）
+        no_shared = dict(good)
+        del no_shared[SHARED_FILE]
+        case("missing-shared-file-must-fail-C1", ["C1"], no_shared)
+        # 负样本 2：页面缺共享件外链（旧页面形态）
         no_ref = dict(good)
-        no_ref["site/data/search.html"] = "<html><body>no script ref</body></html>"
-        case("missing-page-ref-must-fail-C1", ["C1"], no_ref)
-        # 负样本 3：少一条条目（索引陈旧）
+        no_ref["site/data/search.html"] = mk_page(["search-index-zh.js"])
+        case("missing-shared-ref-must-fail-C1", ["C1"], no_ref)
+        # 负样本 3：页面外链顺序错（本语言件在前 → 定义求值必 ReferenceError）
+        bad_order = dict(good)
+        bad_order["site/en/search.html"] = mk_page(["search-index-en.js", "../data/search-index-docs.js"])
+        case("wrong-ref-order-must-fail-C1", ["C1"], bad_order)
+        # 负样本 4：zh 件少一条（索引陈旧）
         stale = dict(good)
-        stale["site/data/search-index-zh.js"] = mk_js("SITE_SEARCH_INDEX_ZH", exp_zh[:1])
-        case("stale-entry-must-fail-C2", ["C2"], stale)
-        # 负样本 4：字段漂移（摘要被改）
+        stale["site/data/search-index-zh.js"] = mk_js("SITE_SEARCH_INDEX_ZH", [], concat=True)
+        case("stale-entry-must-fail-C3", ["C3"], stale)
+        # 负样本 5：docs 共享件字段漂移
         drift = dict(good)
-        tampered = [dict(e) for e in exp_zh]
+        tampered = [dict(e) for e in exp_docs]
         tampered[0]["snippet"] = "改过的摘要"
-        drift["site/data/search-index-zh.js"] = mk_js("SITE_SEARCH_INDEX_ZH", tampered)
-        case("field-drift-must-fail-C2", ["C2"], drift)
-        # 负样本 5：en 件常量名错位（zh 常量写进 en 件）
+        drift[SHARED_FILE] = mk_js(SHARED_CONST, tampered)
+        case("shared-drift-must-fail-C2", ["C2"], drift)
+        # 负样本 6：en 件常量名错位（zh 常量写进 en 件）
         wrong = dict(good)
-        wrong["site/en/search-index-en.js"] = mk_js("SITE_SEARCH_INDEX_ZH", exp_en)
+        wrong["site/en/search-index-en.js"] = mk_js("SITE_SEARCH_INDEX_ZH", exp_en, concat=True)
         case("wrong-const-must-fail-C1", ["C1"], wrong)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
@@ -267,7 +306,7 @@ def main() -> int:
         print("  FAIL 生成器实算失败：%s" % exc)
         return 1
 
-    expected = {"zh": json.loads(built["zh"][1]), "en": json.loads(built["en"][1])}
+    expected = {k: json.loads(built[k][1]) for k in ("docs", "zh", "en")}
     pages = {}
     for rel in list(INDEX_FILES) + list(PAGE_REFS):
         p = os.path.join(root, rel)
@@ -287,8 +326,8 @@ def main() -> int:
         if len(fails) > 20:
             print("  ...（其余 %d 条略）" % (len(fails) - 20))
         return 1
-    print(MARKER + "0 FAIL（zh %d 条 · en %d 条 与生成器实算一致）"
-          % (len(expected["zh"]), len(expected["en"])))
+    print(MARKER + "0 FAIL（docs %d 条 · zh %d 条 · en %d 条 与生成器实算一致）"
+          % (len(expected["docs"]), len(expected["zh"]), len(expected["en"])))
     return 0
 
 

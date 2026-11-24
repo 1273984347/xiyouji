@@ -137,3 +137,4 @@
 + W1312 EN cave-estate 嵌入回退数据归一化治本 file:// 下 text y NaN 清零 第 43 槽 EN 基线收紧 1 行 verify_delivery 判据单测 18 例 判据零放宽·无 workflow 结构改动）。
 + W1313 CSP 面占位符语法治本 connect-src 非法源清零 合法保留域占位源 注入器双形态替换 第 43 槽 dukou 冻结项清零 判据零放宽·无 workflow 结构改动）。
 + W1314 交接文档结构断言判据校正 尾链改取最后更新行 四段骨架替代九段旧判据 两条存量假阳性清零 判据零放宽·无 workflow 结构改动）。
++ W1317 站内搜索容量余量治理 索引去重363KB 语料gzip+base64压缩890KB 容量#4 2.83MB→1.63MB 判据零放宽·无 workflow 结构改动）。

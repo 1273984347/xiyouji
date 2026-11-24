@@ -90,7 +90,7 @@
    "counts": {}
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "d03de1aa1d624db5900756ecb7c1cc933a9e2f79",
+   "sha1": "9c8e49383144590373ac1bd3fa216b9cb2c0169b",
    "counts": {}
   },
   "data/cultural-misreading.html": {
@@ -314,7 +314,7 @@
    "counts": {}
   },
   "data/search.html": {
-   "sha1": "53c831520b44ce4d154f086ddef6a5a8d9b67aef",
+   "sha1": "72a9dafde9af9804035b94160d7fbbb30bc93656",
    "counts": {}
   },
   "data/six-senses-narratology-network.html": {
@@ -330,7 +330,7 @@
    "counts": {}
   },
   "data/tag-cloud.html": {
-   "sha1": "2323cd0a1ec94fe92837f31d2fc8556e6c20f160",
+   "sha1": "755eea9f24ff214075cb5c7fedfadd0db865ba7c",
    "counts": {}
   },
   "data/text-evolution.html": {
@@ -382,7 +382,7 @@
    "counts": {}
   },
   "dukou-engine.html": {
-   "sha1": "cd6f3e1d473299a548e0c9f4c2a435cbd1af9bbc",
+   "sha1": "01e5c3ede70d3d387a21172cd70847e99c34ee9d",
    "counts": {}
   },
   "guide.html": {
@@ -390,7 +390,7 @@
    "counts": {}
   },
   "index.html": {
-   "sha1": "633da2ad71bc016d22b4577db514216ba6c52086",
+   "sha1": "20129c7da41d4fb92584f1f47434f5d71230199e",
    "counts": {}
   },
   "rum-viewer.html": {
@@ -898,7 +898,7 @@
    "counts": {}
   },
   "en/search.html": {
-   "sha1": "b93ee935a408aece15ca1995767f898c74404ebf",
+   "sha1": "a7aedf8679a023f827fadd755ec603ef3e077aa0",
    "counts": {}
   },
   "en/site-map.html": {
@@ -954,5 +954,5 @@
    "counts": {}
   }
  },
- "generated_at": "2026-11-24T17:03:04.528Z"
+ "generated_at": "2026-11-24T20:35:00.623Z"
 }

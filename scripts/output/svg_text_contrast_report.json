@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-24T17:07:12.368Z",
+ "generated_at": "2026-11-24T20:23:45.485Z",
  "threshold": 3,
  "scope": "data,en",
  "bg_mode": "body",
@@ -40,7 +40,7 @@
   "data/concept-device.html": "d840b607083e",
   "data/counterfactual.html": "79fce6a1ac54",
   "data/criticism-history.html": "ead0f23d2700",
-  "data/cross-time-danmaku.html": "b3bd3097f7c0",
+  "data/cross-time-danmaku.html": "9385c9df0811",
   "data/cultural-misreading.html": "21f908efc352",
   "data/customs-pass-route.html": "427e8f0ddbaa",
   "data/data-explorer.html": "a90e6836ae2f",
@@ -96,6 +96,7 @@
   "data/six-senses-narratology-network.html": "e130ecbd2aec",
   "data/social-media.html": "0a7ffbf6c141",
   "data/text-evolution.html": "36ef7c97c1ce",
+  "data/text-search.html": "399d198505da",
   "data/theological-intervention-network.html": "26e9f3695cc1",
   "data/timeline.html": "fd460ca3ea52",
   "data/underworld-power-network.html": "9e022dbb99a1",
@@ -182,8 +183,7 @@
   "en/timeline.html": "1ade1818d118",
   "en/underworld-power-network.html": "d1796dcd5361",
   "en/visual-art.html": "918aeb330fcc",
-  "en/workplace.html": "de9cca65dc70",
-  "data/text-search.html": "399d198505da"
+  "en/workplace.html": "de9cca65dc70"
  },
  "by_page": {}
 }

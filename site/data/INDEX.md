@@ -10,7 +10,7 @@
 
 - `json/`
 
-## 文件（92）
+## 文件（93）
 
 ### HTML 页面
 
@@ -108,6 +108,7 @@
 
 ### JavaScript / TypeScript
 
+- `search-index-docs.js`
 - `search-index-zh.js`
 
 ---

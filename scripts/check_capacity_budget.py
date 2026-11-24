@@ -20,9 +20,11 @@
      §3.1 表 + B-03 取数命令 Get-ChildItem site -Recurse -File -Filter *.html | Measure-Object
      Length -Sum）。120 MB 按 120*1024*1024 = 125829120 B 判定。
   # 4 站内搜索脚本 > 3 MB
-     口径：站内搜索功能所加载的自有脚本（排除第三方库 .min.js）——当前实现为
-     site/static/js/text-search-app.js 单文件，取其字节数（若仓内出现多个搜索脚本则求和）。
-     3 MB = 3*1024*1024 = 3145728 B。
+     口径：站内搜索功能所加载的自有脚本（排除第三方库 .min.js）——当前为四件：
+     site/static/js/text-search-app.js（语料压缩载荷 + app）、
+     site/data/search-index-docs.js（docs/reader 共享索引·W1317 去重后的唯一副本）、
+     site/data/search-index-zh.js 与 site/en/search-index-en.js（本语言页面条目）。
+     取其字节数之和。3 MB = 3*1024*1024 = 3145728 B。
   # 5 门禁全量耗时 > 600 s
      口径：不跑全量 verify_delivery.py（由控制器收官时统一跑）。本脚本只读仓内已有的门禁耗时
      记录：优先读环境变量 CAPACITY_GATE_SECONDS（控制器收官时传入本批实测秒数）；其次读
@@ -119,10 +121,12 @@ BUSINESS_TABLES = ("sessions", "messages", "feedback")
 
 # 站内搜索自有字节（排除第三方库 .min.js）。W1223 执行批 E 起含两份索引数据件
 # （search-index-zh/en.js·自 search 两页外置而来）——诚实口径：索引字节从容量 #1
-# （单页 HTML）搬到本条，不得因「搬家」而在本条盲区里隐形。
+# （单页 HTML）搬到本条，不得因「搬家」而在本条盲区里隐形。W1317 起增 docs 共享件
+# （去重后的唯一副本），压缩语料/去重前后均按全量求和比对。
 SEARCH_SCRIPT_PATTERNS = (
     os.path.join("site", "static", "js", "text-search-app.js"),
     os.path.join("site", "js", "text-search-app.js"),
+    os.path.join("site", "data", "search-index-docs.js"),
     os.path.join("site", "data", "search-index-zh.js"),
     os.path.join("site", "en", "search-index-en.js"),
 )

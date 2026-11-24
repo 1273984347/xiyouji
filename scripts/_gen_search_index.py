@@ -7,6 +7,12 @@
 #       两搜索页改以同目录 <script src> 引用——单页 HTML 体积从 ~449/~426 KB 降至
 #       ~113/~70 KB（容量 #1 治理）。file:// 铁律不破：经典脚本相对路径本地加载，
 #       无 fetch、无外域；CSP script-src 'self' 放行（W1222 评估实测）。
+# W1317（容量 #4 治理）：docs/reader 条目两语共用却各存一份（991 条 × 2 = 363 KB 冗余）
+#       ⇒ 拆出 site/data/search-index-docs.js（SITE_SEARCH_INDEX_DOCS·唯一副本）；zh/en
+#       数据件只保留本语言 site 页面条目，定义改为
+#       `const SITE_SEARCH_INDEX_ZH = SITE_SEARCH_INDEX_DOCS.concat([...]);`
+#       ——消费方页面常量名与语义不变（仍是合并后的完整索引），页面仅多一行共享件外链
+#       （共享件必须先于本语言件加载：数据件定义时求值）。
 #       消费方不变：常量名保持 SITE_SEARCH_INDEX_ZH/EN，页面 app 逻辑零改动。
 import glob
 import json
@@ -119,18 +125,23 @@ def page_entry(p):
             'snippet': snippet, 'url': rel_site, 'kw': make_kw(title)}
 
 
-def build_block(const_name, items):
+def build_block(const_name, items, prefix_ref=None):
+    """渲染数据件块；prefix_ref 非空时定义为本语言页面条目 + 共享 docs 件的 concat。"""
     payload = json.dumps(items, ensure_ascii=False, separators=(',', ':'))
-    return BEGIN + '\nconst ' + const_name + ' = ' + payload + ';\n' + END, payload
+    expr = '%s.concat(%s)' % (prefix_ref, payload) if prefix_ref else payload
+    return BEGIN + '\nconst ' + const_name + ' = ' + expr + ';\n' + END, payload
 
 
 def build_indexes():
-    """按当前 docs/ 与 site/ 实况算出两语索引（纯计算·不落盘）。
+    """按当前 docs/ 与 site/ 实况算出三件载荷（纯计算·不落盘）。
+
+    W1317：docs 条目（含 reader 映射）两语共用 ⇒ 单独一件（唯一副本）；zh/en 件只含
+    本语言 site 页面条目，并以 concat 引用共享件（消费方常量语义不变）。
 
     W809：原实现把「算」与「写」都放在模块级（import 即写盘），导致「只算不写」的
     新鲜度门禁（check_search_index_fresh.py）无法安全复用本模块——本函数化是挂槽前置：
     门禁侧 import 本模块只调用 build_indexes() 取期望载荷；页面写盘只发生在 main()。
-    返回：{'zh': (block_zh, payload_zh), 'en': (block_en, payload_en), 'counts': (docs, pages_zh, pages_en)}
+    返回：{'docs': (block, payload), 'zh': ..., 'en': ..., 'counts': (docs, pages_zh, pages_en)}
     """
     doc_files = []
     for p in glob.glob(os.path.join(DOCS, '**', '*.md'), recursive=True):
@@ -141,60 +152,60 @@ def build_indexes():
                   if os.path.basename(p) not in ('_template.html', '_shell.html')
                   and ('/reader/' not in p.replace(os.sep, '/') or p.replace(os.sep, '/').endswith('reader/themes-hub.html'))]  # W593：reader 页由 docs 条目承载避免双条目；W669 例外=themes-hub（无 docs 对应·导航页入索引）
 
-    # W594：中英双索引分离——docs 全量两份共用；site 页面 zh 版收 zh 页、en 版收 en 页
+    # W1317：docs 全量共用一个共享件；site 页面 zh 版收 zh 页、en 版收 en 页
     index_docs = [doc_entry(p) for p in sorted(doc_files)]
     page_rels = sorted(page_files)
     pages_zh = [page_entry(p) for p in page_rels if '/en/' not in p.replace(os.sep, '/')]
     pages_en = [page_entry(p) for p in page_rels if '/en/' in p.replace(os.sep, '/')]
-    index_zh = index_docs + pages_zh
-    index_en = index_docs + pages_en
-    block_zh, payload_zh = build_block('SITE_SEARCH_INDEX_ZH', index_zh)
-    block_en, payload_en = build_block('SITE_SEARCH_INDEX_EN', index_en)
-    return {'zh': (block_zh, payload_zh), 'en': (block_en, payload_en),
+    block_docs, payload_docs = build_block('SITE_SEARCH_INDEX_DOCS', index_docs)
+    block_zh, payload_zh = build_block('SITE_SEARCH_INDEX_ZH', pages_zh, 'SITE_SEARCH_INDEX_DOCS')
+    block_en, payload_en = build_block('SITE_SEARCH_INDEX_EN', pages_en, 'SITE_SEARCH_INDEX_DOCS')
+    return {'docs': (block_docs, payload_docs), 'zh': (block_zh, payload_zh),
+            'en': (block_en, payload_en),
             'counts': (len(doc_files), len(pages_zh), len(pages_en))}
 
 def main():
-    """把两语索引写进外部 JS 数据件并把搜索页改为 <script src> 引用（W1223·幂等）。
+    """把三件索引数据件与两页外链引用写到位（W1223 建·W1317 拆分共享件·幂等）。
 
-    页面外科幂等语义：
-    - 首跑（页面仍含内联 BEGIN..END 段）：摘除内联段（保留宿主 script 内的 app 逻辑），
-      并在宿主 <script> 开标签前插入外链 <script src="…"></script>（保证常量先于
-      app 逻辑求值——renderOffline 等函数体直呼该常量）。
-    - 重跑（页面已含外链引用）：只重写 JS 数据件，页面不再动。
-    - 两态皆无（结构未知）：SystemExit 拒绝静默。
+    幂等语义：
+    - 数据件整写（幂等）：docs 共享件 + zh/en 本语言页面件（标记对随迁，第 46 槽判据域同步）。
+    - 页面外科（幂等）：本语言件外链在位则不动；缺共享件外链时插入到本语言件**之前**
+      （共享件必须先于本语言件加载——后者定义时即求值 SITE_SEARCH_INDEX_DOCS）。
+    - 结构未知（找不到本语言件外链锚点）：SystemExit 拒绝静默。
     """
     built = build_indexes()
-    targets = [
-        (os.path.join(SITE, 'data', 'search.html'), built['zh'][0], 'search-index-zh.js'),
-        (os.path.join(SITE, 'en', 'search.html'), built['en'][0], 'search-index-en.js'),
-    ]
-    for t, block, js_rel in targets:
-        # 1) 外部数据件：整写（幂等）——标记对随迁，第 46 槽判据域同步
-        js_path = os.path.join(os.path.dirname(t), js_rel)
+    shared_name = 'search-index-docs.js'
+    shared_path = os.path.join(SITE, 'data', shared_name)
+    # 1) 三个数据件整写（幂等）——标记对随迁，第 46 槽判据域同步
+    for js_path, block in (
+        (shared_path, built['docs'][0]),
+        (os.path.join(SITE, 'data', 'search-index-zh.js'), built['zh'][0]),
+        (os.path.join(SITE, 'en', 'search-index-en.js'), built['en'][0]),
+    ):
         with open(js_path, 'w', encoding='utf-8', newline='') as f:
             f.write(block + '\n')
-        # 2) 页面外科（幂等）
-        s = rd(t)
-        src_tag = '<script src="%s"></script>' % js_rel
-        if BEGIN in s and END in s:
-            pos = s.find(BEGIN)
-            pre = s[:pos]
-            post = s[s.find(END) + len(END):]
-            s = pre.rstrip('\n') + '\n' + post
-            host = s.rfind('<script', 0, pos)
-            if host == -1:
-                raise SystemExit(f'FAIL 未找到宿主 script 开标签: {t}')
-            s = s[:host] + src_tag + '\n' + s[host:]
-        elif src_tag in s:
-            pass  # 已迁移形态：页面无需再动
-        else:
-            raise SystemExit(f'FAIL 未找到内联索引段或外链引用锚点: {t}')
-        with open(t, 'w', encoding='utf-8', newline='') as f:
+    # 2) 页面外链（幂等·共享件先于本语言件）
+    for page, own_name in (
+        (os.path.join(SITE, 'data', 'search.html'), 'search-index-zh.js'),
+        (os.path.join(SITE, 'en', 'search.html'), 'search-index-en.js'),
+    ):
+        s = rd(page)
+        own_tag = '<script src="%s"></script>' % own_name
+        shared_rel = os.path.relpath(shared_path, os.path.dirname(page)).replace(os.sep, '/')
+        shared_tag = '<script src="%s"></script>' % shared_rel
+        if shared_tag in s:
+            continue  # 已迁移形态：页面无需再动
+        if own_tag not in s:
+            raise SystemExit(f'FAIL 未找到本语言索引外链锚点: {page}')
+        s = s.replace(own_tag, shared_tag + '\n' + own_tag, 1)
+        with open(page, 'w', encoding='utf-8', newline='') as f:
             f.write(s)
     n_docs, n_zh, n_en = built['counts']
     print(f'docs={n_docs} pages_zh={n_zh} pages_en={n_en} '
-          f'bytes zh={len(built["zh"][1].encode("utf-8"))} en={len(built["en"][1].encode("utf-8"))}')
-    print('targets=2 external-js (search-index-zh.js / search-index-en.js)')
+          f'bytes docs={len(built["docs"][1].encode("utf-8"))} '
+          f'zh={len(built["zh"][1].encode("utf-8"))} en={len(built["en"][1].encode("utf-8"))}')
+    print('targets=3 external-js '
+          '(search-index-docs.js / search-index-zh.js / search-index-en.js)')
 
 
 if __name__ == '__main__':
