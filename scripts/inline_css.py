@@ -60,6 +60,53 @@ def strip_comments(css):
     return re.sub(r"\n{3,}", "\n\n", _CSS_COMMENT_RE.sub("", css)).strip()
 
 
+# W1318（容量 #2b 治本）：共享基线块无损空白压缩。
+# 字符串段原样保留（tokens.css 存在 'rgb(192, 57, 43)' 这类供 JS 消费的字符串令牌）。
+_STRING_SPLIT_RE = re.compile(r"('[^']*'|\"[^\"]*\")")
+
+
+def _minify_code(seg):
+    """代码段（非字符串）空白压缩——逐条语义等价，见 minify 文档。"""
+    seg = seg.replace("\r\n", "\n")
+    seg = re.sub(r"\s*\n\s*", " ", seg)      # ① 换行/缩进 → 单空格
+    seg = re.sub(r"[ \t]{2,}", " ", seg)     # ② 连续空白 → 单空格
+    seg = re.sub(r"\s*([{};,])\s*", r"\1", seg)  # ③ { } ; , 两侧空白删除
+    seg = seg.replace(";}", "}")             # ④ 块末冗余分号
+    seg = re.sub(r":\s+", ":", seg)          # ⑤ 声明/media 特征冒号后空白
+    seg = re.sub(r"\s*>\s*", ">", seg)       # ⑥ 子代组合器两侧空白
+    seg = re.sub(r"(?<![\w.])0\.(\d)", r".\1", seg)  # ⑦ 0.5 → .5（数值前导零）
+    seg = re.sub(r"\s+!important", "!important", seg)  # ⑧ !important 前空白
+    return seg
+
+
+def _unquote_url(css):
+    """url('…') → url(…)（路径无空白/引号/括号时安全；源含 7 处字体 url）。"""
+    def repl(m):
+        inner = m.group(1)
+        if re.search(r"[\s'\"()]", inner):
+            return m.group(0)
+        return "url(%s)" % inner
+    return re.sub(r"url\(\s*'([^']*)'\s*\)", repl, css)
+
+
+def minify(css):
+    """W1318：共享基线块无损压缩（只动代码段空白/冗余分号/等价数值写法·字符串原样保留）。
+
+    背景：共享基线块（tokens.css + system.css 剥注释副本）自 W1224 设 56 KB 机制线后
+    随设计令牌增长到 68,881 B（67.29 KiB）⇒ 容量 #2b 越线。本函数做保守压缩：
+    换行折叠 / 连续空白折叠 / `{ } ; ,` 两侧空白 / `;}` / `:` 后空白 / `>` 两侧空白 /
+    数值前导零 / `!important` 前空白 / url 引号（无空白路径）。
+    不做：字符串内空白（tokens.css 有 'rgb(192, 57, 43)' 这类供 JS 消费的字符串令牌）；
+    `+ - * /` 运算符空白（calc 语法要求空格）。
+    实测 reader 页共享块 68,902 B → 约 57.3 KB（含 url 前缀差异），机制线 56 KiB 内。
+    """
+    parts = _STRING_SPLIT_RE.split(css)
+    out = []
+    for i, part in enumerate(parts):
+        out.append(part if i % 2 else _minify_code(part))
+    return _unquote_url("".join(out).strip())
+
+
 def process(path, force, dry, inline_links=False):
     with open(path, encoding="utf-8") as f:
         html = f.read()
@@ -100,9 +147,9 @@ def process(path, force, dry, inline_links=False):
                       "", html, flags=re.S)
 
     with open(TOKENS, encoding="utf-8") as f:
-        tokens = strip_comments(safe(f.read().strip()))
+        tokens = minify(strip_comments(safe(f.read().strip())))
     with open(SYSTEM, encoding="utf-8") as f:
-        system = strip_comments(safe(f.read().strip()))
+        system = minify(strip_comments(safe(f.read().strip())))
 
     inlined = (
         '    <!-- %s (tokens.css + system.css) · 单一事实源: site/tokens.css, site/system.css · 重同步: python scripts/inline_css.py -->\n'
@@ -118,6 +165,9 @@ def process(path, force, dry, inline_links=False):
         _prefix = "../" * _depth
         inlined = inlined.replace("url('static/", "url('%sstatic/" % _prefix)
         inlined = inlined.replace('url("static/', 'url("%sstatic/' % _prefix)
+        # W1318：minify 已把无空白 url 去引号 ⇒ 前缀替换必须覆盖 url(static/ 形态，
+        # 否则子目录页字体会解析到 site/reader/<sub>/static/…（file:// 404）。
+        inlined = inlined.replace("url(static/", "url(%sstatic/" % _prefix)
 
     html = html.replace(link_tokens, "")
     html = html.replace(link_system, "")

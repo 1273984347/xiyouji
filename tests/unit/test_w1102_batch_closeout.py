@@ -268,3 +268,33 @@ def test_dry_run_never_writes(monkeypatch):
     offenders = [c for c in calls if '--apply' in c]
     assert not offenders, offenders
     assert any('--dry-run' in c for c in calls), calls
+
+
+def test_apply_backfill_uses_injectable_runner(monkeypatch):
+    """W1318 回归：台账回填子进程必须走 bc.run（可注入面），禁直连 subprocess。
+
+    病根（W1315 连带发现·W1317 实证）：`_apply_backfill` 原用 `_sp.run` 直连
+    ⇒ `test_main_executes_steps_in_declared_order` 只 mock `bc.run` 时，`bc.main()`
+    会**真实执行 ledger_backfill.py 并回填本仓台账**（每跑一次 pytest 就多一笔
+    工作树改动；W1317 收官时因此额外产生两笔提交）。
+
+    变异自证：把实现退回 `_sp.run`，本用例必红（subprocess.run 已被替换为抛错桩）。
+    """
+    import subprocess as _subprocess
+
+    calls = []
+
+    def fake_run(args, cwd=None):
+        calls.append([str(a) for a in args])
+        return 0, ''
+
+    def boom(*args, **kwargs):
+        raise AssertionError('直连 subprocess 被禁：回填必须走 bc.run（可注入面）')
+
+    monkeypatch.setattr(bc, 'run', fake_run)
+    monkeypatch.setattr(_subprocess, 'run', boom)
+
+    bc._apply_backfill('D:/nonexistent-root', [(1317, 'abc1234', True)], dry=False)
+
+    assert calls, '回填未调用 bc.run'
+    assert any('ledger_backfill.py' in part for part in calls[0]), calls[0]

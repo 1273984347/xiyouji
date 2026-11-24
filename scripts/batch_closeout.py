@@ -765,8 +765,12 @@ def _git_w_map_v2(root):
 
 
 def _apply_backfill(root, todo, dry):
-    """执行回填（todo 元素 = (w, sha, closed[, kind])）——v1/v2 共用。"""
-    import subprocess as _sp
+    """执行回填（todo 元素 = (w, sha, closed[, kind])）——v1/v2 共用。
+
+    W1318 根修：子进程改走本模块 `run()`（可注入面）——原 `_sp.run` 直连绕过单测
+    mock ⇒ `bc.main()` 的单测会真实执行 ledger_backfill.py 并回填本仓台账
+    （W1315 连带发现/W1317 实证：每跑一次 pytest 就多一笔幽灵台账改动）。
+    """
     for item in todo:
         w, sha, closed = item[0], item[1], item[2]
         kind = item[3] if len(item) > 3 else "回填"
@@ -776,9 +780,13 @@ def _apply_backfill(root, todo, dry):
         if not closed:
             print("[backfill-prev-hash] WARN W%d 状态列仍非「已收官」⇒ 已%s hash（%s）但状态列须人工翻"
                   % (w, kind, sha))
-        print("[backfill-prev-hash] %s W%d ⇒ %s" % (kind, w, sha))
-        _sp.run([sys.executable, os.path.join(root, "scripts", "ledger_backfill.py"),
-                 "--w", str(w), "--hash", sha], cwd=root)
+        rc, out = run([sys.executable, os.path.join(root, "scripts", "ledger_backfill.py"),
+                       "--w", str(w), "--hash", sha], cwd=root)
+        if rc != 0:
+            print("[backfill-prev-hash] WARN ledger_backfill W%d 失败（rc=%d）：%s"
+                  % (w, rc, out.strip()[:200]))
+        else:
+            print("[backfill-prev-hash] %s W%d ⇒ %s" % (kind, w, sha))
 
 
 def _run_backfill_prev_hash(dry=False):

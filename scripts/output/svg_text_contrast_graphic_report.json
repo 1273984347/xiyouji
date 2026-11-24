@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-24T20:23:45.275Z",
+ "generated_at": "2026-11-24T22:38:46.848Z",
  "threshold": 3,
  "scope": "all",
  "bg_mode": "graphic",
@@ -40,7 +40,6 @@
   "data/concept-device.html": "d840b607083e",
   "data/counterfactual.html": "79fce6a1ac54",
   "data/criticism-history.html": "ead0f23d2700",
-  "data/cross-time-danmaku.html": "9385c9df0811",
   "data/cultural-misreading.html": "21f908efc352",
   "data/customs-pass-route.html": "427e8f0ddbaa",
   "data/data-explorer.html": "a90e6836ae2f",
@@ -187,9 +186,10 @@
   "about.html": "f917041c34ea",
   "curated.html": "317e50128e64",
   "dashboard.html": "455c2f86abb7",
-  "dukou-engine.html": "9483e339d717",
   "guide.html": "9324bb32ec2b",
-  "index.html": "bbe64f8eb7a3"
+  "dukou-engine.html": "a3f2bc0de241",
+  "data/cross-time-danmaku.html": "d983282c0401",
+  "index.html": "db09418898d8"
  },
  "by_page": {}
 }
