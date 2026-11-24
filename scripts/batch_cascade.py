@@ -1076,6 +1076,53 @@ def _apply_pend(pend, batch):
     print(f"[MANIFEST] 级联落盘清单 {len(pend)} 个文件 → {manifest}（提交时按清单 git add；清单本身随批入库）")
 
 
+# W1314 判据校正：交接文档结构断言收敛为纯函数（可单测）。
+# ① 尾链原实现 rfind("最后更新：") 命中「维护契约」段内的引用行 ⇒ 尾链=整篇正文
+#    ⇒ 日期计数恒 >3 ⇒ 每批误报；正确口径=同一条 `> 最后更新：` 行内日期条目 ≤3
+#    （维护契约②「最新 1–3 批」）。
+# ② 原「## 九、使用说明」判据已随 W707 结构收敛过期；现役契约为零/一/二/三 四段骨架。
+HANDOVER_SECTIONS = (
+    "## ⚠️ 零、当前阻塞",
+    "## 一、当前进度",
+    "## 二、下一步方向候选清单",
+    "## 三、方法论沉淀",
+)
+_RE_LAST_UPDATED = re.compile(r"^> 最后更新：", re.M)
+_RE_ISO_DATE = re.compile(r"\b20\d{2}-\d{2}-\d{2}\b")
+
+
+def audit_handover_text(txt, batch, sep=None):
+    """交接文档结构断言（纯函数·W1314 判据校正）：返回问题清单（空=通过）。"""
+    issues = []
+    sep = sep or ("\r\n" if "\r\n" in txt else "\n")
+    # W706 结构断言（用户挑刺 P0 实证：头部错位块链+段标题被吞·写后即拦不落脏盘）
+    main_h = txt.find("# 交接文档")
+    if main_h == -1 or txt[:main_h].strip():
+        issues.append("交接文档: 主标题前存在错位内容（结构断言）")
+    positions = [txt.find(s) for s in HANDOVER_SECTIONS]
+    if any(p == -1 for p in positions) or positions != sorted(positions):
+        issues.append(
+            "交接文档: 四段骨架（零/一/二/三）缺失或段序破坏（%s）——结构断言"
+            % " ".join(str(p) for p in positions)
+        )
+    if not re.search(r"> 历史概要（W\d+ 及更早）的详细记录见", txt):
+        issues.append("交接文档: 历史概要指针缺失（结构断言）")
+    # W665：里程碑块置顶后「最后更新」行不再固定在 index 6 ⇒ 按行前缀定位
+    # （W1314：改 re.M 取真正的首行，避免命中维护契约里的「最后更新」引用）
+    m = _RE_LAST_UPDATED.search(txt)
+    head_line = ""
+    if m:
+        nl = txt.find(sep, m.start())
+        head_line = txt[m.start(): nl if nl != -1 else len(txt)]
+    entries = re.findall(r"(?:v[\d.]+\s+)?(W\d+)", head_line)  # W711 双形态
+    if not entries or entries[0] != batch:
+        issues.append("交接文档: 头链首条非 %s（%s）——需人工核查" % (batch, entries[:3]))
+    dates = _RE_ISO_DATE.findall(head_line)
+    if len(dates) > 3:
+        issues.append("交接文档: 尾链日期条目 >3（%s）——需人工核查" % dates[:5])
+    return issues
+
+
 def _post_check(pend, batch):
     """写后自检（W560 并入 jiacheck 要点）：CR 串/交接文档结构/头尾链；返回问题清单。"""
     # ---------- 写后自检 + 自愈（W560：并入 _cascade_fix.py 与 jiacheck 要点） ----------
@@ -1092,28 +1139,7 @@ def _post_check(pend, batch):
                 f.write(data)
             selfcheck.append(f"{path}: CR 串已收敛（自愈）")
         if path == "HANDOVER.md":
-            txt = data.decode("utf-8")
-            sep = "\r\n" if "\r\n" in txt else "\n"
-            # W706 结构断言（用户挑刺 P0 实证：头部错位块链+段标题被吞·写后即拦不落脏盘）
-            _main = txt.find("# 交接文档")
-            if _main == -1 or txt[:_main].strip():
-                selfcheck.append("交接文档: 主标题前存在错位内容（结构断言）")
-            _z, _y, _e = (txt.find("## ⚠️ 零、当前阻塞"), txt.find("## 一、当前进度"), txt.find("## 二、下一步方向候选清单"))
-            if not (-1 < _z < _y < _e):
-                selfcheck.append(f"交接文档: 段序破坏（零={_z} 一={_y} 二={_e}）——段标题被吞（结构断言）")
-            if not re.search(r"> 历史概要（W\d+ 及更早）的详细记录见", txt):
-                selfcheck.append("交接文档: 历史概要指针缺失（结构断言）")
-            hl0 = txt.find("> 最后更新：")  # W665 修复：里程碑块置顶后「最后更新」行不再固定在 index 6
-            head_line = txt[hl0:txt.find(sep, hl0)] if hl0 != -1 else ""
-            head_entries = re.findall(r"(?:v[\d.]+\s+)?(W\d+)", head_line)  # W711 双形态
-            if not head_entries or head_entries[0] != batch:
-                selfcheck.append(f"交接文档: 头链首条非 {batch}（{head_entries[:3]}）——需人工核查")
-            tail_txt = txt[txt.rfind("最后更新："):]
-            tail_entries = re.findall(r"(?:v[\d.]+\s+)?(W\d+)", tail_txt)  # W711 双形态
-            if tail_txt.count("2026-") > 3 or not tail_entries or tail_entries[0] != batch:
-                selfcheck.append(f"交接文档: 尾链异常（{tail_entries[:3]}）——需人工核查")
-            if "## 九、使用说明" not in txt:
-                selfcheck.append("交接文档: 「九、使用说明」段缺失——需人工核查")
+            selfcheck.extend(audit_handover_text(data.decode("utf-8"), batch))
     for line in selfcheck:
         print("[SELF-CHECK]", line)
 

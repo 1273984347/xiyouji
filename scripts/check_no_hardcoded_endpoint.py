@@ -4,7 +4,7 @@
 判定目标（架构方案 v2 §10.6 / §5.4 禁止依赖形态 #8）：
   静态产物（L2）不得内嵌 L3 的服务地址——回环地址、内网 IP、裸域名服务地址都算。
   产物里允许出现的只有三种形态：
-    ① 构建期占位符（__XIJ_SERVICE_BASE__，待部署期注入）；
+    ① 构建期占位符（文本位 __XIJ_SERVICE_BASE__ / CSP 面 https://xij-service-base.invalid，待部署期注入）；
     ② 部署期注入后的「已声明」地址（须以 --expected-endpoint / XIJ_SERVICE_BASE 声明）；
     ③ 开发者本机专用构建（文件内须带显式标记 xij-build-profile:developer-local，
        且标记里写明注入的地址——豁免必须可审计）。
@@ -36,6 +36,12 @@ import tempfile
 
 #: 构建期占位符（与 scripts/inject_service_endpoint.py 一致）。
 PLACEHOLDER = "__XIJ_SERVICE_BASE__"
+
+#: CSP 面占位源（W1313）：CSP host-source 语法只允许 ALPHA/DIGIT/「-」/「.」——下划线形态
+#: `__XIJ_SERVICE_BASE__` 会被浏览器判为 invalid source 并报 console error（第 43 槽冻结项
+#: site/en/dukou-engine.html 的根因）。⇒ CSP 面改用语法合法的保留域 `.invalid` 承载占位语义：
+#: 浏览器解析零报错、不会发起请求；部署期由 inject_service_endpoint.py 与文本位一并替换。
+CSP_PLACEHOLDER = "https://xij-service-base.invalid"
 
 #: 开发者本机专用构建的显式标记（产物内可见·豁免凭此放行）。
 DEV_LOCAL_MARKER = "xij-build-profile:developer-local"
@@ -324,6 +330,8 @@ def _build_finding(rel_path, text, lines, m, host, port, expected_keys, exempt_a
         return None
     if PLACEHOLDER in (host or "") or PLACEHOLDER in m.group(0):
         return None
+    if CSP_PLACEHOLDER in m.group(0):
+        return None
     line_no, col = line_col(text, m.start())
     line_text = lines[line_no - 1] if line_no - 1 < len(lines) else ""
     key = host_port(host, port)
@@ -476,6 +484,9 @@ def self_test():
 
         write("violation.js", "const RAG_BASE = 'http://127.0.0.1:8777';\n")
         write("clean.js", "const RAG_BASE = '" + PLACEHOLDER + "';\n")
+        write("csp.html",
+              '<meta http-equiv="Content-Security-Policy" '
+              'content="connect-src \'self\' ' + CSP_PLACEHOLDER + '">\n')
         write("devlocal.js",
               "/* " + DEV_LOCAL_MARKER + " endpoint=http://127.0.0.1:8777 */\n"
               "const RAG_BASE = 'http://127.0.0.1:8777';\n")
@@ -489,6 +500,7 @@ def self_test():
         checks = [
             ("负样本·硬编码回环地址必红", len(run({"violation.js"})) == 1),
             ("正样本·占位符必绿", len(run({"clean.js"})) == 0),
+            ("正样本·CSP 面合法占位源必绿", len(run({"csp.html"})) == 0),
             ("开发者本机专用构建豁免且可审计",
              len(run({"devlocal.js"})) == 0
              and any(os.path.basename(e["file"]) == "devlocal.js"

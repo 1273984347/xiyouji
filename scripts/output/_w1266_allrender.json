@@ -1267,7 +1267,7 @@
       "visibleLegend": false,
       "seriesEvidence": 4,
       "seriesDesc": "填充色组 4·描边色组 3·同 x 堆叠段 1",
-      "consoleErrors": 17,
+      "consoleErrors": 15,
       "verdict": "multi_nolegend",
       "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
     },
@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "b51fa022bf2e",
+      "sha": "b3bd3097f7c0",
       "static": {
         "svg": true,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "ee64cd080a62",
+      "sha": "c04954319805",
       "static": {
         "svg": false,
         "cls": true,
@@ -5960,7 +5960,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
       "svgKinds": [
         {
           "cls": "",
@@ -5968,9 +5968,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 29,
+          "texts": 30,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 29"
+          "basis": "1100x480·图元 13·文本 30"
         },
         {
           "cls": "",
@@ -6163,7 +6163,7 @@
     },
     {
       "page": "site/dashboard.html",
-      "sha": "b2bb3e0333c3",
+      "sha": "455c2f86abb7",
       "static": {
         "svg": true,
         "cls": true,
@@ -6227,13 +6227,13 @@
       "visibleLegend": true,
       "seriesEvidence": 4,
       "seriesDesc": "填充色组 4·描边色组 1·同 x 堆叠段 0",
-      "consoleErrors": 7,
+      "consoleErrors": 6,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 18 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "83765db59365",
+      "sha": "1fd2b076ed7a",
       "static": {
         "svg": true,
         "cls": false,
@@ -6246,7 +6246,7 @@
       "visibleLegend": false,
       "seriesEvidence": 0,
       "seriesDesc": "",
-      "consoleErrors": 5,
+      "consoleErrors": 4,
       "verdict": "nochart",
       "basis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用"
     },
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "500dd1bced11",
+      "sha": "1f2ac51fd80b",
       "static": {
         "svg": true,
         "cls": false,
@@ -6386,7 +6386,7 @@
       "visibleLegend": false,
       "seriesEvidence": 0,
       "seriesDesc": "",
-      "consoleErrors": 6,
+      "consoleErrors": 5,
       "verdict": "nochart",
       "basis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用"
     },
@@ -6672,7 +6672,7 @@
     },
     {
       "page": "site/en/cave-estate.html",
-      "sha": "40d05061fbbb",
+      "sha": "df9e2c27093b",
       "static": {
         "svg": true,
         "cls": true,
@@ -6706,10 +6706,10 @@
           "id": "chart-region",
           "w": 484,
           "h": 408,
-          "marks": 0,
-          "texts": 12,
+          "marks": 44,
+          "texts": 34,
           "kind": "chart",
-          "basis": "484x408·图元 0·文本 12·命中图表词表"
+          "basis": "484x408·图元 44·文本 34·命中图表词表"
         },
         {
           "cls": "",
@@ -6736,7 +6736,7 @@
       "visibleLegend": true,
       "seriesEvidence": 22,
       "seriesDesc": "填充色组 8·描边色组 0·同 x 堆叠段 22",
-      "consoleErrors": 867,
+      "consoleErrors": 8,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 14 项（≥2 ⇒ 多系列且图例齐备）"
     },

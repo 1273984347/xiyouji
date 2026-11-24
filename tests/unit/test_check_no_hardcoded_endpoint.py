@@ -1,7 +1,7 @@
 """W1205 回归锁 · 服务地址注入机制 + 产物面硬编码守卫（契约 C-8）。
 
 覆盖：
-  ① 守卫：硬编码回环地址必红（负样本自证）；占位符必绿；本地地址检测模式不算服务地址；
+  ① 守卫：硬编码回环地址必红（负样本自证）；文本位占位符与 CSP 面合法占位源必绿；本地地址检测模式不算服务地址；
   ② 注入：占位符 → 部署地址替换正确；开发者本机档写入显式标记且守卫据此豁免（豁免可审计）；
   ③ 档位硬约束：默认档拒绝回环地址（fail-closed）；开发者本机档拒绝非回环地址；
   ④ 部署完整性：占位符残留可检出（--check 的前置）。
@@ -46,6 +46,15 @@ def test_guard_passes_placeholder(tmp_path):
     assert not res["violations"]
 
 
+def test_guard_passes_csp_placeholder(tmp_path):
+    """CSP 面合法占位源（.invalid）⇒ 必绿（W1313：语法合法·浏览器解析零报错）。"""
+    _write(tmp_path / "a.html",
+           '<meta http-equiv="Content-Security-Policy" '
+           'content="connect-src \'self\' ' + guard.CSP_PLACEHOLDER + '">\n')
+    res = guard.scan_roots([str(tmp_path)], set())
+    assert not res["violations"], "CSP 面合法占位源不得判红"
+
+
 def test_guard_ignores_local_detection_pattern(tmp_path):
     """本地地址检测模式（正则字面量）不是服务地址 ⇒ 不判红。"""
     _write(tmp_path / "a.js", "var RE = /^(localhost$|^127\\.)/;\n")
@@ -74,6 +83,28 @@ def test_injection_replaces_placeholder(tmp_path):
     # （语义更强：恰好出现一次），既消掉误报又不放松任何判据。
     assert rec["content"].count("https://rag.example.com") == 1
     assert guard.PLACEHOLDER not in rec["content"]
+
+
+def test_injection_replaces_both_placeholder_forms(tmp_path):
+    """文本位 + CSP 面两种占位形态一并替换（部署期单一入口·W1313）。"""
+    f = _write(tmp_path / "a.html",
+               '<meta http-equiv="Content-Security-Policy" '
+               'content="connect-src \'self\' ' + guard.CSP_PLACEHOLDER + '">\n'
+               '<meta name="xij-service-base" content="' + guard.PLACEHOLDER + '">\n')
+    rec = inject.inject_file(str(f), "https://rag.example.com", "default")
+    assert rec["status"] == "injected"
+    assert rec["replacements"] == 2
+    assert guard.PLACEHOLDER not in rec["content"]
+    assert guard.CSP_PLACEHOLDER not in rec["content"]
+    assert rec["content"].count("https://rag.example.com") == 2
+
+
+def test_check_reports_csp_placeholder_residue(tmp_path):
+    """CSP 面占位源残留同样纳入部署完整性检查（--check 不只看文本位）。"""
+    _write(tmp_path / "a.html",
+           '<meta http-equiv="Content-Security-Policy" '
+           'content="connect-src \'self\' ' + guard.CSP_PLACEHOLDER + '">\n')
+    assert inject.collect_targets(str(tmp_path))
 
 
 def test_developer_local_build_writes_marker_and_guard_exempts(tmp_path):

@@ -130,7 +130,7 @@
    **映射表刻意写死**（label 前缀 → stats 键）：label 文案变更属页面重构，届时同步改此处；不做模糊匹配——「A3 · 人物深化」与「A3 · 人物分析」曾在同仓并存，模糊匹配会误配。
    汇总行恒为 `---- 第 68 门禁 dashboard KPI：卡片 5 · 段落 1 · 违规 N · OK|FAIL ----`；退出码 0/1/2（分母缺失 fail-closed）；自测 4 例（全一致放行 / 单项滞后必红 / 卡片缺失必红 / 段落合计失配必红）。恒跑（读 1 HTML + 1 JSON·毫秒级·`_SCOPE_CORE`）。
 
-70. **产物服务地址**（check_no_hardcoded_endpoint.py·W1208）——静态产物（L2）不得内嵌服务端地址（契约 C-8）：合法形态只有**构建期占位符**（`__XIJ_SERVICE_BASE__`·部署期替换）/ **部署期已声明地址**（须以 `--expected-endpoint` 或 `XIJ_SERVICE_BASE` 声明）/ **开发者本机档**（产物内须带显式标记 `xij-build-profile:developer-local endpoint=<地址>`·豁免可审计）；回环·内网地址与未声明裸域名一律判红。详见文末「第 70 槽 · 详细定义」。恒跑·`_SCOPE_CORE`·自测 6 例。
+70. **产物服务地址**（check_no_hardcoded_endpoint.py·W1208）——静态产物（L2）不得内嵌服务端地址（契约 C-8）：合法形态只有**构建期占位符**（文本位 `__XIJ_SERVICE_BASE__` / CSP 面 `https://xij-service-base.invalid`·部署期替换·W1313）/ **部署期已声明地址**（须以 `--expected-endpoint` 或 `XIJ_SERVICE_BASE` 声明）/ **开发者本机档**（产物内须带显式标记 `xij-build-profile:developer-local endpoint=<地址>`·豁免可审计）；回环·内网地址与未声明裸域名一律判红。详见文末「第 70 槽 · 详细定义」。恒跑·`_SCOPE_CORE`·自测 6 例。
 71. **占位符哈希载体**（check_placeholder_hash_carrier.py·W1210）——构建期占位符**不得落在 CSP 哈希载体上**：内联 `<script>` 块正文（CSP `script-src 'sha256-…'` 的哈希输入）或 `<script src>` 属性值 ⇒ 部署期替换改字节/改外域 ⇒ **整段内联脚本被浏览器拒执行**（页面照常渲染、功能全废·静态审查看不出来·W1207 坑表 E-225 实证）。合法载体（登记不判红）：CSP 声明面 `<meta http-equiv="Content-Security-Policy">`（不参与哈希计算）/ 旁挂 `<meta>` / 外部 JS（不受 sha256 约束）。详见文末「第 71 槽 · 详细定义」。恒跑·`_SCOPE_CORE`·自测 7 例。
 
 ### 第 69 槽 · 模板结构契约详细定义（check_template_contract.py · W1178）
@@ -167,7 +167,7 @@
 - **network**：命中行含网络调用形态（`fetch(` / `XMLHttpRequest` / `src=` 等）⇒ 浏览器真连的位置；
 - **prose**：其余（文案 / 注释 / 常量）。
 
-**合法形态三选一**（其余一律判红）：① 构建期占位符 `__XIJ_SERVICE_BASE__`（待部署期注入）；
+**合法形态三选一**（其余一律判红）：① 构建期占位符（文本位 `__XIJ_SERVICE_BASE__`；CSP 面因 host-source 语法不容下划线，改用语法合法的保留域 `https://xij-service-base.invalid`·W1313 治本第 43 槽冻结项）；
 ② 部署期注入后的**已声明**地址（须以 `--expected-endpoint` 或环境变量 `XIJ_SERVICE_BASE` 声明）；
 ③ 开发者本机专用构建（产物内须带显式标记 `xij-build-profile:developer-local endpoint=<地址>`——
 豁免**必须可审计**：标记可见 + 地址写明 + 清单落盘）。

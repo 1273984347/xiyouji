@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-23T21:25:39.873Z",
+ "generated_at": "2026-11-23T23:26:38.626Z",
  "threshold": 3,
  "scope": "data,en",
  "bg_mode": "body",
@@ -40,7 +40,6 @@
   "data/concept-device.html": "d840b607083e",
   "data/counterfactual.html": "79fce6a1ac54",
   "data/criticism-history.html": "ead0f23d2700",
-  "data/cross-time-danmaku.html": "b51fa022bf2e",
   "data/cultural-misreading.html": "21f908efc352",
   "data/customs-pass-route.html": "427e8f0ddbaa",
   "data/data-explorer.html": "a90e6836ae2f",
@@ -106,7 +105,7 @@
   "en/81-hardships.html": "25c2b71f751a",
   "en/aesthetics.html": "63de35ea41a4",
   "en/business-model.html": "4f5ac1c8a2d4",
-  "en/cave-estate.html": "40d05061fbbb",
+  "en/cave-estate.html": "df9e2c27093b",
   "en/chapter-stats.html": "5c044addd0ec",
   "en/chapter-structure-graph.html": "005bebaa882d",
   "en/character-appearance.html": "c1549fde626c",
@@ -126,7 +125,7 @@
   "en/data-explorer.html": "0c7c8bfa5f3b",
   "en/deconstruction.html": "31426f8e4a3f",
   "en/dialogue-sentiment.html": "8c89cac1afe9",
-  "en/dukou-engine.html": "ab45e85f4833",
+  "en/dukou-engine.html": "a1187eeb56ff",
   "en/ecology.html": "acb002e6a2d0",
   "en/emotional-heatmap.html": "55f57f22ff01",
   "en/ethics-consumption.html": "2ea1ba082350",
@@ -183,7 +182,8 @@
   "en/timeline.html": "1ade1818d118",
   "en/underworld-power-network.html": "d1796dcd5361",
   "en/visual-art.html": "918aeb330fcc",
-  "en/workplace.html": "de9cca65dc70"
+  "en/workplace.html": "de9cca65dc70",
+  "data/cross-time-danmaku.html": "b3bd3097f7c0"
  },
  "by_page": {}
 }

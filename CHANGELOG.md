@@ -1,3 +1,55 @@
+### W1314（2026-11-24）：交接文档结构断言判据校正（尾链取行 + 四段骨架·两条存量假阳性清零）
+
+> **来源**：用户 2026-11-24 指令「先不推送，帮我裁决那两个遗留的假阳性问题」——对象为 W1312/W1313 收官链连续报出的两条 SELF-CHECK 告警。
+>
+> - **裁决①尾链 = 判据实现缺陷（假阳性）**：原实现 `txt[rfind("最后更新："):]` 命中「维护契约」段内的引用行 ⇒ 尾链 = 整篇正文 ⇒ 日期计数恒 >3、首条 W 取自正文进度 ⇒ 每批必误报。W560 立此判据时文档形态不同，W707 结构收敛后未同步。正确口径 = 同一条 `> 最后更新：` 行内日期条目 ≤3（维护契约②「最新 1–3 批」）。
+>
+> - **裁决②「九、使用说明」= 判据过期（假阳性）**：该段已随 W707 结构收敛退役，现行维护契约明确零/一/二/三 四段骨架；判据仍按旧九段形态断言 ⇒ 每批必误报。改为四段存在且有序（同时覆盖原「零<一<二」部分断言）。
+>
+> - **修法（判据校正·非放宽）**：把交接文档结构断言抽成纯函数 `audit_handover_text(txt, batch)`（可单测），`_post_check` 只保留 CR 自愈并调用该函数；尾链改用 `^> 最后更新：` 行定位 + ISO 日期计数；九段判据删除，四段骨架含「三、方法论沉淀」。
+>
+> - **验证**：新增 `tests/unit/test_w1314_handover_audit.py` 7 例——先红（旧实现无该函数/基准样本误报尾链）后绿；真实 HANDOVER 审计仅剩「头链首条非 W1314」一条**正确**告警（本批入链后消失）；邻接 batch_cascade 测试全绿。
+>
+> - **文件**：.github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, pytest.ini, scripts/batch_cascade.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1314.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1314_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/tag-cloud.html, site/dukou-engine.html, site/index.html, site/rss.xml, site/sitemap.xml, tests/unit/INDEX.md, tests/unit/README.md, tests/unit/test_w1314_handover_audit.py
+>
+> - **状态**：两条存量假阳性清零 · 判据零放宽（尾链口径与四段骨架均对齐文档现行契约，并各配机器断言）。
+
+### W1313（2026-11-24）：CSP 面占位符语法治本（connect-src 非法源清零·合法保留域占位源·注入器双形态替换）
+
+> **来源**：用户 2026-11-24 指令「先处理 dukou-engine.html 的占位符冻结项」→ 口径拍板「CSP 内改用合法占位源（推荐）」。
+>
+> - **根因**：CSP host-source 语法只允许 ALPHA/DIGIT/「-」/「.」——构建期占位符 `__XIJ_SERVICE_BASE__` 含下划线 ⇒ Chrome 判 invalid source 并报 console error（第 43 槽 site/en/dukou-engine.html V1 fail 的冻结项）；generate_csp.py 的 RAG_ORIGIN 直接引用该 token ⇒ dukou 两页 + index + dashboard 四页 CSP 同病。
+>
+> - **修法（契约 C-8 语义不变）**：新增 `CSP_PLACEHOLDER = https://xij-service-base.invalid`（`.invalid` 保留域·语法合法·浏览器解析零报错且不会发起请求）；generate_csp 的 RAG_ORIGIN 改取该常量并重生成 4 页 CSP；site/_headers 平台层 CSP 同步；inject_service_endpoint 对文本位与 CSP 面两种占位形态一并替换（collect_targets/--check 同步扩面）；守卫承认该 CSP 占位源合法。
+>
+> - **判据面**：第 70 槽新增 1 条合法形态（经用户拍板·非放宽既有阈值）；第 71 槽不变（CSP meta 属非哈希载体）；第 43 槽 EN 基线再收紧 1 行（828→826）。
+>
+> - **验证**：第 43 槽 228 页 0 FAIL / 冻结 0 / 可收紧 0 · 第 70 槽违规 0 · 第 71 槽违规 0 · CSP 零漂移（874 页 / 915 哈希）· pytest 19 passed（新增 3 例 + 守卫自测 6→7 例）· 注入器双形态替换有专项单例。
+>
+> - **文件**：.github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/agent/gates.md, pytest.ini, scripts/check_no_hardcoded_endpoint.py, scripts/generate_csp.py, scripts/inject_service_endpoint.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1313.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1313_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-values-baseline-en.txt, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/_headers, site/dashboard.html, site/data/cross-time-danmaku.html, site/data/tag-cloud.html, site/dukou-engine.html, site/en/dukou-engine.html, site/index.html, site/rss.xml, site/sitemap.xml, tests/unit/INDEX.md, tests/unit/README.md, tests/unit/test_check_no_hardcoded_endpoint.py
+>
+> - **遗留（存量假阳性·与本批无关）**：收官链 SELF-CHECK 报「交接文档尾链异常」与「九、使用说明段缺失」两项——前者因检查用 rfind 命中「维护契约」段内的引用行、后者因 HANDOVER 骨架早已收敛为四段；两项均非本批引入，待另批裁决（不在本批放宽或改判据）。
+>
+> - **状态**：第 43 槽冻结项清零 · 判据零放宽（仅新增 1 条经拍板的合法占位源形态）。
+
+### W1312（2026-11-24）：EN cave-estate 嵌入回退数据归一化治本（file:// 下 22 个 text y=NaN 清零·第 43 槽 EN 基线收紧）
+
+> **来源**：用户 2026-11-24 指令「用 praxis:debug 跑一遍可视化页空白问题的取证流程；用 praxis:tdd 为 verify_delivery.py 补充判据单测」→ 用户批复「好的，执行吧」。
+>
+> - **取证（先证据后结论）**：第 43 槽全量 228 页扫描中 site/en/cave-estate.html V1 = fail:console-error（n=522）。file:// 直开实测 #chart-region 内 22 个 text.val 的 y="NaN" 且文本为空；同页 http 模式 0 条 NaN、中文页 0 条 NaN ⇒ 症状只出现在「file:// + EN 嵌入回退」组合。
+>
+> - **根因（一条解释全部症状）**：file:// 下 fetch 被拒 → loadData() catch 直接返回原始 EMBEDDED_DATA，而 by_region 归一化只写在 fetch 成功分支；EN 嵌入版 by_region 是原始嵌套组 [{region, caves:[{name, owner, luxury}]}]，renderRegionChart 读 d.luxury 得 undefined ⇒ scaleLinear(NaN) ⇒ 22 个空标签 + 动画逐帧重设属性产生数百条 console 报错。中文页嵌入版已是扁平形态 {region, luxury, name}，故不受影响。
+>
+> - **修复（治根不治点）**：抽出 normalizeRegion() 作为唯一归一化入口，fetch 与嵌入回退两条路径共用；嵌入分支返回 Object.assign({}, EMBEDDED_DATA, {by_region: normalizeRegion(...)})。内联脚本改动后重跑 generate_csp.py（1 页更新·874 页 915 哈希零漂移）。
+>
+> - **验证**：单页复测 V1 ok、冻结 0、可收紧 1 → 删除基线冻结行后全量 228 页复测 0 FAIL、冻结存量 1（余 site/en/dukou-engine.html 的 CSP 占位符·与本批无关）、可收紧 0。
+>
+> - **判据单测（TDD）**：新增 tests/unit/test_verify_scope_fallback.py 18 例，覆盖 _parse_scope / _classify_scope / _has_embedded_fallback 三条「决定门禁跑不跑」的纯判据；生产代码零改动（git diff scripts/verify_delivery.py 为空）；变异测试两次证明测试会咬（破坏标记剔除 ⇒ 1 例红；破坏越界回退 full ⇒ 4 例红），还原后 18/18 绿。
+>
+> - **文件**：.github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, pytest.ini, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1312.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1312_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-values-baseline-en.txt, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/tag-cloud.html, site/dukou-engine.html, site/en/cave-estate.html, site/index.html, site/rss.xml, tests/unit/INDEX.md, tests/unit/README.md, tests/unit/test_verify_scope_fallback.py
+>
+> - **状态**：修复 + 基线收紧 + 判据单测完成 · 判据零放宽。
+
 ### W1311（2026-11-24）：历史行状态列订正（六行登记滞后清零）+ 复盘批 T140（近三批治理面 + tmpe 清理纪律）
 
 > **来源**：preflight 复盘触发（距上篇复盘 3 天 ≥ 3 天）+ 用户 2026-11-24 指令「现在做」。
@@ -577,7 +629,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1311），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1314），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

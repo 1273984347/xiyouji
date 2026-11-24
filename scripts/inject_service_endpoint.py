@@ -35,6 +35,7 @@ import time
 import check_no_hardcoded_endpoint as guard
 
 PLACEHOLDER = guard.PLACEHOLDER
+CSP_PLACEHOLDER = guard.CSP_PLACEHOLDER  # W1313：CSP 面语法合法的占位源（.invalid）
 DEV_LOCAL_MARKER = guard.DEV_LOCAL_MARKER
 
 #: 地址形态：scheme + host（+ 可选端口），不带路径（CSP host-source 兼容）。
@@ -111,10 +112,11 @@ def inject_text(text, endpoint, profile, is_html=False, marker_template=None):
     文本用 #）——原实现恒用代码模板 ⇒ HTML 产物被插入 /* ... */，该串在 HTML 里
     不是注释 ⇒ 会被浏览器当作文本渲染到页面顶部（守卫豁免判定不受影响，但产物观感破）。
     """
-    count = text.count(PLACEHOLDER)
+    # W1313：文本位与 CSP 面两种占位形态一并替换（CSP 面用语法合法的 .invalid 占位源）
+    count = text.count(PLACEHOLDER) + text.count(CSP_PLACEHOLDER)
     if count == 0:
         return text, 0, None
-    new_text = text.replace(PLACEHOLDER, endpoint)
+    new_text = text.replace(PLACEHOLDER, endpoint).replace(CSP_PLACEHOLDER, endpoint)
     marker_line = None
     if profile == "developer-local":
         template = marker_template or MARKER_TEMPLATE_CODE
@@ -128,7 +130,7 @@ def inject_file(path, endpoint, profile):
     """对单个文件注入，返回状态记录（含新内容，调用方决定是否落盘）。"""
     with open(path, encoding="utf-8") as f:
         text = f.read()
-    if PLACEHOLDER not in text:
+    if PLACEHOLDER not in text and CSP_PLACEHOLDER not in text:
         marker_endpoint, marker_line = guard.parse_dev_local_marker(text)
         if marker_endpoint:
             return {"file": path, "status": "already_injected", "replacements": 0,
@@ -151,7 +153,7 @@ def collect_targets(root):
     """收集含占位符的文件。"""
     out = []
     for path, text in guard.iter_text_files(root):
-        if PLACEHOLDER in text:
+        if PLACEHOLDER in text or CSP_PLACEHOLDER in text:
             out.append(path)
     return out
 

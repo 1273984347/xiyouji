@@ -1,5 +1,7 @@
 # 第 43 门禁 · 可视化数据断言基线（W753 建立·存量缺口冻结）
-# 生成：2026-11-17 · 页数 138 · 每页 6 项 = 828 行
+# 生成：2026-11-17 · 页数 138 · 每页 6 项 = 828 行（W1312 收紧 1 行：site/en/cave-estate.html V1
+#   已治本转 ok 并删除该冻结行；W1313 再收紧 1 行：site/en/dukou-engine.html V1 的 CSP 非法源
+#   已治本转 ok 并删除 ⇒ 实际 826 行；两页未来 V1 失败均按 new 判红）
 # 生成命令：node scripts/check_chart_values.js --generate-baseline
 # 格式：page|item|measured|status    status ∈ ok | fail:<reason> | na:<reason>（na = 判据对该页不适用/缺覆盖，计入缺口报告）
 # 语义：违规集合单调不增——本文件内 fail 为冻结存量（WARN 冻结·不算 FAIL）；
@@ -50,7 +52,6 @@ site/en/business-model.html|V3|N=13 best=EMBEDDED:$.organization.organizations:2
 site/en/business-model.html|V4|kpi=4 matched=EMBEDDED:$.organization.organizations.length=2 ↔ 2|ok
 site/en/business-model.html|V5|-|na:citability-unavailable
 site/en/business-model.html|PROBE|ms=1158 stable=true samples=3|ok
-site/en/cave-estate.html|V1|n=491 Error: <text> attribute y: Expected length, "NaN".|fail:console-error
 site/en/cave-estate.html|V2|shapes=179 rows=22 domItems=161 painted=0 containers=4 scene=-|ok
 site/en/cave-estate.html|V3|N=22 best=EMBEDDED_DATA:$.caves[0].subordinates:2 r=89.50 shapes=179 pathPts=23 domItems=161|ok
 site/en/cave-estate.html|V4|kpi=4 matched=EMBEDDED_DATA:$.caves.length=22 ↔ 22|ok
@@ -230,7 +231,6 @@ site/en/dialogue-sentiment.html|V3|N=100 best=EMBEDDED:$.sentiment.speaker_senti
 site/en/dialogue-sentiment.html|V4|kpi=7 matched=EMBEDDED:$.sentiment.chapter_sentiment[3].negative_ratio=0.2105 ↔ 21|ok
 site/en/dialogue-sentiment.html|V5|-|na:citability-unavailable
 site/en/dialogue-sentiment.html|PROBE|ms=1185 stable=true samples=3|ok
-site/en/dukou-engine.html|V1|n=1 The source list for the Content Security Policy directive 'connect-src' contains an invalid source: '__XIJ_SERVICE_BASE__'. It will be ignored.|fail:console-error
 site/en/dukou-engine.html|V2|shapes=0 rows=0 domItems=3 painted=0 containers=0|na:no-view-intent
 site/en/dukou-engine.html|V3|N=0 best=- L=0 shapes=3 pathPts=14 domItems=3|na:no-rendered-view
 site/en/dukou-engine.html|V4|kpi=0|na:no-kpi

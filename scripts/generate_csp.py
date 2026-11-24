@@ -15,7 +15,8 @@ generate_csp.py — 全站 CSP（Content Security Policy）生成 / 注入 / 校
       哈希化不可维护）
   - img-src / font-src 'self'（全站资源本地化后无外部图片/字体）
   - connect-src 'self' + 统计回传域（W1168 起为 GoatCounter **单域**具名例外·W1167 的 GA4 两域
-      已随双轨退役；dukou-engine 两页追加本地 RAG 引擎 127.0.0.1:8777）
+      已随双轨退役；RAG 面（dukou-engine / index / dashboard）追加构建期占位源，
+      部署期由 inject_service_endpoint.py 注入真实端点·W1313）
   - object-src 'none' · base-uri 'self' · form-action 'self' · frame-src 'none'
 
 用法：
@@ -42,7 +43,7 @@ import sys
 # 部署期由 scripts/inject_service_endpoint.py 替换为真实地址，仓内产物因此不含任何服务地址
 # （守卫 check_no_hardcoded_endpoint.py 判红 0）。占位符取自守卫脚本的单一事实源，
 # 避免「判据与生成器两处字面量」漂移（同 E-215「对外部规则须读判据源码」纪律）。
-from check_no_hardcoded_endpoint import PLACEHOLDER as SERVICE_BASE_PLACEHOLDER
+from check_no_hardcoded_endpoint import CSP_PLACEHOLDER as SERVICE_BASE_PLACEHOLDER
 from utils.path_guard import PROJECT_ROOT, make_guard
 
 _w536_guard_open = make_guard(PROJECT_ROOT)  # W761：W536 守卫单模块化（root=仓库根）
@@ -64,6 +65,8 @@ EXTERNAL_SCRIPT_HOSTS = []
 # GoatCounter 端点须与 scripts/output/_w1167_analytics.json 的 goatcounter_endpoint 同源，
 # 二者不一致由第 67 槽 C5 与第 56 槽 CSP 增量漂移同批拦下。
 ANALYTICS_CONNECT_HOSTS = "https://1273984347.goatcounter.com"
+# W1313：CSP host-source 语法不容下划线 ⇒ 取语法合法的保留域占位源（`.invalid`），
+# 浏览器解析零报错；部署期由 inject_service_endpoint.py 与文本位占位符一并替换。
 RAG_ORIGIN = SERVICE_BASE_PLACEHOLDER
 # 口径沿革：W806 因 GoatCounter 账号实测 404 退役统计链，connect-src 归零外域；
 # W1167 G0-1 拍板恢复为「具名例外」——仅 ANALYTICS_CONNECT_HOSTS 所列回传域

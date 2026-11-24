@@ -10,7 +10,7 @@
 
 - （无）
 
-## 文件（143）
+## 文件（145）
 
 ### Python 脚本
 
@@ -99,6 +99,7 @@
 - `test_tracked_files.py`
 - `test_verify_failclosed.py`
 - `test_verify_registry.py`
+- `test_verify_scope_fallback.py`
 - `test_vermilion_solid.py`
 - `test_visualization_data.py`
 - `test_w1102_batch_closeout.py`
@@ -155,6 +156,7 @@
 - `test_w1277_p3_fixes.py`
 - `test_w1280_static_scope.py`
 - `test_w1282_graphic_contrast_scope.py`
+- `test_w1314_handover_audit.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

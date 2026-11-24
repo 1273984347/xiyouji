@@ -63,7 +63,7 @@
     },
     {
       "page": "site/dashboard.html",
-      "sha": "b2bb3e0333c3",
+      "sha": "455c2f86abb7",
       "static": {
         "svg": true,
         "cls": true,
@@ -127,7 +127,7 @@
       "visibleLegend": true,
       "seriesEvidence": 4,
       "seriesDesc": "填充色组 4·描边色组 1·同 x 堆叠段 0",
-      "consoleErrors": 7,
+      "consoleErrors": 6,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 18 项（≥2 ⇒ 多系列且图例齐备）"
     },
@@ -383,7 +383,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "83765db59365",
+      "sha": "1fd2b076ed7a",
       "static": {
         "svg": true,
         "cls": false,
@@ -396,7 +396,7 @@
       "visibleLegend": false,
       "seriesEvidence": 0,
       "seriesDesc": "",
-      "consoleErrors": 5,
+      "consoleErrors": 4,
       "verdict": "nochart",
       "basis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用"
     },
@@ -782,7 +782,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "500dd1bced11",
+      "sha": "1f2ac51fd80b",
       "static": {
         "svg": true,
         "cls": false,
@@ -816,7 +816,7 @@
       "visibleLegend": false,
       "seriesEvidence": 0,
       "seriesDesc": "",
-      "consoleErrors": 6,
+      "consoleErrors": 5,
       "verdict": "nochart",
       "basis": "渲染后无图表 svg·全部 svg 为图标/插画且静态无图表语义 ⇒ 真无图 ⇒ 本无图·图例判据不适用"
     }

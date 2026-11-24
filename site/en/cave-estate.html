@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-k9IglCs3LeJi2ixk75s59Nw9zxtsZs5CqsRNSVpzqI8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-YPiLSREA6+FFJjD6puficjVVHZjHX/YC5HLLwpRyd5Q=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cave Estate Archive · Annotated Journey to the West</title>
@@ -1779,6 +1779,17 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         });
     }
 
+    // by_region normalization: fetch data and embedded fallback share one target
+    // shape [{region, luxury, name}] (W1312: embedded by_region is the raw nested
+    // group form, so skipping this on the fallback path yields undefined luxury).
+    function normalizeRegion(raw) {
+        return raw.map(g => ({
+            region: g.region,
+            luxury: g.caves[0].luxury,
+            name: g.caves[0].name
+        }));
+    }
+
     // ===== Data loading (uses embedded data if fetch fails) =====
     async function loadData() {
         try {
@@ -1794,19 +1805,18 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             const by_owner_rank = await rankRes.json();
             const top_luxury = await luxuryRes.json();
 
-            // Convert by_region to [{region, luxury, name}] form
-            const by_region = by_region_raw.map(g => ({
-                region: g.region,
-                luxury: g.caves[0].luxury,
-                name: g.caves[0].name
-            }));
+            const by_region = normalizeRegion(by_region_raw);
 
             document.getElementById('dataSource').innerHTML =
                 'Data source: loaded live from <code>../en/json/cave_*.json</code> (http server mode)';
             return { caves, by_region, by_owner_rank, top_luxury };
         } catch (e) {
             console.warn('[INFO] Using embedded data: ', e.message);
-            return EMBEDDED_DATA;
+            // W1312: the fallback must go through the same normalization as the
+            // fetch path; otherwise renderRegionChart reads d.luxury === undefined.
+            return Object.assign({}, EMBEDDED_DATA, {
+                by_region: normalizeRegion(EMBEDDED_DATA.by_region)
+            });
         }
     }
 
