@@ -7,7 +7,7 @@
 > 参考来源：Vannevar 项目方法论
 > 严重度：中等（影响跨文件追溯 + 影响面扫描）
 > 最新案例：W086 v2.0.59 双索引同步（CHANGELOG W086 段 + file-index.md W086 段，含 4 篇新建随笔 + 1 篇新建专题 + 6 篇文档同步文件）
-> **W754 校（现役边界与形态）**：① **索引边界**——`scripts/output/file-index.md` 现仅保留 W700+ 段，W449-W699 段已于 W736 归档至 [archive/docs/file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)；② **段形态**——自 W711 起 CHANGELOG 段标题去 v 号（`### W###（日期）：标题`），file-index 新增条目只写 W 号（历史条目保留 v 引用）；③ **维护机制**——段完整性/倒序/最新段残留由第 17 门禁 `scripts/check_index_health.py` 机器校验，逐面写入由 `scripts/batch_cascade.py`（10 面级联 + `scripts/output/_cascade_files_<批号>.txt` 清单）承接。本文 §四/§六 的手工流程与 `W001-W069` 示例均为 2026-07-22 建文时点的**格式样例**，保留作历史记录，勿据其值判断现役范围。
+> **W754 校（现役边界与形态）**：① **索引边界**——`scripts/output/file-index.md` 现仅保留 W700+ 段，W449-W699 段已于 W736 归档至 [archive/docs/file-index-ARCHIVE.md](../../../archive/docs/file-index-ARCHIVE.md)；② **段形态**——自 W711 起 CHANGELOG 段标题去 v 号（`### W###（日期）：标题`），file-index 新增条目只写 W 号（历史条目保留 v 引用）；③ **维护机制**——段完整性/倒序/最新段残留由第 17 门禁 `scripts/check_index_health.py` 机器校验，逐面写入由 `scripts/batch_cascade.py`（10 面级联 + `scripts/output/_cascade_files_<批号>.txt` 清单）承接。本文 §四/§六 的手工流程与 `W001-W069` 示例均为 2026-07-22 建文时点的**格式样例**，保留作历史记录，勿据其值判断现役范围。
 
 ---
 
@@ -113,7 +113,7 @@ file-index 文件段必含：
 - CHANGELOG
 - memory 文件（work-log/project_memory/topics）
 
-详见 [改动后影响面扫描.md](改动后影响面扫描.md)（本目录内等价落地件；W754 校：原指向仓外 `user_profile.md`，该件为私有层、其他 Agent 不可读——见 W517 载体铁律）。
+详见 [改动后影响面扫描.md](../../../docs/10-方法论沉淀/改动后影响面扫描.md)（本目录内等价落地件；W754 校：原指向仓外 `user_profile.md`，该件为私有层、其他 Agent 不可读——见 W517 载体铁律）。
 
 ---
 
@@ -124,7 +124,7 @@ file-index 文件段必含：
 ```markdown
 # 文件索引（反向索引）
 
-> 与 [CHANGELOG.md](../../CHANGELOG.md)（正向时间线）双向链接
+> 与 [CHANGELOG.md](../../../CHANGELOG.md)（正向时间线）双向链接
 > 创建于 2026-07-22
 > 最后更新：2026-07-26（v2.0.42 W069）
 ```
@@ -235,7 +235,7 @@ v主版本.次版本.修订号 — 已完成（YYYY-MM-DD）
 
 **修复策略**：V4 memory sync 从 4 维度扩展到 5 维度——+ 维度 5「项目内文档交叉引用同步」。
 
-详见 [改动后影响面扫描.md](改动后影响面扫描.md)（本目录内等价落地件；W754 校：原指向仓外 `user_profile.md`，该件为私有层、其他 Agent 不可读——见 W517 载体铁律）。
+详见 [改动后影响面扫描.md](../../../docs/10-方法论沉淀/改动后影响面扫描.md)（本目录内等价落地件；W754 校：原指向仓外 `user_profile.md`，该件为私有层、其他 Agent 不可读——见 W517 载体铁律）。
 
 ### 案例 2：2026-07-26 W069 双索引同步
 
@@ -278,18 +278,18 @@ v主版本.次版本.修订号 — 已完成（YYYY-MM-DD）
 
 ### 项目内关联
 
-- [../../CHANGELOG.md](../../CHANGELOG.md)：正向时间线（W754 校·历史窗口：W700+ 已过期；现役窗口随腾窗滚动，以版段首为准；更早段见 archive/docs/CHANGELOG-ARCHIVE*.md）
-- [../../scripts/output/file-index.md](../../scripts/output/file-index.md)：反向文件索引（W754 校·历史窗口：W700+ 已过期；现役窗口随腾窗滚动，以段首为准；更早段见 archive/docs/file-index-ARCHIVE.md）
-- [../../README.md](../../README.md)：项目说明（双索引说明段）
-- [../../STRUCTURE.md](../../STRUCTURE.md)：目录结构（双索引说明段）
-- [../../HANDOVER.md](../../HANDOVER.md)：跨 session 交接（双索引使用说明）
+- [../../CHANGELOG.md](../../../CHANGELOG.md)：正向时间线（W754 校·历史窗口：W700+ 已过期；现役窗口随腾窗滚动，以版段首为准；更早段见 archive/docs/CHANGELOG-ARCHIVE*.md）
+- [../../scripts/output/file-index.md](../../../scripts/output/file-index.md)：反向文件索引（W754 校·历史窗口：W700+ 已过期；现役窗口随腾窗滚动，以段首为准；更早段见 archive/docs/file-index-ARCHIVE.md）
+- [../../README.md](../../../README.md)：项目说明（双索引说明段）
+- [../../STRUCTURE.md](../../../STRUCTURE.md)：目录结构（双索引说明段）
+- [../../HANDOVER.md](../../../HANDOVER.md)：跨 session 交接（双索引使用说明）
 
 ### 项目内方法论关联
 
-- [DRL真循环.md](DRL真循环.md)：DRL 收敛记录到 CHANGELOG W### 段
-- [三skill闭环.md](三skill闭环.md)：mem-wrap-up Step 4 work-log 引用双索引
-- 仓外私有记忆（E4 毕业经验·仅作镜像，不回链）——**W754 校**：其他 Agent 不可读；仓内等价件＝[改动后影响面扫描.md](../../docs/10-方法论沉淀/改动后影响面扫描.md)
-- [Preflight与Subagent模板.md](Preflight与Subagent模板.md)：subagent prompt 引用 file-index 验证文件存在
+- [DRL真循环.md](../../../docs/10-方法论沉淀/DRL真循环.md)：DRL 收敛记录到 CHANGELOG W### 段
+- [三skill闭环.md](../../../docs/10-方法论沉淀/三skill闭环.md)：mem-wrap-up Step 4 work-log 引用双索引
+- 仓外私有记忆（E4 毕业经验·仅作镜像，不回链）——**W754 校**：其他 Agent 不可读；仓内等价件＝[改动后影响面扫描.md](../../../docs/10-方法论沉淀/改动后影响面扫描.md)
+- [Preflight与Subagent模板.md](../../../docs/10-方法论沉淀/Preflight与Subagent模板.md)：subagent prompt 引用 file-index 验证文件存在
 
 ### 参考来源
 
@@ -297,7 +297,7 @@ v主版本.次版本.修订号 — 已完成（YYYY-MM-DD）
 
 ### W086 commit hash 关联
 
-> **W754 校**：本节的 `6408ef2d4` 不在当前仓库历史内（历史起点 2026-07-30），属归档期前记录，原值保留；W086 段现见 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)。
+> **W754 校**：本节的 `6408ef2d4` 不在当前仓库历史内（历史起点 2026-07-30），属归档期前记录，原值保留；W086 段现见 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)。
 
 - **commit**：`6408ef2d4 W086 v2.0.59: A2 Batch 10 物理学/认知科学/演化论 3 篇 + A4 Batch 9 经济学专题 1 篇`
 - **26 文件 staged**：4 新建（A2 Batch 10 + A4 Batch 9）+ 6 同步（v2.0.59 W086）+ 16 prior session 累积（W077-W085 内容，从未 commit）

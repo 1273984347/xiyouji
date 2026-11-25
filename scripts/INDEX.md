@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（242）
+## 文件（243）
 
 ### Python 脚本
 
@@ -267,6 +267,7 @@
 - `w1167_analytics_inject.py`
 - `w1167_badge_inject.py`
 - `w1167_nav_inject.py`
+- `w1327_related_links.py`
 - `worktree_rehearse.py`
 
 ### JavaScript / TypeScript

@@ -6,6 +6,34 @@
     <description>一源多形 · 数字人文可视化解读《西游记》100 回——版本发布批次动态（W### 编号·详见 CHANGELOG）。</description>
     <language>zh-CN</language>
     <item>
+      <title>W1327 页脚同类关联链接补全</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-W1327</guid>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>W1326 两轮推送 CI 等待纪律（E-321 入坑表 + 流水线第 6 步/§五）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-W1326</guid>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>W1325 方法论审查 P0-P3 全量处置（5 件物理归档/合并 + 全目录指针与计数对齐）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-W1325</guid>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
+      <title>W1324 方法论沉淀文档审查（28 篇只读评审 + 报告落位）</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-W1324</guid>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
       <title>W1323 八十一难难度热力图深化（V2 余项·五阶段难度地形）</title>
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1323</guid>
@@ -115,34 +143,6 @@
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1308</guid>
       <pubDate>Mon, 23 Nov 2026 00:00:00 +0000</pubDate>
-      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
-    </item>
-    <item>
-      <title>W1307 遗留清偿批 (L-08 目录件伪血缘治本 409 件一次清且此后幂等 + L-09/L-10 W1304 spec 对齐 + W1306 行 hash 回填)</title>
-      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
-      <guid isPermaLink="false">xiyouji-W1307</guid>
-      <pubDate>Mon, 23 Nov 2026 00:00:00 +0000</pubDate>
-      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
-    </item>
-    <item>
-      <title>W1306 遗留收敛落机器判据 (C4-g 台账 hash 历史链有效性 + C4-h 审查 P2 编号化登记 + 收尾两分类声明)</title>
-      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
-      <guid isPermaLink="false">xiyouji-W1306</guid>
-      <pubDate>Mon, 23 Nov 2026 00:00:00 +0000</pubDate>
-      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
-    </item>
-    <item>
-      <title>W1305 对抗审查 P0/P1 同批治本 (spec 大小写归一 + 台账 hash 合并口径 + 黏行无损还原 + T135 声明不符项更正)</title>
-      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
-      <guid isPermaLink="false">xiyouji-W1305</guid>
-      <pubDate>Sun, 22 Nov 2026 00:00:00 +0000</pubDate>
-      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
-    </item>
-    <item>
-      <title>W1304 修 W1301 遗留根因 (actions/cache restore+save 钉 40-hex full SHA·Workflow Lint 红灯治本)</title>
-      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
-      <guid isPermaLink="false">xiyouji-W1304</guid>
-      <pubDate>Sun, 22 Nov 2026 00:00:00 +0000</pubDate>
       <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
     </item>
   </channel>

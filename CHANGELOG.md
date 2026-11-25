@@ -1,3 +1,17 @@
+### W1327（2026-11-25）：页脚同类关联链接补全
+
+> **来源**：
+> - **T1**：用户旅程 V3 第 3 项——页脚关联链接补全与智能推荐：把读完一页后的死路改成同类三页可继续。
+> - **推荐口径**：唯一来源为 site/dashboard.html 专题卡片（href + data-category，50 张站内卡），同类别按看板顺序循环取后 3 页、自页排除；类别成员不足 4 时取 n-1 条（Q+ 2 页互链 1 条）。
+> - **注入形态**：目标页 `<footer class="site-footer">` 内追加一组 `<nav class="footer-related">`（复用既有 .site-footer nav 与 .footer-meta 样式），零新增 CSS、零新增内联脚本、零外域，file:// 直开不变。
+> - **覆盖**：看板 50 张站内卡 = 45 页注入 + 5 个数据中枢工具页（整页无 site-footer，显式 NO_FOOTER 集并由 check 反向锁死：仍有 footer 或出现 MARK 即红）；其余 site/data 内容页不在看板卡上，无类别事实源，不纳入本批口径。
+> - **源数据勘正**：看板专题区静态文案「51 个专题页 / 全部 51」与实际 41 张网格卡不符（全页站内卡 50 = 41 专题网格 + 4 KPI 概览 + 5 数据中枢；运行时 updateCounts 只自愈标签页数字，静态文案与无 JS 场景不自愈），本批同步订正为 41。
+> - **W1325 遗留根修**：3 篇归档正本 41 条相对链接按迁移后深度重写（lint_links 默认排除 archive/，故 W1325 的 0 broken 结论不覆盖该面）；`docs/10-方法论沉淀/README.md` 三 skill 行补「已归档·指针」标。
+> - **对抗式审查（W1327 已派发）**：审查发现并本批根修 4 项——① 初版写盘未带 newline 致 45 页转 CRLF（已归一，check 增行尾 LF 判据）；② 新脚本四面无引用（补单测 7 例）；③ 看板静态「51」失实（实测网格 41 卡）；④ W1325 归档内链 41 条失效（已按新深度重写）。事实澄清：Q+ 仅 2 页互链 1 条、Q++ 3 页互链 2 条，故 45 页并非每页 3 条（合计 128 条）。
+> - **验证（全绿）**：w1327_related_links.py --check PASS（覆盖 50·死链 0·自页 0·分类不一致 0·杂散 0）；二次 --apply 实际改动 0（幂等）；单测 7 例；归档内链 41/41 可达；lint_links 24807 链接 0 broken；check_structure 873 文件通过。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：见 file-index W1327 段。
+
 ### W1326（2026-11-25）：两轮推送 CI 等待纪律（E-321 入坑表 + 流水线第 6 步/§五）
 
 > **来源**：用户 2026-11-25 指令「把这条教训写进 pitfalls/流水线」——W1324+W1325 两轮推送实操暴露「首轮 CI 被并发取消 + 回填笔 CI 红无法 rerun 转绿」。
@@ -827,19 +841,6 @@
 > - **验证**：见收官链。
 > - **文件**：docs/11-方案报告/设计与架构方案/全站可视化内容形态与打磨项清单-2026-11-18.md,docs/11-方案报告/设计与架构方案/W1266-执行计划-图表与可视化内容层升级-2026-11-18.md,docs/11-方案报告/设计与架构方案/W1266-施工切分表-2026-11-18.md,docs/11-方案报告/设计与架构方案/W1266-证据图/81-hardships-view-内容层缺陷.png,docs/11-方案报告/设计与架构方案/W1266-证据图/graph-explorer-标签裁切与无解读.png,scripts/Z_图表设计/audit_chart_content.py,scripts/check_chart_content_completeness.py,scripts/check_chart_label_clipping.py,scripts/chart_label_clipping_probe.js,tests/unit/test_chart_label_clipping.py,scripts/output/chart-content-baseline.txt,scripts/output/chart-label-clipping-baseline.txt,scripts/output/chart-label-clipping-exemptions.txt,scripts/output/chart-legend-exemptions.txt,scripts/output/chart-content-audit.json,scripts/output/chart_label_clipping_report.json,.gitignore,docs/10-方法论沉淀/批次交付流水线.md,scripts/verify_delivery.py,.agent/skills/puti-shouye/SKILL.md,scripts/output/script-coverage-baseline.txt
 
-### W1265（2026-11-17）：现役前端打磨升级 批一 判据补盲与数据层真缺陷根修
-
-**本批要点**（W1265 · 打磨批一 · 用户裁决定案后的首个开工批）：
-
-> - **① 来源与定性**：用户 2026-11-17 22:41 裁决「还是用现在的吧，打磨升级优化现在所有的网页前端吧」⇒ **保留现役 W1261 宣纸刻本视觉语言，不换设计方向**；W1263「采纳 v3」与 W1264 甲2/乙2 两方向**候选未获采纳** ⇒ 冻结为参考件、**禁作新设计输入**。路线落盘《现役前端打磨升级清单》（12 个打磨面 + W1265–W1270 六批序列 + 每批通用验收口径 + 边界与未验证项）。
-> - **② 本批范围（开批登记）**：批一 = W1259 第 1 档**判据补盲 10 项**（EN 扩面 / EN fetch 目标语言 / 回退块禁 mock / SVG 对比度 / 引用闭合 / 渲染探针 fail-closed 等）＋ 四项**数据层真缺陷**（G1 EN 13 页 38 调用点指向中文数据集 / G2 3 页 EMBEDDED 回退块实为 mock / G3 74 页 222 个 fetch 404 / G4 chapter_rhythm 缺第 26/31/40 回）。
-> - **③ 台账真缺陷修复（E-253）**：台账「状态列」按**固定列位**取格，但 4 行**描述单元格内含裸竖线**致该行多切一格 ⇒ 状态列左移 ⇒ 取到 owner 值 ⇒ 4 个**早已收官**的历史行被误判「真在途」⇒「在途永不迁出」锁死 60/60 顶格 ⇒ **新批号无法登记（开批即卡）**。修法：描述内竖线转义 ＋ 四行列位归一 ＋ W1214/W1215/W1251–W1258/W1263 状态按 git 实际提交回填为已收官 ⇒ **真在途归零**，窗口释放 1 位。
-> - **④ 新坑位 E-253**（表格单元格裸竖线致列解析错位 ⇒ 行状态误判 ⇒ 迁移归档机制被永久锁死）。
-> - **验证**：见收官链。
-> - **文件**：docs/11-方案报告/设计与架构方案/现役前端打磨升级清单-2026-11-17.md,docs/11-方案报告/设计与架构方案/W1264-全站前端重设计-零参考重做-方向裁决材料-2026-11-17.md,docs/11-方案报告/README.md,docs/00-导读/W批次编号对账表.md,archive/docs/W批次编号对账表-ARCHIVE.md,CHANGELOG.md,pitfalls.md,scripts/output/_w1265_spec.json
-> - **⑮ 批一收官（判据补盲 + 数据层真缺陷根修·页面改动已入库）**：**新增 4 道门禁**（第 78 EN 数据源语言隔离 / 第 79 回退块保真度 / 第 80 SVG 文字对比度 / 第 81 页面引用闭合性，配套 `scripts/lib/freeze_gate.py` 基线冻结三档语义 + `scripts/lib/json_refs.py` 解析器）＋ **6 道既有门禁扩面到 site/en**（138 页此前零覆盖：第 30/43/64/66 槽、数据漂移单侧键升级判红、渲染态普查探针默认协议改 file 且 fail-closed）＋ **四项数据层真缺陷根修**（G1 EN 52 页 fetch 目标切 `../en/json/` + 143 英文副本新建 ⇒ 双协议 CJK 泄漏 13→0；G2 三页 EMBEDDED 回退块换真值 ⇒ 双协议图元全相等；G3 http 404 由 EN 112/40 页 + ZH 111/39 页 → 各 5/4 页且部署副本 308 件全部 200；G4 chapter_rhythm 97→100 且**同步真值生成器与 dataset 副本**，四处口径归一 100/12-85-3/avg 4.28）。**主会话独立复算**（自有探针·非子代理自述·HEAD 快照 A/B 对照）：CJK 增量页 **13 → 0**、图元数不一致页 **4 → 0**；并另抓 6 项并行线未自报的问题（EN/ZH character-appearance 取色表被当回退块、chapter-stats 的 MOCK_DATA 仍是真回退块、EN relationships 3 个裸文件名、narrative-experiment 渲染契约与真值源不匹配致 684 个 console error、真值源被 .gitignore 忽略致 G4 成果不入库即回退、基线冻结于在途状态把在途缺陷冻成合规）**全部修完**。**收官阶段门禁另暴露并修掉 3 项**（同样非并行线自报）：① **色盲基线外新增 2 条**——真值执念卡色 #7a5230（EN #8E7D62）与现役 chart-1(#C0392B) 在 protan 下 ΔE=1.9 ⇒ 该页修好后卡组圆与连线在色盲下不可辨（此前因 684 错误未渲染故从未暴露）⇒ 真值源 + 两份部署副本 + 两页内嵌三处同步改为现役序列槽苔绿 #3A473A（EN 站点色板 --series-3/--edge-visible/暗色补偿已精确回退）；② **英文站 CJK 违规 3 页 19 处** ⇒ 逐字段英译 ⇒ EN validate 138 页 0 FAIL；③ **治理文档体积超窗 2 项** ⇒ spec 的 file_index_rows 改目录分组形态（22 行）+ AGENTS.md 五条细节层长行保义压缩（50,333 → 48,029 字节）。**遗留已登记为待办**：EN 缺降级声明 138 / 缺徽标 138 / 英文副本缺口 6 / 单侧键 324 / 暗态不换底色 1 页（EN 残留中文串已英译 19 处）。**新坑位 E-254/E-255/E-256**。
-> - **状态**：已收官（批一：判据补盲 4 新槽 + 6 扩面 + 数据层四缺陷根修；页面改动已入库；遗留 6 项已登记为待办批次）
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -847,7 +848,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1326），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1327），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

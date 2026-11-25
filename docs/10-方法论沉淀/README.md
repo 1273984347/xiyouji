@@ -13,7 +13,7 @@
 | 编号 | 主题 | 文件 | 一句话核心 |
 |:---:|:---|:---|:---|
 | 1 | DRL 真循环 | [DRL真循环.md](DRL真循环.md) | 审查→修复→**重新审查**的循环，直到连续 N 轮 0 问题才收敛 |
-| 2 | 三 skill 闭环 | [三skill闭环.md](三skill闭环.md) | deep-review-loop → mem-wrap-up → self-evolution，闭环不可断裂 |
+| 2 | 三 skill 闭环（已归档·指针） | [三skill闭环.md](三skill闭环.md) | **W1325 物理归档**：历史全文见 [archive/docs/复盘报告/三skill闭环-ARCHIVE.md](../../archive/docs/复盘报告/三skill闭环-ARCHIVE.md)；W562 已退役，勿执行 |
 | 3 | E1 铁律 | [E1铁律.md](E1铁律.md) | prior session 报告 ≠ 实际状态，主代理必须 spot-check 验证 |
 | 4 | Preflight 与 Subagent 模板 | [Preflight与Subagent模板.md](Preflight与Subagent模板.md) | 派 subagent 前先验证事实，subagent 失败时主代理直接 fallback |
 | 5 | 双索引可追溯改造 | [双索引可追溯改造.md](双索引可追溯改造.md) | CHANGELOG 正向时间线 + file-index 反向文件索引 |

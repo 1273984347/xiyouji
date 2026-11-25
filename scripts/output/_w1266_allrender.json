@@ -43,7 +43,7 @@
     },
     {
       "page": "site/data/81-hardships.html",
-      "sha": "f2024c0ded7a",
+      "sha": "3d429bfdafd9",
       "static": {
         "svg": true,
         "cls": true,
@@ -113,7 +113,7 @@
     },
     {
       "page": "site/data/aesthetics.html",
-      "sha": "0338378de244",
+      "sha": "314159d6a0d8",
       "static": {
         "svg": true,
         "cls": true,
@@ -163,7 +163,7 @@
     },
     {
       "page": "site/data/ai-dialogue.html",
-      "sha": "810876b626c7",
+      "sha": "a1f0f435e6d5",
       "static": {
         "svg": false,
         "cls": true,
@@ -193,7 +193,7 @@
     },
     {
       "page": "site/data/business-model.html",
-      "sha": "9eda08a5f14b",
+      "sha": "966367ec27ae",
       "static": {
         "svg": true,
         "cls": true,
@@ -323,7 +323,7 @@
     },
     {
       "page": "site/data/cave-estate.html",
-      "sha": "cc54fee38f4f",
+      "sha": "c89598298df9",
       "static": {
         "svg": true,
         "cls": true,
@@ -393,7 +393,7 @@
     },
     {
       "page": "site/data/century-dialogue.html",
-      "sha": "cac8783e21c0",
+      "sha": "9c7d5d71b8d4",
       "static": {
         "svg": false,
         "cls": true,
@@ -423,7 +423,7 @@
     },
     {
       "page": "site/data/chapter-stats.html",
-      "sha": "b2874fccdf85",
+      "sha": "42cac2b8cc7c",
       "static": {
         "svg": true,
         "cls": true,
@@ -543,7 +543,7 @@
     },
     {
       "page": "site/data/character-appearance.html",
-      "sha": "d123785930f9",
+      "sha": "89f9a5c01cdf",
       "static": {
         "svg": true,
         "cls": true,
@@ -983,7 +983,7 @@
     },
     {
       "page": "site/data/chart-design.html",
-      "sha": "e50e7d25984b",
+      "sha": "dc46aa6e55ad",
       "static": {
         "svg": true,
         "cls": true,
@@ -1093,7 +1093,7 @@
     },
     {
       "page": "site/data/cognitive-psychology.html",
-      "sha": "8d5e8d48a499",
+      "sha": "3a4cf87f6746",
       "static": {
         "svg": true,
         "cls": true,
@@ -1213,7 +1213,7 @@
     },
     {
       "page": "site/data/concept-device.html",
-      "sha": "d840b607083e",
+      "sha": "ebc33b40d973",
       "static": {
         "svg": true,
         "cls": true,
@@ -1273,7 +1273,7 @@
     },
     {
       "page": "site/data/counterfactual.html",
-      "sha": "79fce6a1ac54",
+      "sha": "e0850d06c29c",
       "static": {
         "svg": true,
         "cls": true,
@@ -1323,7 +1323,7 @@
     },
     {
       "page": "site/data/criticism-history.html",
-      "sha": "ead0f23d2700",
+      "sha": "de763bd06d63",
       "static": {
         "svg": true,
         "cls": true,
@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "e9687bea6b37",
+      "sha": "d63fc6d29a9d",
       "static": {
         "svg": true,
         "cls": true,
@@ -1493,7 +1493,7 @@
     },
     {
       "page": "site/data/cultural-misreading.html",
-      "sha": "21f908efc352",
+      "sha": "c41f75c9d182",
       "static": {
         "svg": true,
         "cls": true,
@@ -1633,7 +1633,7 @@
     },
     {
       "page": "site/data/deconstruction.html",
-      "sha": "6d1fa04c4be5",
+      "sha": "9e269b32f33a",
       "static": {
         "svg": true,
         "cls": true,
@@ -1783,7 +1783,7 @@
     },
     {
       "page": "site/data/ecology.html",
-      "sha": "5dd2049da886",
+      "sha": "e2b63ad9e5de",
       "static": {
         "svg": true,
         "cls": true,
@@ -1883,7 +1883,7 @@
     },
     {
       "page": "site/data/emotional-heatmap.html",
-      "sha": "71431cc29fe7",
+      "sha": "6b71070dedac",
       "static": {
         "svg": true,
         "cls": true,
@@ -1933,7 +1933,7 @@
     },
     {
       "page": "site/data/ethics-consumption.html",
-      "sha": "8b619fcd76ac",
+      "sha": "b9640d8e707a",
       "static": {
         "svg": true,
         "cls": true,
@@ -1983,7 +1983,7 @@
     },
     {
       "page": "site/data/famous-time-travel.html",
-      "sha": "8b0475a96dac",
+      "sha": "c78e449da07e",
       "static": {
         "svg": true,
         "cls": true,
@@ -2173,7 +2173,7 @@
     },
     {
       "page": "site/data/game-webnovel.html",
-      "sha": "1a96576b4593",
+      "sha": "7a6cea58690c",
       "static": {
         "svg": true,
         "cls": true,
@@ -2253,7 +2253,7 @@
     },
     {
       "page": "site/data/global-pattern.html",
-      "sha": "c7db2689eea0",
+      "sha": "f310e21dd58b",
       "static": {
         "svg": true,
         "cls": true,
@@ -2523,7 +2523,7 @@
     },
     {
       "page": "site/data/hardship-heatmap.html",
-      "sha": "a7718512f708",
+      "sha": "817f4f99afa2",
       "static": {
         "svg": true,
         "cls": true,
@@ -2893,7 +2893,7 @@
     },
     {
       "page": "site/data/journey-route.html",
-      "sha": "37f3c8a38449",
+      "sha": "5d94f1b0c9b7",
       "static": {
         "svg": true,
         "cls": true,
@@ -2993,7 +2993,7 @@
     },
     {
       "page": "site/data/jurisprudence.html",
-      "sha": "a44977d5441e",
+      "sha": "d3a5a8205f39",
       "static": {
         "svg": true,
         "cls": true,
@@ -3083,7 +3083,7 @@
     },
     {
       "page": "site/data/karma-reincarnation.html",
-      "sha": "4636217340aa",
+      "sha": "3b769e66df38",
       "static": {
         "svg": true,
         "cls": true,
@@ -3203,7 +3203,7 @@
     },
     {
       "page": "site/data/linguistics.html",
-      "sha": "ac0cc3d9cbba",
+      "sha": "e1bc96a732f1",
       "static": {
         "svg": true,
         "cls": true,
@@ -3293,7 +3293,7 @@
     },
     {
       "page": "site/data/magic-system.html",
-      "sha": "dafcd7e9477a",
+      "sha": "01e70c68f18c",
       "static": {
         "svg": true,
         "cls": true,
@@ -3373,7 +3373,7 @@
     },
     {
       "page": "site/data/material-archaeology.html",
-      "sha": "032041e9f1e4",
+      "sha": "a6437c8a7596",
       "static": {
         "svg": true,
         "cls": true,
@@ -3483,7 +3483,7 @@
     },
     {
       "page": "site/data/mbti-evolution.html",
-      "sha": "c362def80501",
+      "sha": "311b32673219",
       "static": {
         "svg": true,
         "cls": true,
@@ -3583,7 +3583,7 @@
     },
     {
       "page": "site/data/methodology-matrix.html",
-      "sha": "5e07283a1cfe",
+      "sha": "fe4562f164c1",
       "static": {
         "svg": true,
         "cls": true,
@@ -3713,7 +3713,7 @@
     },
     {
       "page": "site/data/monster-background.html",
-      "sha": "24835646ccdc",
+      "sha": "f6b62bd8e31d",
       "static": {
         "svg": true,
         "cls": true,
@@ -4073,7 +4073,7 @@
     },
     {
       "page": "site/data/monster-sociology.html",
-      "sha": "bebbc06d4e7d",
+      "sha": "e06af95c1279",
       "static": {
         "svg": true,
         "cls": true,
@@ -4253,7 +4253,7 @@
     },
     {
       "page": "site/data/music-structure.html",
-      "sha": "b7218af3aba8",
+      "sha": "9d1bc9ea4320",
       "static": {
         "svg": true,
         "cls": true,
@@ -4313,7 +4313,7 @@
     },
     {
       "page": "site/data/narrative-experiment.html",
-      "sha": "ee8e1170938d",
+      "sha": "16a936fab96d",
       "static": {
         "svg": true,
         "cls": true,
@@ -4613,7 +4613,7 @@
     },
     {
       "page": "site/data/philosophy.html",
-      "sha": "1c68838a929f",
+      "sha": "e551418d7206",
       "static": {
         "svg": true,
         "cls": true,
@@ -4953,7 +4953,7 @@
     },
     {
       "page": "site/data/power-resources.html",
-      "sha": "9c2d593099b3",
+      "sha": "fc8df860254f",
       "static": {
         "svg": true,
         "cls": true,
@@ -5023,7 +5023,7 @@
     },
     {
       "page": "site/data/relationships.html",
-      "sha": "cc844818d09f",
+      "sha": "28c2b5fa85d0",
       "static": {
         "svg": true,
         "cls": true,
@@ -5133,7 +5133,7 @@
     },
     {
       "page": "site/data/risk-project.html",
-      "sha": "768801747a4b",
+      "sha": "d61324b82568",
       "static": {
         "svg": true,
         "cls": true,
@@ -5283,7 +5283,7 @@
     },
     {
       "page": "site/data/social-media.html",
-      "sha": "0a7ffbf6c141",
+      "sha": "19172d7df8ab",
       "static": {
         "svg": true,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "b37eb961c6d0",
+      "sha": "162bcb624a60",
       "static": {
         "svg": false,
         "cls": true,
@@ -5403,7 +5403,7 @@
     },
     {
       "page": "site/data/text-evolution.html",
-      "sha": "36ef7c97c1ce",
+      "sha": "37dedefd9731",
       "static": {
         "svg": true,
         "cls": true,
@@ -5473,7 +5473,7 @@
     },
     {
       "page": "site/data/text-search.html",
-      "sha": "399d198505da",
+      "sha": "4eb83902cfb6",
       "static": {
         "svg": true,
         "cls": true,
@@ -5603,7 +5603,7 @@
     },
     {
       "page": "site/data/timeline.html",
-      "sha": "fd460ca3ea52",
+      "sha": "98108d2be114",
       "static": {
         "svg": false,
         "cls": true,
@@ -5953,14 +5953,14 @@
     },
     {
       "page": "site/data/visual-art.html",
-      "sha": "2a6a491f9efd",
+      "sha": "3f78c0783d09",
       "static": {
         "svg": true,
         "cls": true,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
       "svgKinds": [
         {
           "cls": "",
@@ -5968,9 +5968,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 30,
+          "texts": 29,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 30"
+          "basis": "1100x480·图元 13·文本 29"
         },
         {
           "cls": "",
@@ -6003,7 +6003,7 @@
     },
     {
       "page": "site/data/workplace.html",
-      "sha": "664a42a95fe7",
+      "sha": "5c6137003917",
       "static": {
         "svg": true,
         "cls": true,
@@ -6163,7 +6163,7 @@
     },
     {
       "page": "site/dashboard.html",
-      "sha": "455c2f86abb7",
+      "sha": "0cf1b22d37ca",
       "static": {
         "svg": true,
         "cls": true,
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "50fbc7707bd1",
+      "sha": "e3e16d74eb26",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "9401891bbae7",
+      "sha": "ed11a109d487",
       "static": {
         "svg": true,
         "cls": false,
@@ -7565,11 +7565,11 @@
           "cls": "string-svg",
           "id": "stringSvg",
           "w": 1022,
-          "h": 1290,
+          "h": 1272,
           "marks": 9,
           "texts": 0,
           "kind": "chart",
-          "basis": "1022x1290·图元 9·文本 0"
+          "basis": "1022x1272·图元 9·文本 0"
         },
         {
           "cls": "ic-moon",
@@ -7586,7 +7586,7 @@
       "visibleLegend": false,
       "seriesEvidence": 4,
       "seriesDesc": "填充色组 4·描边色组 3·同 x 堆叠段 1",
-      "consoleErrors": 15,
+      "consoleErrors": 17,
       "verdict": "multi_nolegend",
       "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
     },
@@ -12209,7 +12209,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
       "svgKinds": [
         {
           "cls": "",
@@ -12217,9 +12217,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 29,
+          "texts": 30,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 29"
+          "basis": "1100x480·图元 13·文本 30"
         },
         {
           "cls": "",
