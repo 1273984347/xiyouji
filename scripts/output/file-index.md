@@ -14,6 +14,10 @@
 | CITATION.cff | W1325 | 版本面推进 W1325 |
 | .github/workflows/README.md | W1325 | 版本面推进 W1325 |
 | scripts/output/file-index.md | W1325 | W1325 段 |
+| scripts/output/_w1325_spec.json | W1325 | 收官 spec |
+| scripts/output/INDEX.md | W1325 | 目录件刷新（补 spec 行） |
+| scripts/output/README.md | W1325 | 目录件刷新（文件数 965→966） |
+| scripts/output/tools-inventory.md | W1325 | 工具清单刷新（时间戳） |
 | scripts/output/stats.json | W1325 | report_docs 255→256 |
 | scripts/output/stats-changelog.json | W1325 | stats 变更史 |
 | scripts/output/stats-index.md | W1325 | stats 反向索引 |
