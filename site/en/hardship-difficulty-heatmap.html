@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-lP+0CF9Ki3ixvm1y75OTg2LMn9wyn9AKlokSRvIi7Xs=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dgdsKsZGyZPYLCdLcXLN0HSs48+3nKV2PrKJRqsopB8=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Eighty-One Hardships Multi-Dimensional Difficulty Heatmap · Annotated Journey to the West</title>
@@ -157,6 +157,18 @@
         .dim-stat-table td.num { text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--accent-text); }
         .stat-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
         @media (min-width: 900px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+        /* Five-stage difficulty terrain (W1323·reuse stat-card·no new class names for gate 76) */
+        #stage-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+        @media (min-width: 760px) { #stage-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+        #stage-grid .stat-card { padding: 12px 14px; }
+        #stage-grid .stat-card[data-peak] { border-color: var(--accent); }
+        #stage-grid header { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; }
+        #stage-grid header b { color: var(--ink); font-weight: 600; }
+        #stage-grid em[data-badge] { font-style: normal; font-size: 0.7em; color: var(--accent-text); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 6px; white-space: nowrap; }
+        #stage-grid strong { display: block; font-family: "JetBrains Mono", monospace; font-size: 1.5em; font-weight: 600; color: var(--ink); margin-top: 6px; }
+        #stage-grid span[data-bar] { display: block; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; margin: 8px 0 6px; }
+        #stage-grid span[data-fill] { display: block; height: 100%; background: var(--ink-soft); }
+        #stage-grid small { display: block; font-size: 0.78em; color: var(--ink-soft); line-height: 1.6; }
         .stat-card { border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 14px; background: var(--paper-warm); }
         .stat-card h3 { font-size: 0.98em; margin-bottom: var(--space-3); color: var(--ink); }
         .stat-card svg { width: 100%; height: 220px; display: block; }
@@ -333,6 +345,25 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <div class="insight-box">
                 <span class="ib-tag">[Peak]</span>
                 <strong>The three Lion-Camel Ridge demons (Ch. 74) top all four dimensions</strong>. Difficulty 10 / Long duration / 3+ rescues / borrowed treasure — this is the novel's only "all-four-peak" trial. The Buddha personally leads the five hundred Arhats to subdue the Roc, marking the absolute limit of celestial mobilization against a pilgrimage trial.
+            </div>
+        </section>
+
+        <!-- Block 5: five-stage difficulty terrain (W1323) -->
+        <section class="section" aria-labelledby="sec-stage">
+            <h2 id="sec-stage">④ Difficulty Progression: Five-Stage Terrain</h2>
+            <p>Aggregating the 81 hardships into five pilgrimage stages (Prequel / Early / Middle / Late / Final) shows how difficulty shifts as the journey advances. Every number below is computed from this page's EMBEDDED data at runtime, never hard-coded.</p>
+            <div class="stage-grid" id="stage-grid"></div>
+            <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+                <table class="dim-stat-table" aria-label="Five-stage difficulty aggregates">
+                    <thead>
+                        <tr><th>Stage</th><th>Chapters</th><th>Hardships</th><th>Avg. Score</th><th>Extreme</th><th>Avg. Rescues</th><th>Hardest Hardship</th></tr>
+                    </thead>
+                    <tbody id="stage-table-body"></tbody>
+                </table>
+            </div>
+            <div class="insight-box" style="margin-top:16px;">
+                <span class="ib-tag">[Progression]</span>
+                <strong id="stage-insight"></strong>
             </div>
         </section>
     </main>
@@ -713,6 +744,61 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         });
     }
 
+    // ========= Five-stage difficulty terrain (W1323·all values computed from page data) =========
+    const STAGE_ORDER = ["pre", "early", "mid", "late", "end"];
+
+    function stageAggregates() {
+        const dataArr = (window.__hmData && window.__hmData.length === EMBEDDED_DATA.length) ? window.__hmData : EMBEDDED_DATA;
+        return STAGE_ORDER.map(function (st) {
+            const arr = dataArr.filter(function (d) { return d.stage === st; });
+            const n = arr.length;
+            const sumScore = arr.reduce(function (a, d) { return a + d.score; }, 0);
+            const sumRescue = arr.reduce(function (a, d) { return a + d.rescueCount; }, 0);
+            const chs = arr.map(function (d) { return d.chNum; }).filter(function (c) { return c > 0; });
+            const top = arr.slice().sort(function (a, b) { return b.score - a.score || a.n - b.n; })[0];
+            return {
+                st: st,
+                n: n,
+                avg: n ? sumScore / n : 0,
+                extreme: arr.filter(function (d) { return d.level === "extreme"; }).length,
+                rescue: n ? sumRescue / n : 0,
+                range: chs.length ? "Ch. " + Math.min.apply(null, chs) + "–" + Math.max.apply(null, chs) : "Prequel",
+                top: top
+            };
+        });
+    }
+
+    function renderStage() {
+        const grid = document.getElementById("stage-grid");
+        const tbody = document.getElementById("stage-table-body");
+        const insight = document.getElementById("stage-insight");
+        if (!grid || !tbody) return;
+        const stats = stageAggregates();
+        const peak = stats.slice().sort(function (a, b) { return b.avg - a.avg; })[0];
+        grid.innerHTML = stats.map(function (s) {
+            const isPeak = s.st === peak.st;
+            return '<div class="stat-card"' + (isPeak ? ' data-peak="1"' : '') + '>' +
+                '<header><b>' + STAGE_LABEL[s.st] + '</b>' +
+                (isPeak ? '<em data-badge>Peak</em>' : '') + '</header>' +
+                '<strong>' + s.avg.toFixed(1) + '</strong>' +
+                '<span data-bar aria-hidden="true"><span data-fill style="width:' + (s.avg / 10 * 100).toFixed(1) + '%"></span></span>' +
+                '<small>' + s.n + ' hardships · extremes ' + s.extreme + ' · rescues ' + s.rescue.toFixed(1) + '/trial</small>' +
+                '</div>';
+        }).join("");
+        tbody.innerHTML = stats.map(function (s) {
+            return '<tr><td>' + STAGE_LABEL[s.st] + '</td><td>' + s.range + '</td>' +
+                '<td class="num">' + s.n + '</td><td class="num">' + s.avg.toFixed(1) + '</td>' +
+                '<td class="num">' + s.extreme + '</td><td class="num">' + s.rescue.toFixed(1) + '</td>' +
+                '<td>No. ' + s.top.n + ' · ' + s.top.name + ' (' + s.top.score + ')</td></tr>';
+        }).join("");
+        if (insight) {
+            const last = stats[stats.length - 1];
+            insight.textContent = (peak.st === last.st)
+                ? STAGE_LABEL[peak.st] + " averages " + peak.avg.toFixed(1) + ", the highest of the five; the Prequel averages " + stats[0].avg.toFixed(1) + "."
+                : STAGE_LABEL[peak.st] + " averages " + peak.avg.toFixed(1) + ", the highest of the five; the Final stage drops to " + last.avg.toFixed(1) + " — final hardships are mostly scripture-related and inner-cultivation trials.";
+        }
+    }
+
     // ========= Initialization & interaction =========
     function renderAll() {
         renderHeatmap(currentDim);
@@ -721,6 +807,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         renderStatBar("#stat-rescue-svg", "rescue");
         renderStatBar("#stat-treasure-svg", "treasure");
         renderCrossTable();
+        renderStage();
     }
 
     // Dimension switching

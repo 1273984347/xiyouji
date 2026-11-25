@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-PbK/Kn+gDO0O5m+V0vJ3pQ3JjG4aFl2rqEuaDvbRA4k=' 'sha256-YHc/fcXFPWaqwCvUwbdl84rLPCi3AJXu3duz4XeksN8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-b1pvgA5TMZZCnG/QphZPYdoPPTwD/T+3sK5B8QUJ8aU=' 'sha256-YHc/fcXFPWaqwCvUwbdl84rLPCi3AJXu3duz4XeksN8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>八十一难多维度难度热力图 · 详解西游记</title>
@@ -166,6 +166,18 @@
         .dim-stat-table td.num { text-align: center; font-family: "JetBrains Mono", monospace; font-weight: 600; color: var(--accent-text); }
         .stat-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
         @media (min-width: 900px) { .stat-grid { grid-template-columns: 1fr 1fr; } }
+        /* 难度演进：五阶段地形（W1323·复用 stat-card·零新增类名以守第 76 槽） */
+        #stage-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+        @media (min-width: 760px) { #stage-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
+        #stage-grid .stat-card { padding: 12px 14px; }
+        #stage-grid .stat-card[data-peak] { border-color: var(--accent); }
+        #stage-grid header { display: flex; align-items: baseline; justify-content: space-between; gap: 6px; }
+        #stage-grid header b { color: var(--ink); font-weight: 600; }
+        #stage-grid em[data-badge] { font-style: normal; font-size: 0.7em; color: var(--accent-text); border: 1px solid var(--accent); border-radius: 999px; padding: 1px 6px; white-space: nowrap; }
+        #stage-grid strong { display: block; font-family: "JetBrains Mono", monospace; font-size: 1.5em; font-weight: 600; color: var(--ink); margin-top: 6px; }
+        #stage-grid span[data-bar] { display: block; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; margin: 8px 0 6px; }
+        #stage-grid span[data-fill] { display: block; height: 100%; background: var(--ink-soft); }
+        #stage-grid small { display: block; font-size: 0.78em; color: var(--ink-soft); line-height: 1.6; }
         .stat-card { border: 1px solid var(--line); border-radius: var(--radius-md) ; padding: 14px; background: var(--paper-warm); }
         .stat-card h3 { font-size: 0.98em; margin-bottom: var(--space-3); color: var(--ink); }
         .stat-card svg { width: 100%; height: 220px; display: block; }
@@ -392,9 +404,28 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
         </section>
 
-        <!-- 板块 4：八十一难清单（C2 与热力图双向联动） -->
+        <!-- 板块 4：难度演进（五阶段地形·W1323） -->
+        <section class="section" aria-labelledby="sec-stage">
+            <h2 id="sec-stage">④ 难度演进：五阶段地形</h2>
+            <p>把 81 难按取经进程分为前传 / 初段 / 中段 / 后段 / 终段五段，看难度如何随回目推进。下列数值全部由页内 EMBEDDED 数据实时聚合，不写死。</p>
+            <div class="stage-grid" id="stage-grid"></div>
+            <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
+                <table class="dim-stat-table" aria-label="五阶段难度聚合">
+                    <thead>
+                        <tr><th>阶段</th><th>回目范围</th><th>难数</th><th>均分</th><th>极难数</th><th>平均求助</th><th>最高分难</th></tr>
+                    </thead>
+                    <tbody id="stage-table-body"></tbody>
+                </table>
+            </div>
+            <div class="insight-box" style="margin-top:16px;">
+                <span class="ib-tag">[演进]</span>
+                <strong id="stage-insight"></strong>
+            </div>
+        </section>
+
+        <!-- 板块 5：八十一难清单（C2 与热力图双向联动） -->
         <section class="section" aria-labelledby="sec-list">
-            <h2 id="sec-list">④ 八十一难清单（与热力图联动）</h2>
+            <h2 id="sec-list">⑤ 八十一难清单（与热力图联动）</h2>
             <p>hover / 点击清单行或热力图单元格，两侧同步高亮；点击任一侧打开该难详情。</p>
             <div style="overflow-x:auto;-webkit-overflow-scrolling:touch;">
                 <table id="hardships-table" aria-label="八十一难清单">
@@ -798,6 +829,61 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         });
     }
 
+    // ========= 难度演进：五阶段地形（W1323·全部由页内数据实时聚合） =========
+    const STAGE_ORDER = ["pre", "early", "mid", "late", "end"];
+
+    function stageAggregates() {
+        const dataArr = (window.__hmData && window.__hmData.length === EMBEDDED_DATA.length) ? window.__hmData : EMBEDDED_DATA;
+        return STAGE_ORDER.map(function (st) {
+            const arr = dataArr.filter(function (d) { return d.stage === st; });
+            const n = arr.length;
+            const sumScore = arr.reduce(function (a, d) { return a + d.score; }, 0);
+            const sumRescue = arr.reduce(function (a, d) { return a + d.rescueCount; }, 0);
+            const chs = arr.map(function (d) { return d.chNum; }).filter(function (c) { return c > 0; });
+            const top = arr.slice().sort(function (a, b) { return b.score - a.score || a.n - b.n; })[0];
+            return {
+                st: st,
+                n: n,
+                avg: n ? sumScore / n : 0,
+                extreme: arr.filter(function (d) { return d.level === "extreme"; }).length,
+                rescue: n ? sumRescue / n : 0,
+                range: chs.length ? "第 " + Math.min.apply(null, chs) + "–" + Math.max.apply(null, chs) + " 回" : "前传",
+                top: top
+            };
+        });
+    }
+
+    function renderStage() {
+        const grid = document.getElementById("stage-grid");
+        const tbody = document.getElementById("stage-table-body");
+        const insight = document.getElementById("stage-insight");
+        if (!grid || !tbody) return;
+        const stats = stageAggregates();
+        const peak = stats.slice().sort(function (a, b) { return b.avg - a.avg; })[0];
+        grid.innerHTML = stats.map(function (s) {
+            const isPeak = s.st === peak.st;
+            return '<div class="stat-card"' + (isPeak ? ' data-peak="1"' : '') + '>' +
+                '<header><b>' + STAGE_LABEL[s.st] + '</b>' +
+                (isPeak ? '<em data-badge>难度峰值</em>' : '') + '</header>' +
+                '<strong>' + s.avg.toFixed(1) + '</strong>' +
+                '<span data-bar aria-hidden="true"><span data-fill style="width:' + (s.avg / 10 * 100).toFixed(1) + '%"></span></span>' +
+                '<small>' + s.n + ' 难 · 极难 ' + s.extreme + ' · 求助 ' + s.rescue.toFixed(1) + ' 次/难</small>' +
+                '</div>';
+        }).join("");
+        tbody.innerHTML = stats.map(function (s) {
+            return '<tr><td>' + STAGE_LABEL[s.st] + '</td><td>' + s.range + '</td>' +
+                '<td class="num">' + s.n + '</td><td class="num">' + s.avg.toFixed(1) + '</td>' +
+                '<td class="num">' + s.extreme + '</td><td class="num">' + s.rescue.toFixed(1) + '</td>' +
+                '<td>第 ' + s.top.n + ' 难 · ' + s.top.name + '（' + s.top.score + ' 分）</td></tr>';
+        }).join("");
+        if (insight) {
+            const last = stats[stats.length - 1];
+            insight.textContent = (peak.st === last.st)
+                ? STAGE_LABEL[peak.st] + "均分 " + peak.avg.toFixed(1) + "，为五段最高；前传均分 " + stats[0].avg.toFixed(1) + "。"
+                : STAGE_LABEL[peak.st] + "均分 " + peak.avg.toFixed(1) + "，为五段最高；终段降至 " + last.avg.toFixed(1) + "——终段多为结经、传经与心性收束类难关。";
+        }
+    }
+
     // ========= 初始化与交互 =========
     function renderAll() {
         renderHeatmap(currentDim);
@@ -806,6 +892,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
         renderStatBar("#stat-rescue-svg", "rescue");
         renderStatBar("#stat-treasure-svg", "treasure");
         renderCrossTable();
+        renderStage();
     }
 
     // 维度切换

@@ -430,10 +430,10 @@
    "page": "data/hardship-difficulty-heatmap.html",
    "charts": 5,
    "source_note": 1,
-   "insight": 13,
+   "insight": 19,
    "tooltip": 2,
    "legend": 8,
-   "text_len": 2009
+   "text_len": 2135
   },
   {
    "page": "data/hardship-heatmap.html",
@@ -1663,10 +1663,10 @@
    "page": "en/hardship-difficulty-heatmap.html",
    "charts": 5,
    "source_note": 0,
-   "insight": 12,
+   "insight": 18,
    "tooltip": 5,
    "legend": 11,
-   "text_len": 4718
+   "text_len": 5095
   },
   {
    "page": "en/hardship-heatmap.html",

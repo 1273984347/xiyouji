@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-25T11:27:32.121Z",
+ "generated_at": "2026-11-25T12:41:12.711Z",
  "threshold": 3,
  "scope": "data,en",
  "bg_mode": "body",
@@ -40,7 +40,7 @@
   "data/concept-device.html": "d840b607083e",
   "data/counterfactual.html": "79fce6a1ac54",
   "data/criticism-history.html": "ead0f23d2700",
-  "data/cross-time-danmaku.html": "6a7afa29022b",
+  "data/cross-time-danmaku.html": "e9687bea6b37",
   "data/cultural-misreading.html": "21f908efc352",
   "data/customs-pass-route.html": "427e8f0ddbaa",
   "data/data-explorer.html": "a90e6836ae2f",
@@ -56,7 +56,6 @@
   "data/global-pattern.html": "c7db2689eea0",
   "data/graph-explorer.html": "c6b89edd96ae",
   "data/guanyin-six-roles-network.html": "7dce3a081436",
-  "data/hardship-difficulty-heatmap.html": "ff24b72c2d99",
   "data/hardship-heatmap.html": "a7718512f708",
   "data/heaven-power-network.html": "ce9040b6d724",
   "data/intertextuality-network.html": "7eb22deb4abd",
@@ -138,7 +137,6 @@
   "en/graph-explorer.html": "41646be45e95",
   "en/guanyin-six-roles-network.html": "7f6c7d0f4cd5",
   "en/guide.html": "01a001f02468",
-  "en/hardship-difficulty-heatmap.html": "906e754ffe97",
   "en/hardship-heatmap.html": "de3e998936af",
   "en/heaven-power-network.html": "f1d8216c7282",
   "en/intertextuality-network.html": "5ccfad27ce1d",
@@ -183,7 +181,9 @@
   "en/timeline.html": "1ade1818d118",
   "en/underworld-power-network.html": "fb90b0d56d42",
   "en/visual-art.html": "918aeb330fcc",
-  "en/workplace.html": "de9cca65dc70"
+  "en/workplace.html": "de9cca65dc70",
+  "en/hardship-difficulty-heatmap.html": "2c3dd5c10e04",
+  "data/hardship-difficulty-heatmap.html": "11f0f7657525"
  },
  "by_page": {}
 }
