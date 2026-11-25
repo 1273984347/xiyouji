@@ -1,21 +1,22 @@
-r"""W1327 专项测试：scripts/w1327_related_links.py（页脚同类关联链接生成器）
+r"""W1327/W1328 专项测试：scripts/w1327_related_links.py（页脚同类关联链接生成器）
 
 ## 为什么测这个脚本
 
-页脚关联链接是「看板卡片 → 45 个内容页」的**单向派生**：推荐口径、自页排除、类别一致
-全部由本脚本的解析与匹配决定。脚本若静默漂移（正则漏卡 / 循环错位 / 幂等破坏），
-页面上的链接会变成死链、自页链或错类链，而页面本身仍「看起来正常」——本文件把
-派生规则与注入/重放行为钉成可回归的判据。
+页脚关联链接是「看板卡片 + 文件名族 → 85 个内容页」的**单向派生**：推荐口径、自页排除、
+分组一致、看板深链全部由本脚本决定。脚本若静默漂移（正则漏卡 / 族漏页 / 循环错位 / 幂等破坏），
+页面上的链接会变成死链、自页链或错组链，而页面本身仍「看起来正常」——本文件把派生规则
+与注入/重放行为钉成可回归的判据。
 
 ## 覆盖判据
 
-  G1 同类循环取后 3 页且自页排除（4 页类别 → a 得到 b/c/d）
-  G2 类别成员不足 4 时取 n-1（Q+ 两页互链 1 条）
-  G3 注入形态固定（MARK + nav.footer-related + 类别标签 + 相对链接）
+  G1 同类循环取后 3 页且自页排除（4 页组 → a 得到 b/c/d）
+  G2 组成员不足 4 时取 n-1（两页互链 1 条）
+  G3 注入形态固定（MARK + nav.footer-related + 标签 + footer-related-link 类）
   G4 重放幂等：同一块再跑 process 输出逐字不变（update 且零变化）
   G5 损坏/缺锚点 fail-closed：mark-broken / no-footer 不被静默吞掉
-  G6 CLI --check 在真实仓库为 PASS（覆盖/MARK/死链/自页/分类/杂散/看板解析完备）
-  G7 NO_FOOTER 5 页在磁盘上真实存在且确无 site-footer
+  G6 分组全量守恒：90 页恰分 13 组、无重复无遗漏（家族 40 页）
+  G7 看板深链契约：dashboard 含 #cat= 解析（readHashCategory/URLSearchParams）
+  G8 CLI --check 在真实仓库为 PASS
 """
 
 import subprocess
@@ -41,11 +42,11 @@ def test_cyclic_next_three_excludes_self():
     assert rl.related_for("a-l", "d.html") == ["a.html", "b.html", "c.html"]
 
 
-def test_small_category_takes_n_minus_1():
+def test_small_group_takes_n_minus_1():
     rl.parse_cache = {"q-plus": [("x.html", "批评史长卷"), ("y.html", "观念装置")]}
     assert rl.related_for("q-plus", "x.html") == ["y.html"]
     block = rl.build_block("q-plus", "x.html")
-    assert block.count("<a href=") == 1
+    assert block.count('class="footer-related-link"') == 1
     assert "同类 · Q+ 批评史" in block
     assert "观念装置" in block
 
@@ -56,7 +57,8 @@ def test_block_shape():
     assert block.startswith("        " + rl.MARK)
     assert 'class="footer-related"' in block
     assert 'aria-label="同类可视化推荐"' in block
-    assert 'href="b.html"' in block
+    assert 'class="footer-meta" href="../dashboard.html#cat=a-l"' in block
+    assert '<a class="footer-related-link" href="b.html">乙</a>' in block
 
 
 HTML = (
@@ -69,8 +71,8 @@ HTML = (
 BLOCK = (
     "        " + rl.MARK + "\n"
     '        <nav class="footer-related" aria-label="同类可视化推荐">\n'
-    '            <span class="footer-meta">同类 · A-L 基础</span>\n'
-    '            <a href="b.html">乙</a>\n'
+    '            <a class="footer-meta" href="../dashboard.html#cat=a-l">同类 · A-L 基础</a>\n'
+    '            <a class="footer-related-link" href="b.html">乙</a>\n'
     "        </nav>"
 )
 
@@ -98,6 +100,23 @@ def test_no_footer_set_matches_disk():
         f = rl.DATA / page
         assert f.is_file(), page
         assert not rl.FOOTER.search(f.read_text(encoding="utf-8")), page
+
+
+def test_groups_cover_all_pages_once():
+    groups = rl.parse_groups()
+    pages = [p for items in groups.values() for p, _ in items]
+    assert len(groups) == 13, sorted(groups)
+    assert len(pages) == 90 == len(set(pages))
+    family_pages = sum(len(items) for name, items in groups.items() if name not in rl.CAT_NAMES)
+    assert family_pages == 40
+    assert all(len(items) >= 2 for items in groups.values())
+
+
+def test_dashboard_deeplink_code_present():
+    html = rl.DASH.read_text(encoding="utf-8")
+    assert "readHashCategory" in html
+    assert "URLSearchParams" in html
+    assert "#cat=" in html
 
 
 def test_cli_check_pass():

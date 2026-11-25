@@ -1,10 +1,12 @@
-"""W1327 页脚同类关联链接生成器（正本=本文件内规则，改推荐口径只改这里）。
+"""W1327/W1328 页脚同类关联链接生成器（正本=本文件内规则，改推荐口径只改这里）。
 
-来源：site/dashboard.html 专题卡片（href=data/xxx.html + data-category）——
-每张卡片即一条「页面 ↔ 类别」事实，类别名取自同页 filter-tab 的 data-label。
-规则：同类别内按看板顺序循环取后 3 页（自页排除），每个目标页恰得一组 3 条链接；
-     类别成员 < 4 时取 n-1 条（如 Q+ 仅 2 页则互链 1 条）。
-注入：目标页 <footer class="site-footer"> 内、现有页脚导航之后，带 MARK 便于幂等重放。
+来源（两段式，W1328 扩）：
+  ① 看板专题卡：site/dashboard.html 的 href=data/xxx.html + data-category（45 页）；
+  ② 文件名族：不在看板卡上的 site/data 内容页按族归组（关系网络 / 人物与文风 /
+     地理与行程 / 叙事与文本 / 专题图谱 / 交互工具与导航）。
+规则：组内按页面顺序循环取后 3 页（自页排除）；组成员 < 4 时取 n-1 条。
+注入：目标页 <footer class="site-footer"> 内、现有页脚导航之后，带 MARK 便于幂等重放；
+     看板类别的标签是指向 dashboard.html#cat=<类别> 的深链（W1328 交互），族标签为纯文本。
 
 用法：
   python scripts/w1327_related_links.py --dry-run    # 打印计划，不写盘
@@ -12,9 +14,9 @@
   python scripts/w1327_related_links.py --check      # 门禁：覆盖/条数/自页排除/可达性/分类一致
 
 判定口径说明：
-  - 「关联」= 同 data-category（看板既有分类，不新增人工标签）；
+  - 「关联」= 同看板类别或同文件名族（不新增人工标签表；族规则显式声明在本文件）；
   - 链接只用 file:// 相对路径（与目标页同目录，site/data/ 内直链）；
-  - 不新增 CSS：复用 .site-footer nav 与 .footer-meta 既有样式（零外域、零内联脚本）。
+  - 不新增 CSS：复用 .site-footer nav / .footer-meta 既有样式（零外域、零内联脚本）。
 """
 import io
 import re
@@ -31,6 +33,7 @@ DASH = SITE / "dashboard.html"
 MARK = "<!-- RELATED-LINKS v1 w1327 -->"
 MAX_LINKS = 3
 NAV_LABEL = "同类可视化推荐"
+DASH_LINK = "../dashboard.html#cat="
 
 # 数据中枢 5 个工具页：整页无 site-footer（独立工具布局，非内容页），不注入；
 # check 模式反向锁死：这 5 页必须仍无 footer 且无 MARK——若某页后续长出 footer，
@@ -54,11 +57,65 @@ CAT_NAMES = {
     "q-plusplusplus": "Q+++ v2.0 新功能",
     "data": "数据中枢",
 }
+# 只有筛选条上真实存在的类别才能深链；data 中枢卡不在 #topic-grid 内、无对应 tab。
+FILTER_CATS = frozenset(CAT_NAMES) - {"data"}
+
+# W1328：非看板页的文件名族（每页必须恰好命中 1 族·parse 期断言）。
+FAMILIES = {
+    "关系网络": lambda n: "network" in n or n in {
+        "character-relationship-3d.html",
+        "character-relationship-3d-view.html",
+        "graph-explorer.html",
+    },
+    "人物与文风": lambda n: n in {
+        "character-presence-timeline.html",
+        "character-sentiment-arc.html",
+        "dialogue-sentiment.html",
+        "language-style-radar.html",
+        "wukong-tangseng-benchmark.html",
+        "pilgrim-team-psychology-arc.html",
+    },
+    "地理与行程": lambda n: n.startswith("journey-") or n == "customs-pass-route.html",
+    "叙事与文本": lambda n: n in {
+        "chapter-structure-graph.html",
+        "narrative-rhythm-curve.html",
+        "story-timeline.html",
+        "poetry-density.html",
+        "poetry-rhythm-analysis.html",
+    },
+    "专题图谱": lambda n: n in {
+        "four-heavenly-kings-artifacts.html",
+        "ming-political-thought-comparison.html",
+        "glossary.html",
+        "hardship-difficulty-heatmap.html",
+        "monster-capability-radar.html",
+    },
+    "交互工具与导航": lambda n: n in {
+        "tag-cloud.html",
+        "perf-canvas-rendering.html",
+        "81-hardships-view.html",
+        "data-explorer.html",
+        "search.html",
+    },
+}
 
 CARD = re.compile(r'<a class="kpi-card"[^>]*?href="data/([^"]+\.html)"[^>]*?data-category="([^"]+)"[^>]*>(.*?)</a>', re.S)
 LABEL = re.compile(r'<div class="label">(.*?)</div>', re.S)
 IDX = re.compile(r'^[A-Z]{1,2}\+{0,3}\s*·\s*')
 FOOTER = re.compile(r'(<footer class="site-footer">)(.*?)(</footer>)', re.S)
+
+
+def _page_title(page):
+    """页面标题：取 h1 首个标签前的文本，退化到 <title> 的首段。"""
+    txt = (DATA / page).read_text(encoding="utf-8")
+    m = re.search(r"<h1[^>]*>(.*?)</h1>", txt, re.S)
+    raw = m.group(1) if m else ""
+    title = re.split(r"<", raw, maxsplit=1)[0].strip()
+    if not title:
+        tm = re.search(r"<title>(.*?)</title>", txt, re.S)
+        raw2 = tm.group(1) if tm else page
+        title = re.split(r"<|·", raw2, maxsplit=1)[0].strip()
+    return title or page
 
 
 def parse_cards():
@@ -86,6 +143,24 @@ def parse_cards():
     return cats
 
 
+def parse_groups():
+    """看板类别 ∪ 文件名族 → 全量分组；非看板页必须恰好命中 1 族。"""
+    dash = parse_cards()
+    dash_pages = {p for items in dash.values() for p, _ in items}
+    fams = {}
+    for f in sorted(DATA.glob("*.html")):
+        page = f.name
+        if page == "_shell.html" or page in dash_pages:
+            continue
+        hits = [name for name, rule in FAMILIES.items() if rule(page)]
+        if len(hits) != 1:
+            raise SystemExit(f"FAIL 文件名族归属异常：{page} 命中 {hits}（应恰 1 族）")
+        fams.setdefault(hits[0], []).append((page, _page_title(page)))
+    groups = dict(dash)
+    groups.update(fams)
+    return groups
+
+
 def related_for(cat, page):
     items = [p for p, _ in parse_cache[cat]]
     n = len(items)
@@ -97,16 +172,23 @@ def related_for(cat, page):
     return out
 
 
+def _label(cat):
+    name = CAT_NAMES.get(cat, cat)
+    if cat in FILTER_CATS:
+        return f'<a class="footer-meta" href="{DASH_LINK}{cat}">同类 · {name}</a>'
+    return f'<span class="footer-meta">同类 · {name}</span>'
+
+
 def build_block(cat, page):
     links = related_for(cat, page)
     titles = dict(parse_cache[cat])
     lines = [
         f"        {MARK}",
         f'        <nav class="footer-related" aria-label="{NAV_LABEL}">',
-        f'            <span class="footer-meta">同类 · {CAT_NAMES[cat]}</span>',
+        f"            {_label(cat)}",
     ]
     for t in links:
-        lines.append(f'            <a href="{t}">{titles[t]}</a>')
+        lines.append(f'            <a class="footer-related-link" href="{t}">{titles[t]}</a>')
     lines.append("        </nav>")
     return "\n".join(lines)
 
@@ -153,7 +235,7 @@ def _drift_reason(page, action, had_crlf):
 def _process_page(mode, cat, page, stats, changed, fail):
     f = DATA / page
     if not f.is_file():
-        fail.append(f"缺页 {page}（看板卡片指向不存在文件）")
+        fail.append(f"缺页 {page}（分类指向不存在文件）")
         return
     txt = f.read_text(encoding="utf-8")
     had_crlf = b"\r\n" in f.read_bytes()
@@ -189,8 +271,19 @@ def _check_hrefs(page, cat, hrefs, page_cat):
         if not (DATA / h).is_file():
             out.append(f"{page}: 死链 {h}")
         if page_cat.get(h) != cat:
-            out.append(f"{page}: {h} 分类不一致（{page_cat.get(h)} ≠ {cat}）")
+            out.append(f"{page}: {h} 分组不一致（{page_cat.get(h)} ≠ {cat}）")
     return out
+
+
+def _check_label(page, cat, blk):
+    name = CAT_NAMES.get(cat, cat)
+    if f"同类 · {name}" not in blk:
+        return [f"{page}: 类别标签缺失"]
+    if cat in FILTER_CATS and f'href="{DASH_LINK}{cat}"' not in blk:
+        return [f"{page}: 看板深链缺失（{DASH_LINK}{cat}）"]
+    if cat not in FILTER_CATS and '<span class="footer-meta">' not in blk:
+        return [f"{page}: 族标签应为纯文本 span"]
+    return []
 
 
 def _check_one(page, cat, expect, page_cat):
@@ -205,15 +298,14 @@ def _check_one(page, cat, expect, page_cat):
     if not m:
         return [f"{page}: MARK 后无 </nav>（块结构损坏）"]
     blk = m.group(0)
-    hrefs = re.findall(r'<a href="([^"]+)">', blk)
+    hrefs = re.findall(r'<a class="footer-related-link" href="([^"]+)">', blk)
     fail = []
     if len(hrefs) != expect:
         fail.append(f"{page}: 链接 {len(hrefs)} 条（应 {expect}）")
     if page in hrefs:
         fail.append(f"{page}: 含自页链接")
     fail.extend(_check_hrefs(page, cat, hrefs, page_cat))
-    if f"同类 · {CAT_NAMES[cat]}" not in blk:
-        fail.append(f"{page}: 类别标签缺失")
+    fail.extend(_check_label(page, cat, blk))
     return fail
 
 
@@ -225,6 +317,17 @@ def _check_coverage(page_cat):
             if page in NO_FOOTER:
                 continue  # 主扫描已反向锁死（无 footer 且无 MARK）
             fail.extend(_check_one(page, cat, expect, page_cat))
+    # 全量守恒：磁盘 90 页（减模板壳）必须 = 已分组页 ∪ NO_FOOTER，且无重复分组。
+    disk = {f.name for f in DATA.glob("*.html")} - {"_shell.html"}
+    grouped = list(page_cat)
+    if len(grouped) != len(set(grouped)):
+        fail.append("分组重复：同一页出现在多个类别/族")
+    missing = sorted(disk - set(grouped) - NO_FOOTER)
+    extra = sorted(set(grouped) - disk)
+    if missing:
+        fail.append(f"未覆盖页 {missing}（既不在看板卡也不在文件名族）")
+    if extra:
+        fail.append(f"分组含不存在的页 {extra}")
     return fail
 
 
@@ -248,19 +351,55 @@ def _check_grid():
     ]
 
 
+def _check_tab_counts():
+    """筛选标签静态计数 ≡ 网格实卡数（W1328：51/12 两处长期漂移的机器防线）。"""
+    dash = DASH.read_text(encoding="utf-8")
+    gi = dash.find('id="topic-grid"')
+    grid = dash[gi:] if gi != -1 else ""
+    if "</section>" in grid:
+        grid = grid[: grid.find("</section>")]
+    counts = {}
+    for m in re.finditer(r'data-category="([^"]+)"', grid):
+        counts[m.group(1)] = counts.get(m.group(1), 0) + 1
+    total = len(re.findall(r'<a class="kpi-card"', grid))
+    fail = []
+    for m in re.finditer(
+        r'<button[^>]*class="filter-tab[^"]*"[^>]*data-category="([^"]+)"[^>]*>([^<]*)</button>', dash
+    ):
+        cat, text = m.group(1), m.group(2).strip()
+        mm = re.search(r"(\d+)\s*$", text)
+        if not mm:
+            continue
+        got = int(mm.group(1))
+        expect = total if cat == "all" else counts.get(cat, 0)
+        if got != expect:
+            fail.append(f"看板筛选标签计数漂移：{cat} 标 {got} vs 网格实卡 {expect}")
+    return fail
+
+
+def _check_dash_deeplink():
+    """看板深链契约：footer 生成的 #cat=<类别> 必须有对应解析代码。"""
+    txt = DASH.read_text(encoding="utf-8")
+    if "URLSearchParams" not in txt or "readHashCategory" not in txt:
+        return ["看板缺少 #cat= 深链解析（readHashCategory/URLSearchParams）"]
+    return []
+
+
 def _check_stray(page_cat):
     fail = []
     for f in sorted(DATA.glob("*.html")):
         if f.name == "_shell.html" or f.name in page_cat:
             continue
         if MARK in f.read_text(encoding="utf-8"):
-            fail.append(f"{f.name}: 非看板页出现 MARK（杂散注入）")
+            fail.append(f"{f.name}: 非目标页出现 MARK（杂散注入）")
     return fail
 
 
 def _run_check(page_cat, stats):
     fail = _check_coverage(page_cat)
     fail.extend(_check_grid())
+    fail.extend(_check_tab_counts())
+    fail.extend(_check_dash_deeplink())
     fail.extend(_check_stray(page_cat))
     bad = {k: v for k, v in stats.items() if k in ("no-footer", "mark-broken")}
     if bad:
@@ -272,15 +411,15 @@ def _run_check(page_cat, stats):
 
 
 def _print_plan(mode, page_cat, stats, changed):
-    print(f"mode={mode}  类别={len(parse_cache)}  目标页={len(page_cat)}  stats={stats}  实际改动={len(changed)}")
+    print(f"mode={mode}  分组={len(parse_cache)}  目标页={len(page_cat)}  stats={stats}  实际改动={len(changed)}")
     for cat, items in parse_cache.items():
-        print(f"  {CAT_NAMES[cat]:<18} {len(items):>2} 页")
+        print(f"  {CAT_NAMES.get(cat, cat):<18} {len(items):>2} 页")
 
 
 def main():
     mode = sys.argv[1] if len(sys.argv) > 1 else "--dry-run"
     global parse_cache
-    parse_cache = parse_cards()
+    parse_cache = parse_groups()
     page_cat = {p: c for c, items in parse_cache.items() for p, _ in items}
     stats, changed, fail = _scan_pages(mode, page_cat)
     _print_plan(mode, page_cat, stats, changed)

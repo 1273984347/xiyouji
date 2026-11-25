@@ -1,6 +1,6 @@
 # CI/CD 工作流说明
 
-> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1327** — 西游记解读项目（`D:\xiyouji`，W1327）的 GitHub Actions 工作流层。
+> **W234-E1 CI/CD 化 → W399/W400/W401/W410/W411/W412/W413/W414/W415/W416/W417/W418/W419/W420/W421/W422/W423/W424/W425/W426 → W450-W1328** — 西游记解读项目（`D:\xiyouji`，W1328）的 GitHub Actions 工作流层。
 > **W1255**：横幅图上题识 209 页（figure 内加小号短题名 + 朱砂落款·页内私有样式·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W1256**：横幅裁白（撤销 W1255 图上题识·209 页裁去左侧约 1/3 素绢留白·CSS 裁切·12 张资产零改动·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W1257**：og 分享图接缝像素级修复（og-03 / og-12 两文件羽化·q=100 重编码·无 workflow 文件改动，CI 全量验证涵盖）。
@@ -23,7 +23,7 @@
 > **W421**：Screenshot Review 提速优化（改动范围判定：页脚/文档-only 跳过·site/data 变更定向截图·static/脚本/workflow 变更全量·schedule/dispatch 恒全量 + batch_screenshots.js --only-pages + Playwright 浏览器缓存 + checkout fetch-depth 0）。
 > **W420**：A1 内容质量深化（深度解读 100/100 补全 + 56 回元数据补齐 + 99 回导航错链修复·无 workflow 文件改动，CI 全量验证涵盖）。
 > **W419**：修复 A1 深度解读 SD 错位（22 篇 SD 编号≠真实回号归位·40-72 回全覆盖·源文件 24 篇元数据/H1/关联行修正·第 56 回补写 SD101·无 workflow 文件改动，CI 全量验证涵盖）。
-> **W450-W1327**：verify 门禁体系扩展（区间号滚动推进自本行；逐批明细自 W1157 起追加 [archive/docs/workflows-readme-history.md](../../archive/docs/workflows-readme-history.md)，原单行累计已拆档）。
+> **W450-W1328**：verify 门禁体系扩展（区间号滚动推进自本行；逐批明细自 W1157 起追加 [archive/docs/workflows-readme-history.md](../../archive/docs/workflows-readme-history.md)，原单行累计已拆档）。
 
 ## 1. 工作流列表
 

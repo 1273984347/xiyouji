@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sILJ15JjtkTpEcv7ggjP7U7nRqEFpSybqmeJopdb7bc=' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-fTVjufsfnCTidLXbZGJsyHzs1q/5UIasmvAqn2WnW9A=' 'sha256-g9BROk2Oq568aS99dTrmwaidfnDyln+aLA6FIajtUUE=' 'sha256-nsjePmNyGGyziIf7KpNVlHlF9qJt+NoRNjkysCSjQIQ=' 'sha256-aKYxxXWAhk9f+XLz7xp5ZJBqjq9Lg87Yp7hZxOyeYvw=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://xij-service-base.invalid https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-sILJ15JjtkTpEcv7ggjP7U7nRqEFpSybqmeJopdb7bc=' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-fTVjufsfnCTidLXbZGJsyHzs1q/5UIasmvAqn2WnW9A=' 'sha256-2bzySF8tmrhT9w4pOrpLLpMCPjmo2KzCHKItkHO1Zpk=' 'sha256-nsjePmNyGGyziIf7KpNVlHlF9qJt+NoRNjkysCSjQIQ=' 'sha256-aKYxxXWAhk9f+XLz7xp5ZJBqjq9Lg87Yp7hZxOyeYvw=' 'sha256-TRMqPiB8dk3yeRtOwuNSuVt3hHiGm0XElRv7kga6q24='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://xij-service-base.invalid https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script>
       // 夜读模式（W488）：首屏防 FOUC
@@ -684,7 +684,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             <div class="filter-bar">
                 <div class="filter-tabs" role="group" aria-label="专题分类筛选">
                     <button class="filter-tab active" data-category="all" data-label="全部" aria-pressed="true">全部 41</button>
-                    <button class="filter-tab" data-category="a-l" data-label="A-L 基础" aria-pressed="false">A-L 基础 12</button>
+                    <button class="filter-tab" data-category="a-l" data-label="A-L 基础" aria-pressed="false">A-L 基础 8</button>
                     <button class="filter-tab" data-category="m-u" data-label="M-U 扩展" aria-pressed="false">M-U 扩展 9</button>
                     <button class="filter-tab" data-category="v-ah" data-label="V-AH 跨学科" aria-pressed="false">V-AH 跨学科 14</button>
                     <button class="filter-tab" data-category="q-plus" data-label="Q+ 批评史" aria-pressed="false">Q+ 批评史 2</button>
@@ -1410,18 +1410,53 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             announceResult(visibleCards.length);
         }
 
+        function activateCategory(cat) {
+            const tab = Array.from(tabs).find(t => (t.dataset.category || 'all') === cat);
+            if (!tab) return false;
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-pressed', 'false');
+            });
+            tab.classList.add('active');
+            tab.setAttribute('aria-pressed', 'true');
+            activeCategory = cat;
+            applyFilter();
+            return true;
+        }
+
+        // W1328：深链筛选（#cat=a-l）——页脚「同类」可直达对应类别。
+        // file:// 下部分浏览器禁 replaceState ⇒ try/catch 静默降级（筛选生效，仅不写回地址）。
+        function syncHash(cat) {
+            try {
+                const next = (cat && cat !== 'all') ? '#cat=' + encodeURIComponent(cat) : '';
+                if (next && location.hash !== next) history.replaceState(null, '', next);
+            } catch (_) { /* 忽略：不影响筛选 */ }
+        }
+
+        function readHashCategory() {
+            const raw = location.hash.replace(/^#/, '');
+            if (!raw) return null;
+            try {
+                return new URLSearchParams(raw).get('cat');
+            } catch (_) {
+                return null;
+            }
+        }
+
         tabs.forEach(tab => {
             tab.addEventListener('click', () => {
-                tabs.forEach(t => {
-                    t.classList.remove('active');
-                    t.setAttribute('aria-pressed', 'false');
-                });
-                tab.classList.add('active');
-                tab.setAttribute('aria-pressed', 'true');
-                activeCategory = tab.dataset.category || 'all';
-                applyFilter();
+                const cat = tab.dataset.category || 'all';
+                if (activateCategory(cat)) syncHash(cat);
             });
         });
+
+        window.addEventListener('hashchange', () => {
+            const cat = readHashCategory();
+            if (cat) activateCategory(cat);
+        });
+
+        const initialCat = readHashCategory();
+        if (initialCat) activateCategory(initialCat);
 
         searchInput.addEventListener('input', () => {
             clearTimeout(debounceTimer);

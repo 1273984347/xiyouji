@@ -1,3 +1,16 @@
+### W1328（2026-11-26）：V3 收尾与看板深链
+
+> **来源**：用户 2026-11-26 指令「按新纪律继续处理下一批」（1+3+4 组合）——V3 收尾 + 看板交互增强 + 治理计数收口。
+> - **V3 收尾**：新增文件名族规则（关系网络 17 / 人物与文风 6 / 地理与行程 5 / 叙事与文本 5 / 专题图谱 5 / 交互工具与导航 2），非看板页 100% 归族；连同 W1327 的 45 页，全站 85 个 site/data 内容页均有页脚同类入口（5 个数据中枢工具页无 footer·反向锁死）。
+> - **footer 形态升级**：关联链接统一 class=footer-related-link（计数判据不惧标签链接混入）；看板类别标签成为 ../dashboard.html#cat=<类别> 深链。
+> - **看板交互**：新增 #cat= 深链解析（activateCategory / syncHash / readHashCategory + hashchange）——页脚一键直达对应类别；file:// 禁 replaceState 时 try/catch 静默降级。
+> - **补页脚**：glossary / poetry-density / story-timeline 三页补齐标准 site-footer（原先只有裸反馈链接），版式与其余 pages 一致。
+> - **计数勘正**：A-L 静态标签 12 → 8（4 张 A-L 卡在顶部 KPI 概览、不在专题网格）；新增「筛选标签计数 ≡ 网格实卡」机器判据（同时锁住 W1327 的 51→41）。
+> - **治理收口**：HANDOVER V2/V3 标「无待办」；遗留总账未清偿 12 → 0（全部已闭合）。
+> - **验证**：check PASS（90 页守恒 = 85 注入 + 5 跳过；死链 0 / 自页 0 / 分组不一致 0 / 杂散 0 / 标签计数漂移 0）；单测 9 例；浏览器实测深链（URL #cat=a-l、tab 选中、网格 8 张 A-L）；CSP 零漂移；lint_links 24980 链接 0 broken。
+> - **文件**：见 file-index W1328 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1327（2026-11-25）：页脚同类关联链接补全
 
 > **来源**：
@@ -848,7 +861,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1327），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1328），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
