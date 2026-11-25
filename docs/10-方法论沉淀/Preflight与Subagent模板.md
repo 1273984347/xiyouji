@@ -2,10 +2,10 @@
 
 > 派 subagent 前的事实清单 + Scope-lock + Fallback 模式
 > 首次复现：2026-07-21 E19（Anthropic 项目 T14）
-> 当前复现计数器：3 项 pattern（Preflight interface analysis + Preflight fact verification + Scope-lock constraint）+ 1 项 fallback（Subagent 失败时主代理直接创作）+ 1 项升级（Preflight 三轨验证 W076 首次完整执行真收敛一次通过·W077-W086 累积 10 次复用稳定有效·总计 11 次完整执行）
+> 时点复现计数器（W086 时点）：3 项 pattern（Preflight interface analysis + Preflight fact verification + Scope-lock constraint）+ 1 项 fallback（Subagent 失败时主代理直接创作）+ 1 项升级（Preflight 三轨验证 W076 首次完整执行真收敛一次通过·W077-W086 累积 10 次复用稳定有效·总计 11 次完整执行）
 > 严重度：中等（影响 subagent 一次通过率 + atomic commit 原则）
 > 最新案例：W086 v2.0.59 Preflight 三轨验证第十一次完整执行真收敛一次通过 P0=0/P1=0/P2=0/P3=0
-> **W754 校（现役口径）**：以上为 W086 时点值（历史记录·按 E2 保留）。Preflight 的**开工侧**已工具化为 `scripts/preflight_check.py`（W736 建·五检：fetch / origin-main 顶部 / 对账表取号 / 工作树态 / 环境；W739 起 `--touches <清单> --self W###` 做跨 Agent 在途文件交集拒绝）。三轨验证的**语料路径已换代**：`site/data/text-search.html` 的内嵌语料于 W691 单源化迁出，语料权威源＝`dataset/text-search.json`（引文核验＝第 20 门禁 `scripts/check_citations.py` 精确子串），`num:` 回目标记现位于 `site/static/js/text-search-app.js`。
+> **W754 校（现役口径）**：以上为 W086 时点值（历史记录·按 E2 保留）。Preflight 的**开工侧**已工具化为 `scripts/preflight_check.py`（W736 建·五检：fetch / origin-main 顶部 / 对账表取号 / 工作树态 / 环境；W739 起 `--touches <清单> --self W###` 做跨 Agent 在途文件交集拒绝）。三轨验证的**语料路径已换代**：`site/data/text-search.html` 的内嵌语料于 W691 单源化迁出，语料权威源＝`dataset/text-search.json`（引文核验＝第 20 门禁 `scripts/check_citations.py` 精确子串），`num:` 回目标记现位于 `site/static/js/text-search-app.js`。**本文中其余 `text-search.html` 字样（除特别注明）均为 W691 前历史路径，不再按该路径执行。**
 
 ---
 
@@ -97,11 +97,11 @@ Task 模板包含事实声明（人物关系/法宝归属/事件顺序）时。
 
 ### 升级版双轨验证（W073 教训吸收，2026-07-26）
 
-**触发条件**：Preflight 阶段验证 line 号引用时。
+**触发条件**：Preflight 阶段验证 line 号引用时。（本节与 E1 铁律 §五 同源，判据以 E1 为准。）
 
 **单轨 vs 双轨**：
 - **单轨（W072 反例）**：仅验 line 号归属回目（如 line 736 归属第5回），不验具体内容 → R1b 发现 line 736 实际是土地回答，"夭夭灼灼"诗句在 line 734，发现 2 P1
-- **双轨（W073 正例）**：归属验证 + 内容 spot-check 双轨（Read text-search.html 实际 line 范围验证内容匹配），25 处 line 号一次通过 R1b
+- **双轨（W073 正例）**：归属验证 + 内容 spot-check 双轨（Read `dataset/text-search.json` 实际 line 范围验证内容匹配），25 处 line 号一次通过 R1b
 
 **操作步骤**：
 1. 主代理核验引用归属（单轨）——**W754 校**：语料已分回化，改为「回目归属 + `dataset/text-search.json` 精确子串命中」（第 20 门禁 `check_citations.py` 同口径）；原写法为 Grep `text-search.html`
@@ -167,10 +167,10 @@ Task 模板包含事实声明（人物关系/法宝归属/事件顺序）时。
 - **身份政治三联对照方法论首次复用**：女儿国国王（真主权者）/ 老鼠精（义女身份）/ 玉兔精（假公主身份）三种身份政治策略镜像——同 batch 内 3 篇随笔形成主题对照
 - **方法论自我证明的第三次延续**：A3 Batch 3 是 Preflight 三轨验证教学材料化（W075）之后立即落地的项目，依然踩到 E1 坑（第 14 次复现，5 文件未 tracked）——方法论在自我证明的第三次延续
 
-**三轨验证操作步骤（W076 标准化）**：
-1. 主代理 Grep text-search.html 验证 line 号归属（第一轨）
-2. 主代理 Read text-search.html 的实际 line 范围，核对内容匹配（第二轨）
-3. 主代理 Grep text-search.html 验证 line 号所属 chapter（num:N 字段，第三轨）
+**三轨验证操作步骤（W076 标准化·W1325 路径校订）**：
+1. 主代理 Grep `dataset/text-search.json` 验证 line 号归属（第一轨）
+2. 主代理 Read `dataset/text-search.json` 的实际 line 范围，核对内容匹配（第二轨）
+3. 主代理 Grep `dataset/text-search.json` 验证 line 号所属 chapter（`num:N` 字段现位于 `site/static/js/text-search-app.js`，第三轨）
 4. 如内容不匹配或 chapter 归属错误，修正 line 号到正确位置
 
 ### 十一批对比升级结论（W072-W086，2026-07-26）
@@ -217,7 +217,7 @@ Task 模板包含事实声明（人物关系/法宝归属/事件顺序）时。
 
 **W082 复现**：line 7054 章节归属错误（原误属第98回 line 7048，实际为 line 7062 第98回段尾）——同 chapter 内不同 line 段落归属错误
 
-**升级建议**：未来 Preflight 协议升级为"四轨"——line 号归属 + 内容匹配 + chapter 归属验证（Grep num:N）+ chapter 内 line 段落定位（Read text-search.html 验证 line 在 chapter 内的具体段落）。
+**升级建议**：未来 Preflight 协议升级为"四轨"——line 号归属 + 内容匹配 + chapter 归属验证（Grep num:N）+ chapter 内 line 段落定位（Read `dataset/text-search.json` 验证 line 在 chapter 内的具体段落）。
 
 ### W086 Preflight 三轨验证第十一次完整执行（双轨并发）
 
@@ -348,7 +348,7 @@ subagent 在 context 丢失或返回结果缺失时未交付。
 
 ```
 subagent 创建随笔时禁止编造 line 号；
-若需引用原文位置，必须 Grep text-search.html 验证后使用真实 line 号；
+若需引用原文位置，必须 Grep `dataset/text-search.json` 验证后使用真实 line 号；
 无法验证时用"回目作锚点 + 转述方式"代替
 （如"原文中那一段"/"那一段写得极冷"）
 ```
@@ -357,7 +357,7 @@ subagent 创建随笔时禁止编造 line 号；
 
 主代理必须 Grep spot-check subagent 创建的随笔中的 line 号：
 - 抽样 3-5 处 line 号
-- Grep text-search.html 验证实际位置
+- Grep `dataset/text-search.json` 验证实际位置
 - 差异 > 5 行 → 全量验证 + 修复
 
 详见 [E1铁律.md W069 案例](E1铁律.md#五w069-系统性编造-line-号)。
@@ -369,8 +369,8 @@ subagent 创建随笔时禁止编造 line 号；
 ### 上游 skill
 
 - `%USERPROFILE%\.trae-cn\skills\deep-review-loop\SKILL.md`（v1.2.0 R1a 硬性要求"verifier 必须附工具调用证据"·**W754 校：实测失联·去链留值**）
-- [%USERPROFILE%\.trae-cn\skills\executing-plans\SKILL.md](file:///C:/Users/12739/.trae-cn/skills/executing-plans/SKILL.md)（Step 2 子步骤 2 Preflight interface analysis + 子步骤 3 Scope-lock constraint）
-- **W754 校**：上述全局路径中 deep-review-loop 已实测失联、仓内 `skills/` 已 W562 退役（executing-plans 全局路径仍在，但非本仓协议载体）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + [CLAUDE.md](../../CLAUDE.md) + [pitfalls.md](../../pitfalls.md)，开工侧工具＝`scripts/preflight_check.py`
+- `%USERPROFILE%\.trae-cn\skills\executing-plans\SKILL.md`（原全局路径·仅存历史值，不回链；Step 2 子步骤 2 Preflight interface analysis + 子步骤 3 Scope-lock constraint）
+- **W754 校**：上述全局路径中 deep-review-loop 已实测失联、仓内 `skills/` 已 W562 退役（executing-plans 全局路径仍在，但非本仓协议载体）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §一 铁律 2/14 + §三 常用命令 + [CLAUDE.md](../../CLAUDE.md) + [pitfalls.md](../../pitfalls.md)，开工侧工具＝`scripts/preflight_check.py`
 
 ### 项目内关联
 
@@ -380,7 +380,7 @@ subagent 创建随笔时禁止编造 line 号；
 
 ### memory 文件
 
-- [c:\Users\12739\.trae-cn\memory\user_profile.md](file:///C:/Users/12739/.trae-cn/memory/user_profile.md)：Subagent prompt 模板铁律常驻声明（每次 session 注入）
+- 仓外私有记忆仅作镜像（不回链）：本模板权威面在本文；判据以 AGENTS 铁律 2/14 + E1 §四 为准。
 
 ### 项目内 W### 关联
 

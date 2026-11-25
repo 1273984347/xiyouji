@@ -1,3 +1,38 @@
+## W1325 方法论审查 P0-P3 全量处置（2026-11-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/docs/复盘报告/（7 件） | W1325 | 5 篇归档/合并 + INDEX.md/README.md 刷新 |
+| docs/10-方法论沉淀/（28 件） | W1325 | 4 篇指针 + dispatching 指针 + 其余篇 P0-P3 修订 |
+| docs/INDEX.md | W1325 | docs_index 重建 |
+| docs/00-导读/W批次编号对账表.md | W1325 | 认领行 + 台账腾窗 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1325 | 台账最老行迁出 |
+| CHANGELOG.md | W1325 | W1325 段 + 编号规则上限 |
+| HANDOVER.md | W1325 | 进度块 + 最后更新 + HEAD 同步 |
+| STRUCTURE.md | W1325 | stats 标记跟随（report_docs 256） |
+| docs/11-方案报告/设计与架构方案/（2 件） | W1325 | stats 标记跟随（report_docs 256） |
+| CITATION.cff | W1325 | 版本面推进 W1325 |
+| .github/workflows/README.md | W1325 | 版本面推进 W1325 |
+| scripts/output/file-index.md | W1325 | W1325 段 |
+| scripts/output/stats.json | W1325 | report_docs 255→256 |
+| scripts/output/stats-changelog.json | W1325 | stats 变更史 |
+| scripts/output/stats-index.md | W1325 | stats 反向索引 |
+| site/data/search-index-docs.js | W1325 | 搜索索引刷新 |
+
+## W1324 方法论沉淀文档审查（2026-11-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/（2 件） | W1324 | 新增审查报告 + README §一登记（23→24 篇） |
+| .github/workflows/README.md | W1324 | 版本面推进 W1324 |
+| CITATION.cff | W1324 | 版本面推进 W1324 |
+| docs/00-导读/W批次编号对账表.md | W1324 | 认领行 |
+| CHANGELOG.md | W1324 | W1324 段 + 编号规则上限 |
+| HANDOVER.md | W1324 | 进度块 + 最后更新 + HEAD 同步 |
+| scripts/output/file-index.md | W1324 | W1324 段 |
+| scripts/output/stats.json | W1324 | stats 重跑（报表面待提交后计入） |
+| site/data/search-index-docs.js | W1324 | 搜索索引刷新（新增报告条目） |
+
 ## W1323 八十一难难度热力图深化（2026-11-25）
 
 | 文件 | W | 说明 |

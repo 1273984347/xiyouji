@@ -95,10 +95,10 @@ Why 5: 主代理把历史变更日志中的旧版本号一并改成新版本号
 | README.md | 头部"当前版本 v2.0.59" | 无（README 不保留历史版本号） |
 | STRUCTURE.md | 表格当前结构 | 版本史段（v0.1/v0.5/...保留原值） |
 | CHANGELOG.md | 当前版本段（W086 v2.0.59） | 历史版本段（W085 v2.0.58 保留） |
-| file-index.md | 当前反向索引（现役件仅存 W700+） | 历史变更记录已移出：W449-W699 段归档 [archive/docs/file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)（W736 迁） |
+| file-index.md | 当前反向索引（现役窗口随腾窗滚动，以段首为准） | 历史变更记录已移出：W449-W699 段归档 [archive/docs/file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)（W736 迁） |
 | 项目说明.md | 当前项目说明 | 无 |
 
-> **W754 补（形态与归档口径·示例值保留）**：表中 v2.0.59 / v2.0.58 属 W086 当时形态（历史示例值不改）——CHANGELOG 段标题自 W711 起去 v 号，形态为 `### W###（日期）：标题`，v 号降格为阶段标签；CHANGELOG.md 与 file-index.md 现役件均只保留 W700+，更早段分别查 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md) 与上表归档件。
+> **W754 补（形态与归档口径·示例值保留）**：表中 v2.0.59 / v2.0.58 属 W086 当时形态（历史示例值不改）——CHANGELOG 段标题自 W711 起去 v 号，形态为 `### W###（日期）：标题`，v 号降格为阶段标签；CHANGELOG.md 与 file-index.md 现役窗口均随腾窗滚动（以段首为准），更早段分别查 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md) 与上表归档件。
 
 ### 错误示例与正确示例
 
@@ -144,18 +144,17 @@ mem-wrap-up Step 4a 协议升级要求文档同步后 Grep spot-check 验证新�
 
 ### 上游 skill（已随 skills 治理退役·W562）
 
-- 原 `mem-wrap-up`（Step 4a 项目层 Grep spot-check）全局路径已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）→ 仓内等价：[E1铁律.md](E1铁律.md)（Step 4a/7a 落地验证）+ [三skill闭环.md](三skill闭环.md)（协议升级联动记录）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + docs/agent/*.md
+- 原 `mem-wrap-up`（Step 4a 项目层 Grep spot-check）全局路径已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）→ 仓内等价：[E1铁律.md](E1铁律.md)（Step 4a/7a 落地验证）+ [三skill闭环.md](三skill闭环.md)（协议升级联动记录）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §一 铁律 2/14 + §三 常用命令 + CLAUDE.md + docs/agent/*.md
 
 ### memory 文件
 
-- [c:\Users\12739\.trae-cn\memory\user_profile.md](file:///C:/Users/12739/.trae-cn/memory/user_profile.md)：E2 铁律常驻声明
-- [c:\Users\12739\.trae-cn\memory\projects\-d-1-xiyouji\project_memory.md](file:///C:/Users/12739/.trae-cn/memory/projects/-d-1-xiyouji/project_memory.md)：项目内复现记录
+- 仓外私有记忆仅作镜像（不回链）：本铁律权威面在本文与 `pitfalls` 主题正本（AGENTS 铁律 14）。
 
 ### 双索引
 
-- 正向时间线：[../../CHANGELOG.md](../../CHANGELOG.md)（现役件仅存 W700+）——W086 v2.0.59 文档同步 6 文件落地后 Grep spot-check 验证记录见 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)
-- 反向文件索引：[../../scripts/output/file-index.md](../../scripts/output/file-index.md)（现役件仅存 W700+；W449-W699 段见 [archive/docs/file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)）
-- W235 反向索引：W235-S1 方法论沉淀·本文件为第 1 篇（共 4 篇）
+- 正向时间线：[../../CHANGELOG.md](../../CHANGELOG.md)（现役窗口随腾窗滚动，以版段首为准）——W086 v2.0.59 文档同步 6 文件落地后 Grep spot-check 验证记录见 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)
+- 反向文件索引：[../../scripts/output/file-index.md](../../scripts/output/file-index.md)（现役窗口随腾窗滚动，以段首为准；更早段见 [archive/docs/file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)）
+- W235 反向索引：W235-S1 方法论沉淀·时点篇序（历史值；现势以目录 README 为准）
 
 ---
 

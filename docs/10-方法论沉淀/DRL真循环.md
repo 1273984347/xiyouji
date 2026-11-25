@@ -1,11 +1,13 @@
 # DRL 真循环
 
+> **状态（W1325）**：历史审查协议（deep-review-loop 已 W562 退役）；现役审查载体＝批次分组评审 + E1 铁律 2/14；本文判据保留，执行指令按 AGENTS §三。层级 N_max 为历史判据，现役用 P0/P1 清零 + Backlog。
+
 > Deep Review Loop（深度审查循环）方法论沉淀
 > 首次训诫：2026-07-12 用户明确训诫
 > 升级时间：2026-07-16 4 层过拟合防护
-> 当前版本：v1.2.0（含 4 层防护 + R0-R3 完整流程）——该版本号属已退役的 deep-review-loop 协议层（W562 随 skills 治理整体退役）；现役审查流程载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + [pitfalls.md](../../pitfalls.md)
+> 当前版本：v1.2.0（含 4 层防护 + R0-R3 完整流程）——该版本号属已退役的 deep-review-loop 协议层（W562 随 skills 治理整体退役）；现役审查流程载体＝[AGENTS.md](../../AGENTS.md) §一 铁律 2/14 + §三 常用命令 + CLAUDE.md + [pitfalls.md](../../pitfalls.md)
 > 最新案例：W086 v2.0.59 DRL R1b 主代理 spot-check 真收敛一次通过 P0=0/P1=0/P2=0/P3=0（A2 Batch 10 + A4 Batch 9 双轨并发·Preflight 三轨验证第十一次完整执行）——案例表截至 W086（历史事实·原值不改）；W087+ 同类复现登记于 HANDOVER.md「三、方法论沉淀」与 pitfalls.md，W086 段（含归档期记录的 commit `6408ef2d4`——该 commit 不在当前仓库历史·本仓历史起点 2026-07-30·保留原值不改）已归档 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)
-> 上游 skill（已随 skills 治理退役·W562）：原 `deep-review-loop` 全局路径 `%USERPROFILE%\.trae-cn\skills\deep-review-loop\SKILL.md` 已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + docs/agent/*.md，仓内等价记录＝[E1铁律.md](E1铁律.md)
+> 上游 skill（已随 skills 治理退役·W562）：原 `deep-review-loop` 全局路径 `%USERPROFILE%\.trae-cn\skills\deep-review-loop\SKILL.md` 已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §一 铁律 2/14 + §三 常用命令 + CLAUDE.md + docs/agent/*.md，仓内等价记录＝[E1铁律.md](E1铁律.md)
 
 ---
 
@@ -204,13 +206,13 @@ A2 = 边际收益 gate 采纳的 P2 残留数
 
 **4 P1 详情**：
 1. README.md:50 — 复利经验总览表 E1 跨 session git tracked 仍写 9/9，实际 E1铁律.md 已更新到 10/10（W070 第 10 次复现）
-2. 双索引可追溯改造.md:112 — 引用 E1铁律.md "改动后主动影响面扫描"锚点不存在（实际在 user_profile.md E4 毕业经验）
+2. 双索引可追溯改造.md:112 — 引用 E1铁律.md "改动后主动影响面扫描"锚点不存在（实际在 E1 铁律 §四（历史记录原指私有记忆，现以仓内为准））
 3. 双索引可追溯改造.md:232 — 同 #2
 4. 双索引可追溯改造.md:259 — 显示文本承诺"改动后主动影响面扫描"段落，但 E1铁律.md 无此段
 
 **假收敛根因**：prior session R2 声称"6 文件内部跨文件链接 18 处全部解析正确"，实际未 spot-check 锚点真实存在性 + 未同步 E1铁律.md 计数器到 README.md 总览表。
 
-**修复策略**：4 处全部修复（README 9/9→10/10 + 双索引 3 处锚点改为 file:/// user_profile.md 外部链接），R2 验证修复落地 + git tracked 状态 + 链接可达性 = 真收敛。
+**修复策略**：4 处全部修复（README 9/9→10/10 + 双索引 3 处锚点改为 E1 铁律 §四 仓内锚点（原为私有记忆外链）），R2 验证修复落地 + git tracked 状态 + 链接可达性 = 真收敛。
 
 **讽刺之处**：W070 是 DRL 真循环方法论教学材料化项目，DRL 真循环自身在沉淀过程中再次假收敛——方法论在自我证明。与 E1 铁律第 10 次复现（W070 文件未 git tracked）同属"方法论自我证明"案例。
 
@@ -241,7 +243,7 @@ A2 = 边际收益 gate 采纳的 P2 残留数
 派 subagent 修复前，主代理必须：
 1. **Preflight fact verification**：Grep 验证关键事实（人物关系/法宝归属/事件顺序）
 2. **Scope-lock constraint**：subagent prompt 必含"仅修改 Files 段列出文件"约束
-3. **现役 Preflight 工具（W736 建·W739 起扩展）**：批次动工前跑 `python scripts/preflight_check.py --touches "<清单>" --self W###`（五检 + 从对账表取号 + 跨 Agent touches 交集拒绝）；内容级 spot-check 用 MCP 工具 `xiyouji_drl_spotcheck`（mcp-server/xiyouji_mcp.py:91·对应 E1 升级版铁律）
+3. **现役 Preflight 工具（W736 建·W739 起扩展）**：批次动工前跑 `python scripts/preflight_check.py --touches "<清单>" --self W###`（开工核验 + 从对账表取号 + 跨 Agent touches 交集拒绝）；内容级 spot-check 用 MCP 工具 `xiyouji_drl_spotcheck`（`mcp-server/xiyouji_mcp.py` 的 `xiyouji_drl_spotcheck`·对应 E1 升级版铁律）
 
 详见 [Preflight与Subagent模板.md](Preflight与Subagent模板.md)。
 
@@ -249,9 +251,9 @@ A2 = 边际收益 gate 采纳的 P2 残留数
 
 | 验证项 | 工具 | 通过判据 |
 |:---|:---|:---|
-| JS 语法 | RunCommand `node -c file.js` | 0 syntax error |
+| JS 语法 | 现役 Shell 工具 `node -c file.js` | 0 syntax error |
 | Grep 落地 | Grep 修复后的值 | 全部命中 |
-| zip 重新打包（W754 校：非现役交付流程·全仓无 zip 交付链路，仅存历史） | RunCommand `Compress-Archive` | 包含修复后文件 |
+| zip 重新打包（W754 校：非现役交付流程·全仓无 zip 交付链路，仅存历史） | 现役 Shell 工具 `Compress-Archive` | 包含修复后文件 |
 
 ### 7.3 修复后必跑 R2 重新审查
 
@@ -281,14 +283,14 @@ DRL 报告中**禁用**以下字眼：
 
 ### 上游 skill（已随 skills 治理退役·W562）
 
-- 原 `deep-review-loop` 全局路径已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + [pitfalls.md](../../pitfalls.md)；仓内等价记录＝[E1铁律.md](E1铁律.md)（R1a 硬性要求·subagent 报告 spot-check）
+- 原 `deep-review-loop` 全局路径已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §一 铁律 2/14 + §三 常用命令 + CLAUDE.md + [pitfalls.md](../../pitfalls.md)；仓内等价记录＝[E1铁律.md](E1铁律.md)（R1a 硬性要求·subagent 报告 spot-check）
 
 ### 项目内关联
 
 - [三skill闭环.md](三skill闭环.md)：DRL 在三 skill 闭环中的位置（审查端）
 - [E1铁律.md](E1铁律.md)：DRL R1b/R2 subagent 报告 spot-check
 - [Preflight与Subagent模板.md](Preflight与Subagent模板.md)：DRL R1b/R2 subagent prompt 模板
-- [../../CHANGELOG.md](../../CHANGELOG.md)：每个 W### 的 DRL 收敛记录（现役件仅存 W700+；更早段见 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)）
+- [../../CHANGELOG.md](../../CHANGELOG.md)：每个 W### 的 DRL 收敛记录（现役窗口随腾窗滚动，以版段首为准；更早段见 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)）
 
 ### 项目内 DRL 历史记录
 

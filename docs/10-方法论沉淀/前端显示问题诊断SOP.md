@@ -44,8 +44,8 @@ document.querySelector('style').sheet.cssRules.length  // 若 ≤1 即内联 CSS
    node scripts/check_js_syntax.js        # 内联脚本语法（A/C 类）
    python scripts/generate_csp.py --check # CSP 哈希漂移（C 类）
    ```
-4. **运行时复现**（有浏览器时）：`node scripts/_diag_style_assert.js` 全量断言样式生效 + pageerror；`_smoke_batch.js` 单页冒烟（三者均为手动取证脚本，非 CI 门禁，见第四节）。
-5. **定位到文件/行**：语法错误用 `node -e` 的 vm.Script 编译拿行号；CSS 断点用 `python scripts/check_structure.py <file>`（第 11 槽常驻门禁的同款定位器，可传单文件定位）。
+4. **运行时复现**（有浏览器时）：`node archive/scripts/batches/misc/_diag_style_assert.js` 全量断言样式生效 + pageerror；`archive/scripts/batches/misc/_smoke_batch.js` 单页冒烟（三者均已归档，仅作留痕取证，非 CI 门禁，见第四节）。
+5. **定位到文件/行**：语法错误用 `node -e` 的 vm.Script 编译拿行号；CSS 断点用 `python scripts/check_structure.py` 全量扫描（第 11 槽常驻门禁的同款定位器；脚本仅 `os.walk(site)`，不支持单文件参数）。
 6. **修复 + 复验**：修复后重跑对应门禁 + 浏览器复测渲染，留痕截图。
 
 ---
@@ -58,12 +58,12 @@ document.querySelector('style').sheet.cssRules.length  // 若 ≤1 即内联 CSS
 | `check_js_syntax.js` | 第 10 槽 | verify_delivery（pre-commit·node 跑） | 内联脚本 SyntaxError（含 EN 站·W457 EN 腐蚀 A 类） |
 | `generate_csp.py --check` | 第 8 槽 | verify_delivery（pre-commit） | CSP 哈希失配（C 类） |
 | `check_corruption.py` | 第 9 槽 | verify_delivery（pre-commit·与 `check_data_drift.js` 同槽） | 双引号翻倍腐蚀、d3 插件漏引（该槽 = 数据漂移 + 腐蚀/插件） |
-| `_diag_style_assert.js` / `_p1_viz_audit.js` / `_smoke_batch.js` | 非门禁槽 | 手动取证脚本（实测 `.github/workflows/*.yml`、`verify_delivery.py`、`check_screenshot_gates.js` 均无引用） | 样式裸奔、零渲染、零尺寸 canvas、横向溢出 |
-| 第 24 / 28 / 43 槽 + `check_screenshot_gates.js` | 第 24、28、43 槽 | 现役运行时防线（`check_screenshot_gates.js` 挂 `.github/workflows/screenshot-review.yml`） | 图表静态自洽 + 可视化可引用性 + 可视化数据断言；其中第 43 槽（`check_chart_values.js`·W753 建·Playwright file:// 真实渲染五判据）专拦「数据装载失败但不报错」的空图（A 类） |
+| `archive/scripts/batches/misc/_diag_style_assert.js` / `_p1_viz_audit.js` / `_smoke_batch.js` | 非门禁槽 | 已归档取证脚本（实测 `.github/workflows/*.yml`、`verify_delivery.py`、`check_screenshot_gates.js` 均无引用） | 样式裸奔、零渲染、零尺寸 canvas、横向溢出 |
+| 第 24 / 28 / 43 槽 + `check_screenshot_gates.js` | 第 24、28、43 槽 | 部分承接（24/28 为静态门禁，43 为运行时数据断言；`check_screenshot_gates.js` 挂 `.github/workflows/screenshot-review.yml`） | 图表静态自洽 + 可视化可引用性 + 可视化数据断言；其中第 43 槽（`check_chart_values.js`·W753 建·Playwright file:// 真实渲染五判据）专拦「数据装载失败但不报错」的空图（A 类）。**样式生效不在此列**（W1325 复核） |
 
 **表注（W754 校）**：
-- 门禁链跑的是 `check_js_syntax.js`（node 实现·第 10 槽）；[AGENTS.md](../../AGENTS.md) §5.2、Makefile 目标与 `.github/workflows/ci.yml` 里列的 `check_js_syntax.py --all` 是**另一实现**，勿混（本地核对内联脚本语法以门禁链的 `.js` 版为准）。
-- 三个 `_` 前缀脚本转正与否的结论见 [白屏三连根因复盘与防回归清单.md](白屏三连根因复盘与防回归清单.md) §五：其覆盖职能已由第 24/43 槽 + `check_screenshot_gates.js` 承接，脚本本身留在仓内作留痕取证。
+- 门禁链跑的是 `check_js_syntax.js`（node 实现·第 10 槽）；Makefile 目标与 `.github/workflows/ci.yml`（L370）里列的 `check_js_syntax.py --all` 是**另一实现**，勿混（本地核对内联脚本语法以门禁链的 `.js` 版为准）。
+- 三个 `_` 前缀脚本已归档至 `archive/scripts/batches/misc/`，仅作留痕；其覆盖职能中「图表静态自洽 / 可引用性」由第 24/43 槽承接，**「样式生效」目前仅由渲染基线对比间接覆盖，无专门判据**（`check_screenshot_gates.js` 仅 1 处 `getComputedStyle` 用于画布遮挡分支）。
 
 ---
 

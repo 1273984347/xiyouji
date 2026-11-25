@@ -50,11 +50,11 @@
 ## 4. 可直接复用的命令
 
 ```
-python scripts/audit_repo.py all            # 五维总览（只读·退出码 0/1/2）
+python scripts/audit_repo.py all            # 五维总览（只读·退出码 0/1）
 python scripts/audit_repo.py reader         # reader 完整性四判据
 python scripts/audit_repo.py dataset        # dataset 清单/schema/哨兵/引文状态
 python scripts/audit_repo.py trees          # output / site-json / dataset 三树
-python scripts/audit_repo.py patterns       # 占位/旧前缀/多 h1/同题全站分布
+python scripts/audit_repo.py patterns       # 占位/旧前缀/多 h1/同题全站分布（不输出扫描面清单）
 python scripts/check_reader_integrity.py --self-test
 python scripts/check_dataset_manifest.py --self-test
 python scripts/check_dataset_provenance.py --self-test

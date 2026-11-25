@@ -1,4 +1,4 @@
-# 并行 Edit 竞态问题（E20 候选）
+# 并行 Edit 竞态问题（E20 未立案·约束现役）
 
 > 同一文件的多个 Edit 并行执行时后执行的 Edit 可能基于原始内容覆盖先执行的 Edit 结果，导致前序 Edit 丢失
 > 首次复现：2026-07-23 xiyouji
@@ -32,7 +32,7 @@ Edit 工具无文件级锁，并行 Edit 同一文件时基于同一原始文件
 
 > 同一文件的多个 Edit 必须串行执行；若多行有共同模式，用 `replace_all=true` 一次性处理。
 
-> **跨 Agent 版（W739·本铁律现役未被取代）**：单 Agent 内同文件 Edit 串行约束（AGENTS.md §4.3「同文件 Edit 串行」）不变；跨 Agent 的同类竞态由 `scripts/preflight_check.py --touches "<清单>" --self W###` 交集拒绝承接（W739 起·与在途批次 touches 交集非空即拒绝并行），纪律见 [pitfalls.md](../../pitfalls.md) git/提交/并发类。承接关系是「事后 Grep 验证」前移到「动工前交集拒绝」，非机制淘汰。
+> **跨 Agent 版（W739·本铁律现役未被取代）**：单 Agent 内同文件 Edit 串行约束（[批次交付流水线.md](批次交付流水线.md) §二 第 2 步「同文件 Edit 串行」）不变；跨 Agent 的同类竞态由 `scripts/preflight_check.py --touches "<清单>" --self W###` 交集拒绝承接（W739 起·与在途批次 touches 交集非空即拒绝并行），纪律见 [pitfalls.md](../../pitfalls.md) git/提交/并发类。承接关系是「事后 Grep 验证」前移到「动工前交集拒绝」，非机制淘汰。跨 Agent 版见 [多Agent干扰治理与touches纪律.md](多Agent干扰治理与touches纪律.md) §二；两文为叠加关系。
 
 ### 当前 session 立即验证原则
 
@@ -155,17 +155,16 @@ W086 Step 4a 协议升级首次完整实战验证中，subagent 串行同步 6 �
 
 ### 上游 skill（已随 skills 治理退役·W562）
 
-- 原 `mem-wrap-up`（Step 4a 项目层 Grep spot-check·串行 Edit 约束）全局路径已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）→ 仓内等价：[E1铁律.md](E1铁律.md)（Step 4a/7a 落地验证）+ [三skill闭环.md](三skill闭环.md)（协议升级联动记录）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §4.3/§6 + CLAUDE.md + docs/agent/*.md
+- 原 `mem-wrap-up`（Step 4a 项目层 Grep spot-check·串行 Edit 约束）全局路径已失联（junction 指向不存在的 D:\1\open-source·仓内不共享）→ 仓内等价：[E1铁律.md](E1铁律.md)（Step 4a/7a 落地验证）+ [三skill闭环.md](三skill闭环.md)（协议升级联动记录）；现役协议载体＝[AGENTS.md](../../AGENTS.md) §一 铁律 2/14 + §三 常用命令 + CLAUDE.md + docs/agent/*.md
 
 ### memory 文件
 
-- [c:\Users\12739\.trae-cn\memory\user_profile.md](file:///C:/Users/12739/.trae-cn/memory/user_profile.md)：并行 Edit 竞态铁律常驻声明（候选 E20）
-- [c:\Users\12739\.trae-cn\memory\projects\-d-1-xiyouji\project_memory.md](file:///C:/Users/12739/.trae-cn/memory/projects/-d-1-xiyouji/project_memory.md)：项目内复现记录
+- 仓外私有记忆仅作镜像（不回链）：本铁律权威面在本文；E20 尚未立案为坑表正式条目（AGENTS 铁律 14：私有记忆仅作镜像）。
 
 ### 双索引
 
-- 正向时间线：[../../CHANGELOG.md](../../CHANGELOG.md)（现役件仅存 W700+）——W086 v2.0.59 文档同步 6 文件串行 Edit + Grep spot-check 30 处命中全部通过的记录见 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)
-- 反向文件索引：[../../scripts/output/file-index.md](../../scripts/output/file-index.md)（现役件仅存 W700+；W449-W699 段见 [archive/docs/file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)）
+- 正向时间线：[../../CHANGELOG.md](../../CHANGELOG.md)（现役窗口随腾窗滚动，以版段首为准）——W086 v2.0.59 文档同步 6 文件串行 Edit + Grep spot-check 30 处命中全部通过的记录见 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](../../archive/docs/CHANGELOG-ARCHIVE-tier2.md)
+- 反向文件索引：[../../scripts/output/file-index.md](../../scripts/output/file-index.md)（现役窗口随腾窗滚动，以段首为准；更早段见 [archive/docs/file-index-ARCHIVE.md](../../archive/docs/file-index-ARCHIVE.md)）
 - W235 反向索引：W235-S1 方法论沉淀·本文件为第 2 篇（共 4 篇）
 
 ---

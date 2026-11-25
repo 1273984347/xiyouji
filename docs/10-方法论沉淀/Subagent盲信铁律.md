@@ -2,7 +2,7 @@
 
 > DRL R1b/R2 subagent 可能产生幻觉，其 prompt 虽要求附工具调用证据，但证据本身仍可能被误读。主代理在关键路径/声明上必须执行直接 Read/LS/Grep 验证，不可仅因 subagent 报告"0 finding"或"已验证"就采信
 > 首次复现：2026-07-19 xiyouji
-> 当前复现计数器：多次（2026-07-19 首次 + 2026-07-21 E14 补充）
+> 复现计数器：3+ 次（明细见 §三；不写单一总分）（2026-07-19 首次 + 2026-07-21 E14 补充）
 > 严重度：严重（影响关键路径决策 + subagent 报告可信度）
 > 最新案例：2026-07-21 E14 第二次复现（ripgrep 跳过二进制文件导致 subagent 误判 baichuan2-technical-report.md + cais/paper.md 无 ## 中文翻译 标注）
 
@@ -81,11 +81,11 @@ Why 5: subagent 误判"未找到 X"，实际 X 在二进制文件中存在
 |:---:|:---|:---|:---|
 | 1 | 2026-07-19 xiyouji 首次 | DRL R1b subagent 报告"0 finding" | 主代理 spot-check 发现 subagent 漏报 P1 finding，subagent 报告"0 finding"实际存在多处问题 |
 | 2 | 2026-07-21 xiyouji E14 第二次复现 | DRL R1a 3 verifier 均报告 baichuan2-technical-report.md + cais/paper.md 无 `## 中文翻译` 标注 | 主代理用 Python 脚本读取 PDF 二进制文件末尾字节，确认标注存在（字节 2057954 / 3159768），推翻 subagent 误判。**根因**：ripgrep 检测到 NUL 字节后跳过二进制文件 |
-| 3+ | 多次（详见 user_profile.md 对应条目） | 多个 DRL R1b/R2 subagent 报告场景 | 详见 user_profile.md "Subagent 工具证据不可盲信" 段 |
+| 3+ | 多次（明细以本文 §三 表为准） | 多个 DRL R1b/R2 subagent 报告场景 | 判据见本文 §二；私有记忆仅作镜像 |
 
 ### 复现频率声明
 
-"多次"表示已记录的复现案例不止 2 次，但部分早期案例未独立记录到本计数器（详见 user_profile.md 对应条目）。本铁律已纳入 E1 铁律 §四 作为 L3 spot-check 层级，详见 [E1铁律.md](E1铁律.md) §四。
+"多次"表示已记录的复现案例不止 2 次，但部分早期案例未独立记录到本计数器（以本文 §三 表为准；私有记忆仅作镜像）。本铁律已纳入 E1 铁律 §四 作为 L3 spot-check 层级，详见 [E1铁律.md](E1铁律.md) §四。
 
 ---
 
@@ -165,19 +165,18 @@ DRL R1b/R2 subagent spot-check 是本铁律的下游应用。DRL R1a 3 verifier 
 
 ### 项目内关联
 
-- [E1铁律.md](E1铁律.md) §四 Subagent 工具证据不可盲信：本铁律是 E1 铁律 §四 的独立铁律化（L3 层级具体化）
+- [E1铁律.md](E1铁律.md) §四 Subagent 工具证据不可盲信：本铁律是 E1 铁律 §四 的展开版（L3 层级具体化）；重复段判据以 E1 为准
 - [DRL真循环.md](DRL真循环.md)：DRL R1b/R2 subagent spot-check 是本铁律的下游应用
 - [Preflight与Subagent模板.md](Preflight与Subagent模板.md)：subagent prompt 模板含本铁律约束（禁止盲信 ripgrep 二进制跳过结果）
 - [三skill闭环.md](三skill闭环.md)：DRL 真循环是三 skill 闭环的第一环，本铁律在 DRL 阶段执行
 
 ### 上游 skill
 
-- 原指全局路径 `%USERPROFILE%\.trae-cn\skills\deep-review-loop\SKILL.md`（v1.2.0 R1a 硬性要求"verifier 必须附工具调用证据"·本铁律补充"证据本身仍需主代理 spot-check"）——**W754 校：该全局路径随 `skills/` 治理退役（W562）失联**；仓内等价权威改指 [E1铁律.md](E1铁律.md)（§四 L3 层级）与 [AGENTS.md](../../AGENTS.md) §4.3（subagent prompt 约束与 spot-check 铁则）
+- 原指全局路径 `%USERPROFILE%\.trae-cn\skills\deep-review-loop\SKILL.md`（v1.2.0 R1a 硬性要求"verifier 必须附工具调用证据"·本铁律补充"证据本身仍需主代理 spot-check"）——**W754 校：该全局路径随 `skills/` 治理退役（W562）失联**；仓内等价权威改指 [E1铁律.md](E1铁律.md)（§四 L3 层级）与 [AGENTS.md](../../AGENTS.md) §一 铁律 2/14（subagent prompt 约束与 spot-check 铁则）
 
 ### memory 文件
 
-- [c:\Users\12739\.trae-cn\memory\user_profile.md](file:///C:/Users/12739/.trae-cn/memory/user_profile.md)：Subagent 工具证据不可盲信铁律常驻声明（每次 session 注入）
-- [c:\Users\12739\.trae-cn\memory\projects\-d-1-xiyouji\project_memory.md](file:///C:/Users/12739/.trae-cn/memory/projects/-d-1-xiyouji/project_memory.md)：项目内复现记录（2026-07-19 首次 + 2026-07-21 E14 补充）
+- 仓外私有记忆仅作镜像（不回链）：本铁律的权威面在本文与 [E1铁律.md](E1铁律.md) §四；复现明细以本文 §三 表为准（AGENTS 铁律 14：私有记忆仅作镜像）。
 
 ### 双索引
 

@@ -4,7 +4,7 @@
 > 创建于 2026-07-26（v2.0.43 W070 落地）·条目随批登记（项目现役版本见 CHANGELOG 现役版段）
 > 与 [项目根目录 README.md](../../README.md) / [STRUCTURE.md](../../STRUCTURE.md) / [CHANGELOG.md](../../CHANGELOG.md) / [HANDOVER.md](../../HANDOVER.md) 配套使用。
 > **维护契约**：本文件是方法论目录索引——新增方法论须登记条目并与交接文档「三、方法论沉淀」同步（分工按 W507 上移映射：规则类→AGENTS.md、批次经验→HANDOVER「三」、深度篇→本目录、工具→scripts/）。本目录**只收方法论**：报告/复盘/调研类自 W737 起统一入 [../11-方案报告/](../11-方案报告/README.md)（该目录索引为报告篇数的唯一权威）。
-> **W754 校（2026-10-16）**：① 目录内各篇「最新案例/更新时间」多停在 W086-W457 时点（历史记录按 E2 铁律保留旧值）；W087+ 同类复现登记于 HANDOVER「三」与 [../agent/pitfalls.md](../../pitfalls.md)；② 原「与上游 skill 关系」所述协议层已随 skills 治理退役（W562），现役载体见该节改订；③ 索引行内数字一律标注时点，现役值不在本文件维护（防漂移·文档规范 §4.10）。
+> **W754 校（2026-10-16）**：① 目录内各篇「最新案例/更新时间」多停在 W086-W457 时点（历史记录按 E2 铁律保留旧值）；W087+ 同类复现登记于 HANDOVER「三」与 [pitfalls.md（根索引壳）](../../pitfalls.md)；② 原「与上游 skill 关系」所述协议层已随 skills 治理退役（W562），现役载体见该节改订；③ 索引行内数字一律标注时点，现役值不在本文件维护（防漂移·文档规范 §4.10）。
 
 ---
 
@@ -27,10 +27,10 @@
 | 13 | 前端显示问题诊断 SOP | [前端显示问题诊断SOP.md](前端显示问题诊断SOP.md) | 显示异常/白屏「先取证再假设」诊断流程（W457 复盘沉淀） |
 | 14 | 改动后影响面扫描 | [改动后影响面扫描.md](改动后影响面扫描.md) | 修改后必须扫描依赖该文件的所有下游·防副作用 |
 | 15 | 白屏三连根因复盘与防回归清单 | [白屏三连根因复盘与防回归清单.md](白屏三连根因复盘与防回归清单.md) | W454-W457 白屏根因复盘 + 可视化页防回归清单 |
-| 16 | 记忆研究理论框架应用方法论 | [记忆研究理论框架应用方法论.md](记忆研究理论框架应用方法论.md) | 记忆研究四框架应用方法论·与 W253-256「应用-方法论」双轨 |
-| 17 | 四 subagent 并行模式 | [dispatching-parallel-agents四subagent并行模式.md](dispatching-parallel-agents四subagent并行模式.md) | 四 subagent 并行派发模式（W257·与记忆研究四篇双轨） |
-| 18 | agent-web 技术栈迁移评估 | [agent-web技术栈迁移评估.md](agent-web技术栈迁移评估.md) | W536：React 19 / Express 5 / Tailwind v4 / Vite 8 / TS 7 破坏点分级与五阶段迁移顺序·实证修正 Express 5 与 uuid 14 的低风险判级；**W754 校：迁移已于 W543-W548 落地、W568 关闭，本文降级为历史评估档案** |
-| 19 | 批次交付流水线 | [批次交付流水线.md](批次交付流水线.md) | W755：取号→前置核验→施工→spec 三检→10 面级联→分级门禁→提交与收官 七步链；编号锚点三形态（正常/跳号/递延补登记）+ 行尾与编码纪律 + 失败模式速查 |
+| 16 | 记忆研究理论框架应用方法论（已归档·指针） | [记忆研究理论框架应用方法论.md](记忆研究理论框架应用方法论.md) | **W1325 物理归档**：历史全文见 [archive/docs/复盘报告/记忆研究理论框架应用方法论-ARCHIVE.md](../../archive/docs/复盘报告/记忆研究理论框架应用方法论-ARCHIVE.md)；现役口径见文档规范 §4.5/§4.6/§4.8 |
+| 17 | 四 subagent 并行模式（已归档·已并入） | [dispatching-parallel-agents四subagent并行模式.md](dispatching-parallel-agents四subagent并行模式.md) | **W1325 物理归档并合并**：现役纪律见 [多Agent干扰治理与touches纪律.md](多Agent干扰治理与touches纪律.md) §四之三；历史全文见 [archive/docs/复盘报告/dispatching-parallel-agents四subagent并行模式-ARCHIVE.md](../../archive/docs/复盘报告/dispatching-parallel-agents四subagent并行模式-ARCHIVE.md) |
+| 18 | agent-web 技术栈迁移评估（已归档·指针） | [agent-web技术栈迁移评估.md](agent-web技术栈迁移评估.md) | **W1325 物理归档**：W536 评估已于 W543-W548 落地、W568 关闭；历史全文见 [archive/docs/复盘报告/agent-web技术栈迁移评估-ARCHIVE.md](../../archive/docs/复盘报告/agent-web技术栈迁移评估-ARCHIVE.md)，现役以 `xiyouji-agent-web/package.json` 为准 |
+| 19 | 批次交付流水线 | [批次交付流水线.md](批次交付流水线.md) | W755：取号→前置核验→施工→spec 三检→级联落盘（面数以 `batch_cascade.py` 实跑清单为准）→分级门禁→提交与收官 七步链；编号锚点三形态（正常/跳号/递延补登记）+ 行尾与编码纪律 + 失败模式速查 |
 | 20 | 治理文档分层与按需查表 | [治理文档分层与按需查表.md](治理文档分层与按需查表.md) | W755：L0 指针层/L1 摘要层/L2 全量层/L3 归档层四层职责与体量纪律 + 阅读契约写法 + 第 41 门禁四查 + 数字与指针纪律 + W754 反面案例 |
 | 21 | 可视化数据正确性断言方法论 | [可视化数据正确性断言方法论.md](可视化数据正确性断言方法论.md) | W755：真实渲染优先 + 双签名稳定等待（防 count-up 中途值）+ 先普查后定阈（p00=0.82/p05=2.8 → S/L≥0.5）+ 基线冻结 + fail-closed；五判据 V1-V5 与建线流程 |
 | 22 | 多 Agent 干扰治理与 touches 纪律 | [多Agent干扰治理与touches纪律.md](多Agent干扰治理与touches纪律.md) | W755：N×p×T 暴露面（p 已被级联压低·T 为主）+ 机制三件套（touches 声明/交集拒绝/pathspec 互斥）+ 登记口径 + 拦不住的两件事 |
@@ -44,6 +44,20 @@
 
 ---
 
+> 编号说明：上表编号为历史行号/全局序号，不是篇数；篇数以本节标题为准。
+
+## 历史档案（W1325 物理归档）
+
+> 以下 4 篇已迁 `archive/docs/复盘报告/`（原路径保留指针），1 篇已并入多 Agent 篇。历史全文只读，不再作为现役协议。
+
+- [三skill闭环.md](三skill闭环.md) → [archive/docs/复盘报告/三skill闭环-ARCHIVE.md](../../archive/docs/复盘报告/三skill闭环-ARCHIVE.md)（W562 退役）
+- [记忆研究理论框架应用方法论.md](记忆研究理论框架应用方法论.md) → [archive/docs/复盘报告/记忆研究理论框架应用方法论-ARCHIVE.md](../../archive/docs/复盘报告/记忆研究理论框架应用方法论-ARCHIVE.md)（W258 写作回顾）
+- [双索引可追溯改造.md](双索引可追溯改造.md) → [archive/docs/复盘报告/双索引可追溯改造-ARCHIVE.md](../../archive/docs/复盘报告/双索引可追溯改造-ARCHIVE.md)（2026-07-22 v0.8 改造报告）
+- [agent-web技术栈迁移评估.md](agent-web技术栈迁移评估.md) → [archive/docs/复盘报告/agent-web技术栈迁移评估-ARCHIVE.md](../../archive/docs/复盘报告/agent-web技术栈迁移评估-ARCHIVE.md)（W536 评估）
+- [dispatching-parallel-agents四subagent并行模式.md](dispatching-parallel-agents四subagent并行模式.md) → 已并入 [多Agent干扰治理与touches纪律.md](多Agent干扰治理与touches纪律.md) §四之三
+
+---
+
 ## 阅读路径
 
 ### 新读者快速路径（5 分钟）
@@ -52,10 +66,10 @@
 
 ### 项目接手者路径
 
-1. **必读**：[DRL真循环.md](DRL真循环.md) + [三skill闭环.md](三skill闭环.md) — 决定如何审查工作
-2. **重要**：[E1铁律.md](E1铁律.md) — 决定如何验证 prior session 报告
-3. **可选**：[Preflight与Subagent模板.md](Preflight与Subagent模板.md) — 决定如何派 subagent
-4. **参考**：[双索引可追溯改造.md](双索引可追溯改造.md) — 决定如何追溯变更
+1. **必读**：[E1铁律.md](E1铁律.md) — 决定如何验证 prior session 报告
+2. **重要**：[Preflight与Subagent模板.md](Preflight与Subagent模板.md) + [多Agent干扰治理与touches纪律.md](多Agent干扰治理与touches纪律.md) — 决定如何派 subagent、如何并行
+3. **参考**：[批次交付流水线.md](批次交付流水线.md) + [file-index.md](../../scripts/output/file-index.md) — 决定如何追溯变更
+4. **历史**：[三skill闭环.md](三skill闭环.md)（已归档·勿执行）
 
 ### 方法论作者路径
 
@@ -70,7 +84,7 @@
 
 ## 复利经验总览
 
-> **W754 校（表的定位）**：下表是 **W086 时点（2026-07-26）的里程碑快照**，按 E2 铁律保留原值。此后批次经验不再逐条并入本表，而是登记在 [HANDOVER.md](../../HANDOVER.md)「三、方法论沉淀」（现 37 条·最新条目 W691）与 [pitfalls.md](../../pitfalls.md)（六主题坑位）；查「现役有哪些坑/防线」请读这两处，勿据本表判断当前计数。
+> **W754 校（表的定位）**：下表是 **W086 时点（2026-07-26）的里程碑快照**，按 E2 铁律保留原值。此后批次经验不再逐条并入本表，而是登记在 [HANDOVER.md](../../HANDOVER.md)「三、方法论沉淀」（以 HANDOVER「三」/pitfalls 现役条目为准）与 [pitfalls.md](../../pitfalls.md)（六主题坑位）；查「现役有哪些坑/防线」请读这两处，勿据本表判断当前计数。
 
 | 经验名 | 复现次数 | 严重度 | 首次出现 | 最近复现 |
 |:---|:---:|:---:|:---|:---|
@@ -90,7 +104,7 @@
 
 本节原声明本目录对应上游 TRAE 三 skill（deep-review-loop / mem-wrap-up / self-evolution）作为**协议层**。现状已变：① 仓内 `skills/` 目录已于 **W562 整体退役**（运行时不加载·维护面为负资产）；② 下列全局路径实测**已失联**（junction 目标不存在）。
 
-**现役分工**：**协议层＝仓库内公共载体**——[AGENTS.md](../../AGENTS.md) §4.3 工具链要点 / §6 铁律、[CLAUDE.md](../../CLAUDE.md) 速查层、[pitfalls.md](../../pitfalls.md) 坑位表与 [docs/agent/gates.md](../agent/gates.md) 门禁全量、HANDOVER「三、方法论沉淀」批次经验；**本目录＝深度篇案例层**（复现记录 + 修复策略 + 可复用判据）。
+**现役分工**：**协议层＝仓库内公共载体**——[AGENTS.md](../../AGENTS.md) §一 铁律 2/14 + §三 常用命令、[CLAUDE.md](../../CLAUDE.md) 速查层、[pitfalls.md](../../pitfalls.md) 坑位表与 [docs/agent/gates.md](../agent/gates.md) 门禁全量、HANDOVER「三、方法论沉淀」批次经验；**本目录＝深度篇案例层**（复现记录 + 修复策略 + 可复用判据）。
 
 历史路径（仅存档·不可达）：`%USERPROFILE%\.trae-cn\skills\deep-review-loop\SKILL.md`（v1.2.0 含 4 层防护）、`...\mem-wrap-up\SKILL.md`（v1.1.0 含 6 面状态矩阵）、`...\self-evolution\SKILL.md`（蒸馏版）。
 
@@ -114,6 +128,6 @@
 - [../../STRUCTURE.md](../../STRUCTURE.md)：目录结构
 - [../../CHANGELOG.md](../../CHANGELOG.md)：变更日志（编号上限见现役版段）
 - [../../HANDOVER.md](../../HANDOVER.md)：跨 session 交接（「三、方法论沉淀」= 批次经验权威面）
-- [../agent/pitfalls.md](../../pitfalls.md)：六主题坑位表（W709 起 L2 分层·查坑入口）
+- [pitfalls.md（根索引壳）](../../pitfalls.md)：六主题坑位表（W709 起 L2 分层·查坑入口）
 - [../agent/gates.md](../agent/gates.md)：门禁全量定义（槽数以该文件现役条目为准）
 - [../../scripts/output/file-index.md](../../scripts/output/file-index.md)：反向文件索引
