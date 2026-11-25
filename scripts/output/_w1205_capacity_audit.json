@@ -3,7 +3,7 @@
   "tool_version": "w1205-capacity-audit-v1",
   "batch": "W1205",
   "task": "v2 §8.3 容量阈值（10 条）实算",
-  "generated_at": "2026-11-25T06:59:54+08:00",
+  "generated_at": "2026-11-25T08:25:26+08:00",
   "threshold_source": "docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md §8.3（10 条）",
   "unit_convention": "KB/MB/GB 均为二进制（1 KB = 1024 B · 1 MB = 1024^2 B · 1 GB = 1024^3 B）",
   "gate_seconds_note": "第 5 条不跑全量 verify_delivery.py（控制器收官统一跑）；取值须由调用方用 --gate-seconds / CAPACITY_GATE_SECONDS 传入",
@@ -15,10 +15,10 @@
       "threshold": 524288,
       "threshold_unit": "bytes",
       "action_if_triggered": "拆包评审（不得直接引入框架运行时）·软线 200 KB 预警清单随附",
-      "measured": 436487,
-      "measured_display": "426.26 KB",
-      "headroom_abs": 87801,
-      "headroom_pct": 16.75,
+      "measured": 433258,
+      "measured_display": "423.10 KB",
+      "headroom_abs": 91030,
+      "headroom_pct": 17.36,
       "triggered": false,
       "pending": false,
       "source": "site/**/*.html 逐个 os.path.getsize() 取最大值（875 个文件）",
@@ -26,16 +26,16 @@
       "extra": {
         "file": "site/reader/people/紧箍儿的内侧-器物传记.html",
         "file_count": 875,
-        "site_html_total_bytes": 75909549,
+        "site_html_total_bytes": 73852997,
         "hard_over_pages": [],
         "soft_over_pages": [
           {
             "file": "site/reader/people/紧箍儿的内侧-器物传记.html",
-            "bytes": 436487
+            "bytes": 433258
           },
           {
             "file": "site/reader/themes/西游渡第二讲专题.html",
-            "bytes": 375241
+            "bytes": 372012
           },
           {
             "file": "site/en/relationships.html",
@@ -43,11 +43,11 @@
           },
           {
             "file": "site/reader/themes/倒果为因专题.html",
-            "bytes": 316953
+            "bytes": 313724
           },
           {
             "file": "site/reader/people/如来佛祖-方向二深化B.html",
-            "bytes": 295745
+            "bytes": 292516
           },
           {
             "file": "site/data/relationships.html",
@@ -55,7 +55,7 @@
           },
           {
             "file": "site/reader/themes/混世四猴专题.html",
-            "bytes": 217264
+            "bytes": 214035
           }
         ],
         "soft_over_count": 7
@@ -74,10 +74,10 @@
       "triggered": false,
       "pending": false,
       "source": "site/**/*.html 逐页拆 (页特有, 共享块) 并取页特有最大值（875 个文件·W1224 口径）",
-      "note": "页特有最多页：site/reader/themes/八十一难专题.html｜共享基线块最大 55.95 KB（site/reader/culture/index.html）",
+      "note": "页特有最多页：site/reader/themes/八十一难专题.html｜共享基线块最大 52.80 KB（site/reader/culture/index.html）",
       "extra": {
         "file": "site/reader/themes/八十一难专题.html",
-        "shared_block_max_bytes": 57296,
+        "shared_block_max_bytes": 54067,
         "shared_block_max_file": "site/reader/culture/index.html",
         "shared_block_triggered": false,
         "over_threshold_pages": [],
@@ -90,10 +90,10 @@
       "threshold": 125829120,
       "threshold_unit": "bytes",
       "action_if_triggered": "资源分片评审",
-      "measured": 75909549,
-      "measured_display": "72.39 MB",
-      "headroom_abs": 49919571,
-      "headroom_pct": 39.67,
+      "measured": 73852997,
+      "measured_display": "70.43 MB",
+      "headroom_abs": 51976123,
+      "headroom_pct": 41.31,
       "triggered": false,
       "pending": false,
       "source": "site/**/*.html 字节和（沿用 v2 §3.1 资产表 / B-03 取数命令同路径）",
@@ -144,13 +144,13 @@
       "threshold": 600,
       "threshold_unit": "seconds",
       "action_if_triggered": "引入按 scope 增量门禁",
-      "measured": null,
-      "measured_display": "待控制器回填",
-      "headroom_abs": null,
-      "headroom_pct": null,
-      "triggered": null,
-      "pending": true,
-      "source": "未取到本批门禁全量耗时实测值：脚本不跑全量 verify_delivery（由控制器收官时统一跑）；请用 --gate-seconds <秒> 或环境变量 CAPACITY_GATE_SECONDS 传入后复跑",
+      "measured": 476.4,
+      "measured_display": "476.4 s",
+      "headroom_abs": 123.60000000000002,
+      "headroom_pct": 20.6,
+      "triggered": false,
+      "pending": false,
+      "source": "命令行 --gate-seconds（调用方传入本批实测值）",
       "note": "",
       "extra": {}
     },
@@ -160,18 +160,18 @@
       "threshold": 1073741824,
       "threshold_unit": "bytes",
       "action_if_triggered": "git gc + 归档复核",
-      "measured": 860865430,
-      "measured_display": "820.99 MB",
-      "headroom_abs": 212876394,
-      "headroom_pct": 19.83,
+      "measured": 882230346,
+      "measured_display": "841.36 MB",
+      "headroom_abs": 191511478,
+      "headroom_pct": 17.84,
       "triggered": false,
       "pending": false,
       "source": ".git 目录 os.walk 实算全部文件字节和（含 pack/loose/lost-found）",
-      "note": "pack 子目录 243.56 MB（占 29.7%）",
+      "note": "pack 子目录 243.56 MB（占 28.9%）",
       "extra": {
-        "file_count": 3307,
+        "file_count": 4033,
         "pack_bytes": 255389681,
-        "pack_ratio_pct": 29.67
+        "pack_ratio_pct": 28.95
       }
     },
     {
@@ -180,23 +180,19 @@
       "threshold": 500,
       "threshold_unit": "files",
       "action_if_triggered": "拆分批次",
-      "measured": 247,
-      "measured_display": "247 files",
-      "headroom_abs": 253,
-      "headroom_pct": 50.6,
+      "measured": 210,
+      "measured_display": "210 files",
+      "headroom_abs": 290,
+      "headroom_pct": 58.0,
       "triggered": false,
       "pending": false,
       "source": "git diff --name-only HEAD~1..HEAD ∪ git status --porcelain（去重）",
-      "note": "已提交 247 + 工作树未提交 0 = 247；历史最大单提交 998 个（46fe0ef2be00）；历史最大批次 spec 登记文件数 1016（W1261）",
+      "note": "已提交 210 + 工作树未提交 0 = 210；历史最大单提交 998 个（46fe0ef2be00）；历史最大批次 spec 登记文件数 1016（W1261）",
       "extra": {
         "batch_base": "HEAD~1",
-        "committed_count": 247,
+        "committed_count": 210,
         "worktree_count": 0,
         "files": [
-          "\"archive/docs/W\\346\\211\\271\\346\\254\\241\\347\\274\\226\\345\\217\\267\\345\\257\\271\\350\\264\\246\\350\\241\\250-ARCHIVE.md\"",
-          "\"docs/00-\\345\\257\\274\\350\\257\\273/W\\346\\211\\271\\346\\254\\241\\347\\274\\226\\345\\217\\267\\345\\257\\271\\350\\264\\246\\350\\241\\250.md\"",
-          "\"docs/00-\\345\\257\\274\\350\\257\\273/\\351\\241\\271\\347\\233\\256\\350\\257\\264\\346\\230\\216.md\"",
-          "\"docs/11-\\346\\226\\271\\346\\241\\210\\346\\212\\245\\345\\221\\212/\\350\\256\\276\\350\\256\\241\\344\\270\\216\\346\\236\\266\\346\\236\\204\\346\\226\\271\\346\\241\\210/\\347\\263\\273\\347\\273\\237\\346\\236\\266\\346\\236\\204\\346\\226\\271\\346\\241\\210v2-\\347\\233\\256\\346\\240\\207\\346\\200\\201\\344\\270\\216\\350\\220\\275\\345\\234\\260\\350\\267\\257\\347\\272\\277-2026-10-25.md\"",
           "\"site/reader/culture/\\344\\270\\211\\346\\225\\231\\345\\220\\210\\344\\270\\200\\346\\230\\216\\344\\273\\243\\346\\200\\235\\346\\203\\263\\345\\217\\262\\346\\267\\261\\345\\214\\226\\344\\270\\223\\351\\242\\230.html\"",
           "\"site/reader/culture/\\344\\270\\224\\345\\220\\254\\344\\270\\213\\345\\233\\236\\345\\210\\206\\350\\247\\243\\345\\245\\227\\350\\257\\255\\344\\270\\223\\351\\242\\230.html\"",
           "\"site/reader/culture/\\344\\275\\233\\351\\201\\223\\346\\200\\235\\346\\203\\263.html\"",
@@ -302,37 +298,6 @@
           "\"site/reader/poetry/\\351\\200\\220\\345\\233\\236\\350\\257\\227\\350\\257\\215\\347\\264\\242\\345\\274\\225-\\347\\254\\254041-060\\345\\233\\236.html\"",
           "\"site/reader/poetry/\\351\\200\\220\\345\\233\\236\\350\\257\\227\\350\\257\\215\\347\\264\\242\\345\\274\\225-\\347\\254\\254061-080\\345\\233\\236.html\"",
           "\"site/reader/poetry/\\351\\200\\220\\345\\233\\236\\350\\257\\227\\350\\257\\215\\347\\264\\242\\345\\274\\225-\\347\\254\\254081-100\\345\\233\\236.html\"",
-          ".github/workflows/README.md",
-          "AGENTS.md",
-          "CHANGELOG.md",
-          "CITATION.cff",
-          "HANDOVER.md",
-          "README.md",
-          "STRUCTURE.md",
-          "archive/docs/AGENTS-ARCHIVE.md",
-          "archive/docs/workflows-readme-history.md",
-          "pytest.ini",
-          "scripts/output/INDEX.md",
-          "scripts/output/README.md",
-          "scripts/output/_cascade_files_W1318.txt",
-          "scripts/output/_vermilion_solid_cache.json",
-          "scripts/output/_w1205_capacity_audit.json",
-          "scripts/output/_w1266_allrender.json",
-          "scripts/output/_w1318_spec.json",
-          "scripts/output/chart-legend-render-audit.json",
-          "scripts/output/file-index.md",
-          "scripts/output/stats-changelog.json",
-          "scripts/output/stats-index.md",
-          "scripts/output/stats.json",
-          "scripts/output/svg_text_contrast_graphic_report.json",
-          "scripts/output/svg_text_contrast_report.json",
-          "scripts/output/tools-inventory.md",
-          "site/_template.html",
-          "site/data/_shell.html",
-          "site/data/cross-time-danmaku.html",
-          "site/data/tag-cloud.html",
-          "site/dukou-engine.html",
-          "site/index.html",
           "site/reader/ch001.html",
           "site/reader/ch002.html",
           "site/reader/ch003.html",
@@ -437,9 +402,7 @@
           "site/reader/essays/index.html",
           "site/reader/index.html",
           "site/reader/poetry/index.html",
-          "site/reader/themes-hub.html",
-          "site/rss.xml",
-          "site/sitemap.xml"
+          "site/reader/themes-hub.html"
         ],
         "history_max_single_commit_files": 998,
         "history_max_commit": "46fe0ef2be00519974f8119b876b079073408920",
@@ -503,13 +466,11 @@
     "total": 10,
     "triggered": [],
     "pending": [
-      5,
       8,
       9,
       10
     ],
     "unmeasurable": [
-      5,
       8,
       9,
       10
