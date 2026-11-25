@@ -1564,3 +1564,7 @@ E-305
 #### E-320（原文全量·W1308 新增）
 
 - **用 git ls-files 展开目录清单时必须加 core.quotepath=false 且必须用 --exclude-standard 排除 .gitignore 面——否则要么漏 add·要么整链中止**（W1308 实证·E-320·跨项目通用）：收官链 add 步把登记面里的「目录分组行」展开为待 add 路径 ⇒ 两个坑同时命中：① git ls-files 默认对非 ASCII 路径**转义**（八进制）⇒ 展开出的路径在磁盘上不存在 ⇒ 被判「尚不存在」跳过 ⇒ 中文路径文件**静默漏 add**；② 若用 os.walk 递归磁盘来展开 ⇒ 把 .gitignore 忽略目录（实测 docs/S2-外部分享、视觉重设计样板/*/_verify_shots）也纳入 ⇒ git add 报「paths are ignored by one of your .gitignore files」⇒ **add 步整链中止**。⇒ 纪律：展开一律走 git 口径（ls-files 加 ls-files --others --exclude-standard）并加 -c core.quotepath=false；分组登记行的展开面必须与「本批实际变更面」对账（展开会把同目录的未改动件也纳入·幂等但需知情）。
+
+#### E-321（原文全量·W1326 新增）
+
+- **两轮推送未等首轮 CI 完成 ⇒ 并发取消首轮 + 回填笔 CI 红无法 rerun 转绿**（W1326 实证·E-321·跨项目通用·git 域）：W1324+W1325 合并交付按两轮纪律推送——内容笔 `d7fce25c8` push 后立即推回填笔 `cb82fb15a`；GitHub Actions 并发组把首轮 CI/Security 取消（cancelled），回填笔 CI 因两处文档缺陷（HANDOVER 轮换指针停在 W1318；`scripts/output/INDEX.md` 漏 `_w1325_spec.json`）失败。事后 `gh run rerun` 被拒（`Resource not accessible by integration`），且回填笔 CI checkout 的是旧树，即使重跑仍会红；最终以新增 forward-fix `bffa4ee8e` 转绿。⇒ 纪律：① **内容笔 push 后必须等其 CI（含 Security）跑完再推回填笔**，否则并发组取消第一轮；② **回填笔早于修复时其 CI 红不能靠 rerun 转绿**（它跑旧树）——只能 forward-fix 新增修复提交；③ **禁 force-push 改写已推历史**来追求「历史 run 全绿」；④ 集成 token 无 actions:write 时 `gh run rerun` 不可用，重跑只能由仓库 UI/管理员操作。

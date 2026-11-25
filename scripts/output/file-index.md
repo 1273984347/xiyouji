@@ -1,3 +1,28 @@
+## W1326 两轮推送 CI 等待纪律（2026-11-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/agent/pitfalls-topics/git-concurrency.md | W1326 | 新增 E-321 |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1326 | E-321 全文 |
+| pitfalls.md | W1326 | git 反查表 + 计数 |
+| docs/agent/pitfalls.md | W1326 | stats 标记跟随 |
+| docs/agent/pitfalls-topics/（5 件） | W1326 | stats 标记跟随 |
+| docs/10-方法论沉淀/批次交付流水线.md | W1326 | §二 第 6 步 + §五 新增 CI 等待纪律 |
+| AGENTS.md | W1326 | pitfalls 标记跟随 |
+| STRUCTURE.md | W1326 | pitfalls 标记跟随 |
+| .agent/skills/puti-shouye/SKILL.md | W1326 | pitfalls 标记跟随 |
+| HANDOVER.md | W1326 | 进度块 + 指针 + HEAD |
+| CHANGELOG.md | W1326 | W1326 段 + 编号规则上限 |
+| CITATION.cff | W1326 | 版本面推进 W1326 |
+| .github/workflows/README.md | W1326 | 版本面推进 W1326 |
+| docs/00-导读/W批次编号对账表.md | W1326 | 认领行 + 台账腾窗 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1326 | 台账最老行迁出 |
+| scripts/output/file-index.md | W1326 | W1326 段 |
+| scripts/output/stats.json | W1326 | pitfalls 426→427 |
+| scripts/output/stats-changelog.json | W1326 | stats 变更史 |
+| scripts/output/stats-index.md | W1326 | stats 反向索引 |
+| site/data/search-index-docs.js | W1326 | 搜索索引刷新 |
+
 ## W1325 方法论审查 P0-P3 全量处置（2026-11-25）
 
 | 文件 | W | 说明 |
