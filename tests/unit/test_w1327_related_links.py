@@ -114,7 +114,7 @@ def test_groups_cover_all_pages_once():
 
 def test_dashboard_deeplink_code_present():
     html = rl.DASH.read_text(encoding="utf-8")
-    assert "readHashCategory" in html
+    assert "readHashState" in html
     assert "URLSearchParams" in html
     assert "#cat=" in html
 

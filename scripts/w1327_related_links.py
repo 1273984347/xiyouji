@@ -380,8 +380,8 @@ def _check_tab_counts():
 def _check_dash_deeplink():
     """看板深链契约：footer 生成的 #cat=<类别> 必须有对应解析代码。"""
     txt = DASH.read_text(encoding="utf-8")
-    if "URLSearchParams" not in txt or "readHashCategory" not in txt:
-        return ["看板缺少 #cat= 深链解析（readHashCategory/URLSearchParams）"]
+    if "URLSearchParams" not in txt or "readHashState" not in txt:
+        return ["看板缺少 #cat= 深链解析（readHashState/URLSearchParams）"]
     return []
 
 

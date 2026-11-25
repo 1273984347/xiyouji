@@ -10,7 +10,7 @@
 
 - （无）
 
-## 文件（18）
+## 文件（19）
 
 ### JavaScript / TypeScript
 
@@ -28,6 +28,7 @@
 - `label-contrast.js`
 - `motion-gsap.js`
 - `rag-chat.js`
+- `recent.js`
 - `stats.js`
 - `text-search-app.js`
 - `three.r128.min.js`

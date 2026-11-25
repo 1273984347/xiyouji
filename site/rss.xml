@@ -6,6 +6,13 @@
     <description>一源多形 · 数字人文可视化解读《西游记》100 回——版本发布批次动态（W### 编号·详见 CHANGELOG）。</description>
     <language>zh-CN</language>
     <item>
+      <title>W1330 V1 交互二期</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-W1330</guid>
+      <pubDate>Thu, 26 Nov 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
       <title>W1329 V4 移动端回归与裁切根修</title>
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1329</guid>
@@ -135,13 +142,6 @@
       <title>W1311 历史行状态列订正（六行登记滞后清零）+ 复盘批 T140（近三批治理面 + tmpe 清理纪律）</title>
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1311</guid>
-      <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
-      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
-    </item>
-    <item>
-      <title>W1310 绢本系列 8 张源件入仓（5472×3072 JPEG·补缺·新目录避免覆盖·像素级判别证画面不同）</title>
-      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
-      <guid isPermaLink="false">xiyouji-W1310</guid>
       <pubDate>Tue, 24 Nov 2026 00:00:00 +0000</pubDate>
       <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
     </item>
