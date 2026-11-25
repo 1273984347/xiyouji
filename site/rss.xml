@@ -6,6 +6,13 @@
     <description>一源多形 · 数字人文可视化解读《西游记》100 回——版本发布批次动态（W### 编号·详见 CHANGELOG）。</description>
     <language>zh-CN</language>
     <item>
+      <title>W1319 CSS 源瘦身（零消费规则与死声明清零·共享基线块余量 48→3,277 B）+ DESIGN Hero 规格更正</title>
+      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
+      <guid isPermaLink="false">xiyouji-W1319</guid>
+      <pubDate>Wed, 25 Nov 2026 00:00:00 +0000</pubDate>
+      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
+    </item>
+    <item>
       <title>W1318 容量 #2b 治本（共享 CSS 无损压缩 + 全站重同步）+ 测试隔离缺陷根修</title>
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1318</guid>
@@ -135,13 +142,6 @@
       <title>W1300 L-07 公共口径多批次锚漏计治本（本体275→276·反查表补E-291·私有正则退役）</title>
       <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
       <guid isPermaLink="false">xiyouji-W1300</guid>
-      <pubDate>Sun, 22 Nov 2026 00:00:00 +0000</pubDate>
-      <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
-    </item>
-    <item>
-      <title>W1299 L-04① 归档孤儿段清偿（13→0·三类根因分别治本·回归锁+3·负例去硬编码）</title>
-      <link>https://github.com/1273984347/xiyouji/blob/main/CHANGELOG.md</link>
-      <guid isPermaLink="false">xiyouji-W1299</guid>
       <pubDate>Sun, 22 Nov 2026 00:00:00 +0000</pubDate>
       <description>详见 CHANGELOG 对应版段（四件套：来源/文件/验证/状态）。</description>
     </item>

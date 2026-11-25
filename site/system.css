@@ -54,12 +54,8 @@ h1 { font-size: clamp(36px, 5vw, 56px); font-weight: 700; letter-spacing: -0.01e
 h2 { font-size: clamp(28px, 3.5vw, 40px); font-weight: 600; }
 h3 { font-size: clamp(20px, 2.5vw, 26px); font-weight: 600; }
 h4 { font-size: 18px; font-weight: 500; }
-.text-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
 .text-muted { color: var(--ink-soft); }
-.text-faint { color: var(--ink-faint); }
-.text-accent { color: var(--accent); }
 .text-sm { font-size: 13px; }
-.text-xs { font-size: 11px; letter-spacing: 0.04em; }
 .kicker {
     font-size: 12px;
     font-weight: 500;
@@ -274,31 +270,8 @@ html[data-theme="dark"] .reset-view-btn { background: rgba(242, 235, 220, 0.14);
 .data-status-badge[data-status="sample"] .ds-label { color: var(--warn); }
 
 /* ===== Hero（数据页通用） ===== */
-.hero {
-    background: var(--dark);
-    background-image: url('static/images/ink-mountains-hero.webp');
-    background-size: cover;
-    background-position: center 70%;
-    background-blend-mode: soft-light;
-    color: var(--dark-text);
-    padding: clamp(48px, 8vw, 80px) clamp(24px, 6vw, 96px);
-    position: relative;
-    overflow: hidden;
-}
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 75% 20%, rgba(201, 160, 99, 0.10), transparent 55%);
-    pointer-events: none;
-}
 .hero > * { position: relative; z-index: 1; }
 .hero .kicker { color: var(--accent-soft); margin-bottom: 14px; }
-.hero h1 {
-    color: var(--dark-text);
-    font-size: clamp(28px, 4vw, 44px);
-    margin-bottom: 10px;
-}
 .hero .subtitle {
     font-size: 14px;
     color: rgba(242, 235, 220, 0.7);
@@ -537,18 +510,6 @@ td.num, th.num {
     border-radius: var(--radius-pill);
     border: 1px solid;
 }
-.badge-accent { color: var(--accent); border-color: rgba(200, 70, 58, 0.25); background: rgba(200, 70, 58, 0.06); }
-.badge-blue { color: var(--accent-primary); border-color: rgba(58, 107, 140, 0.25); background: rgba(58, 107, 140, 0.06); }
-.badge-gold { color: var(--text-secondary); border-color: rgba(138, 109, 59, 0.25); background: rgba(138, 109, 59, 0.06); }
-.badge-green { color: var(--accent-4); border-color: rgba(107, 142, 90, 0.25); background: rgba(107, 142, 90, 0.06); }
-
-/* —— 墨韵动效（W460）：正文链接下划线生长（opt-in 类 .link-ink，禁止 blanket a） —— */
-.link-ink {
-    background: linear-gradient(var(--accent), var(--accent)) no-repeat 0 100% / 0% 1px;
-    transition: background-size var(--dur-base) var(--ease-out-quart);
-}
-.link-ink:hover { background-size: 100% 1px; }
-
 .skip-link {
     position: absolute;
     left: -9999px;
@@ -564,16 +525,10 @@ td.num, th.num {
     position: absolute;
     pointer-events: none;
     z-index: var(--z-tooltip);
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
     padding: 8px 12px;
     max-width: 280px;
-    font-family: var(--font-sans);
     font-size: 12px;
     line-height: 1.6;
-    color: var(--ink);
-    box-shadow: var(--elev-3);
     opacity: 0;
     transition: opacity var(--dur-base) var(--ease-out-quart);
 }
@@ -656,13 +611,6 @@ td.num, th.num {
     cursor: not-allowed;
     pointer-events: none;
 }
-.btn-primary {
-    background: linear-gradient(180deg, var(--accent), var(--accent-deep));
-    border-color: var(--accent-deep);
-    color: #fff;
-}
-.btn-primary:hover { background: var(--accent-deep); color: #fff; box-shadow: var(--elev-2); }
-
 /* ===== 页脚 ===== */
 .site-footer {
     border-top: 1px solid var(--line);
@@ -1376,6 +1324,8 @@ td, th { height: auto; white-space: normal; }
 
 /* ---------- Hero：去光晕、去渐变（禁科技感与拟物） ---------- */
 .hero {
+    position: relative;
+    overflow: hidden;
     background: #221D16;
     background-image: url('static/images/ink-mountains-hero.webp');
     background-size: cover;
@@ -1384,17 +1334,14 @@ td, th { height: auto; white-space: normal; }
     color: var(--dark-text);
     padding: clamp(44px, 7vw, 72px) clamp(20px, 5vw, 80px);
 }
-.hero::after { background: none; }   /* 去径向光晕 */
-.hero h1 { color: var(--dark-text); font-size: var(--size-hero); }
+.hero h1 { color: var(--dark-text); font-size: var(--size-hero); margin-bottom: 10px; }
 
 /* ---------- 图表内文字与辅助线（用新令牌·保证对比度） ---------- */
 svg text {
-    font-family: var(--font-data);
     fill: var(--text-tertiary);   /* 轴标签 对 bg 5.02（亮）/ 5.85（暗） */
 }
 svg .axis-line, svg line.axis { stroke: var(--axis-line); }
 svg .grid-line, svg line.grid { stroke: var(--grid-line); }
-svg .label-strong { fill: var(--text-primary); }
 
 /* ---------- 图表 tooltip（规范类名·与既有 chart-tooltip 一致） ---------- */
 .chart-tooltip {
@@ -1462,9 +1409,7 @@ svg .chart-axis .tick line {
 .chart-block svg .curves-axis text,
 .chart-block svg .axis text,
 .chart-block svg .chart-axis text,
-.chart-block svg .chart-axis .tick text,
-.chart-block svg .axis text,
-.chart-block svg .tick text {
+.chart-block svg .chart-axis .tick text {
     font-family: var(--font-data) !important;
     font-size: 10px !important;
     fill: var(--text-tertiary) !important;
@@ -1502,16 +1447,8 @@ svg text {
 .chart-block svg rect[fill^='#'] {
     filter: none;
 }
-.chart-block .series-shape {
-    stroke: color-mix(in srgb, var(--text-primary) 22%, transparent);
-    stroke-width: 1px;
-    stroke-linejoin: round;
-}
-
 /* ---------- ④ 数据标签：直接标注 ---------- */
-.chart-block svg text.value-label,
 .chart-block svg .data-label,
-svg text.value-label,
 svg .data-label {
     font-family: var(--font-data) !important;
     font-size: 11px;
@@ -1520,11 +1457,6 @@ svg .data-label {
     stroke: var(--surface-canvas);
     stroke-width: 2.5px;
     stroke-linejoin: round;
-}
-.chart-block svg text.value-label.is-strong,
-.chart-block svg .data-label.is-strong {
-    fill: var(--text-primary);
-    font-weight: 600;
 }
 
 /* ---------- ⑤ 图例：chip 化 ---------- */
@@ -1583,50 +1515,8 @@ svg .force-label {
     stroke: var(--surface-canvas);
     stroke-width: 1px;
 }
-.chart-block svg text.heat-value {
-    font-family: var(--font-data) !important;
-    font-size: 10px;
-    fill: var(--text-primary);
-}
 
-/* ---------- 暗色态色值映射（W1261）——
-   实测：图表形状的 fill 是属性（fill=#C0392B），CSS filter 虽能在视觉上提亮，
-   但 computed fill 不受 filter 影响 ⇒ 暗色态门禁仍判「不可见」。
-   正解：暗色下把亮色属性值映射到暗色序列槽 var(--series-N)。 */
-html[data-theme="dark"] svg [fill="#C0392B"],
-html[data-theme="dark"] svg [fill="#c0392b"] {
-    fill: var(--series-1) !important;
-}
-html[data-theme="dark"] svg [fill="#40619E"],
-html[data-theme="dark"] svg [fill="#40619e"] {
-    fill: var(--series-2) !important;
-}
-html[data-theme="dark"] svg [fill="#8E7D62"],
-html[data-theme="dark"] svg [fill="#8e7d62"] {
-    fill: var(--series-3) !important;
-}
-html[data-theme="dark"] svg [fill="#3A473A"],
-html[data-theme="dark"] svg [fill="#3a473a"] {
-    fill: var(--series-4) !important;
-}
-html[data-theme="dark"] svg [fill="#6B665E"],
-html[data-theme="dark"] svg [fill="#6b665e"] {
-    fill: var(--series-5) !important;
-}
-html[data-theme="dark"] svg [fill="#472A4C"],
-html[data-theme="dark"] svg [fill="#472a4c"] {
-    fill: var(--series-6) !important;
-}
-html[data-theme="dark"] svg [fill="#678A93"],
-html[data-theme="dark"] svg [fill="#678a93"] {
-    fill: var(--series-7) !important;
-}
-html[data-theme="dark"] svg [fill="#6D4E65"],
-html[data-theme="dark"] svg [fill="#6d4e65"] {
-    fill: var(--series-8) !important;
-}
 
-/* ---------- ⑨ 暗色态：禁亮度滤波与发光 ---------- */
 html[data-theme="dark"] .chart-block svg path[fill^='#'],
 html[data-theme="dark"] .chart-block svg circle[fill^='#'],
 html[data-theme="dark"] .chart-block svg rect[fill^='#'],

@@ -1,3 +1,22 @@
+### W1319（2026-11-25）：CSS 源瘦身（零消费规则与死声明清零·共享基线块余量 48→3,277 B）+ DESIGN Hero 规格更正
+
+> **来源**：W1318 收官登记「#2b 余量仅 48 B ⇒ 下一批须二选一：CSS 源瘦身（推荐）或由用户裁决机制线校准」；用户 2026-11-25 指令「好的，执行吧」= 批准做 CSS 源瘦身（不动机制线·不新增豁免·不调阈值）。
+>
+> - **取证（零消费判定）**：对 875 个 site HTML（剔除共享 `<style>` 块后只看标记面）+ 26 个 site JS + scripts/ 生成器全扫，按「选择器内任一 class/id 记号词边界零命中且无同义选择器可匹配」判零消费。命中 16 条规则（1,576 B 源）：`.text-mono` / `.text-xs` / `.text-faint` / `.text-accent`、`.badge-{accent,blue,gold,green}`、`.link-ink`(含 :hover)、`.btn-primary`(含 :hover)、`.series-shape`、`text.heat-value`、`svg .label-strong`、`text.value-label`(含 `.is-strong`)；另检出跨文件完全重复块（tokens.css 与 system.css 各一份 W1261 暗色序列映射 8 条）、同选择器后段覆盖的死声明（`.hero` 双层、`.chart-tooltip` 首块、`svg text` font-family）、同一选择器表内重复项 2 处。
+>
+> - **修法（只删已证无消费者的字节·判据零放宽）**：① 16 条零消费规则删除；② hero 双层合单——tokens 覆写层（`.hero` / `.hero::after`）与 system 基础层删除，定义收敛到 system.css W1261 节单处（position/overflow 并入，逐属性与旧级联终值等值）；③ `.chart-tooltip` 首块 6 条被后块 100% 覆盖的死声明删除（布局/动效位保留）；④ `svg text` 的 font-family 死声明、tick-text 选择器表重复项、system 侧 W1261 暗色映射重复块删除；⑤ `.value-label` 死选择器与 `.is-strong` 死规则删除（`.data-label` 有效选择器保留）。机制线、阈值、白名单、压缩算法均未改。
+>
+> - **结果**：共享基线块 57,296 → **54,067 B**（52.80 KiB·机制线 57,344 B·余量 48 B → **3,277 B**）；637 页重同步；check_inlined_css 内联 634 页 min 54,041 B（≥20,000）；check_structure 873 文件 / 1966 style 块括号平衡通过；抽样渲染（dukou-engine / reader ch001 / dashboard / en-dashboard）零 console error，`.hero` / `.chart-tooltip` / `svg text` 计算样式与旧级联同值。
+>
+> - **文档同步**：DESIGN.md §3.3 Hero 规格由「135deg 三色渐变 + 径向光晕」更正为现役「玄墨纯色 + 水墨山形图·无光晕」（旧文与 W334/W1261 已落地事实相反，且其描述的空 `::after` 规则本批删除）；§4A.8 现役实测重算（内联 637 页 / 三口径字节 / 共享块 54,067 B·余量 3,277 B）。
+>
+> - **零消费证据边界**：`.btn-primary` / `.badge-*` 仅出现在 v2/v3 方案报告与样板 BRIEF（历史规格），现役 875 页标记面 0 消费；如后续迁移需要按 DESIGN 重新新增，不以保留死规则代替。
+>
+> - **验证**：pytest 全量见收官链；verify_delivery 全量见收官链；容量 #2b 0 越线（#7 仅未提交暂态，两笔提交后清零）。
+>
+> - **文件**：见 file-index W1319 段（site/reader 634 件按目录分组登记）。
+>
+> - **状态**：容量 #2b 余量 48 B → 3,277 B；判据/机制线/白名单零变更；两笔提交（457 + 210 件）绕 #7 <500。
 ### W1318（2026-11-25）：容量 #2b 治本（共享 CSS 无损压缩 + 全站重同步）+ 测试隔离缺陷根修
 
 > **来源**：用户 2026-11-25 指令「继续容量软线治理」并裁决「两个都做」——对象①容量 #2b 共享基线块机制线（67.29 KB > 56 KB 越线）；对象②W1315 连带发现/W1317 实证的 batch_closeout 测试隔离缺陷（pytest 会真实回填本仓台账）。
@@ -705,7 +724,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1318），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1319），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

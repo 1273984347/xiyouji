@@ -266,24 +266,20 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 
 ```css
 .hero {
-    background: linear-gradient(135deg, #1a1410 0%, #3a2820 50%, #5a3828 100%);
-    color: #f5e9d4;
-    padding: 50px 24px 40px;
-    text-align: center;
     position: relative;
     overflow: hidden;
-}
-.hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at 70% 30%, rgba(232, 184, 133, 0.18), transparent 60%);
-    pointer-events: none;
+    background: #221D16;                    /* 玄墨纯色（W334 弃三色渐变） */
+    background-image: url('static/images/ink-mountains-hero.webp');
+    background-size: cover;
+    background-position: center 70%;
+    background-blend-mode: soft-light;
+    color: var(--dark-text);
+    padding: clamp(44px, 7vw, 72px) clamp(20px, 5vw, 80px);
 }
 ```
 
-- 固定三色渐变，不可随意替换。
-- `::after` 光晕层仅作装饰，`pointer-events: none` 避免遮挡点击。
+- 玄墨纯色底 + 水墨山形背景图（soft-light 叠加），**无三色渐变、无径向光晕**（W1261 去装饰层）。
+- W1319：`.hero` 合并为 system.css 单处定义（原 tokens 覆写层与 system 基础层两份已并入实测值）；`::after` 光晕层已清零 → 规则删除，页面私有 `::after`（55 页自建渐变）不受影响。
 
 ---
 
@@ -615,7 +611,7 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 
 ### 4A.8 体积预算红线
 
-- tokens.css 与 system.css 内联进现役 **330 页**（data 88 / EN 138 / reader 102 / 根页 2·实测按「<style> 内含 `--bg:` 且含 `Noto Serif SC`」判定·W1105 实测），**每 +1KB = 全站 +330KB**。
+- tokens.css 与 system.css 内联进现役 **637 页**（`inline_css.py --force` 实测 re-synced 637；另有 235 页以外链形态直引源文件——W1319 口径，W1105 时代为 330 页），**每 +1KB ≈ 全站 +637KB**。
 - Phase E 预算：system ≤ +6KB（18.9→≤24.9KB）；每批以 `wc -c` 复核并写入批次记录。
 - **tokens 预算（W851 上调 +2KB → +3KB）**：现役基线 20,799 B（W476 纸感层后实测）→ 上限 **23,799 B**。Phase E 原「tokens ≤ +2KB（5.7→≤7.7KB）」为 v3 前口径，W476 增层后未同步，已废止；v4 令牌增量（W851 落地 +2,240 B）按新预算验收（J4）。
 - 超预算时砍微交互工具类，不砍色彩/海拔令牌；perf-budget html 分项 50KB 逐批复核。
@@ -623,9 +619,7 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
   追溯，计**毛重**；`inline_css.py` 在传播为每页内联副本时剥离块注释（`strip_comments`），页内实际
   字节计**净重**。本预算的约束对象是「每页内联体积」（见上条 +225KB/KB），注释对渲染零贡献，
   故**达标判据以净重为准**——源文件可继续用注释承载设计决策，不为压数字牺牲可追溯性。
-- **现役实测**：system 毛重 29,353 B / 净重 23,541 B（≤24.9KB 上限·达标·用项目自身 `inline_css.strip_comments` 口径复算·W1105 订正旧值 28,441/23,052）；tokens 毛重 23,039 B /
-  净重 16,245 B（≤23,799 B 上限·达标）。单页内联块由 51,504 B 降至 39,323 B（-23.7%），
-  `check_inlined_css.py` 下限 20,000 B 仍有 96% 余量。
+- **现役实测（W1319 重算）**：system 毛重 54,763 B / 剥注释净重 37,670 B / 压缩内联净重 30,257 B；tokens 毛重 44,781 B / 剥注释净重 27,747 B / 压缩内联净重 23,766 B；共享基线块**页内实测 54,067 B**（`check_capacity_budget._inline_css_split` 口径·容量 #2b 机制线 57,344 B·余量 3,277 B）。旧 W1105 值（system 29,353/23,541、tokens 23,039/16,245、单页块 39,323 B）为 39 KB 时代口径，已被 56 KB 机制线与 W1318 压缩链取代。
 
 ### 4C. v4 设计迁移（W826 起·阶段 1 令牌纯加法）
 

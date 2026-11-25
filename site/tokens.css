@@ -157,15 +157,6 @@ h1, h2, h3, h4, h5,
     font-family: var(--font-serif);
 }
 
-/* ===== Hero 覆写（W334：深棕渐变 → 玄墨纯色） ===== */
-/* 旧版 135deg 深棕渐变统一替换为玄墨纯色，高光改淡金 */
-.hero {
-    background: #221D16;
-}
-.hero::after {
-    background: none;   /* W1261：去径向光晕（禁装饰层） */
-}
-
 /* ===== 选区与焦点细节 ===== */
 ::selection {
     background: rgba(200, 70, 58, 0.16);

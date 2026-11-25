@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "d983282c0401",
+      "sha": "f4e354540397",
       "static": {
         "svg": true,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "1514b28b1093",
+      "sha": "e17f4ffa54e7",
       "static": {
         "svg": false,
         "cls": true,
@@ -5960,7 +5960,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
       "svgKinds": [
         {
           "cls": "",
@@ -5968,9 +5968,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 29,
+          "texts": 30,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 29"
+          "basis": "1100x480·图元 13·文本 30"
         },
         {
           "cls": "",
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "a3f2bc0de241",
+      "sha": "a02edaf52918",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "db09418898d8",
+      "sha": "971f883b0373",
       "static": {
         "svg": true,
         "cls": false,
