@@ -40,7 +40,7 @@
 
 12. **token 覆盖率**（check_token_coverage.py，W493 转正：页面私有 `<style>` 块 UI 裸色——无豁免注释页必须 0、带 `e-track-exempt` 注释页 ≤ 登记 N；真裸 box-shadow 必须 0；INLINED 副本跳过，私有块识别靠 `tokens.css —` 注释特征）
 13. **动效禁止清单**（check_motion_ban.py，W493 转正：cubic-bezier 负值 / 360° 旋转 / animation infinite / parallax，白名单仅 .chart-loading/.chart-fade-in）
-14. **a11y 对比度**（a11y_audit.py E2-2，W493 挂载：P0+P1=0 阻断，WCAG 2.2 AA 正文 ≥4.5:1）
+14. **a11y 全规则**（a11y_audit.py，W493 挂载·W1322 强化：E2-2 对比度 P0+P1=0 阻断，WCAG 2.2 AA 正文 ≥4.5:1；**全 40 条规则 P1 合计=0 锁**——原判据只解析 E2-2，其余 39 条 P1 无阻断位；W1322 修 12 条后上锁，P2/P3 不阻断）
 15. **INLINED CSS 完整性**（check_inlined_css.py，W495 转正：data/EN 页 INLINED 标记块内容 ≥20KB——防 W493 式「224 页内联块被清空而 14 门禁全绿漏网」回归）
 
 ### 数据与一致性类（16-26）

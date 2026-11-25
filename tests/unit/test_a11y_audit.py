@@ -771,3 +771,77 @@ def test_rule_40_animation_interactions_no_reduced_motion():
     p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
     assert len(p2) >= 1
     assert any("prefers-reduced-motion" in f["message"] for f in p2)
+
+
+# ---------------------------------------------------------------------------
+# E2-23：表单标签或指令（WCAG 3.3.2 Labels or Instructions）
+# W1322：补隐式包裹识别——原判据只认 for / aria-label / title，把合规页面误判 P1
+# ---------------------------------------------------------------------------
+
+def test_rule_23_implicit_label_wrapped():
+    """控件被 <label> 隐式包裹（WCAG 认可的关联方式）应无 findings"""
+    text = (
+        '<html><body>'
+        '<label>起因：<select id="cause"><option>全部</option></select></label>'
+        '</body></html>'
+    )
+    findings = a11y_audit.rule_23_labels_or_instructions(text, Path("implicit.html"))
+    assert len(findings) == 0
+
+
+def test_rule_23_implicit_label_multiline():
+    """多行隐式包裹（label 开闭跨行）同样应无 findings"""
+    text = (
+        '<html><body>\n'
+        '<label style="display:block">\n'
+        '  维度切换：\n'
+        '  <select id="level">\n'
+        '    <option>分回</option>\n'
+        '  </select>\n'
+        '</label>\n'
+        '</body></html>'
+    )
+    findings = a11y_audit.rule_23_labels_or_instructions(text, Path("implicit2.html"))
+    assert len(findings) == 0
+
+
+def test_rule_23_explicit_for_still_ok():
+    """<label for> 显式关联的既有判据不得回退"""
+    text = (
+        '<html><body>'
+        '<label for="q">关键词</label><input id="q" type="text">'
+        '</body></html>'
+    )
+    findings = a11y_audit.rule_23_labels_or_instructions(text, Path("explicit.html"))
+    assert len(findings) == 0
+
+
+def test_rule_23_three_unlabeled_p1():
+    """3 个无任何关联名称的控件应报 P1（负样本不得被隐式识别放过）"""
+    text = (
+        '<html><body>'
+        '<select id="a"><option>x</option></select>'
+        '<select id="b"><option>y</option></select>'
+        '<input id="c" type="text">'
+        '</body></html>'
+    )
+    findings = a11y_audit.rule_23_labels_or_instructions(text, Path("nolabel.html"))
+    p1 = [f for f in findings if f["severity"] == a11y_audit.Severity.P1]
+    assert len(p1) == 1
+    assert "3 个表单控件" in p1[0]["message"]
+
+
+def test_rule_23_label_wraps_only_first_control():
+    """一个 label 只标注首个可标注后代——第二个控件仍应报缺 label（精度负样本）"""
+    text = (
+        '<html><body>\n'
+        '<label>组合：\n'
+        '<select id="first"><option>x</option></select>\n'
+        '<select id="second"><option>y</option></select>\n'
+        '</label>\n'
+        '</body></html>'
+    )
+    findings = a11y_audit.rule_23_labels_or_instructions(text, Path("two.html"))
+    p2 = [f for f in findings if f["severity"] == a11y_audit.Severity.P2]
+    assert len(p2) == 1
+    assert "1 个表单控件" in p2[0]["message"]

@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "00b533f815a9",
+      "sha": "6a7afa29022b",
       "static": {
         "svg": true,
         "cls": true,
@@ -2443,7 +2443,7 @@
     },
     {
       "page": "site/data/hardship-difficulty-heatmap.html",
-      "sha": "ade20fec0b70",
+      "sha": "ff24b72c2d99",
       "static": {
         "svg": true,
         "cls": true,
@@ -2583,7 +2583,7 @@
     },
     {
       "page": "site/data/heaven-power-network.html",
-      "sha": "59a01883ea63",
+      "sha": "ce9040b6d724",
       "static": {
         "svg": true,
         "cls": true,
@@ -3983,7 +3983,7 @@
     },
     {
       "page": "site/data/monster-hierarchy-network.html",
-      "sha": "d18c4ea58ba1",
+      "sha": "34e082633153",
       "static": {
         "svg": true,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "263f0080d490",
+      "sha": "32db5b645807",
       "static": {
         "svg": false,
         "cls": true,
@@ -5863,7 +5863,7 @@
     },
     {
       "page": "site/data/underworld-power-network.html",
-      "sha": "9e022dbb99a1",
+      "sha": "2e2fd0aa2247",
       "static": {
         "svg": true,
         "cls": true,
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "c54130723bfb",
+      "sha": "2f3f0f8c350f",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "05ed866a1797",
+      "sha": "b398ba3e3e20",
       "static": {
         "svg": true,
         "cls": false,
@@ -7565,11 +7565,11 @@
           "cls": "string-svg",
           "id": "stringSvg",
           "w": 1022,
-          "h": 1290,
+          "h": 1272,
           "marks": 9,
           "texts": 0,
           "kind": "chart",
-          "basis": "1022x1290·图元 9·文本 0"
+          "basis": "1022x1272·图元 9·文本 0"
         },
         {
           "cls": "ic-moon",
@@ -7586,7 +7586,7 @@
       "visibleLegend": false,
       "seriesEvidence": 4,
       "seriesDesc": "填充色组 4·描边色组 3·同 x 堆叠段 1",
-      "consoleErrors": 15,
+      "consoleErrors": 17,
       "verdict": "multi_nolegend",
       "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
     },
@@ -8347,9 +8347,9 @@
           "w": 1002,
           "h": 620,
           "marks": 24,
-          "texts": 22,
+          "texts": 21,
           "kind": "chart",
-          "basis": "1002x620·图元 24·文本 22·命中图表词表"
+          "basis": "1002x620·图元 24·文本 21·命中图表词表"
         },
         {
           "cls": "",
@@ -8942,7 +8942,7 @@
     },
     {
       "page": "site/en/heaven-power-network.html",
-      "sha": "6752c996224f",
+      "sha": "f1d8216c7282",
       "static": {
         "svg": true,
         "cls": true,
@@ -10312,7 +10312,7 @@
     },
     {
       "page": "site/en/monster-hierarchy-network.html",
-      "sha": "3da192c0fa5a",
+      "sha": "072a382f50fb",
       "static": {
         "svg": true,
         "cls": true,
@@ -12112,7 +12112,7 @@
     },
     {
       "page": "site/en/underworld-power-network.html",
-      "sha": "d1796dcd5361",
+      "sha": "fb90b0d56d42",
       "static": {
         "svg": true,
         "cls": true,
@@ -12209,7 +12209,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
       "svgKinds": [
         {
           "cls": "",
@@ -12217,9 +12217,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 29,
+          "texts": 30,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 29"
+          "basis": "1100x480·图元 13·文本 30"
         },
         {
           "cls": "",

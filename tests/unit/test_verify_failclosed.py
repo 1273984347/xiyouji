@@ -163,6 +163,28 @@ def test_b2_p01_reds_unchanged(monkeypatch):
     assert "P0+P1=2" in ctx.rep.fails[0]
 
 
+def test_w1322_all_rules_p1_lock_reds(monkeypatch):
+    """W1322 语义强化：E2-2 干净但其他规则有 P1 → FAIL（原判据只解析 E2-2·P1 无阻断位）。"""
+    _a11y_run(monkeypatch, {"summary": {
+        "E2-2": {"P0": 0, "P1": 0}, "E2-4": {"P0": 0, "P1": 1},
+    }})
+    ctx = _Ctx()
+    v._gate_a11y(ctx)
+    assert ctx.rep.fails
+    assert any("全规则 P1=1" in f and "E2-4" in f for f in ctx.rep.fails)
+
+
+def test_w1322_p2_p3_not_blocking(monkeypatch):
+    """W1322 锁只拦 P1：其他规则仅有 P2/P3 时必须不判红（判据不放宽的另一面=不过度加严）。"""
+    _a11y_run(monkeypatch, {"summary": {
+        "E2-2": {"P0": 0, "P1": 0}, "E2-4": {"P0": 0, "P1": 0, "P2": 9, "P3": 40},
+    }})
+    ctx = _Ctx()
+    v._gate_a11y(ctx)
+    assert not ctx.rep.fails
+    assert any("全规则 P1=0" in o for o in ctx.rep.oks)
+
+
 def test_b2_nonzero_exit_fails_unchanged(monkeypatch):
     """回归锁：a11y_audit 非零退出 → FAIL（既有行为·W493 原语义）。"""
     _a11y_run(monkeypatch, "", returncode=1)

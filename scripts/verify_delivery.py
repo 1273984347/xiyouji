@@ -2025,6 +2025,18 @@ def _gate_a11y(ctx):
         ctx.rep.ok("a11y 对比度门禁通过（E2-2 P0/P1=0）")
     else:
         ctx.rep.fail("a11y 对比度 P0+P1=%d（M1 WCAG AA 阻断）" % p01)
+        return
+
+    # W1322 语义强化：全规则 P1=0 锁。
+    # 原判据只解析 summary.E2-2 ⇒ 其余 39 条规则的 P1 没有任何阻断位（实测长期躺平
+    # 12 条：4 条 E2-23 检测器假阳性已根修、8 条真实问题已修）。锁 = 合计 P1>0 即红，
+    # 防止新增页面把 P1 重新带进来；P2/P3 仍不阻断（保持原判据强度不变）。
+    p1_all = sum((v.get("P1", 0) or 0) for v in s.values() if isinstance(v, dict))
+    if p1_all == 0:
+        ctx.rep.ok("a11y 全规则 P1=0（40 条规则·W1322 锁）")
+    else:
+        hit = [k for k, v in s.items() if isinstance(v, dict) and (v.get("P1", 0) or 0)]
+        ctx.rep.fail("a11y 全规则 P1=%d（涉 %s·W1322 锁）" % (p1_all, "、".join(hit)))
 
 
 # ---------------------------------------------------------------------------

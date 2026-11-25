@@ -1387,12 +1387,35 @@ def rule_22_error_identification(html_content, file_path):
     return findings
 
 
+def _implicit_label_lines(html_content):
+    """E2-23 辅助：返回被 <label>…</label> **隐式包裹**的控件行号集合。
+
+    WCAG 3.3.2 / HTML 规范认可两种关联：显式 `<label for>` 与隐式包裹（控件在 label
+    元素内）。E2-23 原判据只认 for / aria-label / aria-labelledby / title ⇒ 隐式包裹
+    被误判为「缺 label」（W1322 实证：81-hardships / relationships 中英 4 页共 4 条
+    P1 全为此形态·页面本就合规）。按规范一个 label 只标注**首个**可标注后代，
+    故每个 label 块内仅取第一个 input/select/textarea。
+    """
+    lines = set()
+    for m in re.finditer(r"<label\b[^>]*>", html_content, re.I):
+        close = re.search(r"</label\s*>", html_content[m.end():], re.I)
+        if not close:
+            continue
+        block = html_content[m.end(): m.end() + close.start()]
+        ctrl = re.search(r"<(?:input|select|textarea)\b", block, re.I)
+        if not ctrl:
+            continue
+        lines.add(html_content.count("\n", 0, m.end() + ctrl.start()) + 1)
+    return lines
+
+
 def rule_23_labels_or_instructions(html_content, file_path):
     """E2-23：WCAG 3.3.2 Labels or Instructions。
-    检测表单控件是否有关联的 label（<label for> 或 aria-label 或 aria-labelledby）。
-    触发条件：input/select/textarea 无关联 label 且无 aria-label/aria-labelledby。"""
+    检测表单控件是否有关联的 label（<label for> / 隐式包裹 / aria-label / aria-labelledby）。
+    触发条件：input/select/textarea 无上述任一关联名称。"""
     findings = []
     parser = _parse_html(html_content)
+    implicit_lines = _implicit_label_lines(html_content)
 
     # 收集所有 <label for> 的目标 id
     label_for_ids = set()
@@ -1418,6 +1441,9 @@ def rule_23_labels_or_instructions(html_content, file_path):
         title = el.attrs.get("title", "").strip()
         # 有 label for 关联 / aria-label / aria-labelledby / title 任一即可
         if (ctrl_id and ctrl_id in label_for_ids) or aria_label or aria_labelledby or title:
+            continue
+        # 隐式包裹（<label> 内首个表单控件）同属合规关联（WCAG 3.3.2）
+        if el.line in implicit_lines:
             continue
         missing_count += 1
         if first_missing_line == 0:

@@ -1,3 +1,27 @@
+## W1322 a11y P1 清零与全规则 P1 锁（2026-11-25）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/（1 件） | W1322 | 本批改动（版本面推进 W1322） |
+| archive/docs/（3 件） | W1322 | 本批改动（台账行窗口迁出） |
+| docs/00-导读/（2 件） | W1322 | 本批改动（W1322 登记） |
+| docs/11-方案报告/（1 件） | W1322 | 本批改动（stats 标记跟随 pytest_collected） |
+| docs/agent/（1 件） | W1322 | 改：第 14 槽判据描述同步（a11y 全规则） |
+| scripts/（2 件） | W1322 | 改：E2-23 隐式 label 识别（假阳性根修） |
+| scripts/output/（16 件） | W1322 | 本批改动（收官 spec） |
+| site/（4 件） | W1322 | 本批改动（收官生成） |
+| site/data/（6 件） | W1322 | 改：node-circle focus-visible 焦点可见 |
+| site/en/（3 件） | W1322 | 改：node-circle focus-visible 焦点可见 |
+| tests/unit/（2 件） | W1322 | 改：新增 E2-23 正负例五例 |
+| CHANGELOG.md | W1322 | 本批改动（W1322 段） |
+| HANDOVER.md | W1322 | 本批改动（进度块 + 最后更新 + 三选一取证注记） |
+| AGENTS.md | W1322 | 本批改动（脚注条目 W1322） |
+| README.md | W1322 | 本批改动（版本面推进 W1322） |
+| STRUCTURE.md | W1322 | 本批改动（版本面推进 W1322） |
+| CITATION.cff | W1322 | 本批改动（版本面推进 W1322） |
+| pyproject.toml | W1322 | 本批改动（版本面推进 W1322） |
+| pytest.ini | W1322 | 本批改动（collected 计数） |
+
 ## W1321 巨批分笔与多推送固化（2026-11-25）
 
 | 文件 | W | 说明 |
