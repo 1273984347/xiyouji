@@ -197,6 +197,30 @@ def _verify_expect_spec(expect_spec, staged):
     return None
 
 
+def _index_worktree_divergence():
+    """索引态 vs 工作树分歧检测（W1321·W1320 实证根因机器化）。
+
+    场景：`--expect-spec` 无 pathspec = **索引态提交**；若某文件在被 `git add` 之后又被
+    改写（级联的 versions/csp 等步在 add 之后重写页面），提交会捕获**旧版本** ⇒ 该笔
+    单独检出时探针（第 80/82 槽按页 sha fail-closed）判红。W1320 实证：dukou-engine
+    版本页脚在 add 之后被重写，首笔捕获旧页 ⇒ 探针陈旧 ⇒ 只能在本地重建该笔。
+    判据：`git status --porcelain` 中 X∈{M,A,R,C} 且 Y∈{M,D}（= 已暂存后又改写/删除）。
+    返回分歧路径列表（fail-closed：git 失败即抛，由调用方按异常处理）。
+    """
+    r = subprocess.run(["git", "-c", "core.quotePath=false", "status", "--porcelain"],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    if r.returncode != 0:
+        raise RuntimeError("git status 失败：%s" % (r.stderr or "").strip()[:200])
+    out = []
+    for ln in (r.stdout or "").splitlines():
+        if len(ln) < 4:
+            continue
+        x, y, rest = ln[0], ln[1], ln[3:]
+        if x in "MARC" and y in "MD":
+            out.append(rest.strip().strip('"').replace("\\", "/"))
+    return out
+
+
 def _staged_and_expect_guard(pathspecs, expect_spec):
     """W1155（提取降复杂度）：commit 前置守卫——staged 取数 + expect-spec 校验 +
     pathspec 漂移拒绝。返回 (staged, rc_or_None)：rc 非 None 即拒绝退出。"""
@@ -210,12 +234,19 @@ def _staged_and_expect_guard(pathspecs, expect_spec):
         _rc = _verify_expect_spec(expect_spec, staged)
         if _rc is not None:
             return staged, _rc
-        drift = _pathspec_drift(pathspecs)  # 深度审计 #6
+        if pathspecs:
+            drift = _pathspec_drift(pathspecs)  # 深度审计 #6
+            drift_hint = ("以下声明件存在「已暂存≠工作树」漂移（expect-spec 按"
+                          "索引态校验·pathspec 按工作树提交——二者必须一致）：")
+        else:
+            drift = _index_worktree_divergence()  # W1321：索引态提交的旧版本捕获防线
+            drift_hint = ("以下已暂存文件在暂存后又被改写（索引态提交会捕获**旧版本** ⇒ "
+                          "该笔单独检出时探针判红·W1320 实证）：")
         if drift:
-            print("[safe_commit] 拒绝：以下声明件存在「已暂存≠工作树」漂移（expect-spec 按"
-                  "索引态校验·pathspec 按工作树提交——二者必须一致）：")
+            print("[safe_commit] 拒绝：" + drift_hint)
             for n in drift[:10]:
                 print("      drift: " + n)
+            print("      改法：git add <路径> 重新暂存后再提交")
             return staged, 1
     return staged, None
 

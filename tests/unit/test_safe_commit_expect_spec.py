@@ -93,3 +93,33 @@ def test_cli_allows_index_subset(tmp_path):
                         "--expect-spec", str(spec)], cwd=repo, capture_output=True, text=True, encoding="utf-8")
     assert r.returncode == 0, r.stdout + r.stderr
     assert _git(repo, "log", "--oneline").stdout.count("\n") == 2
+
+
+def test_cli_blocks_index_mode_divergence(tmp_path):
+    """W1321：暂存后又改写 ⇒ 索引态提交会捕获旧版本 ⇒ 拒绝（W1320 dukou 页脚实证）。"""
+    repo = _repo(tmp_path)
+    (repo / "a.py").write_text("staged\n", encoding="utf-8")
+    _git(repo, "add", "a.py")
+    (repo / "a.py").write_text("worktree-newer\n", encoding="utf-8")   # 暂存后又被改写
+    spec = _spec(tmp_path, ["a.py"])
+    r = subprocess.run([sys.executable, str(SCRIPTS_DIR / "safe_commit.py"), "-m", "t",
+                        "--expect-spec", str(spec)], cwd=repo, capture_output=True, text=True, encoding="utf-8")
+    assert r.returncode == 1, r.stdout + r.stderr
+    assert "暂存后又被改写" in r.stdout and "a.py" in r.stdout
+    assert _git(repo, "log", "--oneline").stdout.count("\n") == 1  # 仍只有 init 一笔
+
+
+def test_cli_allows_after_readd(tmp_path):
+    """W1321 正样本：暂存后改写 → 重新 add 消除分歧 → 放行。"""
+    repo = _repo(tmp_path)
+    (repo / "a.py").write_text("v2\n", encoding="utf-8")
+    _git(repo, "add", "a.py")
+    (repo / "a.py").write_text("v3\n", encoding="utf-8")   # 暂存后又被改写
+    _git(repo, "add", "a.py")                              # 重新暂存（改法）
+    spec = _spec(tmp_path, ["a.py"])
+    r = subprocess.run([sys.executable, str(SCRIPTS_DIR / "safe_commit.py"), "-m", "ok",
+                        "--expect-spec", str(spec)], cwd=repo, capture_output=True, text=True, encoding="utf-8")
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert _git(repo, "log", "--oneline").stdout.count("\n") == 2
+    blob = _git(repo, "show", "HEAD:a.py").stdout
+    assert "v3" in blob
