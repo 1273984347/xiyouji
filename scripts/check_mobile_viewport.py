@@ -19,6 +19,8 @@
   B 报告采信（动态证据链）：
     B1 scripts/output/mobile_viewport_report.json 存在时其 FAIL 页数必须为 0
     B2 报告旧于 system.css / cite-box.js ⇒ NOTE 提示重跑探针（不判红：探针 84 秒不进 pre-commit）
+    B3 320px 报告 FAIL 页数必须为 0（存在时）
+    B5/B6 两份报告的 clipped 页数必须为 0（W1329：内容被 overflow 裁掉＝不可达，非「可横滚」）
 
 探针本体：scripts/mobile_viewport_probe.py（全量普查工具，手动或批收尾执行）。
 
@@ -352,16 +354,25 @@ def check_report() -> tuple[list[str], list[str]]:
         fails.append(f"B 探针报告仍有 {len(bad)} 页未达标：{names}")
     if not pages:
         fails.append("B 探针报告 pages 为空（疑似空跑）")
+    clip = [p for p in pages if p.get("clipped")]
+    if clip:
+        names = "、".join(p.get("page", "?") for p in clip[:6])
+        fails.append(f"B5 报告有 {len(clip)} 页内容被裁切（clipped·不可达）：{names}")
 
     # W1173：320px 报告（三目录抽样）同样必须 FAIL=0；缺失只 NOTE（探针 4 分钟不进 pre-commit）
     if os.path.exists(REPORT_320_PATH):
         try:
             with open(REPORT_320_PATH, encoding="utf-8") as fh:
                 rep320 = json.load(fh)
-            bad320 = [p for p in rep320.get("pages", []) if p.get("grade") in ("FAIL", "ERROR")]
+            pages320 = rep320.get("pages", [])
+            bad320 = [p for p in pages320 if p.get("grade") in ("FAIL", "ERROR")]
             if bad320:
                 names = "、".join(p.get("page", "?") for p in bad320[:6])
                 fails.append(f"B3 320px 报告仍有 {len(bad320)} 页未达标：{names}")
+            clip320 = [p for p in pages320 if p.get("clipped")]
+            if clip320:
+                names = "、".join(p.get("page", "?") for p in clip320[:6])
+                fails.append(f"B6 320px 报告有 {len(clip320)} 页内容被裁切（clipped·不可达）：{names}")
         except (OSError, json.JSONDecodeError) as exc:
             fails.append(f"B3 320px 报告不可读：{type(exc).__name__}")
     else:

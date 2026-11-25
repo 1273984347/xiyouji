@@ -1,3 +1,15 @@
+### W1329（2026-11-26）：V4 移动端回归与裁切根修
+
+> **来源**：用户 2026-11-26 指令「按新纪律继续处理下一批」——V4 移动端回归（375/320 全量复跑）。
+> - **探针复跑**：mobile_viewport_probe 全量 270 页（ZH + EN + reader 抽样）× 375/320 两档，以及 EN 148 页单档；修复后两档均 FAIL 0 / 溢出 0。
+> - **裁切根修（8 页）**：wukong-tangseng-benchmark 私有 `.chart-block{overflow:hidden}` 覆盖共享移动横滚模式；en/text-evolution 两张定宽图（min-width 800）缺滚动容器 ⇒ 加 `.chart-scroll`；en/pilgrim-team-dynamic-network 五列阶段卡在窄屏挤压 ⇒ 2 列/1 列降级；en/hardship-heatmap 的条形卡被表格 min-content 撑宽 ⇒ min-width:0 + 横滚；en/global-pattern 双列卡在 ≤480 降单列；en/cross-time-danmaku 与 en/social-media 的 notice code 长路径断行。
+> - **触摸线**：rum-viewer（未接公共壳的独立页）补 `.nav-item` 24px 双维下限（EN 标签实测 18px）。
+> - **机器判据**：第 64 槽新增 B5/B6——375/320 报告 clipped 页数必须为 0（内容被 overflow 裁掉＝不可达，不能以「可横滚」名义蒙混）。
+> - **报告**：mobile_viewport_report.json（375·270 页）、mobile_viewport_report_320.json（320·270 页）、mobile_viewport_report_en.json（EN·148 页）全部重生成并入库。
+> - **验证**：第 64 槽 0 违规（契约 7 项）· 自测 7/7 · check_structure 873 文件通过 · lint_links 0 broken。
+> - **文件**：见 file-index W1329 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1328（2026-11-26）：V3 收尾与看板深链
 
 > **来源**：用户 2026-11-26 指令「按新纪律继续处理下一批」（1+3+4 组合）——V3 收尾 + 看板交互增强 + 治理计数收口。
@@ -861,7 +873,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1328），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1329），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

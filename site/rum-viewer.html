@@ -36,6 +36,8 @@
         .site-mainnav a { color: var(--text-primary); text-decoration: none; font-size: 14px; }
         .site-mainnav a:hover { color: var(--accent-primary); }
         .site-mainnav .nav-brand { font-weight: 600; font-size: 15px; }
+        /* W1329：WCAG 2.5.8 AA 触摸线——EN 等窄标签在 375px 下实测宽 18px，补双维下限 */
+        .site-mainnav .nav-item { display: inline-flex; align-items: center; justify-content: center; min-height: 24px; min-width: 24px; white-space: nowrap; }
         /* W1261 兜底：本页未接入公共壳 ⇒ 未设色的链接落浏览器默认蓝（rgb(0,0,238)）⇒ 统一朱砂 */
         a { color: var(--accent-primary); text-decoration: none; }
         .hero { margin-bottom: 28px; }

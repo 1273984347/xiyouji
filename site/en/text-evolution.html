@@ -505,6 +505,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 @media (max-width: 768px){ main { overflow-x: clip; } }
 @media (max-width: 768px){ .evo-step { max-width: 100%; overflow-wrap: anywhere; } }
 @media (max-width: 768px){ #commentary-count-bar, #commentary-stacked { min-width: 800px; } }
+@media (max-width: 768px){ .chart-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; } }
 
 /* en 迁移批：KPI 顶条按行收敛（同排首卡保顶条·其余转细线·口径同 zh 页 W870） */
 .kpi-row > .kpi-card:not([class*="alt-"]) ~ .kpi-card:not([class*="alt-"]) { border-top: 1px solid var(--line); }
@@ -624,7 +625,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 </div>
                 <div class="chart-block">
                     <h3>Total Comments Distribution</h3>
-                    <svg id="commentary-count-bar" data-audit-skip width="380" height="380"></svg>
+                    <div class="chart-scroll"><svg id="commentary-count-bar" data-audit-skip width="380" height="380"></svg></div>
                 </div>
             </div>
             <div class="quotes-grid" id="quotes-grid"></div>
@@ -634,7 +635,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <section class="section">
             <h2 class="section-title">Commentary Type Distribution (Stacked)</h2>
             <div class="section-sub">Five commentators × five commentary types (Praise / Invective / Elucidation / Textual Criticism / Exegesis) as a horizontal stacked bar chart. Note that Liu Yiming's Original Intent leads in all five categories.</div>
-            <svg id="commentary-stacked" data-audit-skip></svg>
+            <div class="chart-scroll"><svg id="commentary-stacked" data-audit-skip></svg></div>
             <div class="legend" id="legend-types"></div>
         </section>
 
