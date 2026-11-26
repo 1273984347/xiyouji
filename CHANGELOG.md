@@ -9,6 +9,7 @@
 > - **验证**：单测 6/6；`npm run test:server` 159 例 fail 0（155 通过 / 4 跳过：PG 不可达）；`tsc --noEmit` 退出码 0。
 > - **报告**：`docs/11-方案报告/设计与架构方案/可观测性接入选型与决策-2026-11-27.md`（§8 单列 5 项未验证项）。
 > - **处置收尾（腾窗）**：落段后 CHANGELOG 余量仅 366 字节（261778/262144）⇒ 跑 `archive_segments.py --keep 56 --apply` 迁出 8 段（W1271-W1278）至 `archive/docs/CHANGELOG-ARCHIVE.md`（守恒断言 A1-A5 全过·逐字节未改写）；file-index 同批迁出 8 段（W1271-W1278）至 `archive/docs/file-index-ARCHIVE.md`。迁后 CHANGELOG 216623 字节（余量 45521）、file-index 229636 字节（余量 32508）。
+> - **处置收尾（页脚 WARN 清零）**：`site/dukou-engine.html` 页脚版本 W1333→W1334；因页面内容变更使第 80/82 槽「报告/档案陈旧」fail-closed 触发 ⇒ 重跑 `svg_text_contrast_probe.js`（body + graphic 双口径·各 168 页 × 4 态·低对比 0）与 `_w1266_render_legend.py`（判定分布 multi_legend=3 / multi_nolegend=1 / nochart=7 / unknown=6）；两槽复跑 0 FAIL，`dukou-engine` 页脚 WARN 归零。
 > - **文件**：见 file-index W1334 段。
 > - **状态**：已落地（级联+提交后以 gh run list 为准）。
 
