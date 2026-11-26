@@ -1,3 +1,16 @@
+### W1334（2026-11-27）：可观测性接入决策（方案 D）+ usage 前置
+
+> **来源**：用户 2026-11-27 指令「按方案 D 执行，先实现 usage 前置逻辑；生成决策文档」。
+> - **决策**：观测面走本地零依赖 trace（方案 D），排除 Langfuse Cloud / 自建 Langfuse / 标准 OTel 自建。决定性判据 = 云端留存上限 90 天 < 项目审计硬下限 180 天（Hobby 30 天 · Core $29 档 90 天 · Pro $199 档 3 年，2026-11-26 实取定价），叠加架构方案 v1 裁定 5 与 v2 裁定 5 两次否决付费 APM；依赖体积实测 3 / 15 / 67 包属可接受量级，故非排除理由。
+> - **usage 前置（本批施工）**：`openai-compat.ts` 请求侧带 `stream_options.include_usage`（HTTP 400 回退重试一次并去掉该字段）、响应侧 usage 帧与 choices 解耦解析 + 归一（total 缺失以 input+output 兜底）；`types.ts` 增 `TokenUsage` / `StreamEvent{type:"usage"}` / `AgentTurnResult.usage`；`agent-loop.ts` 跨轮累计；`chat.ts` 落「问答 token 用量」结构化日志。口径：未回传记 null 不记 0（沿用 OBS-14「缺样本 ≠ 0 ms」）。
+> - **只读接入实证（前序·未改代码）**：`auth_check` True；云端 2026-11-16 删旧路由（SDK 5 `api.trace.list` 抛 AttributeError），langfuse-mcp 0.14.0 的 v2 observations 回退实测 200；stdio 按拟用配置起服 11 工具，`fetch_traces` 等三工具 `isError=None`。
+> - **同车安置（他批遗留暂存件·用户授权）**：`TODOS.md`（新文件）+ `STRUCTURE.md` 待办入口行 + `scripts/check_repo_layout.py` 配套 + `HANDOVER.md` 待办单一入口指针，系他方会话「待办单一入口（2026-11-27 用户令）」的暂存件（台账无认领行、无独立版段）；用户 2026-11-27 裁决「四件一并提交并披露」⇒ 随本批入库并于此披露，归属原会话，后续补段由该会话按号序回写。
+> - **机器判据**：新增 `server/engine/openai-compat.test.ts` 6 例并登记 `test:server`（请求字段 / usage 帧 / 缺样本不造 0 / total 兜底 / 400 回退 / 与 tool_calls 共存）。
+> - **验证**：单测 6/6；`npm run test:server` 159 例 fail 0（155 通过 / 4 跳过：PG 不可达）；`tsc --noEmit` 退出码 0。
+> - **报告**：`docs/11-方案报告/设计与架构方案/可观测性接入选型与决策-2026-11-27.md`（§8 单列 5 项未验证项）。
+> - **文件**：见 file-index W1334 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1333（2026-11-26）：A1 交叉引用与 reader 阅读体验
 
 
@@ -898,7 +911,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1333），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1334），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

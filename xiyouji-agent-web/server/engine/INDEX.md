@@ -10,12 +10,13 @@
 
 - （无）
 
-## 文件（6）
+## 文件（7）
 
 ### JavaScript / TypeScript
 
 - `agent-loop.ts`
 - `grep-worker.mjs`
+- `openai-compat.test.ts`
 - `openai-compat.ts`
 - `tools.test.ts`
 - `tools.ts`

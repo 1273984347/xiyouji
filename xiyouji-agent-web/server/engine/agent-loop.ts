@@ -7,6 +7,7 @@ import type {
   AgentTurnOptions,
   AgentTurnResult,
   ChatMessage,
+  TokenUsage,
   ToolCallRecord,
 } from "./types.js";
 
@@ -16,6 +17,8 @@ export async function runAgentTurn(opts: AgentTurnOptions): Promise<AgentTurnRes
   const toolCalls: ToolCallRecord[] = [];
   let fullText = "";
   let turns = 0;
+  /** 跨轮 usage 累计；全程无一轮回传则保持 null（缺样本 ≠ 0 token）。 */
+  let usage: TokenUsage | null = null;
 
   while (turns < opts.maxTurns) {
     turns += 1;
@@ -36,6 +39,14 @@ export async function runAgentTurn(opts: AgentTurnOptions): Promise<AgentTurnRes
       if (ev.type === "text_delta") {
         turnText += ev.delta;
         opts.handlers.onText(ev.delta);
+      } else if (ev.type === "usage") {
+        usage = usage
+          ? {
+              inputTokens: usage.inputTokens + ev.usage.inputTokens,
+              outputTokens: usage.outputTokens + ev.usage.outputTokens,
+              totalTokens: usage.totalTokens + ev.usage.totalTokens,
+            }
+          : ev.usage;
       } else {
         finishToolCalls = ev.toolCalls;
       }
@@ -44,7 +55,7 @@ export async function runAgentTurn(opts: AgentTurnOptions): Promise<AgentTurnRes
     fullText += turnText;
 
     if (finishToolCalls.length === 0) {
-      return { text: fullText, toolCalls, durationMs: Date.now() - started, turns };
+      return { text: fullText, toolCalls, durationMs: Date.now() - started, turns, usage };
     }
 
     // 回写 assistant（含 tool_calls 原始形态）

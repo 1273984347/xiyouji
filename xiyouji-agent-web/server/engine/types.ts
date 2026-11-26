@@ -42,9 +42,22 @@ export interface ChatMessage {
   tool_call_id?: string;
 }
 
+/**
+ * token 用量（provider 回传的 usage 字段归一后的形状）。
+ *
+ * 口径纪律（沿用 metrics.ts「缺样本 ≠ 0」）：上游未回传 usage 时，下游拿到的是
+ * **null**，不是三个 0——否则「没测到」会被读成「消耗 0 token」，与事实相反。
+ */
+export interface TokenUsage {
+  inputTokens: number;
+  outputTokens: number;
+  totalTokens: number;
+}
+
 /** chat/completions 流式事件（由 openai-compat 产出）。 */
 export type StreamEvent =
   | { type: "text_delta"; delta: string }
+  | { type: "usage"; usage: TokenUsage }
   | { type: "finish"; reason: string | null; toolCalls: Array<{ id: string; name: string; arguments: string }> };
 
 /** 引擎工具执行结果。 */
@@ -93,4 +106,6 @@ export interface AgentTurnResult {
   toolCalls: ToolCallRecord[];
   durationMs: number;
   turns: number;
+  /** 各轮 usage 累计；全程无一轮回传 usage 时为 null（缺样本，非 0）。 */
+  usage: TokenUsage | null;
 }

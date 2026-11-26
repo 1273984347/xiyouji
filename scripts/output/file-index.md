@@ -1,3 +1,26 @@
+## W1334 可观测性接入决策（方案 D）+ usage 前置（2026-11-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1334 | 旁文档头部版本与里程碑区间行升版 |
+| CHANGELOG.md | W1334 | 新增 W1334 段 + 编号规则上限同步 |
+| CITATION.cff | W1334 | 版本字段升版（W 号区间字面量门禁） |
+| HANDOVER.md | W1334 | 阻塞段 HEAD + 进度段里程碑 + 概要块滚动（7→6） |
+| README.md | W1334 | 当前批次行升版 |
+| STRUCTURE.md | W1334 | 当前批次行升版 + 待办入口登记行（同车·他批遗留） |
+| TODOS.md | W1334 | 新文件（待办单一入口·同车·他批遗留暂存件·用户授权披露） |
+| docs/00-导读/项目说明.md | W1334 | 当前批次与当前版本两处升版 |
+| docs/00-导读/W批次编号对账表.md | W1334 | 追加认领行 + 台账行窗归档（迁出 1 行·正本 60） |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1334 | 台账归档目标（archive_ledger_rows --apply） |
+| docs/11-方案报告/README.md | W1334 | 二节新增第 156 号登记行 + 件数 30→31 |
+| docs/11-方案报告/设计与架构方案/（1 件） | W1334 | 新增决策文档（可观测性接入选型与决策-2026-11-27.md） |
+| site/data/（1 件） | W1334 | search-index-docs.js 重生成（docs 996 条） |
+| site/（1 件） | W1334 | dukou-engine.html 页脚版本升版 |
+| scripts/（1 件） | W1334 | check_repo_layout.py 配套（同车·他批遗留暂存件） |
+| xiyouji-agent-web/（1 件） | W1334 | package.json 登记新单测 |
+| xiyouji-agent-web/server/（1 件） | W1334 | chat.ts 落「问答 token 用量」结构化日志 |
+| xiyouji-agent-web/server/engine/（4 件） | W1334 | usage 承接三件（openai-compat/types/agent-loop）+ 新增 openai-compat.test.ts |
+
 ## W1333 A1 交叉引用与 reader 阅读体验（2026-11-26）
 
 | 文件 | W | 说明 |

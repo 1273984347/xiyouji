@@ -22,7 +22,7 @@
 - `xiyouji-agent-web/`
 - `xiyouji-desktop/`
 
-## 文件（24）
+## 文件（25）
 
 ### Markdown 文档
 
@@ -37,6 +37,7 @@
 - `README.en.md`
 - `RULES.md`
 - `SECURITY.md`
+- `TODOS.md`
 - `pitfalls.md`
 
 ### JavaScript / TypeScript

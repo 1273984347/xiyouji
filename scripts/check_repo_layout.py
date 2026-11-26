@@ -39,6 +39,8 @@ ROOT_FILES = {
     "AGENTS.md", "CLAUDE.md", "DESIGN.md", "HANDOVER.md", "STRUCTURE.md",
     "CHANGELOG.md", "README.md", "README.en.md", "CONTRIBUTING.md",
     "CODE_OF_CONDUCT.md", "SECURITY.md", "LICENSE", "LICENSE-CONTENT.md", "CITATION.cff",
+    # 任务清单（2026-11-27 用户令·实时更新/完成即删·判据化条目）
+    "TODOS.md",
     # 四文档治理体系（W1157 建·用户令）：RULES=规则入口 / pitfalls=坑表正本（docs/agent/ 留跳转壳）·AGENTS/CLAUDE 既有
     "RULES.md", "pitfalls.md",
     # 工程配置

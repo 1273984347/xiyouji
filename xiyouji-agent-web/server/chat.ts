@@ -314,6 +314,21 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         });
       }
 
+      // W1334：token 用量落结构化日志（usage 前置·原生观测面第一块数据）。
+      // 口径同 OBS-14：上游未回传 usage 时三个计数记 null 并标 reported=false，
+      // 不得落 0——否则「没测到」会被后续统计读成「消耗 0 token」。
+      logger.info("问答 token 用量", {
+        request_id: req.requestId,
+        session_id: session.id,
+        model: selectedModel,
+        turns: result.turns,
+        duration_ms: result.durationMs,
+        usage_reported: result.usage !== null,
+        input_tokens: result.usage?.inputTokens ?? null,
+        output_tokens: result.usage?.outputTokens ?? null,
+        total_tokens: result.usage?.totalTokens ?? null,
+      });
+
       // 完成时兜底：仍未终结的工具标记完成（对齐旧 result 分支语义）
       toolCalls.forEach((tool) => {
         if (tool.status === "running") {
