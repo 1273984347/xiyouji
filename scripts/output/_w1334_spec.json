@@ -19,6 +19,8 @@
   "| docs/00-导读/W批次编号对账表.md | W1334 | 追加认领行 + 台账行窗归档（迁出 1 行·正本 60） |",
   "| docs/00-导读/项目说明.md | W1334 | 当前批次与当前版本两处升版 |",
   "| archive/docs/W批次编号对账表-ARCHIVE.md | W1334 | 台账归档目标（archive_ledger_rows --apply） |",
+  "| archive/docs/CHANGELOG-ARCHIVE.md | W1334 | 腾窗迁入 W1271-W1278 共 8 段 |",
+  "| archive/docs/file-index-ARCHIVE.md | W1334 | 腾窗迁入 W1271-W1278 共 8 段 |",
   "| docs/11-方案报告/README.md | W1334 | 二节新增第 156 号登记行 + 件数 30→31 |",
   "| docs/11-方案报告/设计与架构方案/可观测性接入选型与决策-2026-11-27.md | W1334 | 新增决策文档 |",
   "| scripts/check_repo_layout.py | W1334 | 仓库布局配套（同车·他批遗留暂存件） |",

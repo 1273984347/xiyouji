@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987） + 2026-11-03（W960 迁入 W988-W988） + 2026-11-03（W960 迁入 W989-W989） + 2026-11-03（W1113 迁入 W990-W990） + 2026-11-03（W960 迁入 W991-W991） + 2026-11-04（W960 迁入 W992-W992） + 2026-11-04（W960 迁入 W993-W993） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W995-W995） + 2026-11-04（W960 迁入 W996-W996） + 2026-11-04（W960 迁入 W997-W1048） + 2026-11-04（W960 迁入 W1001-W1107） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-09（W1192 迁入 W1108-W1109） + 2026-11-09（W1192 迁入 W1110-W1116） + 2026-11-10（W960 迁入 W1117-W1169） + 2026-11-10（W960 迁入 W1170-W1170） + 2026-11-15（W960 迁入 W1171-W1176） + 2026-11-15（W960 迁入 W1177-W1178） + 2026-11-15（W960 迁入 W1179-W1179） + 2026-11-15（W960 迁入 W1180-W1180） + 2026-11-15（W960 迁入 W1181-W1182） + 2026-11-15（W960 迁入 W1183-W1183） + 2026-11-15（W960 迁入 W1184-W1184） + 2026-11-16（W1251 迁入 W1185-W1205） + 2026-11-16（W960 迁入 W1206-W1206） + 2026-11-16（W960 迁入 W1207-W1207） + 2026-11-19（W960 迁入 W1208-W1223） + 2026-11-21（W1286 迁入 W1224-W1224） + 2026-11-21（W1287 迁入 W1225-W1226） + 2026-11-21（W1287 迁入 W1227-W1227） + 2026-11-21（W1287 迁入 W1228-W1228） + 2026-11-21（W1288 迁入 W1229-W1252） + 2026-11-23（W960 迁入 W1253-W1255） + 2026-11-23（W960 迁入 W1256-W1257） + 2026-11-23（W960 迁入 W1258-W1259） + 2026-11-23（W960 迁入 W1260-W1264） + 2026-11-25（W960 迁入 W1265-W1265） + 2026-11-26（W960 迁入 W1266-W1266）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987） + 2026-11-03（W960 迁入 W988-W988） + 2026-11-03（W960 迁入 W989-W989） + 2026-11-03（W1113 迁入 W990-W990） + 2026-11-03（W960 迁入 W991-W991） + 2026-11-04（W960 迁入 W992-W992） + 2026-11-04（W960 迁入 W993-W993） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W995-W995） + 2026-11-04（W960 迁入 W996-W996） + 2026-11-04（W960 迁入 W997-W1048） + 2026-11-04（W960 迁入 W1001-W1107） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-09（W1192 迁入 W1108-W1109） + 2026-11-09（W1192 迁入 W1110-W1116） + 2026-11-10（W960 迁入 W1117-W1169） + 2026-11-10（W960 迁入 W1170-W1170） + 2026-11-15（W960 迁入 W1171-W1176） + 2026-11-15（W960 迁入 W1177-W1178） + 2026-11-15（W960 迁入 W1179-W1179） + 2026-11-15（W960 迁入 W1180-W1180） + 2026-11-15（W960 迁入 W1181-W1182） + 2026-11-15（W960 迁入 W1183-W1183） + 2026-11-15（W960 迁入 W1184-W1184） + 2026-11-16（W1251 迁入 W1185-W1205） + 2026-11-16（W960 迁入 W1206-W1206） + 2026-11-16（W960 迁入 W1207-W1207） + 2026-11-19（W960 迁入 W1208-W1223） + 2026-11-21（W1286 迁入 W1224-W1224） + 2026-11-21（W1287 迁入 W1225-W1226） + 2026-11-21（W1287 迁入 W1227-W1227） + 2026-11-21（W1287 迁入 W1228-W1228） + 2026-11-21（W1288 迁入 W1229-W1252） + 2026-11-23（W960 迁入 W1253-W1255） + 2026-11-23（W960 迁入 W1256-W1257） + 2026-11-23（W960 迁入 W1258-W1259） + 2026-11-23（W960 迁入 W1260-W1264） + 2026-11-25（W960 迁入 W1265-W1265） + 2026-11-26（W960 迁入 W1266-W1266） + 2026-11-27（W960 迁入 W1271-W1278）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -4004,3 +4004,443 @@
 | pitfalls.md | W1266 | 本批收官链产物 |
 | pytest.ini | W1266 | 本批收官链产物 |
 | .gitignore | W1266 | 收官期卫生：.qoder/ 与 **/_verify_shots/ 不入仓（用户令·GitHub 只留必要内容） |
+## W1278 pitfalls/AGENTS 瘦身批（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| pitfalls.md | W1278 | 二层化正本（407.6→284.8KB·判据+纪律留正本） |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1278 | 叙事/实证细节归档（#### E-NN 锚·221+15 条·新建） |
+| AGENTS.md | W1278 | §4.2/§6 摘要化（48.2→31.8KB）+ 脚注 W1278 条目 |
+| docs/00-导读/W批次编号对账表.md | W1278 | W1278 认领行 |
+| scripts/check_doc_size_budget.py | W1278 | 74 槽 BYTE_CAPS 挂窗（pitfalls/AGENTS）+ evaluate_sizes per-file cap |
+| docs/agent/gates.md | W1278 | 74 槽定义同步挂窗说明 |
+| CHANGELOG.md | W1278 | W1278 落段 |
+| scripts/output/file-index.md | W1278 | file-index W1278 段 |
+| README.md | W1278 | 版本面推进 |
+| STRUCTURE.md | W1278 | 版本面推进 |
+| docs/00-导读/项目说明.md | W1278 | 版本面推进 |
+| CITATION.cff | W1278 | 版本面推进 |
+| .github/workflows/README.md | W1278 | 版本面推进 |
+| site/index.html | W1278 | 页脚批次链 W1278 前插 |
+| scripts/output/_w1278_spec.json | W1278 | 本批 spec |
+| scripts/output/_cascade_files_W1278.txt | W1278 | 手工级联清单 |
+| scripts/output/stats.json | W1278 | stats 刷新 |
+| scripts/output/stats-changelog.json | W1278 | stats 变更史 |
+| scripts/output/stats-index.md | W1278 | stats 反向索引 |
+| scripts/output/tools-inventory.md | W1278 | 工具清单跟随 |
+| site/data/search-index-zh.js | W1278 | 搜索索引重建 |
+| site/en/search-index-en.js | W1278 | 搜索索引重建 |
+| docs/INDEX.md | W1278 | 文档索引刷新 |
+| scripts/INDEX.md | W1278 | 脚本索引刷新 |
+| HANDOVER.md | W1278 | 进度 bullet 移链首 + 更新链（裁 3）+ 里程碑滚动 |
+| site/rss.xml | W1278 | RSS 产物新鲜度跟随 |
+| archive/docs/INDEX.md | W1278 | 归档目录文档 refresh（新收 pitfalls-detail-ARCHIVE） |
+| archive/docs/README.md | W1278 | 归档目录 README refresh |
+| scripts/output/INDEX.md | W1278 | 产物索引 refresh |
+| scripts/output/README.md | W1278 | 产物 README refresh |
+
+
+## W1277 判据修补与验证缓存批（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/W批次编号对账表.md | W1277 | W1271 回填核验 + W1277 认领行 |
+| scripts/lib/freeze_gate.py | W1277 | P3-1 基线棘轮（增长须 allow_grow·只降不升） |
+| scripts/check_chart_content_completeness.py | W1277 | P3-2 缺 sha fail-closed + P3-3 轴色计数排除 |
+| scripts/check_chart_degrade.py | W1277 | P3-1 调用方 allow_grow 补形参 |
+| scripts/check_chart_label_clipping.py | W1277 | P3-4 豁免缺失 fail-closed + label 64 字 + P3-1 调用方 |
+| scripts/batch_closeout.py | W1277 | P3-5 失败语义对齐三处（非收敛阻断/台账抛出/ROOT 解析） |
+| scripts/verify_delivery.py | W1277 | verify 回放缓存（内容 hash 命中即回放·仅 full） |
+| scripts/output/chart-label-clipping-baseline.txt | W1277 | 83 基线重生成（label 64 字·154 条） |
+| tests/unit/test_w1277_p3_fixes.py | W1277 | P3 回归锁 4 例（棘轮/缺 sha/缺失 fail-closed） |
+| CHANGELOG.md | W1277 | W1277 落段 |
+| scripts/output/file-index.md | W1277 | file-index W1277 段 |
+| README.md | W1277 | 版本面推进 |
+| STRUCTURE.md | W1277 | 版本面推进 |
+| docs/00-导读/项目说明.md | W1277 | 版本面推进 |
+| CITATION.cff | W1277 | 版本面推进 |
+| .github/workflows/README.md | W1277 | 版本面推进 |
+| site/index.html | W1277 | 页脚批次链 W1277 前插 |
+| scripts/output/_w1277_spec.json | W1277 | 本批 spec |
+| scripts/output/_cascade_files_W1277.txt | W1277 | 手工级联清单 |
+| scripts/output/stats.json | W1277 | stats 刷新 |
+| scripts/output/stats-changelog.json | W1277 | stats 变更史 |
+| scripts/output/_vermilion_solid_cache.json | W1277 | 朱砂槽增量缓存跟随 |
+| .gitignore | W1277 | replay 状态文件入 ignore |
+| scripts/output/tools-inventory.md | W1277 | 工具清单跟随 |
+| AGENTS.md | W1277 | 菩提授业 16 条 + 脚注 W1277 条目（此前登记遗漏补登） |
+| HANDOVER.md | W1277 | 进度 bullet 移链首 + 更新链 + 里程碑滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1277 | 台账腾窗迁入 W1213-W1214 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1277 | report_docs 计数标记 sweep 跟随 |
+| pytest.ini | W1277 | pytest_collected 计数标记 sweep 跟随（1784→1788·回归锁 4 例） |
+| scripts/output/INDEX.md | W1277 | 产物索引刷新（gen_folder_docs） |
+| scripts/output/README.md | W1277 | 产物索引 README 刷新 |
+| scripts/output/stats-index.md | W1277 | stats 反向索引刷新 |
+| site/data/search-index-zh.js | W1277 | 搜索索引重建 |
+| site/en/search-index-en.js | W1277 | 搜索索引重建 |
+| scripts/output/_sync_analysis_manifest.json | W1277 | 分析包同步清单（若本轮有刷新） |
+| tests/unit/INDEX.md | W1277 | 目录文档 refresh（新增回归锁文件） |
+| tests/unit/README.md | W1277 | 目录文档 refresh（同上） |
+
+
+## W1276 A 方案铺开第一批完成 与 两处门禁口径修订（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| .agent/skills/puti-shouye/SKILL.md | W1276 | 本批配套改动 |
+| .github/workflows/README.md | W1276 | 本批配套改动 |
+| AGENTS.md | W1276 | 本批配套改动 |
+| CHANGELOG.md | W1276 | 本批配套改动 |
+| CITATION.cff | W1276 | 本批配套改动 |
+| HANDOVER.md | W1276 | 本批配套改动 |
+| README.md | W1276 | 本批配套改动 |
+| STRUCTURE.md | W1276 | 本批配套改动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1276 | 本批配套改动 |
+| archive/docs/workflows-readme-history.md | W1276 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1276 | W1276 认领行 |
+| docs/00-导读/项目说明.md | W1276 | 本批配套改动 |
+| docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md | W1276 | W1276 续记（口径修订与铺开第一批完成） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1276 | 本批配套改动 |
+| docs/agent/pitfalls.md | W1276 | 坑位入表 E-281（判据统计面随形态修订） |
+| pitfalls.md | W1276 | 坑位入表 E-281（判据统计面随形态修订） |
+| pytest.ini | W1276 | 本批配套改动 |
+| scripts/check_token_coverage.py | W1276 | 统计面随形态修订（剔除公共层管辖规则·与 relink 变体判定同源） |
+| scripts/output/INDEX.md | W1276 | 本批配套改动 |
+| scripts/output/README.md | W1276 | 本批配套改动 |
+| scripts/output/_cascade_files_W1276.txt | W1276 | 本批配套改动 |
+| scripts/output/_vermilion_solid_cache.json | W1276 | 本批配套改动 |
+| scripts/output/_w1266_allrender.json | W1276 | 本批配套改动 |
+| scripts/output/_w1276_spec.json | W1276 | 本批配套改动 |
+| scripts/output/chart-legend-render-audit.json | W1276 | 本批配套改动 |
+| scripts/output/file-index.md | W1276 | 本批配套改动 |
+| scripts/output/stats-changelog.json | W1276 | 本批配套改动 |
+| scripts/output/stats-index.md | W1276 | 本批配套改动 |
+| scripts/output/stats.json | W1276 | 本批配套改动 |
+| scripts/output/tools-inventory.md | W1276 | 本批配套改动 |
+| site/data/cross-time-danmaku.html | W1276 | 本批配套改动 |
+| site/data/search-index-zh.js | W1276 | 本批配套改动 |
+| site/data/tag-cloud.html | W1276 | 本批配套改动 |
+| site/dukou-engine.html | W1276 | 本批配套改动 |
+| site/en/search-index-en.js | W1276 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/index.html | W1276 | 本批配套改动 |
+| site/rss.xml | W1276 | 本批配套改动 |
+| tests/unit/INDEX.md | W1276 | 本批配套改动 |
+| tests/unit/README.md | W1276 | 本批配套改动 |
+| tests/unit/test_w1276_token_scope.py | W1276 | W1276 回归锁 3 例（口径修订负向证明） |
+
+
+## W1275 A 方案铺开第一批（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| .agent/skills/puti-shouye/SKILL.md | W1275 | 本批配套改动 |
+| .github/workflows/README.md | W1275 | 本批配套改动 |
+| AGENTS.md | W1275 | 本批配套改动 |
+| CHANGELOG.md | W1275 | 本批配套改动 |
+| CITATION.cff | W1275 | 本批配套改动 |
+| HANDOVER.md | W1275 | 进度与更新链推进 + Backlog 对账注记 |
+| README.md | W1275 | 本批配套改动 |
+| STRUCTURE.md | W1275 | 本批配套改动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1275 | 本批配套改动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1275 | 台账腾窗归档 |
+| archive/docs/workflows-readme-history.md | W1275 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1275 | W1275 认领行 |
+| docs/00-导读/项目说明.md | W1275 | 本批配套改动 |
+| docs/11-方案报告/README.md | W1275 | 报告登记面补登 |
+| docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md | W1275 | 本批交付报告（计划·执行·验收·复盘·沉淀） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1275 | 本批配套改动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1275 | 本批配套改动 |
+| docs/INDEX.md | W1275 | 本批配套改动 |
+| docs/agent/pitfalls.md | W1275 | 坑位入表 E-280（口径同源与形态同源族） |
+| pitfalls.md | W1275 | 坑位入表 E-280（口径同源与形态同源族） |
+| pytest.ini | W1275 | 本批配套改动 |
+| scripts/check_chart_design_parity.py | W1275 | 本批配套改动 |
+| scripts/inline_css.py | W1275 | 外链形态优先（--force 不把外链页转回内联） |
+| scripts/output/INDEX.md | W1275 | 本批配套改动 |
+| scripts/output/README.md | W1275 | 本批配套改动 |
+| scripts/output/_cascade_files_W1275.txt | W1275 | 本批配套改动 |
+| scripts/output/_vermilion_solid_cache.json | W1275 | 本批配套改动 |
+| scripts/output/_w1266_allrender.json | W1275 | 本批配套改动 |
+| scripts/output/_w1275_spec.json | W1275 | 本批配套改动 |
+| scripts/output/chart-legend-render-audit.json | W1275 | 本批配套改动 |
+| scripts/output/file-index.md | W1275 | 本批配套改动 |
+| scripts/output/stats-changelog.json | W1275 | 本批配套改动 |
+| scripts/output/stats-index.md | W1275 | 本批配套改动 |
+| scripts/output/stats.json | W1275 | 本批配套改动 |
+| scripts/output/tools-inventory.md | W1275 | 本批配套改动 |
+| scripts/relink_public_css.py | W1275 | 公共层索引与传播端同源（strip_comments）+ 残留标记清除 |
+| site/data/cross-time-danmaku.html | W1275 | 本批配套改动 |
+| site/data/search-index-zh.js | W1275 | 本批配套改动 |
+| site/data/tag-cloud.html | W1275 | 本批配套改动 |
+| site/dukou-engine.html | W1275 | 本批配套改动 |
+| site/en/search-index-en.js | W1275 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/index.html | W1275 | 本批配套改动 |
+| site/reader/themes/八十一难专题.html | W1275 | 外链页残留内联标记清除（形态同源） |
+| site/rss.xml | W1275 | 本批配套改动 |
+| tests/unit/INDEX.md | W1275 | 本批配套改动 |
+| tests/unit/README.md | W1275 | 本批配套改动 |
+| tests/unit/test_w1275_relink_persist.py | W1275 | 本批回归锁 5 例 |
+
+
+## W1274 A 方案样板验证批（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1274 | 本批配套改动 |
+| .github/workflows/README.md | W1274 | 版本面推进 |
+| AGENTS.md | W1274 | 版本脚注推进 |
+| CHANGELOG.md | W1274 | 本批配套改动 |
+| CITATION.cff | W1274 | 版本面推进 |
+| HANDOVER.md | W1274 | 进度与更新链推进 |
+| README.md | W1274 | 版本面推进 |
+| STRUCTURE.md | W1274 | 版本面推进 |
+| archive/docs/AGENTS-ARCHIVE.md | W1274 | 本批配套改动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1274 | 本批配套改动 |
+| archive/docs/workflows-readme-history.md | W1274 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1274 | W1274 认领行 |
+| docs/00-导读/项目说明.md | W1274 | 版本面推进 |
+| docs/11-方案报告/README.md | W1274 | 报告登记面补登第 54 篇 |
+| docs/11-方案报告/设计与架构方案/W1274-A方案样板验证-2026-11-18.md | W1274 | A 方案样板验证报告（取证链 + 改造形态 + 四项验证 + 铺开计划） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1274 | 本批配套改动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1274 | 本批配套改动 |
+| docs/INDEX.md | W1274 | 本批配套改动 |
+| docs/agent/pitfalls.md | W1274 | 坑位计数标记 sweep 跟随 |
+| pitfalls.md | W1274 | E-279 入表（style 开闭标签被吞 ⇒ CSS 源码当正文渲染·探针门禁全绿） |
+| pytest.ini | W1274 | 本批配套改动 |
+| scripts/INDEX.md | W1274 | 本批配套改动 |
+| scripts/check_inlined_css.py | W1274 | 本批配套改动 |
+| scripts/check_public_layer_coverage.py | W1274 | 第 76 槽新增维度：实际加载面（外链页占比）独立棘轮 |
+| scripts/output/INDEX.md | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/README.md | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/_cascade_files_W1274.txt | W1274 | 手工级联清单 |
+| scripts/output/_vermilion_solid_cache.json | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/_w1266_allrender.json | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/_w1274_spec.json | W1274 | 本批 spec |
+| scripts/output/chart-legend-render-audit.json | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/file-index.md | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/stats-changelog.json | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/stats-index.md | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/stats.json | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/output/tools-inventory.md | W1274 | 统计与索引产物刷新（计数链跟随） |
+| scripts/relink_public_css.py | W1274 | 新增：公共层外链化工具（规则级剥离·幂等·fail-closed 门槛） |
+| site/data/cross-time-danmaku.html | W1274 | 本批配套改动 |
+| site/data/search-index-zh.js | W1274 | 本批配套改动 |
+| site/data/tag-cloud.html | W1274 | 本批配套改动 |
+| site/dukou-engine.html | W1274 | 本批配套改动 |
+| site/en/search-index-en.js | W1274 | 本批配套改动 |
+| site/index.html | W1274 | 页脚批次链推进 |
+| site/reader/themes/八十一难专题.html | W1274 | 公共层外链化样板（块0 → tokens.css + system.css 两个 link·页私有层保留） |
+| site/rss.xml | W1274 | 本批配套改动 |
+| tests/unit/INDEX.md | W1274 | 本批配套改动 |
+| tests/unit/README.md | W1274 | 本批配套改动 |
+| tests/unit/test_inlined_css_source.py | W1274 | 本批配套改动 |
+| tests/unit/test_public_layer_coverage_ext.py | W1274 | 覆盖率新维度回归锁 3 例 |
+| tests/unit/test_relink_public_css.py | W1274 | 外链化工具回归锁 4 例 |
+
+## W1273 公共层归并 L1 铺开与内联 CSS 残渣判据批（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1273 | W1273 |
+| .github/workflows/README.md | W1273 | 本批配套改动 |
+| AGENTS.md | W1273 | W1273 |
+| CHANGELOG.md | W1273 | 本批配套改动 |
+| CITATION.cff | W1273 | 本批配套改动 |
+| HANDOVER.md | W1273 | W1273 |
+| README.md | W1273 | 本批配套改动 |
+| STRUCTURE.md | W1273 | W1273 |
+| archive/docs/AGENTS-ARCHIVE.md | W1273 | 本批配套改动 |
+| archive/docs/workflows-readme-history.md | W1273 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1273 | W1273 |
+| docs/00-导读/项目说明.md | W1273 | 治理文档与报告登记面同步 |
+| docs/11-方案报告/README.md | W1273 | 治理文档与报告登记面同步 |
+| docs/11-方案报告/设计与架构方案/W1273-批三L1归并可行性与范围建议-2026-11-18.md | W1273 | W1273 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1273 | 治理文档与报告登记面同步 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1273 | W1273 |
+| docs/INDEX.md | W1273 | 治理文档与报告登记面同步 |
+| docs/agent/pitfalls.md | W1273 | W1273 |
+| pitfalls.md | W1273 | W1273 |
+| pytest.ini | W1273 | W1273 |
+| scripts/INDEX.md | W1273 | 本批配套改动 |
+| scripts/check_css_inline_residue.py | W1273 | W1273 |
+| scripts/check_page_css_deps.py | W1273 | W1273 |
+| scripts/output/INDEX.md | W1273 | 本批配套改动 |
+| scripts/output/README.md | W1273 | 本批配套改动 |
+| scripts/output/_cascade_files_W1273.txt | W1273 | W1273 |
+| scripts/output/_vermilion_solid_cache.json | W1273 | 渲染档案 / 统计产物刷新（页面 sha 与计数链跟随） |
+| scripts/output/_w1266_allrender.json | W1273 | W1273 |
+| scripts/output/_w1273_spec.json | W1273 | W1273 |
+| scripts/output/chart-legend-render-audit.json | W1273 | 渲染档案 / 统计产物刷新（页面 sha 与计数链跟随） |
+| scripts/output/file-index.md | W1273 | 本批配套改动 |
+| scripts/output/stats-changelog.json | W1273 | W1273 |
+| scripts/output/stats-index.md | W1273 | W1273 |
+| scripts/output/stats.json | W1273 | W1273 |
+| scripts/output/tools-inventory.md | W1273 | 本批配套改动 |
+| site/404.html | W1273 | W1273 |
+| site/data/cross-time-danmaku.html | W1273 | 页面内联层随归并同步 |
+| site/data/search-index-zh.js | W1273 | 页面内联层随归并同步 |
+| site/data/tag-cloud.html | W1273 | 页面内联层随归并同步 |
+| site/dukou-engine.html | W1273 | 页面内联层随归并同步 |
+| site/en/search-index-en.js | W1273 | 页面内联层随归并同步 |
+| site/index.html | W1273 | 页面内联层随归并同步 |
+| site/rss.xml | W1273 | 页面内联层随归并同步 |
+| tests/unit/INDEX.md | W1273 | 本批配套改动 |
+| tests/unit/README.md | W1273 | 本批配套改动 |
+| tests/unit/test_css_inline_residue.py | W1273 | W1273 |
+| tests/unit/test_page_css_deps.py | W1273 | W1273 |
+
+## W1272 台账回填工具三缺陷根修批（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/batch_cascade.py | W1272 | 脚注尾锚点契约根修（正则定位 + 规范化拼装显式补句号） |
+| scripts/check_doc_size_budget.py | W1272 | 门禁侧新增脚注尾句形态判据（前导句号必需·与写入侧同源） |
+| tests/unit/test_agents_tail_anchor.py | W1272 | 新增回归锁 6 例（定位 / 唯一性 / 规范化 / 形态判据 / 两侧同源） |
+| scripts/preflight_check.py | W1272 | 顺序契约单源化（git_log_subjects 正序）+ 登记滞后告警改走共享函数 |
+| scripts/ledger_backfill.py | W1272 | 首笔反填根修 + locate_cells touches 列位改末格 + append-claim 现行 9 格形态与竖线防线 |
+| tests/unit/test_ledger_first_hash.py | W1272 | 新增回归锁 5 例（端到端 git 对拍 + 列位 + 认领行形态 + 竖线拒绝） |
+| docs/00-导读/文档规范.md | W1272 | 规则三补 hash=首笔与末笔=末笔与 touches=末格口径 + 规则一补认领行形态与竖线禁令 |
+| pitfalls.md | W1272 | E-272 台账回填工具三缺陷入表 |
+| docs/agent/pitfalls.md | W1272 | 坑位计数标记 sweep 跟随 |
+| docs/00-导读/W批次编号对账表.md | W1272 | W1272 认领行 + W1271 行回填（首笔/末笔/状态/touches）+ 腾窗迁 2 行 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1272 | 腾窗迁入 W1208-W1209 |
+| HANDOVER.md | W1272 | §四 对账注记与 P-43-01 结清 + §一 进度 + 最后更新链 |
+| CHANGELOG.md | W1272 | W1272 落段 |
+| AGENTS.md | W1272 | 版本脚注推进 |
+| README.md | W1272 | 版本面推进 |
+| STRUCTURE.md | W1272 | 版本面推进 |
+| docs/00-导读/项目说明.md | W1272 | 版本面推进 |
+| CITATION.cff | W1272 | 版本面推进 |
+| .github/workflows/README.md | W1272 | 版本面推进 |
+| site/index.html | W1272 | 页脚批次链推进 |
+| scripts/output/_w1272_spec.json | W1272 | 本批 spec |
+| scripts/output/_cascade_files_W1272.txt | W1272 | 手工级联清单 |
+| scripts/output/_vermilion_solid_cache.json | W1272 | 朱砂槽增量缓存（门禁实跑刷新） |
+| scripts/output/file-index.md | W1272 | file-index W1272 段 |
+| scripts/output/stats.json | W1272 | stats 刷新（坑位计数链 sweep） |
+| scripts/output/stats-index.md | W1272 | stats 反向索引 |
+| scripts/output/stats-changelog.json | W1272 | stats 变更史追加 |
+| scripts/output/INDEX.md | W1272 | 产物索引刷新 |
+| scripts/output/README.md | W1272 | 产物索引 README 刷新 |
+| scripts/output/tools-inventory.md | W1272 | 工具清单刷新 |
+| docs/INDEX.md | W1272 | 文档索引刷新 |
+| scripts/INDEX.md | W1272 | 脚本索引刷新 |
+| tests/unit/INDEX.md | W1272 | 单测目录文档刷新（新增测试文件） |
+| tests/unit/README.md | W1272 | 单测目录文档刷新 |
+| scripts/output/_w1266_allrender.json | W1272 | 渲染档案刷新（页脚推进后页面 sha 跟随·防绕过闸） |
+| scripts/output/chart-legend-render-audit.json | W1272 | 图例豁免渲染档案刷新（同上） |
+| .agent/skills/puti-shouye/SKILL.md | W1272 | 计数链 sweep 跟随（坑位 379→380） |
+| archive/docs/AGENTS-ARCHIVE.md | W1272 | AGENTS 脚注滚动归档 |
+| archive/docs/workflows-readme-history.md | W1272 | workflows README 历史滚动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1272 | report_docs 计数标记 sweep 跟随 |
+| pytest.ini | W1272 | pytest_collected 计数跟随（新增 13 例） |
+| site/data/cross-time-danmaku.html | W1272 | 页脚批次链推进 |
+| site/data/search-index-zh.js | W1272 | 搜索索引重建 |
+| site/data/tag-cloud.html | W1272 | 页脚批次链推进 |
+| site/dukou-engine.html | W1272 | 页脚批次链推进（渲染档案 sha 跟随） |
+| site/en/search-index-en.js | W1272 | 搜索索引重建 |
+| site/rss.xml | W1272 | RSS 产物新鲜度跟随 |
+| site/sitemap.xml | W1272 | sitemap 重建 |
+| scripts/output/data-copy-chain-baseline.json | W1272 | 数据副本链存量漂移基线登记（11 件·页面内嵌与 CSS 令牌仍旧色·视觉级同步留下一批专项） |
+
+## W1271 双 skill 增补与三哨清偿批（2026-11-18）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1271 | 第 16 条收官时间纪律（六则浓缩）+ 16 条字面量 |
+| .agent/skills/huoyan-jinjing/SKILL.md | W1271 | 唐僧节 +2（E-262/E-263）+ 重编号至 26 + 互引 16 条 |
+| AGENTS.md | W1271 | 菩提授业行 15→16 + 版本脚注 W1271 条目 |
+| HANDOVER.md | W1271 | Backlog 对账注记 + 进度 bullet + 更新链 |
+| docs/00-导读/W批次编号对账表.md | W1271 | W1266 hash 回填 + W1271 认领行（双 token）+ 腾窗 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1271 | 台账腾窗迁入 W1206-W1207 |
+| docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-18.md | W1271 | 复盘报告（时间账与三哨清偿主题） |
+| CHANGELOG.md | W1271 | W1271 落段（认领复盘批角色） |
+| scripts/output/file-index.md | W1271 | file-index W1271 段 |
+| README.md | W1271 | 版本面推进 |
+| STRUCTURE.md | W1271 | 版本面推进 |
+| docs/00-导读/项目说明.md | W1271 | 版本面推进 |
+| CITATION.cff | W1271 | 版本面推进 |
+| .github/workflows/README.md | W1271 | 版本面推进 |
+| site/index.html | W1271 | 页脚批次链 W1271 前插 |
+| scripts/output/_w1271_spec.json | W1271 | 本批 spec |
+| scripts/output/_cascade_files_W1271.txt | W1271 | 手工级联清单（跳号批） |
+| scripts/output/stats.json | W1271 | stats 刷新（计数链 sweep） |
+| scripts/output/stats-index.md | W1271 | stats 反向索引 |
+| docs/INDEX.md | W1271 | 文档索引刷新（新复盘报告） |
+| scripts/INDEX.md | W1271 | 脚本索引刷新 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1271 | report_docs 计数标记 sweep 跟随（224→225） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1271 | report_docs 计数标记 sweep 跟随（224→225） |
+| scripts/output/INDEX.md | W1271 | 产物索引刷新（gen_folder_docs） |
+| scripts/output/README.md | W1271 | 产物索引 README 刷新 |
+| scripts/output/stats-changelog.json | W1271 | stats 变更史追加 |
+| scripts/output/tools-inventory.md | W1271 | 工具清单刷新（gen_folder_docs） |
+| site/data/search-index-zh.js | W1271 | 搜索索引重建（新复盘报告） |
+| site/en/search-index-en.js | W1271 | 搜索索引重建（新复盘报告） |
+| scripts/check_pitfall_id_unique.py | W1271 | 第 54 槽 P1-1 修复（RX 前瞻收口 119 逃逸 + 补充分悬空判据 + 自测 9 例） |
+| scripts/check_chart_content_completeness.py | W1271 | 第 82 槽 P1-2 修复（series=* 接渲染档案交叉复核） |
+| scripts/check_en_data_source.py | W1271 | 第 78 槽 P2-1 修复（EN 目录缺失零页 fail-closed） |
+| scripts/check_fallback_fidelity.py | W1271 | 第 79 槽 P2-1/2/3 修复（零页 fail-closed + 解析失败 NOTE + 自测真跑管线） |
+| docs/11-方案报告/README.md | W1271 | 报告登记面补登复盘报告（第 55 篇）+ 计数 20 |
+| scripts/output/_w1266_allrender.json | W1271 | 渲染档案刷新（site/index.html 页脚改动后 sha 跟随·防绕过闸） |
+| scripts/output/render_classify_result.json | W1271 | 渲染分类报告刷新（同上） |
+| scripts/output/_vermilion_solid_cache.json | W1271 | 朱砂槽增量缓存跟随（门禁实跑刷新） |
+| scripts/output/chart-legend-render-audit.json | W1271 | 图例豁免渲染档案刷新（site/index.html sha 跟随·防绕过闸） |
+| scripts/output/chart-legend-render-audit.md | W1271 | 图例豁免渲染档案 MD 副本（同上） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/P_音乐声效/music_structure.py | W1271 | 分析包同步跟随（ci_sim P3#24·副本漂移清偿） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Z_图表设计/audit_chart_content.py | W1271 | 分析包同步跟随（W1266 新脚本首收入包） |
+| scripts/output/_sync_analysis_manifest.json | W1271 | 同步清单刷新（39 件） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Z_图表设计/INDEX.md | W1271 | 目录文档 refresh（新收 audit_chart_content.py） |
+| packaging/xiyouji-analysis/src/xiyouji_analysis/analyses/Z_图表设计/README.md | W1271 | 目录文档 refresh（同上） |
+| site/rss.xml | W1271 | RSS 产物新鲜度跟随（第 55 篇复盘报告） |
+| site/en/json/character_appearance.json | W1271 | EN 真值随生成器重建（build_en_json translate 模式·12 对齐·翻译缺口 0） |
+| site/en/character-appearance.html | W1271 | EN 页内嵌随真值同步（sync_embedded） |
+| site/en/methodology-matrix.html | W1271 | EN 页内嵌潜在漂移顺带修复（sync_embedded 全量跑） |
+| site/data/json/character_appearance.json | W1271 | ZH 真值同步（sync_data_json） |
+| site/data/character-appearance.html | W1271 | ZH 页内嵌整块灌新真值（太上老君[6] 8→12·玉帝等多处陈旧一并清偿） |
+| scripts/output/chart-content-audit.json | W1271 | run_all 重生成跟随 |
+| scripts/_audit_render_states.js | W1271 | 暗态 invisible 判据根修（移除 fill:none 误计·描边图标可见） |
+| site/en/narrative-experiment.html | W1271 | 暗色提亮规则（combo-svg #3A473A→#6B7A6B·invisibleShapes 5→0） |
+| pitfalls.md | W1271 | E-271 门禁标签→字段→产线取证链（379 条） |
+| docs/agent/pitfalls.md | W1271 | 跳转壳计数标记 sweep 跟随（379） |
