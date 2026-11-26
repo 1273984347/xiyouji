@@ -1,3 +1,18 @@
+## W1335 归档分卷收口（C 先行·B 终态）（2026-11-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/gen_archive_manifest.py | W1335 | 新增：归档清单生成/校验（--refresh/--check/--self-test） |
+| scripts/check_archive_health.py | W1335 | 增 T5 覆盖完备性 + T6 archive/docs 总量 ≤12MB |
+| scripts/archive_tier2.py | W1335 | 增 --range-width 250 / --rounds；新卷范围命名；冻结卷拒绝追加 |
+| tests/unit/test_w1335_archive_sharding.py | W1335 | 新增 6 例（卷界/上界截断/冻结与多卷/T5 三档/清单过期/T6） |
+| archive/docs/ARCHIVE-MANIFEST.md | W1335 | 新增（生成物·卷谱系清单） |
+| archive/docs/ARCHIVE-T5-EXEMPTIONS.md | W1335 | 新增：T5 显式豁免簿（2 条·含核实动作） |
+| scripts/output/archive-manifest.json | W1335 | 新增（机读清单） |
+| docs/00-导读/文档规范.md | W1335 | §11.2 增「二级归档分卷」条款 |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W1335 | 当前批次行升版 |
+| CHANGELOG.md / HANDOVER.md / docs/00-导读/W批次编号对账表.md | W1335 | 批次面同步 |
+
 ## W1334 可观测性接入决策（方案 D）+ usage 前置（2026-11-27）
 
 | 文件 | W | 说明 |

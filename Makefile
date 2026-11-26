@@ -82,6 +82,11 @@ docs-index: ## 生成/更新 docs/INDEX.md（321 篇文档索引）
 	python scripts/docs_index.py
 	@echo "==> docs-index 完成"
 
+archive-manifest: ## 归档分卷清单对拍（--check·W1335）
+	@echo "==> archive-manifest: 清单与磁盘对拍"
+	python scripts/gen_archive_manifest.py --check
+	@echo "==> archive-manifest 完成"
+
 test: ## pytest（python -m pytest tests/）— 跨平台兼容
 	@echo "==> test: pytest"
 	@python -c "from pathlib import Path; import subprocess, sys; sys.exit(subprocess.run([sys.executable, '-m', 'pytest', 'tests/', '-q']).returncode if Path('tests').is_dir() else (print('  [skip] tests/ 目录不存在'), 0)[1])"

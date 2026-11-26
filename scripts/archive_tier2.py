@@ -34,6 +34,22 @@ DEFAULT_TARGET = 900 * 1024  # 迁到 1MB 线内且留判距余量（探针 WARN
 LIMIT = 1024 * 1024          # §11.2 1MB 线（W995 起 tier2 追加前容量判断用）
 DATE = datetime.date.today().isoformat()
 
+# W1335（用户 2026-11-27 裁决）：新卷宽度 = 250 个 W 号；无范围名的旧二级卷冻结为只读。
+# 冻结理由：旧卷名不含范围（tier2.md 实装 W277-W672），继续追加会让「查哪个体积/哪段」失去
+# 可判定性；冻结后由 archive/docs/ARCHIVE-MANIFEST.md + gen_archive_manifest.py 登记真实区间。
+RANGE_WIDTH = 250
+FROZEN_TIER2 = ("CHANGELOG-ARCHIVE-tier2.md", "file-index-ARCHIVE-tier2.md")
+
+
+def align_boundary(min_key, width=RANGE_WIDTH):
+    """把迁出上界对齐到 width 的整数倍（→ 卷名稳定、可复算）。
+
+    min_key=951、width=250 ⇒ 1000（本卷只迁到 W1000，宽度 50）；
+    min_key=1001 ⇒ 1250（宽度 250）。key 0（file-index 早期目录节）按 1 处理。
+    """
+    k = max(int(min_key), 1)
+    return (k - 1) // width * width + width
+
 KINDS = {
     "changelog": {
         "primary": os.path.join("archive", "docs", "CHANGELOG-ARCHIVE.md"),
@@ -74,10 +90,11 @@ def parse_segments(text, block_re, kind):
     return segs
 
 
-def plan(text, block_re, kind, target):
+def plan(text, block_re, kind, target, max_key=None):
     """→ (header, 迁出[(key,start,end)], 保留[(key,start,end)])——键升序前缀切分·纯函数。
 
     目标判定按**全文字节**（§11.2 管文件体积·非 body）：剩余全文 = 全文 − 已迁段字节。
+    max_key（W1335）：迁出上界——键 > max_key 的段不迁（分卷宽度由 align_boundary 决定）。
     """
     segs = parse_segments(text, block_re, kind)
     if not segs:
@@ -92,6 +109,8 @@ def plan(text, block_re, kind, target):
     for k, s, e in ordered:
         if total_bytes - moved_bytes <= target:
             break
+        if max_key is not None and k > max_key:
+            break
         moved_bytes += len(text[s:e].encode())
         moved.append((k, s, e))
     kept = [t for t in segs if t not in set(moved)]
@@ -100,39 +119,43 @@ def plan(text, block_re, kind, target):
     return header, moved, kept
 
 
-def migrate(kind, target, apply):
+def migrate(kind, target, apply, range_width=RANGE_WIDTH):
     cfg = KINDS[kind]
     primary_p = os.path.join(ROOT, cfg["primary"])
-    tier2_p = os.path.join(ROOT, cfg["tier2"])
     text = open(primary_p, encoding="utf-8", newline="").read()
-    header, moved, kept = plan(text, cfg["block"], kind, target)
+    segs = parse_segments(text, cfg["block"], kind)
+    if not segs:
+        print("[TIER2] %s 无段可迁（结构异常）" % kind)
+        return 0
+    # W1335：迁出上界先按 range_width 对齐（卷名稳定可复算），再由体积目标决定实际迁多少
+    boundary = align_boundary(min(k for k, _s, _e in segs), range_width)
+    header, moved, kept = plan(text, cfg["block"], kind, target, max_key=boundary)
+    moved = [t for t in moved if t[0] <= boundary]
     if not moved:
         print("[TIER2] %s 已在目标线内（%d KB ≤ %d KB）·无迁出" % (kind, len(text.encode()) // 1024, target // 1024))
         return 0
     keys = [k for k, _s, _e in moved]
     moved_bytes = sum(len(text[s:e].encode()) for _k, s, e in moved)
-    # W995 拆分约定：追加目标=现有 tier2 容器，除非「容器现体积+本次迁出」会破 1MB——
-    # 此时开**范围命名新件** `<stem>-tier2-W<lo>-W<hi>.md`（单件 ≤1MB·check_archive_health T1b 监视）
-    tier2_p = os.path.join(ROOT, cfg["tier2"])
+    # W1335：一律写**范围命名卷**（旧的无范围名 tier2.md 已冻结只读，不再追加）
+    stem = os.path.splitext(os.path.basename(cfg["tier2"]))[0]  # CHANGELOG-ARCHIVE-tier2
+    vol_name = "%s-W%d-W%d.md" % (stem, min(keys), max(keys))
+    assert vol_name not in FROZEN_TIER2, "分卷目标命中了冻结卷（冻结卷不得追加）"
+    tier2_p = os.path.join(ROOT, os.path.dirname(cfg["tier2"]), vol_name)
     tier2_size = os.path.getsize(tier2_p) if os.path.exists(tier2_p) else 0
-    if tier2_size + moved_bytes > LIMIT:
-        stem = os.path.splitext(os.path.basename(cfg["tier2"]))[0]  # CHANGELOG-ARCHIVE-tier2
-        tier2_p = os.path.join(os.path.dirname(cfg["tier2"]),
-                               "%s-W%d-W%d.md" % (stem, min(k for k, _s, _e in moved),
-                                                  max(k for k, _s, _e in moved)))
-        tier2_size = 0  # 新件
-    tier2_p = os.path.join(ROOT, tier2_p) if not os.path.isabs(tier2_p) else tier2_p
+    assert tier2_size + moved_bytes <= LIMIT, (
+        "分卷 %s 追加后破 1MB 线（现有 %d KB + 迁出 %d KB）——收窄 --range-width 或人工拆卷"
+        % (vol_name, tier2_size // 1024, moved_bytes // 1024))
     kr = ("目录节(最老)" if keys[0] == 0 else "W%d" % keys[0],
           "目录节" if keys[-1] == 0 else "W%d" % keys[-1])
     print("[TIER2] %s：迁出 %d 段（%s-%s·%d KB）→ %s ·一级留存（%d KB）"
-          % (kind, len(moved), kr[0], kr[1], moved_bytes // 1024, os.path.basename(tier2_p),
+          % (kind, len(moved), kr[0], kr[1], moved_bytes // 1024, vol_name,
              (len(text.encode()) - moved_bytes) // 1024))
     if not apply:
         print("[DRY-RUN] 未落盘。加 --apply 执行。")
         return 0
 
     pointer = "\n> **%s（%s 迁出 %d 段·%s-%s 至 %s·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。\n" % (
-        DATE, "W994", len(moved), kr[0], kr[1], os.path.basename(cfg["tier2"]))
+        DATE, "W1335", len(moved), kr[0], kr[1], vol_name)
     moved_spans = [(s, e) for _k, s, e in moved]
     # body = header 之后；按 span 切除迁出段——**必须按位置升序**：
     # 键序（=W 升序）在本文件里是位置降序（新段插顶·老段沉底），cur 前向切除会静默保留新版段
@@ -215,17 +238,30 @@ def _self_test() -> int:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="归档件二级归档工具（W994·§11.2 执行器）")
+    ap = argparse.ArgumentParser(description="归档件二级归档工具（W994·§11.2 执行器·W1335 分卷）")
     ap.add_argument("--file", choices=sorted(KINDS), help="一级归档件种类（--self-test 时可省）")
     ap.add_argument("--apply", action="store_true", help="落盘（默认 dry-run）")
     ap.add_argument("--target-bytes", type=int, default=DEFAULT_TARGET, help="一级目标体积（默认 900KB）")
+    ap.add_argument("--range-width", type=int, default=RANGE_WIDTH,
+                    help="分卷宽度（W 号跨度·默认 %d·卷名按 align_boundary 对齐）" % RANGE_WIDTH)
+    ap.add_argument("--rounds", type=int, default=5,
+                    help="最多连续迁出几卷（单卷宽度受限 ⇒ 需多轮才把一级压回目标线内）")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args()
     if args.self_test:
         return _self_test()
     if not args.file:
         ap.error("必须指定 --file（或 --self-test）")
-    return migrate(args.file, args.target_bytes, apply=args.apply)
+    rc = 0
+    for _ in range(max(1, args.rounds)):
+        primary_p = os.path.join(ROOT, KINDS[args.file]["primary"])
+        before = os.path.getsize(primary_p)
+        rc = migrate(args.file, args.target_bytes, apply=args.apply, range_width=args.range_width)
+        if rc != 0 or not args.apply:
+            break
+        if os.path.getsize(primary_p) >= before:
+            break  # 无进展（已在线内或迁不动）⇒ 停止，避免空转
+    return rc
 
 
 if __name__ == "__main__":

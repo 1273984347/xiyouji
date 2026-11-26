@@ -10,7 +10,7 @@
 
 - （无）
 
-## 文件（151）
+## 文件（152）
 
 ### Python 脚本
 
@@ -163,6 +163,7 @@
 - `test_w1331_chart_portrait.py`
 - `test_w1332_public_layer_and_dark_contrast.py`
 - `test_w1333_a1_crossref.py`
+- `test_w1335_archive_sharding.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

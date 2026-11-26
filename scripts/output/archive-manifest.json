@@ -1,0 +1,131 @@
+{
+ "families": {
+  "changelog": {
+   "covered": 888,
+   "duplicates": {},
+   "volumes": [
+    {
+     "bytes": 306173,
+     "file": "CHANGELOG-ARCHIVE-tier2-W400-W559.md",
+     "frozen": false,
+     "segs": 144,
+     "w_max": 559,
+     "w_min": 400
+    },
+    {
+     "bytes": 436783,
+     "file": "CHANGELOG-ARCHIVE-tier2-W673-W813.md",
+     "frozen": false,
+     "segs": 138,
+     "w_max": 813,
+     "w_min": 673
+    },
+    {
+     "bytes": 201810,
+     "file": "CHANGELOG-ARCHIVE-tier2-W814-W874.md",
+     "frozen": false,
+     "segs": 59,
+     "w_max": 874,
+     "w_min": 814
+    },
+    {
+     "bytes": 215095,
+     "file": "CHANGELOG-ARCHIVE-tier2-W875-W950.md",
+     "frozen": false,
+     "segs": 68,
+     "w_max": 950,
+     "w_min": 875
+    },
+    {
+     "bytes": 1044485,
+     "file": "CHANGELOG-ARCHIVE-tier2.md",
+     "frozen": true,
+     "segs": 177,
+     "w_max": 672,
+     "w_min": 277
+    },
+    {
+     "bytes": 1014769,
+     "file": "CHANGELOG-ARCHIVE.md",
+     "frozen": false,
+     "segs": 302,
+     "w_max": 1278,
+     "w_min": 951
+    }
+   ],
+   "w_max": 1278,
+   "w_min": 277
+  },
+  "file-index": {
+   "covered": 845,
+   "duplicates": {},
+   "volumes": [
+    {
+     "bytes": 722295,
+     "file": "file-index-ARCHIVE-tier2-W1080-W1151.md",
+     "frozen": false,
+     "segs": 59,
+     "w_max": 1151,
+     "w_min": 1080
+    },
+    {
+     "bytes": 825556,
+     "file": "file-index-ARCHIVE-tier2-W335-W979.md",
+     "frozen": false,
+     "segs": 570,
+     "w_max": 979,
+     "w_min": 335
+    },
+    {
+     "bytes": 922907,
+     "file": "file-index-ARCHIVE-tier2.md",
+     "frozen": true,
+     "segs": 115,
+     "w_max": 1169,
+     "w_min": 980
+    },
+    {
+     "bytes": 392739,
+     "file": "file-index-ARCHIVE.md",
+     "frozen": false,
+     "segs": 101,
+     "w_max": 1278,
+     "w_min": 1170
+    }
+   ],
+   "w_max": 1278,
+   "w_min": 335
+  }
+ },
+ "frozen": [
+  "CHANGELOG-ARCHIVE-tier2.md",
+  "file-index-ARCHIVE-tier2.md"
+ ],
+ "others": [
+  {
+   "bytes": 328201,
+   "file": "AGENTS-ARCHIVE.md"
+  },
+  {
+   "bytes": 1258,
+   "file": "ARCHIVE-T5-EXEMPTIONS.md"
+  },
+  {
+   "bytes": 344171,
+   "file": "HANDOVER-ARCHIVE.md"
+  },
+  {
+   "bytes": 86479,
+   "file": "STRUCTURE-ARCHIVE.md"
+  },
+  {
+   "bytes": 813193,
+   "file": "W批次编号对账表-ARCHIVE.md"
+  },
+  {
+   "bytes": 381080,
+   "file": "pitfalls-detail-ARCHIVE.md"
+  }
+ ],
+ "range_width": 250
+}

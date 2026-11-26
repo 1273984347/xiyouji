@@ -1,3 +1,15 @@
+### W1335（2026-11-27）：归档分卷收口（C 先行 · B 终态）
+
+> **来源**：用户 2026-11-27 指令「按 C 先行、B 终态方案执行，新卷宽度设为 250，旧卷冻结为只读」；方案出自当批只读评估（实测 6+4 个归档卷、两家族零重复、区间缺号 114/99 无人知晓、一级归档 4.7 倍于正本）。
+> - **清单面（C）**：新建 `scripts/gen_archive_manifest.py`——扫卷谱系产出 `archive/docs/ARCHIVE-MANIFEST.md`（人读）+ `scripts/output/archive-manifest.json`（机读），`--check` 与磁盘对拍（盘面变更未刷清单即红）。实测登记 2 家族 10 卷。
+> - **判据面**：`check_archive_health.py` 增 **T5 覆盖完备性**（台账声明已收官的号必须在正本或某卷找到段）与 **T6 archive/docs 总量 ≤12MB**。T5 首跑抓出 12 号疑点，逐条核实：10 号属台账自述（作废 / 合并段 / 追记 / 在途 / 占位空号），2 号属历史缺口（W934 全仓无段承载、W1088 僵尸行随 W1086 落地）⇒ 建显式豁免簿 `archive/docs/ARCHIVE-T5-EXEMPTIONS.md`（逐条写核实动作），**不放宽判据、不悄悄加白名单**。现势台账 671 号全覆盖（自述豁免 29 + 显式豁免 2）。
+> - **分卷面（B）**：`archive_tier2.py` 增 `--range-width 250`（卷界由 `align_boundary` 对齐）+ `--rounds`（单卷宽度受限时连迁多卷）；新卷一律范围命名，命中冻结卷即断言拒绝；两件无范围名 `-tier2.md` 冻结只读。干跑实测：CHANGELOG 一级 991KB ⇒ 迁 W951-W983 入 `CHANGELOG-ARCHIVE-tier2-W951-W983.md`、一级留存 896KB（未落盘·1MB 线尚未触发）。
+> - **规范**：文档规范 §11.2 增「二级归档分卷」条款（宽度 / 命名 / manifest / T5·T6 / 豁免簿纪律），W513 原条款逐字保留。
+> - **机器判据**：新增 `tests/unit/test_w1335_archive_sharding.py` 6 例（卷界对齐 / 迁出上界截断 / 冻结标注与同号多卷 / T5 三档判定 / 清单过期识别 / T6 累计）；存量归档域 9 例零回归；ruff 0。
+> - **验证**：归档域单测 15 例全过；`gen_archive_manifest --check` 与磁盘一致；`check_archive_health` T5/T6 绿（余 1 项 T2 段目录组行属存量债务）。
+> - **文件**：见 file-index W1335 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1334（2026-11-27）：可观测性接入决策（方案 D）+ usage 前置
 
 > **来源**：用户 2026-11-27 指令「按方案 D 执行，先实现 usage 前置逻辑；生成决策文档」。
@@ -799,7 +811,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1334），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1335），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

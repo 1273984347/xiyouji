@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（247）
+## 文件（248）
 
 ### Python 脚本
 
@@ -201,6 +201,7 @@
 - `fetch_gate_stats.py`
 - `fixed_ancestor_probe.py`
 - `font_weight_probe.py`
+- `gen_archive_manifest.py`
 - `gen_dataset_index.py`
 - `gen_folder_docs.py`
 - `gen_og_cover.py`

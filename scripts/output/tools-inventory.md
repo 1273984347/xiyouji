@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-27 04:31
+生成时间：2026-11-27 05:03
 
-共 **238** 件（门禁与校验 115 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 92 · 一次性（下划线前缀） 7）
+共 **239** 件（门禁与校验 115 · 批次与登记 12 · 统计与对账 3 · 生成与索引 9 · 运维与临时区 1 · 工具 92 · 一次性（下划线前缀） 7）
 
 ## 门禁与校验（115）
 
@@ -153,10 +153,11 @@
 | `judge_gate.py` | W465 决策闸门判定脚本（Phase 3 路线图 v7 · W530 落地）。 |
 | `stats.py` | 聚合数字统计器 stats（W703 建·W704 实体化）——从磁盘实算生成 scripts/output/stats.json（tracke |
 
-## 生成与索引（8）
+## 生成与索引（9）
 
 | 脚本 | 用途 |
 |:---|:---|
+| `gen_archive_manifest.py` | gen_archive_manifest.py — 归档分卷清单生成与校验（W1335 建 · 归档分卷 C 先行 · B 终态） |
 | `gen_compliance_migration.mjs` | gen_compliance_migration.mjs — 从 DDL 事实源生成 PG 合规列迁移（W1205 · D-3 合规批） |
 | `gen_dataset_index.py` | 生成 dataset/README.md 数据索引（从磁盘实读，替代手工维护的 41 行表）。 |
 | `gen_folder_docs.py` | gen_folder_docs.py — 为全仓目录补齐 INDEX.md / README.md（W779 批·用户令「检查所有文件夹，添加  |

@@ -11,7 +11,7 @@
 - `data/`
 - `figures/`
 
-## 文件（986）
+## 文件（988）
 
 ### Markdown 文档
 
@@ -773,6 +773,7 @@
 - `_w1332_spec.json`
 - `_w1333_spec.json`
 - `_w1334_spec.json`
+- `_w1335_spec.json`
 - `_w736_spec.json`
 - `_w737_spec.json`
 - `_w760_spec.json`
@@ -937,6 +938,7 @@
 - `_w996_spec.json`
 - `_w997_spec.json`
 - `_w999_batch.json`
+- `archive-manifest.json`
 - `chart-content-audit.json`
 - `chart-content-baseline.txt`
 - `chart-degrade-baseline.txt`
