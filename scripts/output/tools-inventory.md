@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-27 05:03
+生成时间：2026-11-27 05:45
 
-共 **239** 件（门禁与校验 115 · 批次与登记 12 · 统计与对账 3 · 生成与索引 9 · 运维与临时区 1 · 工具 92 · 一次性（下划线前缀） 7）
+共 **240** 件（门禁与校验 115 · 批次与登记 12 · 统计与对账 3 · 生成与索引 10 · 运维与临时区 1 · 工具 92 · 一次性（下划线前缀） 7）
 
 ## 门禁与校验（115）
 
@@ -153,7 +153,7 @@
 | `judge_gate.py` | W465 决策闸门判定脚本（Phase 3 路线图 v7 · W530 落地）。 |
 | `stats.py` | 聚合数字统计器 stats（W703 建·W704 实体化）——从磁盘实算生成 scripts/output/stats.json（tracke |
 
-## 生成与索引（9）
+## 生成与索引（10）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -165,6 +165,7 @@
 | `gen_rss.py` | gen_rss.py — 生成 site/rss.xml（B-1·W644）。 |
 | `gen_sitemap.py` | gen_sitemap.py — site/sitemap.xml 生成器（W591 SEO 清零）。 |
 | `gen_tools_inventory.py` | gen_tools_inventory.py — scripts/ 顶层工具清单生成器（W985 建·P-44-05 同族：登记面跟手工较劲的最 |
+| `gen_version_footer.py` | gen_version_footer.py — dukou 页脚批次链生成器（W1336 建·用户 2026-11-27「页脚改脚本生成」） |
 | `generate_csp.py` | generate_csp.py — 全站 CSP（Content Security Policy）生成 / 注入 / 校验 |
 
 ## 运维与临时区（1）

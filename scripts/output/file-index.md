@@ -1,3 +1,18 @@
+## W1336 页脚版本生成化 + 归档覆盖门禁（2026-11-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| scripts/gen_version_footer.py | W1336 | 新增：dukou 页脚链生成/校验（复用 cascade 单一写入逻辑） |
+| Makefile | W1336 | 新增 dukou-footer 目标（页脚 + 第 80/82 槽探针一条命令） |
+| scripts/check_archive_health.py | W1336 | 增 --gate 阻断档（只拦 T5/T6） |
+| scripts/verify_delivery.py | W1336 | 挂第 84 槽「归档覆盖」（铁律 8 面·用户批准） |
+| docs/agent/gates.md | W1336 | 补第 84 条 + 槽数 83→84 |
+| site/dukou-engine.html | W1336 | 页脚链前插 W1336/W1335（脚本生成） |
+| scripts/output/svg_text_contrast_report.json · svg_text_contrast_graphic_report.json · chart-legend-render-audit.json | W1336 | 探针与渲染档案重跑（页面改动后必需） |
+| README.md / STRUCTURE.md / docs/00-导读/项目说明.md | W1336 | 当前批次行升版 |
+| CHANGELOG.md / HANDOVER.md / CITATION.cff / .github/workflows/README.md | W1336 | 版本面同步 |
+| tests/unit/test_w1335_archive_sharding.py | W1336 | 清单单测隔离加固（MANIFEST_MD patch） |
+
 ## W1335 归档分卷收口（C 先行·B 终态）（2026-11-27）
 
 | 文件 | W | 说明 |

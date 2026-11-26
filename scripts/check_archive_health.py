@@ -205,10 +205,13 @@ def _t2_accounting(cov, lines, problems):
         problems.append("T2 段全集派生含磁盘不存在的段：%s" % cov["segs_stale"])
 
 
-def run(strict=False, prefix=""):
+def run(strict=False, prefix="", gate=False):
     import tracked_files as tf
 
     lines, problems = [], []
+    # W1336：T5/T6 升为**阻断门禁**（用户 2026-11-27 批准）——--gate 模式下只有这两族的
+    # 问题决定退出码；T1b/T2/T3 属存量债务与报告面，不参与阻断（避免门禁变成长期常红）。
+    gate_problems = []
     arch = os.path.join(ROOT, "archive")
 
     # T1
@@ -268,12 +271,12 @@ def run(strict=False, prefix=""):
     if cov5["duplicates"]:
         for fam, dup in cov5["duplicates"].items():
             sample = ", ".join("W%s" % w for w in list(dup)[:5])
-            problems.append("T5 %s 家族同号多卷：%d 号（%s…）" % (fam, len(dup), sample))
+            gate_problems.append("T5 %s 家族同号多卷：%d 号（%s…）" % (fam, len(dup), sample))
             lines.append("T5  ⚠ %s 家族同号多卷 %d 号（%s…）——修法=保留一卷·另一卷人工核后迁出"
                          % (fam, len(dup), sample))
     if cov5["missing"]:
         sample = ", ".join("W%d" % w for w in cov5["missing"][:8])
-        problems.append("T5 台账登记但无段：%d 号（%s…）" % (len(cov5["missing"]), sample))
+        gate_problems.append("T5 台账登记但无段：%d 号（%s…）" % (len(cov5["missing"]), sample))
         lines.append("T5  ⚠ 台账登记但正本与归档均无段：%d 号（%s…）——修法=补段或在该台账行标注"
                      "「占位空号/让号」" % (len(cov5["missing"]), sample))
     else:
@@ -282,14 +285,19 @@ def run(strict=False, prefix=""):
     # T6（W1335）：archive/docs 总量上限
     docs_total = t6_arch_docs_total(os.path.join(arch, "docs"))
     if docs_total > ARCH_DOCS_CAP:
-        problems.append("T6 archive/docs 总量 %s 超 %s" % (_kb(docs_total), _kb(ARCH_DOCS_CAP)))
+        gate_problems.append("T6 archive/docs 总量 %s 超 %s" % (_kb(docs_total), _kb(ARCH_DOCS_CAP)))
         lines.append("T6  ⚠ archive/docs 总量 %s 超上限 %s——修法=归档分流/裁量"
                      % (_kb(docs_total), _kb(ARCH_DOCS_CAP)))
     else:
         lines.append("T6  archive/docs 总量 %s（上限 %s）" % (_kb(docs_total), _kb(ARCH_DOCS_CAP)))
+    problems.extend(gate_problems)
 
     for ln in lines:
         print(prefix + ln)
+    if gate:
+        # 阻断模式：汇总行形态固定（verify 的 StrictGate 以 marker 判定「真跑过」）
+        print("---- 归档覆盖门禁（T5/T6）：%d FAIL ----" % len(gate_problems))
+        return 1 if gate_problems else 0
     print("---- 归档健康探针：%d 项待办（报告型·修法见各行）----" % len(problems))
     if strict and problems:
         return 1
@@ -353,13 +361,15 @@ def _self_test() -> int:
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="归档区健康探针（W994·报告型）")
+    ap = argparse.ArgumentParser(description="归档区健康探针（W994·T5/T6 阻断档 W1336）")
     ap.add_argument("--strict", action="store_true", help="破线/缺标注 exit 1（门禁候选）")
+    ap.add_argument("--gate", action="store_true",
+                    help="阻断档：仅 T5 覆盖完备性 / T6 总量超标 ⇒ exit 1（第 84 槽）")
     ap.add_argument("--self-test", action="store_true")
     args = ap.parse_args()
     if args.self_test:
         return _self_test()
-    return run(strict=args.strict)
+    return run(strict=args.strict, gate=args.gate)
 
 
 if __name__ == "__main__":

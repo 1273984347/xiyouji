@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（248）
+## 文件（249）
 
 ### Python 脚本
 
@@ -208,6 +208,7 @@
 - `gen_rss.py`
 - `gen_sitemap.py`
 - `gen_tools_inventory.py`
+- `gen_version_footer.py`
 - `generate_csp.py`
 - `ime_scroll_probe.py`
 - `inject_chart_a11y.py`

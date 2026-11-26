@@ -82,6 +82,16 @@ docs-index: ## 生成/更新 docs/INDEX.md（321 篇文档索引）
 	python scripts/docs_index.py
 	@echo "==> docs-index 完成"
 
+dukou-footer: ## dukou 页脚链生成 + 第 80/82 槽探针重跑（W1336·页面一改报告即陈旧）
+	@echo "==> dukou-footer: 页脚链生成"
+	python scripts/gen_version_footer.py --apply
+	@echo "==> dukou-footer: 重跑第 80 槽探针（body + graphic）"
+	node scripts/svg_text_contrast_probe.js
+	node scripts/svg_text_contrast_probe.js --bg-mode graphic --out scripts/output/svg_text_contrast_graphic_report.json
+	@echo "==> dukou-footer: 重跑第 82 槽渲染档案"
+	python scripts/output/_w1266_render_legend.py
+	@echo "==> dukou-footer 完成"
+
 archive-manifest: ## 归档分卷清单对拍（--check·W1335）
 	@echo "==> archive-manifest: 清单与磁盘对拍"
 	python scripts/gen_archive_manifest.py --check
