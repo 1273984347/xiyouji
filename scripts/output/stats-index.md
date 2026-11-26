@@ -22,7 +22,7 @@
 | icon_allowlist_entries | 63 | scripts/output/_w949_icon_field_allowlist.json 顶层数组长度 | W1053 | W1261 |
 | inline_css_pages | 638 | site 全树含 INLINED 标记页 | W459 | 1333 |
 | learn_docs | 4 | docs/07-学以致用/*.md（排除 README） | W904 | W1096 |
-| methodology_docs | 28 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1157 |
+| methodology_docs | 29 | docs/10-方法论沉淀/*.md（含索引 README） | W070 | W1337 |
 | pitfalls_cascade | 30 | pitfalls.md 主题「级联 / CHANGELOG」实测条目数 | W1215 | 1309 |
 | pitfalls_css | 91 | pitfalls.md 主题「CSS / 视觉渲染」实测条目数 | W1215 | W1299 |
 | pitfalls_data | 28 | pitfalls.md 主题「数据 / 内容可信度」实测条目数 | W1215 | 1287 |
@@ -44,6 +44,9 @@
 | w864_entries | 0 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | 1291 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1337（2026-11-27 06:06:32）
+- methodology_docs: 28 → 29
 
 ### W1336（2026-11-27 05:39:36）
 - gate_count: 83 → 84

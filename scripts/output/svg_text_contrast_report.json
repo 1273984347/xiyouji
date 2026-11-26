@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-26T21:40:31.601Z",
+ "generated_at": "2026-11-26T21:58:39.853Z",
  "threshold": 3,
  "scope": "all",
  "bg_mode": "body",
@@ -189,7 +189,7 @@
   "dashboard.html": "c3648b85df06",
   "guide.html": "9324bb32ec2b",
   "index.html": "39dfcba1a0ab",
-  "dukou-engine.html": "d908a01f1a6c"
+  "dukou-engine.html": "82b3f15fc6cd"
  },
  "by_page": {}
 }
