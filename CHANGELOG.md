@@ -7,6 +7,7 @@
 > - **规范**：文档规范 §11.2 增「二级归档分卷」条款（宽度 / 命名 / manifest / T5·T6 / 豁免簿纪律），W513 原条款逐字保留。
 > - **机器判据**：新增 `tests/unit/test_w1335_archive_sharding.py` 7 例（卷界对齐 / 迁出上界截断 / 冻结标注与同号多卷 / T5 三档判定 / 清单过期识别 / 非滚动件体积变化不判过期 / T6 累计）；存量归档域 9 例零回归；ruff 0。
 > - **验证**：归档域单测 16 例全过；`gen_archive_manifest --check` 与磁盘一致；`check_archive_health` T5/T6 绿（余 1 项 T2 段目录组行属存量债务）。
+> - **处置收尾（自捕缺陷·根修）**：收尾核验发现正本 `ARCHIVE-MANIFEST.md` 被单测污染成「1 段 W5」——根因是两例 manifest 单测只 monkeypatch 了 `ARCH`/`MANIFEST_JSON`，`refresh()` 仍把 tmp 数据写进真实清单。修法：单测同时 patch `MANIFEST_MD` + 增「单测不得污染真实清单」断言（7 例全过）；正本已重建（10 卷 · 冻结 2 卷 · 重复 0）。
 > - **文件**：见 file-index W1335 段。
 > - **状态**：已落地（级联+提交后以 gh run list 为准）。
 

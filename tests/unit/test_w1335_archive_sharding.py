@@ -71,18 +71,26 @@ def test_manifest_check_detects_drift(tmp_path, monkeypatch):
     """清单 --check：盘面变化但清单未刷 ⇒ 判过期（exit 1）。"""
     monkeypatch.setattr(gam, "ARCH", str(tmp_path))
     monkeypatch.setattr(gam, "MANIFEST_JSON", str(tmp_path / "archive-manifest.json"))
+    # W1335 根修：MANIFEST_MD 也必须指向 tmp——否则 refresh() 会把 tmp 数据写进**真实**
+    # archive/docs/ARCHIVE-MANIFEST.md（实测：单测跑完正本清单被污染成「1 段 W5」）。
+    monkeypatch.setattr(gam, "MANIFEST_MD", str(tmp_path / "ARCHIVE-MANIFEST.md"))
     (tmp_path / "CHANGELOG-ARCHIVE.md").write_text(CL_SEG % (5, 5), encoding="utf-8")
     assert gam.refresh() == 0
     assert gam.check() == 0, "刚刷新应当一致"
     (tmp_path / "CHANGELOG-ARCHIVE.md").write_text(
         (CL_SEG % (5, 5)) + (CL_SEG % (4, 4)), encoding="utf-8")
     assert gam.check() == 1, "新增一段但未刷清单 ⇒ 必须判过期"
+    # 断言单测不落真实清单
+    real_md = Path(gam.__file__).resolve().parent.parent / "archive" / "docs" / "ARCHIVE-MANIFEST.md"
+    if real_md.exists():
+        assert "W5–W5" not in real_md.read_text(encoding="utf-8"), "单测污染了真实清单"
 
 
 def test_manifest_check_ignores_other_archive_size(tmp_path, monkeypatch):
     """清单 --check 判据面 = 卷谱系/冻结/卷宽；其他归档件体积属信息面，变动不判过期。"""
     monkeypatch.setattr(gam, "ARCH", str(tmp_path))
     monkeypatch.setattr(gam, "MANIFEST_JSON", str(tmp_path / "archive-manifest.json"))
+    monkeypatch.setattr(gam, "MANIFEST_MD", str(tmp_path / "ARCHIVE-MANIFEST.md"))
     (tmp_path / "CHANGELOG-ARCHIVE.md").write_text(CL_SEG % (5, 5), encoding="utf-8")
     (tmp_path / "HANDOVER-ARCHIVE.md").write_text("x", encoding="utf-8")
     assert gam.refresh() == 0
