@@ -1,7 +1,7 @@
 {
- "generated_at": "2026-11-26T21:58:39.853Z",
+ "generated_at": "2026-11-26T23:18:51.216Z",
  "threshold": 3,
- "scope": "all",
+ "scope": "data,en",
  "bg_mode": "body",
  "no_tool": false,
  "only_pages": null,
@@ -11,8 +11,8 @@
   "S3-mobile-dark",
   "S4-mobile-light"
  ],
- "pages_scanned": 168,
- "rows": 672,
+ "pages_scanned": 162,
+ "rows": 648,
  "fatal_rows": 0,
  "unstable_rows": 0,
  "unstable_detail": [],
@@ -40,7 +40,7 @@
   "data/concept-device.html": "4a0133c9fbec",
   "data/counterfactual.html": "7f3f5807a65f",
   "data/criticism-history.html": "f7a356261ce2",
-  "data/cross-time-danmaku.html": "95c80f7a6d69",
+  "data/cross-time-danmaku.html": "fee3b872e742",
   "data/cultural-misreading.html": "d7e126eab439",
   "data/customs-pass-route.html": "90f0ceff127c",
   "data/data-explorer.html": "49fbbd5e971d",
@@ -183,13 +183,7 @@
   "en/timeline.html": "12f05f4db318",
   "en/underworld-power-network.html": "fb90b0d56d42",
   "en/visual-art.html": "3b0eb2768bbe",
-  "en/workplace.html": "697bb1b73c40",
-  "about.html": "f917041c34ea",
-  "curated.html": "317e50128e64",
-  "dashboard.html": "c3648b85df06",
-  "guide.html": "9324bb32ec2b",
-  "index.html": "39dfcba1a0ab",
-  "dukou-engine.html": "82b3f15fc6cd"
+  "en/workplace.html": "697bb1b73c40"
  },
  "by_page": {}
 }
