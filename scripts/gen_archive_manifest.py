@@ -284,28 +284,31 @@ def check():
         print("FAIL  清单缺失：%s（修法=--refresh）" % os.path.relpath(MANIFEST_JSON, ROOT))
         return 1
     saved = json.load(open(MANIFEST_JSON, encoding="utf-8"))
-    if saved != disk:
-        diffs = []
-        if saved.get("families") != disk.get("families"):
-            for fam in disk["families"]:
-                a = saved.get("families", {}).get(fam, {})
-                b = disk["families"][fam]
-                if a != b:
-                    diffs.append("%s 家族卷谱系不一致（清单 %d 卷 / 磁盘 %d 卷）" % (
-                        fam, len(a.get("volumes", [])), len(b["volumes"])))
-        if saved.get("others") != disk.get("others"):
-            diffs.append("其他归档件体积/件数不一致")
-        if saved.get("frozen") != disk.get("frozen"):
-            diffs.append("冻结清单不一致")
-        if saved.get("range_width") != disk.get("range_width"):
-            diffs.append("range_width 不一致")
-        print("FAIL  归档清单已过期（修法=py -3 scripts/gen_archive_manifest.py --refresh）：")
-        for d in diffs or ["载荷与磁盘不一致"]:
-            print("  · " + d)
-        return 1
-    total = sum(len(v["volumes"]) for v in disk["families"].values())
-    print("---- 归档分卷清单：%d 家族 · %d 卷 · 与磁盘一致 · OK ----" % (len(disk["families"]), total))
-    return 0
+    # 判据面 = 卷谱系 / 冻结清单 / 卷宽（须与磁盘一致）；others 体积只是信息面——
+    # 台账归档等「非滚动件」每批都在变，若纳入判据会让清单每批必刷（W1335 实测自锁）。
+    if saved.get("others") != disk.get("others"):
+        print("NOTE  其他归档件体积有变动（信息面·不判过期）——需要清单显示最新值时跑 --refresh")
+    if saved.get("families") == disk.get("families") and \
+            saved.get("frozen") == disk.get("frozen") and \
+            saved.get("range_width") == disk.get("range_width"):
+        total = sum(len(v["volumes"]) for v in disk["families"].values())
+        print("---- 归档分卷清单：%d 家族 · %d 卷 · 与磁盘一致 · OK ----" % (len(disk["families"]), total))
+        return 0
+    diffs = []
+    for fam in disk["families"]:
+        a = saved.get("families", {}).get(fam, {})
+        b = disk["families"][fam]
+        if a != b:
+            diffs.append("%s 家族卷谱系不一致（清单 %d 卷 / 磁盘 %d 卷）" % (
+                fam, len(a.get("volumes", [])), len(b["volumes"])))
+    if saved.get("frozen") != disk.get("frozen"):
+        diffs.append("冻结清单不一致")
+    if saved.get("range_width") != disk.get("range_width"):
+        diffs.append("range_width 不一致")
+    print("FAIL  归档清单已过期（修法=py -3 scripts/gen_archive_manifest.py --refresh）：")
+    for d in diffs or ["载荷与磁盘不一致"]:
+        print("  · " + d)
+    return 1
 
 
 def self_test():

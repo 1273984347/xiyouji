@@ -79,6 +79,17 @@ def test_manifest_check_detects_drift(tmp_path, monkeypatch):
     assert gam.check() == 1, "新增一段但未刷清单 ⇒ 必须判过期"
 
 
+def test_manifest_check_ignores_other_archive_size(tmp_path, monkeypatch):
+    """清单 --check 判据面 = 卷谱系/冻结/卷宽；其他归档件体积属信息面，变动不判过期。"""
+    monkeypatch.setattr(gam, "ARCH", str(tmp_path))
+    monkeypatch.setattr(gam, "MANIFEST_JSON", str(tmp_path / "archive-manifest.json"))
+    (tmp_path / "CHANGELOG-ARCHIVE.md").write_text(CL_SEG % (5, 5), encoding="utf-8")
+    (tmp_path / "HANDOVER-ARCHIVE.md").write_text("x", encoding="utf-8")
+    assert gam.refresh() == 0
+    (tmp_path / "HANDOVER-ARCHIVE.md").write_text("y" * 999, encoding="utf-8")  # 非滚动件体积变化
+    assert gam.check() == 0, "非滚动件体积变动不得判过期（否则每批必刷·自锁）"
+
+
 def test_t6_total_bytes(tmp_path):
     """T6：archive/docs 总量累加（口径=字节）。"""
     (tmp_path / "a.md").write_bytes(b"x" * 100)
