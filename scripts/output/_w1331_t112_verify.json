@@ -1,0 +1,282 @@
+{
+ "generated": "2026-11-26T19:06:49",
+ "rows": [
+  {
+   "item": "数据位仍等宽（页内私有 JetBrains Mono·2,651 处/867 页）",
+   "source": "§9.2-1/§9.4",
+   "standard": "S",
+   "result": "命中 867 页 / 5028 处",
+   "verdict": "部分",
+   "evidence": {
+    "pages": 867,
+    "occurrences": 5028,
+    "samples": [
+     "site/dashboard.html",
+     "site/dukou-engine.html",
+     "site/_template.html",
+     "site/data/81-hardships-view.html",
+     "site/data/81-hardships.html",
+     "site/data/aesthetics.html"
+    ]
+   }
+  },
+  {
+   "item": "图表绘制 JS 参数（柱宽/标签抽稀/环形外置/力导向/热力色阶）",
+   "source": "§9.2-1",
+   "standard": "R",
+   "result": "竖版探针：压缩不可读已根修至 0；标签越界项见下",
+   "verdict": "部分",
+   "evidence": {
+    "note": "压缩类 159 svg → 0；标签越界见「SVG 文字越出视口」行"
+   }
+  },
+  {
+   "item": "暗色态 invisible 形状（运行期插值色·约 40 处/8 页）",
+   "source": "§9.2-2",
+   "standard": "M",
+   "result": "需暗色渲染探针（本批未跑）",
+   "verdict": "未核验",
+   "evidence": {
+    "why": "判据未自动化"
+   }
+  },
+  {
+   "item": "压在半透明淡色底上的图表标签（2.54:1）",
+   "source": "§9.2-3",
+   "standard": "M",
+   "result": "需合成底色对比度探针（本批未跑）",
+   "verdict": "未核验",
+   "evidence": {
+    "why": "判据未自动化"
+   }
+  },
+  {
+   "item": "页面私有样式未全量令牌化",
+   "source": "§9.2-4",
+   "standard": "S",
+   "result": "第 76 槽公共层覆盖率基线 0.119（棘轮不许退）",
+   "verdict": "部分",
+   "evidence": {
+    "public_layer_coverage": 0.119
+   }
+  },
+  {
+   "item": "--accent-soft 保留原值（hero 浅金·2,561 处）",
+   "source": "§9.2-5",
+   "standard": "S",
+   "result": "消费面 812 页 / 3286 处（用户未裁决收敛）",
+   "verdict": "存续",
+   "evidence": {
+    "pages": 812,
+    "occurrences": 3286,
+    "samples": [
+     "site/dashboard.html",
+     "site/dukou-engine.html",
+     "site/_template.html",
+     "site/data/aesthetics.html"
+    ]
+   }
+  },
+  {
+   "item": "EN 站数据层缺陷（W1259 P0）",
+   "source": "§9.2-6",
+   "standard": "M",
+   "result": "不属于视觉面（归 W1259 数据层独立批）",
+   "verdict": "不属视觉面",
+   "evidence": {}
+  },
+  {
+   "item": "深色 hero 页顶栏深字压深底（1.04:1）",
+   "source": "§9.4",
+   "standard": "M",
+   "result": "需渲染对比度抽样（本批未跑）",
+   "verdict": "未核验",
+   "evidence": {
+    "why": "判据未自动化"
+   }
+  },
+  {
+   "item": "暗色下表头/定义块浅字压硬编码浅底（4 页）",
+   "source": "§9.4",
+   "standard": "M",
+   "result": "需暗色渲染对比度抽样（本批未跑）",
+   "verdict": "未核验",
+   "evidence": {
+    "why": "判据未自动化"
+   }
+  },
+  {
+   "item": "徽标白字压赭金底（1.73:1）",
+   "source": "§9.4",
+   "standard": "S",
+   "result": "同规则白字+accent-soft 底 0 页 / 0 处",
+   "verdict": "已清偿",
+   "evidence": {
+    "pages": 0,
+    "samples": []
+   }
+  },
+  {
+   "item": "暗色簇间连线 1.21:1（2 页）",
+   "source": "§9.4",
+   "standard": "S",
+   "result": "旧浅线色 stroke 0 页 / 0 处",
+   "verdict": "已清偿",
+   "evidence": {
+    "pages": 0,
+    "samples": []
+   }
+  },
+  {
+   "item": "SVG 文字越出视口 / 标签 bbox 相交（21 / 34 页）",
+   "source": "§9.4",
+   "standard": "R",
+   "result": "竖版探针 FAIL：375=0 页 / 320=0 页",
+   "verdict": "已清偿",
+   "evidence": {
+    "fail375": [],
+    "fail320": []
+   }
+  },
+  {
+   "item": "表格无横滚容器（14 页）",
+   "source": "§9.4",
+   "standard": "S",
+   "result": "公共层 ≤640 table{display:block;overflow-x:auto} 在位（含表格页 465）",
+   "verdict": "已清偿",
+   "evidence": {
+    "system_css_rule": true
+   }
+  },
+  {
+   "item": "移动端图表固定宽 980px 溢出（1–2 页）",
+   "source": "§9.4",
+   "standard": "S+R",
+   "result": "静态 980 字面 8 页；竖版探针 FAIL 375=0 / 320=0（可达性以探针为准）",
+   "verdict": "已清偿",
+   "evidence": {
+    "pages": 8,
+    "samples": [
+     "site/data/hardship-difficulty-heatmap.html",
+     "site/data/journey-spacetime.html",
+     "site/data/pilgrim-team-psychology-arc.html",
+     "site/data/poetry-rhythm-analysis.html",
+     "site/en/hardship-difficulty-heatmap.html",
+     "site/en/journey-spacetime.html"
+    ],
+    "fail375": [],
+    "fail320": []
+   }
+  },
+  {
+   "item": "3D 容器固定高裁切 35px（2 页）",
+   "source": "§9.4",
+   "standard": "S",
+   "result": "三维页固定高容器 0 页",
+   "verdict": "已清偿",
+   "evidence": {
+    "pages": []
+   }
+  },
+  {
+   "item": "衬线渲染的按钮（4 页）",
+   "source": "§9.4",
+   "standard": "S",
+   "result": "命中 1 页",
+   "verdict": "存续",
+   "evidence": {
+    "pages": 1,
+    "samples": [
+     "site/index.html"
+    ]
+   }
+  },
+  {
+   "item": "rum-viewer / visit-viewer 未接入公共壳",
+   "source": "§9.6",
+   "standard": "S",
+   "result": "rum-viewer.html=已接 system.css; visit-viewer.html=未接 system.css",
+   "verdict": "存续",
+   "evidence": {
+    "rum-viewer.html": "已接 system.css",
+    "visit-viewer.html": "未接 system.css"
+   }
+  },
+  {
+   "item": "reader 页 summary 双三角（635/636 页）",
+   "source": "§9.6",
+   "standard": "S",
+   "result": "system.css 全局屏蔽 缺失",
+   "verdict": "存续",
+   "evidence": {
+    "system_css_rule": false
+   }
+  },
+  {
+   "item": "悬浮问答按钮遮挡 reader 内容（8/8 页）",
+   "source": "§9.6",
+   "standard": "S",
+   "result": "W1166 页脚安全区规则 在位",
+   "verdict": "已清偿",
+   "evidence": {
+    "fab_clearance": true
+   }
+  },
+  {
+   "item": "导航当前项缺语义标记（4 根页）",
+   "source": "§9.6",
+   "standard": "S",
+   "result": "index.html=缺; dashboard.html=有 aria-current; guide.html=有 aria-current",
+   "verdict": "存续",
+   "evidence": {
+    "index.html": "缺",
+    "dashboard.html": "有 aria-current",
+    "guide.html": "有 aria-current"
+   }
+  },
+  {
+   "item": "数据位 / 元信息位仍用衬线（12 实例）",
+   "source": "§9.6",
+   "standard": "S",
+   "result": "命中 0 页 / 0 处",
+   "verdict": "已清偿",
+   "evidence": {
+    "pages": 0,
+    "samples": []
+   }
+  },
+  {
+   "item": "--shadow-2 未定义 ⇒ theme-init.js 硬编码阴影",
+   "source": "§9.6",
+   "standard": "S",
+   "result": "令牌缺失；theme-init.js 硬编码阴影=True",
+   "verdict": "存续",
+   "evidence": {
+    "token": false,
+    "theme_init_shadow": true
+   }
+  },
+  {
+   "item": "hero 巨号并置（1 页）",
+   "source": "§9.6",
+   "standard": "S",
+   "result": "≥71px 字面 0 页 / 0 处",
+   "verdict": "已清偿",
+   "evidence": {
+    "pages": 0,
+    "samples": []
+   }
+  },
+  {
+   "item": "移动端不可达裁切 / 页面溢出（W1329 基线）",
+   "source": "§9.6",
+   "standard": "R",
+   "result": "clipped 页 0；overflow 页 0",
+   "verdict": "已清偿",
+   "evidence": {
+    "clipped_pages": 0,
+    "overflow_pages": 0
+   }
+  }
+ ]
+}

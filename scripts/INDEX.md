@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（244）
+## 文件（249）
 
 ### Python 脚本
 
@@ -60,6 +60,11 @@
 - `_check_pipeline_consistency.py`
 - `_cite_probe.py`
 - `_gen_search_index.py`
+- `_w1331_chart_census.py`
+- `_w1331_chart_portrait_fix.py`
+- `_w1331_chart_portrait_probe.py`
+- `_w1331_merge_reports.py`
+- `_w1331_t112_verify.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`

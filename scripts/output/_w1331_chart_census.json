@@ -1,0 +1,3681 @@
+{
+ "summary": {
+  "pages": 229,
+  "chart_pages": 165,
+  "no_container": [
+   "data/81-hardships-view.html",
+   "data/character-relationship-3d-view.html",
+   "data/chart-design.html",
+   "data/concept-device.html",
+   "data/criticism-history.html",
+   "data/cross-time-danmaku.html",
+   "data/customs-pass-route.html",
+   "data/data-explorer.html",
+   "data/emotional-heatmap.html",
+   "data/famous-time-travel.html",
+   "data/graph-explorer.html",
+   "data/hardship-difficulty-heatmap.html",
+   "data/hardship-heatmap.html",
+   "data/journey-geo-semiotics.html",
+   "data/mbti-evolution.html",
+   "data/narrative-experiment.html",
+   "data/perf-canvas-rendering.html",
+   "data/social-media.html",
+   "data/text-search.html",
+   "data/theological-intervention-network.html",
+   "data/timeline.html",
+   "data/visual-art.html",
+   "data/workplace.html",
+   "en/81-hardships-view.html",
+   "en/character-relationship-3d-view.html",
+   "en/chart-design.html",
+   "en/concept-device.html",
+   "en/criticism-history.html",
+   "en/cross-time-danmaku.html",
+   "en/customs-pass-route.html",
+   "en/data-explorer.html",
+   "en/dukou-engine.html",
+   "en/emotional-heatmap.html",
+   "en/famous-time-travel.html",
+   "en/graph-explorer.html",
+   "en/guide.html",
+   "en/hardship-difficulty-heatmap.html",
+   "en/hardship-heatmap.html",
+   "en/journey-geo-semiotics.html",
+   "en/mbti-evolution.html",
+   "en/narrative-experiment.html",
+   "en/perf-canvas-rendering.html",
+   "en/social-media.html",
+   "en/text-search.html",
+   "en/theological-intervention-network.html",
+   "en/timeline.html",
+   "en/visual-art.html",
+   "en/workplace.html"
+  ],
+  "width_980": [
+   "data/hardship-difficulty-heatmap.html",
+   "data/journey-spacetime.html",
+   "data/pilgrim-team-psychology-arc.html",
+   "data/poetry-rhythm-analysis.html",
+   "en/hardship-difficulty-heatmap.html",
+   "en/journey-spacetime.html",
+   "en/pilgrim-team-psychology-arc.html",
+   "en/poetry-rhythm-analysis.html"
+  ],
+  "min_width_literal": {
+   "data/_shell.html": [
+    "640"
+   ],
+   "data/emotional-heatmap.html": [
+    "720",
+    "720"
+   ],
+   "data/game-webnovel.html": [
+    "880",
+    "760"
+   ],
+   "data/global-pattern.html": [
+    "900"
+   ],
+   "data/hardship-difficulty-heatmap.html": [
+    "980",
+    "900",
+    "760"
+   ],
+   "data/hardship-heatmap.html": [
+    "760",
+    "900"
+   ],
+   "data/journey-spacetime.html": [
+    "980"
+   ],
+   "data/ming-political-thought-comparison.html": [
+    "760",
+    "720"
+   ],
+   "data/monster-capability-radar.html": [
+    "720",
+    "880",
+    "880"
+   ],
+   "data/pilgrim-team-dynamic-network.html": [
+    "760"
+   ],
+   "data/pilgrim-team-psychology-arc.html": [
+    "980",
+    "760"
+   ],
+   "data/poetry-rhythm-analysis.html": [
+    "980",
+    "900"
+   ],
+   "data/social-media.html": [
+    "720"
+   ],
+   "data/story-timeline.html": [
+    "920"
+   ],
+   "en/academic-papers.html": [
+    "720"
+   ],
+   "en/emotional-heatmap.html": [
+    "720",
+    "720"
+   ],
+   "en/game-webnovel.html": [
+    "880",
+    "760"
+   ],
+   "en/global-pattern.html": [
+    "900"
+   ],
+   "en/hardship-difficulty-heatmap.html": [
+    "980",
+    "900",
+    "760"
+   ],
+   "en/hardship-heatmap.html": [
+    "760",
+    "900"
+   ],
+   "en/journey-spacetime.html": [
+    "980"
+   ],
+   "en/ming-political-thought-comparison.html": [
+    "760",
+    "720"
+   ],
+   "en/monster-capability-radar.html": [
+    "720",
+    "880",
+    "880"
+   ],
+   "en/pilgrim-team-dynamic-network.html": [
+    "760"
+   ],
+   "en/pilgrim-team-psychology-arc.html": [
+    "980",
+    "760"
+   ],
+   "en/poetry-rhythm-analysis.html": [
+    "980",
+    "900"
+   ],
+   "en/social-media.html": [
+    "720"
+   ],
+   "en/text-evolution.html": [
+    "800"
+   ]
+  },
+  "tables_no_wrap": [
+   {
+    "page": "data/81-hardships-view.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "data/business-model.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "data/character-dynamic-network.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "data/character-relationship-3d-view.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "data/cognitive-psychology.html",
+    "tables": 5,
+    "wraps": 0
+   },
+   {
+    "page": "data/criticism-history.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "data/data-explorer.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "data/four-heavenly-kings-artifacts.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "data/hardship-difficulty-heatmap.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "data/hardship-heatmap.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "data/heaven-power-network.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "data/journey-route.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "data/journey-spacetime.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "data/karma-reincarnation.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "data/linguistics.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "data/material-archaeology.html",
+    "tables": 4,
+    "wraps": 3
+   },
+   {
+    "page": "data/monster-background.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "data/monster-ecology-network.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "data/monster-sociology.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "data/music-structure.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "data/philosophy.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "data/pilgrim-team-dynamic-network.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "data/power-resources.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "data/relationships.html",
+    "tables": 5,
+    "wraps": 0
+   },
+   {
+    "page": "data/risk-project.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "data/search.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "data/text-evolution.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "data/theological-intervention-network.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/81-hardships-view.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/bestiary.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "en/business-model.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "en/chapters-map.html",
+    "tables": 4,
+    "wraps": 0
+   },
+   {
+    "page": "en/character-dynamic-network.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/character-relationship-3d-view.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/characters.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/cognitive-psychology.html",
+    "tables": 5,
+    "wraps": 0
+   },
+   {
+    "page": "en/criticism-history.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/data-explorer.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-buddhist-chan.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-chapter-couplets.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-character-fu.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-cipai-linjiangxian.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-cipai-mantingfang.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-cipai-shuidiaogetou.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-cipai-xijiangyue.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-composition-origins.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-folk-belief.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-historical-xuanzang.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-ming-economy.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-ming-intellectual-history.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-ming-literary-thought.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-ming-metaphor.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-ming-military.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-ming-politics.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-ming-religion.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-ming-social-customs.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-original-poetry.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-poetry-imagery.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-poetry-opening.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-quanzhen-daoism.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-rhythm-analysis.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/essay-three-teachings.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/four-heavenly-kings-artifacts.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/guide.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/hardship-difficulty-heatmap.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/hardship-heatmap.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/heaven-power-network.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/journey-route.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/journey-spacetime.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/karma-reincarnation.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "en/linguistics.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/material-archaeology.html",
+    "tables": 4,
+    "wraps": 3
+   },
+   {
+    "page": "en/methodology.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/monster-background.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/monster-ecology-network.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/monster-sociology.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "en/music-structure.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/philosophy.html",
+    "tables": 2,
+    "wraps": 0
+   },
+   {
+    "page": "en/pilgrim-team-dynamic-network.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/power-resources.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "en/relationships.html",
+    "tables": 5,
+    "wraps": 0
+   },
+   {
+    "page": "en/risk-project.html",
+    "tables": 3,
+    "wraps": 0
+   },
+   {
+    "page": "en/search.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/text-evolution.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/theological-intervention-network.html",
+    "tables": 1,
+    "wraps": 0
+   },
+   {
+    "page": "en/tribulations.html",
+    "tables": 2,
+    "wraps": 0
+   }
+  ],
+  "container_dist": {
+   "(none)": 48,
+   "chart-block": 90,
+   "chart-wrap": 22,
+   "chart-box": 4,
+   "chart-block,chart-scroll": 1
+  }
+ },
+ "rows": [
+  {
+   "page": "data/81-hardships-view.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/81-hardships.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 2,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/_shell.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [
+    "640"
+   ],
+   "chartish": false
+  },
+  {
+   "page": "data/aesthetics.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/ai-dialogue.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "data/business-model.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/cave-estate.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/century-dialogue.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/character-appearance.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/character-dynamic-network.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/character-presence-timeline.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/character-relationship-3d-view.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/character-relationship-3d.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 0,
+   "canvas": 0,
+   "three": true,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/character-semantic-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": true,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/character-sentiment-arc.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/chart-design.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/cognitive-psychology.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 5,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/concept-device.html",
+   "containers": [],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/counterfactual.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/criticism-history.html",
+   "containers": [],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/cross-time-danmaku.html",
+   "containers": [],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/cultural-misreading.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/customs-pass-route.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/data-explorer.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/deconstruction.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/dialogue-sentiment.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/ecology.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 7,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 3,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/emotional-heatmap.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [
+    "720",
+    "720"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/ethics-consumption.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/famous-time-travel.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/four-dimensional-research-network.html",
+   "containers": [
+    "chart-box"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/four-heavenly-kings-artifacts.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/game-webnovel.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [
+    "880",
+    "760"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/global-pattern.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 2,
+   "width_980": 0,
+   "min_width_literal": [
+    "900"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/glossary.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "data/graph-explorer.html",
+   "containers": [],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/guanyin-six-roles-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "containers": [],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 1,
+   "min_width_literal": [
+    "980",
+    "900",
+    "760"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "containers": [],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [
+    "760",
+    "900"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/heaven-power-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/intertextuality-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/journey-geo-3d.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 0,
+   "canvas": 0,
+   "three": true,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/journey-geo-semiotics.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/journey-map-interactive.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/journey-route.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/journey-spacetime.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 7,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 1,
+   "min_width_literal": [
+    "980"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/jurisprudence.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 2,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/karma-reincarnation.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/language-style-radar.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/linguistics.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/magic-system.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 4,
+   "table_wrap": 4,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/material-archaeology.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 8,
+   "canvas": 0,
+   "three": false,
+   "tables": 4,
+   "table_wrap": 3,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/mbti-evolution.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 2,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/ming-political-thought-comparison.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [
+    "760",
+    "720"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/monster-background.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/monster-capability-radar.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [
+    "720",
+    "880",
+    "880"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/monster-ecology-network.html",
+   "containers": [
+    "chart-box"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/monster-female-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/monster-hierarchy-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/monster-sociology.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 8,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/monster-victims-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/music-structure.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/narrative-experiment.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/narrative-rhythm-curve.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/narratology-12d-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/narratology-16d-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/perf-canvas-rendering.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 1,
+   "three": true,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/philosophy.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/pilgrim-team-dynamic-network.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [
+    "760"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/pilgrim-team-psychology-arc.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 11,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 1,
+   "min_width_literal": [
+    "980",
+    "760"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/poetry-density.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "data/poetry-rhythm-analysis.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 11,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 1,
+   "min_width_literal": [
+    "980",
+    "900"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/power-resources.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/relationships.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 8,
+   "canvas": 0,
+   "three": false,
+   "tables": 5,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/risk-project.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/search.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "data/six-senses-narratology-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/social-media.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [
+    "720"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "data/story-timeline.html",
+   "containers": [
+    "chart-block",
+    "chart-scroll"
+   ],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [
+    "920"
+   ],
+   "chartish": false
+  },
+  {
+   "page": "data/tag-cloud.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "data/text-evolution.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/text-search.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/theological-intervention-network.html",
+   "containers": [],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/timeline.html",
+   "containers": [],
+   "svg": 16,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/underworld-power-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/visual-art.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/workplace.html",
+   "containers": [],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "data/wukong-tangseng-benchmark.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/81-hardships-view.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/81-hardships.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 2,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/academic-papers.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [
+    "720"
+   ],
+   "chartish": false
+  },
+  {
+   "page": "en/aesthetics.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/ai-dialogue.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/bestiary.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/business-model.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/cave-estate.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/century-dialogue.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/chapter-stats.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/chapter-structure-graph.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/chapters-map.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 4,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/character-appearance.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/character-bailongma.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/character-bajie.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/character-dynamic-network.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/character-presence-timeline.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/character-relationship-3d-view.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/character-relationship-3d.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 0,
+   "canvas": 0,
+   "three": true,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/character-semantic-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": true,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/character-sentiment-arc.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/character-shaseng.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/character-tangseng.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/character-wukong.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/characters.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/chart-design.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/cognitive-psychology.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 5,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/concept-device.html",
+   "containers": [],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/counterfactual.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/criticism-history.html",
+   "containers": [],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/cross-time-danmaku.html",
+   "containers": [],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/cultural-misreading.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/customs-pass-route.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/dashboard.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/data-explorer.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/deconstruction.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/dialogue-sentiment.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/dukou-engine.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/ecology.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 7,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 3,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/emotional-heatmap.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [
+    "720",
+    "720"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/essay-ai-era.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-buddhist-chan.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-chapter-couplets.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-character-fu.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-cipai-linjiangxian.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-cipai-mantingfang.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-cipai-shuidiaogetou.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-cipai-xijiangyue.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-composition-origins.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-divine-bureaucracy.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-folk-belief.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-historical-xuanzang.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-information-cocoon.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-economy.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-examination.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-garrison.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-intellectual-history.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-judiciary.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-literary-thought.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-maritime-ban.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-metaphor.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-military.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-politics.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-religion.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-ming-social-customs.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-modern-management.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-original-poetry.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-poetry-imagery.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-poetry-opening.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-quanzhen-daoism.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-rhythm-analysis.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-scenery-poems.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-thematic-poetry.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-three-teachings.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-version-evolution.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/essay-zen-koan-vs-neidan.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/ethics-consumption.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/famous-time-travel.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/four-dimensional-research-network.html",
+   "containers": [
+    "chart-box"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/four-heavenly-kings-artifacts.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/game-webnovel.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [
+    "880",
+    "760"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/global-pattern.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 2,
+   "width_980": 0,
+   "min_width_literal": [
+    "900"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/graph-explorer.html",
+   "containers": [],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/guanyin-six-roles-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/guide.html",
+   "containers": [],
+   "svg": 7,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/hardship-difficulty-heatmap.html",
+   "containers": [],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 1,
+   "min_width_literal": [
+    "980",
+    "900",
+    "760"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/hardship-heatmap.html",
+   "containers": [],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [
+    "760",
+    "900"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/heaven-power-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/index.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/intertextuality-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/journey-geo-semiotics.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/journey-map-interactive.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/journey-route.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/journey-spacetime.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 7,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 1,
+   "min_width_literal": [
+    "980"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/jurisprudence.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 2,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/karma-reincarnation.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/language-style-radar.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/linguistics.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/magic-system.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 4,
+   "table_wrap": 4,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/material-archaeology.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 8,
+   "canvas": 0,
+   "three": false,
+   "tables": 4,
+   "table_wrap": 3,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/mbti-evolution.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/methodology-matrix.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 2,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/methodology.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/ming-political-thought-comparison.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [
+    "760",
+    "720"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/monster-background.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/monster-capability-radar.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [
+    "720",
+    "880",
+    "880"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/monster-ecology-network.html",
+   "containers": [
+    "chart-box"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/monster-female-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/monster-hierarchy-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/monster-sociology.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 8,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/monster-victims-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/music-structure.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/narrative-experiment.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/narrative-rhythm-curve.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/narratology-12d-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/narratology-16d-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/perf-canvas-rendering.html",
+   "containers": [],
+   "svg": 1,
+   "canvas": 1,
+   "three": true,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/philosophy.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/pilgrim-team-dynamic-network.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [
+    "760"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/pilgrim-team-psychology-arc.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 11,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 1,
+   "min_width_literal": [
+    "980",
+    "760"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/poetry-rhythm-analysis.html",
+   "containers": [
+    "chart-wrap"
+   ],
+   "svg": 11,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 1,
+   "min_width_literal": [
+    "980",
+    "900"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/power-resources.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/relationships.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 8,
+   "canvas": 0,
+   "three": false,
+   "tables": 5,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/risk-project.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 3,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/search.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/site-map.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/six-senses-narratology-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/social-media.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [
+    "720"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/tag-cloud.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/text-evolution.html",
+   "containers": [
+    "chart-block",
+    "chart-scroll"
+   ],
+   "svg": 4,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [
+    "800"
+   ],
+   "chartish": true
+  },
+  {
+   "page": "en/text-search.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/theological-intervention-network.html",
+   "containers": [],
+   "svg": 5,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/timeline.html",
+   "containers": [],
+   "svg": 16,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/tribulations.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 2,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/underworld-power-network.html",
+   "containers": [
+    "chart-block"
+   ],
+   "svg": 6,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/visual-art.html",
+   "containers": [],
+   "svg": 2,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  },
+  {
+   "page": "en/visualizations.html",
+   "containers": [],
+   "svg": 0,
+   "canvas": 0,
+   "three": false,
+   "tables": 0,
+   "table_wrap": 0,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": false
+  },
+  {
+   "page": "en/workplace.html",
+   "containers": [],
+   "svg": 3,
+   "canvas": 0,
+   "three": false,
+   "tables": 1,
+   "table_wrap": 1,
+   "width_980": 0,
+   "min_width_literal": [],
+   "chartish": true
+  }
+ ]
+}

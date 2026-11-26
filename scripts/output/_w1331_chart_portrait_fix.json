@@ -1,0 +1,211 @@
+{
+ "applied": {
+  "data/criticism-history.html": [
+   {
+    "sel": "#triangle-chart",
+    "mode": "overflow-visible",
+    "ids": [
+     "triangle-chart"
+    ],
+    "was": [
+     1,
+     10
+    ]
+   }
+  ],
+  "data/customs-pass-route.html": [
+   {
+    "sel": "#pass-svg",
+    "mode": "overflow-visible",
+    "ids": [
+     "pass-svg"
+    ],
+    "was": [
+     1,
+     10
+    ]
+   }
+  ],
+  "data/dialogue-sentiment.html": [
+   {
+    "sel": "#chart-word-positive",
+    "min_width": 350,
+    "ids": [
+     "(manual)"
+    ],
+    "was": null
+   },
+   {
+    "sel": "#chart-word-negative",
+    "min_width": 350,
+    "ids": [
+     "(manual)"
+    ],
+    "was": null
+   }
+  ],
+  "data/graph-explorer.html": [
+   {
+    "sel": "#graphBox > svg",
+    "min_width": 900,
+    "ids": [
+     "(manual)"
+    ],
+    "was": null
+   }
+  ],
+  "data/hardship-heatmap.html": [
+   {
+    "sel": "#cause-bar-svg",
+    "min_width": 360,
+    "ids": [
+     "(manual)"
+    ],
+    "was": null
+   }
+  ],
+  "data/magic-system.html": [
+   {
+    "sel": "#sankey",
+    "min_width": 1100,
+    "ids": [
+     "sankey"
+    ],
+    "was": [
+     0.312,
+     3.1
+    ]
+   },
+   {
+    "sel": "#consumers-chart",
+    "min_width": 480,
+    "ids": [
+     "consumers-chart"
+    ],
+    "was": [
+     0.715,
+     7.1
+    ]
+   }
+  ],
+  "data/theological-intervention-network.html": [
+   {
+    "sel": "#network-svg",
+    "mode": "overflow-visible",
+    "ids": [
+     "network-svg"
+    ],
+    "was": [
+     1,
+     10
+    ]
+   }
+  ],
+  "en/criticism-history.html": [
+   {
+    "sel": "#triangle-chart",
+    "mode": "overflow-visible",
+    "ids": [
+     "triangle-chart"
+    ],
+    "was": [
+     1,
+     10
+    ]
+   }
+  ],
+  "en/dialogue-sentiment.html": [
+   {
+    "sel": "#chart-word-positive",
+    "min_width": 350,
+    "ids": [
+     "(manual)"
+    ],
+    "was": null
+   },
+   {
+    "sel": "#chart-word-negative",
+    "min_width": 350,
+    "ids": [
+     "(manual)"
+    ],
+    "was": null
+   }
+  ],
+  "en/hardship-heatmap.html": [
+   {
+    "sel": "#cause-bar-svg",
+    "min_width": 360,
+    "ids": [
+     "(manual)"
+    ],
+    "was": null
+   }
+  ],
+  "en/methodology-matrix.html": [
+   {
+    "sel": "#matrix-svg",
+    "mode": "overflow-visible",
+    "ids": [
+     "matrix-svg"
+    ],
+    "was": [
+     1,
+     10
+    ]
+   }
+  ],
+  "en/narrative-experiment.html": [
+   {
+    "sel": "#phase-svg",
+    "mode": "overflow-visible",
+    "ids": [
+     "phase-svg"
+    ],
+    "was": [
+     1,
+     10
+    ]
+   },
+   {
+    "sel": "#combo-svg",
+    "mode": "overflow-visible",
+    "ids": [
+     "combo-svg"
+    ],
+    "was": [
+     1,
+     10
+    ]
+   }
+  ],
+  "en/theological-intervention-network.html": [
+   {
+    "sel": "#network-svg",
+    "mode": "overflow-visible",
+    "ids": [
+     "network-svg"
+    ],
+    "was": [
+     1,
+     10
+    ]
+   }
+  ],
+  "en/visual-art.html": [
+   {
+    "sel": "#scent-flow-svg",
+    "mode": "overflow-visible",
+    "ids": [
+     "scent-flow-svg"
+    ],
+    "was": [
+     1,
+     10
+    ]
+   }
+  ]
+ },
+ "skipped": {},
+ "reverted": []
+}

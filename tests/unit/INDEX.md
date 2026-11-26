@@ -10,7 +10,7 @@
 
 - （无）
 
-## 文件（148）
+## 文件（149）
 
 ### Python 脚本
 
@@ -160,6 +160,7 @@
 - `test_w1314_handover_audit.py`
 - `test_w1327_related_links.py`
 - `test_w1330_dashboard_interactions.py`
+- `test_w1331_chart_portrait.py`
 - `test_w851_j1_name_audit.py`
 - `test_w851_visual_regression_probe.py`
 

@@ -1,3 +1,16 @@
+### W1331（2026-11-26）：竖版图表专项与 T112 视觉遗留核验
+
+
+> **来源**：用户 2026-11-26 指令「开始 V4 竖版图表专项和 T112 视觉遗留核验」。
+> - **竖版图表专项**：新建双视口图表探针（`_w1331_chart_portrait_probe.py`：载体/压缩比/有效字号/标签越界/不可达裁切五类事实，file:// 实测 165 页）。375 竖屏基线 OK 54 / WARN 64 / **FAIL 47**——159 个 svg 被压到有效字号 <8px（最甚 2.7px），根因三类：固定 viewBox 的 svg 缺窄屏 min-width（容器有滚动条但无内容可滚·40 页）、svg 直挂 section 无滚动轴、绘制层标签越出 svg 边界。
+> - **根修**：`_w1331_chart_portrait_fix.py` 对 81 页注入窄屏 `@media` 块（222 条规则·`data-w1331="1"` 幂等标记）：`min-width` = viewBox 宽（保 1:1 + 横向可滚而非压缩，DESIGN §6.4 同源）、父容器不可滚时 `*:has(> 选择器)` 精确补 `overflow-x:auto`、越界标签 `overflow:visible`。重建块继承旧规则（分阶段修复不丢前一次成果）；8–9.5px 微压缩只记 WARN 不强行加宽（避免给运行时重设 viewBox 的响应式小图强加 min-width）。
+> - **实测结果**：**375：OK 109 / WARN 56 / FAIL 0；320：OK 100 / WARN 65 / FAIL 0**（WARN = 标签越出 svg 边界但容器可滚可达 + 8–9.5px 响应式小图）。最大修复项：journey-route #timeline 3.1px→10px、character-appearance #chart-timeline 3.2px→10px、concept-device #prismSvg 2.7px→10px。
+> - **T112 视觉遗留核验**：`_w1331_t112_verify.py` 对 T112 报告 §9.2/§9.4/§9.6 共 24 项做机器核验（S 静态可复算 / R 引用探针 / M 未自动化）：**已清偿 10 / 部分 3 / 存续 6 / 未核验 4 / 不属视觉面 1**。已清偿含徽标对比度、暗色簇间连线、SVG 文字越出视口、表格横滚、980px 图表、3D 固定高、FAB 遮挡、数据位衬线、hero 巨号、移动端不可达裁切；存续项按族归并登记遗留总账 **L-13～L-15**（图表绘制层+暗色对比度 / 公共层 summary 双三角+--shadow-2 / 视觉零散四项）。
+> - **机器判据**：单测 8 例（build_block 压缩/越界/缺锚点分支、真实页注入恰一块、规则与 viewBox 对账、grade 负样本、CLI smoke）；注入器 `--dry/--report/--revert` 三模式。
+> - **验证**：全量探针 375/320 双视口 FAIL 0；`_w1331_chart_portrait_report_375.json`/`_320.json` 入库存证；T112 核验 JSON 入库。
+> - **文件**：见 file-index W1331 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1330（2026-11-26）：V1 交互二期
 
 > **来源**：用户 2026-11-26 指令「按新纪律继续处理下一批」——V1 dashboard 交互二期。
@@ -860,7 +873,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1330），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1331），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

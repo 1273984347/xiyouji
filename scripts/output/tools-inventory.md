@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-26 05:10
+生成时间：2026-11-26 19:54
 
-共 **235** 件（门禁与校验 115 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 89 · 一次性（下划线前缀） 7）
+共 **240** 件（门禁与校验 115 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 89 · 一次性（下划线前缀） 12）
 
 ## 门禁与校验（115）
 
@@ -266,7 +266,7 @@
 | `w1330_recent_inject.py` | W1330 最近浏览埋点注入器（正本=本文件；目标页固定 site/data/**）。 |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（7）
+## 一次性（下划线前缀）（12）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -277,3 +277,8 @@
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
 | `_render_scope.js` | scripts/_render_scope.js — W1192：渲染审计「采集面」口径单一来源 |
+| `_w1331_chart_census.py` | _w1331_chart_census.py — W1331 竖版图表专项·静态普查（一次性）。 |
+| `_w1331_chart_portrait_fix.py` | _w1331_chart_portrait_fix.py — W1331 竖版图表根修注入（一次性·可重复运行）。 |
+| `_w1331_chart_portrait_probe.py` | _w1331_chart_portrait_probe.py — W1331 竖版图表专项·渲染探针（一次性）。 |
+| `_w1331_merge_reports.py` | _w1331_merge_reports.py — W1331 竖版图表双视口报告合并（一次性·复算口径）。 |
+| `_w1331_t112_verify.py` | _w1331_t112_verify.py — W1331 T112 视觉遗留核验（一次性·只读）。 |
