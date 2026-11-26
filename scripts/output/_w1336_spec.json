@@ -29,6 +29,7 @@
   "| docs/00-导读/W批次编号对账表.md | W1336 | 追加认领行 |",
   "| scripts/output/file-index.md | W1336 | 新增 W1336 段 |",
   "| scripts/output/_w1336_spec.json | W1336 | 本批 spec |",
+  "| site/rss.xml | W1336 | 推送判据 regen 步重生成（生成物） |",
   "| archive/docs/W批次编号对账表-ARCHIVE.md | W1336 | 台账行窗归档目标 |",
   "| archive/docs/INDEX.md | W1336 | 归档目录索引重生成 |",
   "| archive/docs/README.md | W1336 | 归档目录导读重生成 |",

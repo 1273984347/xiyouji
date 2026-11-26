@@ -205,6 +205,38 @@ def _t2_accounting(cov, lines, problems):
         problems.append("T2 段全集派生含磁盘不存在的段：%s" % cov["segs_stale"])
 
 
+def _t5_t6_report(lines, gate_problems, docs_dir):
+    """T5/T6 判定与汇总行（W1336 提取降复杂度·同 `_t2_accounting` 形态）。
+
+    返回需并入 problems 的条目（= gate_problems 本身，便于 run() 一行收口）。
+    """
+    # T5（W1335）：分卷覆盖完备性——台账登记号必须在正本或某卷找到段（空号行须自带说明）
+    cov5 = t5_archive_coverage(docs_dir)
+    if cov5["duplicates"]:
+        for fam, dup in cov5["duplicates"].items():
+            sample = ", ".join("W%s" % w for w in list(dup)[:5])
+            gate_problems.append("T5 %s 家族同号多卷：%d 号（%s…）" % (fam, len(dup), sample))
+            lines.append("T5  ⚠ %s 家族同号多卷 %d 号（%s…）——修法=保留一卷·另一卷人工核后迁出"
+                         % (fam, len(dup), sample))
+    if cov5["missing"]:
+        sample = ", ".join("W%d" % w for w in cov5["missing"][:8])
+        gate_problems.append("T5 台账登记但无段：%d 号（%s…）" % (len(cov5["missing"]), sample))
+        lines.append("T5  ⚠ 台账登记但正本与归档均无段：%d 号（%s…）——修法=补段或在该台账行标注"
+                     "「占位空号/让号」" % (len(cov5["missing"]), sample))
+    else:
+        lines.append("T5  覆盖完备：台账 %d 号全部有段或自带空号说明（豁免 %d 号·显式豁免簿 %d 号）"
+                     % (cov5["checked"], cov5["explained"], len(cov5["exempt"])))
+    # T6（W1335）：archive/docs 总量上限
+    docs_total = t6_arch_docs_total(docs_dir)
+    if docs_total > ARCH_DOCS_CAP:
+        gate_problems.append("T6 archive/docs 总量 %s 超 %s" % (_kb(docs_total), _kb(ARCH_DOCS_CAP)))
+        lines.append("T6  ⚠ archive/docs 总量 %s 超上限 %s——修法=归档分流/裁量"
+                     % (_kb(docs_total), _kb(ARCH_DOCS_CAP)))
+    else:
+        lines.append("T6  archive/docs 总量 %s（上限 %s）" % (_kb(docs_total), _kb(ARCH_DOCS_CAP)))
+    return gate_problems
+
+
 def run(strict=False, prefix="", gate=False):
     import tracked_files as tf
 
@@ -266,31 +298,7 @@ def run(strict=False, prefix="", gate=False):
     )
     lines.append("T4  归档区合计 %s（tracked %d 件·archive/scripts 下）" % (_kb(total), len(tracked)))
 
-    # T5（W1335）：分卷覆盖完备性——台账登记号必须在正本或某卷找到段（空号行须自带说明）
-    cov5 = t5_archive_coverage(os.path.join(arch, "docs"))
-    if cov5["duplicates"]:
-        for fam, dup in cov5["duplicates"].items():
-            sample = ", ".join("W%s" % w for w in list(dup)[:5])
-            gate_problems.append("T5 %s 家族同号多卷：%d 号（%s…）" % (fam, len(dup), sample))
-            lines.append("T5  ⚠ %s 家族同号多卷 %d 号（%s…）——修法=保留一卷·另一卷人工核后迁出"
-                         % (fam, len(dup), sample))
-    if cov5["missing"]:
-        sample = ", ".join("W%d" % w for w in cov5["missing"][:8])
-        gate_problems.append("T5 台账登记但无段：%d 号（%s…）" % (len(cov5["missing"]), sample))
-        lines.append("T5  ⚠ 台账登记但正本与归档均无段：%d 号（%s…）——修法=补段或在该台账行标注"
-                     "「占位空号/让号」" % (len(cov5["missing"]), sample))
-    else:
-        lines.append("T5  覆盖完备：台账 %d 号全部有段或自带空号说明（豁免 %d 号·显式豁免簿 %d 号）"
-                     % (cov5["checked"], cov5["explained"], len(cov5["exempt"])))
-    # T6（W1335）：archive/docs 总量上限
-    docs_total = t6_arch_docs_total(os.path.join(arch, "docs"))
-    if docs_total > ARCH_DOCS_CAP:
-        gate_problems.append("T6 archive/docs 总量 %s 超 %s" % (_kb(docs_total), _kb(ARCH_DOCS_CAP)))
-        lines.append("T6  ⚠ archive/docs 总量 %s 超上限 %s——修法=归档分流/裁量"
-                     % (_kb(docs_total), _kb(ARCH_DOCS_CAP)))
-    else:
-        lines.append("T6  archive/docs 总量 %s（上限 %s）" % (_kb(docs_total), _kb(ARCH_DOCS_CAP)))
-    problems.extend(gate_problems)
+    problems.extend(_t5_t6_report(lines, gate_problems, os.path.join(arch, "docs")))
 
     for ln in lines:
         print(prefix + ln)
