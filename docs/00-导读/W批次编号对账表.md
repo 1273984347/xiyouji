@@ -236,4 +236,4 @@
 | W1329 | V4 移动端回归：375/320 全量探针复跑与新增失败根修（页脚第三组后的触摸/溢出复核） | e9b5d3c73 | —（待回填） | **已收官**（首笔回填 e9b5d3c73） | 主会话 2026-11-26（W1329） | — | 本会话（W1329） | scripts/mobile_viewport_probe.py · site/system.css · site/data（按探针结果） · scripts/output/mobile_viewport_report*.json · CHANGELOG.md · HANDOVER.md |
 | W1330 | V1 交互二期：看板搜索深链 #q= + 键盘 / 聚焦 + 最近浏览（localStorage）+ 回到顶部 | 134d664a8 | —（待回填） | **已收官**（首笔回填 134d664a8） | 主会话 2026-11-26（W1330） | — | 本会话（W1330） | site/dashboard.html · site/static/js/recent.js · site/data（90 页埋点） · scripts/w1330_recent_inject.py · tests/unit/test_w1330_dashboard_interactions.py · HANDOVER.md |
 | W1331 | 竖版图表专项：165 页双视口探针 + 81 页窄屏根修（375/320 FAIL 0）+ T112 视觉遗留 24 项核验 | cb73ca594 | —（待回填） | **已收官**（首笔回填 cb73ca594） | 主会话 2026-11-26（W1331） | — | 本会话（W1331） | — |
-| W1332 | 暗色对比度专项：夜读态探针 243 页 + 深底浅字根修 + 公共层 summary/--shadow-2 + L-13～L-15 闭合 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 2026-11-26（W1332） | — | 本会话（W1332） | — |
+| W1332 | 暗色对比度专项：夜读态探针 243 页 + 深底浅字根修 + 公共层 summary/--shadow-2 + L-13～L-15 闭合 | 6a6f9ca75 | —（待回填） | **已收官**（首笔回填 6a6f9ca75） | 主会话 2026-11-26（W1332） | — | 本会话（W1332） | — |
