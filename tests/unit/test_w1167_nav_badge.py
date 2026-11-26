@@ -41,6 +41,41 @@ def test_analytics_block_shape():
     assert analytics.build_block("x.html", {}) == ""  # 无端点=不注入
 
 
+def test_analytics_update_preserves_neighbor_injects():
+    """W1333 根修：幂等更新只重建本块，同区其它注入块（label-contrast / 批次 <style>）必须保留。
+
+    病根实证：旧实现重建 MARK → </head> 整段 ⇒ build_reader 收尾自动重跑注入器时，
+    W1284 注入的 label-contrast.js 与 W1331 的 chart-portrait <style> 被一并洗掉（168 页）
+    ⇒ 第 80 槽 graphic 口径违例 0 → 1679 反弹。此处钉住「保留」与「幂等」两个不变量。
+    """
+    cfg = {"goatcounter_endpoint": "https://a.goatcounter.com/count"}
+    blk = analytics.build_block("data/x.html", cfg).strip()
+    html = ("<html><head>\n" + blk + "\n"
+            + '  <script src="../static/js/label-contrast.js"></script>\n'
+            + '<style data-w1331="1">\n#chart-a { min-width: 700px; }\n</style>\n'
+            + "</head><body>x</body></html>\n")
+    out, action = analytics.process("data/x.html", html, cfg)
+    assert action == "update"
+    assert out == html  # 幂等 + 邻居零改动
+    assert "label-contrast.js" in out and 'data-w1331="1"' in out
+    assert analytics.process("data/x.html", out, cfg)[0] == out
+
+
+def test_analytics_update_rebuilds_only_own_lines():
+    """W1333 根修：端点变更时本块被替换，同区其它注入块不陪葬。"""
+    cfg = {"goatcounter_endpoint": "https://new.goatcounter.com/count"}
+    stale = ("<html><head>\n<!-- ANALYTICS v2 w1168 -->\n"
+             '<script data-goatcounter="https://old.goatcounter.com/count" async '
+             'src="../static/js/goatcounter.js"></script>\n'
+             '<script defer src="../static/js/stats.js"></script>\n'
+             '  <script src="../static/js/label-contrast.js"></script>\n'
+             "</head><body>x</body></html>\n")
+    out, action = analytics.process("data/x.html", stale, cfg)
+    assert action == "update"
+    assert "old.goatcounter.com" not in out and "new.goatcounter.com" in out
+    assert "label-contrast.js" in out
+
+
 # ---- 导航正本 ----
 
 def test_active_for_mapping():

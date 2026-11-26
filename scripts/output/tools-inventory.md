@@ -4,9 +4,9 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-26 22:57
+生成时间：2026-11-27 01:28
 
-共 **239** 件（门禁与校验 115 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 91 · 一次性（下划线前缀） 9）
+共 **238** 件（门禁与校验 115 · 批次与登记 12 · 统计与对账 3 · 生成与索引 8 · 运维与临时区 1 · 工具 92 · 一次性（下划线前缀） 7）
 
 ## 门禁与校验（115）
 
@@ -172,7 +172,7 @@
 |:---|:---|
 | `tmpe_tidy.py` | tmpe_tidy.py — tmpe 本地临时区策略化治理工具（W738 起·策略源=tmpe/policy.yml）。 |
 
-## 工具（91）
+## 工具（92）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -266,9 +266,10 @@
 | `w1330_recent_inject.py` | W1330 最近浏览埋点注入器（正本=本文件；目标页固定 site/data/**）。 |
 | `w1331_chart_portrait_fix.py` | _w1331_chart_portrait_fix.py — W1331 竖版图表根修注入（一次性·可重复运行）。 |
 | `w1331_chart_portrait_probe.py` | _w1331_chart_portrait_probe.py — W1331 竖版图表专项·渲染探针（一次性）。 |
+| `w1333_a1_crossref.py` | w1333_a1_crossref.py — A1 逐回解读交叉引用补全（W1333·内容质量深化）。 |
 | `worktree_rehearse.py` | worktree_rehearse.py — worktree 预演法工具化（W701·S-26·用户圈选开工）。 |
 
-## 一次性（下划线前缀）（9）
+## 一次性（下划线前缀）（7）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -279,5 +280,3 @@
 | `_cite_probe.py` | 引文候选提取探针（E-A 沉淀，W507 永久化）。 |
 | `_gen_search_index.py` | W594：标题关键词数组（中文 jieba 切词、英文按词干拆分），供前端 +4 加权，≤12 个。 |
 | `_render_scope.js` | scripts/_render_scope.js — W1192：渲染审计「采集面」口径单一来源 |
-| `_w1332_dark_contrast_probe.py` | _w1332_dark_contrast_probe.py — W1332 暗色对比度专项探针（一次性·L-13 ②–⑤ 判据自动化）。 |
-| `_w1332_dark_text_fix.py` | _w1332_dark_text_fix.py — W1332 暗色「深底浅字」令牌误用批量根修（一次性·幂等）。 |

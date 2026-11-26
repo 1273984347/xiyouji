@@ -90,7 +90,7 @@
    "counts": {}
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "508049fe38c99d28592f7c226ff2d0ed8136c1e4",
+   "sha1": "eb76f9f02e4e992d08ae51b0f6171cbbeab1c32b",
    "counts": {}
   },
   "data/cultural-misreading.html": {
@@ -330,7 +330,7 @@
    "counts": {}
   },
   "data/tag-cloud.html": {
-   "sha1": "171e85c902338ea0a9b2d39d0ae166993321c036",
+   "sha1": "4cf383fb750c95b5027937e96d858b58eff40eda",
    "counts": {}
   },
   "data/text-evolution.html": {
@@ -370,11 +370,11 @@
    "counts": {}
   },
   "about.html": {
-   "sha1": "ef22d8381d1f6829cd1a91f18e208d6d814659e9",
+   "sha1": "ca929991e5fe77cd3c5459f649cf12466b2d3bfa",
    "counts": {}
   },
   "curated.html": {
-   "sha1": "1bb448f1d46b679c4e2aa6a8d017895aab54fc24",
+   "sha1": "8db3bbd9632ddb314d0fac1d86b58ccd8198243f",
    "counts": {}
   },
   "dashboard.html": {
@@ -382,19 +382,19 @@
    "counts": {}
   },
   "dukou-engine.html": {
-   "sha1": "67704c5b7b5cfacbae07c5a1bfe880754dd7e05c",
+   "sha1": "eaf6901f009964eed9627675d7dc5545e73da19e",
    "counts": {}
   },
   "guide.html": {
-   "sha1": "32246f0d3186bd4c59210d0c775188ee9bb5bcc3",
+   "sha1": "33e88f22d56e3b549cec464259ac2aba82933ed5",
    "counts": {}
   },
   "index.html": {
-   "sha1": "9a08424dde41813a00568c62955399728c61f063",
+   "sha1": "9bbe6e98c6c99fe697148908155955c20f2b7b15",
    "counts": {}
   },
   "rum-viewer.html": {
-   "sha1": "4b5ec6f482c16134a12ec9ff08ebd1bdde2248dd",
+   "sha1": "a12af475fadea04f9d0bcaa1e66d2d07ef288e9a",
    "counts": {}
   },
   "visit-viewer.html": {
@@ -718,7 +718,7 @@
    "counts": {}
   },
   "en/four-heavenly-kings-artifacts.html": {
-   "sha1": "19b41cc22dffeeb4bba636a360950c5846457802",
+   "sha1": "e44276dce0601f41c09a9544942de619e5f55ee1",
    "counts": {}
   },
   "en/game-webnovel.html": {
@@ -754,7 +754,7 @@
    "counts": {}
   },
   "en/index.html": {
-   "sha1": "15d412c348d1432b1d2a1a02a54afe74c4ce44cd",
+   "sha1": "3879993654dcaeb95fa8499d5754e05bfa8ab461",
    "counts": {}
   },
   "en/intertextuality-network.html": {
@@ -834,7 +834,7 @@
    "counts": {}
   },
   "en/monster-hierarchy-network.html": {
-   "sha1": "392e018d9d9dcb64f4ba72d98f8dc99d19a03387",
+   "sha1": "7ea785821fe9e4d7dd3fa765e6018d8bedb26899",
    "counts": {}
   },
   "en/monster-sociology.html": {
@@ -858,7 +858,7 @@
    "counts": {}
   },
   "en/narratology-12d-network.html": {
-   "sha1": "4460f9a06db4557bfa736d2b60e6b699c4816426",
+   "sha1": "6298e8c69bc01dea4ee50ea8c1d05acedd2a9100",
    "counts": {}
   },
   "en/narratology-16d-network.html": {
@@ -874,7 +874,7 @@
    "counts": {}
   },
   "en/pilgrim-team-dynamic-network.html": {
-   "sha1": "b3940348d9d03baac919738926670bd1b4319260",
+   "sha1": "e5b23671a00dbf6764589251791b8124e5374236",
    "counts": {}
   },
   "en/pilgrim-team-psychology-arc.html": {
@@ -954,5 +954,5 @@
    "counts": {}
   }
  },
- "generated_at": "2026-11-26T14:45:09.022Z"
+ "generated_at": "2026-11-26T17:25:45.781Z"
 }

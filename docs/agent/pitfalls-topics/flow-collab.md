@@ -3,7 +3,7 @@
 > **📖 阅读契约**：查表型——流程 / 协作 / 取证类踩坑排查时按本表查；每条含根因、判据与可执行纪律（纪律块留本层，叙事全文在归档层）。
 > **何时读**：取批次号 / 写计划与报告 / 多 Agent 协作 / 取证定性与复盘时（收官链、登记面、纪律落地）
 > **叙事全文**：`archive/docs/pitfalls-detail-ARCHIVE.md` 的 `#### E-NN` 段（只追加不修改）。
-> **同族**：总 427<!--stats:pitfalls_total--> 条 · CSS 91<!--stats:pitfalls_css--> / JS 13<!--stats:pitfalls_js--> / git 41<!--stats:pitfalls_git--> / 级联 30<!--stats:pitfalls_cascade--> / 数据 28<!--stats:pitfalls_data--> / 流程 224<!--stats:pitfalls_flow-->
+> **同族**：总 428<!--stats:pitfalls_total--> 条 · CSS 91<!--stats:pitfalls_css--> / JS 14<!--stats:pitfalls_js--> / git 41<!--stats:pitfalls_git--> / 级联 30<!--stats:pitfalls_cascade--> / 数据 28<!--stats:pitfalls_data--> / 流程 224<!--stats:pitfalls_flow-->
 
 ### 流程 / 协作 / 取证（224<!--stats:pitfalls_flow--> 条）
 

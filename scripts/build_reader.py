@@ -146,8 +146,11 @@ def fold_sections(body_html: str, names: tuple[str, ...] = FOLD_SECTIONS) -> tup
         content = parts[i + 1] if i + 1 < len(parts) else ""
         name = re.sub(r"</?h2>", "", h2).strip()
         if name in names:
-            out.append('<details class="reader-fold"><summary>%s</summary>'
-                       '<div class="reader-fold-body">' % html.escape(name))
+            # W1333（reader 阅读体验）：首个折叠默认展开（剧情梗概）——此前三个折叠全收起
+            # ⇒ 回目页首屏可读内容为零；其余折叠保持收起（渐进披露）。
+            open_attr = " open" if folded == 0 else ""
+            out.append('<details class="reader-fold"%s><summary>%s</summary>'
+                       '<div class="reader-fold-body">' % (open_attr, html.escape(name)))
             out.append(content)
             out.append("</div></details>\n")
             folded += 1

@@ -3,9 +3,9 @@
 > **📖 阅读契约**：查表型——JS / CSP / 运行时类踩坑排查时按本表查；每条含根因、判据与可执行纪律（纪律块留本层，叙事全文在归档层）。
 > **何时读**：改页内联脚本 / CSP 哈希 / 前端运行时行为时（脚本被拒执行、事件族降级、动画与动效契约）
 > **叙事全文**：`archive/docs/pitfalls-detail-ARCHIVE.md` 的 `#### E-NN` 段（只追加不修改）。
-> **同族**：总 427<!--stats:pitfalls_total--> 条 · CSS 91<!--stats:pitfalls_css--> / JS 13<!--stats:pitfalls_js--> / git 41<!--stats:pitfalls_git--> / 级联 30<!--stats:pitfalls_cascade--> / 数据 28<!--stats:pitfalls_data--> / 流程 224<!--stats:pitfalls_flow-->
+> **同族**：总 428<!--stats:pitfalls_total--> 条 · CSS 91<!--stats:pitfalls_css--> / JS 14<!--stats:pitfalls_js--> / git 41<!--stats:pitfalls_git--> / 级联 30<!--stats:pitfalls_cascade--> / 数据 28<!--stats:pitfalls_data--> / 流程 224<!--stats:pitfalls_flow-->
 
-### JS / CSP / 运行时（13<!--stats:pitfalls_js--> 条）
+### JS / CSP / 运行时（14<!--stats:pitfalls_js--> 条）
 
 
 - **「守卫覆盖率」类判据必须枚举全部合法变量命名·否则得出「漏守卫」假结论**（W1105 实证·E-97）：全站 d3 页的 reduced-motion 守卫同时存在两种写法——本批统一注入的 MOYUN_RM 与既有页的 REDUCE_MOTION。⇒ 要点详见归档；【全文详见归档 E-97】
@@ -29,3 +29,5 @@
 - **测试桩里 `global.window = {}` 时裸标识符不是全局：浏览器语义不能假定给 node**（W1168 实证·E-210）：探针捕获脚本写 `window.persist = function …` 后以裸 `persist(...)` 调用——浏览器里 `window.x` 自动成为全局，`node -e` 的 `global.window={}` 桩里**不会**，判据自测当场 `ReferenceError: persist is not defined`。⇒ 要点与纪律详见归档 E-210
 
 - **改页内内联 `<script>`（哪怕只加一个 class 属性）⇒ 该页 CSP 哈希失配 ⇒ 整段脚本被拒执行 ⇒ 页面「无报错但图表全不渲染」**（W1286 实证·E-302·跨项目通用·与 W1283「CSP 哈希须随内联块同步」同族的「CSP 漂移」族·与 E-244「视觉改动须自己看渲染图」互补）：识别特征：**`svg text` 计数为 0 + 控制台仅一条 CSP 违规 + 无 pageerror**。修法：`python scripts/generate_csp.py` 重算哈希（本次 2 页更新）→ `python scripts/generate_csp.py --check` 确认「漂移/缺失 0 页」⇒ 再截图目视。⇒ 要点与纪律详见归档 E-302
+
+- **「幂等重建」若以右侧边界（`</head>`）为终点，会静默洗掉同区其它注入块**（W1333 实证·E-322·与 E-302「注入器隐性破坏」同族·跨项目通用）：`w1167_analytics_inject.py` 的更新分支把「MARK → `</head>`」整段重建 ⇒ 同区里 W1284 注入的 `label-contrast.js` 与 W1331 的 `chart-portrait <style>` 一并被删（实测 **168 页**）⇒ 第 80 槽 graphic 口径违例 **0 → 1679** 反弹，而页面本身不报错、门禁只在「重跑探针」时才叫。触发面极隐蔽：`build_reader.py` 收尾会**自动**重跑该注入器（reader 重建后补注入），因此「改 reader」也会误伤全站图表页。⇒ 纪律：① 幂等替换的区间必须**按本块自身行形态**收敛（本块 = MARK + 统计脚本行），禁以容器边界（`</head>`/`</main>`）作右端；② 同区多块注入的组件，其回归判据须**显式断言「邻居块仍在」**（本批 `tests/unit/test_w1167_nav_badge.py` 两例钉住保留 + 幂等）；③ 凡「注入器被流水线自动重跑」的组件，改它即等于改全站渲染面——须在同批跑一次受影响门禁（本批第 80 槽探针）。

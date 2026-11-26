@@ -63,14 +63,42 @@ def _block_start(txt: str) -> int:
     return -1
 
 
+# 本块自身行形态（W1333 根修）：MARK 之后只吞「统计脚本」行。
+# 病根（W1333 第 80 槽实证 168 页）：旧实现把 MARK → </head> 整段重建，而同一区里
+# 还有 W1284 注入的 label-contrast.js 与 W1331 的 chart-portrait <style>（各批同区注入）⇒
+# 任何一次幂等重跑（build_reader 收尾会自动跑本注入器）都会把它们洗掉 ⇒
+# graphic 口径违例 0 → 1679 反弹。⇒ 只重建本块自己的行，其余注入块原样保留。
+ANALYTICS_LINE = re.compile(
+    r"^\s*<script\b[^>]*(?:goatcounter\.js|stats\.js|gtag/js|googletagmanager)[^>]*>\s*</script>\s*$",
+    re.I,
+)
+
+
+def _block_end(txt: str, i: int) -> int:
+    """统计块结束位置（不含）：从 MARK 行之后起，只跳过统计脚本行；遇其它内容即停。"""
+    nl = txt.find("\n", i)
+    if nl < 0:
+        return len(txt)
+    pos = nl + 1
+    while pos < len(txt):
+        nl = txt.find("\n", pos)
+        line = txt[pos:] if nl < 0 else txt[pos:nl]
+        if not ANALYTICS_LINE.match(line):
+            break
+        if nl < 0:
+            return len(txt)
+        pos = nl + 1
+    return pos
+
+
 def process(rel: str, txt: str, cfg: dict):
     block = build_block(rel, cfg)
     if not block.strip():
         return txt, "no-config"
     i = _block_start(txt)
     if i >= 0:
-        # 幂等更新：MARK（含旧版本）到 </head> 前的注入区整段重建
-        j = txt.lower().index("</head>", i)
+        # 幂等更新：只重建本块（MARK + 统计脚本行），同区其它注入块保留（W1333 根修）
+        j = _block_end(txt, i)
         new = txt[:i] + block.strip() + "\n" + txt[j:]
         return new, "update"
     e = END_HEAD.search(txt)
@@ -93,7 +121,8 @@ def main():
         if new != txt:
             changed.append(rel)
             if mode == "--apply":
-                f.write_text(new, encoding="utf-8")
+                # W1333（E-322 同族）：显式 LF——默认 newline=None 在 Windows 造 CRLF 工作树
+                f.write_text(new, encoding="utf-8", newline="\n")
     gc_on = bool(cfg.get("goatcounter_endpoint"))
     print(f"mode={mode}  轨道: GoatCounter 单轨={'开' if gc_on else '关'}"
           f"  桥={'随发' if gc_on else '不发'}  GA4=已退役(W1168)")

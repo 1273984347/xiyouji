@@ -27,10 +27,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 SCRIPTS = ROOT / "scripts"
+# W1333：本批脚本按「脚本三档归位」迁入归档（第 42 槽 C4 要求历史批脚本不得滞留 scripts/ 根）
+BATCH1332 = ROOT / "archive" / "scripts" / "batches" / "w1332"
 sys.path.insert(0, str(SCRIPTS))
+sys.path.insert(0, str(BATCH1332))
 
-import _w1332_dark_text_fix as fix  # noqa: E402
 import _w1332_dark_contrast_probe as probe  # noqa: E402
+import _w1332_dark_text_fix as fix  # noqa: E402
 
 
 def test_system_css_summary_marker_masked():
@@ -101,6 +104,6 @@ def test_probe_grade_rules():
 
 def test_cli_help_smoke():
     for name in ("_w1332_dark_contrast_probe.py", "_w1332_dark_text_fix.py"):
-        r = subprocess.run([sys.executable, str(SCRIPTS / name), "--help"],
+        r = subprocess.run([sys.executable, str(BATCH1332 / name), "--help"],
                            capture_output=True, text=True, timeout=60)
         assert r.returncode == 0, name

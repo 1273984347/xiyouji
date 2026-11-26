@@ -144,7 +144,10 @@ def main():
         if new != txt:
             changed.append(rel)
             if mode == "--apply":
-                f.write_text(new, encoding="utf-8")
+                # W1333（E-322 同族）：write_text 默认 newline=None 在 Windows 把 \n 转 CRLF
+                # ⇒ 全站工作树被翻成 CRLF（.gitattributes text=auto eol=lf 契约背离）⇒
+                # w1330_recent_inject --check 之类按裸字节判 EOL 的判据集体假红。
+                f.write_text(new, encoding="utf-8", newline="\n")
     print(f"mode={mode}  stats={stats}  实际改动={len(changed)}")
     bad = {k: v for k, v in stats.items() if k in ("no-anchor", "mark-broken")}
     if bad:

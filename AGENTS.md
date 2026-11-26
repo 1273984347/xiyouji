@@ -35,7 +35,7 @@
 | 文件 | 何时读 | 回答什么 |
 |---|---|---|
 | docs/agent/gates.md | **任何写操作或提交前 → 先跑 verify_delivery.py（退出码非 0 即阻断），红时查对应槽条目** | 门禁触发条件 + 失败处置（薄说明层·判定逻辑在门禁脚本本体） |
-| pitfalls.md | 门禁红 / 同类二犯 / 批量改动前 | 427<!--stats:pitfalls_total--> 条坑位判据（**索引壳=仓库根 pitfalls.md**·E-NN 反查表；**六主题正本在 docs/agent/pitfalls-topics/**；docs/agent/pitfalls.md 为二级跳转壳勿读）·六主题：CSS / 视觉渲染（91<!--stats:pitfalls_css-->）·JS / CSP / 运行时（13<!--stats:pitfalls_js-->）·git / 提交 / 并发（41<!--stats:pitfalls_git-->）·级联 / CHANGELOG（30<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（28<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（224<!--stats:pitfalls_flow-->）·叙事细节在归档 |
+| pitfalls.md | 门禁红 / 同类二犯 / 批量改动前 | 428<!--stats:pitfalls_total--> 条坑位判据（**索引壳=仓库根 pitfalls.md**·E-NN 反查表；**六主题正本在 docs/agent/pitfalls-topics/**；docs/agent/pitfalls.md 为二级跳转壳勿读）·六主题：CSS / 视觉渲染（91<!--stats:pitfalls_css-->）·JS / CSP / 运行时（14<!--stats:pitfalls_js-->）·git / 提交 / 并发（41<!--stats:pitfalls_git-->）·级联 / CHANGELOG（30<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（28<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（224<!--stats:pitfalls_flow-->）·叙事细节在归档 |
 | archive/docs/pitfalls-detail-ARCHIVE.md | 需要坑位条目全文时 | 叙事/实证细节（#### E-NN 锚·只增不改） |
 | docs/10-方法论沉淀/批次交付流水线.md | 批次收官 / 推送前 | 全链 7 步 + 失败模式速查 + 收官链时间纪律 |
 | docs/agent/MAINTAINING.md | **改 AGENTS/pitfalls/gates 等治理文件前** | 维护契约全文：退役三标准 / 添加前四问 / 体积预算 / 局部化预留形态 |
@@ -74,4 +74,4 @@ Windows 单机的解释器三语境 / 编码 / heredoc / curl / 路径等环境�
 2. 每批核心 2 同步（CHANGELOG + HANDOVER）·批次经台账认领·提交一律 safe_commit（防代提）。
 3. 有复用价值的教训落 pitfalls（16-⑥ 载体铁则）·同类两犯的纪律**上提本文件铁律区**（上提后在坑条目预防段标注）。
 
-*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1327-W1327 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-26（W1328）：V3 收尾与看板深链（全站 85 页关联+计数收口）；2026-11-26（W1329）：V4 移动端回归（全量探针+8 页裁切根修）；2026-11-26（W1330）：V1 交互二期（搜索深链+最近浏览+回到顶部）；2026-11-26（W1331）：竖版图表专项（165 页探针·81 页根修·FAIL 0）+ T112 遗留核验（24 项）；2026-11-26（W1332）：暗色对比度专项（243 页探针·FAIL 46→0）+ 公共层补丁（summary/--shadow-2）+ L-13～L-15 闭合。如与上述权威文档冲突，以权威文档为准。*
+*本文件由 AGENTS 通读项目后生成于 2026-08-16（v2.3.73 W458）；W458-W707 沿革已迁 [archive/docs/AGENTS-ARCHIVE.md](archive/docs/AGENTS-ARCHIVE.md)（W709 建·W1328-W1328 级联自动滚动·脚注保留最近 5 条·每条 ≤120 字·日期阿拉伯形态·grep 查勿通读）；2026-11-26（W1329）：V4 移动端回归（全量探针+8 页裁切根修）；2026-11-26（W1330）：V1 交互二期（搜索深链+最近浏览+回到顶部）；2026-11-26（W1331）：竖版图表专项（165 页探针·81 页根修·FAIL 0）+ T112 遗留核验（24 项）；2026-11-26（W1332）：暗色对比度专项（243 页探针·FAIL 46→0）+ 公共层补丁（summary/--shadow-2）+ L-13～L-15 闭合；2026-11-26（W1333）：A1 逐回交叉引用（100 回 0 死链）+ reader 阅读体验（首个折叠 open）+ A5 两篇提质；同批根修统计注入器洗块（E-322）。如与上述权威文档冲突，以权威文档为准。*

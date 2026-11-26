@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（248）
+## 文件（247）
 
 ### Python 脚本
 
@@ -60,8 +60,6 @@
 - `_check_pipeline_consistency.py`
 - `_cite_probe.py`
 - `_gen_search_index.py`
-- `_w1332_dark_contrast_probe.py`
-- `_w1332_dark_text_fix.py`
 - `a11y_audit.py`
 - `acceptance_snapshot.py`
 - `agent_start.py`
@@ -273,6 +271,7 @@
 - `w1330_recent_inject.py`
 - `w1331_chart_portrait_fix.py`
 - `w1331_chart_portrait_probe.py`
+- `w1333_a1_crossref.py`
 - `worktree_rehearse.py`
 
 ### JavaScript / TypeScript

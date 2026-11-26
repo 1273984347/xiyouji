@@ -1,3 +1,15 @@
+### W1333（2026-11-26）：A1 交叉引用与 reader 阅读体验
+
+
+> **来源**：用户 2026-11-26 指令「开始 W1333」，方向经 AskUserQuestion 裁决为「1+2+4」：A1 交叉引用 + reader 阅读体验 + A5 两篇提质。
+> - **A1 逐回交叉引用**：新建 `scripts/w1333_a1_crossref.py`（--dry/--apply/--check 三模式·幂等标记 `<!-- w1333-crossref -->`）——按 chapter-meta（num / main_characters）给 100 回各注入 1 条「相邻回 + 人物主文件」关联行（别名表：观世音→观音、如来佛祖→如来；外传/深化不作主链接），**0 死链**；reader 重生成后自动改写为站内链接。
+> - **reader 阅读体验**：`build_reader.py` 的 `fold_sections` 让**首个折叠（剧情梗概）默认 open**——此前回目页三个折叠全收起、首屏可读内容为零；其余折叠保持渐进披露。重生成 636 页 + 内联 CSS 635 页重同步 + nav/analytics 补注入；第 62 槽 reader 完整性 0 FAIL、reader/RSS 新鲜度 0 FAIL。
+> - **A5 两篇提质**：`西游与禅宗公案专题.md` 修复 2 条坏引文（第1回多余 `”`、第3回引号错乱）并按原文补全；`佛道思想.md` 新增「禅宗公案读法 vs 内丹修炼次第」对照节（复用篇首已核验的第1/78/85 回引文）。引文核验 5+3 条命中率 100%；术语门禁新违规 0；元信息块 v2 通过。
+> - **同批根修（E-322·收官链拦下）**：`w1167_analytics_inject.py` 的幂等更新分支以 `</head>` 为右端整段重建 ⇒ 同区注入块（W1284 `label-contrast.js` / W1331 `chart-portrait <style>`）被洗掉 **168 页**（触发面=`build_reader.py` 收尾自动全站重跑注入器）⇒ 第 80 槽 graphic 违例 **0 → 1679**。改为**只按本块行形态收敛**，并按 HEAD 原文加法式补回 129 页；判据 = `--dry-run` 改动 0 / `--check` PASS + 单测 2 例（邻居保留 / 只换本块）。
+> - **机器判据**：单测 8 例（A1 六例 + 注入器保留与幂等两例）。
+> - **文件**：见 file-index W1333 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1332（2026-11-26）：暗色对比度专项与公共层补丁
 
 
@@ -886,7 +898,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1332），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1333），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
@@ -894,6 +906,6 @@
 >
 > **历史版本归档**：v0.1 - v2.3.17（W001-W1000）已迁移至 [archive/docs/CHANGELOG-ARCHIVE-tier2.md](archive/docs/CHANGELOG-ARCHIVE-tier2.md)（W513 二级归档）；W422 再归档 v2.3.18-v2.3.31（W400-W416）段；W511 归档 v2.3.32-v2.3.82（W417-W464）段 + v2.3.83（W484）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W681 归档 v2.3.84-v2.3.249（W485-W649）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)。W736 再归档 v2.3.250-v2.3.293（W650-W699）段至 [CHANGELOG-ARCHIVE.md](archive/docs/CHANGELOG-ARCHIVE.md)（源文件超 50KB/500 行阈值）。本文件正本按 110 段窗滚动（W960 窗口制·正本最老段随批推进·早期形态：W650-W710 段用历史 vX.Y.Z 形态·W711+ 段用批次键 W### 形态）。
 >
-> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 875<!--stats:html_total--> 页（site/data 91<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 636<!--stats:site_reader_html-->）；CSP 覆盖 874<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 873<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 873<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 637<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 90<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
+> **全站页数口径**（W459 建·W702 实跑刷新，各门禁分母不同）：HTML 共 875<!--stats:html_total--> 页（site/data 91<!--stats:site_data_html--> + site/en 138<!--stats:site_en_html--> + site 根 10<!--stats:site_root_html--> + site/reader 636<!--stats:site_reader_html-->）；CSP 覆盖 874<!--stats:csp_covered--> 页（排除 `_template.html`）；check_js_syntax/check_structure 扫 873<!--stats:scan_files--> 文件（再排除 `_shell.html`）；check_seo_head 扫 873<!--stats:seo_scanned--> 页（site 全树减两个模板壳）；inline_css 同步 638<!--stats:inline_css_pages--> 页（site 全树含 INLINED 标记页）；「可视化页 90<!--stats:visualization_pages-->」= site/data 88 减 `_shell.html`。
 >
 > **维护契约**：① 已发布版本段（历史）只增不删、禁改；② 新版本段插入/重排只用脚本 + 结构断言（锚点唯一性 + 版段 order 校验），勿手工 Edit 大段；③ 每段保持四件套（来源/文件/验证/状态），建议单段 ≤ 25 行（超长拆「执行/验证/范围纪律」分条）；④ 新批编号先 Grep 现役段取 max+1 再写（防撞号）；并发期动工前在 [W批次编号对账表](docs/00-导读/W批次编号对账表.md) 登记认领（W663 起·版段递延时以对账表为准）。
