@@ -35,7 +35,7 @@
 | 文件 | 何时读 | 回答什么 |
 |---|---|---|
 | docs/agent/gates.md | **任何写操作或提交前 → 先跑 verify_delivery.py（退出码非 0 即阻断），红时查对应槽条目** | 门禁触发条件 + 失败处置（薄说明层·判定逻辑在门禁脚本本体） |
-| pitfalls.md | 门禁红 / 同类二犯 / 批量改动前 | 428<!--stats:pitfalls_total--> 条坑位判据（**索引壳=仓库根 pitfalls.md**·E-NN 反查表；**六主题正本在 docs/agent/pitfalls-topics/**；docs/agent/pitfalls.md 为二级跳转壳勿读）·六主题：CSS / 视觉渲染（91<!--stats:pitfalls_css-->）·JS / CSP / 运行时（14<!--stats:pitfalls_js-->）·git / 提交 / 并发（41<!--stats:pitfalls_git-->）·级联 / CHANGELOG（30<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（28<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（224<!--stats:pitfalls_flow-->）·叙事细节在归档 |
+| pitfalls.md | 门禁红 / 同类二犯 / 批量改动前 | 429<!--stats:pitfalls_total--> 条坑位判据（**索引壳=仓库根 pitfalls.md**·E-NN 反查表；**六主题正本在 docs/agent/pitfalls-topics/**；docs/agent/pitfalls.md 为二级跳转壳勿读）·六主题：CSS / 视觉渲染（91<!--stats:pitfalls_css-->）·JS / CSP / 运行时（14<!--stats:pitfalls_js-->）·git / 提交 / 并发（41<!--stats:pitfalls_git-->）·级联 / CHANGELOG（30<!--stats:pitfalls_cascade-->）·数据 / 内容可信度（28<!--stats:pitfalls_data-->）·流程 / 协作 / 取证（225<!--stats:pitfalls_flow-->）·叙事细节在归档 |
 | archive/docs/pitfalls-detail-ARCHIVE.md | 需要坑位条目全文时 | 叙事/实证细节（#### E-NN 锚·只增不改） |
 | docs/10-方法论沉淀/批次交付流水线.md | 批次收官 / 推送前 | 全链 7 步 + 失败模式速查 + 收官链时间纪律 |
 | docs/agent/MAINTAINING.md | **改 AGENTS/pitfalls/gates 等治理文件前** | 维护契约全文：退役三标准 / 添加前四问 / 体积预算 / 局部化预留形态 |

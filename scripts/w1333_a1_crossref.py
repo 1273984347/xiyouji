@@ -89,7 +89,7 @@ def apply_page(page, line):
 
 def check(pages):
     issues = []
-    for i, pg in enumerate(pages):
+    for pg in pages:
         n = len(LINE_RE.findall(pg["text"]))
         if n != 1:
             issues.append("%s: 关联行 %d 条（应恰 1）" % (pg["name"], n))

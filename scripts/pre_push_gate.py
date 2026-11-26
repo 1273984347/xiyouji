@@ -119,11 +119,28 @@ def aggregate(results, partial):
 
 
 def _changed_py():
-    """本批 .py 改动清单（复用 batch_closeout 三态并集·引用不复制）。"""
+    """本批 .py 改动清单（复用 batch_closeout 三态并集·引用不复制）。
+
+    W1333（E-323）根修：三态并集只看工作树/索引/未跟踪 ⇒ 「先提交再跑本判据」时恒空
+    ⇒ guardrails 必 SKIP ⇒ 已提交但未推送的新 .py 从未过 ruff ⇒ CI Code Quality 首红
+    （实证：w1333_a1_crossref.py B007）。⇒ 并入「未推送提交」范围（@{u}...HEAD）。
+    """
     sys.path.insert(0, os.path.join(ROOT, "scripts"))
     import batch_closeout  # 依赖缺失 ImportError 自然抛出（铁律 23·不吞不包）
 
-    return batch_closeout._changed_py_files()
+    files = list(batch_closeout._changed_py_files())
+    rc, out = run(["git", "rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}"])
+    up = (out or "").strip().splitlines()[-1].strip() if rc == 0 and (out or "").strip() else ""
+    if up:
+        rc2, out2 = run(["git", "-c", "core.quotepath=false", "diff", "--name-only", "%s...HEAD" % up])
+        if rc2 == 0:
+            files += [ln.strip() for ln in (out2 or "").splitlines() if ln.strip().endswith(".py")]
+    seen, uniq = set(), []
+    for f in files:
+        if f not in seen:
+            seen.add(f)
+            uniq.append(f)
+    return uniq
 
 
 def run_regen():

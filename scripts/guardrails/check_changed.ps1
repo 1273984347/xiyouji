@@ -84,7 +84,14 @@ function Get-ChangedPyFiles {
     param([string]$RepoRoot)
     $diff = & git -C $RepoRoot -c core.quotepath=false diff --name-only HEAD 2>$null
     $new = & git -C $RepoRoot -c core.quotepath=false ls-files --others --exclude-standard
-    $names = @($diff) + @($new) | Where-Object { $_ }
+    # W1333（E-323）：工作树 diff 在「先提交再跑判据」的流程下恒为空 ⇒ 新增 .py 从未过 ruff
+    # ⇒ CI Code Quality 首红（实证：w1333_a1_crossref.py B007）。⇒ 并入「未推送提交」范围。
+    $committed = @()
+    $up = & git -C $RepoRoot rev-parse --abbrev-ref --symbolic-full-name '@{u}' 2>$null
+    if ($LASTEXITCODE -eq 0 -and $up) {
+        $committed = & git -C $RepoRoot -c core.quotepath=false diff --name-only "$($up.Trim())...HEAD" 2>$null
+    }
+    $names = @($diff) + @($new) + @($committed) | Where-Object { $_ }
     return @($names | Sort-Object -Unique)
 }
 

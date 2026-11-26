@@ -3,7 +3,7 @@
 > **📖 阅读契约**：查表型——CSS / 视觉渲染类踩坑排查时按本表查；每条含根因、判据与可执行纪律（纪律块留本层，叙事全文在归档层）。
 > **何时读**：改 CSS / 视觉 / 图表标签与配色时（颜色对比度、标签可读性、深浅两态、图形覆盖底色）
 > **叙事全文**：`archive/docs/pitfalls-detail-ARCHIVE.md` 的 `#### E-NN` 段（只追加不修改）。
-> **同族**：总 428<!--stats:pitfalls_total--> 条 · CSS 91<!--stats:pitfalls_css--> / JS 14<!--stats:pitfalls_js--> / git 41<!--stats:pitfalls_git--> / 级联 30<!--stats:pitfalls_cascade--> / 数据 28<!--stats:pitfalls_data--> / 流程 224<!--stats:pitfalls_flow-->
+> **同族**：总 429<!--stats:pitfalls_total--> 条 · CSS 91<!--stats:pitfalls_css--> / JS 14<!--stats:pitfalls_js--> / git 41<!--stats:pitfalls_git--> / 级联 30<!--stats:pitfalls_cascade--> / 数据 28<!--stats:pitfalls_data--> / 流程 225<!--stats:pitfalls_flow-->
 
 ### CSS / 视觉渲染（91<!--stats:pitfalls_css--> 条）
 

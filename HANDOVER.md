@@ -2,7 +2,7 @@
 
 
 > **📖 阅读契约（W707）**：首段型+查表型——接手时只读「零、当前阻塞」+「一、当前进度」+ 文件末尾「最后更新」链；「三、方法论沉淀」「四、待办」按需查；历史批次细节在 CHANGELOG（grep 查）勿在本文件找。
-> **🚪 新 Agent 必读三件套（W1025）**：① 本文件（当前状态与阻塞）② [pitfalls.md](pitfalls.md)（428<!--stats:pitfalls_total--> 条坑·六主题·**索引壳 + 六主题正本在 docs/agent/pitfalls-topics/**——**只读前 10 条高频也强于不读**：W1019–W1024 六批踩的坑有 11 条属这里已写过的形态）③ [docs/agent/gates.md](docs/agent/gates.md)（83<!--stats:gate_count--> 槽判据）。三件之外按需再查；交接/审查/收官各有一份模板见 `docs/agent/`。
+> **🚪 新 Agent 必读三件套（W1025）**：① 本文件（当前状态与阻塞）② [pitfalls.md](pitfalls.md)（429<!--stats:pitfalls_total--> 条坑·六主题·**索引壳 + 六主题正本在 docs/agent/pitfalls-topics/**——**只读前 10 条高频也强于不读**：W1019–W1024 六批踩的坑有 11 条属这里已写过的形态）③ [docs/agent/gates.md](docs/agent/gates.md)（83<!--stats:gate_count--> 槽判据）。三件之外按需再查；交接/审查/收官各有一份模板见 `docs/agent/`。
 > 轨标：教学讲解
 > 本文件用于跨 session 交接，记录当前进度、下一步可推进方向、方法论沉淀与待办事项。
 > 创建于 2026-07-25（v2.0.41 W068 后）
@@ -72,7 +72,7 @@
 - **反馈回路的位置与延迟决定 CI 轮数——验证搬回本地、纪律物理化；收官第 7 步与推送同批；仓内 hook 需每克隆一次性启用**（W1288·E-310/E-311/E-312·跨项目通用）：① **CI 轮数被放大通常不是纪律松**，而是唯一反馈通道是「推 ⇒ 等 20-30 分钟 ⇒ 看结果」，回路延迟**反向塑造**「一改一推」（「推前必跑本地验收」在延迟面前必然失效）⇒ 问题在流程形状不在自制力 ⇒ 修法主体是**把验证搬回本地且与 CI 等价**+ 用仓内 pre-push hook 让闸门**物理化**；② **收官链第 7 步（台账状态/hash 回填）必须与推送同批完成**——「回填类永不单独开 PR」不是「不回填」（实测累积 4 批登记滞后 ⇒ 开工告警成噪音 ⇒ 真滞后也看不见）；③ **仓内版本化的 hook ≠ 已生效**——`core.hooksPath` 不随 clone 走 ⇒ 每个克隆须一次性 `git config core.hooksPath .githooks`，否则是**静默失效的假机制**（比没有机制更危险：制造「已有防护」的错觉）
 
 > **经验总入口（W755 指针化·W973 真指针化收口）**：现役坑位与门禁读
-> [pitfalls.md](pitfalls.md)（428<!--stats:pitfalls_total--> 条·六主题·正本在 docs/agent/pitfalls-topics/）与 [docs/agent/gates.md](docs/agent/gates.md)（83<!--stats:gate_count--> 槽）；
+> [pitfalls.md](pitfalls.md)（429<!--stats:pitfalls_total--> 条·六主题·正本在 docs/agent/pitfalls-topics/）与 [docs/agent/gates.md](docs/agent/gates.md)（83<!--stats:gate_count--> 槽）；
 > 诊断 SOP 读 [docs/10-方法论沉淀/](docs/10-方法论沉淀/README.md)；
 > 本区历史叙事全文已迁 archive/docs/HANDOVER-ARCHIVE.md（W973·grep 查）。
 ## 四、待办事项（短期）

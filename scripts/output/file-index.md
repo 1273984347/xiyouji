@@ -12,7 +12,8 @@
 | docs/04-文化与历史背景/（2 件） | W1333 | 本批改动 |
 | docs/11-方案报告/（4 件） | W1333 | 本批改动 |
 | docs/agent/（7 件） | W1333 | 六主题计数跟随（stats 刷新） |
-| scripts/（7 件） | W1333 | 本批改动 |
+| scripts/（8 件） | W1333 | 本批改动 |
+| scripts/guardrails/（1 件） | W1333 | 根修：Get-ChangedPyFiles 并入 @{u}...HEAD（E-3 |
 | scripts/output/（16 件） | W1333 | 本批改动 |
 | site/（8 件） | W1333 | 本批改动 |
 | site/data/（65 件） | W1333 | 本批改动 |

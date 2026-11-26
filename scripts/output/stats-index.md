@@ -26,10 +26,10 @@
 | pitfalls_cascade | 30 | pitfalls.md 主题「级联 / CHANGELOG」实测条目数 | W1215 | 1309 |
 | pitfalls_css | 91 | pitfalls.md 主题「CSS / 视觉渲染」实测条目数 | W1215 | W1299 |
 | pitfalls_data | 28 | pitfalls.md 主题「数据 / 内容可信度」实测条目数 | W1215 | 1287 |
-| pitfalls_flow | 224 | pitfalls.md 主题「流程 / 协作 / 取证」实测条目数 | W1215 | W1291 |
+| pitfalls_flow | 225 | pitfalls.md 主题「流程 / 协作 / 取证」实测条目数 | W1215 | W1333 |
 | pitfalls_git | 41 | pitfalls.md 主题「git / 提交 / 并发」实测条目数 | W1215 | W1326 |
 | pitfalls_js | 14 | pitfalls.md 主题「JS / CSP / 运行时」实测条目数 | W1215 | W1333 |
-| pitfalls_total | 428 | pitfalls.md 六主题实测条目之和（E-NN 本体口径） | W1215 | W1333 |
+| pitfalls_total | 429 | pitfalls.md 六主题实测条目之和（E-NN 本体口径） | W1215 | W1333 |
 | pytest_collected | 1949 | pytest --collect-only -q 收集数（tests/e2e 浏览器套件按 pytest.ini addopts 排除·W401 决议） | W830 | W1333 |
 | report_docs | 259 | docs/11-方案报告/**/*.md（含索引 README·W757 目录改名与子目录化） | W737 | W1333 |
 | scan_files | 873 | html_total − _template.html − _shell.html（check_js_syntax/check_structure） | W459 | W1302 |
@@ -44,6 +44,10 @@
 | w864_entries | 0 | scripts/output/_w864_accent_exemptions.json batches[].exemptions 条目合计 | W1053 | 1291 |
 
 ## 反向：W → stats key 变更（新→旧）
+
+### W1333（2026-11-27 01:59:00）
+- pitfalls_flow: 224 → 225
+- pitfalls_total: 428 → 429
 
 ### W1333（2026-11-27 00:17:12）
 - pitfalls_js: 13 → 14
