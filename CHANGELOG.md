@@ -1,3 +1,16 @@
+### W1332（2026-11-26）：暗色对比度专项与公共层补丁
+
+
+> **来源**：用户 2026-11-26 指令「开始 W1332 并处理遗留总账中的 L-13 至 L-15 项」；L-13 深度与 --accent-soft 处置经 AskUserQuestion 裁决（判据自动化+违例即修 / 保留声明例外）。
+> - **L-13 判据自动化**：新建 `scripts/_w1332_dark_contrast_probe.py`——夜读态（localStorage 预置 dark）逐页量「HTML 文字 vs 逐层 alpha 合成背景」与「SVG 形状可见性」，243 页（根页+data+en+reader 抽样）。判据自纠三项：C 项（SVG 文字覆盖图形）简化几何实测误报 2/2 页（截图证伪）⇒ 删除并声明由第 80 槽 graphic 口径承担；背景基色改 body 优先 + 支持 `color(srgb …)`（修顶栏半透明背景误报）；无 class 形状与 fill alpha ≤0.2 判装饰层豁免。
+> - **L-13 修复**：基线 FAIL 46 页（HTML 文字 194 条 + 不可见形状 32 条）→ **FAIL 0**（四轮·OK 240 / WARN 3）。真缺陷五族：深底浅字令牌误用 **110 块 / 83 页**（`background: var(--dark); color: var(--paper-warm)`——`--paper-warm` 暗色重定向到深色 ⇒ 深底深字，cave-estate 表头实测 1.11）→ `--dark-text`；浅米硬编码表头底 6 页 → `--surface-sunken`；footer 用 `--ink` 当深底 2 页 → `--dark`；danmaku-stage 硬编码亮底 2 页 → `--paper`；`--rebel` 暗色补 `#D96C5C`。① 标签越出 svg 边界裁决设计容差；③ 半透明底由第 80 槽覆盖（168 页 0 违例）。
+> - **L-14 公共层**：`system.css` 全局屏蔽原生 details marker（reader 635 页双三角根修·自定义 ▸ 不受影响）；`tokens.css` 补 `--shadow-2` 亮（`rgba(35,32,26,.12)`）/暗（`rgba(0,0,0,.45)`）两态；`inline_css.py --force` 重分发 637 页。
+> - **L-15 视觉零散**：index `.ask-form button` 衬线 → `--font-sans`；index `nav-brand` 补 `aria-current="page"`；rum-viewer / visit-viewer 接入 `system.css`；`--accent-soft` 用户裁决保留并声明例外（3,286 处消费面不收敛）。
+> - **机器判据**：单测 8 例（summary 屏蔽 / 阴影两态 / aria-current / 公共壳 / 深底块令牌 / 修复器幂等与 INLINED 副本跳过 / 探针判据负样本 / CLI）；修复器幂等（重跑零变化）。
+> - **验证**：夜读态探针五轮（46→15→10→0→0）；第 80 槽 SVG 对比度 168 页 0 违例；单测 8 通过。
+> - **文件**：见 file-index W1332 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1331（2026-11-26）：竖版图表专项与 T112 视觉遗留核验
 
 
@@ -873,7 +886,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1331），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1332），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

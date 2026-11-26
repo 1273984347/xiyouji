@@ -1,0 +1,1767 @@
+{
+ "generated": "2026-11-26T21:52:59",
+ "theme": "dark",
+ "scope": "all",
+ "pages": [
+  {
+   "page": "404.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "about.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "curated.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "dashboard.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "dukou-engine.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "guide.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "index.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "rum-viewer.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "visit-viewer.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/81-hardships-view.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/81-hardships.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/aesthetics.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/ai-dialogue.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/business-model.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/cave-estate.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/century-dialogue.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/chapter-stats.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/chapter-structure-graph.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/character-appearance.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/character-dynamic-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/character-presence-timeline.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/character-relationship-3d-view.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/character-relationship-3d.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/character-semantic-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/character-sentiment-arc.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/chart-design.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/cognitive-psychology.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/concept-device.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/counterfactual.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/criticism-history.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/cross-time-danmaku.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/cultural-misreading.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/customs-pass-route.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/data-explorer.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/deconstruction.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/dialogue-sentiment.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/ecology.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/emotional-heatmap.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/ethics-consumption.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/famous-time-travel.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/four-dimensional-research-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/four-heavenly-kings-artifacts.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/game-webnovel.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/global-pattern.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/glossary.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/graph-explorer.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/guanyin-six-roles-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/hardship-difficulty-heatmap.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/hardship-heatmap.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/heaven-power-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/intertextuality-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/journey-geo-3d.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/journey-geo-semiotics.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/journey-map-interactive.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/journey-route.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/journey-spacetime.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/jurisprudence.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/karma-reincarnation.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/language-style-radar.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/linguistics.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/magic-system.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/material-archaeology.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/mbti-evolution.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/methodology-matrix.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/ming-political-thought-comparison.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/monster-background.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/monster-capability-radar.html",
+   "htmlText": [
+    {
+     "tag": "a",
+     "cls": "active",
+     "txt": "妖怪能力雷达",
+     "cr": 4.46,
+     "fs": 14,
+     "fg": "rgb(224,96,79)",
+     "bg": "rgb(50,30,24)",
+     "uncertain": false
+    }
+   ],
+   "shapes": [],
+   "grade": "WARN",
+   "reasons": [
+    "HTML 文字 CR 4.46（妖怪能力雷达·active）"
+   ]
+  },
+  {
+   "page": "data/monster-ecology-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/monster-female-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/monster-hierarchy-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/monster-sociology.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/monster-victims-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/music-structure.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/narrative-experiment.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/narrative-rhythm-curve.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/narratology-12d-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/narratology-16d-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/perf-canvas-rendering.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/philosophy.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/pilgrim-team-dynamic-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/pilgrim-team-psychology-arc.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/poetry-density.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/poetry-rhythm-analysis.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/power-resources.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/relationships.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/risk-project.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/search.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/six-senses-narratology-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/social-media.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/story-timeline.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/tag-cloud.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/text-evolution.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/text-search.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/theological-intervention-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/timeline.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/underworld-power-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/visual-art.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/workplace.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "data/wukong-tangseng-benchmark.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/81-hardships-view.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/81-hardships.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/academic-papers.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/aesthetics.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/ai-dialogue.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/bestiary.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/business-model.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/cave-estate.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/century-dialogue.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/chapter-stats.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/chapter-structure-graph.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/chapters-map.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-appearance.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-bailongma.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-bajie.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-dynamic-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-presence-timeline.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-relationship-3d-view.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-relationship-3d.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-semantic-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-sentiment-arc.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-shaseng.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-tangseng.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/character-wukong.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/characters.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/chart-design.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/cognitive-psychology.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/concept-device.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/counterfactual.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/criticism-history.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/cross-time-danmaku.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/cultural-misreading.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/customs-pass-route.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/dashboard.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/data-explorer.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/deconstruction.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/dialogue-sentiment.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/dukou-engine.html",
+   "htmlText": [
+    {
+     "tag": "a",
+     "cls": "",
+     "txt": "← Back to English home",
+     "cr": 2.91,
+     "fs": 13,
+     "fg": "rgb(64,97,158)",
+     "bg": "rgb(26,23,20)",
+     "uncertain": true
+    },
+    {
+     "tag": "div",
+     "cls": "meta",
+     "txt": "By default a template engine (",
+     "cr": 4.06,
+     "fs": 12,
+     "fg": "rgb(142,125,98)",
+     "bg": "rgb(35,32,28)",
+     "uncertain": false
+    }
+   ],
+   "shapes": [],
+   "grade": "WARN",
+   "reasons": [
+    "HTML 文字 CR 4.06（By default a·meta）"
+   ]
+  },
+  {
+   "page": "en/ecology.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/emotional-heatmap.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ai-era.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-buddhist-chan.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-chapter-couplets.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-character-fu.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-cipai-linjiangxian.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-cipai-mantingfang.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-cipai-shuidiaogetou.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-cipai-xijiangyue.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-composition-origins.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-divine-bureaucracy.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-folk-belief.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-historical-xuanzang.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-information-cocoon.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-economy.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-examination.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-garrison.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-intellectual-history.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-judiciary.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-literary-thought.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-maritime-ban.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-metaphor.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-military.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-politics.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-religion.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-ming-social-customs.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-modern-management.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-original-poetry.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-poetry-imagery.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-poetry-opening.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-quanzhen-daoism.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-rhythm-analysis.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-scenery-poems.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-thematic-poetry.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-three-teachings.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-version-evolution.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/essay-zen-koan-vs-neidan.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/ethics-consumption.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/famous-time-travel.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/four-dimensional-research-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/four-heavenly-kings-artifacts.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/game-webnovel.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/global-pattern.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/graph-explorer.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/guanyin-six-roles-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/guide.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/hardship-difficulty-heatmap.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/hardship-heatmap.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/heaven-power-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/index.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/intertextuality-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/journey-geo-semiotics.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/journey-map-interactive.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/journey-route.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/journey-spacetime.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/jurisprudence.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/karma-reincarnation.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/language-style-radar.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/linguistics.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/magic-system.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/material-archaeology.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/mbti-evolution.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/methodology-matrix.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/methodology.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/ming-political-thought-comparison.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/monster-background.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/monster-capability-radar.html",
+   "htmlText": [
+    {
+     "tag": "a",
+     "cls": "active",
+     "txt": "Monster Capability Radar",
+     "cr": 4.46,
+     "fs": 14,
+     "fg": "rgb(224,96,79)",
+     "bg": "rgb(50,30,24)",
+     "uncertain": false
+    }
+   ],
+   "shapes": [],
+   "grade": "WARN",
+   "reasons": [
+    "HTML 文字 CR 4.46（Monster Capa·active）"
+   ]
+  },
+  {
+   "page": "en/monster-ecology-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/monster-female-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/monster-hierarchy-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/monster-sociology.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/monster-victims-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/music-structure.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/narrative-experiment.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/narrative-rhythm-curve.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/narratology-12d-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/narratology-16d-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/perf-canvas-rendering.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/philosophy.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/pilgrim-team-dynamic-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/pilgrim-team-psychology-arc.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/poetry-rhythm-analysis.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/power-resources.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/relationships.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/risk-project.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/search.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/site-map.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/six-senses-narratology-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/social-media.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/tag-cloud.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/text-evolution.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/text-search.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/theological-intervention-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/timeline.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/tribulations.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/underworld-power-network.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/visual-art.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/visualizations.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "en/workplace.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "reader/ch001.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "reader/ch021.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "reader/ch041.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "reader/ch061.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "reader/ch081.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  },
+  {
+   "page": "reader/index.html",
+   "htmlText": [],
+   "shapes": [],
+   "grade": "OK",
+   "reasons": []
+  }
+ ],
+ "summary": {
+  "total": 243,
+  "counts": {
+   "OK": 240,
+   "WARN": 3,
+   "FAIL": 0,
+   "ERROR": 0
+  },
+  "elapsedSec": 315.5
+ }
+}

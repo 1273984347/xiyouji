@@ -44,7 +44,9 @@ def test_analytics_block_shape():
 # ---- 导航正本 ----
 
 def test_active_for_mapping():
-    assert nav.active_for("index.html") is None
+    # W1332（L-15②）：首页当前项由品牌链接承担、EN 首页由 Home 项承担
+    assert nav.active_for("index.html") == "__brand__"
+    assert nav.active_for("en/index.html") == "Home"
     assert nav.active_for("404.html") is None
     assert nav.active_for("en/aesthetics.html") is None
     assert nav.active_for("guide.html") == "导读"

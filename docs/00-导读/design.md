@@ -8,11 +8,11 @@
 > 再生成即覆盖。对账门禁 `check_design_doc_drift.py` 校验本文档 ↔ CSS 双向一致（PD-5·AC-2）。
 > 本文件不含生成日期等易变字段——保证「再生成逐字节一致」的反篡改比对（PD-5 检查 1）可长期成立。
 
-覆盖声明总数 **192**（light 139 / dark 53 / 其他 0）·来源节 7 个。修改令牌请改 `site/tokens.css` 后重跑导出。
+覆盖声明总数 **195**（light 140 / dark 55 / 其他 0）·来源节 7 个。修改令牌请改 `site/tokens.css` 后重跑导出。
 
 ## Light 主题（:root）
 
-### 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）（33）
+### 子集化 webfont（W334 · 本地托管 · file:// 可用 · 零外部依赖）（34）
 
 | 令牌 | 值 | 说明 |
 |---|---|---|
@@ -39,6 +39,7 @@
 | `--line` | `var(--border-subtle)` | 发丝线：浅米褐 |
 | `--shadow` | `none` |  |
 | `--shadow-lift` | `none` |  |
+| `--shadow-2` | `0 2px 8px rgba(35, 32, 26, 0.12)` | W1332（L-14②）：theme-init 浮动夜读钮兜底阴影令牌化（亮态） |
 | `--dur-fast` | `150ms` | 按压、toggle、色彩切换 |
 | `--dur-base` | `250ms` | hover、行高亮、tooltip |
 | `--dur-slow` | `500ms` | 卡片入场、区块 reveal |
@@ -178,7 +179,7 @@
 
 ## Dark 主题（html[data-theme="dark"]·夜读模式）
 
-### 夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载（30）
+### 夜读模式（W489）：全站 dark 令牌组——html[data-theme] 由 js/theme-init.js 挂载（32）
 
 | 令牌 | 值 | 说明 |
 |---|---|---|
@@ -206,12 +207,14 @@
 | `--ok` | `#8FBF7F` |  |
 | `--warn` | `#D0A35C` |  |
 | `--danger` | `#D96C5C` |  |
+| `--rebel` | `#D96C5C` | W1332（L-13⑤ 同族）：暗色下与 danger 同值——原亮色 #8C2A2A 压暗底仅 1.92:1 |
 | `--info` | `#7FA8C9` |  |
 | `--elev-0` | `none` |  |
 | `--elev-1` | `none` |  |
 | `--elev-2` | `none` |  |
 | `--elev-3` | `0 1px 2px rgba(0, 0, 0, 0.40)` |  |
 | `--elev-4` | `0 8px 24px rgba(0, 0, 0, 0.45)` |  |
+| `--shadow-2` | `0 2px 8px rgba(0, 0, 0, 0.45)` | W1332（L-14②）：暗态浮动夜读钮阴影 |
 
 ### W1260 · 宣纸刻本 · 暗色态（独立令牌·非反色）（23）
 

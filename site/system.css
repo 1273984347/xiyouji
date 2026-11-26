@@ -830,6 +830,11 @@ td.num, th.num {
     font-family: var(--font-code);
     font-size: 11px;
 }
+/* W1332（L-14①）：原生 details 三角全局屏蔽——reader 页 635 页「原生 marker + 自定义 ▸」
+   双三角根修。自定义 ▸ 由各页 summary::before 提供（.cite-details / .reader-fold），
+   本规则只屏蔽浏览器原生 marker，不改自定义箭头。 */
+summary { list-style: none; }
+summary::-webkit-details-marker { display: none; }
 .cite-block .cite-details { margin-top: 6px; }
 /* summary 触摸尺寸：原为浏览器默认 19px 高（88 页统一落在 WCAG 2.5.8 的 24px 线以下）。
    display:flex 会吃掉 list-item 原生三角，故显式绘制箭头；动效仅 transform，时长走 --dur-fast 预算。 */

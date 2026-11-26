@@ -11,7 +11,7 @@
 - `data/`
 - `figures/`
 
-## 文件（979）
+## 文件（983）
 
 ### Markdown 文档
 
@@ -311,6 +311,7 @@
 - `_cascade_files_W1322.txt`
 - `_cascade_files_W1323.txt`
 - `_cascade_files_W1331.txt`
+- `_cascade_files_W1332.txt`
 - `_cascade_files_W751.txt`
 - `_cascade_files_W761.txt`
 - `_cascade_files_W816.txt`
@@ -766,6 +767,9 @@
 - `_w1331_chart_portrait_report_merged.json`
 - `_w1331_spec.json`
 - `_w1331_t112_verify.json`
+- `_w1332_dark_contrast_report.json`
+- `_w1332_slot80_check.json`
+- `_w1332_spec.json`
 - `_w736_spec.json`
 - `_w737_spec.json`
 - `_w760_spec.json`

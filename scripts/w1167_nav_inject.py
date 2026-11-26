@@ -60,7 +60,13 @@ def relpath(target, from_file):
     return ("../" * depth) + target
 
 def active_for(rel):
-    if rel == "index.html" or rel == "404.html" or rel == "_template.html":
+    # W1332（L-15② 根修）：首页当前项由品牌链接承担（nav-brand 加 aria-current）；
+    # EN 首页由 Home 项承担。此前两者恒 None ⇒ 首页导航缺当前项语义。
+    if rel == "index.html":
+        return "__brand__"
+    if rel == "en/index.html":
+        return "Home"
+    if rel == "404.html" or rel == "_template.html":
         return None
     if rel.startswith("en/"):
         return None
@@ -89,7 +95,8 @@ def build_nav(rel, zone):
         cls = ' class="nav-item is-active"' if label == act else ' class="nav-item"'
         links.append(f'<a href="{href}"{cls}{cur} data-goatcounter-click="{event}">{label}</a>')
     bhref = relpath(brand[1], rel)
-    inner = f'<a class="nav-brand" href="{bhref}">{brand[0]}</a>' + "".join(links)
+    bcur = ' aria-current="page"' if act == "__brand__" else ""
+    inner = f'<a class="nav-brand" href="{bhref}"{bcur}>{brand[0]}</a>' + "".join(links)
     return (
         f'{MARK}\n<nav class="{NAV_CLASS}" aria-label="主导航">{inner}</nav>'
     )

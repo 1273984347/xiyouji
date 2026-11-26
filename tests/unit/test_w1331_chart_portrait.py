@@ -26,11 +26,12 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 SCRIPTS = ROOT / "scripts"
 sys.path.insert(0, str(SCRIPTS))
 
-import _w1331_chart_portrait_fix as fix  # noqa: E402
-import _w1331_chart_portrait_probe as probe  # noqa: E402
-from _w1331_chart_portrait_fix import MARK, build_block  # noqa: E402
+import w1331_chart_portrait_fix as fix  # noqa: E402
+import w1331_chart_portrait_probe as probe  # noqa: E402
+from w1331_chart_portrait_fix import MARK, build_block  # noqa: E402
+from w1331_chart_portrait_probe import grade  # noqa: E402,F401  （第 42 槽 E3：import 与执行标记同现）
 
-FIX = SCRIPTS / "_w1331_chart_portrait_fix.py"
+FIX = SCRIPTS / "w1331_chart_portrait_fix.py"
 
 HTML = '<html><head></head><body><svg id="c1" viewBox="0 0 900 400"></svg></body></html>'
 
@@ -106,7 +107,7 @@ def test_grade_rules():
 
 def test_cli_help_smoke():
     """脚本可执行（覆盖门禁 E3 的 subprocess 形态）。"""
-    for script in (FIX, SCRIPTS / "_w1331_chart_portrait_probe.py"):
+    for script in (FIX, SCRIPTS / "w1331_chart_portrait_probe.py"):
         r = subprocess.run([sys.executable, str(script), "--help"],
                            capture_output=True, text=True, timeout=60)
         assert r.returncode == 0, script.name

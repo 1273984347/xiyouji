@@ -91,6 +91,7 @@
     /* —— 阴影（克制，仅卡片浮起用） —— */
     --shadow: none;
     --shadow-lift: none;
+    --shadow-2: 0 2px 8px rgba(35, 32, 26, 0.12);   /* W1332（L-14②）：theme-init 浮动夜读钮兜底阴影令牌化（亮态） */
 
     /* —— 动效令牌（W460 墨韵动效体系：时长三级 + 缓动三系） —— */
     /* 时长：fast 即时反馈 / base 状态变化 / slow 入场编排（克制雅致，不上弹跳） */
@@ -188,12 +189,14 @@ html[data-theme="dark"] {
     --ok: #8FBF7F;
     --warn: #D0A35C;
     --danger: #D96C5C;
+    --rebel: #D96C5C;   /* W1332（L-13⑤ 同族）：暗色下与 danger 同值——原亮色 #8C2A2A 压暗底仅 1.92:1 */
     --info: #7FA8C9;
     --elev-0: none;
     --elev-1: none;
     --elev-2: none;
     --elev-3: 0 1px 2px rgba(0, 0, 0, 0.40);
     --elev-4: 0 8px 24px rgba(0, 0, 0, 0.45);
+    --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.45);   /* W1332（L-14②）：暗态浮动夜读钮阴影 */
     color-scheme: dark;
 }
 /* W1134 · 暗色字重降档（对抗黑底白字光晕·人眼在纯暗底上的白字视觉偏胖）

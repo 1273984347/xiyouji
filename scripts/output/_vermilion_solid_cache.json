@@ -10,11 +10,11 @@
    "counts": {}
   },
   "data/_shell.html": {
-   "sha1": "67c6deeab61551eae253142c41b861cc3c82189a",
+   "sha1": "da4c965be4d70f3ef33bee797ade06097f74d90b",
    "counts": {}
   },
   "data/aesthetics.html": {
-   "sha1": "b919635fb599efa55ea6bba9696d6a3db5a3c91d",
+   "sha1": "34be47b5cff39274561d9e171d14d030a23a2a4a",
    "counts": {}
   },
   "data/ai-dialogue.html": {
@@ -22,11 +22,11 @@
    "counts": {}
   },
   "data/business-model.html": {
-   "sha1": "033e02b8bb4cbac2c2f69bdb98e2602fd10cc0b6",
+   "sha1": "2a762ff77dc4ab5b86129a3fd72f2cf067fdc9c2",
    "counts": {}
   },
   "data/cave-estate.html": {
-   "sha1": "7b8304c88e10f8bd8887da4ac7cee2fa160d795f",
+   "sha1": "560e6307f027a353175964a4d1ccffcd1cc49933",
    "counts": {}
   },
   "data/century-dialogue.html": {
@@ -66,19 +66,19 @@
    "counts": {}
   },
   "data/character-sentiment-arc.html": {
-   "sha1": "311dde2cdfcb34b51c5e2c809f25dc3014b3ce55",
+   "sha1": "da6b829406854d2c06586ac0074058b5d3ee287c",
    "counts": {}
   },
   "data/chart-design.html": {
-   "sha1": "e5605bed38958b820d1825a18a0c3ee8dbcee26b",
+   "sha1": "f73d72c2be95a49354697fef24724048fe9a9723",
    "counts": {}
   },
   "data/cognitive-psychology.html": {
-   "sha1": "e5640d462dcd96c3d0b2ef0c198629c6dcbd079a",
+   "sha1": "db5c2394c8ada8c461e8a9f84bee0b8aa21b6e38",
    "counts": {}
   },
   "data/concept-device.html": {
-   "sha1": "2fa521e4b51d0de748c2385d38ab16c5537df146",
+   "sha1": "e18171fc685f151cc3a3f8db0abecba4d40f93bf",
    "counts": {}
   },
   "data/counterfactual.html": {
@@ -86,15 +86,15 @@
    "counts": {}
   },
   "data/criticism-history.html": {
-   "sha1": "5b9dd473edb547bd4a6c64fec9da41ef3ba5ecb5",
+   "sha1": "159e05314b980260cf834f32132e29f86e06fb3a",
    "counts": {}
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "1fc9169540ff207926d7f12f706984800ac985f1",
+   "sha1": "508049fe38c99d28592f7c226ff2d0ed8136c1e4",
    "counts": {}
   },
   "data/cultural-misreading.html": {
-   "sha1": "75b955dbd6bac2a3c34834d6bf9bce4e92ade010",
+   "sha1": "447e84d06bda118cbca711301d44d70dd7bc54ad",
    "counts": {}
   },
   "data/customs-pass-route.html": {
@@ -106,15 +106,15 @@
    "counts": {}
   },
   "data/deconstruction.html": {
-   "sha1": "8ed2c508dfa565dd50d3efef36c44b8260469298",
+   "sha1": "ccc6016d9693000616963c9d13ed5b041798006d",
    "counts": {}
   },
   "data/dialogue-sentiment.html": {
-   "sha1": "0d147e4b14ca5fe818201d6c06cd0afbd57b9a84",
+   "sha1": "9178406da91f81ec10670cd988c5629a97f7fa0d",
    "counts": {}
   },
   "data/ecology.html": {
-   "sha1": "e2084fde551365aad014ac5e0bc0eaa69c1466af",
+   "sha1": "eaef5aa47ee3f595268f54202b877e6309ad8bc2",
    "counts": {}
   },
   "data/emotional-heatmap.html": {
@@ -122,7 +122,7 @@
    "counts": {}
   },
   "data/ethics-consumption.html": {
-   "sha1": "aa86858e96131a07c6c92451397a57e168ed4079",
+   "sha1": "fc2613d41470a135fab7fcbc8aeb49fabedb8244",
    "counts": {}
   },
   "data/famous-time-travel.html": {
@@ -138,11 +138,11 @@
    "counts": {}
   },
   "data/game-webnovel.html": {
-   "sha1": "6e013894e2b8d8ab458f6c72900bd6ac5ee1a4f6",
+   "sha1": "6118b3b254fbd05f2dda60648f4d11fdf7573273",
    "counts": {}
   },
   "data/global-pattern.html": {
-   "sha1": "63280f0ab600ea21c6e75b3e4cc15fa1b3a5953f",
+   "sha1": "2615d427d8589beb7ca14317fadd8bbd81912e96",
    "counts": {}
   },
   "data/glossary.html": {
@@ -158,7 +158,7 @@
    "counts": {}
   },
   "data/hardship-difficulty-heatmap.html": {
-   "sha1": "ac8b90237c80ef8d2a2c814b9ea7612b2d927081",
+   "sha1": "8d6fc66a8ebfd23b7767c32d6ebc10061f1ffcd6",
    "counts": {}
   },
   "data/hardship-heatmap.html": {
@@ -166,7 +166,7 @@
    "counts": {}
   },
   "data/heaven-power-network.html": {
-   "sha1": "446c86c307b12ea48875a396b79741acd42127b8",
+   "sha1": "bf31e6885a867f2ae878161365d455d2387cc39c",
    "counts": {}
   },
   "data/intertextuality-network.html": {
@@ -190,15 +190,15 @@
    "counts": {}
   },
   "data/journey-spacetime.html": {
-   "sha1": "847fbab5c444c11115d20a63a6ffe9da05856b59",
+   "sha1": "19b33d48d690014764f54fd8f68b93ef2bdca8db",
    "counts": {}
   },
   "data/jurisprudence.html": {
-   "sha1": "471b3428e369ccca619784680f4b24c883da59c9",
+   "sha1": "1356f07972e49fa4d8ddd014f772e457454a86fb",
    "counts": {}
   },
   "data/karma-reincarnation.html": {
-   "sha1": "401ff18b668be4bfa7d3c0f5505f2a5ae97b50bb",
+   "sha1": "719a935b401f4acd42cecd2cfabf932d74d109c9",
    "counts": {}
   },
   "data/language-style-radar.html": {
@@ -206,23 +206,23 @@
    "counts": {}
   },
   "data/linguistics.html": {
-   "sha1": "9ddfe2abb94d8a9ce9cec277d3d2a0a502341a87",
+   "sha1": "c636cfa4e1e872f389233d1d530e54d403a86d79",
    "counts": {}
   },
   "data/magic-system.html": {
-   "sha1": "dda04dd96be8361d9a05e216055e110987ac6846",
+   "sha1": "e68572f5e402a42bc38cb3523263a86959cc10e6",
    "counts": {}
   },
   "data/material-archaeology.html": {
-   "sha1": "153baa39f921b8485704c97dd6b3f84d4292eeeb",
+   "sha1": "010443fe60d2069bdc08b0bec8589462e738cfad",
    "counts": {}
   },
   "data/mbti-evolution.html": {
-   "sha1": "55e23ef07c8949225e2a3470b419b8058f7ff44e",
+   "sha1": "04f73676a35d09786bb5a7da38392fc69d7fc45d",
    "counts": {}
   },
   "data/methodology-matrix.html": {
-   "sha1": "3ba0e6e768a1ccd0f091317bda189b8ed2836ce8",
+   "sha1": "aee7fa65204f02bbc57cac78f6ecef05b90f1d46",
    "counts": {}
   },
   "data/ming-political-thought-comparison.html": {
@@ -234,7 +234,7 @@
    "counts": {}
   },
   "data/monster-capability-radar.html": {
-   "sha1": "70b744c561b93cffe9da4a0b5ff7c2a68619e47e",
+   "sha1": "90ab66c4042114e73ee289402352b052d65af404",
    "counts": {}
   },
   "data/monster-ecology-network.html": {
@@ -250,7 +250,7 @@
    "counts": {}
   },
   "data/monster-sociology.html": {
-   "sha1": "71951080d19f731e4c71bf0e3770219fa54d1124",
+   "sha1": "573dd66a82919ff4027d41de4545d3765c644bb8",
    "counts": {}
   },
   "data/monster-victims-network.html": {
@@ -258,11 +258,11 @@
    "counts": {}
   },
   "data/music-structure.html": {
-   "sha1": "a94c44776c71b4871f69398e9a1afc7dbbb414e9",
+   "sha1": "c3e0d66d9ed402dac0d04b1ea6dcbb73feb99e6e",
    "counts": {}
   },
   "data/narrative-experiment.html": {
-   "sha1": "e525c38c3339d9f5ddeff068d7d1b94c9501fc50",
+   "sha1": "96a7e1a6e3863e48c0e01e6840f047c12b643e0a",
    "counts": {}
   },
   "data/narrative-rhythm-curve.html": {
@@ -278,11 +278,11 @@
    "counts": {}
   },
   "data/perf-canvas-rendering.html": {
-   "sha1": "fe1f51259e8b1a8d4a93a53bd81aacd2e0f6f0b0",
+   "sha1": "5489bba9c2bc1bedbba3ec78e3d20608e7fa4481",
    "counts": {}
   },
   "data/philosophy.html": {
-   "sha1": "d8f32fa9eb1cf8162fcca4ddb74106b2c657af1d",
+   "sha1": "00d361c4a66089f8e6fff5f6b02133970de0b1a5",
    "counts": {}
   },
   "data/pilgrim-team-dynamic-network.html": {
@@ -290,7 +290,7 @@
    "counts": {}
   },
   "data/pilgrim-team-psychology-arc.html": {
-   "sha1": "558640f95b2b9cf1f39caefaedbbb5bb775bfe9f",
+   "sha1": "0a3097fef9e2afef72430b37f8d132eff0562cdc",
    "counts": {}
   },
   "data/poetry-density.html": {
@@ -298,19 +298,19 @@
    "counts": {}
   },
   "data/poetry-rhythm-analysis.html": {
-   "sha1": "40bb3dc32455163bf7fc57ffcf13a0e955f412d9",
+   "sha1": "8608f2d25fc7b97b3a8bad9c1973095950df5ca6",
    "counts": {}
   },
   "data/power-resources.html": {
-   "sha1": "d9fbec5d777d554d537c3fd3044a1c7283f65b85",
+   "sha1": "04527d599649848526f10e08cfdceec336e9ef7a",
    "counts": {}
   },
   "data/relationships.html": {
-   "sha1": "99b9c7ea36c82204d4dee5ad721794e71853cf58",
+   "sha1": "b65a36beada96e3952cd9055864cf20fd5dce8df",
    "counts": {}
   },
   "data/risk-project.html": {
-   "sha1": "85c5837a21a7d815dccab7de8770ac597557b8fa",
+   "sha1": "08baa5fc4e98fc55e3c8d3e62948733ceb7ca15b",
    "counts": {}
   },
   "data/search.html": {
@@ -322,7 +322,7 @@
    "counts": {}
   },
   "data/social-media.html": {
-   "sha1": "86aeb1b8c736af50ce4db95927cdf00d68dfd386",
+   "sha1": "383eb95799d931d73e509f5d84f297708424b571",
    "counts": {}
   },
   "data/story-timeline.html": {
@@ -330,11 +330,11 @@
    "counts": {}
   },
   "data/tag-cloud.html": {
-   "sha1": "a33580aadbc4ec1e37e51cfc899612dd2c668508",
+   "sha1": "171e85c902338ea0a9b2d39d0ae166993321c036",
    "counts": {}
   },
   "data/text-evolution.html": {
-   "sha1": "5ebf6794b186a8718e87022b451b5ab781cb1ed5",
+   "sha1": "b0774d80535b705a674a86c4683df1972ae96cdf",
    "counts": {}
   },
   "data/text-search.html": {
@@ -342,11 +342,11 @@
    "counts": {}
   },
   "data/theological-intervention-network.html": {
-   "sha1": "21d7038f4d736fef2d84547c12c83cc789ab262b",
+   "sha1": "a99dd1a78e3c888483aaa34d4c2ec70674b50a7b",
    "counts": {}
   },
   "data/timeline.html": {
-   "sha1": "7786b9bd59f9c9f385ac62f1e5812a29286365c5",
+   "sha1": "d7704f2d25e758df57185b885994e2e4622b2ee1",
    "counts": {}
   },
   "data/underworld-power-network.html": {
@@ -354,11 +354,11 @@
    "counts": {}
   },
   "data/visual-art.html": {
-   "sha1": "66c4d2994be1b2e85b0aad9a04a891bba9b95db6",
+   "sha1": "403452b818e191ff41ef28ef35d13d2a4d59b607",
    "counts": {}
   },
   "data/workplace.html": {
-   "sha1": "8f98ac2e6c91464d00fb74f9b8c968c01a697324",
+   "sha1": "8fced2535518efb9055cf7f0d284f8f4b5ce5281",
    "counts": {}
   },
   "data/wukong-tangseng-benchmark.html": {
@@ -382,7 +382,7 @@
    "counts": {}
   },
   "dukou-engine.html": {
-   "sha1": "8307993c4f67a665dbe7709d1d34f7172cf17d13",
+   "sha1": "67704c5b7b5cfacbae07c5a1bfe880754dd7e05c",
    "counts": {}
   },
   "guide.html": {
@@ -390,15 +390,15 @@
    "counts": {}
   },
   "index.html": {
-   "sha1": "7407f1d569dcfddb2627ee3b602e816d89666538",
+   "sha1": "9a08424dde41813a00568c62955399728c61f063",
    "counts": {}
   },
   "rum-viewer.html": {
-   "sha1": "dba385f01e8a3b863cc275cf066b474c975f5401",
+   "sha1": "4b5ec6f482c16134a12ec9ff08ebd1bdde2248dd",
    "counts": {}
   },
   "visit-viewer.html": {
-   "sha1": "9dbd7e947e8c122a18a320459cb581075baf1d11",
+   "sha1": "7f6f6b8d8c632dc7ad041861ae3d8fda5f8b207c",
    "counts": {}
   },
   "en/81-hardships-view.html": {
@@ -410,11 +410,11 @@
    "counts": {}
   },
   "en/academic-papers.html": {
-   "sha1": "dd4aad64d18a5121fb4eee63fde5fdf2a697961d",
+   "sha1": "ce722ac8b882f8ecafea8fb58751e26aa7c30827",
    "counts": {}
   },
   "en/aesthetics.html": {
-   "sha1": "f0332b65088579c6f8c96c50d60970f2e0de2014",
+   "sha1": "84d05c406c0f3822969a0044fbfc860e636de9ad",
    "counts": {}
   },
   "en/ai-dialogue.html": {
@@ -422,15 +422,15 @@
    "counts": {}
   },
   "en/bestiary.html": {
-   "sha1": "9b07cf50e0c0e5f21b1fef561e6ad66ce1224ea1",
+   "sha1": "255e97375d08dcbbdc7bc69c78af713c5f00013a",
    "counts": {}
   },
   "en/business-model.html": {
-   "sha1": "64ad3eb2a53b4d923b1c8de110428aaa4c2ad95e",
+   "sha1": "a72ebbb16ead834d1e5cb0070cc3fb44a3e0cfd9",
    "counts": {}
   },
   "en/cave-estate.html": {
-   "sha1": "3268011d8386e62987d74f89a6fff942ffbb1efe",
+   "sha1": "2de1538781e5d8c8db0d4a109975652cae3b20b1",
    "counts": {}
   },
   "en/century-dialogue.html": {
@@ -446,7 +446,7 @@
    "counts": {}
   },
   "en/chapters-map.html": {
-   "sha1": "778cf1bf929d0595e073f54489e078a2874cebac",
+   "sha1": "39a3847418b62ec83f81a304a00db3230be99e1d",
    "counts": {}
   },
   "en/character-appearance.html": {
@@ -462,7 +462,7 @@
    "counts": {}
   },
   "en/character-dynamic-network.html": {
-   "sha1": "bb28730747b2530458f36bdac7ab7558931b7318",
+   "sha1": "1bdc7cf68b5281f28a5236af7cd9fae24f2fc512",
    "counts": {}
   },
   "en/character-presence-timeline.html": {
@@ -482,7 +482,7 @@
    "counts": {}
   },
   "en/character-sentiment-arc.html": {
-   "sha1": "177a4c5d0c943a87e5dcb2097927d6e40f5a8b96",
+   "sha1": "7cbaa47090ce944ac1b6563d2b78f2ae132bfa91",
    "counts": {}
   },
   "en/character-shaseng.html": {
@@ -498,19 +498,19 @@
    "counts": {}
   },
   "en/characters.html": {
-   "sha1": "1e43f6cce9fda4c3af4f7f06b4b6fa9bb4e998c6",
+   "sha1": "6bc01d5a5727116db829b1218d6ee4e595963a9e",
    "counts": {}
   },
   "en/chart-design.html": {
-   "sha1": "58fa5b20202f6d854e338a2f2fb701867aad6058",
+   "sha1": "6d4a6546e2fe76058eff15953eb4769628a2013a",
    "counts": {}
   },
   "en/cognitive-psychology.html": {
-   "sha1": "698437d15f16249fe9f50e570f3dcb9fc88849d5",
+   "sha1": "be999dd42cd861cb2235a6eb3375235c2c56caaf",
    "counts": {}
   },
   "en/concept-device.html": {
-   "sha1": "0aa74e2769783c47509182c9b492cf82f36add5b",
+   "sha1": "31c3947ad2dc7ef8e4161ae6ea958e4958bd3e60",
    "counts": {}
   },
   "en/counterfactual.html": {
@@ -518,15 +518,15 @@
    "counts": {}
   },
   "en/criticism-history.html": {
-   "sha1": "ec22a9e23f60ffaf41cf701e1b7aae085d8a1859",
+   "sha1": "edfd01fd6901bf7778a16b23e6fcbc5910125f06",
    "counts": {}
   },
   "en/cross-time-danmaku.html": {
-   "sha1": "859e417541cf79b42c7424d8f9125a6b23f4d028",
+   "sha1": "9d9efc86fb407470d07121b920e537c1386f133a",
    "counts": {}
   },
   "en/cultural-misreading.html": {
-   "sha1": "ea703f0969fe4f7636a67657a373e2f94c916d65",
+   "sha1": "14bf52555ae4c2d4326227a25f90327efa444bac",
    "counts": {}
   },
   "en/customs-pass-route.html": {
@@ -542,11 +542,11 @@
    "counts": {}
   },
   "en/deconstruction.html": {
-   "sha1": "f5f8319ba706f15b0f700417a5929df07604762f",
+   "sha1": "c133afffc1f5de29cccb56d75b4bcb5beb03b69e",
    "counts": {}
   },
   "en/dialogue-sentiment.html": {
-   "sha1": "6a1c493c10ada3eee25bd4f1096dd03cf6cbb824",
+   "sha1": "f8de33186ea59d5863d27b35c19650e9164612c5",
    "counts": {}
   },
   "en/dukou-engine.html": {
@@ -554,11 +554,11 @@
    "counts": {}
   },
   "en/ecology.html": {
-   "sha1": "03a209c310961449a00dd9287ebc1d77e87c9c5e",
+   "sha1": "bd5a16ecf8c144f06d6c714d2f69270f43663dbb",
    "counts": {}
   },
   "en/emotional-heatmap.html": {
-   "sha1": "bc717730d9062f7c6ddd13a43a939dc617b55dab",
+   "sha1": "5e14fe83f9b30a6ac74d1c6598816be14b2f201c",
    "counts": {}
   },
   "en/essay-ai-era.html": {
@@ -706,7 +706,7 @@
    "counts": {}
   },
   "en/ethics-consumption.html": {
-   "sha1": "d734c884c9be90cc792fcc0da73f12c921e5feeb",
+   "sha1": "6350e3b9d345bda0ba2b4654714b25737a77440d",
    "counts": {}
   },
   "en/famous-time-travel.html": {
@@ -722,11 +722,11 @@
    "counts": {}
   },
   "en/game-webnovel.html": {
-   "sha1": "e43a5dca4627300df3ac9c70e18b9dfff46da1a3",
+   "sha1": "a6d0261d29caa117d05cc672f3e53318b9c8cc73",
    "counts": {}
   },
   "en/global-pattern.html": {
-   "sha1": "6e73f2db84bf3cc291f491176e13839e29366c17",
+   "sha1": "7d6066ad90291b5e0ec36b4f0351d43f5bd25919",
    "counts": {}
   },
   "en/graph-explorer.html": {
@@ -742,19 +742,19 @@
    "counts": {}
   },
   "en/hardship-difficulty-heatmap.html": {
-   "sha1": "c116a84892a96434d6f6073d5b22fd9de5d53407",
+   "sha1": "09d565b08d95aaf7517ac5aeaaaafe1439831f72",
    "counts": {}
   },
   "en/hardship-heatmap.html": {
-   "sha1": "96f421c233a1cb8a056bfcf28c8dbe92636ad2f3",
+   "sha1": "7130304acf2c52896f51d144336bab653f3a151a",
    "counts": {}
   },
   "en/heaven-power-network.html": {
-   "sha1": "1444b3f321b917f528e52ced9688e3e60b0ea681",
+   "sha1": "ed0c10c3a118e1742c47b74909dff13dba2bcf7a",
    "counts": {}
   },
   "en/index.html": {
-   "sha1": "f80173a90c48caa08a7b872094794749502fb854",
+   "sha1": "15d412c348d1432b1d2a1a02a54afe74c4ce44cd",
    "counts": {}
   },
   "en/intertextuality-network.html": {
@@ -774,15 +774,15 @@
    "counts": {}
   },
   "en/journey-spacetime.html": {
-   "sha1": "d8ee64bd4e46d61dc508f7223ae51d6782f1e168",
+   "sha1": "a98fd118e10d372231e69299a00366419f770600",
    "counts": {}
   },
   "en/jurisprudence.html": {
-   "sha1": "bda10b370b86c9f568e5b7de92643eddbbab9add",
+   "sha1": "8cc21d5b645a2abb14a6a9b200b53dc8f4107e9c",
    "counts": {}
   },
   "en/karma-reincarnation.html": {
-   "sha1": "98bf93f851cc93d3e4d2f24e2fcb5d759dd36d7b",
+   "sha1": "a769948d45f3084a658bcf87e61c1c5fb53c0e13",
    "counts": {}
   },
   "en/language-style-radar.html": {
@@ -790,23 +790,23 @@
    "counts": {}
   },
   "en/linguistics.html": {
-   "sha1": "bee787459365d12a1885f2f5cbe69d164083159b",
+   "sha1": "59f0f60679607752cd9b09c1c7c214d9c38e98bc",
    "counts": {}
   },
   "en/magic-system.html": {
-   "sha1": "dbc6487fab638cc36d6db1f0468c359b1ca7b2b9",
+   "sha1": "10a63ca7a9c34d36fc607fe7eb5046955ca5b108",
    "counts": {}
   },
   "en/material-archaeology.html": {
-   "sha1": "da552b6116254095cfdd0dd78450640c86da670e",
+   "sha1": "a7ba33edea0115fe75edb3853c0c4d3f0b23e2db",
    "counts": {}
   },
   "en/mbti-evolution.html": {
-   "sha1": "bd38951b7ab004fbc56472d92241c2b81da7fa64",
+   "sha1": "428b59597d74b4061dae7bf0264b51442ac37405",
    "counts": {}
   },
   "en/methodology-matrix.html": {
-   "sha1": "e4ac0e4aa86b8e617b319600ed5c82021735939a",
+   "sha1": "6d801b4885e7479817439cac528085d7e5ecd254",
    "counts": {}
   },
   "en/methodology.html": {
@@ -822,7 +822,7 @@
    "counts": {}
   },
   "en/monster-capability-radar.html": {
-   "sha1": "052497b250582eb56a7c1eb34dfb293248dfea37",
+   "sha1": "1377f4a196a51909e9d88389f74dbd2b9c826a7b",
    "counts": {}
   },
   "en/monster-ecology-network.html": {
@@ -838,7 +838,7 @@
    "counts": {}
   },
   "en/monster-sociology.html": {
-   "sha1": "7e068bbb3a9f07af98f2fd47b5990408306bc84d",
+   "sha1": "14d88794908fd222e3aaff767622dd6e84a86f85",
    "counts": {}
   },
   "en/monster-victims-network.html": {
@@ -846,11 +846,11 @@
    "counts": {}
   },
   "en/music-structure.html": {
-   "sha1": "3ff6dea8f196ceab897f4375300bbd2edc16fbbb",
+   "sha1": "045cb812df2c22706c551a6b2986506243012d25",
    "counts": {}
   },
   "en/narrative-experiment.html": {
-   "sha1": "05b16b4c55b86b0080e43c2f958804b605ea5f29",
+   "sha1": "b94ea157038de0e50de8266deed2831b805c7b59",
    "counts": {}
   },
   "en/narrative-rhythm-curve.html": {
@@ -866,11 +866,11 @@
    "counts": {}
   },
   "en/perf-canvas-rendering.html": {
-   "sha1": "9ce88dcadf1af8fd3fbaddbe540b8f33a74b7997",
+   "sha1": "111df81fde14fd0c4df590f0b27ea67dd5bf6cdc",
    "counts": {}
   },
   "en/philosophy.html": {
-   "sha1": "1f6637852ec6f7de3f9b334591accf514137470b",
+   "sha1": "373c9f23f1cc0379945f6a8018d1f73f76f85fb9",
    "counts": {}
   },
   "en/pilgrim-team-dynamic-network.html": {
@@ -878,23 +878,23 @@
    "counts": {}
   },
   "en/pilgrim-team-psychology-arc.html": {
-   "sha1": "223c9d830218a5fed08d5c2e23920056aa23de8a",
+   "sha1": "4c9d3e4fd8995fb5c5b2884d6c473a0b800df56c",
    "counts": {}
   },
   "en/poetry-rhythm-analysis.html": {
-   "sha1": "8f0c16e6ed8129bb8997d74ae81152f8af4782e2",
+   "sha1": "61bde019bf91bb89b8dfaa90cc579173fc261ca2",
    "counts": {}
   },
   "en/power-resources.html": {
-   "sha1": "cc89c2cf31fa243d6b02ca4ff5f370e9e541510b",
+   "sha1": "4a0a670a0ae13400d48b8e7f54d0c67aee8f18f1",
    "counts": {}
   },
   "en/relationships.html": {
-   "sha1": "1e188dada5c920258bcb69bf67fa89d0b7f063cf",
+   "sha1": "99ec1d2fc6703fb6098c31c02507f538dd869f7a",
    "counts": {}
   },
   "en/risk-project.html": {
-   "sha1": "6b26b26941008c69893cc7f21bae4753c4e4bf19",
+   "sha1": "91c1feda737bfdf50f7ad966398606b4987de884",
    "counts": {}
   },
   "en/search.html": {
@@ -910,15 +910,15 @@
    "counts": {}
   },
   "en/social-media.html": {
-   "sha1": "deb45a4cde42668b5bac69c3d3fc91aeb0787886",
+   "sha1": "2d5977ead35156ba7904639ef38b13d2bd75bf06",
    "counts": {}
   },
   "en/tag-cloud.html": {
-   "sha1": "c8dbd8574fd67c21774e2ca2749554d0ba486c0f",
+   "sha1": "88d0a62320e14d4dd670db00e41e487b5efae0f3",
    "counts": {}
   },
   "en/text-evolution.html": {
-   "sha1": "d4f24e6616e88a478932bcd4a395aaae2e8e4056",
+   "sha1": "b288f0c0a01362982f59e1b3f0d116df7275f8a8",
    "counts": {}
   },
   "en/text-search.html": {
@@ -926,15 +926,15 @@
    "counts": {}
   },
   "en/theological-intervention-network.html": {
-   "sha1": "bb2497b6862f152537eaa47602f95b7896db94f7",
+   "sha1": "48f7f2d742239feba8a9547249260655da159024",
    "counts": {}
   },
   "en/timeline.html": {
-   "sha1": "bb2fb6790fbc9dc67b087159a3845af73b613b4d",
+   "sha1": "c7833f86fa64516d558e68bec49eca6164682a89",
    "counts": {}
   },
   "en/tribulations.html": {
-   "sha1": "075f92495e9e482984dd946eb7005da140098ecc",
+   "sha1": "e697be63839df6a3247b2afdae8d2de551b5de59",
    "counts": {}
   },
   "en/underworld-power-network.html": {
@@ -942,7 +942,7 @@
    "counts": {}
   },
   "en/visual-art.html": {
-   "sha1": "fd2ba77dd0faad6357c29b139bade204a403d524",
+   "sha1": "172c125dbf772ffb44fbd04f686cef5e4d095e62",
    "counts": {}
   },
   "en/visualizations.html": {
@@ -950,9 +950,9 @@
    "counts": {}
   },
   "en/workplace.html": {
-   "sha1": "5811d7c200897f507a8f264f95d3aedab05a2b67",
+   "sha1": "ba59e66c5ecb4c8de108f05cd29df09b2f8b4f95",
    "counts": {}
   }
  },
- "generated_at": "2026-11-26T11:40:41.134Z"
+ "generated_at": "2026-11-26T14:45:09.022Z"
 }
