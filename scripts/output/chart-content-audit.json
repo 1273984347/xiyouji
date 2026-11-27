@@ -163,7 +163,7 @@
    "insight": 15,
    "tooltip": 20,
    "legend": 6,
-   "text_len": 1638
+   "text_len": 1564
   },
   {
    "page": "data/character-appearance.html",
@@ -379,7 +379,7 @@
    "insight": 9,
    "tooltip": 50,
    "legend": 18,
-   "text_len": 2348
+   "text_len": 2280
   },
   {
    "page": "data/game-webnovel.html",
@@ -586,7 +586,7 @@
    "insight": 8,
    "tooltip": 3,
    "legend": 23,
-   "text_len": 2484
+   "text_len": 2416
   },
   {
    "page": "data/monster-background.html",
@@ -604,7 +604,7 @@
    "insight": 6,
    "tooltip": 2,
    "legend": 6,
-   "text_len": 2490
+   "text_len": 2422
   },
   {
    "page": "data/monster-ecology-network.html",
@@ -676,7 +676,7 @@
    "insight": 15,
    "tooltip": 17,
    "legend": 0,
-   "text_len": 1624
+   "text_len": 1550
   },
   {
    "page": "data/narratology-12d-network.html",
@@ -811,7 +811,7 @@
    "insight": 3,
    "tooltip": 1,
    "legend": 0,
-   "text_len": 1574
+   "text_len": 1500
   },
   {
    "page": "data/tag-cloud.html",
