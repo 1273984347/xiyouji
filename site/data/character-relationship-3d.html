@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-pbwYUKZQ0i6TFEFPgvor47nMLnnFyejrZmqiGOtrbIk='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-NyWwPw/tMkg5c+U+gLt+wpj7XbINLhLheO0wNi9edPU='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>人物关系 3D 网络图 · 详解西游记</title>
@@ -126,6 +126,8 @@
         .legend { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: var(--space-4); font-size: 0.82rem; justify-content: center; }
         .legend-item { display: flex; align-items: center; gap: 6px; color: var(--accent-primary); }
         .legend-swatch { width: 14px; height: 14px; border-radius: 50% ; display: inline-block; }
+        /* 深度读法说明（W1343：z 轴承载阵营层级·非几何副产品） */
+        .depth-hint { margin-top: var(--space-3); font-size: 0.8rem; line-height: 1.8; color: var(--ink-soft); text-align: center; }
         /* 关键洞察段（W1286：结论段统一样式·只用令牌色） */
         .insight-list { background: var(--paper); border: 1px solid var(--line); border-radius: var(--radius-md); padding: var(--space-5); }
         .insight-item { margin: var(--space-3) 0; padding-left: var(--space-5); position: relative; }
@@ -186,7 +188,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <!-- DATA-STATUS-BADGE v1 w1167 -->
 <div class="data-status-badge" data-status="snapshot" data-goatcounter-view="badge_view"><span class="ds-dot" aria-hidden="true"></span><span class="ds-label">内嵌快照</span><span class="ds-note">本页数字为发布时生成的快照，离线双击也能看，不随接口更新。</span></div>
         <p class="subtitle">CHARACTER RELATIONSHIP 3D NETWORK</p>
-        <p class="tagline">Three.js 力导向 3D 网络图——20+ 节点的人物关系立体可视化，鼠标拖拽旋转、滚轮缩放、点击查看详情。</p>
+        <p class="tagline">Three.js 力导向 3D 网络图——20+ 节点的人物关系立体可视化，深度轴承载阵营层级，鼠标拖拽旋转、滚轮缩放、点击查看详情。</p>
     
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
@@ -197,7 +199,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <!-- 3D 网络图 -->
         <section class="section">
             <h2 class="section-title">人物关系 3D 力导向图</h2>
-            <div class="section-sub">基于 Three.js 构建 3D 力导向图，22 个角色节点 + 32 条关系边，节点按阵营聚类着色。鼠标拖拽旋转视角，滚轮缩放，点击节点查看人物信息。</div>
+            <div class="section-sub">基于 Three.js 构建 3D 力导向图，22 个角色节点 + 32 条关系边，节点按阵营聚类着色。<strong>深度（z 轴）承载阵营层级</strong>：五个阵营各占一层，由近及远依次为 取经团 → 天庭 → 佛门 → 妖界 → 龙族。鼠标拖拽旋转视角，滚轮缩放，点击节点查看人物信息。</div>
             <div class="chart-block">
                 <div id="three-container" class="chart-fade-in">
                     <div class="controls-hint">
@@ -220,6 +222,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     <div class="legend-item"><span class="legend-swatch" style="background:#5a7a3a"></span>妖界</div>
                     <div class="legend-item"><span class="legend-swatch" style="background:#7a5230"></span>龙族</div>
                 </div>
+                <p class="depth-hint">读法：<strong>深度（z 轴）= 阵营层级</strong>——上列图例顺序即由近及远的五个深度层（取经团最近 · 龙族最远），同层节点必属同一阵营；球体大小与颜色仍分别表示角色重要性（1–10）与阵营。拖拽旋转即可看出五层分面。</p>
                 <div class="chart-tooltip" id="nodeTooltip"></div>
             </div>
         </section>
@@ -1395,6 +1398,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     let linkLines = [];
     let raycaster, mouse;
     let nodePositions = [];
+    let nodeDepthZ = [];   // W1343：每节点的深度层目标值（z 轴承载阵营层级）
     let velocity = [];
         let _tmpV3 = null; // W674 WP-3.10：循环内共享临时向量（原每帧 new O(n²) 次）——init3D 内惰性创建（three.r128 为 defer，顶层语句时 THREE 未定义，W674 e2e 实证回归）
     let selectedNode = null;
@@ -1408,7 +1412,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         scene = new THREE.Scene();
         _tmpV3 = new THREE.Vector3(); // W674 WP-3.10 惰性创建
         scene.background = new THREE.Color(0x1a2530);
-        scene.fog = new THREE.Fog(0x1a2530, 200, 600);
+        scene.fog = new THREE.Fog(0x1a2530, 200, 560);
 
         // 相机
         camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 2000);
@@ -1439,33 +1443,31 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         // OrbitControls（手动实现，避免外部依赖）
         setupOrbitControls(container);
 
-        // 初始化节点位置（按聚类分组建圈）
+        // 初始化节点位置（按聚类分组·z 轴承载阵营层级）
+        // W1343：z 不再由聚类环几何推导（原 z = clusterRadius * sin(angle) 不承载数据），
+        //        改为由 node.group（阵营 0-4）映射成 5 个深度层：同层 = 同阵营，z 越小越靠前。
+        //        层内节点在 x-y 平面上成环散开（力导向只在 x/y 生效），5 层沿 z 叠成纵深分面。
+        const DEPTH_STEP = 45;                                    // 相邻阵营层间距（全程深度跨度 180 单位）
+        const depthOf = (groupIdx) => (groupIdx - 2) * DEPTH_STEP; // 阵营 0 → -90（最近）· 阵营 4 → +90（最远）
         const groupNodes = [[], [], [], [], []];
         EMBEDDED_DATA.nodes.forEach(n => groupNodes[n.group].push(n));
 
         nodePositions = [];
+        nodeDepthZ = [];
         velocity = [];
         EMBEDDED_DATA.nodes.forEach((node, i) => {
             const groupIdx = node.group;
             const groupSize = groupNodes[groupIdx].length;
             const idxInGroup = groupNodes[groupIdx].indexOf(node);
-            // 每个聚类成一个环
-            const clusterRadius = 40 + groupIdx * 15;
+            // 层内环半径随阵营人数微调：人多则环大，减少同层球体互压
+            const clusterRadius = 42 + Math.min(groupSize, 6) * 3;
             const angleStep = (Math.PI * 2) / groupSize;
             const angle = idxInGroup * angleStep + groupIdx * 0.5;
-            const clusterOffset = groupIdx * 60 - 120;
-            const axis = groupIdx % 2 === 0 ? "x" : "y";
-            let x, y, z;
-            if (axis === "x") {
-                x = clusterRadius * Math.cos(angle);
-                y = clusterOffset;
-                z = clusterRadius * Math.sin(angle);
-            } else {
-                x = clusterOffset;
-                y = clusterRadius * Math.cos(angle);
-                z = clusterRadius * Math.sin(angle);
-            }
+            const x = clusterRadius * Math.cos(angle);
+            const y = clusterRadius * Math.sin(angle) * 0.8;   // 纵向略压扁：贴合宽屏取景
+            const z = depthOf(groupIdx);
             nodePositions.push(new THREE.Vector3(x, y, z));
+            nodeDepthZ.push(z);
             velocity.push(new THREE.Vector3(0, 0, 0));
         });
 
@@ -1566,9 +1568,9 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // OrbitControls 手动实现
     let isDragging = false;
     let prevMouse = { x: 0, y: 0 };
-    let cameraTheta = 0;
-    let cameraPhi = Math.PI / 2;
-    let cameraRadius = 280;
+    let cameraTheta = -0.85;              // W1343：初始视角改 3/4 侧视——z 轴阵营层才能在屏幕上分面可辨
+    let cameraPhi = 1.22;
+    let cameraRadius = 230;
     // W1168 视角复位（audit 原始发现：手机上把 3D 图拖乱了，没有任何按钮能回到初始视角）。
     // 快照在相机状态声明处取——此刻还是初值；后续任何拖拽只改活值，不动这份快照。
     var VIEW_INITIAL = {
@@ -1747,14 +1749,18 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         // 更新位置
         for (let i = 0; i < nodePositions.length; i++) {
             velocity[i].multiplyScalar(damping);
+            // W1343：z 轴是阵营层编码——z 方向不参与力导向（否则深度语义会被物理仿真抹掉）
+            velocity[i].z = 0;
             // 限制速度
             const maxSpeed = 2;
             if (velocity[i].length() > maxSpeed) {
                 velocity[i].normalize().multiplyScalar(maxSpeed);
             }
             nodePositions[i].add(velocity[i]);
-            // 轻微回归中心
-            nodePositions[i].multiplyScalar(0.999);
+            // 轻微回归中心（x/y 回收，z 由阵营层钉住）
+            nodePositions[i].x *= 0.999;
+            nodePositions[i].y *= 0.999;
+            nodePositions[i].z = nodeDepthZ[i];
             // 更新 mesh 位置
             nodeMeshes[i].position.copy(nodePositions[i]);
             if (nodeMeshes[i].userData.ring) {

@@ -1,0 +1,24 @@
+{
+ "batch": "W1346",
+ "date": "2026-11-28",
+ "title": "W1346 Belbin 双页热力矩阵 + P2 两页 3D 深度语义收口",
+ "desc": "Belbin双页9轴雷达改热力矩阵 3D深度语义收口 雷达基线清零",
+ "head_entry": "2026-11-28（W1346 Belbin 双页热力矩阵 + 3D 深度语义收口）",
+ "head_sentence": "Belbin 双页热力矩阵 + P2 3D 深度语义 雷达基线清零",
+ "changelog_body": "\n\n> **来源**：用户 2026-11-28「处理 P2 的 3D 图表」（与 W1345 遗留的两页 9 轴雷达一并收口）。\n> - **雷达族清零（基线 2 → 0）**：relationships 与 pilgrim-team-dynamic-network 的 9 轴 Belbin 雷达 → 行=角色、列=成员热力矩阵（单色顺序色阶·格内数值按底色亮度翻转·色阶条图例·chart-tooltip）；id/函数改 heatmap，残留雷达签名实测 0。\n> - **P2-1 character-relationship-3d**：z 由聚类环几何改为阵营层级（z=(group−2)×45·取经团 −90 · 龙族 +90），velocity.z 置零并每帧写回，相机 3/4 视角 + fog 200→560。\n> - **P2-2 journey-geo-3d**：高度由程序化地形噪声改为回目序号（chapterIndex 12 回→6 · 98 回→40），长安最低、灵山最高；orbitTarget.y 与 VIEW_INITIAL.ty 同步防复位跳变。\n> - **验证**：check_chart_data 239 页 · 基线 0 · FAIL 0；check_js_syntax 873 通过；CSP 0 漂移；对比度两口径 0 违例；verify full 见收官记录；代理侧 headless 截图实测四页。\n> - **边界**：EN 三镜像页另排批；3D 两页无本仓 Playwright 运行期档案。\n> - **文件**：见 file-index W1346 段。\n> - **状态**：已落地。\n",
+ "milestone_block": "- **W1346 Belbin 双页热力矩阵 + P2 3D 深度语义**：9 轴雷达改「行=角色 × 列=成员」热力矩阵（残留雷达签名 0）· character-relationship-3d 深度改阵营层级（z=(group−2)×45·velocity.z 归零）· journey-geo-3d 高度改回目序号（长安低·灵山高）· 雷达基线清零\n",
+ "file_index_rows": [
+  "| site/data/（2 件） | W1346 | 9 轴 Belbin 雷达改热力矩阵（id/函数改 heatmap·签名残留 0） |",
+  "| site/data/（2 件） | W1346 | 3D 深度语义：阵营层级 / 回目序号映射 + 读法说明 |",
+  "| scripts/output/radar-family-baseline.txt | W1346 | 基线清零（2 → 0 页） |",
+  "| scripts/output/（1 件） | W1346 | 本批 spec + 探针报告刷新 |",
+  "| CHANGELOG.md | W1346 | 新增 W1346 段 + 编号上限同步 |",
+  "| HANDOVER.md | W1346 | HEAD + 进度段 + 最后更新（概要块滚动：W1340 块淘汰） |",
+  "| archive/docs/（2 件） | W1346 | 台账行窗归档（迁出 W1286-W1287） |",
+  "| README.md | W1346 | 当前批次行升版 |",
+  "| STRUCTURE.md | W1346 | 当前批次行升版 |",
+  "| docs/00-导读/（2 件） | W1346 | 项目说明批次行升版 + 台账认领行 |",
+  "| CITATION.cff | W1346 | 版本字段升版 |",
+  "| .github/workflows/README.md | W1346 | 头部版本与里程碑区间行升版 |"
+ ]
+}

@@ -1,3 +1,14 @@
+### W1346（2026-11-28）：Belbin 双页改热力矩阵 + P2 两页 3D 深度语义收口
+
+> **来源**：用户 2026-11-28「处理 P2 的 3D 图表」（与 W1345 遗留的两页 9 轴雷达一并收口）。
+> - **雷达族清零（基线 2 → 0）**：`relationships` 与 `pilgrim-team-dynamic-network` 的 9 轴 Belbin 雷达 → **行=角色、列=成员的热力矩阵**（单色顺序色阶·格内数值按底色亮度翻转·色阶条图例·`.chart-tooltip` 悬停）；`id`/函数名一并改 `heatmap`，残留雷达签名实测 **0** ⇒ R5 判据下不再有存量豁免页。
+> - **P2-1 character-relationship-3d 深度改为数据维度**：原 z 由聚类环几何推导（装饰性），改 **z =（阵营层级 group 0-4 − 2）× 45**（取经团最近 −90 · 龙族最远 +90，层间距 45），层内成环；并把 `velocity.z` 置零、每帧写回 z，避免力导向把深度语义抹平；相机改 3/4 视角（theta −0.85 / phi 1.22）+ fog 200→560，使五层分面可辨；页内加读法说明。`group` 的选取依据：22 节点均有 `group` 与 `GROUP_NAMES`（5 阵营），而 `importance` 已被球半径占用、`source_chapters` 是代表性引证非全量出场。
+> - **P2-2 journey-geo-3d 高度改为时间维度**：原 y 取程序化地形噪声（无数据含义），改 **高度 = 回目序号**（`chapterIndex()` 正则取首回目数·12 回 → 6 · 98 回 → 40），长安最低、灵山最高；地形保留为底景；`orbitTarget.y` 与 `VIEW_INITIAL.ty` 同步（否则复位会跳），相机 phi 1.02 + fog 220→420。
+> - **验证**：`check_chart_data` 239 页 · **基线 0** · FAIL 0；`check_js_syntax` 873 通过；CSP 注入后 `--check` 0 漂移；对比度探针两口径见收官记录；代理侧另用 headless 浏览器对四页截图实测（热力矩阵 9×5 / 5×9 与色阶条正常、3D z 分层实值 g0→−90…g4→+90、路线由低到高）。
+> - **边界**：`site/en/relationships|pilgrim-team-dynamic-network|character-relationship-3d` 为英文镜像，不在本批范围，需另排 EN 批；两页 3D 仍无本仓 Playwright 运行期档案（代理用临时 headless 副本取证后已清理）。
+> - **文件**：见 file-index W1346 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1345（2026-11-28）：雷达族 A 组 16 页降级 + C 组 3 页取证（基线 21 → 2）
 
 > **来源**：用户 2026-11-28「继续处理剩余的 21 页雷达族图表」——W1341 报告 §九第 2 档的剩余面。
@@ -843,7 +854,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1345），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1346），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-118DVeYckyeyBXx5yl7urbKFu6q5ctHHh+E4az47iio=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-lUTuFkA1JGaP5uIHNcF27B116a4g0lU8MGZ/HWVeOYs=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队动力学关系网络 · 详解西游记</title>
@@ -322,14 +322,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
         </section>
 
-        <!-- 板块 1：Belbin 角色雷达图 -->
+        <!-- 板块 1：Belbin 角色热力矩阵 -->
         <section class="section" aria-labelledby="sec-belbin">
-            <h2 id="sec-belbin">① Belbin 九角色覆盖度雷达</h2>
-            <p>取经团队 5 人覆盖 Belbin 九角色中的 8 种，仅缺"监督评估者"（Monitor Evaluator）——这正是团队反复陷入"悟空决策-唐僧否决"冲突的根因。无人冷静评估方案，导致决策震荡。</p>
+            <h2 id="sec-belbin">① Belbin 九角色覆盖度热力矩阵</h2>
+            <p>取经团队 5 人覆盖 Belbin 九角色中的 8 种，仅缺"监督评估者"（Monitor Evaluator）——这正是团队反复陷入"悟空决策-唐僧否决"冲突的根因。无人冷静评估方案，导致决策震荡。下图把 5 人 × 9 角色的适配度排成矩阵：行 = 五位成员，列 = 九种角色，格内数值为该角色的覆盖度评分（0-10），颜色越深表示覆盖度越高。</p>
             <div class="chart-wrap">
-                <svg id="belbin-radar" width="100%" height="460" role="img" aria-labelledby="belbin-title belbin-desc">
-                    <title id="belbin-title">Belbin 九角色覆盖度雷达图</title>
-                    <desc id="belbin-desc">取经团队五成员在 Belbin 九角色上的覆盖度雷达对比。</desc>
+                <svg id="belbin-heatmap" width="100%" height="460" role="img" aria-labelledby="belbin-title belbin-desc">
+                    <title id="belbin-title">Belbin 九角色覆盖度热力矩阵</title>
+                    <desc id="belbin-desc">取经团队五成员在 Belbin 九角色上的覆盖度热力矩阵：行 = 五位成员，列 = 九种角色，颜色越深覆盖度越高。</desc>
                 </svg>
                 <div class="chart-tooltip" id="belbin-tip"></div>
             </div>
@@ -423,7 +423,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <p>四方向整合产出：</p>
             <ul style="margin-left:var(--space-5); color:var(--ink-soft); font-size:0.9em;">
                 <li><strong>W269 A 方向</strong>：<a href="#">取经团队动力学深化专题</a>（docs/02-人物深度分析/取经团队动力学深化专题.md）·Belbin + Tuckman + 群体动力学三框架</li>
-                <li><strong>W270 V 方向</strong>：本页 · force-directed 关系网络 + 九角色雷达 + 五阶段时间线</li>
+                <li><strong>W270 V 方向</strong>：本页 · force-directed 关系网络 + 九角色热力矩阵 + 五阶段时间线</li>
                 <li><strong>W271 E 方向</strong>：a11y 深化（WCAG 2.2 SC 2.4.13 焦点可见 + 屏幕阅读器 + 键盘导航）</li>
                 <li><strong>W272 S 方向</strong>：心理学跨学科分析短文（团队动力学视角 · 2000 字）</li>
             </ul>
@@ -433,7 +433,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
         <section class="section">
             <h2 class="section-title">⑥ 关键洞察</h2>
-            <div class="section-sub">KEY INSIGHTS · 取自 Belbin 雷达 / 五成员关系网络 / Tuckman 五阶段 / 目标对齐度的实际取值</div>
+            <div class="section-sub">KEY INSIGHTS · 取自 Belbin 热力矩阵 / 五成员关系网络 / Tuckman 五阶段 / 目标对齐度的实际取值</div>
             <div class="insight-list">
                 <div class="insight-item"><strong>职能分工零重叠：</strong>唐僧独占协调者 9，悟空包揽塑造者 9／智多星 8／专家 9，八戒拿下资源调查员 8／团队工作者 8，沙僧执行者 9，白龙马专家 8 —— 五名成员各占一段互不争抢的职能带。</div>
                 <div class="insight-item"><strong>缺位的是监督评估者：</strong>九角色里只有监督评估者无人达标 —— 唐僧 2、悟空 3、八戒 3、沙僧 2、白龙马 2，无一人上 4 分，与页面 KPI 的 8/9 覆盖、缺监督评估者一致；震荡期随之拖成 38 回，占第 8 至 99 回的 41%。</div>
@@ -519,65 +519,128 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         }
     };
 
-    // ============= Belbin 雷达图 =============
-    (function renderBelbinRadar() {
-        const svg = d3.select("#belbin-radar");
+    // ============= Belbin 九角色覆盖度热力矩阵（9 角色 > §4B 维度上限 8 → 雷达改热力矩阵） =============
+    (function renderBelbinHeatmap() {
+        const svg = d3.select("#belbin-heatmap");
         const tip = d3.select("#belbin-tip");
-        const width = +svg.attr("width") || 800;
-        const height = +svg.attr("height");
-        const cx = width / 2, cy = height / 2;
-        const radius = Math.max(0, Math.min(width, height) / 2 - 60);
+        const width = svg.node().clientWidth || 800;
+        const height = +svg.attr("height") || 460;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const m = {top: 62, right: 18, bottom: 58, left: 66};
+        const w = width - m.left - m.right;
+        const h = height - m.top - m.bottom;
         const roles = ["coordinator", "completer", "shaper", "plant", "specialist", "ri", "tw", "me", "implementer"];
         const roleLabels = ["协调者", "完成者", "塑造者", "智多星", "专家", "资源调查员", "团队工作者", "监督评估者", "执行者"];
-        const colors = {唐僧: "#C0392B", 悟空: "#8c2a2a", 八戒: "#8E7D62", 沙僧: "#3A473A", 白龙马: "#40619E"};
-        const levels = [2, 4, 6, 8, 10];
-        const g = svg.append("g").attr("transform", `translate(${cx},${cy})`);
+        const rows = EMBEDDED_DATA.belbin;
+        const members = rows.map(d => d.character);
+        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
 
-        // 网格圆
-        levels.forEach(lv => {
-            const r = (lv / 10) * radius;
-            g.append("circle").attr("r", r).attr("fill", "none").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "3,3");
-            g.append("text").attr("y", -r).attr("text-anchor", "middle").attr("font-size", "10px").style("fill", "var(--ink-soft)").text(lv);
-        });
+        // 布局：行 = 5 位成员 · 列 = 9 种角色（角色标签横排可读）
+        const x = d3.scaleBand().domain(roles).range([0, w]).padding(0.06);
+        const y = d3.scaleBand().domain(members).range([0, h]).padding(0.06);
 
-        // 轴线 + 标签
-        roles.forEach((role, i) => {
-            const angle = (i / roles.length) * 2 * Math.PI - Math.PI / 2;
-            const x2 = Math.cos(angle) * radius, y2 = Math.sin(angle) * radius;
-            g.append("line").attr("x1", 0).attr("y1", 0).attr("x2", x2).attr("y2", y2).attr("stroke", "#d9cdb8");
-            const lx = Math.cos(angle) * (radius + 24), ly = Math.sin(angle) * (radius + 24);
-            g.append("text").attr("x", lx).attr("y", ly).attr("text-anchor", "middle").attr("dominant-baseline", "middle")
-                .attr("font-size", "11px").style("fill", "var(--ink)").text(roleLabels[i]);
-        });
+        // 单色顺序色阶：宣纸浅赭 → 朱砂深赭（禁 turbo/rainbow；覆盖度高则色深）
+        const color = d3.scaleSequential()
+            .domain([0, 10])
+            .interpolator(d3.interpolateRgb("#f5e9d4", "#8C2F1B"));
+        const textOn = function (fill) {
+            const c = d3.rgb(fill);
+            const lum = (0.299 * c.r + 0.587 * c.g + 0.114 * c.b) / 255;
+            return lum > 0.62 ? "var(--ink)" : "#fdf8ee";
+        };
 
-        // 角色多边形
-        EMBEDDED_DATA.belbin.forEach(d => {
-            const points = roles.map((role, i) => {
-                const angle = (i / roles.length) * 2 * Math.PI - Math.PI / 2;
-                const val = d[role];
-                const r = (val / 10) * radius;
-                return [Math.cos(angle) * r, Math.sin(angle) * r];
+        const cells = [];
+        rows.forEach(function (row) {
+            roles.forEach(function (role, i) {
+                cells.push({member: row.character, role: role, roleLabel: roleLabels[i], value: row[role]});
             });
-            g.append("polygon").attr("points", points.map(p => p.join(",")).join(" "))
-                .attr("fill", colors[d.character]).attr("fill-opacity", 0.12)
-                .attr("stroke", colors[d.character]).attr("stroke-width", 1.8)
-                .style("cursor", "pointer")
-                .on("mouseover", (e) => {
-                    tip.classed("visible", true).html(`<strong>${d.character}</strong>`);
-                })
-                .on("mousemove", (e) => {
-                    tip.style("left", (e.pageX + 10) + "px").style("top", (e.pageY - 10) + "px");
-                })
-                .on("mouseout", () => tip.classed("visible", false));
         });
 
-        // 图例
-        const legend = d3.select("#belbin-legend");
-        Object.entries(colors).forEach(([name, color]) => {
-            legend.append("div").attr("class", "legend-item").html(
-                `<span class="legend-dot" style="background:${color}"></span>${name}`
-            );
+        const cellG = g.append("g").selectAll("g")
+            .data(cells).join("g")
+            .attr("transform", d => `translate(${x(d.role)},${y(d.member)})`);
+
+        cellG.append("rect")
+            .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+            .attr("rx", 3)
+            .attr("fill", d => color(d.value))
+            .attr("stroke", "#d9cdb8").attr("stroke-opacity", 0.55).attr("stroke-width", 1)
+            .style("cursor", "pointer");
+
+        cellG.append("text")
+            .attr("x", x.bandwidth() / 2).attr("y", y.bandwidth() / 2)
+            .attr("dy", "0.35em").attr("text-anchor", "middle")
+            .attr("font-size", "13px").attr("font-weight", "600")
+            .style("pointer-events", "none")
+            .attr("fill", d => textOn(color(d.value)))
+            .text(d => d.value);
+
+        // 悬停：沿用页内 .chart-tooltip（classed("visible") 契约）
+        cellG.on("mouseover", function (e, d) {
+            d3.select(this).select("rect")
+                .attr("stroke", "var(--accent)").attr("stroke-opacity", 1).attr("stroke-width", 2);
+            tip.classed("visible", true)
+                .html(`<strong>${d.member}</strong> · ${d.roleLabel}：${d.value}/10`);
+        }).on("mousemove", function (e) {
+            tip.style("left", (e.pageX + 10) + "px").style("top", (e.pageY - 10) + "px");
+        }).on("mouseout", function () {
+            d3.select(this).select("rect")
+                .attr("stroke", "#d9cdb8").attr("stroke-opacity", 0.55).attr("stroke-width", 1);
+            tip.classed("visible", false);
         });
+
+        // 列标签（九角色）
+        g.append("g").selectAll("text")
+            .data(roles).join("text")
+            .attr("x", d => x(d) + x.bandwidth() / 2)
+            .attr("y", -12)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "11px")
+            .attr("font-weight", "600")
+            .style("fill", "var(--ink)")
+            .text((d, i) => roleLabels[i]);
+
+        // 行标签（五成员）
+        g.append("g").selectAll("text")
+            .data(members).join("text")
+            .attr("x", -12)
+            .attr("y", d => y(d) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "end")
+            .attr("font-size", "12px")
+            .attr("font-weight", "600")
+            .style("fill", "var(--ink)")
+            .text(d => d);
+
+        g.append("text")
+            .attr("x", 0).attr("y", -34)
+            .attr("text-anchor", "start")
+            .attr("font-size", "11px")
+            .style("fill", "var(--ink-soft)")
+            .text("纵轴：5 位成员 ↓　横轴：9 种角色 →");
+
+        // 色阶图例：颜色越深 = 覆盖度越高
+        const lg = svg.append("g").attr("transform", `translate(${m.left},${m.top + h + 20})`);
+        const lgW = 130, lgH = 10, steps = 26;
+        for (let i = 0; i < steps; i++) {
+            lg.append("rect")
+                .attr("x", i * lgW / steps).attr("y", 0)
+                .attr("width", lgW / steps + 0.6).attr("height", lgH)
+                .attr("fill", color(i / (steps - 1) * 10));
+        }
+        lg.append("text").attr("x", 0).attr("y", lgH + 13)
+            .attr("font-size", "10px").style("fill", "var(--ink-soft)").text("0");
+        lg.append("text").attr("x", lgW).attr("y", lgH + 13).attr("text-anchor", "end")
+            .attr("font-size", "10px").style("fill", "var(--ink-soft)").text("10");
+        lg.append("text").attr("x", lgW + 12).attr("y", lgH)
+            .attr("font-size", "11px").style("fill", "var(--ink-soft)").text("颜色越深 = 角色覆盖度越高");
+
+        // 图例：单色顺序色阶（成员色不再承载编码）
+        const legend = d3.select("#belbin-legend");
+        legend.selectAll("*").remove();
+        legend.append("div").attr("class", "legend-item").html(
+            '<span class="legend-dot" style="border-radius:3px;width:90px;height:12px;background:linear-gradient(90deg,#f5e9d4 0%,#e0b89a 40%,#b5654a 75%,#8C2F1B 100%);"></span>覆盖度 0 → 10（颜色越深越高）'
+        );
     })();
 
     // ============= 关系网络 force-directed =============

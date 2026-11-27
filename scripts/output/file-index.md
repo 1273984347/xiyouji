@@ -1,3 +1,15 @@
+## W1346 Belbin 双页热力矩阵 + P2 3D 深度语义（2026-11-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/（2 件） | W1346 | 9 轴 Belbin 雷达改热力矩阵（id/函数改 heatmap·签名残留 0） |
+| site/data/（2 件） | W1346 | 3D 深度语义：阵营层级 / 回目序号映射 + 读法说明 |
+| scripts/output/radar-family-baseline.txt | W1346 | 基线清零（2 → 0 页） |
+| scripts/output/（1 件） | W1346 | 本批 spec + 探针报告刷新 |
+| CHANGELOG.md / HANDOVER.md | W1346 | 段 + HEAD/进度/最后更新（概要块滚动：W1340 块淘汰） |
+| README.md / STRUCTURE.md / docs-00-导读/ | W1346 | 当前批次行升版 + 台账认领行 |
+| CITATION.cff / .github/workflows/README.md | W1346 | 版本与里程碑区间行升版 |
+
 ## W1345 雷达 A 组 16 页降级 + C 组 3 页取证（2026-11-28）
 
 | 文件 | W | 说明 |

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-MdXFepNSlKNixpLDpczAH4LVujzsSp1nnQzPqFnXKxA=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nOkVElB3mq+jLL4I3NAHA+P/11DRlmkT4SjUpVEi8gs=' 'sha256-5h37ohiZtGhpGFFKwT5GfvxK4orxn+yg7vNaMpTKj1o=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>关系网络 · 详解西游记</title>
@@ -520,7 +520,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
                 <div class="map-card alt2">
                     <div class="map-label" style="color: var(--text-secondary);">LENS 4</div>
                     <div class="map-title">贝尔宾角色 · Belbin Roles</div>
-                    <div class="map-row">5 人 × 9 角色雷达：覆盖 7 角色·缺审议员·团队评分 7.5，前 3 人互补性最强。</div>
+                    <div class="map-row">5 人 × 9 角色热力矩阵：覆盖 7 角色·缺审议员·团队评分 7.5，前 3 人互补性最强。</div>
                 </div>
                 <div class="map-card alt">
                     <div class="map-label" style="color:var(--accent-4);">LENS 5</div>
@@ -741,9 +741,9 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
             </p>
 
             <div class="chart-block">
-                <div class="chart-title">5 人 × 9 角色贝尔宾雷达图</div>
-                <div class="chart-caption">9 轴：智多星/审议员/推进者/创新者/监督员/凝聚者/完成者/专家/协调者（每角色 0-10 分）</div>
-                <svg id="chart-belbin-radar" class="chart-svg" width="100%" height="560"></svg>
+                <div class="chart-title">5 人 × 9 角色贝尔宾热力矩阵</div>
+                <div class="chart-caption">行 = 9 个贝尔宾角色（智多星/审议员/推进者/创新者/监督员/凝聚者/完成者/专家/协调者）/ 列 = 5 位成员 / 格内数值 = 该成员在该角色上的适配分（0-10 分）/ 颜色越深 = 适配度越高 / 悬停查看完整角色定位</div>
+                <svg id="chart-belbin-heatmap" class="chart-svg" width="100%" height="560"></svg>
                 <div class="legend-row" id="belbin-legend"></div>
             </div>
 
@@ -1195,7 +1195,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
         renderRescueTable(rescue);
         renderRescuePattern(rescue);
         renderRescueInsights(rescue);
-        renderBelbinRadar(belbin);
+        renderBelbinHeatmap(belbin);
         renderBelbinLegend(belbin);
         renderBelbinTable(belbin);
         renderBelbinInsights(belbin);
@@ -1697,134 +1697,134 @@ const link = g.append('g').selectAll('line')
         list.selectAll('li').data(insights).enter().append('li').text(d => d);
     }
 
-    // ===== Section 4: 贝尔宾团队角色雷达图 =====
-    function renderBelbinRadar(data) {
-        const svg = d3.select('#chart-belbin-radar');
+    // ===== Section 4: 贝尔宾团队角色热力矩阵（W1343：9 轴 >§4B 维度上限 8 → 雷达改热力矩阵）=====
+    function renderBelbinHeatmap(data) {
+        const svg = d3.select('#chart-belbin-heatmap');
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 700;
         const W = Math.max(containerW, 600), H = 560;
         svg.attr('viewBox', `0 0 ${W} ${H}`);
-        const cx = W / 2, cy = H / 2 + 10;
-        const radius = Math.max(0, Math.min(W, H) / 2 - 80);
-        const levels = 5;
-        const dims = Object.keys(data.pilgrim_team[0].role_fit);
-        const nDims = dims.length;
 
-        const colorMap = {
-            '唐僧': '#40619E',
-            '孙悟空': '#C0392B',
-            '猪八戒': '#e9b885',
-            '沙僧': '#3A473A',
-            '白龙马': '#8E7D62'
+        // 布局：行 = 9 个角色（左侧横排标签）· 列 = 5 位成员（顶部标签）
+        const m = {top: 46, right: 26, bottom: 62, left: 96};
+        const w = W - m.left - m.right;
+        const h = H - m.top - m.bottom;
+        const members = data.pilgrim_team;
+        const roles = Object.keys(members[0].role_fit);
+        const g = svg.append('g').attr('transform', `translate(${m.left},${m.top})`);
+        const x = d3.scaleBand().domain(members.map(d => d.character)).range([0, w]).padding(0.06);
+        const y = d3.scaleBand().domain(roles).range([0, h]).padding(0.06);
+
+        // 单色顺序色阶：宣纸浅赭 → 朱砂深赭（禁 turbo/rainbow；高分深、低分浅）
+        const color = d3.scaleSequential()
+            .domain([0, 10])
+            .interpolator(d3.interpolateRgb('#f5e9d4', '#8C2F1B'));
+        // 格内数值色按底色亮度翻转，暗色模式下同样可读
+        const textOn = (fill) => {
+            const c = d3.rgb(fill);
+            const lum = (0.299 * c.r + 0.587 * c.g + 0.114 * c.b) / 255;
+            return lum > 0.62 ? 'var(--ink)' : '#fdf8ee';
         };
 
-        const angle = (i) => (i * 2 * Math.PI / nDims) - Math.PI / 2;
-
-        const gridG = svg.append('g').attr('transform', `translate(${cx},${cy})`);
-        for (let lv = 1; lv <= levels; lv++) {
-            const r = radius * lv / levels;
-            const pts = dims.map((_, i) => [r * Math.cos(angle(i)), r * Math.sin(angle(i))]);
-            gridG.append('polygon')
-                .attr('points', pts.map(p => p.join(',')).join(' '))
-                .attr('fill', 'none')
-                .attr('stroke', '#d9cdb8')
-                .attr('stroke-dasharray', lv === levels ? '0' : '3,3');
-        }
-        for (let lv = 1; lv <= levels; lv++) {
-            const r = radius * lv / levels;
-            gridG.append('text')
-                .attr('x', 4).attr('y', -r + 3)
-                .style('font-size', '10px')
-                .style('fill', 'var(--ink-soft)')
-                .text((lv * 2).toString());
-        }
-
-        dims.forEach((d, i) => {
-            const x2 = radius * Math.cos(angle(i));
-            const y2 = radius * Math.sin(angle(i));
-            gridG.append('line')
-                .attr('x1', 0).attr('y1', 0)
-                .attr('x2', x2).attr('y2', y2)
-                .attr('stroke', '#d9cdb8');
-            const lx = (radius + 36) * Math.cos(angle(i));
-            const ly = (radius + 36) * Math.sin(angle(i));
-            gridG.append('text')
-                .attr('x', lx).attr('y', ly)
-                .attr('text-anchor', 'middle')
-                .attr('dominant-baseline', 'middle')
-                .style('font-size', '11px')
-                .style('font-weight', '600')
-                .style('fill', 'var(--ink)')
-                .text(d);
-        });
-
-        const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
-
-        data.pilgrim_team.forEach(member => {
-            const pts = dims.map((d, i) => {
-                const v = member.role_fit[d];
-                return [rScale(v) * Math.cos(angle(i)), rScale(v) * Math.sin(angle(i))];
-            });
-            const poly = gridG.append('polygon')
-                .attr('points', pts.map(p => p.join(',')).join(' '))
-                .attr('fill', colorMap[member.character])
-                .attr('fill-opacity', 0.15)
-                .attr('stroke', colorMap[member.character])
-                .attr('stroke-width', 2)
-                .style('cursor', 'pointer');
-            poly.on('mouseover', (e) => {
-                poly.attr('fill-opacity', 0.4);
-                const dimList = dims.map(d => `${d}: ${member.role_fit[d]}`).join('<br>');
-                tooltip.show(
-                    `<strong style="color:${colorMap[member.character]}">${member.character}</strong> · 主角色 ${member.primary_role} / 次角色 ${member.secondary_role}<br>` +
-                    `<em>${member.team_value}</em><br>` +
-                    dimList, e);
-            }).on('mouseout', () => {
-                poly.attr('fill-opacity', 0.15);
-                tooltip.hide();
-            });
-            pts.forEach((p) => {
-                gridG.append('circle')
-                    .attr('cx', p[0]).attr('cy', p[1])
-                    .attr('r', 3)
-                    .attr('fill', colorMap[member.character])
-                    .attr('stroke', '#fff').attr('stroke-width', 1.2)
-                    .style('pointer-events', 'none');
+        const cells = [];
+        roles.forEach(role => {
+            members.forEach(member => {
+                cells.push({role: role, member: member.character, memberObj: member, value: member.role_fit[role]});
             });
         });
 
-        // 团队评分圆
-        const scoreR = rScale(data.team_balance.team_score);
-        gridG.append('circle')
-            .attr('cx', 0).attr('cy', 0)
-            .attr('r', scoreR)
-            .attr('fill', 'none')
-            .style('stroke', 'var(--ink-soft)')
-            .attr('stroke-dasharray', '6,4')
-            .attr('stroke-width', 1.5);
-        gridG.append('text')
-            .attr('x', scoreR * Math.SQRT1_2 + 4)
-            .attr('y', -scoreR * Math.SQRT1_2 - 4)
-            .style('font-size', '10px').style('fill', 'var(--ink-soft)')
-            .text(`团队评分 ${data.team_balance.team_score}`);
+        const cellG = g.append('g').selectAll('g')
+            .data(cells).join('g')
+            .attr('transform', d => `translate(${x(d.member)},${y(d.role)})`);
+
+        cellG.append('rect')
+            .attr('width', x.bandwidth())
+            .attr('height', y.bandwidth())
+            .attr('rx', 3)
+            .attr('fill', d => color(d.value))
+            .attr('stroke', '#d9cdb8').attr('stroke-opacity', 0.55).attr('stroke-width', 1)
+            .style('cursor', 'pointer');
+
+        cellG.append('text')
+            .attr('x', x.bandwidth() / 2)
+            .attr('y', y.bandwidth() / 2)
+            .attr('dy', '0.35em')
+            .attr('text-anchor', 'middle')
+            .style('font-size', '13px')
+            .style('font-weight', '600')
+            .style('pointer-events', 'none')
+            .attr('fill', d => textOn(color(d.value)))
+            .text(d => d.value);
+
+        // 悬停：沿用页内 tooltip + 高亮描边
+        cellG.on('mouseover', function(e, d) {
+            d3.select(this).select('rect')
+                .attr('stroke', 'var(--accent)').attr('stroke-opacity', 1).attr('stroke-width', 2);
+            const mb = d.memberObj;
+            tooltip.show(
+                `<strong>${mb.character}</strong> · ${d.role}：${d.value}/10<br>` +
+                `主角色 ${mb.primary_role} / 次角色 ${mb.secondary_role}<br>` +
+                `<em>${mb.team_value}</em>`, e);
+        }).on('mouseout', function() {
+            d3.select(this).select('rect')
+                .attr('stroke', '#d9cdb8').attr('stroke-opacity', 0.55).attr('stroke-width', 1);
+            tooltip.hide();
+        });
+
+        // 行标签（角色）
+        g.append('g').selectAll('text')
+            .data(roles).join('text')
+            .attr('x', -12)
+            .attr('y', d => y(d) + y.bandwidth() / 2)
+            .attr('dy', '0.35em')
+            .attr('text-anchor', 'end')
+            .style('font-size', '12px')
+            .style('font-weight', '600')
+            .attr('fill', 'var(--ink)')
+            .text(d => d);
+
+        // 列标签（成员）
+        g.append('g').selectAll('text')
+            .data(members.map(d => d.character)).join('text')
+            .attr('x', d => x(d) + x.bandwidth() / 2)
+            .attr('y', -14)
+            .attr('text-anchor', 'middle')
+            .style('font-size', '12px')
+            .style('font-weight', '600')
+            .attr('fill', 'var(--ink)')
+            .text(d => d);
+
+        g.append('text')
+            .attr('x', 0).attr('y', -30)
+            .attr('text-anchor', 'start')
+            .style('font-size', '11px')
+            .attr('fill', 'var(--ink-soft)')
+            .text('纵轴：9 个角色 ↓　横轴：5 位成员 →');
+
+        // 色阶图例：颜色越深 = 适配度越高
+        const lg = svg.append('g').attr('transform', `translate(${m.left},${m.top + h + 24})`);
+        const lgW = 150, lgH = 10, steps = 30;
+        for (let i = 0; i < steps; i++) {
+            lg.append('rect')
+                .attr('x', i * lgW / steps).attr('y', 0)
+                .attr('width', lgW / steps + 0.6).attr('height', lgH)
+                .attr('fill', color(i / (steps - 1) * 10));
+        }
+        lg.append('text').attr('x', 0).attr('y', lgH + 13)
+            .style('font-size', '10px').attr('fill', 'var(--ink-soft)').text('0');
+        lg.append('text').attr('x', lgW).attr('y', lgH + 13).attr('text-anchor', 'end')
+            .style('font-size', '10px').attr('fill', 'var(--ink-soft)').text('10');
+        lg.append('text').attr('x', lgW + 12).attr('y', lgH)
+            .style('font-size', '11px').attr('fill', 'var(--ink-soft)').text('颜色越深 = 角色适配度越高');
     }
 
     function renderBelbinLegend(data) {
         const legend = d3.select('#belbin-legend');
         legend.selectAll('*').remove();
-        const colorMap = {
-            '唐僧': '#40619E',
-            '孙悟空': '#C0392B',
-            '猪八戒': '#e9b885',
-            '沙僧': '#3A473A',
-            '白龙马': '#8E7D62'
-        };
-        const items = legend.selectAll('.legend-item')
-            .data(data.pilgrim_team).enter()
-            .append('span')
-            .attr('class', 'legend-item');
-        items.append('span').attr('class', 'legend-swatch').style('background', d => colorMap[d.character]);
-        items.append('span').text(d => d.character + '（' + d.primary_role + '）');
+        // 热力矩阵用单色顺序色阶，成员色不再承载编码——图例改为色阶 + 团队评分
+        const ramp = 'linear-gradient(90deg, #f5e9d4 0%, #e0b89a 40%, #b5654a 75%, #8C2F1B 100%)';
+        legend.append('span').attr('class', 'legend-item')
+            .html('<span class="legend-swatch" style="width:120px;background:' + ramp + ';"></span>角色适配度 0 → 10（颜色越深越高）');
         legend.append('span').attr('class', 'legend-item')
             .html('<span class="legend-swatch line" style="background:#6B6455;"></span>团队评分 ' + data.team_balance.team_score);
     }

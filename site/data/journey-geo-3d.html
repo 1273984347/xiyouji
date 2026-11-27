@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-ZMrIicv7WX/WxeFqYfYZQWwZG07874N+pL0sjAJmnl8='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-C66aIPiO7Afd5KH5eFjFS/YoC+nSSCPm2iL4+Txtbao='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>西游地理 3D · 详解西游记</title>
@@ -246,7 +246,7 @@
 <!-- DATA-STATUS-BADGE v1 w1167 -->
 <div class="data-status-badge" data-status="snapshot" data-goatcounter-view="badge_view"><span class="ds-dot" aria-hidden="true"></span><span class="ds-label">内嵌快照</span><span class="ds-note">本页数字为发布时生成的快照，离线双击也能看，不随接口更新。</span></div>
         <p class="subtitle">JOURNEY GEO 3D</p>
-        <p class="tagline">取经路线的立体纵深——17 个关键节点自东土大唐至西天灵山，示意地形 + 手绘风格路线。</p>
+        <p class="tagline">取经路线的立体纵深——17 个关键节点自东土大唐至西天灵山，高度对应回目序号（越晚越高），示意地形 + 手绘风格路线。</p>
     
             <img class="hero-ornament" src="../static/images/viz-dark-02-heatmap.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
@@ -268,7 +268,7 @@
             </div>
             <div class="chart-block">
                 <div id="three-container" class="chart-fade-in" role="img" aria-label="取经路线 3D 场景，17 个节点自长安至灵山"><button type="button" id="reset-view" class="reset-view-btn" data-goatcounter-click="reset_view" aria-label="复位视角">复位视角</button></div>
-                <p class="geo-hint">拖拽旋转 · 滚轮缩放 · 点击节点查看地点详情。地形为程序化示意，非真实地理高程。</p>
+                <p class="geo-hint">拖拽旋转 · 滚轮缩放 · 点击节点查看地点详情。地形为程序化示意，非真实地理高程；<strong>高度（y 轴）= 回目序号</strong>——越晚到达的站点越高（长安第 12 回最低 · 灵山第 98 回最高），立体纵深本身就是西行的时间推进轴。</p>
             </div>
         </section>
 
@@ -298,7 +298,7 @@
 
 <section class="section">
             <h2 class="section-title" style="font-size:1.4rem;">相关页面</h2>
-            <div class="section-sub">本页提供立体纵深感；平面路线、时空双轴与符号学分析见下列页面。</div>
+            <div class="section-sub">本页立体纵深＝回目序号（越晚越高）；平面路线、时空双轴与符号学分析见下列页面。</div>
             <p style="font-size:0.92rem; line-height:2;">
                 <a href="journey-map-interactive.html" style="color:var(--accent); text-decoration:none;">→ 取经路线交互式地图（平面轨）</a> ·
                 <a href="journey-spacetime.html" style="color: var(--accent-primary); text-decoration:none;">→ 时空双轴分析</a> ·
@@ -364,7 +364,7 @@
     var scene, camera, renderer, orbitTarget;
     var terrainMesh, routeTube, routeGlow, riverTube;
     var nodeMeshes = [], labelSprites = [];
-    var cameraRadius = 150, cameraPhi = 0.95, cameraTheta = 0.7;
+    var cameraRadius = 155, cameraPhi = 1.02, cameraTheta = 0.7;
     // W1168 视角复位（audit 原始发现：手机上把 3D 图拖乱了，没有任何按钮能回到初始视角）。
     // 快照在相机状态声明处取——此刻还是初值；后续任何拖拽只改活值，不动这份快照。
     var VIEW_INITIAL = {
@@ -425,10 +425,29 @@
     }
 
     // ---------- 经纬度 → 3D 投影（近似示意） ----------
+    // 高度口径（W1343）：原先 y 只取程序化地形起伏（无数据含义）→ 改为承载「回目序号」这一时间维度，
+    //                    即越晚到达的西行站点越高；地形退为底景，不再参与节点/路线的高度。
+    function chapterIndex(n) {
+        var m = /第\s*(\d+)/.exec(n.chapter || "");
+        return m ? parseInt(m[1], 10) : (n.id + 1);
+    }
+    var CHAPTER_MIN = null, CHAPTER_MAX = null;
+    var HEIGHT_BASE = 6, HEIGHT_SPAN = 34;   // 高度区间 6-40（地形起伏约 ±8，站点始终浮在其上）
+    function heightOf(n) {
+        if (CHAPTER_MAX === null) {
+            EMBEDDED_DATA.nodes.forEach(function (x) {
+                var v = chapterIndex(x);
+                if (CHAPTER_MIN === null || v < CHAPTER_MIN) CHAPTER_MIN = v;
+                if (CHAPTER_MAX === null || v > CHAPTER_MAX) CHAPTER_MAX = v;
+            });
+        }
+        var t = (CHAPTER_MAX === CHAPTER_MIN) ? 0 : (chapterIndex(n) - CHAPTER_MIN) / (CHAPTER_MAX - CHAPTER_MIN);
+        return HEIGHT_BASE + t * HEIGHT_SPAN;
+    }
     function project(node) {
         var x = ((node.lon - 78) / (110 - 78)) * 150 - 75;
         var z = ((35 - node.lat) / (35 - 26)) * 90 - 45;
-        var y = terrainHeight(x, z);
+        var y = heightOf(node);
         return new THREE.Vector3(x, y, z);
     }
 
@@ -665,10 +684,11 @@
         scene = new THREE.Scene();
         scene.background = new THREE.Color(0x1A2530);
         var mobile = w < 520;
-        if (!mobile) scene.fog = new THREE.Fog(0x1A2530, 200, 360);
+        if (!mobile) scene.fog = new THREE.Fog(0x1A2530, 220, 420);
 
         camera = new THREE.PerspectiveCamera(50, w / h, 0.1, 1000);
-        orbitTarget = new THREE.Vector3(0, 3, 0);
+        orbitTarget = new THREE.Vector3(0, 14, 0);
+        VIEW_INITIAL.ty = orbitTarget.y;   // 复位快照同步真实视线中心（高度编码抬升后不再是 0）
         try {
             renderer = new THREE.WebGLRenderer({antialias: true});
         } catch (e) {
