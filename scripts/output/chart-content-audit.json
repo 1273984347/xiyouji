@@ -217,7 +217,7 @@
    "insight": 7,
    "tooltip": 12,
    "legend": 20,
-   "text_len": 2761
+   "text_len": 2748
   },
   {
    "page": "data/character-sentiment-arc.html",
@@ -847,7 +847,7 @@
    "insight": 16,
    "tooltip": 1,
    "legend": 0,
-   "text_len": 2398
+   "text_len": 2385
   },
   {
    "page": "data/timeline.html",
