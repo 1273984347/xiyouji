@@ -12,10 +12,6 @@
 #
 # 格式：仓库相对路径（正斜杠）· # 后为注释（加载时剥离）
 
-site/data/monster-female-network.html        # 4 轴 × 17 系列（超标·P0）
-site/data/underworld-power-network.html      # 5 轴 × 16 系列（超标·P0·图注 16 / 注释 14 两处不一致）
-site/data/monster-capability-radar.html      # 5 轴 × 15 系列（超标·P0）
-site/data/monster-hierarchy-network.html     # 5 轴 × 14 系列（超标·P0）
 site/data/heaven-power-network.html          # 5 轴 × 12 系列（超标·P1）
 site/data/monster-sociology.html             # 5 轴 × 10 系列（超标·P1）
 site/data/linguistics.html                   # 4 轴 × 8 系列（超标·P1）

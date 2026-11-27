@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987） + 2026-11-03（W960 迁入 W988-W988） + 2026-11-03（W960 迁入 W989-W989） + 2026-11-03（W1113 迁入 W990-W990） + 2026-11-03（W960 迁入 W991-W991） + 2026-11-04（W960 迁入 W992-W992） + 2026-11-04（W960 迁入 W993-W993） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W995-W995） + 2026-11-04（W960 迁入 W996-W996） + 2026-11-04（W960 迁入 W997-W1048） + 2026-11-04（W960 迁入 W1001-W1107） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-09（W1192 迁入 W1108-W1109） + 2026-11-09（W1192 迁入 W1110-W1116） + 2026-11-10（W960 迁入 W1117-W1169） + 2026-11-10（W960 迁入 W1170-W1170） + 2026-11-15（W960 迁入 W1171-W1176） + 2026-11-15（W960 迁入 W1177-W1178） + 2026-11-15（W960 迁入 W1179-W1179） + 2026-11-15（W960 迁入 W1180-W1180） + 2026-11-15（W960 迁入 W1181-W1182） + 2026-11-15（W960 迁入 W1183-W1183） + 2026-11-15（W960 迁入 W1184-W1184） + 2026-11-16（W1251 迁入 W1185-W1205） + 2026-11-16（W960 迁入 W1206-W1206） + 2026-11-16（W960 迁入 W1207-W1207） + 2026-11-19（W960 迁入 W1208-W1223） + 2026-11-21（W1286 迁入 W1224-W1224） + 2026-11-21（W1287 迁入 W1225-W1226） + 2026-11-21（W1287 迁入 W1227-W1227） + 2026-11-21（W1287 迁入 W1228-W1228） + 2026-11-21（W1288 迁入 W1229-W1252） + 2026-11-23（W960 迁入 W1253-W1255） + 2026-11-23（W960 迁入 W1256-W1257） + 2026-11-23（W960 迁入 W1258-W1259） + 2026-11-23（W960 迁入 W1260-W1264） + 2026-11-25（W960 迁入 W1265-W1265） + 2026-11-26（W960 迁入 W1266-W1266） + 2026-11-27（W960 迁入 W1271-W1278）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987） + 2026-11-03（W960 迁入 W988-W988） + 2026-11-03（W960 迁入 W989-W989） + 2026-11-03（W1113 迁入 W990-W990） + 2026-11-03（W960 迁入 W991-W991） + 2026-11-04（W960 迁入 W992-W992） + 2026-11-04（W960 迁入 W993-W993） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W995-W995） + 2026-11-04（W960 迁入 W996-W996） + 2026-11-04（W960 迁入 W997-W1048） + 2026-11-04（W960 迁入 W1001-W1107） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-09（W1192 迁入 W1108-W1109） + 2026-11-09（W1192 迁入 W1110-W1116） + 2026-11-10（W960 迁入 W1117-W1169） + 2026-11-10（W960 迁入 W1170-W1170） + 2026-11-15（W960 迁入 W1171-W1176） + 2026-11-15（W960 迁入 W1177-W1178） + 2026-11-15（W960 迁入 W1179-W1179） + 2026-11-15（W960 迁入 W1180-W1180） + 2026-11-15（W960 迁入 W1181-W1182） + 2026-11-15（W960 迁入 W1183-W1183） + 2026-11-15（W960 迁入 W1184-W1184） + 2026-11-16（W1251 迁入 W1185-W1205） + 2026-11-16（W960 迁入 W1206-W1206） + 2026-11-16（W960 迁入 W1207-W1207） + 2026-11-19（W960 迁入 W1208-W1223） + 2026-11-21（W1286 迁入 W1224-W1224） + 2026-11-21（W1287 迁入 W1225-W1226） + 2026-11-21（W1287 迁入 W1227-W1227） + 2026-11-21（W1287 迁入 W1228-W1228） + 2026-11-21（W1288 迁入 W1229-W1252） + 2026-11-23（W960 迁入 W1253-W1255） + 2026-11-23（W960 迁入 W1256-W1257） + 2026-11-23（W960 迁入 W1258-W1259） + 2026-11-23（W960 迁入 W1260-W1264） + 2026-11-25（W960 迁入 W1265-W1265） + 2026-11-26（W960 迁入 W1266-W1266） + 2026-11-27（W960 迁入 W1271-W1278） + 2026-11-28（W1343 迁入 W1279-W1282）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -4444,3 +4444,452 @@
 | site/en/narrative-experiment.html | W1271 | 暗色提亮规则（combo-svg #3A473A→#6B7A6B·invisibleShapes 5→0） |
 | pitfalls.md | W1271 | E-271 门禁标签→字段→产线取证链（379 条） |
 | docs/agent/pitfalls.md | W1271 | 跳转壳计数标记 sweep 跟随（379） |
+## W1282 图表标签可读性修复（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/README.md | W1282 | 级联版本面机械联动 |
+| AGENTS.md | W1282 | 级联版本面机械联动 |
+| CHANGELOG.md | W1282 | 本批段与上一批段订正 |
+| CITATION.cff | W1282 | 级联版本面机械联动 |
+| HANDOVER.md | W1282 | 级联版本面机械联动 |
+| README.md | W1282 | 级联版本面机械联动 |
+| STRUCTURE.md | W1282 | 级联版本面机械联动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1282 | 级联版本面机械联动 |
+| archive/docs/workflows-readme-history.md | W1282 | 级联版本面机械联动 |
+| docs/00-导读/W批次编号对账表.md | W1282 | 台账回填与上一批行订正 |
+| docs/00-导读/项目说明.md | W1282 | 级联版本面机械联动 |
+| docs/11-方案报告/README.md | W1282 | 本批报告登记 |
+| docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md | W1282 | 订正第十一节错误机制描述 |
+| docs/11-方案报告/计划方案/T115-任务计划执行与经验沉淀报告-2026-11-19.md | W1282 | 本批报告落盘 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1282 | 级联版本面机械联动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1282 | 级联版本面机械联动 |
+| docs/INDEX.md | W1282 | 级联版本面机械联动 |
+| docs/agent/gates.md | W1282 | 第八十槽三口径同步 |
+| pytest.ini | W1282 | 级联版本面机械联动 |
+| scripts/check_svg_text_contrast.py | W1282 | 第八十门禁同步图形底色口径 |
+| scripts/output/INDEX.md | W1282 | 级联版本面机械联动 |
+| scripts/output/README.md | W1282 | 级联版本面机械联动 |
+| scripts/output/_cascade_files_W1282.txt | W1282 | 级联文件清单 |
+| scripts/output/_vermilion_solid_cache.json | W1282 | 级联版本面机械联动 |
+| scripts/output/_w1266_allrender.json | W1282 | 渲染档案刷新 |
+| scripts/output/_w1281_spec.json | W1282 | 订正上一批 spec 内错误机制描述 |
+| scripts/output/_w1282_spec.json | W1282 | 级联版本面机械联动 |
+| scripts/output/chart-legend-render-audit.json | W1282 | 渲染档案刷新 |
+| scripts/output/file-index.md | W1282 | 级联版本面机械联动 |
+| scripts/output/stats-changelog.json | W1282 | 级联版本面机械联动 |
+| scripts/output/stats-index.md | W1282 | 级联版本面机械联动 |
+| scripts/output/stats.json | W1282 | 级联版本面机械联动 |
+| scripts/output/svg_text_contrast_graphic_probe.json | W1282 | 图形底色口径证据产物 |
+| scripts/output/svg_text_contrast_graphic_report.json | W1282 | 图形底色口径证据产物 |
+| scripts/output/tools-inventory.md | W1282 | 级联版本面机械联动 |
+| scripts/svg_text_contrast_probe.js | W1282 | 探针新增图形底色口径 |
+| site/data/81-hardships.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·描边随前景切换） |
+| site/data/aesthetics.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·描边随前景切换） |
+| site/data/cross-time-danmaku.html | W1282 | 级联版本面机械联动 |
+| site/data/global-pattern.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·描边随前景切换） |
+| site/data/search-index-zh.js | W1282 | 级联版本面机械联动 |
+| site/data/tag-cloud.html | W1282 | 级联版本面机械联动 |
+| site/dukou-engine.html | W1282 | 级联版本面机械联动 |
+| site/en/81-hardships.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·英文长标签截断） |
+| site/en/aesthetics.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·英文长标签截断） |
+| site/en/global-pattern.html | W1282 | treemap 标签可读性修复（前景按底色自适应·字号下限十二像素·英文长标签截断） |
+| site/en/search-index-en.js | W1282 | 级联版本面机械联动 |
+| site/index.html | W1282 | 级联版本面机械联动 |
+| tests/unit/INDEX.md | W1282 | 级联版本面机械联动 |
+| tests/unit/README.md | W1282 | 级联版本面机械联动 |
+| tests/unit/test_w1282_graphic_contrast_scope.py | W1282 | 新增回归锁十三例 |
+| site/rss.xml | W1282 | 级联版本面机械联动 |
+| pitfalls.md | W1282 | 坑表新增三条（E-284/E-285/E-286） |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1282 | 坑表正文归档 |
+| .agent/skills/puti-shouye/SKILL.md | W1282 | 坑位计数同步联动 |
+| docs/agent/pitfalls.md | W1282 | 坑表兼容壳同步 |
+
+
+## W1281 A 方案铺开第二批（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+
+
+
+
+| .github/workflows/README.md | W1281 | 本批配套改动 |
+| AGENTS.md | W1281 | 本批配套改动 |
+| CHANGELOG.md | W1281 | 本批配套改动 |
+| CITATION.cff | W1281 | 本批配套改动 |
+| HANDOVER.md | W1281 | 本批配套改动 |
+| README.md | W1281 | 本批配套改动 |
+| STRUCTURE.md | W1281 | 本批配套改动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1281 | 本批配套改动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1281 | 本批配套改动 |
+| archive/docs/workflows-readme-history.md | W1281 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1281 | 本批配套改动 |
+| docs/00-导读/项目说明.md | W1281 | 本批配套改动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1281 | 本批配套改动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1281 | 本批配套改动 |
+| scripts/check_chart_colorblind.py | W1281 | 本批配套改动 |
+| scripts/output/INDEX.md | W1281 | 本批配套改动 |
+| scripts/output/README.md | W1281 | 本批配套改动 |
+| scripts/output/_cascade_files_W1281.txt | W1281 | 本批配套改动 |
+| scripts/output/_vermilion_solid_cache.json | W1281 | 本批配套改动 |
+| scripts/output/_w1266_allrender.json | W1281 | 本批配套改动 |
+| scripts/output/_w1281_spec.json | W1281 | 本批配套改动 |
+| scripts/output/chart-legend-render-audit.json | W1281 | 本批配套改动 |
+| scripts/output/colorblind-baseline.txt | W1281 | 本批配套改动 |
+| scripts/output/file-index.md | W1281 | 本批配套改动 |
+| scripts/output/stats-changelog.json | W1281 | 本批配套改动 |
+| scripts/output/stats-index.md | W1281 | 本批配套改动 |
+| scripts/output/stats.json | W1281 | 本批配套改动 |
+| scripts/output/tools-inventory.md | W1281 | 本批配套改动 |
+| scripts/verify_delivery.py | W1281 | 本批配套改动 |
+| site/data/81-hardships-view.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/81-hardships.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/aesthetics.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/ai-dialogue.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/business-model.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/cave-estate.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/century-dialogue.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/chapter-stats.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/chapter-structure-graph.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-appearance.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-dynamic-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-presence-timeline.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-relationship-3d-view.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-relationship-3d.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-semantic-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/character-sentiment-arc.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/chart-design.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/cognitive-psychology.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/concept-device.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/counterfactual.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/criticism-history.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/cross-time-danmaku.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/cultural-misreading.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/customs-pass-route.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/data-explorer.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/deconstruction.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/dialogue-sentiment.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/ecology.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/emotional-heatmap.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/ethics-consumption.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/famous-time-travel.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/four-dimensional-research-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/four-heavenly-kings-artifacts.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/game-webnovel.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/global-pattern.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/glossary.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/graph-explorer.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/guanyin-six-roles-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/hardship-difficulty-heatmap.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/hardship-heatmap.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/heaven-power-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/intertextuality-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/journey-geo-3d.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/journey-geo-semiotics.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/journey-map-interactive.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/journey-route.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/journey-spacetime.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/jurisprudence.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/karma-reincarnation.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/language-style-radar.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/linguistics.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/magic-system.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/material-archaeology.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/mbti-evolution.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/methodology-matrix.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/ming-political-thought-comparison.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-background.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-capability-radar.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-ecology-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-female-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-hierarchy-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-sociology.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/monster-victims-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/music-structure.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/narrative-experiment.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/narrative-rhythm-curve.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/narratology-12d-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/narratology-16d-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/perf-canvas-rendering.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/philosophy.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/pilgrim-team-dynamic-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/pilgrim-team-psychology-arc.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/poetry-density.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/poetry-rhythm-analysis.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/power-resources.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/relationships.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/risk-project.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/search.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/six-senses-narratology-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/social-media.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/story-timeline.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/tag-cloud.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/text-evolution.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/text-search.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/theological-intervention-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/timeline.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/underworld-power-network.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/visual-art.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/workplace.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/data/wukong-tangseng-benchmark.html | W1281 | 公共层外链化（公共层规则外链·页私有层保留·同源判据·排除模板壳） |
+| site/dukou-engine.html | W1281 | 本批配套改动 |
+| site/index.html | W1281 | 本批配套改动 |
+| site/rss.xml | W1281 | 本批配套改动 |
+
+
+## W1280 A 方案铺开第一批落地 与 判定面口径再修订（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+| .github/workflows/README.md | W1280 | 本批配套改动 |
+| AGENTS.md | W1280 | 本批配套改动 |
+| CHANGELOG.md | W1280 | 本批配套改动 |
+| CITATION.cff | W1280 | 本批配套改动 |
+| HANDOVER.md | W1280 | 本批配套改动 |
+| README.md | W1280 | 本批配套改动 |
+| STRUCTURE.md | W1280 | 本批配套改动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1280 | 本批配套改动 |
+| archive/docs/INDEX.md | W1280 | 本批配套改动 |
+| archive/docs/README.md | W1280 | 本批配套改动 |
+| archive/docs/file-index-ARCHIVE-tier2-W1080-W1151.md | W1280 | 本批配套改动 |
+| archive/docs/file-index-ARCHIVE-tier2.md | W1280 | 本批配套改动 |
+| archive/docs/file-index-ARCHIVE.md | W1280 | 本批配套改动 |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1280 | 本批配套改动 |
+| archive/docs/workflows-readme-history.md | W1280 | 本批配套改动 |
+| docs/00-导读/W批次编号对账表.md | W1280 | W1280 认领行 |
+| docs/00-导读/项目说明.md | W1280 | 本批配套改动 |
+| docs/11-方案报告/计划方案/T114-任务计划执行与经验沉淀报告-2026-11-18.md | W1280 | W1280 续记（口径再修订 + 铺开第一批落地） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1280 | 本批配套改动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1280 | 本批配套改动 |
+| pytest.ini | W1280 | 本批配套改动 |
+| scripts/check_chart_design_parity.py | W1280 | 第 53 槽契约标记判定面改用同源模块 |
+| scripts/check_mobile_viewport.py | W1280 | 第 64 槽 A8 判定面随形态修订（公共层并入判定面） |
+| scripts/output/INDEX.md | W1280 | 本批配套改动 |
+| scripts/output/README.md | W1280 | 本批配套改动 |
+| scripts/output/_cascade_files_W1280.txt | W1280 | 本批配套改动 |
+| scripts/output/_vermilion_solid_cache.json | W1280 | 本批配套改动 |
+| scripts/output/_w1266_allrender.json | W1280 | 本批配套改动 |
+| scripts/output/_w1280_spec.json | W1280 | 本批配套改动 |
+| scripts/output/chart-legend-render-audit.json | W1280 | 本批配套改动 |
+| scripts/output/file-index.md | W1280 | 本批配套改动 |
+| scripts/output/mobile_viewport_report_en.json | W1280 | 本批配套改动 |
+| scripts/output/stats-changelog.json | W1280 | 本批配套改动 |
+| scripts/output/stats-index.md | W1280 | 本批配套改动 |
+| scripts/output/stats.json | W1280 | 本批配套改动 |
+| scripts/output/tools-inventory.md | W1280 | 本批配套改动 |
+| scripts/utils/INDEX.md | W1280 | 本批配套改动 |
+| scripts/utils/README.md | W1280 | 本批配套改动 |
+| scripts/utils/css_public_layer.py | W1280 | 新增：公共层文本解析同源模块（判定面补全共用） |
+| site/data/cross-time-danmaku.html | W1280 | 本批配套改动 |
+| site/data/tag-cloud.html | W1280 | 本批配套改动 |
+| site/dukou-engine.html | W1280 | 本批配套改动 |
+| site/en/81-hardships-view.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/81-hardships.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/academic-papers.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/aesthetics.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/ai-dialogue.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/bestiary.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/business-model.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/cave-estate.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/century-dialogue.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/chapter-stats.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/chapter-structure-graph.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/chapters-map.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-appearance.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-bailongma.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-bajie.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-dynamic-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-presence-timeline.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-relationship-3d-view.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-relationship-3d.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-semantic-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-sentiment-arc.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-shaseng.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-tangseng.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/character-wukong.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/characters.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/chart-design.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/cognitive-psychology.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/concept-device.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/counterfactual.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/criticism-history.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/cross-time-danmaku.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/cultural-misreading.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/customs-pass-route.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/dashboard.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/data-explorer.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/deconstruction.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/dialogue-sentiment.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/dukou-engine.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/ecology.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/emotional-heatmap.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ai-era.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-buddhist-chan.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-chapter-couplets.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-character-fu.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-cipai-linjiangxian.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-cipai-mantingfang.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-cipai-shuidiaogetou.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-cipai-xijiangyue.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-composition-origins.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-divine-bureaucracy.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-folk-belief.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-historical-xuanzang.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-information-cocoon.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-economy.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-examination.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-garrison.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-intellectual-history.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-judiciary.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-literary-thought.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-maritime-ban.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-metaphor.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-military.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-politics.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-religion.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-ming-social-customs.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-modern-management.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-original-poetry.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-poetry-imagery.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-poetry-opening.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-quanzhen-daoism.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-rhythm-analysis.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-scenery-poems.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-thematic-poetry.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-three-teachings.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-version-evolution.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/essay-zen-koan-vs-neidan.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/ethics-consumption.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/famous-time-travel.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/four-dimensional-research-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/four-heavenly-kings-artifacts.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/game-webnovel.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/global-pattern.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/graph-explorer.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/guanyin-six-roles-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/guide.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/hardship-difficulty-heatmap.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/hardship-heatmap.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/heaven-power-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/index.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/intertextuality-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/journey-geo-semiotics.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/journey-map-interactive.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/journey-route.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/journey-spacetime.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/jurisprudence.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/karma-reincarnation.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/language-style-radar.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/linguistics.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/magic-system.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/material-archaeology.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/mbti-evolution.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/methodology-matrix.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/methodology.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/ming-political-thought-comparison.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-background.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-capability-radar.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-ecology-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-female-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-hierarchy-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-sociology.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/monster-victims-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/music-structure.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/narrative-experiment.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/narrative-rhythm-curve.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/narratology-12d-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/narratology-16d-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/perf-canvas-rendering.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/philosophy.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/pilgrim-team-dynamic-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/pilgrim-team-psychology-arc.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/poetry-rhythm-analysis.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/power-resources.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/relationships.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/risk-project.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/search.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/site-map.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/six-senses-narratology-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/social-media.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/tag-cloud.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/text-evolution.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/text-search.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/theological-intervention-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/timeline.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/tribulations.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/underworld-power-network.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/visual-art.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/visualizations.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/en/workplace.html | W1280 | 公共层外链化（公共层规则外链·页私有层保留·同源判据） |
+| site/index.html | W1280 | 本批配套改动 |
+| site/rss.xml | W1280 | 本批配套改动 |
+| tests/unit/INDEX.md | W1280 | 本批配套改动 |
+| tests/unit/README.md | W1280 | 本批配套改动 |
+| tests/unit/test_w1280_static_scope.py | W1280 | 本批回归锁 3 例（含负向） |
+
+
+## W1279 AGENTS 地图化重建批（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| AGENTS.md | W1279 | 地图化重建（86 行·铁律前移·路由表·指令式 gates 行） |
+| docs/agent/MAINTAINING.md | W1279 | 新建：维护契约全文（退役三标准/四问/体积预算/局部化预留/环境事实） |
+| CLAUDE.md | W1279 | 导入式（@AGENTS.md + Claude 专属·15 行·原 17 条速查退役） |
+| pitfalls.md | W1279 | 三阶段收口 221.7KB 过全局硬窗（上批 ⑨ 合并入库） |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1279 | 叙事归档跟随（236 条） |
+| scripts/check_agents_layers.py | W1279 | 41 槽重锚（C2 两方+路由行/C3 退役 450 改指针/C4 表格形态/T3-T6 更新） |
+| scripts/check_claude_md.py | W1279 | 32 槽新增 C5 导入有效性（锚点对拍对镜像形态退役） |
+| scripts/check_doc_sync.py | W1279 | 31 槽 C3 声明面重锚 gates.md（兼容保留+gates_gate_list_max 新增） |
+| scripts/check_doc_size_budget.py | W1279 | BYTE_CAPS pitfalls 对齐 262144（test_w1120 口径） |
+| docs/agent/gates.md | W1279 | 74 槽挂窗说明（W1278） |
+| docs/00-导读/W批次编号对账表.md | W1279 | W1277-W1279 认领与回填 |
+| CHANGELOG.md | W1279 | W1278 ⑨ + W1279 落段 |
+| scripts/output/file-index.md | W1279 | file-index W1279 段 |
+| README.md | W1279 | 本批交付物 |
+| STRUCTURE.md | W1279 | 本批交付物 |
+| docs/00-导读/项目说明.md | W1279 | 本批交付物 |
+| CITATION.cff | W1279 | 本批交付物 |
+| .github/workflows/README.md | W1279 | 本批交付物 |
+| site/index.html | W1279 | 页脚批次链 W1279 前插 |
+| scripts/output/_w1279_spec.json | W1279 | 本批交付物 |
+| scripts/output/_cascade_files_W1279.txt | W1279 | 本批交付物 |
+| scripts/output/stats.json | W1279 | 本批交付物 |
+| scripts/output/stats-changelog.json | W1279 | 本批交付物 |
+| scripts/output/stats-index.md | W1279 | 本批交付物 |
+| scripts/output/tools-inventory.md | W1279 | 本批交付物 |
+| scripts/output/_vermilion_solid_cache.json | W1279 | 本批交付物 |
+| site/data/search-index-zh.js | W1279 | 本批交付物 |
+| site/en/search-index-en.js | W1279 | 本批交付物 |
+| docs/INDEX.md | W1279 | 本批交付物 |
+| scripts/INDEX.md | W1279 | 本批交付物 |
+| scripts/output/_w1278_spec.json | W1279 | 上批 ⑨ 收尾笔并入本笔（段内订正·51 槽归属顶段） |
+| HANDOVER.md | W1279 | 进度 bullet 移链首 + 更新链（裁 3）+ 里程碑滚动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1279 | 台账腾窗迁入 |
+| docs/agent/INDEX.md | W1279 | 目录文档 refresh（新收 MAINTAINING.md） |
+| docs/agent/README.md | W1279 | 目录 README refresh |
+| scripts/output/INDEX.md | W1279 | 产物索引 refresh |
+| scripts/output/README.md | W1279 | 产物 README refresh |
+| tests/unit/test_check_placeholder_hash_carrier.py | W1279 | 声明面重锚 gates.md（AGENTS §4.2 断言退役） |
+| tests/unit/test_w1141_gate_mount.py | W1279 | 声明面重锚 gates.md H1（同上） |
+| site/rss.xml | W1279 | RSS 产物新鲜度跟随 |
+| scripts/pre_push_gate.py | W1279 | regen 步前插（run_all.py 同轨 CI Delivery Gate 前置再生） |
+| tests/unit/test_pre_push_gate.py | W1279 | STEP_ORDER 三处断言随 regen 步更新 |

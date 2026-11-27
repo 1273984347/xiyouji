@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-zmNoPxn2ifjnVoYqOL5q/I6Jhr7y/WuwXLqDHCfBXok=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-WubexoNkNBVfxW5rGUOUq0ZOJvdmBf3vw7qzvB94iaI=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪能力雷达图 · 详解西游记</title>
@@ -260,7 +260,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 <!-- DATA-STATUS-BADGE v1 w1167 -->
 <div class="data-status-badge" data-status="snapshot" data-goatcounter-view="badge_view"><span class="ds-dot" aria-hidden="true"></span><span class="ds-label">内嵌快照</span><span class="ds-note">本页数字为发布时生成的快照，离线双击也能看，不随接口更新。</span></div>
         <p class="subtitle">W233-3 · V3 · 与 monster-hierarchy-network 形成 等级-能力 双维</p>
-        <p class="tagline">—— 15 代表妖怪 × 5 能力维度（法力 / 智谋 / 法宝 / 背景 / 结局）半透明叠加 · 来历→结局桑基流向</p>
+        <p class="tagline">—— 15 代表妖怪 × 5 能力维度（法力 / 智谋 / 法宝 / 背景 / 结局）单选雷达 + 全量排序点图 · 来历→结局桑基流向</p>
     
             <img class="hero-ornament" src="../static/images/viz-dark-03-radar.webp" alt="" aria-hidden="true" loading="lazy" decoding="async">
         </section>
@@ -314,19 +314,22 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
         </section>
 
-        <!-- Section 1：15 妖怪雷达图叠加 -->
+        <!-- Section 1：妖怪能力雷达图（单选实体 · 全量排序见下方点图） -->
         <section class="section" aria-labelledby="sec-radar">
-            <h2 id="sec-radar">① 15 妖怪能力雷达图叠加</h2>
-            <p>使用 D3.js radarChart 绘制。15 个妖怪的 5 维能力（法力/智谋/法宝/背景/结局）以半透明多边形叠加，可点击妖怪名称切换高亮。叠加图揭示了"无背景高智谋型"（白骨精/六耳猕猴）与"高背景全维型"（大鹏金翅雕/黄眉大王）两类典型妖怪。</p>
+            <h2 id="sec-radar">① 妖怪能力雷达图（单选妖怪 · 全量排序见下方点图）</h2>
+            <p>使用 D3.js radarChart 绘制。每次只绘 1 个妖怪的 5 维能力（法力/智谋/法宝/背景/结局），下拉选择或点击下方点图切换实体；全量 15 个妖怪按五维均值降序排列见下方点图。单实体视图可精确读出各维取值，揭示"无背景高智谋型"（白骨精/六耳猕猴）与"高背景全维型"（大鹏金翅雕/黄眉大王）两类典型妖怪。</p>
             <div class="monster-switcher" id="radar-switcher" role="group" aria-label="妖怪切换"></div>
+            <!-- chart-radar-meta: axes=5 series=1 -->
+            <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
             <div class="chart-wrap">
                 <svg id="radar-svg" width="100%" height="560" role="img" aria-labelledby="radar-title radar-desc">
-                    <title id="radar-title">15 妖怪能力雷达图叠加</title>
-                    <desc id="radar-desc">15 个妖怪在 5 个能力维度上的雷达图叠加，半透明多边形展示。</desc>
+                    <title id="radar-title">妖怪能力雷达图（单选实体）</title>
+                    <desc id="radar-desc">每次展示 1 个妖怪在 5 个能力维度上的取值，可通过下拉选择或下方点图切换实体。</desc>
                 </svg>
                 <div class="radar-tip" id="radar-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="radar-legend" aria-label="妖怪图例"></div>
+            <div id="radar-dotplot" style="margin-top:12px"></div>
         </section>
 
         <!-- Section 2：能力对比柱状图 -->
@@ -522,6 +525,68 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
     let highlightedMonster = null;
 
     // ============= Section 1：雷达图叠加 =============
+    // ===== W1343：§4B 雷达行合规面板（单图仅 1 系列 + 全量排序点图）=====
+    let radarSelected = null;
+
+    function radarMean(d) {
+        const vals = DIMENSIONS.map(dim => d[dim.key]).filter(v => typeof v === "number");
+        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    }
+
+    function renderRadarPanel() {
+        const list = EMBEDDED_DATA.radar.slice();
+        if (!list.length) { renderRadar(); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.monster === radarSelected)) radarSelected = sorted[0].monster;
+        highlightedMonster = radarSelected;
+
+        const ctrl = d3.select("#radar-controls");
+        ctrl.selectAll("*").remove();
+        ctrl.append("span").text("雷达实体：")
+            .style("font-size", "0.78rem").style("color", "var(--ink-soft)");
+        const sel = ctrl.append("select")
+            .style("font-size", "0.8rem").style("padding", "3px 8px")
+            .style("border", "1px solid var(--line)").style("border-radius", "4px")
+            .style("background", "var(--paper)").style("color", "var(--ink)");
+        sel.selectAll("option").data(sorted).enter().append("option")
+            .attr("value", d => d.monster).property("selected", d => d.monster === radarSelected)
+            .text(d => d.monster);
+        sel.on("change", function() {
+            radarSelected = this.value;
+            renderRadarPanel();
+        });
+
+        renderRadar();
+        renderSwitcher();
+
+        const host = d3.select("#radar-dotplot");
+        host.selectAll("*").remove();
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll(".dot-row").data(sorted).enter().append("div")
+            .attr("class", "dot-row")
+            .style("display", "flex").style("align-items", "center").style("gap", "8px")
+            .style("padding", "2px 0").style("cursor", "pointer")
+            .style("opacity", d => (d.monster === radarSelected ? 1 : 0.72))
+            .on("click", (e, d) => {
+                radarSelected = d.monster;
+                renderRadarPanel();
+            });
+        rows.append("span").text(d => d.monster)
+            .style("flex", "0 0 96px").style("text-align", "right").style("font-size", "0.74rem")
+            .style("color", "var(--ink-soft)");
+        const track = rows.append("span")
+            .style("position", "relative").style("flex", "1 1 auto").style("height", "8px")
+            .style("background", "var(--line)").style("border-radius", "4px");
+        track.append("span")
+            .style("position", "absolute").style("top", "-3px")
+            .style("left", d => (radarMean(d) / maxV * 100).toFixed(2) + "%")
+            .style("width", "14px").style("height", "14px").style("border-radius", "50%")
+            .style("background", d => (d.monster === radarSelected ? "var(--accent-primary)" : "var(--series-2)"))
+            .style("transform", "translateX(-7px)");
+        rows.append("span").text(d => radarMean(d).toFixed(1))
+            .style("flex", "0 0 44px").style("font-size", "0.72rem").style("color", "var(--ink)");
+    }
+
     function renderRadar() {
         const svg = d3.select("#radar-svg");
         svg.selectAll("*").remove();
@@ -579,12 +644,14 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             .attr("cx", cx).attr("cy", cy).attr("r", 2)
             .style("fill", "var(--chart-3)");
 
-        // 15 妖怪多边形叠加
+        // 单选实体（§4B 单图仅 1 系列）：只绘 radarSelected 对应实体，空选时取全量第一项
         const tip = d3.select("#radar-tip");
         const wrapEl = wrap.parentElement;
         const monsterPolys = [];
 
-        EMBEDDED_DATA.radar.forEach((m, mi) => {
+        const series = EMBEDDED_DATA.radar.filter(d => d.monster === radarSelected);
+        (series.length ? series : EMBEDDED_DATA.radar.slice(0, 1)).forEach((m) => {
+            const mi = EMBEDDED_DATA.radar.indexOf(m);
             const pts = DIMENSIONS.map((dim, di) => {
                 const ang = -Math.PI / 2 + di * 2 * Math.PI / DIMENSIONS.length;
                 const r = radius * m[dim.key] / 10;
@@ -622,9 +689,8 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                     tip.style("opacity", 0);
                 })
                 .on("click", function() {
-                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
-                    renderRadar();
-                    renderSwitcher();
+                    radarSelected = m.monster;
+                    renderRadarPanel();
                 });
             monsterPolys.push(poly);
         });
@@ -641,9 +707,8 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .style("background", highlightedMonster === m.monster ? MONSTER_COLORS[mi] : "#fff8e7")
                 .style("color", highlightedMonster === m.monster ? "#fff" : "var(--ink-soft)")
                 .on("click", function() {
-                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
-                    renderRadar();
-                    renderSwitcher();
+                    radarSelected = m.monster;
+                    renderRadarPanel();
                 });
             item.append("span").attr("class", "lg-swatch").style("background", MONSTER_COLORS[mi]);
             item.append("span").text(m.monster);
@@ -659,9 +724,8 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                 .style("border-left", `3px solid ${MONSTER_COLORS[mi]}`)
                 .text(m.monster)
                 .on("click", function() {
-                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
-                    renderRadar();
-                    renderSwitcher();
+                    radarSelected = m.monster;
+                    renderRadarPanel();
                 });
         });
     }
@@ -1039,8 +1103,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
 
     // ============= 初始化 =============
     function renderAll() {
-        renderSwitcher();
-        renderRadar();
+        renderRadarPanel();
         renderBar();
         renderScatter();
         renderSankey();
