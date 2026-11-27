@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1EnQnNN1YiDOwtgk8JhY+8iWWIS6EGrH5aESv81qlw4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-CWx+4Ny6qh+eO1LcIEMzEbVIhDtVftbSh29mEK8YAqc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>互文性关系图谱 · 详解西游记</title>
@@ -431,10 +431,13 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <strong>定义：</strong>从五个维度评估每部前置文本对《西游记》的互文强度：结构借用（叙事框架）、主题继承（思想主旨）、人物转化（角色塑造）、情节改写（故事事件）、语言引用（词句典故）。雷达面积越大，该文本对西游记的塑造作用越强。取经诗话与西游记杂剧在「人物转化」「情节改写」上最强，朴通事谚解在「语言引用」上突出。
   </div>
   <div class="chart-block">
-    <div class="chart-title">七前置文本互文强度雷达图（5 维度）</div>
-    <div class="chart-caption">7 文本 × 5 维度 · 数值归一化 0-100 · hover 查看详情</div>
+    <div class="chart-title">七前置文本互文强度雷达图（单选文本 · 全量排序见下方点图）</div>
+    <div class="chart-caption">数值归一化 0-100 · 雷达单选 1 实体（§4B 单图系列 ≤3）· 点图按五维均值降序 · hover 查看详情</div>
+    <!-- chart-radar-meta: axes=5 series=1 -->
+    <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
     <svg id="chart-radar" class="chart-svg" width="100%" height="580"></svg>
     <div class="legend-row" id="radar-legend"></div>
+    <div id="radar-dotplot" style="margin-top:12px"></div>
   </div>
 </section>
 
@@ -1104,6 +1107,69 @@ function renderMatrix(matrixData) {
 // ============================================================
 // Section 3: 互文强度雷达图（7 前置文本 × 5 维度）
 // ============================================================
+// ===== W1343：§4B 雷达行合规面板（单图仅 1 系列 + 全量排序点图）=====
+const RADAR_DIMS = ['结构借用', '主题继承', '人物转化', '情节改写', '语言引用'];
+let radarSelected = null;
+
+function radarMean(d) {
+  const vals = RADAR_DIMS.map(k => d[k]).filter(v => typeof v === 'number');
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+
+let radarMaxes = null;
+
+function renderRadarPanel(data) {
+  // 归一化基准取全量（与 six-senses 同口径·W1345）
+  const all = (data && data.radar) || [];
+  radarMaxes = {};
+  ['结构借用', '主题继承', '人物转化', '情节改写', '语言引用'].forEach(dim => {
+    radarMaxes[dim] = d3.max(all, d => d[dim]) || 100;
+  });
+  const list = (data.radar || []).slice();
+  if (!list.length) { renderRadar(list); return; }
+  const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+  if (!radarSelected || !list.some(d => d.文本 === radarSelected)) radarSelected = sorted[0].文本;
+
+  const ctrl = d3.select('#radar-controls');
+  ctrl.selectAll('*').remove();
+  ctrl.append('span').text('雷达实体：')
+    .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+  const sel = ctrl.append('select')
+    .style('font-size', '0.8rem').style('padding', '3px 8px')
+    .style('border', '1px solid var(--line)').style('border-radius', '4px')
+    .style('background', 'var(--paper)').style('color', 'var(--ink)');
+  sel.selectAll('option').data(sorted).enter().append('option')
+    .attr('value', d => d.文本).property('selected', d => d.文本 === radarSelected)
+    .text(d => d.文本);
+  sel.on('change', function () { radarSelected = this.value; renderRadarPanel(data); });
+
+  renderRadar(list.filter(d => d.文本 === radarSelected));
+
+  const host = d3.select('#radar-dotplot');
+  host.selectAll('*').remove();
+  const maxV = d3.max(sorted, radarMean) || 1;
+  const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+    .attr('class', 'dot-row')
+    .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+    .style('padding', '2px 0').style('cursor', 'pointer')
+    .style('opacity', d => (d.文本 === radarSelected ? 1 : 0.72))
+    .on('click', (e, d) => { radarSelected = d.文本; renderRadarPanel(data); });
+  rows.append('span').text(d => d.文本)
+    .style('flex', '0 0 132px').style('text-align', 'right').style('font-size', '0.74rem')
+    .style('color', 'var(--ink-soft)');
+  const track = rows.append('span')
+    .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+    .style('background', 'var(--line)').style('border-radius', '4px');
+  track.append('span')
+    .style('position', 'absolute').style('top', '-3px')
+    .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+    .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+    .style('background', d => (d.文本 === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+    .style('transform', 'translateX(-7px)');
+  rows.append('span').text(d => radarMean(d).toFixed(1))
+    .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+}
+
 function renderRadar(radarData) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
@@ -1120,10 +1186,11 @@ function renderRadar(radarData) {
   const textColors = {};
   EMBEDDED_DATA.intertextuality.texts.forEach(t => { textColors[t.name] = t.color; });
 
-  // 归一化：每维度映射到 0-100
+  // 归一化：每维度映射到 0-100（W1345：基准须取全量——单选 1 实体后若按传入数组取最大值，
+  //   每维最大值即自身 ⇒ 多边形恒满格、四轴面积失真）
   const maxes = {};
   dimensions.forEach(dim => {
-    maxes[dim] = d3.max(radarData, d => d[dim]) || 100;
+    maxes[dim] = (radarMaxes && radarMaxes[dim]) || d3.max(radarData, d => d[dim]) || 100;
   });
 
   const cx = width / 2;
@@ -1714,7 +1781,7 @@ async function main() {
   renderOverview(data.texts);
   renderForce(data.network);
   renderMatrix(data.matrix);
-  renderRadar(data.radar);
+  renderRadarPanel(data);
   renderTimeline(data.timeline);
   renderSankey(data.sankey);
   renderSummary(data.texts, data.theorists, data.radar);
@@ -1730,7 +1797,7 @@ window.addEventListener('resize', () => {
       renderOverview(data.texts);
       renderForce(data.network);
       renderMatrix(data.matrix);
-      renderRadar(data.radar);
+      renderRadarPanel(data);
       renderTimeline(data.timeline);
       renderSankey(data.sankey);
       renderSummary(data.texts, data.theorists, data.radar);

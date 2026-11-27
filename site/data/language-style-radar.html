@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Um5ilMMuzByK4g0h1soQY84TtFY12EE+U8fV0bW6NNc='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dshDUQQX19Ynzq/aGoeXCGpCzTjfR4Mjx6pB+qBACKE='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>语言风格雷达图 · 详解西游记</title>
@@ -252,8 +252,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <h2 class="section-title">角色语言风格五维雷达图</h2>
             <div class="section-sub">唐僧/悟空/八戒/悟净/观音/如来/玉帝 7 角色的对话语言特征对比，5 维度：词汇丰富度/句长/修辞密度/口语化/文言化。</div>
             <div class="chart-block">
+                <h3>角色语言风格五维雷达图（单选角色 · 全量排序见下方点图）</h3>
+                <div style="font-size:0.82rem;color:var(--ink-soft);margin-bottom:10px">数值 0-10 · 雷达单选 1 实体（§4B 单图系列 ≤3）· 点图按五维均值降序 · hover 查看详情</div>
+                <!-- chart-radar-meta: axes=5 series=1 -->
+                <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
                 <svg id="chart-radar" width="900" height="640"></svg>
                 <div class="legend" id="radar-legend"></div>
+                <div id="radar-dotplot" style="margin-top:12px"></div>
             </div>
         </section>
 
@@ -399,6 +404,60 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         row.selectAll(".kpi-card").data(data.kpi).enter()
           .append("div").attr("class", "kpi-card")
           .html(d => `<div class="label">${d.label}</div><div class="value">${d.value}</div><div class="desc">${d.desc}</div>`);
+    }
+
+    // ===== W1343：§4B 雷达行合规面板（单图仅 1 系列 + 全量排序点图）=====
+    let radarSelected = null;
+
+    function radarMean(d) {
+        const vals = (d.values || []).filter(v => typeof v === "number");
+        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    }
+
+    function renderRadarPanel(data) {
+        const list = (data.characters || []).slice();
+        if (!list.length) { renderRadar(data); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.name === radarSelected)) radarSelected = sorted[0].name;
+
+        const ctrl = d3.select("#radar-controls");
+        ctrl.selectAll("*").remove();
+        ctrl.append("span").text("雷达实体：")
+            .style("font-size", "0.78rem").style("color", "var(--ink-soft)");
+        const sel = ctrl.append("select")
+            .style("font-size", "0.8rem").style("padding", "3px 8px")
+            .style("border", "1px solid var(--line)").style("border-radius", "4px")
+            .style("background", "var(--paper)").style("color", "var(--ink)");
+        sel.selectAll("option").data(sorted).enter().append("option")
+            .attr("value", d => d.name).property("selected", d => d.name === radarSelected)
+            .text(d => d.name);
+        sel.on("change", function () { radarSelected = this.value; renderRadarPanel(data); });
+
+        renderRadar({ dimensions: data.dimensions, characters: list.filter(d => d.name === radarSelected) });
+
+        const host = d3.select("#radar-dotplot");
+        host.selectAll("*").remove();
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll(".dot-row").data(sorted).enter().append("div")
+            .attr("class", "dot-row")
+            .style("display", "flex").style("align-items", "center").style("gap", "8px")
+            .style("padding", "2px 0").style("cursor", "pointer")
+            .style("opacity", d => (d.name === radarSelected ? 1 : 0.72))
+            .on("click", (e, d) => { radarSelected = d.name; renderRadarPanel(data); });
+        rows.append("span").text(d => d.name)
+            .style("flex", "0 0 96px").style("text-align", "right").style("font-size", "0.74rem")
+            .style("color", "var(--ink-soft)");
+        const track = rows.append("span")
+            .style("position", "relative").style("flex", "1 1 auto").style("height", "8px")
+            .style("background", "var(--line)").style("border-radius", "4px");
+        track.append("span")
+            .style("position", "absolute").style("top", "-3px")
+            .style("left", d => (radarMean(d) / maxV * 100).toFixed(2) + "%")
+            .style("width", "14px").style("height", "14px").style("border-radius", "50%")
+            .style("background", d => (d.name === radarSelected ? "var(--accent-primary)" : "var(--series-2)"))
+            .style("transform", "translateX(-7px)");
+        rows.append("span").text(d => radarMean(d).toFixed(1))
+            .style("flex", "0 0 44px").style("font-size", "0.72rem").style("color", "var(--ink)");
     }
 
     // ============= 图1：5 维雷达图 =============
@@ -620,7 +679,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // ============= 主流程 =============
     function main() {
         renderKPI(EMBEDDED_DATA);
-        renderRadar(EMBEDDED_DATA);
+        renderRadarPanel(EMBEDDED_DATA);
         renderPCA(EMBEDDED_DATA);
     }
 

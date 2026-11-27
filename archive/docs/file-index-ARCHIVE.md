@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987） + 2026-11-03（W960 迁入 W988-W988） + 2026-11-03（W960 迁入 W989-W989） + 2026-11-03（W1113 迁入 W990-W990） + 2026-11-03（W960 迁入 W991-W991） + 2026-11-04（W960 迁入 W992-W992） + 2026-11-04（W960 迁入 W993-W993） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W995-W995） + 2026-11-04（W960 迁入 W996-W996） + 2026-11-04（W960 迁入 W997-W1048） + 2026-11-04（W960 迁入 W1001-W1107） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-09（W1192 迁入 W1108-W1109） + 2026-11-09（W1192 迁入 W1110-W1116） + 2026-11-10（W960 迁入 W1117-W1169） + 2026-11-10（W960 迁入 W1170-W1170） + 2026-11-15（W960 迁入 W1171-W1176） + 2026-11-15（W960 迁入 W1177-W1178） + 2026-11-15（W960 迁入 W1179-W1179） + 2026-11-15（W960 迁入 W1180-W1180） + 2026-11-15（W960 迁入 W1181-W1182） + 2026-11-15（W960 迁入 W1183-W1183） + 2026-11-15（W960 迁入 W1184-W1184） + 2026-11-16（W1251 迁入 W1185-W1205） + 2026-11-16（W960 迁入 W1206-W1206） + 2026-11-16（W960 迁入 W1207-W1207） + 2026-11-19（W960 迁入 W1208-W1223） + 2026-11-21（W1286 迁入 W1224-W1224） + 2026-11-21（W1287 迁入 W1225-W1226） + 2026-11-21（W1287 迁入 W1227-W1227） + 2026-11-21（W1287 迁入 W1228-W1228） + 2026-11-21（W1288 迁入 W1229-W1252） + 2026-11-23（W960 迁入 W1253-W1255） + 2026-11-23（W960 迁入 W1256-W1257） + 2026-11-23（W960 迁入 W1258-W1259） + 2026-11-23（W960 迁入 W1260-W1264） + 2026-11-25（W960 迁入 W1265-W1265） + 2026-11-26（W960 迁入 W1266-W1266） + 2026-11-27（W960 迁入 W1271-W1278） + 2026-11-28（W1343 迁入 W1279-W1282）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987） + 2026-11-03（W960 迁入 W988-W988） + 2026-11-03（W960 迁入 W989-W989） + 2026-11-03（W1113 迁入 W990-W990） + 2026-11-03（W960 迁入 W991-W991） + 2026-11-04（W960 迁入 W992-W992） + 2026-11-04（W960 迁入 W993-W993） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W995-W995） + 2026-11-04（W960 迁入 W996-W996） + 2026-11-04（W960 迁入 W997-W1048） + 2026-11-04（W960 迁入 W1001-W1107） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-09（W1192 迁入 W1108-W1109） + 2026-11-09（W1192 迁入 W1110-W1116） + 2026-11-10（W960 迁入 W1117-W1169） + 2026-11-10（W960 迁入 W1170-W1170） + 2026-11-15（W960 迁入 W1171-W1176） + 2026-11-15（W960 迁入 W1177-W1178） + 2026-11-15（W960 迁入 W1179-W1179） + 2026-11-15（W960 迁入 W1180-W1180） + 2026-11-15（W960 迁入 W1181-W1182） + 2026-11-15（W960 迁入 W1183-W1183） + 2026-11-15（W960 迁入 W1184-W1184） + 2026-11-16（W1251 迁入 W1185-W1205） + 2026-11-16（W960 迁入 W1206-W1206） + 2026-11-16（W960 迁入 W1207-W1207） + 2026-11-19（W960 迁入 W1208-W1223） + 2026-11-21（W1286 迁入 W1224-W1224） + 2026-11-21（W1287 迁入 W1225-W1226） + 2026-11-21（W1287 迁入 W1227-W1227） + 2026-11-21（W1287 迁入 W1228-W1228） + 2026-11-21（W1288 迁入 W1229-W1252） + 2026-11-23（W960 迁入 W1253-W1255） + 2026-11-23（W960 迁入 W1256-W1257） + 2026-11-23（W960 迁入 W1258-W1259） + 2026-11-23（W960 迁入 W1260-W1264） + 2026-11-25（W960 迁入 W1265-W1265） + 2026-11-26（W960 迁入 W1266-W1266） + 2026-11-27（W960 迁入 W1271-W1278） + 2026-11-28（W1343 迁入 W1279-W1282） + 2026-11-28（W1345 迁入 W1283-W1285）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -4893,3 +4893,260 @@
 | site/rss.xml | W1279 | RSS 产物新鲜度跟随 |
 | scripts/pre_push_gate.py | W1279 | regen 步前插（run_all.py 同轨 CI Delivery Gate 前置再生） |
 | tests/unit/test_pre_push_gate.py | W1279 | STEP_ORDER 三处断言随 regen 步更新 |
+## W1285 graphic 口径覆盖面补齐 + 探针去重盲区修复 + 判据稳定性根修（2026-11-20）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1285 | 级联版本面机械联动 |
+| .github/workflows/ci.yml | W1285 | CI 加跑 body 口径探针（stale 检测对 body 生效） |
+| AGENTS.md | W1285 | 级联版本面机械联动 |
+| HANDOVER.md | W1285 | 级联版本面机械联动 |
+| STRUCTURE.md | W1285 | 级联版本面机械联动 |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1285 | 坑位正文（E-295~E-299） |
+| docs/00-导读/W批次编号对账表.md | W1285 | 台账 W1285 行 |
+| docs/11-方案报告/README.md | W1285 | 计划方案分区登记 T118 |
+| docs/11-方案报告/计划方案/T118-任务计划执行与经验沉淀报告-2026-11-20.md | W1285 | 级联版本面机械联动 |
+| docs/agent/gates.md | W1285 | 第 80 槽：三处盲区 + 第五处同源化 + 两口径扫描面界定 |
+| docs/agent/pitfalls.md | W1285 | 级联版本面机械联动 |
+| pitfalls.md | W1285 | 坑表 E-295~E-299 + 计数链 |
+| scripts/check_svg_text_contrast.py | W1285 | 第 80 门禁：unstable fail-closed + 双口径判定 |
+| scripts/output/_w1285_spec.json | W1285 | 级联版本面机械联动 |
+| scripts/output/stats-changelog.json | W1285 | 级联版本面机械联动 |
+| scripts/output/stats-index.md | W1285 | 级联版本面机械联动 |
+| scripts/output/stats.json | W1285 | 级联版本面机械联动 |
+| scripts/output/svg-text-contrast-baseline.txt | W1285 | body 口径基线（8 条既有存量·已登记说明） |
+| scripts/output/svg-text-contrast-graphic-baseline.txt | W1285 | graphic 口径基线（0 条·口径隔离声明） |
+| scripts/output/svg_text_contrast_graphic_report.json | W1285 | graphic 口径全站探针报告（168 页·两遍一致·违例 0） |
+| scripts/output/svg_text_contrast_report.json | W1285 | body 口径全站探针报告（162 页·含全量 page_sha） |
+| scripts/svg_text_contrast_probe.js | W1285 | 探针：扫描面纳入根页 + 去重键含底色维度 + 稳定判据排除平凡解（scope 支持逗号组合） |
+| site/about.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/curated.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/dashboard.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/data/aesthetics.html | W1285 | 末端直标错开 20px（根修时隐时现）+ 源级指定高对比色 |
+| site/data/chart-design.html | W1285 | 日晷时辰标签 fill 改 var(--ink)（CR 2.94→5.45） |
+| site/data/game-webnovel.html | W1285 | 散点比例尺留白 38px + 源级指定高对比色与深色描边 |
+| site/data/material-archaeology.html | W1285 | 补接入公共工具（子站路径 ../static/js/...） |
+| site/data/pilgrim-team-psychology-arc.html | W1285 | 事件标签改深一档同色系（#8a6a1c·图形填充色不变） |
+| site/data/power-resources.html | W1285 | 补接入公共工具（子站路径 ../static/js/...） |
+| site/dukou-engine.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/en/aesthetics.html | W1285 | 末端直标错开 20px（根修时隐时现）+ 源级指定高对比色 |
+| site/en/game-webnovel.html | W1285 | 散点比例尺留白 38px + 源级指定高对比色与深色描边 |
+| site/en/pilgrim-team-psychology-arc.html | W1285 | 事件标签改深一档同色系（#8a6a1c·图形填充色不变） |
+| site/en/power-resources.html | W1285 | 补接入公共工具（子站路径 ../static/js/...） |
+| site/guide.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/index.html | W1285 | 补接入公共工具（根页路径 static/js/label-contrast.js） |
+| site/static/js/label-contrast.js | W1285 | 公共工具：多层覆盖候选选择改为 bbox 面积最小（与门禁同源） |
+
+## W1284 图表标签低对比存量清偿 与 graphic 全量基线接入 CI（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1284 | 级联版本面机械联动 |
+| .github/workflows/README.md | W1284 | 级联版本面机械联动 |
+| .github/workflows/ci.yml | W1284 | CI 现跑 graphic 探针刷新报告 |
+| AGENTS.md | W1284 | 级联版本面机械联动 |
+| CHANGELOG.md | W1284 | 本批段 |
+| CITATION.cff | W1284 | 级联版本面机械联动 |
+| HANDOVER.md | W1284 | 本批里程碑与头链 |
+| README.md | W1284 | 级联版本面机械联动 |
+| STRUCTURE.md | W1284 | 级联版本面机械联动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1284 | 级联版本面机械联动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1284 | 台账行归档 |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1284 | 坑表正文归档 |
+| archive/docs/workflows-readme-history.md | W1284 | 级联版本面机械联动 |
+| docs/00-导读/W批次编号对账表.md | W1284 | 台账回填 |
+| docs/00-导读/项目说明.md | W1284 | 级联版本面机械联动 |
+| docs/11-方案报告/README.md | W1284 | 本批报告登记 |
+| docs/11-方案报告/计划方案/T117-任务计划执行与经验沉淀报告-2026-11-19.md | W1284 | 本批报告落盘 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1284 | 级联版本面机械联动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1284 | 级联版本面机械联动 |
+| docs/INDEX.md | W1284 | 级联版本面机械联动 |
+| docs/agent/gates.md | W1284 | 第八十槽双口径与 graphic 基线纳入 CI 说明 |
+| docs/agent/pitfalls.md | W1284 | 级联版本面机械联动 |
+| pitfalls.md | W1284 | 坑表新增四条（E-291~E-294） |
+| scripts/check_svg_text_contrast.py | W1284 | 门禁双口径判定 + 报告陈旧 fail-closed + 自测二十四项 |
+| scripts/output/INDEX.md | W1284 | 生成产物 |
+| scripts/output/README.md | W1284 | 生成产物 |
+| scripts/output/_cascade_files_W1284.txt | W1284 | 级联文件清单 |
+| scripts/output/_vermilion_solid_cache.json | W1284 | 生成产物 |
+| scripts/output/_w1266_allrender.json | W1284 | 生成产物 |
+| scripts/output/_w1284_spec.json | W1284 | 本批 spec |
+| scripts/output/chart-legend-render-audit.json | W1284 | 生成产物 |
+| scripts/output/file-index.md | W1284 | 生成产物 |
+| scripts/output/stats-changelog.json | W1284 | 生成产物 |
+| scripts/output/stats-index.md | W1284 | 生成产物 |
+| scripts/output/stats.json | W1284 | 生成产物 |
+| scripts/output/svg-text-contrast-graphic-baseline.txt | W1284 | graphic 口径基线（存量归零） |
+| scripts/output/svg_text_contrast_graphic_report.json | W1284 | graphic 口径全量证据产物（含全量 page_sha） |
+| scripts/output/tools-inventory.md | W1284 | 生成产物 |
+| scripts/svg_text_contrast_probe.js | W1284 | graphic 口径同源化（匿名 SVG 稳定键 · 页面内容哈希 · 稳定判据含样式指纹）+ 自测十项 |
+| site/data/cave-estate.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/counterfactual.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/cross-time-danmaku.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/ethics-consumption.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/heaven-power-network.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/magic-system.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/poetry-rhythm-analysis.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/search-index-zh.js | W1284 | 图表标签可读性逐页清偿 |
+| site/data/social-media.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/tag-cloud.html | W1284 | 图表标签可读性逐页清偿 |
+| site/data/visual-art.html | W1284 | 图表标签可读性逐页清偿 |
+| site/dukou-engine.html | W1284 | 级联版本面机械联动 |
+| site/en/cave-estate.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/counterfactual.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/ethics-consumption.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/heaven-power-network.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/risk-project.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/search-index-en.js | W1284 | 图表标签可读性逐页清偿 |
+| site/en/social-media.html | W1284 | 图表标签可读性逐页清偿 |
+| site/en/visual-art.html | W1284 | 图表标签可读性逐页清偿 |
+| site/index.html | W1284 | 级联版本面机械联动 |
+| site/static/js/label-contrast.js | W1284 | 通用工具补强（跳过 fill=none 图形 · 底色取不到继续找候选 · 监听 resize） |
+| site/rss.xml | W1284 | 级联版本面机械联动 |
+
+
+## W1283 图表标签可读性存量清偿（2026-11-19）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/00-导读/W批次编号对账表.md | W1283 | 级联版本面机械联动 |
+| scripts/output/INDEX.md | W1283 | 级联版本面机械联动 |
+| scripts/output/README.md | W1283 | 级联版本面机械联动 |
+| scripts/output/_vermilion_solid_cache.json | W1283 | 级联版本面机械联动 |
+| scripts/output/_w1266_allrender.json | W1283 | 级联版本面机械联动 |
+| scripts/output/_w1283_spec.json | W1283 | 级联版本面机械联动 |
+| scripts/output/chart-legend-render-audit.json | W1283 | 级联版本面机械联动 |
+| scripts/output/svg_text_contrast_graphic_probe.json | W1283 | 级联版本面机械联动 |
+| scripts/output/svg_text_contrast_graphic_report.json | W1283 | graphic 口径全量证据产物 |
+| scripts/output/svg_text_contrast_remaining_W1283.json | W1283 | 剩余存量清单（下一批专项依据） |
+| scripts/output/tools-inventory.md | W1283 | 级联版本面机械联动 |
+| scripts/svg_text_contrast_probe.js | W1283 | graphic 口径三处同源化（中心点判据·背景回退·底色乘提亮系数）+ 自测扩到九项 |
+| site/data/business-model.html | W1283 | 接入通用标签对比度工具 |
+| site/data/chapter-structure-graph.html | W1283 | 接入通用标签对比度工具 |
+| site/data/character-appearance.html | W1283 | 接入通用标签对比度工具 |
+| site/data/character-semantic-network.html | W1283 | 接入通用标签对比度工具 |
+| site/data/character-sentiment-arc.html | W1283 | 接入通用标签对比度工具 |
+| site/data/chart-design.html | W1283 | 接入通用标签对比度工具 |
+| site/data/cognitive-psychology.html | W1283 | 接入通用标签对比度工具 |
+| site/data/criticism-history.html | W1283 | 接入通用标签对比度工具 |
+| site/data/cultural-misreading.html | W1283 | 接入通用标签对比度工具 |
+| site/data/deconstruction.html | W1283 | 接入通用标签对比度工具 |
+| site/data/dialogue-sentiment.html | W1283 | 接入通用标签对比度工具 |
+| site/data/ethics-consumption.html | W1283 | 接入通用标签对比度工具 |
+| site/data/famous-time-travel.html | W1283 | 接入通用标签对比度工具 |
+| site/data/four-dimensional-research-network.html | W1283 | 接入通用标签对比度工具 |
+| site/data/four-heavenly-kings-artifacts.html | W1283 | 接入通用标签对比度工具 |
+| site/data/game-webnovel.html | W1283 | 接入通用标签对比度工具 |
+| site/data/intertextuality-network.html | W1283 | 接入通用标签对比度工具 |
+| site/data/journey-map-interactive.html | W1283 | 接入通用标签对比度工具 |
+| site/data/jurisprudence.html | W1283 | 接入通用标签对比度工具 |
+| site/data/karma-reincarnation.html | W1283 | 接入通用标签对比度工具 |
+| site/data/linguistics.html | W1283 | 接入通用标签对比度工具 |
+| site/data/mbti-evolution.html | W1283 | 接入通用标签对比度工具 |
+| site/data/methodology-matrix.html | W1283 | 接入通用标签对比度工具 |
+| site/data/ming-political-thought-comparison.html | W1283 | 接入通用标签对比度工具 |
+| site/data/monster-background.html | W1283 | 接入通用标签对比度工具 |
+| site/data/monster-capability-radar.html | W1283 | 接入通用标签对比度工具 |
+| site/data/monster-ecology-network.html | W1283 | 接入通用标签对比度工具 |
+| site/data/monster-hierarchy-network.html | W1283 | 接入通用标签对比度工具 |
+| site/data/monster-sociology.html | W1283 | 接入通用标签对比度工具 |
+| site/data/monster-victims-network.html | W1283 | 接入通用标签对比度工具 |
+| site/data/music-structure.html | W1283 | 接入通用标签对比度工具 |
+| site/data/narrative-experiment.html | W1283 | 接入通用标签对比度工具 |
+| site/data/narrative-rhythm-curve.html | W1283 | 接入通用标签对比度工具 |
+| site/data/narratology-12d-network.html | W1283 | 接入通用标签对比度工具 |
+| site/data/philosophy.html | W1283 | 接入通用标签对比度工具 |
+| site/data/pilgrim-team-dynamic-network.html | W1283 | 接入通用标签对比度工具 |
+| site/data/pilgrim-team-psychology-arc.html | W1283 | 接入通用标签对比度工具 |
+| site/data/poetry-rhythm-analysis.html | W1283 | 接入通用标签对比度工具 |
+| site/data/relationships.html | W1283 | 接入通用标签对比度工具 |
+| site/data/risk-project.html | W1283 | 接入通用标签对比度工具 |
+| site/data/social-media.html | W1283 | 接入通用标签对比度工具 |
+| site/data/text-evolution.html | W1283 | 接入通用标签对比度工具 |
+| site/data/theological-intervention-network.html | W1283 | 接入通用标签对比度工具 |
+| site/data/visual-art.html | W1283 | 接入通用标签对比度工具 |
+| site/data/workplace.html | W1283 | 接入通用标签对比度工具 |
+| site/en/81-hardships.html | W1283 | 接入通用标签对比度工具 |
+| site/en/aesthetics.html | W1283 | 接入通用标签对比度工具 |
+| site/en/business-model.html | W1283 | 接入通用标签对比度工具 |
+| site/en/chapter-structure-graph.html | W1283 | 接入通用标签对比度工具 |
+| site/en/character-appearance.html | W1283 | 接入通用标签对比度工具 |
+| site/en/character-semantic-network.html | W1283 | 接入通用标签对比度工具 |
+| site/en/character-sentiment-arc.html | W1283 | 接入通用标签对比度工具 |
+| site/en/chart-design.html | W1283 | 接入通用标签对比度工具 |
+| site/en/cognitive-psychology.html | W1283 | 接入通用标签对比度工具 |
+| site/en/criticism-history.html | W1283 | 接入通用标签对比度工具 |
+| site/en/cultural-misreading.html | W1283 | 接入通用标签对比度工具 |
+| site/en/deconstruction.html | W1283 | 接入通用标签对比度工具 |
+| site/en/dialogue-sentiment.html | W1283 | 接入通用标签对比度工具 |
+| site/en/ethics-consumption.html | W1283 | 接入通用标签对比度工具 |
+| site/en/famous-time-travel.html | W1283 | 接入通用标签对比度工具 |
+| site/en/four-dimensional-research-network.html | W1283 | 接入通用标签对比度工具 |
+| site/en/four-heavenly-kings-artifacts.html | W1283 | 接入通用标签对比度工具 |
+| site/en/game-webnovel.html | W1283 | 接入通用标签对比度工具 |
+| site/en/global-pattern.html | W1283 | 接入通用标签对比度工具 |
+| site/en/intertextuality-network.html | W1283 | 接入通用标签对比度工具 |
+| site/en/journey-map-interactive.html | W1283 | 接入通用标签对比度工具 |
+| site/en/jurisprudence.html | W1283 | 接入通用标签对比度工具 |
+| site/en/karma-reincarnation.html | W1283 | 接入通用标签对比度工具 |
+| site/en/linguistics.html | W1283 | 接入通用标签对比度工具 |
+| site/en/magic-system.html | W1283 | 接入通用标签对比度工具 |
+| site/en/material-archaeology.html | W1283 | 接入通用标签对比度工具 |
+| site/en/mbti-evolution.html | W1283 | 接入通用标签对比度工具 |
+| site/en/methodology-matrix.html | W1283 | 接入通用标签对比度工具 |
+| site/en/ming-political-thought-comparison.html | W1283 | 接入通用标签对比度工具 |
+| site/en/monster-background.html | W1283 | 接入通用标签对比度工具 |
+| site/en/monster-capability-radar.html | W1283 | 接入通用标签对比度工具 |
+| site/en/monster-hierarchy-network.html | W1283 | 接入通用标签对比度工具 |
+| site/en/monster-sociology.html | W1283 | 接入通用标签对比度工具 |
+| site/en/music-structure.html | W1283 | 接入通用标签对比度工具 |
+| site/en/narrative-experiment.html | W1283 | 接入通用标签对比度工具 |
+| site/en/narrative-rhythm-curve.html | W1283 | 接入通用标签对比度工具 |
+| site/en/narratology-12d-network.html | W1283 | 接入通用标签对比度工具 |
+| site/en/philosophy.html | W1283 | 接入通用标签对比度工具 |
+| site/en/pilgrim-team-dynamic-network.html | W1283 | 接入通用标签对比度工具 |
+| site/en/pilgrim-team-psychology-arc.html | W1283 | 接入通用标签对比度工具 |
+| site/en/poetry-rhythm-analysis.html | W1283 | 接入通用标签对比度工具 |
+| site/en/relationships.html | W1283 | 接入通用标签对比度工具 |
+| site/en/social-media.html | W1283 | 接入通用标签对比度工具 |
+| site/en/text-evolution.html | W1283 | 接入通用标签对比度工具 |
+| site/en/theological-intervention-network.html | W1283 | 接入通用标签对比度工具 |
+| site/en/visual-art.html | W1283 | 接入通用标签对比度工具 |
+| site/en/workplace.html | W1283 | 接入通用标签对比度工具 |
+| site/static/js/INDEX.md | W1283 | 级联版本面机械联动 |
+| site/static/js/README.md | W1283 | 级联版本面机械联动 |
+| site/static/js/label-contrast.js | W1283 | 新增公共工具·按渲染后实际底色自适应标签前景色与描边 |
+| tests/unit/test_w1282_graphic_contrast_scope.py | W1283 | 回归锁口径更新与断言 |
+| .github/workflows/README.md | W1283 | 级联版本面机械联动 |
+| AGENTS.md | W1283 | 级联版本面机械联动 |
+| CHANGELOG.md | W1283 | 级联版本面机械联动 |
+| CITATION.cff | W1283 | 级联版本面机械联动 |
+| HANDOVER.md | W1283 | 级联版本面机械联动 |
+| README.md | W1283 | 级联版本面机械联动 |
+| STRUCTURE.md | W1283 | 级联版本面机械联动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1283 | 级联版本面机械联动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1283 | 级联版本面机械联动 |
+| archive/docs/workflows-readme-history.md | W1283 | 级联版本面机械联动 |
+| docs/00-导读/项目说明.md | W1283 | 级联版本面机械联动 |
+| scripts/output/_cascade_files_W1283.txt | W1283 | 级联版本面机械联动 |
+| scripts/output/file-index.md | W1283 | 级联版本面机械联动 |
+| scripts/output/stats.json | W1283 | 级联版本面机械联动 |
+| site/data/cross-time-danmaku.html | W1283 | 级联版本面机械联动 |
+| site/data/tag-cloud.html | W1283 | 级联版本面机械联动 |
+| site/dukou-engine.html | W1283 | 级联版本面机械联动 |
+| site/index.html | W1283 | 级联版本面机械联动 |
+| .agent/skills/puti-shouye/SKILL.md | W1283 | 坑位计数同步联动 |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1283 | 坑表正文归档 |
+| docs/11-方案报告/README.md | W1283 | 本批报告登记 |
+| docs/11-方案报告/计划方案/T116-任务计划执行与经验沉淀报告-2026-11-19.md | W1283 | 本批报告落盘 |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1283 | 级联与索引面机械联动 |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1283 | 级联与索引面机械联动 |
+| docs/INDEX.md | W1283 | 级联与索引面机械联动 |
+| docs/agent/pitfalls.md | W1283 | 坑表兼容壳同步 |
+| pitfalls.md | W1283 | 坑表新增四条（双实现同源 / 运行时工具静默失效 / 几何配对须归一化 / 底色自适应属运行时层） |
+| scripts/output/stats-changelog.json | W1283 | 级联与索引面机械联动 |
+| scripts/output/stats-index.md | W1283 | 级联与索引面机械联动 |
+| site/data/search-index-zh.js | W1283 | 级联与索引面机械联动 |
+| site/en/search-index-en.js | W1283 | 级联与索引面机械联动 |
+| site/rss.xml | W1283 | 级联与索引面机械联动 |
+| docs/agent/gates.md | W1283 | 第八十槽四处同源化同步 |

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Reayxnm4vbNAAa4WMknvKJl4hu9+gxvKat3PE4HhGBA=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-eGxJ1fegOAp+bY1DzBEnWCMjdpPJfgDaqCsU5dYD788=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>社媒人设 · MBTI 人格图谱 · 详解西游记</title>
@@ -629,16 +629,19 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <!-- 板块 2：MBTI 雷达图 -->
         <section class="section">
             <h2 class="section-title">MBTI 八维雷达图</h2>
-            <div class="section-sub">把 MBTI 四字母拆为 8 个独立轴（E/I/S/N/T/F/J/P），每轴值为 0 或 1，叠加 8 个角色形成对比。</div>
+            <div class="section-sub">把 MBTI 四字母拆为 8 个独立轴（E/I/S/N/T/F/J/P），每轴值为 0 或 1 · 雷达单选 1 角色（§4B 单图系列 ≤3）· 全量排序见下方点图。</div>
+            <!-- chart-radar-meta: axes=8 series=1 -->
+            <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
             <div class="radar-wrap">
                 <div style="position:relative;">
                     <svg id="radar-svg"></svg>
                     <div class="radar-tip" id="radar-tip"></div>
                 </div>
                 <div class="radar-legend" id="radar-legend">
-                    <h4>角色图例</h4>
+                    <h4>当前角色</h4>
                 </div>
             </div>
+            <div id="radar-dotplot" style="margin-top:12px"></div>
         </section>
 
         <!-- 板块 3：职场适配度条形图 -->
@@ -854,6 +857,65 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     // ============================================================
     // 渲染：MBTI 八维雷达图
     // ============================================================
+    // ===== §4B 雷达行合规面板（单图仅 1 系列 + 全量排序点图）=====
+    let radarSelected = null;
+    let radarPanelData = null;   // 面板数据缓存（本页数据挂在 window.__data·mbti 在其 .mbti）
+
+    // 本页八轴取值恒为 0/1（每型恰好 4 命中）⇒ 轴均值对 8 位角色恒等 0.5·无法排序；
+    // 排序键改用页面既有 workplace_fit（职场适配度·与下方条形图同源），避免伪排序。
+    function radarMean(d) {
+        return typeof d.workplace_fit === "number" ? d.workplace_fit : 0;
+    }
+
+    function renderRadarPanel(mbtiList) {
+        radarPanelData = mbtiList;
+        const list = (mbtiList || []).slice();
+        if (!list.length) { renderRadar(list); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.character === radarSelected)) radarSelected = sorted[0].character;
+
+        const ctrl = d3.select("#radar-controls");
+        ctrl.selectAll("*").remove();
+        ctrl.append("span").text("雷达实体：")
+            .style("font-size", "0.78rem").style("color", "var(--ink-soft)");
+        const sel = ctrl.append("select")
+            .style("font-size", "0.8rem").style("padding", "3px 8px")
+            .style("border", "1px solid var(--line)").style("border-radius", "4px")
+            .style("background", "var(--paper)").style("color", "var(--ink)");
+        sel.selectAll("option").data(sorted).enter().append("option")
+            .attr("value", d => d.character).property("selected", d => d.character === radarSelected)
+            .text(d => d.character);
+        sel.on("change", function () { radarSelected = this.value; renderRadarPanel(radarPanelData); });
+
+        renderRadar(list.filter(d => d.character === radarSelected));
+
+        const host = d3.select("#radar-dotplot");
+        host.selectAll("*").remove();
+        host.append("div").text("点图排序键：职场适配度 workplace_fit（八轴取值为 0/1·轴均值不可排序）")
+            .style("font-size", "0.72rem").style("color", "var(--ink-soft)").style("margin-bottom", "4px");
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll(".dot-row").data(sorted).enter().append("div")
+            .attr("class", "dot-row")
+            .style("display", "flex").style("align-items", "center").style("gap", "8px")
+            .style("padding", "2px 0").style("cursor", "pointer")
+            .style("opacity", d => (d.character === radarSelected ? 1 : 0.72))
+            .on("click", (e, d) => { radarSelected = d.character; renderRadarPanel(radarPanelData); });
+        rows.append("span").text(d => d.character)
+            .style("flex", "0 0 96px").style("text-align", "right").style("font-size", "0.74rem")
+            .style("color", "var(--ink-soft)");
+        const track = rows.append("span")
+            .style("position", "relative").style("flex", "1 1 auto").style("height", "8px")
+            .style("background", "var(--line)").style("border-radius", "4px");
+        track.append("span")
+            .style("position", "absolute").style("top", "-3px")
+            .style("left", d => (radarMean(d) / maxV * 100).toFixed(2) + "%")
+            .style("width", "14px").style("height", "14px").style("border-radius", "50%")
+            .style("background", d => (d.character === radarSelected ? "var(--accent-primary)" : "var(--series-2)"))
+            .style("transform", "translateX(-7px)");
+        rows.append("span").text(d => radarMean(d).toFixed(1))
+            .style("flex", "0 0 44px").style("font-size", "0.72rem").style("color", "var(--ink)");
+    }
+
     function renderRadar(mbtiList) {
         const svg = d3.select("#radar-svg");
         svg.selectAll("*").remove();
@@ -994,26 +1056,13 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             });
         });
 
-        // 渲染图例
+        // 渲染图例（单选实体时仅标注当前角色——单系列无多实体可对照）
         const legend = d3.select("#radar-legend");
         legend.selectAll("*").remove();
-        legend.append("h4").text("角色图例 · 8 位");
-        mbtiList.forEach((m, idx) => {
+        legend.append("h4").text("当前角色");
+        mbtiList.forEach(m => {
             const color = MBTI_COLORS[m.character] || "#8E7D62";
-            const item = legend.append("div").attr("class", "legend-item")
-                .attr("tabindex", "0")
-                .on("mouseover", function() {
-                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.35).attr("stroke-width", 3);
-                })
-                .on("mouseout", function() {
-                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.12).attr("stroke-width", 2);
-                })
-                .on("focus", function() {
-                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.35).attr("stroke-width", 3);
-                })
-                .on("blur", function() {
-                    d3.select(".radar-poly.poly-" + idx).attr("fill-opacity", 0.12).attr("stroke-width", 2);
-                });
+            const item = legend.append("div").attr("class", "legend-item");
             item.append("span").attr("class", "swatch").style("background", color);
             item.append("span").text(m.character);
             item.append("span").attr("class", "li-mbti").text(m.mbti);
@@ -1245,7 +1294,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         }
 
         renderProfiles(data.profiles);
-        renderRadar(data.mbti);
+        renderRadarPanel(data.mbti);
         renderFitChart(data.mbti);
         renderMbtiTable(data.mbti);
         renderInsights();
@@ -1260,7 +1309,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
             if (window.__data) {
-                renderRadar(window.__data.mbti);
+                renderRadarPanel(window.__data.mbti);
                 renderFitChart(window.__data.mbti);
             }
         }, 250);

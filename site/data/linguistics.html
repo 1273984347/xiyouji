@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-a8/SNMRl44TikDUIrOXANx1OoktDd6Ypw3kWWUlubIg=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-224hyNieTJ+8FvkSN17up9UfpR6JsoEEDYbQ6R5wyVY=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>语言学 · 详解西游记</title>
@@ -870,10 +870,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </p>
 
             <div class="chart-block">
-                <div class="chart-title">8 角色 × 4 教身份雷达图</div>
-                <div class="chart-caption">4 维度：佛教 / 道教 / 儒家 / 民间（每维度 0-10 分）/ 每角色一个多边形·颜色区分</div>
+                <div class="chart-title">8 角色四维教身份雷达图（单选角色 · 全量排序见下方点图）</div>
+                <div class="chart-caption">4 维度：佛教 / 道教 / 儒家 / 民间（每维度 0-10 分）· 雷达单选 1 角色（§4B 单图系列 ≤3）· 点图按四维均值降序 · hover 查看详情</div>
+                <!-- chart-radar-meta: axes=4 series=1 -->
+                <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
                 <svg id="chart-identity-radar" class="chart-svg" width="100%" height="560"></svg>
                 <div class="legend-row" id="radar-legend"></div>
+                <div id="radar-dotplot" style="margin-top:12px"></div>
             </div>
 
             <div class="chart-block">
@@ -1135,7 +1138,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         renderPairCards(power);
         renderMbtiCards(power);
         renderPdInsights(power);
-        renderIdentityRadar(identity);
+        renderIdentityRadarPanel(identity);
         renderIdentityStacked(identity);
         renderIdentityTable(identity);
         renderCharCards(identity);
@@ -1610,7 +1613,65 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     }
 
     // ===== Section 3-1: 身份雷达图 =====
-    function renderIdentityRadar(data) {
+    // ===== §4B 雷达行合规面板（单图仅 1 系列 + 全量排序点图）=====
+    // 本页雷达数据为扁平维度键（identity_score_*·0-10），均值取四维算术平均
+    const RADAR_DIMS = ['identity_score_buddhist', 'identity_score_daoist', 'identity_score_confucian', 'identity_score_folk'];
+    let radarSelected = null;
+    let radarPanelData = null;   // 面板数据缓存（本页 __lastData 是聚合对象·identity 在其 .identity）
+
+    function radarMean(d) {
+        const vals = RADAR_DIMS.map(k => d[k]).filter(v => typeof v === 'number');
+        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    }
+
+    function renderIdentityRadarPanel(data) {
+        radarPanelData = data;
+        const list = ((data && data.character_language_profiles) || []).slice();
+        if (!list.length) { renderIdentityRadar(list); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.character === radarSelected)) radarSelected = sorted[0].character;
+
+        const ctrl = d3.select('#radar-controls');
+        ctrl.selectAll('*').remove();
+        ctrl.append('span').text('雷达实体：')
+            .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+        const sel = ctrl.append('select')
+            .style('font-size', '0.8rem').style('padding', '3px 8px')
+            .style('border', '1px solid var(--line)').style('border-radius', '4px')
+            .style('background', 'var(--paper)').style('color', 'var(--ink)');
+        sel.selectAll('option').data(sorted).enter().append('option')
+            .attr('value', d => d.character).property('selected', d => d.character === radarSelected)
+            .text(d => d.character);
+        sel.on('change', function () { radarSelected = this.value; renderIdentityRadarPanel(radarPanelData); });
+
+        renderIdentityRadar(list.filter(d => d.character === radarSelected));
+
+        const host = d3.select('#radar-dotplot');
+        host.selectAll('*').remove();
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+            .attr('class', 'dot-row')
+            .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+            .style('padding', '2px 0').style('cursor', 'pointer')
+            .style('opacity', d => (d.character === radarSelected ? 1 : 0.72))
+            .on('click', (e, d) => { radarSelected = d.character; renderIdentityRadarPanel(radarPanelData); });
+        rows.append('span').text(d => d.character)
+            .style('flex', '0 0 96px').style('text-align', 'right').style('font-size', '0.74rem')
+            .style('color', 'var(--ink-soft)');
+        const track = rows.append('span')
+            .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+            .style('background', 'var(--line)').style('border-radius', '4px');
+        track.append('span')
+            .style('position', 'absolute').style('top', '-3px')
+            .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+            .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+            .style('background', d => (d.character === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+            .style('transform', 'translateX(-7px)');
+        rows.append('span').text(d => radarMean(d).toFixed(1))
+            .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+    }
+
+    function renderIdentityRadar(radarData) {
         const svg = d3.select('#chart-identity-radar');
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 800;
@@ -1624,7 +1685,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         const nDims = dims.length;
         const angle = (i) => (i * 2 * Math.PI / nDims) - Math.PI / 2;
 
-        const chars = data.character_language_profiles;
+        const chars = radarData;
         const gridG = svg.append('g').attr('transform', `translate(${cx},${cy})`);
         // 网格圆
         for (let lv = 1; lv <= levels; lv++) {

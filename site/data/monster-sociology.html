@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-T/nXPPM8+vbwlz7bjTXjfU6Ph4ho2dXiKVI/hUVhnMk=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-FLEKMvXt4OuNPyy9aSRsOgdICZvkYOz9wbZcGCEu7zo=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪社会学 · 详解西游记</title>
@@ -797,21 +797,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
 
             <div class="chart-block">
-                <div class="chart-title">10 坐骑下凡雷达图（5 维度：判决严厉度/罪行数量/下凡年数/社会危害度/原主影响力）</div>
-                <div class="chart-caption">5 维度均归一化至 0-10：sentence_severity / crimes_committed×2.5 / time_on_earth÷13×10 / harm_severity / owner_influence</div>
+                <div class="chart-title">10 坐骑下凡雷达图（单选坐骑 · 全量排序见下方点图）</div>
+                <div class="chart-caption">5 维度均归一化至 0-10：sentence_severity / crimes_committed×2.5 / time_on_earth÷13×10 / harm_severity / owner_influence · 雷达单选 1 坐骑（§4B 单图系列 ≤3）· 点图按五维均值降序</div>
+                <!-- chart-radar-meta: axes=5 series=1 -->
+                <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
                 <svg id="chart-mount-radar" class="chart-svg" width="100%" height="560"></svg>
-                <div class="legend-row" id="radar-legend">
-                    <span class="legend-item"><span class="legend-swatch" style="background:#C0392B;"></span>青牛精</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#40619E;"></span>金鱼精</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;"></span>金毛犼</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#3A473A;"></span>青毛狮子怪</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#8E7D62;"></span>黄牙老象</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#8c4a6b;"></span>金翅大鹏雕</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#4a6b8c;"></span>九灵元圣</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#a8542a;"></span>黄袍怪</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#6b8c4a;"></span>白象</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#8c6b4a;"></span>青狮</span>
-                </div>
+                <div class="legend-row" id="radar-legend"></div>
+                <div id="radar-dotplot" style="margin-top:12px"></div>
             </div>
 
             <div class="chart-block">
@@ -1144,7 +1136,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         renderSignalBar(signal);
         renderSignalCards(signal);
         renderSignalInsights(signal);
-        renderMountRadar(mount);
+        renderMountRadarPanel(mount);
         renderOwnerPie(mount);
         renderMountTable(mount);
         renderMountCards(mount);
@@ -1435,7 +1427,76 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     }
 
     // ===== Section 3: 坐骑下凡雷达图 =====
-    function renderMountRadar(data) {
+    // ===== §4B 雷达行合规面板（单图仅 1 系列 + 全量排序点图）=====
+    const RADAR_MAX_YEARS = 13;   // 最大下凡年数（归一化分母·与雷达多边形同源）
+    let radarSelected = null;
+    let radarPanelData = null;    // 面板数据缓存（本页 __lastData 是聚合对象，不能整块透传）
+
+    // 五维归一化值：sentence_severity / crimes×2.5 / years÷13×10 / harm / owner（0-10）
+    function radarValues(d) {
+        return [
+            d.sentence_severity,
+            Math.min(10, d.crimes_committed.length * 2.5),
+            Math.min(10, d.time_on_earth_years / RADAR_MAX_YEARS * 10),
+            d.harm_severity,
+            d.owner_influence
+        ];
+    }
+
+    function radarMean(d) {
+        const vals = radarValues(d).filter(v => typeof v === 'number');
+        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    }
+
+    function renderMountRadarPanel(data) {
+        radarPanelData = data;
+        const list = ((data && data.desertion_cases) || []).slice();
+        const avgSeverity = data && data.desertion_stats ? data.desertion_stats.avg_sentence_severity : 0;
+        if (!list.length) { renderMountRadar(list, avgSeverity); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.name === radarSelected)) radarSelected = sorted[0].name;
+
+        const ctrl = d3.select('#radar-controls');
+        ctrl.selectAll('*').remove();
+        ctrl.append('span').text('雷达实体：')
+            .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+        const sel = ctrl.append('select')
+            .style('font-size', '0.8rem').style('padding', '3px 8px')
+            .style('border', '1px solid var(--line)').style('border-radius', '4px')
+            .style('background', 'var(--paper)').style('color', 'var(--ink)');
+        sel.selectAll('option').data(sorted).enter().append('option')
+            .attr('value', d => d.name).property('selected', d => d.name === radarSelected)
+            .text(d => d.name);
+        sel.on('change', function () { radarSelected = this.value; renderMountRadarPanel(radarPanelData); });
+
+        renderMountRadar(list.filter(d => d.name === radarSelected), avgSeverity);
+
+        const host = d3.select('#radar-dotplot');
+        host.selectAll('*').remove();
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+            .attr('class', 'dot-row')
+            .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+            .style('padding', '2px 0').style('cursor', 'pointer')
+            .style('opacity', d => (d.name === radarSelected ? 1 : 0.72))
+            .on('click', (e, d) => { radarSelected = d.name; renderMountRadarPanel(radarPanelData); });
+        rows.append('span').text(d => d.name)
+            .style('flex', '0 0 96px').style('text-align', 'right').style('font-size', '0.74rem')
+            .style('color', 'var(--ink-soft)');
+        const track = rows.append('span')
+            .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+            .style('background', 'var(--line)').style('border-radius', '4px');
+        track.append('span')
+            .style('position', 'absolute').style('top', '-3px')
+            .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+            .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+            .style('background', d => (d.name === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+            .style('transform', 'translateX(-7px)');
+        rows.append('span').text(d => radarMean(d).toFixed(1))
+            .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+    }
+
+    function renderMountRadar(radarData, avgSeverity) {
         const svg = d3.select('#chart-mount-radar');
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 700;
@@ -1505,17 +1566,9 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
 
         // 数据多边形
         const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
-        const maxCrimes = 5; // 最大罪行数 = 4
-        const maxYears = 13; // 最大下凡年数 = 13
 
-        data.desertion_cases.forEach(mount => {
-            const vals = [
-                mount.sentence_severity,
-                Math.min(10, mount.crimes_committed.length * 2.5),
-                Math.min(10, mount.time_on_earth_years / maxYears * 10),
-                mount.harm_severity,
-                mount.owner_influence
-            ];
+        radarData.forEach(mount => {
+            const vals = radarValues(mount);
             const pts = vals.map((v, i) => [rScale(v) * Math.cos(angle(i)), rScale(v) * Math.sin(angle(i))]);
             const poly = gridG.append('polygon')
                 .attr('points', pts.map(p => p.join(',')).join(' '))
@@ -1551,7 +1604,6 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         });
 
         // 平均判决线
-        const avgSeverity = data.desertion_stats.avg_sentence_severity;
         const avgR = rScale(avgSeverity);
         gridG.append('circle')
             .attr('cx', 0).attr('cy', 0)
@@ -1565,6 +1617,14 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('y', -avgR * Math.SQRT1_2 - 4)
             .style('font-size', '10px').style('fill', 'var(--chart-1)')
             .text(`平均判决 ${avgSeverity}`);
+
+        // 图例（单选实体时仅标注当前坐骑——单系列无多实体可切换）
+        const legend = d3.select('#radar-legend');
+        legend.selectAll('*').remove();
+        radarData.forEach(mount => {
+            legend.append('span').attr('class', 'legend-item')
+                .html(`<span class="legend-swatch" style="background:${colorMap[mount.name]};"></span>${mount.name} · ${mount.english_name}`);
+        });
     }
 
     // ===== Section 3: 坐骑原主分布饼图 =====

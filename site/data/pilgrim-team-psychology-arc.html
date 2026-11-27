@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-yHk/ZliMn8dEff0odTobjDGCXe4ahc9Q2NVJEsm2d48=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qGDhA2/icWfXqdoQzWMOTvhqFvbXiXeJ/bjGwy6x3wQ=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队心理变化曲线 · 详解西游记</title>
@@ -345,18 +345,21 @@ svg text.ev-label { fill: #8a6a1c !important; }
             </div>
         </section>
 
-        <!-- 板块 2：五众心理状态雷达图 -->
+        <!-- 板块 2：五众心理状态雷达图（§4B 单选实体雷达 + 全量排序点图） -->
         <section class="section" aria-labelledby="sec-radar">
             <h2 id="sec-radar">① 五众心理状态雷达图</h2>
-            <p>将五众心理状态按"恐惧 / 坚定 / 愤怒 / 智慧 / 顺从"五维展开。悟空高坚定高愤怒低顺从（叛逆英雄），唐僧高坚定高顺从（虔诚行者），八戒高恐惧低坚定（凡心未脱），沙僧高顺从低愤怒（和事佬），白龙马均衡偏高智慧（沉默智者）。</p>
+            <p>将五众心理状态按"恐惧 / 坚定 / 愤怒 / 智慧 / 顺从"五维展开。悟空高坚定高愤怒低顺从（叛逆英雄），唐僧高坚定高顺从（虔诚行者），八戒高恐惧低坚定（凡心未脱），沙僧高顺从低愤怒（和事佬），白龙马均衡偏高智慧（沉默智者）。雷达单选 1 实体 · 全量排序见下方点图。</p>
+            <!-- chart-radar-meta: axes=5 series=1 -->
+            <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
             <div class="chart-wrap">
                 <svg id="radar-svg" width="100%" height="520" role="img" aria-labelledby="radar-title radar-desc">
-                    <title id="radar-title">五众心理状态五维雷达图</title>
-                    <desc id="radar-desc">五个角色在恐惧/坚定/愤怒/智慧/顺从五维上的雷达对比。</desc>
+                    <title id="radar-title">心理状态五维雷达图（单选角色）</title>
+                    <desc id="radar-desc">当前选中角色在恐惧/坚定/愤怒/智慧/顺从五维上的雷达画像，全量排序见下方点图。</desc>
                 </svg>
                 <div class="heat-tip" id="radar-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="radar-legend" aria-label="角色图例"></div>
+            <div id="radar-dotplot" style="margin-top:12px"></div>
         </section>
 
         <!-- 板块 3：100 回心理曲线 -->
@@ -598,7 +601,64 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
     let playTimer = null;
     let playSpeed = 800;
 
-    // ============= 板块 2：雷达图 =============
+    // ============= 板块 2：雷达图（§4B 单选实体雷达 + 全量均值降序点图）=============
+    let radarSelected = null;
+
+    // 均值口径：该角色五维得分（0-10）的算术平均
+    function radarMean(d) {
+        const vals = RADAR_AXES.map(a => d[a.key]).filter(v => typeof v === "number");
+        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    }
+
+    function renderRadarPanel() {
+        const list = EMBEDDED_DATA.radar.slice();
+        if (!list.length) { renderRadar(); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.character === radarSelected)) radarSelected = sorted[0].character;
+
+        // 下拉选择实体
+        const ctrl = d3.select("#radar-controls");
+        ctrl.selectAll("*").remove();
+        ctrl.append("span").text("雷达角色：")
+            .style("font-size", "0.78rem").style("color", "var(--ink-soft)");
+        const sel = ctrl.append("select")
+            .style("font-size", "0.8rem").style("padding", "3px 8px")
+            .style("border", "1px solid var(--line)").style("border-radius", "4px")
+            .style("background", "var(--paper)").style("color", "var(--ink)");
+        sel.selectAll("option").data(sorted).enter().append("option")
+            .attr("value", d => d.character).property("selected", d => d.character === radarSelected)
+            .text(d => d.character);
+        sel.on("change", function () { radarSelected = this.value; renderRadarPanel(); });
+
+        // 雷达只绘当前 1 个实体
+        renderRadar();
+
+        // 全量排序点图（均值降序 · 点击联动雷达）
+        const host = d3.select("#radar-dotplot");
+        host.selectAll("*").remove();
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll(".dot-row").data(sorted).enter().append("div")
+            .attr("class", "dot-row")
+            .style("display", "flex").style("align-items", "center").style("gap", "8px")
+            .style("padding", "2px 0").style("cursor", "pointer")
+            .style("opacity", d => (d.character === radarSelected ? 1 : 0.72))
+            .on("click", (e, d) => { radarSelected = d.character; renderRadarPanel(); });
+        rows.append("span").text(d => d.character)
+            .style("flex", "0 0 96px").style("text-align", "right").style("font-size", "0.74rem")
+            .style("color", "var(--ink-soft)");
+        const track = rows.append("span")
+            .style("position", "relative").style("flex", "1 1 auto").style("height", "8px")
+            .style("background", "var(--line)").style("border-radius", "4px");
+        track.append("span")
+            .style("position", "absolute").style("top", "-3px")
+            .style("left", d => (radarMean(d) / maxV * 100).toFixed(2) + "%")
+            .style("width", "14px").style("height", "14px").style("border-radius", "50%")
+            .style("background", d => (d.character === radarSelected ? "var(--accent-primary)" : "var(--series-2)"))
+            .style("transform", "translateX(-7px)");
+        rows.append("span").text(d => radarMean(d).toFixed(1))
+            .style("flex", "0 0 44px").style("font-size", "0.72rem").style("color", "var(--ink)");
+    }
+
     function renderRadar() {
         const svg = d3.select("#radar-svg");
         svg.selectAll("*").remove();
@@ -661,9 +721,11 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
 
         const tip = d3.select("#radar-tip");
         const wrapEl = wrap.parentElement;
-        // 五众多边形
-        CHARACTERS.forEach((ch, ci) => {
+        // 单选实体（§4B 单图仅 1 系列）：只绘当前选中角色，空选时取第一项
+        const drawn = CHARACTERS.filter(ch => ch.name === radarSelected);
+        (drawn.length ? drawn : CHARACTERS.slice(0, 1)).forEach((ch, ci) => {
             const data = EMBEDDED_DATA.radar.find(r => r.character === ch.name);
+            const order = CHARACTERS.findIndex(c => c.name === ch.name) + 1;
             const pts = RADAR_AXES.map((axis, idx) => {
                 const val = data[axis.key];
                 const r = (radius * val) / (levels * 2);
@@ -699,7 +761,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
                         tip.style("opacity", 1)
                             .html(`<div class="tip-title">${ch.name} · ${RADAR_AXES[pi].label}</div>
                                 <div class="tip-row">数值：<strong style="color: var(--text-primary)">${data[RADAR_AXES[pi].key]} / 10</strong></div>
-                                <div class="tip-meta">角色 ${ci+1}/5 · 维度 ${pi+1}/5</div>`);
+                                <div class="tip-meta">角色 ${order}/5 · 维度 ${pi+1}/5</div>`);
                     })
                     .on("mousemove", function(event) {
                         const rect = wrapEl.getBoundingClientRect();
@@ -717,13 +779,14 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
             });
         });
 
-        // 图例
+        // 图例：单选实体时仅标注当前角色（单系列无可切换对象）
         const legend = d3.select("#radar-legend");
         legend.selectAll("*").remove();
-        CHARACTERS.forEach(ch => {
+        (drawn.length ? drawn : CHARACTERS.slice(0, 1)).forEach(ch => {
             const item = legend.append("div").attr("class", "lg-item");
             item.append("span").attr("class", "lg-swatch dot").style("background", ch.color);
-            item.append("span").text(ch.name);
+            const row = EMBEDDED_DATA.radar.find(r => r.character === ch.name);
+            item.append("span").text(ch.name + (row ? " · 均值 " + radarMean(row).toFixed(1) : ""));
         });
     }
 
@@ -1224,7 +1287,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
 
     // ============= 初始化 =============
     function renderAll() {
-        renderRadar();
+        renderRadarPanel();
         renderArc(currentChapter);
         renderCohesion();
         renderTimeline();
@@ -1270,7 +1333,7 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
     window.addEventListener("resize", function() {
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
-            renderRadar();
+            renderRadarPanel();
             renderArc(currentChapter);
             renderCohesion();
             renderTimeline();

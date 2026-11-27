@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-YooNqOuU7U5gpfeTdFgj97/hFn7zJJOw1++vrESwyjU=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-eSCEyUIVehlQEqp37qfTrwUZe5CTKOP1RaNYZpYRDWY=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>认知心理 · 详解西游记</title>
@@ -660,17 +660,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </p>
 
             <div class="chart-block">
-                <div class="chart-title">5 人 × 6 维度认知灵活性雷达图</div>
-                <div class="chart-caption">6 维度：假设多样性 / 切换速度 / 信息整合 / 认知抑制 / 经验迁移 / 抽象思维（每维度 0-10 分）</div>
+                <div class="chart-title">认知灵活性雷达（单选角色 · 全量排序见下方点图）</div>
+                <div class="chart-caption">6 维度：假设多样性 / 切换速度 / 信息整合 / 认知抑制 / 经验迁移 / 抽象思维（每维度 0-10 分）· 雷达单选 1 实体 · 全量排序见下方点图</div>
+                <!-- chart-radar-meta: axes=6 series=1 -->
+                <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
                 <svg id="chart-radar" class="chart-svg" width="100%" height="520"></svg>
-                <div class="legend-row" id="radar-legend">
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>孙悟空 9.0</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>唐僧 4.3</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>猪八戒 3.5</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>沙悟净 5.0</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-3);"></span>白龙马 6.2</span>
-                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--ink-soft);"></span>团队均值 5.6</span>
-                </div>
+                <div class="legend-row" id="radar-legend"></div>
+                <div id="radar-dotplot" style="margin-top:12px"></div>
             </div>
 
             <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">5 人认知特征卡片</h3>
@@ -1041,7 +1037,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         renderCasesTable(availability);
         renderInsights(availability);
         renderPhaseTable(availability);
-        renderRadar(flexibility);
+        renderRadarPanel(flexibility);
         renderCharCards(flexibility);
         renderFlexInsights(flexibility);
         renderFlexTable(flexibility);
@@ -1189,17 +1185,84 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         list.selectAll('li').data(data.cognitive_insights).enter().append('li').text(d => d);
     }
 
-    // ===== Section 2: 雷达图 =====
-    function renderRadar(data) {
+    // ===== Section 2: 雷达图（§4B 单选实体雷达 + 全量均值降序点图）=====
+    let radarSelected = null;
+
+    // 均值口径：该实体各维度得分（0-10）的算术平均
+    function radarMean(d) {
+        const vals = Object.values(d.dimensions || {}).filter(v => typeof v === 'number');
+        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    }
+
+    function renderRadarPanel(data) {
+        const list = (data.team_members || []).slice();
+        if (!list.length) { renderRadar([], data); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.character === radarSelected)) radarSelected = sorted[0].character;
+
+        // 下拉选择实体
+        const ctrl = d3.select('#radar-controls');
+        ctrl.selectAll('*').remove();
+        ctrl.append('span').text('雷达角色：')
+            .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+        const sel = ctrl.append('select')
+            .style('font-size', '0.8rem').style('padding', '3px 8px')
+            .style('border', '1px solid var(--line)').style('border-radius', '4px')
+            .style('background', 'var(--paper)').style('color', 'var(--ink)');
+        sel.selectAll('option').data(sorted).enter().append('option')
+            .attr('value', d => d.character).property('selected', d => d.character === radarSelected)
+            .text(d => d.character);
+        sel.on('change', function () {
+            radarSelected = this.value;
+            renderRadarPanel((window.__lastData && window.__lastData.flexibility) || data);
+        });
+
+        // 雷达只绘当前 1 个实体
+        renderRadar(list.filter(d => d.character === radarSelected), data);
+
+        // 全量排序点图（均值降序 · 点击联动雷达）
+        const host = d3.select('#radar-dotplot');
+        host.selectAll('*').remove();
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+            .attr('class', 'dot-row')
+            .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+            .style('padding', '2px 0').style('cursor', 'pointer')
+            .style('opacity', d => (d.character === radarSelected ? 1 : 0.72))
+            .on('click', (e, d) => {
+                radarSelected = d.character;
+                renderRadarPanel((window.__lastData && window.__lastData.flexibility) || data);
+            });
+        rows.append('span').text(d => d.character)
+            .style('flex', '0 0 96px').style('text-align', 'right').style('font-size', '0.74rem')
+            .style('color', 'var(--ink-soft)');
+        const track = rows.append('span')
+            .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+            .style('background', 'var(--line)').style('border-radius', '4px');
+        track.append('span')
+            .style('position', 'absolute').style('top', '-3px')
+            .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+            .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+            .style('background', d => (d.character === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+            .style('transform', 'translateX(-7px)');
+        rows.append('span').text(d => radarMean(d).toFixed(1))
+            .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+    }
+
+    function renderRadar(radarData, flexData) {
         const svg = d3.select('#chart-radar');
         svg.selectAll('*').remove();
+        if (!radarData || radarData.length === 0) {
+            svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#8a7a5a').text('暂无数据');
+            return;
+        }
         const containerW = svg.node().clientWidth || 700;
         const W = Math.max(containerW, 500), H = 520;
         svg.attr('viewBox', `0 0 ${W} ${H}`);
         const cx = W / 2, cy = H / 2 + 10;
         const radius = Math.max(0, Math.min(W, H) / 2 - 70);
         const levels = 5;
-        const dims = Object.keys(data.team_members[0].dimensions);
+        const dims = Object.keys(radarData[0].dimensions);
         const nDims = dims.length;
 
         const colorMap = {
@@ -1258,7 +1321,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         // 数据多边形
         const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
 
-        data.team_members.forEach(member => {
+        // 单选实体（§4B 单图仅 1 系列）：只绘当前选中角色
+        radarData.forEach(member => {
             const pts = dims.map((d, i) => {
                 const v = member.dimensions[d];
                 return [rScale(v) * Math.cos(angle(i)), rScale(v) * Math.sin(angle(i))];
@@ -1292,20 +1356,39 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             });
         });
 
-        // 团队均值圆
-        const avgR = rScale(data.team_avg_flexibility);
-        gridG.append('circle')
-            .attr('cx', 0).attr('cy', 0)
-            .attr('r', avgR)
-            .attr('fill', 'none')
-            .style('stroke', 'var(--ink-soft)')
-            .attr('stroke-dasharray', '6,4')
-            .attr('stroke-width', 1.5);
-        gridG.append('text')
-            .attr('x', avgR * Math.SQRT1_2 + 4)
-            .attr('y', -avgR * Math.SQRT1_2 - 4)
-            .style('font-size', '10px').style('fill', 'var(--ink-soft)')
-            .text(`团队均值 ${data.team_avg_flexibility}`);
+        // 团队均值圆（参照线·非系列）
+        const avgVal = (flexData && typeof flexData.team_avg_flexibility === 'number') ? flexData.team_avg_flexibility : 0;
+        if (avgVal) {
+            const avgR = rScale(avgVal);
+            gridG.append('circle')
+                .attr('cx', 0).attr('cy', 0)
+                .attr('r', avgR)
+                .attr('fill', 'none')
+                .style('stroke', 'var(--ink-soft)')
+                .attr('stroke-dasharray', '6,4')
+                .attr('stroke-width', 1.5);
+            gridG.append('text')
+                .attr('x', avgR * Math.SQRT1_2 + 4)
+                .attr('y', -avgR * Math.SQRT1_2 - 4)
+                .style('font-size', '10px').style('fill', 'var(--ink-soft)')
+                .text(`团队均值 ${avgVal}`);
+        }
+
+        // 图例：单选实体时仅标注当前实体 + 团队均值参照线（无可切换对象）
+        const legend = d3.select('#radar-legend');
+        legend.html('');
+        radarData.forEach(member => {
+            const item = legend.append('div').attr('class', 'legend-item');
+            item.append('div').attr('class', 'legend-swatch')
+                .each(function () { d3.select(this).style('background', colorMap[member.character] || 'var(--ink-soft)'); });
+            item.append('span').text(member.character + ' · 均值 ' + radarMean(member).toFixed(1));
+        });
+        if (avgVal) {
+            const item = legend.append('div').attr('class', 'legend-item');
+            item.append('div').attr('class', 'legend-swatch line')
+                .each(function () { d3.select(this).style('background', 'var(--ink-soft)'); });
+            item.append('span').text('团队均值 ' + avgVal);
+        }
     }
 
     function renderCharCards(data) {

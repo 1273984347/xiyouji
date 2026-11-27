@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-8ymXGPWcT4nhE2uzd4IXJMKjcV1/e7hqrp/HrKBNLc8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-nsoHvnK6OACrNIpjcX01MVqJYujaBgC64f8icDkklkA=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>风险评估与项目管理 · 详解西游记</title>
@@ -812,19 +812,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </p>
 
             <div class="chart-block">
-                <div class="chart-title">图 5 · 8 角色 MBTI 适配度雷达图（4 维度 · 8 人重叠）</div>
-                <div class="chart-caption">4 轴：E（外向）/ N（直觉）/ F（情感）/ P（感知）·数值 0-10·8 角色多边形重叠·形状越饱满越外向直觉</div>
+                <div class="chart-title">图 5 · 8 角色 MBTI 适配度雷达图（单选角色 · 全量排序见下方点图）</div>
+                <div class="chart-caption">4 轴：E（外向）/ N（直觉）/ F（情感）/ P（感知）·数值 0-10·雷达单选 1 角色（§4B 单图系列 ≤3）·点图按四轴均值降序</div>
+                <!-- chart-radar-meta: axes=4 series=1 -->
+                <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
                 <svg id="chart-mbti-radar" class="chart-svg" width="100%" height="540"></svg>
-                <div class="legend-row" id="mbti-legend">
-                    <span class="legend-item"><span class="legend-swatch" style="background:#C0392B;"></span>唐僧 INFJ</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#40619E;"></span>悟空 ENTP</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;"></span>八戒 ESFP</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#3A473A;"></span>沙僧 ISFJ</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#8E7D62;"></span>白龙马 ISTP</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#a04060;"></span>观音 ENFJ</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#4a3a6b;"></span>如来 INTJ</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#8a7a3a;"></span>玉帝 ESTJ</span>
-                </div>
+                <div class="legend-row" id="mbti-legend"></div>
+                <div id="radar-dotplot" style="margin-top:12px"></div>
             </div>
 
             <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">8 角色 MBTI 详表</h3>
@@ -1041,7 +1035,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         renderKpiInsights(kpi);
 
         // Section 3: MBTI 人格图鉴
-        renderMbtiRadar(mbti);
+        renderMbtiRadarPanel(mbti);
         renderMbtiTable(mbti);
         renderMbtiCharCards(mbti);
         renderMbtiInsights(mbti);
@@ -1554,7 +1548,67 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     }
 
     // ===== Section 3.1: MBTI 雷达图 =====
-    function renderMbtiRadar(data) {
+    // ===== §4B 雷达行合规面板（单图仅 1 系列 + 全量排序点图）=====
+    // 本页雷达维度藏在 dimensions 对象里（E/N/F/P 四轴·0-10），均值取四轴算术平均
+    const RADAR_DIMS = ['E', 'N', 'F', 'P'];
+    let radarSelected = null;
+    let radarPanelData = null;   // 面板数据缓存（本页 __lastData 是聚合对象·mbti 在其 .mbti）
+
+    function radarMean(d) {
+        const dim = d.dimensions || {};
+        const vals = RADAR_DIMS.map(k => dim[k]).filter(v => typeof v === 'number');
+        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    }
+
+    function renderMbtiRadarPanel(data) {
+        radarPanelData = data;
+        const list = ((data && data.character_mbti) || []).slice();
+        const avgFit = data && data.mbti_stats ? data.mbti_stats.avg_fit_score : 0;
+        if (!list.length) { renderMbtiRadar(list, avgFit); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.character === radarSelected)) radarSelected = sorted[0].character;
+
+        const ctrl = d3.select('#radar-controls');
+        ctrl.selectAll('*').remove();
+        ctrl.append('span').text('雷达实体：')
+            .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+        const sel = ctrl.append('select')
+            .style('font-size', '0.8rem').style('padding', '3px 8px')
+            .style('border', '1px solid var(--line)').style('border-radius', '4px')
+            .style('background', 'var(--paper)').style('color', 'var(--ink)');
+        sel.selectAll('option').data(sorted).enter().append('option')
+            .attr('value', d => d.character).property('selected', d => d.character === radarSelected)
+            .text(d => d.character);
+        sel.on('change', function () { radarSelected = this.value; renderMbtiRadarPanel(radarPanelData); });
+
+        renderMbtiRadar(list.filter(d => d.character === radarSelected), avgFit);
+
+        const host = d3.select('#radar-dotplot');
+        host.selectAll('*').remove();
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+            .attr('class', 'dot-row')
+            .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+            .style('padding', '2px 0').style('cursor', 'pointer')
+            .style('opacity', d => (d.character === radarSelected ? 1 : 0.72))
+            .on('click', (e, d) => { radarSelected = d.character; renderMbtiRadarPanel(radarPanelData); });
+        rows.append('span').text(d => d.character)
+            .style('flex', '0 0 96px').style('text-align', 'right').style('font-size', '0.74rem')
+            .style('color', 'var(--ink-soft)');
+        const track = rows.append('span')
+            .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+            .style('background', 'var(--line)').style('border-radius', '4px');
+        track.append('span')
+            .style('position', 'absolute').style('top', '-3px')
+            .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+            .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+            .style('background', d => (d.character === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+            .style('transform', 'translateX(-7px)');
+        rows.append('span').text(d => radarMean(d).toFixed(1))
+            .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+    }
+
+    function renderMbtiRadar(radarData, avgFit) {
         const svg = d3.select('#chart-mbti-radar');
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 700;
@@ -1625,7 +1679,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         // 数据多边形
         const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
 
-        data.character_mbti.forEach(member => {
+        radarData.forEach(member => {
             const pts = dims.map((d, i) => {
                 const v = member.dimensions[d];
                 return [rScale(v) * Math.cos(angle(i)), rScale(v) * Math.sin(angle(i))];
@@ -1661,7 +1715,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         });
 
         // 平均适配度圆
-        const avgR = rScale(data.mbti_stats.avg_fit_score);
+        const avgR = rScale(avgFit);
         gridG.append('circle')
             .attr('cx', 0).attr('cy', 0)
             .attr('r', avgR)
@@ -1673,7 +1727,16 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr('x', avgR * Math.SQRT1_2 + 4)
             .attr('y', -avgR * Math.SQRT1_2 - 4)
             .style('font-size', '10px').style('fill', 'var(--ink-soft)')
-            .text(`avg fit ${data.mbti_stats.avg_fit_score}`);
+            .text(`avg fit ${avgFit}`);
+
+        // 图例（单选实体时仅标注当前角色——单系列无多实体可对照）
+        const legend = d3.select('#mbti-legend');
+        legend.selectAll('*').remove();
+        radarData.forEach(member => {
+            legend.append('span').attr('class', 'legend-item')
+                .html('<span class="legend-swatch" style="background:' + colorMap[member.character] + ';"></span>' +
+                      member.character + ' ' + member.mbti_type);
+        });
     }
 
     function renderMbtiTable(data) {

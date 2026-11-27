@@ -25,6 +25,34 @@
 
 > **2026-11-22（W994 迁出 68 段·W875-W950 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W1285（2026-11-20）：graphic 口径覆盖面补齐 + 探针去重盲区修复 + 判据稳定性根修
+
+**本批要点**（W1285 · graphic 口径覆盖面补齐 + 探针去重盲区修复 + 判据稳定性根修）：
+
+> - **① 扫描面纳入站点根**：探针页面枚举长期只含 `site/data + site/en `⇒ **站点根十页从未被测过**；本批纳入 root 作用域（根页 rel 无子目录前缀·路径深度不同 ⇒ 公共工具引入路径为 `static/js/label-contrast.js `）⇒ graphic 口径扫描页 **162 → 168**（含图根页 6 个：about / curated / dashboard / dukou-engine / guide / index）。
+> - **② 去重键含底色维度**：原去重键只有文案 ⇒ **同页同名但落在不同底色的**文字只判第一个 ⇒ 其一被静默漏判；新键＝所属 SVG + 文案 + 底色来源 + 底色值，且**去重时机移到底色确定之后**（否则键里的底色维度恒空）⇒ 同底色仍去重（基线可对账性不变）· 不同底色分别判定。探针自测 11 → **12 项**（新增「同名不同底色分别判定·同底色仍去重」）。
+> - **③ 第三处盲区：判定结果不可复现**——本批最关键发现。稳定判据「指纹连续两次相同」不足以保证采到**最终视觉状态**：① 颜色动画的「平台期」在两次采样恰好相同时会被误判为稳定 ⇒ 采到**动画中间态颜色**；② 页面尚未渲染出图表 ⇒ 指纹同样「两次相同」⇒ 采到空/不完整状态；③ 采集时刻该页该态无任何 svg 文字（多见于「图表滚出视口即卸载」的懒渲染页）⇒ **判定面为空·无可判内容·不产生漏检**。实证：A/B 对照（git worktree 取 HEAD 态页面·同一批页面分别用 HEAD 探针与本批探针实跑）两组结果**互不包含**（3 条 vs 59 条）⇒ 违例集合**随跑动波动**。修法四层：① 指纹加 display+visibility 且要求**连续 3 次**相同（原 2 次）+ 慢渲染页放宽超时重试；② 稳定须「已渲染产出（文字或图形）> 0」以排除平凡解（抽为纯函数·单测可直接断言）；③ 未能稳定 ⇒ 记 unstable（探针退出码 4）⇒ 门禁 unstable_rows > 0 ⇒ **fail-closed 拒绝通过**；且报告**缺** unstable_rows 字段（旧版探针产出）⇒ 同样 fail-closed（此前按缺字段→0 处理属 **fail-open**）；④ **判定面为空**（采集时刻无 svg 文字）⇒ 记 empty_rows 而**不**记 unstable（避免把「无可判内容」误判成不稳定而阻断全站）。⚠ 自我订正留痕：初稿把机制归因为「未渲染 ⇒ 平凡解 ⇒ 静默漏检」，其关键证据「同一页单页跑 2 条 / 全站跑 0 条」**跑的是同一份脚本** ⇒ 只能证明不可复现；且独立 worker 用同一脚本连跑 12 次全 0 ⇒ 那 2 条实为**动画中间态假阳** ⇒ 归因修正为上述三形态，并据此把「未加固探针的 63 条」订正为**加固后的真实暴露量 59 条 / 6 页**（63 − 59 = 4 条即 poetry-rhythm-analysis 的动画中间态假阳·与 12 次跑全 0 吻合）。
+> - **④ 第五处同源化**：公共工具 site/static/js/label-contrast.js 的多层覆盖候选选择由「交集覆盖率最大」改为「**bbox 面积最小**」，与门禁 pickCoveringShape() 一致（原实现**连自己的注释「面积最小者」都不符**）⇒ 否则同一文字两侧选出不同底色 ⇒ 工具判达标而门禁判红（实证 chart-design 的「戌」：工具取黑扇形·门禁取橙扇形·白描边分离度 2.80 < 3.0）。门禁自测 25 → **27 项**（新增 unstable fail-closed 端到端 2 例）。
+> - **⑤ 暴露即清偿（不冻结基线）**：加固后探针对 HEAD 态页面实测暴露 **59 条 / 6 页** ⇒ **56 条靠补接入公共工具自动清零**（根页 dashboard 16 + material-archaeology 24 + data/en power-resources 各 8）+ **3 条逐页清偿**（chart-design CR 2.94 → 5.45 · en/game-webnovel 深色描边 · aesthetics 源级指定色）+ 另含 pilgrim-team 事件标签改深一档同色系 #8a6a1c + **根修「时隐时现」**（末端直标错开 20px + 散点比例尺留白 38px ⇒ 4 态 hidden 由 1 降为 0）。
+> - **⑥ 收官证据（可复现性）**：graphic 口径**连跑两遍**均 **168 页 / 672 行 / 违例 0 · 违例页 0 · unstable 0 · fatal 0 · 退出码 0**，**两遍违例集完全一致** ⇒ 结论可复现（这正是 W1284「1236 → 0 条」所缺的证据）。
+> - **⑦ 口径界定与 CI**：两个口径**扫描面有意不同**（graphic --scope all 含根页 168 页 / body --scope data,en 保持 W1265 原定义 162 页——body 粗口径只取「文字 vs 页面底色」⇒ 对「文字压卡片/色块」有语义性假红·dashboard 16 条·根页由 graphic 覆盖）；body 口径报告新增全量 page_sha ⇒ stale 检测对它生效 ⇒ **CI 加跑 body 探针**（此前 body 报告无 page_sha ⇒ stale 检测对它完全失效 ⇒ 该槽长期在读一份三天的陈旧报告·实际显示 0 违例而现状 24 条）。
+> - **⑧ 状态**：已收官（覆盖面 + 去重面 + 稳定性 + 第五处同源化 + 可复现性验收 + 双口径门禁全绿）。
+> - **⑨ 遗留（6 项·已量化登记）**：L-01 两页源级缺陷（公共工具失效时暴露；worker 的页内加固已**备份后撤销**以免出现公共工具的第二份实现）· L-02 chart-design drawSundial() 未设 .cx()/.cy() 的既有渲染错位（另立批次）· L-03 game-webnovel 顶部散点标签自重叠（不翻转判决）· L-04 poetry-rhythm-analysis 4 条不可复现（12 次 4 态跑全 0）· L-05 ming 页延迟隐藏 · L-06 根页的 body 口径覆盖。
+> - **⑩ 经验**：坑表新增 **E-295~E-299**（去重键须含判定依赖的全部维度且时机须晚于依赖量确定 / 扫描面须显式核对·别让默认子集成为永久盲区 / 批量写入产物须回读且归档面不在门禁扫描面 / 稳定判据须排除「尚未渲染」的平凡解 / worker 产出须先核对官方口径是否真违例·过度修复也要拦截）。
+> - **文件**： scripts/svg_text_contrast_probe.js,scripts/check_svg_text_contrast.py,scripts/output/svg_text_contrast_graphic_report.json,scripts/output/svg_text_contrast_report.json,scripts/output/svg-text-contrast-graphic-baseline.txt,scripts/output/svg-text-contrast-baseline.txt,site/static/js/label-contrast.js,.github/workflows/ci.yml,site/,docs/agent/gates.md,pitfalls.md,archive/docs/pitfalls-detail-ARCHIVE.md
+
+### W1284（2026-11-19）：图表标签低对比存量清偿 与 graphic 全量基线接入 CI
+
+**本批要点**（W1284 · 图表标签低对比存量清偿 与 graphic 全量基线接入 CI）：
+
+> - **① 存量清偿（四步并进）**：第 80 门禁 graphic 口径实测全站 **1236 条 / 89 页** → 本批 **个位数**。① **通用工具补强**（跳过 fill=none 的装饰性图形 + 底色取不到时继续找下一个候选·与门禁同源）⇒ 182 → 89 条；② **补齐 8 页漏接入**（铺开清单按最新命中面重算·89 → 97 页）⇒ 89 → 70 条；③ **逐页清偿**（四个 worker 并行·跨底色标签只能靠不透明描边或指定高对比色）；④ **判据分组键根治**。
+> - **② 判据分组键根治（本批最关键发现）**：worker 清偿时发现 `famous-time-travel` 含两个无 id 的 `<svg>` ⇒ 探针的 svgId 全为空串 ⇒ **一幅 SVG 的文字被几何配对到另一幅 SVG 的图形上**（明信片正文被配到另一幅插画的矩形·CR 2.10 假红）。全站 **147 页含多 SVG、其中 23 页多个无 id** 同等中招 ⇒ 探针改按 DOM 顺序给匿名 SVG 分配稳定键 ⇒ 全站 **27 → 2 条**（大量原「违例」实为跨容器错配假红）。**若不修，对齐方向会被误导**（去改本来没问题的页面）。
+> - **③ graphic 全量基线接入 CI（未改 verify_delivery.py·属禁改清单）**：门禁脚本默认**双口径判定**（body 与 graphic 各自对拍自己的基线·基线声明口径隔离·互不放行）·**末行合并汇总**取两口径基线外新增之和 ⇒ 既有挂槽取末行即得两口径总判定；报告新增**全量页面内容哈希** ⇒ 页面一改而探针未重跑即判「报告陈旧」并 fail-closed（复用第 82 槽渲染档案同款机制）；门禁自测 18 → **24 项**·探针自测 9 → **10 项**。
+> - **④ 负向证明（判据有区分力）**：注入一条基线外新违例 ⇒ 门禁 **判红并逐条列出**（退出码非零）·还原后转绿；改动一个页面制造报告陈旧 ⇒ 门禁判「档案 sha 与当前不符」并指出具体页（退出码非零）。
+> - **⑤ 状态**：已收官（存量清偿 + graphic 口径纳入 CI + 判据分组键与防陈旧补齐）。
+> - **⑥ 遗留**：根页（站点根十页）未纳入 graphic 口径（探针页面枚举口径）· 工具与门禁两处实现须持续同源（E-287/E-294 已入坑表）。
+> - **文件**： scripts/svg_text_contrast_probe.js,scripts/check_svg_text_contrast.py,scripts/output/svg_text_contrast_graphic_report.json,scripts/output/svg-text-contrast-graphic-baseline.txt,site/static/js/label-contrast.js,site/data/,site/en/,tests/unit/
+
 ### W1283（2026-11-19）：图表标签可读性存量清偿（通用工具化与判据同源化）
 
 **本批要点**（W1283 · 图表标签可读性存量清偿 · 通用工具化与判据同源化）：

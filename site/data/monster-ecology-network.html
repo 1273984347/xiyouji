@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-Ym0TRIVFLNRye4WUSmtGYcka2J4DwVqt6fmvqBwzLiY='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-bbGkamP7yw/dKxM5FWZCnW23qwE1Xzf5vcZeS7Dc4eo='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>妖怪生态网络图谱 · 详解西游记</title>
@@ -343,10 +343,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         </section>
 
         <section class="section">
-            <h2>三、妖怪生态位·雷达图叠加 <span class="en">Ecological Niche Radar</span></h2>
-            <p class="lead">15 代表妖怪 × 5 生态维度（栖息地/食性/群居度/法力/结局）·r-K 选择谱系可视化</p>
+            <h2>三、妖怪生态位·单选实体雷达 <span class="en">Ecological Niche Radar</span></h2>
+            <p class="lead">12 代表妖怪 × 5 生态维度（栖息地/食性/群居度/法力/结局）·r-K 选择谱系可视化 · 雷达单绘 1 妖怪（§4B 单图实体 ≤3）· 全量排序见下方点图</p>
             <div class="chart-box">
+                <!-- chart-radar-meta: axes=5 series=1 -->
+                <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
                 <svg width="100%" height="500" id="radar-svg" role="img" aria-label="妖怪生态位雷达图"></svg>
+                <div id="radar-dotplot" style="margin-top:12px"></div>
             </div>
         </section>
 
@@ -840,56 +843,115 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .text("凡人精气（100%）→ 小妖消费者 → 大妖顶级捕食者 → 取经团队 → 天庭/佛界收编 · 四级能量金字塔·每级损失约 50%");
     })();
 
-    // ============= 3. Radar Chart =============
-    (function renderRadar() {
-        const svg = d3.select("#radar-svg");
-        const width = svg.node().clientWidth;
-        const height = 500;
-        const cx = width / 2, cy = height / 2, R = Math.max(0, Math.min(width, height) / 2 - 60);
+    // ============= 3. Radar Chart（单选实体雷达 + 全量排序点图·DESIGN §4B 单图实体 ≤3） =============
+    (function renderRadarPanelHost() {
         const dims = ["habitat", "diet", "sociality", "magic", "ending"];
         const dimLabels = ["栖息地", "食性", "群居度", "法力", "结局"];
         const maxV = 10;
-        const colors = d3.schemeCategory10;
+        let radarSelected = null;
 
-        // 网格
-        for (let lv = 2; lv <= maxV; lv += 2) {
-            const pts = dims.map((d, i) => {
-                const a = (i / dims.length) * 2 * Math.PI - Math.PI / 2;
-                return [cx + Math.cos(a) * R * lv / maxV, cy + Math.sin(a) * R * lv / maxV];
-            });
-            svg.append("polygon").attr("points", pts.map(p => p.join(",")).join(" "))
-                .attr("fill", "none").attr("stroke", "#d9cdb8").attr("stroke-width", 0.8);
+        // 五维均值：点图排序口径（与雷达同一 5 轴·不另立一套评分）
+        function radarMean(m) {
+            const vals = dims.map(d => m[d]).filter(v => typeof v === "number");
+            return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
         }
-        // 轴
-        dims.forEach((d, i) => {
-            const a = (i / dims.length) * 2 * Math.PI - Math.PI / 2;
-            svg.append("line").attr("x1", cx).attr("y1", cy)
-                .attr("x2", cx + Math.cos(a) * R).attr("y2", cy + Math.sin(a) * R)
-                .attr("stroke", "#d9cdb8");
-            svg.append("text").attr("x", cx + Math.cos(a) * (R + 20)).attr("y", cy + Math.sin(a) * (R + 20))
-                .attr("text-anchor", "middle").attr("dy", 4).attr("font-size", "12px").style("fill", "var(--ink-soft)")
-                .text(dimLabels[i]);
-        });
 
-        EMBEDDED_DATA.radar.forEach((m, idx) => {
-            const pts = dims.map((d, i) => {
+        function renderRadarPanel() {
+            const sorted = EMBEDDED_DATA.radar.slice().sort((a, b) => radarMean(b) - radarMean(a));
+            if (!radarSelected || !sorted.some(m => m.monster === radarSelected)) radarSelected = sorted[0].monster;
+
+            const ctrl = d3.select("#radar-controls");
+            ctrl.selectAll("*").remove();
+            ctrl.append("span").text("雷达实体：")
+                .style("font-size", "0.78rem").style("color", "var(--ink-soft)");
+            const sel = ctrl.append("select")
+                .style("font-size", "0.8rem").style("padding", "3px 8px")
+                .style("border", "1px solid var(--line)").style("border-radius", "4px")
+                .style("background", "var(--paper)").style("color", "var(--ink)")
+                .on("change", function () { radarSelected = this.value; renderRadarPanel(); });
+            sel.selectAll("option").data(sorted).enter().append("option")
+                .attr("value", m => m.monster).property("selected", m => m.monster === radarSelected)
+                .text(m => `${m.monster}（${m.strategy} 策略）`);
+
+            // 单系列守卫：面板只绘当前 1 个实体（无按类型聚合的可点击隐藏图例，不会一点就空图）
+            renderRadar(sorted.filter(m => m.monster === radarSelected));
+
+            const host = d3.select("#radar-dotplot");
+            host.selectAll("*").remove();
+            const maxMean = d3.max(sorted, radarMean) || 1;
+            const rows = host.selectAll(".dot-row").data(sorted).enter().append("div")
+                .attr("class", "dot-row")
+                .style("display", "flex").style("align-items", "center").style("gap", "8px")
+                .style("padding", "2px 0").style("cursor", "pointer")
+                .style("opacity", m => (m.monster === radarSelected ? 1 : 0.72))
+                .on("click", (e, m) => { radarSelected = m.monster; renderRadarPanel(); });
+            rows.append("span").text(m => `${m.monster}（${m.strategy}）`)
+                .style("flex", "0 0 150px").style("text-align", "right").style("font-size", "0.74rem")
+                .style("color", "var(--ink-soft)");
+            const track = rows.append("span")
+                .style("position", "relative").style("flex", "1 1 auto").style("height", "8px")
+                .style("background", "var(--line)").style("border-radius", "4px");
+            track.append("span")
+                .style("position", "absolute").style("top", "-3px")
+                .style("left", m => (radarMean(m) / maxMean * 100).toFixed(2) + "%")
+                .style("width", "14px").style("height", "14px").style("border-radius", "50%")
+                .style("background", m => (m.monster === radarSelected ? "var(--accent-primary)" : "var(--series-2)"))
+                .style("transform", "translateX(-7px)");
+            rows.append("span").text(m => radarMean(m).toFixed(1))
+                .style("flex", "0 0 44px").style("font-size", "0.72rem").style("color", "var(--ink)");
+        }
+
+        function renderRadar(data) {
+            const svg = d3.select("#radar-svg");
+            svg.selectAll("*").remove();
+            const width = svg.node().clientWidth;
+            const height = 500;
+            svg.attr("viewBox", `0 0 ${width} ${height}`);
+            const cx = width / 2, cy = height / 2, R = Math.max(0, Math.min(width, height) / 2 - 60);
+
+            // 网格
+            for (let lv = 2; lv <= maxV; lv += 2) {
+                const pts = dims.map((d, i) => {
+                    const a = (i / dims.length) * 2 * Math.PI - Math.PI / 2;
+                    return [cx + Math.cos(a) * R * lv / maxV, cy + Math.sin(a) * R * lv / maxV];
+                });
+                svg.append("polygon").attr("points", pts.map(p => p.join(",")).join(" "))
+                    .attr("fill", "none").attr("stroke", "#d9cdb8").attr("stroke-width", 0.8);
+            }
+            // 轴
+            dims.forEach((d, i) => {
                 const a = (i / dims.length) * 2 * Math.PI - Math.PI / 2;
-                const v = m[d];
-                return [cx + Math.cos(a) * R * v / maxV, cy + Math.sin(a) * R * v / maxV];
+                svg.append("line").attr("x1", cx).attr("y1", cy)
+                    .attr("x2", cx + Math.cos(a) * R).attr("y2", cy + Math.sin(a) * R)
+                    .attr("stroke", "#d9cdb8");
+                svg.append("text").attr("x", cx + Math.cos(a) * (R + 20)).attr("y", cy + Math.sin(a) * (R + 20))
+                    .attr("text-anchor", "middle").attr("dy", 4).attr("font-size", "12px").style("fill", "var(--ink-soft)")
+                    .text(dimLabels[i]);
             });
-            svg.append("polygon").attr("points", pts.map(p => p.join(",")).join(" "))
-                .attr("fill", colors[idx % 10]).attr("fill-opacity", 0.08)
-                .attr("stroke", colors[idx % 10]).attr("stroke-width", 1.2);
-        });
 
-        // 图例
-        const legendG = svg.append("g").attr("transform", `translate(${width - 160}, 20)`);
-        EMBEDDED_DATA.radar.forEach((m, idx) => {
-            legendG.append("rect").attr("x", 0).attr("y", idx * 18).attr("width",12).attr("height", 12)
-                .attr("fill", colors[idx % 10]).attr("opacity", 0.7);
-            legendG.append("text").attr("x", 18).attr("y", idx * 18 + 10).attr("font-size", "10px").style("fill", "var(--ink)")
-                .text(`${m.monster} (${m.strategy})`);
-        });
+            // 当前实体多边形 + 顶点数值（不叠绘多系列）
+            data.forEach(m => {
+                const pts = dims.map((d, i) => {
+                    const a = (i / dims.length) * 2 * Math.PI - Math.PI / 2;
+                    const v = m[d];
+                    return [cx + Math.cos(a) * R * v / maxV, cy + Math.sin(a) * R * v / maxV];
+                });
+                svg.append("polygon").attr("points", pts.map(p => p.join(",")).join(" "))
+                    .attr("fill", "var(--accent-primary)").attr("fill-opacity", 0.14)
+                    .attr("stroke", "var(--accent-primary)").attr("stroke-width", 2);
+                pts.forEach((p, i) => {
+                    const a = (i / dims.length) * 2 * Math.PI - Math.PI / 2;
+                    const rr = R * m[dims[i]] / maxV;
+                    svg.append("circle").attr("cx", p[0]).attr("cy", p[1]).attr("r", 3.5)
+                        .attr("fill", "var(--accent-primary)").attr("stroke", "#fff").attr("stroke-width", 1);
+                    svg.append("text").attr("x", cx + Math.cos(a) * (rr - 16)).attr("y", cy + Math.sin(a) * (rr - 16))
+                        .attr("text-anchor", "middle").attr("dy", 4).attr("font-size", "11px")
+                        .style("fill", "var(--ink)").text(m[dims[i]]);
+                });
+            });
+        }
+
+        renderRadarPanel();
     })();
 
     // ============= 4. Timeline =============

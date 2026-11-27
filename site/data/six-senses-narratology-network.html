@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-hihwlM8kfgBlaDqSCt0nBhVqFfUCF1BMSZroG5CRabs=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-i3E/p7LUcA4yUjxqoXDL7Uv1DFZJfPN/uV8acQu4MNg=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>六感叙事学关系图谱 · 详解西游记</title>
@@ -417,10 +417,13 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <strong>定义：</strong>七维度评估七感官——术语数、案例数、理论家数、交叉引用度。雷达面积越大，该感官的叙事学负载越重。视觉与空间引用度最高，味觉最低，反映感官在叙事中的能指密度梯度。
   </div>
   <div class="chart-block">
-    <div class="chart-title">七感官四维度雷达图（术语数/案例数/理论家数/引用度）</div>
-    <div class="chart-caption">7 感官 × 4 维度 · 数值归一化 0-10 · hover 查看详情</div>
+    <div class="chart-title">七感官叙事学维度雷达（单选实体 · 全量排序见下方点图）</div>
+    <div class="chart-caption">4 维度（术语数/案例数/理论家数/引用度）· 数值归一化 0-10 · 雷达单选 1 实体 · 全量排序见下方点图 · hover 查看详情</div>
+    <!-- chart-radar-meta: axes=4 series=1 -->
+    <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
     <svg id="chart-radar" class="chart-svg" width="100%" height="540"></svg>
     <div class="legend-row" id="radar-legend"></div>
+    <div id="radar-dotplot" style="margin-top:12px"></div>
   </div>
 </section>
 
@@ -971,8 +974,70 @@ const structLink = svg.append('g').selectAll('.struct-link')
 }
 
 // ============================================================
-// Section 3: 雷达图（7 感官 × 4 维度）
+// Section 3: 雷达图（7 感官 × 4 维度·§4B 单选实体雷达 + 全量均值降序点图）
 // ============================================================
+const SENSE_RADAR_DIMS = ['术语数', '案例数', '理论家数', '引用度'];
+let radarSelected = null;
+// 归一化基准取全量七感官的每维最大值——单选 1 实体时若回退为自身最大值，四轴会全齐平而失真
+let radarMaxes = {};
+
+// 均值口径：该感官四维归一化值（0-10）的算术平均
+function radarMean(d) {
+  const vals = SENSE_RADAR_DIMS.map(k => (radarMaxes[k] ? (d[k] / radarMaxes[k]) * 10 : 0));
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+
+function renderRadarPanel(radarList) {
+  const list = (radarList || []).slice();
+  if (!list.length) { renderRadar([]); return; }
+  radarMaxes = {};
+  SENSE_RADAR_DIMS.forEach(dim => { radarMaxes[dim] = d3.max(list, d => d[dim]) || 1; });
+  const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+  if (!radarSelected || !list.some(d => d.sense === radarSelected)) radarSelected = sorted[0].sense;
+
+  // 下拉选择实体
+  const ctrl = d3.select('#radar-controls');
+  ctrl.selectAll('*').remove();
+  ctrl.append('span').text('雷达感官：')
+    .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+  const sel = ctrl.append('select')
+    .style('font-size', '0.8rem').style('padding', '3px 8px')
+    .style('border', '1px solid var(--line)').style('border-radius', '4px')
+    .style('background', 'var(--paper)').style('color', 'var(--ink)');
+  sel.selectAll('option').data(sorted).enter().append('option')
+    .attr('value', d => d.sense).property('selected', d => d.sense === radarSelected)
+    .text(d => d.sense);
+  sel.on('change', function () { radarSelected = this.value; renderRadarPanel(list); });
+
+  // 雷达只绘当前 1 个实体
+  renderRadar(list.filter(d => d.sense === radarSelected));
+
+  // 全量排序点图（均值降序 · 点击联动雷达）
+  const host = d3.select('#radar-dotplot');
+  host.selectAll('*').remove();
+  const maxV = d3.max(sorted, radarMean) || 1;
+  const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+    .attr('class', 'dot-row')
+    .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+    .style('padding', '2px 0').style('cursor', 'pointer')
+    .style('opacity', d => (d.sense === radarSelected ? 1 : 0.72))
+    .on('click', (e, d) => { radarSelected = d.sense; renderRadarPanel(list); });
+  rows.append('span').text(d => d.sense)
+    .style('flex', '0 0 96px').style('text-align', 'right').style('font-size', '0.74rem')
+    .style('color', 'var(--ink-soft)');
+  const track = rows.append('span')
+    .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+    .style('background', 'var(--line)').style('border-radius', '4px');
+  track.append('span')
+    .style('position', 'absolute').style('top', '-3px')
+    .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+    .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+    .style('background', d => (d.sense === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+    .style('transform', 'translateX(-7px)');
+  rows.append('span').text(d => radarMean(d).toFixed(1))
+    .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+}
+
 function renderRadar(radarData) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
@@ -985,14 +1050,11 @@ function renderRadar(radarData) {
   const height = 540;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
-  const dimensions = ['术语数', '案例数', '理论家数', '引用度'];
+  const dimensions = SENSE_RADAR_DIMS;
   const senseColors = senseColorMap(EMBEDDED_DATA.sixSenses.senses);
 
-  // 归一化：每维度映射到 0-10
-  const maxes = {};
-  dimensions.forEach(dim => {
-    maxes[dim] = d3.max(radarData, d => d[dim]) || 1;
-  });
+  // 归一化：每维度按全量最大值映射到 0-10（基准由 renderRadarPanel 预先算好，不随单选收缩）
+  const maxes = radarMaxes;
 
   const cx = width / 2;
   const cy = height / 2 + 10;
@@ -1052,7 +1114,7 @@ function renderRadar(radarData) {
     ? d3.select('body').append('div').attr('class', 'chart-tooltip')
     : d3.select('.chart-tooltip');
 
-  // 每个感官一个多边形
+  // 单选实体（§4B 单图仅 1 系列）：只绘当前选中感官
   radarData.forEach(role => {
     const points = dimensions.map((dim, i) => {
       const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
@@ -1098,13 +1160,13 @@ function renderRadar(radarData) {
     });
   });
 
-  // 图例
+  // 图例：单选实体时仅标注当前感官（单系列无可切换对象）
   const legend = d3.select('#radar-legend');
   legend.html('');
   radarData.forEach(role => {
     const item = legend.append('div').attr('class', 'legend-item');
     item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', senseColors[role.sense] || '#8b4513'); });
-    item.append('span').text(role.sense);
+    item.append('span').text(role.sense + ' · 均值 ' + radarMean(role).toFixed(1));
   });
 }
 
@@ -1512,7 +1574,7 @@ async function main() {
 
   renderOverview(data.senses);
   renderForce(data.network);
-  renderRadar(data.radar);
+  renderRadarPanel(data.radar);
   renderSankey(data.sankey);
   renderTimeline(data.timeline);
   renderSummary(data.senses, data.network);
@@ -1527,7 +1589,7 @@ window.addEventListener('resize', () => {
       const data = window.__lastData;
       renderOverview(data.senses);
       renderForce(data.network);
-      renderRadar(data.radar);
+      renderRadarPanel(data.radar);
       renderSankey(data.sankey);
       renderTimeline(data.timeline);
       renderSummary(data.senses, data.network);

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-vo94MZGPwv8WlIFL1nLbKFhe3P6pY+Y9n2OugIb4BRE=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-fYj1CSz6mOLkgUuxXPyvSWnUjKveq2PZ2NVbxNXnzGM=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>观音六重身份关系图谱 · 详解西游记</title>
@@ -366,10 +366,13 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <strong>定义：</strong>五维度评估六身份——慈悲度（对受害者的同情）/精算度（成本核算）/权力（资源调配力）/隐匿（退场程度）/介入（直接出手频率）。雷达面积越大，身份的符号负载越重。招募者与操盘手精算度高、慈悲度低；退场者隐匿度极高、介入度归零。
   </div>
   <div class="chart-block">
-    <div class="chart-title">六身份五维度雷达图（慈悲/精算/权力/隐匿/介入）</div>
-    <div class="chart-caption">六身份 × 5 维度 · 数值 0-10 · hover 查看详情</div>
+    <div class="chart-title">六身份五维度雷达图（单选身份 · 全量排序见下方点图）</div>
+    <div class="chart-caption">数值 0-10 · 雷达单选 1 实体（§4B 单图系列 ≤3）· 点图按五维均值降序 · hover 查看详情</div>
+    <!-- chart-radar-meta: axes=5 series=1 -->
+    <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
     <svg id="chart-radar" class="chart-svg" width="100%" height="500"></svg>
     <div class="legend-row" id="radar-legend"></div>
+    <div id="radar-dotplot" style="margin-top:12px"></div>
   </div>
 </section>
 
@@ -1169,6 +1172,61 @@ function renderSankey(sankeyData) {
 // ============================================================
 // Section 4: 雷达图
 // ============================================================
+// ===== W1343：§4B 雷达行合规面板（单图仅 1 系列 + 全量排序点图）=====
+const RADAR_DIMS = ['慈悲度', '精算度', '权力', '隐匿', '介入'];
+let radarSelected = null;
+
+function radarMean(d) {
+  const vals = RADAR_DIMS.map(k => d[k]).filter(v => typeof v === 'number');
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+
+function renderRadarPanel(data) {
+  const list = (data.radar || []).slice();
+  if (!list.length) { renderRadar(list); return; }
+  const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+  if (!radarSelected || !list.some(d => d.role === radarSelected)) radarSelected = sorted[0].role;
+
+  const ctrl = d3.select('#radar-controls');
+  ctrl.selectAll('*').remove();
+  ctrl.append('span').text('雷达实体：')
+    .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+  const sel = ctrl.append('select')
+    .style('font-size', '0.8rem').style('padding', '3px 8px')
+    .style('border', '1px solid var(--line)').style('border-radius', '4px')
+    .style('background', 'var(--paper)').style('color', 'var(--ink)');
+  sel.selectAll('option').data(sorted).enter().append('option')
+    .attr('value', d => d.role).property('selected', d => d.role === radarSelected)
+    .text(d => d.role);
+  sel.on('change', function () { radarSelected = this.value; renderRadarPanel(data); });
+
+  renderRadar(list.filter(d => d.role === radarSelected));
+
+  const host = d3.select('#radar-dotplot');
+  host.selectAll('*').remove();
+  const maxV = d3.max(sorted, radarMean) || 1;
+  const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+    .attr('class', 'dot-row')
+    .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+    .style('padding', '2px 0').style('cursor', 'pointer')
+    .style('opacity', d => (d.role === radarSelected ? 1 : 0.72))
+    .on('click', (e, d) => { radarSelected = d.role; renderRadarPanel(data); });
+  rows.append('span').text(d => d.role)
+    .style('flex', '0 0 96px').style('text-align', 'right').style('font-size', '0.74rem')
+    .style('color', 'var(--ink-soft)');
+  const track = rows.append('span')
+    .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+    .style('background', 'var(--line)').style('border-radius', '4px');
+  track.append('span')
+    .style('position', 'absolute').style('top', '-3px')
+    .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+    .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+    .style('background', d => (d.role === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+    .style('transform', 'translateX(-7px)');
+  rows.append('span').text(d => radarMean(d).toFixed(1))
+    .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+}
+
 function renderRadar(radarData) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
@@ -1462,7 +1520,7 @@ async function main() {
   renderIntensity(data.intensity);
   renderForce(data.network);
   renderSankey(data.sankey);
-  renderRadar(data.radar);
+  renderRadarPanel(data);
   renderTimeline(data.timeline);
 }
 
@@ -1477,7 +1535,7 @@ window.addEventListener('resize', () => {
       renderIntensity(data.intensity);
       renderForce(data.network);
       renderSankey(data.sankey);
-      renderRadar(data.radar);
+      renderRadarPanel(data);
       renderTimeline(data.timeline);
     }
   }, 250);

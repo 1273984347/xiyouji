@@ -1,0 +1,24 @@
+{
+ "batch": "W1345",
+ "date": "2026-11-28",
+ "title": "W1345 雷达族 A 组 16 页降级 + C 组 3 页取证",
+ "desc": "雷达A组16页降级单选实体雷达+点图 C组3页取证分流 归一化基准根修 基线21→2",
+ "head_entry": "2026-11-28（W1345 雷达 A 组 16 页降级 + C 组取证）",
+ "head_sentence": "雷达 A 组 16 页降级 + C 组 3 页取证 基线 21→2",
+ "changelog_body": "\n\n> **来源**：用户 2026-11-28「继续处理剩余的 21 页雷达族图表」。\n> - **A 组 16 页改造**：单选实体雷达 + 均值降序点图（axes 实读 4–8 · series 一律 1）。\n> - **C 组取证后分流**：monster-ecology（5×12）改造并订正图注 15→12；theological（5×3）与 ming-political（3×3）本就合规，只补 chart-radar-meta 声明。\n> - **归一化基准根修**：单选化会让「按传入数组取 max」退化为「每维最大值=自身」⇒ 恒满格；six-senses 自查修复，intertextuality 由主会话复核发现并改为取全量基准。\n> - **偏差与发现**：social-media 八轴 0/1 改用 workplace_fit 排序键；monster-sociology 数据缺两字段（既存漂移未修）；EN mbti 镜像仍 5 人叠加（EN 不在 R5 辖区）；基线注释 four-dimensional 轴/系列写反。\n> - **验证**：check_chart_data 239 页 · 基线 2 · FAIL 0；check_js_syntax 873 通过；CSP 0 漂移；对比度两口径 0 违例；verify full 见收官记录。\n> - **边界**：无浏览器运行期取证；relationships / pilgrim-team-dynamic 9 轴留 W1346。\n> - **文件**：见 file-index W1345 段。\n> - **状态**：已落地。\n",
+ "milestone_block": "- **W1345 雷达 A 组 16 页降级 + C 组 3 页取证（基线 21→2）**：16 页改单选实体雷达 + 均值降序点图 · C 组取证分流（ecology 改造；theological / ming 本合规只补声明）· 归一化基准根修（六感 + intertextuality 恒满格）· social-media 排序键改 workplace_fit · monster-sociology 数据缺字段（既存漂移登记未修）\n",
+ "file_index_rows": [
+  "| site/data/（17 件） | W1345 | A 组 16 页改单选雷达 + 点图 + C 组 ecology 改造 |",
+  "| site/data/（2 件） | W1345 | C 组 theological / ming 仅补 chart-radar-meta 声明 |",
+  "| scripts/output/radar-family-baseline.txt | W1345 | 出基线 19 页（21 → 2·仅余 9 轴的 relationships / pilgrim-team-dynamic） |",
+  "| scripts/output/（1 件） | W1345 | 本批 spec + 探针报告刷新 |",
+  "| CHANGELOG.md | W1345 | 新增 W1345 段 + 编号上限 + 段窗归档（迁出 W1284-W1285） |",
+  "| HANDOVER.md | W1345 | HEAD + 进度段 + 最后更新（概要块滚动：W1339 块淘汰） |",
+  "| archive/docs/（2 件） | W1345 | 段窗归档目标 |",
+  "| README.md | W1345 | 当前批次行升版 |",
+  "| STRUCTURE.md | W1345 | 当前批次行升版 |",
+  "| docs/00-导读/（2 件） | W1345 | 项目说明批次行升版 + 台账认领行 |",
+  "| CITATION.cff | W1345 | 版本字段升版 |",
+  "| .github/workflows/README.md | W1345 | 头部版本与里程碑区间行升版 |"
+ ]
+}

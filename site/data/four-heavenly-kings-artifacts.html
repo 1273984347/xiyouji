@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-EWyCdl7PJME5NBumg3SG/estHcuXX0ZbyXUjXnZl9r4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-WmXK3hzKRPjEXaPV6A2TDhUqwT5DOaL6HZ9pxCbBfb0=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>四大天王器物符号图谱 · 详解西游记</title>
@@ -347,10 +347,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <strong>定义：</strong>五维度评估——威力（战斗效能）/记忆（时间沉淀）/伤痕（失败物证）/签名（存在印记）/沉默（失语状态）。雷达面积越大，器物的符号负载越重。
   </div>
   <div class="chart-block">
-    <div class="chart-title">四器物五维度雷达图</div>
-    <div class="chart-caption">四器物 × 5 维度（威力/记忆/伤痕/签名/沉默）· 数值 0-10 · hover 查看详情</div>
+    <div class="chart-title">器物象征维度雷达（单选实体 · 全量排序见下方点图）</div>
+    <div class="chart-caption">5 维度（威力/记忆/伤痕/签名/沉默）· 数值 0-10 · 雷达单选 1 实体 · 全量排序见下方点图 · hover 查看详情</div>
+    <!-- chart-radar-meta: axes=5 series=1 -->
+    <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
     <svg id="chart-radar" class="chart-svg" width="100%" height="480"></svg>
     <div class="legend-row" id="radar-legend"></div>
+    <div id="radar-dotplot" style="margin-top:12px"></div>
   </div>
 </section>
 
@@ -605,8 +608,66 @@ function showKingTooltip(event, d) {
 }
 
 // ============================================================
-// Section 2: 雷达图
+// Section 2: 雷达图（§4B 单选实体雷达 + 全量均值降序点图）
 // ============================================================
+const KING_RADAR_DIMS = ['威力', '记忆', '伤痕', '签名', '沉默'];
+let radarSelected = null;
+
+// 均值口径：该器物五维象征得分（0-10）的算术平均
+function radarMean(d) {
+  const vals = KING_RADAR_DIMS.map(k => d[k]).filter(v => typeof v === 'number');
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+
+function renderRadarPanel(radarList) {
+  const list = (radarList || []).slice();
+  if (!list.length) { renderRadar([]); return; }
+  const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+  if (!radarSelected || !list.some(d => d.king === radarSelected)) radarSelected = sorted[0].king;
+
+  // 下拉选择实体
+  const ctrl = d3.select('#radar-controls');
+  ctrl.selectAll('*').remove();
+  ctrl.append('span').text('雷达器物：')
+    .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+  const sel = ctrl.append('select')
+    .style('font-size', '0.8rem').style('padding', '3px 8px')
+    .style('border', '1px solid var(--line)').style('border-radius', '4px')
+    .style('background', 'var(--paper)').style('color', 'var(--ink)');
+  sel.selectAll('option').data(sorted).enter().append('option')
+    .attr('value', d => d.king).property('selected', d => d.king === radarSelected)
+    .text(d => d.king + ' · ' + d.artifact);
+  sel.on('change', function () { radarSelected = this.value; renderRadarPanel(list); });
+
+  // 雷达只绘当前 1 个实体
+  renderRadar(list.filter(d => d.king === radarSelected));
+
+  // 全量排序点图（均值降序 · 点击联动雷达）
+  const host = d3.select('#radar-dotplot');
+  host.selectAll('*').remove();
+  const maxV = d3.max(sorted, radarMean) || 1;
+  const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+    .attr('class', 'dot-row')
+    .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+    .style('padding', '2px 0').style('cursor', 'pointer')
+    .style('opacity', d => (d.king === radarSelected ? 1 : 0.72))
+    .on('click', (e, d) => { radarSelected = d.king; renderRadarPanel(list); });
+  rows.append('span').text(d => d.king)
+    .style('flex', '0 0 96px').style('text-align', 'right').style('font-size', '0.74rem')
+    .style('color', 'var(--ink-soft)');
+  const track = rows.append('span')
+    .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+    .style('background', 'var(--line)').style('border-radius', '4px');
+  track.append('span')
+    .style('position', 'absolute').style('top', '-3px')
+    .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+    .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+    .style('background', d => (d.king === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+    .style('transform', 'translateX(-7px)');
+  rows.append('span').text(d => radarMean(d).toFixed(1))
+    .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+}
+
 function renderRadar(radarData) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
@@ -619,7 +680,7 @@ function renderRadar(radarData) {
   const height = 480;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
-  const dimensions = ['威力', '记忆', '伤痕', '签名', '沉默'];
+  const dimensions = KING_RADAR_DIMS;
   const kingColors = {};
   EMBEDDED_DATA.kings.forEach(k => { kingColors[k.name] = k.color; });
 
@@ -683,7 +744,7 @@ function renderRadar(radarData) {
     ? d3.select('body').append('div').attr('class', 'chart-tooltip')
     : d3.select('.chart-tooltip');
 
-  // 每个天王一个多边形
+  // 单选实体（§4B 单图仅 1 系列）：只绘当前选中器物
   radarData.forEach(king => {
     const points = dimensions.map((dim, i) => {
       const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
@@ -728,13 +789,13 @@ function renderRadar(radarData) {
     });
   });
 
-  // 图例
+  // 图例：单选实体时仅标注当前器物（单系列无可切换对象）
   const legend = d3.select('#radar-legend');
   legend.html('');
   radarData.forEach(king => {
     const item = legend.append('div').attr('class', 'legend-item');
     item.append('div').attr('class', 'legend-swatch').style('background', kingColors[king.king]);
-    item.append('span').text(king.king + ' · ' + king.artifact);
+    item.append('span').text(king.king + ' · ' + king.artifact + ' · 均值 ' + radarMean(king).toFixed(1));
   });
 }
 
@@ -1101,7 +1162,7 @@ async function main() {
   }
 
   renderOverview(data.kings);
-  renderRadar(data.radar);
+  renderRadarPanel(data.radar);
   renderMatrix(data.kings);
   renderChord(data.chord);
   renderTimeline(data.timeline);
@@ -1115,7 +1176,7 @@ window.addEventListener('resize', () => {
     if (window.__lastData) {
       const data = window.__lastData;
       renderOverview(data.kings);
-      renderRadar(data.radar);
+      renderRadarPanel(data.radar);
       renderMatrix(data.kings);
       renderChord(data.chord);
       renderTimeline(data.timeline);
