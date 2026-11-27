@@ -10,7 +10,7 @@
 
 - （无）
 
-## 文件（154）
+## 文件（155）
 
 ### Python 脚本
 
@@ -34,6 +34,7 @@
 - `test_chart_content_completeness.py`
 - `test_chart_label_clipping.py`
 - `test_chart_render_probe.py`
+- `test_check_chart_data.py`
 - `test_check_chart_design_parity.py`
 - `test_check_data_copy_chain.py`
 - `test_check_db_schema.py`

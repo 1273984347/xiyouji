@@ -11,14 +11,20 @@
       treemap（d3.treemap 存在）且无任何弧形实现（d3.arc/d3.pie 均为 0）→ 错配
   R3  （W654·PD-1b）可见文本命中 §4B 图型词表（桑基/和弦/树图/力导向/折线/面积/柱形条形）
       但页内实现签名不存在 → 措辞×实现错配（词表见 FAMILIES·与 DESIGN.md §4B 选型章联动）
+  R4  （W1342）族注册完备性：site/data 实际渲染的图表族必须已在 §4B 表内——表外族
+      （W1341 审查实证雷达族 27 页在用却不在表内）⇒ 该族无禁用条件/无降级档/零判据
+  R5  （W1342）雷达族规模判据：基线外页面（新页/改动页）须声明
+      `<!-- chart-radar-meta: axes=N series=M -->`，且轴 ≤8、单图系列 ≤3；基线名单
+      `scripts/output/radar-family-baseline.txt` 冻结存量 27 页（W1341 审查实测的超载面）
 
   设计取舍（W551）：连线画布遮挡、桑基空渲染、reveal 空带、横向溢出等需要真实渲染
   状态的缺陷由 check_screenshot_gates.js（Playwright 动态门禁）覆盖——静态代理
   （CSS 声明/DOM 顺序）经实证不可靠（monster-hierarchy 有不透明背景但边可见，
   canvas 与 svg 的先后顺序 CSS 无法表达）。
 
---self-test：对内置负样本断言 R1/R2/R3 各自命中、好样本与 R3 正样本不命中（W654 扩至 6 例）。
---spec-check DESIGN.md：解析 §4B 选型章表体行与空单元格（AC-4：行 9·空格 0）。
+--self-test：对内置负样本断言 R1/R2/R3 各自命中、R4/R5 各自命中与放行、好样本与
+R3 正样本不命中（W654 扩至 6 例·W1342 扩至 10 例）。
+--spec-check DESIGN.md：解析 §4B 选型章表体行与空单元格（AC-4：行 10·空格 0）。
 """
 
 import argparse
@@ -51,6 +57,33 @@ FAMILIES = [
 
 
 RE_HTML_TAG = re.compile(r"</?[A-Za-z][A-Za-z0-9:._-]*(?:\s[^<>]*)?/?>")
+
+# §4B 表体行数（W1342：随「雷达图」入表 9 → 10；改表须同批改此常量，spec-check 才不假红/假绿）
+EXPECT_SPEC_ROWS = 10
+
+# R4（W1342）：族注册完备性——渲染签名（id/function 级，非正文关键词）。
+# 为什么不复用 FAMILIES：R3 是「措辞→实现」正向判据，把「雷达」加进 R3 词表会把
+#   「页脚链到 language-style-radar.html」这类纯提及误判成错配（W1341 实测 6 页此形态）。
+RADAR_SIG = re.compile(r'id="[^"]*radar|class="[^"]*radar-|function\s+\w*[Rr]adar|render\w*Radar', re.I)
+FAMILY_SIGS = [
+    # (族标签, 渲染签名, §4B 章内用于判「已注册」的词——取表内原词，不给表加别名)
+    ('雷达', RADAR_SIG, '雷达图'),
+    ('和弦', re.compile(r'chord', re.I), '和弦图'),
+    ('桑基', re.compile(r'sankey', re.I), '桑基图'),
+    ('树图', re.compile(r'treemap|d3\.pack\s*\(', re.I), '树图'),
+    ('力导向', re.compile(r'forceSimulation', re.I), '力导向图'),
+    ('折线', re.compile(r'd3\.line\s*\(', re.I), '折线图'),
+    ('面积', re.compile(r'd3\.area\s*\(|d3\.stack\s*\(', re.I), '面积图'),
+    ('柱形', re.compile(r'scaleBand', re.I), '条形图'),
+    ('弧形', re.compile(r'd3\.pie\s*\(', re.I), '弧形图'),
+    ('画布', re.compile(r'THREE\.', re.I), '画布'),
+]
+
+# R5（W1342）：雷达族规模判据（阈值取自 DESIGN §4B 雷达行「禁用条件」）
+RADAR_META = re.compile(r'chart-radar-meta:\s*axes=(\d+)\s+series=(\d+)')
+RADAR_MAX_AXES = 8
+RADAR_MAX_SERIES = 3
+RADAR_BASELINE = os.path.join(ROOT, 'scripts', 'output', 'radar-family-baseline.txt')
 
 
 def strip_invisible(html):
@@ -135,6 +168,67 @@ def check_page(path, r3_scope=None):
     return fails
 
 
+def design_segment(design_path):
+    """取 DESIGN.md §4B 章全文（到下一个二级标题止）；缺章返回 None。"""
+    with open(design_path, encoding='utf-8') as f:
+        s = f.read()
+    i = s.find('## 4B. 图表选型与数据契约')
+    if i == -1:
+        return None
+    seg = s[i:]
+    j = seg.find('\n## ', 1)
+    return seg[:j] if j != -1 else seg
+
+
+def family_registry_fails(htmls, design_path):
+    """R4（W1342）：站内实际渲染的族若不在 §4B 章内 → [(族名, 命中页数)]。
+
+    判据方向是「实族 ⊆ 表内族」：表内族可以零页在用（如和弦），表外族一页在用即 FAIL。
+    """
+    seg = design_segment(design_path)
+    if seg is None:
+        return [('§4B 章缺失', 0)]
+    hits = {}
+    for html in htmls:
+        for fam, sig, _key in FAMILY_SIGS:
+            if sig.search(html):
+                hits[fam] = hits.get(fam, 0) + 1
+    return [(fam, n) for fam, n in sorted(hits.items())
+            if next(k for f, _s, k in FAMILY_SIGS if f == fam) not in seg]
+
+
+def radar_scale_fails(rel, html, baseline):
+    """R5（W1342）：雷达族规模判据。rel 为仓库相对路径；基线内页面豁免（存量冻结）。"""
+    if not RADAR_SIG.search(html):
+        return []
+    if rel.replace('\\', '/') in baseline:
+        return []
+    m = RADAR_META.search(html)
+    if not m:
+        return ['R5 雷达族页面缺规模声明（须 <!-- chart-radar-meta: axes=N series=M -->·存量页入基线）']
+    axes, series = int(m.group(1)), int(m.group(2))
+    fails = []
+    if axes > RADAR_MAX_AXES:
+        fails.append(f'R5 雷达轴数 {axes} > §4B 上限 {RADAR_MAX_AXES}（禁用条件：改热力矩阵）')
+    if series > RADAR_MAX_SERIES:
+        fails.append(f'R5 雷达系列数 {series} > §4B 上限 {RADAR_MAX_SERIES}（禁用条件：改单选雷达 + 排序点图）')
+    return fails
+
+
+def load_baseline(path=None):
+    """读基线名单（一行一路径·# 后为注释）。"""
+    path = path or RADAR_BASELINE
+    if not os.path.exists(path):
+        return set()
+    out = set()
+    with open(path, encoding='utf-8') as f:
+        for line in f:
+            line = line.split('#', 1)[0].strip()
+            if line:
+                out.add(line.replace('\\', '/'))
+    return out
+
+
 def spec_check(design_path):
     """AC-4：解析 DESIGN.md §4B 选型章表体行与空单元格。"""
     with open(design_path, encoding='utf-8') as f:
@@ -151,9 +245,9 @@ def spec_check(design_path):
             if row.startswith('| ') and '数据形态约束' not in row and not row.startswith('|---')]
     empty = sum(1 for row in rows for cell in row.strip().strip('|').split('|') if not cell.strip())
     print(f'spec-check: §4B 表体行 {len(rows)} · 空单元格 {empty}')
-    ok = len(rows) == 9 and empty == 0
+    ok = len(rows) == EXPECT_SPEC_ROWS and empty == 0
     if not ok:
-        print('spec-check FAIL（期望行 9·空格 0）')
+        print(f'spec-check FAIL（期望行 {EXPECT_SPEC_ROWS}·空格 0·改表须同批改 EXPECT_SPEC_ROWS）')
     return 0 if ok else 1
 
 
@@ -238,13 +332,42 @@ def self_test():
     if '可见正文' not in vis2:
         print('SELF-TEST FAIL: 注释内 `<script>` 字面量触发误剥离⇒可见正文被吞:', vis2[:160])
         ok = False
+    # W1342 新增四例（R4/R5 的可证伪锁——判据放宽或写歪都会在这里红）：
+    radar_html = '<html><body><svg id="chart-radar"></svg></body></html>'
+    design_no_radar = os.path.join(tempfile.gettempdir(), '_cgd_design_no_radar.md')
+    with open(design_no_radar, 'w', encoding='utf-8') as f:
+        f.write('## 4B. 图表选型与数据契约\n\n| 桑基图 | 折线图 |\n\n## 4C. 其他\n')
+    unreg = family_registry_fails([radar_html], design_no_radar)
+    if not any(fam == '雷达' for fam, _n in unreg):
+        print('SELF-TEST FAIL: R4 表外族（雷达）未检出:', unreg)
+        ok = False
+    design_with_radar = os.path.join(tempfile.gettempdir(), '_cgd_design_with_radar.md')
+    with open(design_with_radar, 'w', encoding='utf-8') as f:
+        f.write('## 4B. 图表选型与数据契约\n\n| 雷达图 | 桑基图 |\n\n## 4C. 其他\n')
+    if family_registry_fails([radar_html], design_with_radar):
+        print('SELF-TEST FAIL: R4 已注册族被误报:', family_registry_fails([radar_html], design_with_radar))
+        ok = False
+    meta_ok = '<!-- chart-radar-meta: axes=5 series=3 -->'
+    if radar_scale_fails('site/data/x.html', radar_html + meta_ok, set()):
+        print('SELF-TEST FAIL: R5 合规声明被误报:', radar_scale_fails('site/data/x.html', radar_html + meta_ok, set()))
+        ok = False
+    if not radar_scale_fails('site/data/x.html', radar_html, set()):
+        print('SELF-TEST FAIL: R5 缺规模声明未检出')
+        ok = False
+    if not radar_scale_fails('site/data/x.html', radar_html + '<!-- chart-radar-meta: axes=12 series=9 -->', set()):
+        print('SELF-TEST FAIL: R5 超限（12 轴/9 系列）未检出')
+        ok = False
+    if radar_scale_fails('site/data/x.html', radar_html + '<!-- chart-radar-meta: axes=12 series=9 -->',
+                         {'site/data/x.html'}):
+        print('SELF-TEST FAIL: R5 基线内页面未豁免')
+        ok = False
     print('self-test:', 'PASS（负样本命中 · 好样本放行）' if ok else 'FAIL')
     return ok
 
 
 def main():
     ap = argparse.ArgumentParser(description='图表静态自洽门禁（W551 挂载·R3 于 W654 扩充）')
-    ap.add_argument('--self-test', action='store_true', help='内置负样本自检（6 例）')
+    ap.add_argument('--self-test', action='store_true', help='内置负样本自检（10 例）')
     ap.add_argument('--spec-check', metavar='DESIGN_MD', help='AC-4：解析 §4B 选型章表体行与空单元格')
     args = ap.parse_args()
 
@@ -262,7 +385,28 @@ def main():
         if fails:
             n_fail += 1
             print('FAIL %s — %s' % (os.path.relpath(p, ROOT), '；'.join(fails)))
-    print('图表静态自洽门禁：%d 页扫描 · FAIL %d 页' % (len(pages), n_fail))
+
+    # R4/R5（W1342）：辖区 site/data（与 R3 同辖·选型章管数据图表页）
+    data_dir = os.path.join(ROOT, 'site', 'data')
+    data_pages = [p for p in pages
+                  if os.path.realpath(p).startswith(os.path.realpath(data_dir) + os.sep)]
+    texts = {}
+    for p in data_pages:
+        with open(p, encoding='utf-8', errors='ignore') as f:
+            texts[p] = f.read()
+    for fam, n in family_registry_fails(texts.values(), os.path.join(ROOT, 'DESIGN.md')):
+        n_fail += 1
+        print('FAIL R4 族未在 DESIGN §4B 注册：%s（%d 页在用·先入表再改页）' % (fam, n))
+    baseline = load_baseline()
+    for p in data_pages:
+        rel = os.path.relpath(p, ROOT)
+        fails = radar_scale_fails(rel, texts[p], baseline)
+        if fails:
+            n_fail += 1
+            print('FAIL %s — %s' % (rel, '；'.join(fails)))
+
+    print('图表静态自洽门禁：%d 页扫描 · 基线豁免 %d 页 · FAIL %d 页'
+          % (len(pages), len(baseline), n_fail))
     sys.exit(1 if n_fail else 0)
 
 

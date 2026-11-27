@@ -527,7 +527,7 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 
 ## 4B. 图表选型与数据契约（PD-1b · W654 入档）
 
-> 本章为 §6 响应式的图表侧配套：每族一行五字段（数据形态约束 → 该图型 → 禁用条件 → 站内代表页 → 窄屏降级方案），共 9 族 45 格。
+> 本章为 §6 响应式的图表侧配套：每族一行五字段（数据形态约束 → 该图型 → 禁用条件 → 站内代表页 → 窄屏降级方案），共 10 族 50 格。
 > 机判三件套：`python scripts/check_chart_data.py --spec-check DESIGN.md`（表体行 9·空单元格 0）；措辞↔实现错配由第 24 门禁 R3 拦截；窄屏形态声明由第 30 门禁 check_chart_degrade 校验（页面注释 `chart-degrade: 四值枚举`）。
 
 | 数据形态约束 | 该图型 | 禁用条件 | 站内代表页 | 窄屏降级方案 |
@@ -541,6 +541,7 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 | 层级包含关系 + 数值面积编码 | 矩形树图（d3.treemap） | 层级 >3 层禁用（标签放不下）；要求精确数值对比禁用 | site/data/aesthetics.html | degrade: scroll-x |
 | 双向成对关系矩阵（实体 × 实体对称流量） | 和弦图（d3.chord） | 实体 >30 禁用（弧重叠）；非对称关系禁用 | site/data/four-heavenly-kings-artifacts.html | degrade: scroll-x |
 | 三维场景 / 高密度边渲染（性能兜底） | 画布 / 3D（canvas 2D + THREE.WebGL） | WebGL 不可用必须回退（三页先例）；无交互需求禁用（改 SVG） | site/data/character-relationship-3d.html | degrade: simplified |
+| 多实体 × 多维度同构评分（维度 ≤8·单图实体 ≤3） | 雷达图（自绘 polygon + 径向刻度） | 维度 >8 禁用（改热力矩阵·相邻轴不可分辨）；单图系列 >3 禁用（改「单选实体雷达 + 全量排序点图」）；多数轴取值齐平禁用（常量轴无信息）；无精确比较需求禁用（改点图/表） | site/data/language-style-radar.html | degrade: simplified |
 
 ## 4A. 纸感轻立体体系（Phase E · W476 宪改）
 

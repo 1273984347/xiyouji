@@ -1,0 +1,32 @@
+{
+ "batch": "W1342",
+ "date": "2026-11-28",
+ "title": "W1342 雷达族入 §4B 选型表 + 族注册判据",
+ "desc": "雷达族入DESIGN 4B第10族 族注册判据R4 雷达规模判据R5 存量27页基线冻结 辅助3文档补齐",
+ "head_entry": "2026-11-28（W1342 雷达族入 §4B + 族注册判据 R4/R5）",
+ "head_sentence": "雷达族入 4B 第10族 族注册判据R4 雷达规模判据R5",
+ "changelog_body": "\n\n> **来源**：用户 2026-11-28 指令「都做」——批准 W1341 报告 §九第 1 档（判据侧三项）并补齐 3 项辅助文档 WARN。\n> - **§4B 第 10 族（雷达图）**：`DESIGN.md` §4B 增行——数据形态「多实体 × 多维度同构评分（维度 ≤8·单图实体 ≤3）」/ 图型「雷达图（自绘 polygon + 径向刻度）」/ 禁用条件四款（维度 >8 改热力矩阵 · 单图系列 >3 改「单选实体雷达 + 全量排序点图」 · 多数轴取值齐平禁用 · 无精确比较需求改点图/表）/ 代表页 language-style-radar.html / degrade: simplified。章首「9 族 45 格」→「10 族 50 格」。\n> - **spec-check 常量同源**：行数硬编码 9 → `EXPECT_SPEC_ROWS = 10`；改表不同批改常量即 FAIL。\n> - **R4 族注册判据（新）**：site/data 实际渲染的族必须已在 §4B 章内注册——表外族一页在用即 FAIL。签名取 id/function 级；刻意不复用 R3 词表（「雷达」并入 R3 会把页脚链纯提及判成措辞×实现错配·W1341 实测 6 页此形态）。\n> - **R5 雷达规模判据（新）**：基线外页面须声明 `<!-- chart-radar-meta: axes=N series=M -->` 且 axes ≤8、series ≤3；基线 `scripts/output/radar-family-baseline.txt` 冻结存量 27 页（删一行 = 该页重新受判据约束）。\n> - **验证**：`check_chart_data.py` 现网 239 页 · 基线豁免 27 · FAIL 0 页；`--spec-check` 10 行 0 空格；`--self-test` 10 例 PASS；新增 `tests/unit/test_check_chart_data.py` 7 例全过；ruff 0 违规。\n> - **辅助文档补齐**：README / STRUCTURE / 项目说明 当前批次行 → W1342（`bump_version.py` 已于 W711 停用，改为按各文件现行形态手工同步）。\n> - **边界（如实）**：本批只立判据与基线，未改任何页面——存量 27 页雷达过载仍在原位，改造属 W1341 报告 §九第 2 档；3 个简单页脚（index / cross-time-danmaku / tag-cloud）仍停在 W1340 链头，由下次级联批统一前插。\n> - **文件**：见 file-index W1342 段。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n",
+ "milestone_block": "- **W1342 雷达族入 §4B + 族注册判据（判据侧收口·未改页面）**：`DESIGN.md` §4B 增第 10 族「雷达图」（维度 ≤8 / 单图实体 ≤3 / 多数轴齐平禁用 / degrade: simplified）· `check_chart_data.py` 行数硬编码 9→`EXPECT_SPEC_ROWS=10` + **R4 族注册**（表外族一页在用即 FAIL）+ **R5 雷达规模**（新页须声明 `chart-radar-meta`，基线冻结存量 27 页）· 现网 239 页 FAIL 0 · 新增 7 例单测全过\n",
+ "file_index_rows": [
+  "| DESIGN.md | W1342 | §4B 增第 10 族「雷达图」行 + 章首 9 族 45 格→10 族 50 格 |",
+  "| scripts/check_chart_data.py | W1342 | EXPECT_SPEC_ROWS=10 + R4 族注册判据 + R5 雷达规模判据（含基线加载） |",
+  "| scripts/output/radar-family-baseline.txt | W1342 | 新增：雷达族存量基线 27 页（逐页轴×系列与超标等级） |",
+  "| tests/unit/test_check_chart_data.py | W1342 | 新增：7 例（spec 常量同源 / R4 / R5 / 基线形态 / self-test） |",
+  "| scripts/output/（1 件） | W1342 | 本批 spec |",
+  "| README.md | W1342 | 当前批次行升版 |",
+  "| STRUCTURE.md | W1342 | 当前批次行升版 |",
+  "| docs/00-导读/项目说明.md | W1342 | 当前批次与当前版本两处升版 |",
+  "| CHANGELOG.md | W1342 | 新增 W1342 段 + 编号规则上限同步 |",
+  "| HANDOVER.md | W1342 | HEAD + 进度段 + 最后更新行（概要块滚动：W1336 块淘汰） |",
+  "| CITATION.cff | W1342 | 版本字段升版 |",
+  "| .github/workflows/README.md | W1342 | 头部版本与里程碑区间行升版 |",
+  "| docs/00-导读/（1 件） | W1342 | 认领行 + 台账行窗归档（迁出 W1282-W1283） |",
+  "| archive/docs/（1 件） | W1342 | 台账行窗归档目标 |",
+  "| docs/INDEX.md | W1342 | docs_index 重建（971 篇·13 板块） |",
+  "| docs/11-方案报告/设计与架构方案/（2 件） | W1342 | stats C5b 标记面跟随（架构方案数字实体刷新） |",
+  "| pytest.ini | W1342 | pytest_collected 1968→1975（新增 7 例） |",
+  "| site/data/search-index-docs.js | W1342 | 站内搜索索引刷新（内容漂移归零） |",
+  "| site/rss.xml | W1342 | RSS 新鲜度跟随 |",
+  "| tests/unit/（3 件） | W1342 | 新增 7 例 + 目录索引刷新 |"
+ ]
+}

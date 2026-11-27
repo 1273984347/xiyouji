@@ -1,0 +1,41 @@
+# 雷达族存量基线（W1342 立·经用户批准）
+#
+# 用途：check_chart_data.py R5「雷达族规模判据」的存量豁免名单。
+#   R5 规则：site/data 内渲染雷达图（RADAR_SIG）的页面，须声明
+#            <!-- chart-radar-meta: axes=N series=M -->，且 axes ≤8、series ≤3
+#            （阈值 = DESIGN §4B 雷达行「禁用条件」）。
+#   本名单内页面豁免（存量冻结·W1341 审查实测即已超标，改动它们不在本批范围）；
+#   名单外页面一律受判据约束 —— 新增雷达页必须合规或先改写本名单（改名单须用户批准）。
+#
+# 来源：docs/11-方案报告/审查与评审/图表选型审查报告-2026-11-28.md 附录 B（27 页自述值）
+# 清理口径：页面按 §4B 新规改造后，从本名单删除该行（删一行 = 该页重新受判据约束）。
+#
+# 格式：仓库相对路径（正斜杠）· # 后为注释（加载时剥离）
+
+site/data/monster-female-network.html        # 4 轴 × 17 系列（超标·P0）
+site/data/underworld-power-network.html      # 5 轴 × 16 系列（超标·P0·图注 16 / 注释 14 两处不一致）
+site/data/monster-capability-radar.html      # 5 轴 × 15 系列（超标·P0）
+site/data/monster-hierarchy-network.html     # 5 轴 × 14 系列（超标·P0）
+site/data/heaven-power-network.html          # 5 轴 × 12 系列（超标·P1）
+site/data/monster-sociology.html             # 5 轴 × 10 系列（超标·P1）
+site/data/linguistics.html                   # 4 轴 × 8 系列（超标·P1）
+site/data/social-media.html                  # 8 轴 × 8 系列（轴与系列双超·P1）
+site/data/risk-project.html                  # 4 轴 × 8 系列（超标·P1）
+site/data/language-style-radar.html          # 5 轴 × 7 系列（超标·P1·§4B 雷达行代表页）
+site/data/intertextuality-network.html       # 5 轴 × 7 系列（超标·P1）
+site/data/four-dimensional-research-network.html  # 4 轴 × 5 系列（超标·P1）
+site/data/narratology-16d-network.html       # 16 轴 × 4 系列（轴超限·P1）
+site/data/narratology-12d-network.html       # 12 轴 × 4 系列（轴超限·P1）
+site/data/mbti-evolution.html                # 8 轴 × 5 系列（轴达上限·观察）
+site/data/guanyin-six-roles-network.html     # 5 轴 × 6 系列（超系列上限·观察）
+site/data/cognitive-psychology.html          # 6 轴 × 5 系列（观察）
+site/data/character-sentiment-arc.html       # 6 轴 × 4 系列（观察）
+site/data/pilgrim-team-psychology-arc.html   # 5 轴 × 5 系列（观察）
+site/data/pilgrim-team-dynamic-network.html  # 9 轴 × 5 系列（观察·Belbin）
+site/data/relationships.html                 # 9 轴 × 5 系列（观察·Belbin）
+site/data/monster-victims-network.html       # 5 轴 × 4 系列（观察）
+site/data/four-heavenly-kings-artifacts.html # 5 轴 × 4 系列（观察）
+site/data/six-senses-narratology-network.html  # 4 轴 × 7 系列（观察·正文自述 3/4 轴恒等）
+site/data/ming-political-thought-comparison.html  # 3 轴 × 3 系列（合规·仅因存量入基线）
+site/data/monster-ecology-network.html       # 轴×系列未取到精确声明（待取证）
+site/data/theological-intervention-network.html  # 多型叠加·轴数未取到精确声明（待取证）

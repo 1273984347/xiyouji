@@ -1,3 +1,27 @@
+## W1342 雷达族入 §4B 选型表 + 族注册判据（2026-11-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| DESIGN.md | W1342 | §4B 增第 10 族「雷达图」行 + 章首 9 族 45 格→10 族 50 格 |
+| scripts/check_chart_data.py | W1342 | EXPECT_SPEC_ROWS=10 + R4 族注册判据 + R5 雷达规模判据（含基线加载） |
+| scripts/output/radar-family-baseline.txt | W1342 | 新增：雷达族存量基线 27 页（逐页轴×系列与超标等级） |
+| tests/unit/test_check_chart_data.py | W1342 | 新增：7 例（spec 常量同源 / R4 / R5 / 基线形态 / self-test） |
+| scripts/output/（1 件） | W1342 | 本批 spec |
+| README.md | W1342 | 当前批次行升版 |
+| STRUCTURE.md | W1342 | 当前批次行升版 |
+| docs/00-导读/项目说明.md | W1342 | 当前批次与当前版本两处升版 |
+| CHANGELOG.md | W1342 | 新增 W1342 段 + 编号规则上限同步 |
+| HANDOVER.md | W1342 | HEAD + 进度段 + 最后更新行（概要块滚动：W1336 块淘汰） |
+| CITATION.cff | W1342 | 版本字段升版 |
+| .github/workflows/README.md | W1342 | 头部版本与里程碑区间行升版 |
+| docs/00-导读/（2 件） | W1342 | 认领行 + 台账行窗归档（迁出 W1282-W1283）+ 项目说明批次行 |
+| archive/docs/（1 件） | W1342 | 台账行窗归档目标 |
+| docs/INDEX.md | W1342 | docs_index 重建（971 篇·13 板块） |
+| docs/11-方案报告/设计与架构方案/（2 件） | W1342 | stats C5b 标记面跟随（架构方案数字实体刷新） |
+| pytest.ini | W1342 | pytest_collected 1968→1975（新增 7 例） |
+| site/（2 件） | W1342 | 站内搜索索引刷新 + RSS 新鲜度跟随 |
+| tests/unit/（3 件） | W1342 | 新增 7 例 + 目录索引刷新 |
+
 ## W1341 图表选型审查报告落盘：雷达族选型裸区（2026-11-28）
 
 | 文件 | W | 说明 |
