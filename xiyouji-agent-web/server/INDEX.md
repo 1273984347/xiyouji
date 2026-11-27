@@ -12,7 +12,7 @@
 - `engine/`
 - `storage/`
 
-## 文件（31）
+## 文件（33）
 
 ### JavaScript / TypeScript
 
@@ -45,6 +45,8 @@
 - `security.ts`
 - `shutdown.ts`
 - `sse.ts`
+- `trace.test.ts`
+- `trace.ts`
 - `types.ts`
 - `validation.ts`
 

@@ -9,6 +9,7 @@ import type {
   ChatMessage,
   TokenUsage,
   ToolCallRecord,
+  TurnTrace,
 } from "./types.js";
 
 export async function runAgentTurn(opts: AgentTurnOptions): Promise<AgentTurnResult> {
@@ -19,9 +20,14 @@ export async function runAgentTurn(opts: AgentTurnOptions): Promise<AgentTurnRes
   let turns = 0;
   /** 跨轮 usage 累计；全程无一轮回传则保持 null（缺样本 ≠ 0 token）。 */
   let usage: TokenUsage | null = null;
+  /** 逐轮 trace（W1339·方案 D D-2）：只记元数据，不含 prompt/回答正文。 */
+  const turnTrace: TurnTrace[] = [];
 
   while (turns < opts.maxTurns) {
     turns += 1;
+    const turnStarted = Date.now();
+    /** 本轮 usage；本轮未回传 = null（缺样本，不累加成 0）。 */
+    let turnUsage: TokenUsage | null = null;
     if (opts.signal?.aborted) throw new Error("请求已中止");
 
     let turnText = "";
@@ -40,6 +46,13 @@ export async function runAgentTurn(opts: AgentTurnOptions): Promise<AgentTurnRes
         turnText += ev.delta;
         opts.handlers.onText(ev.delta);
       } else if (ev.type === "usage") {
+        turnUsage = turnUsage
+          ? {
+              inputTokens: turnUsage.inputTokens + ev.usage.inputTokens,
+              outputTokens: turnUsage.outputTokens + ev.usage.outputTokens,
+              totalTokens: turnUsage.totalTokens + ev.usage.totalTokens,
+            }
+          : ev.usage;
         usage = usage
           ? {
               inputTokens: usage.inputTokens + ev.usage.inputTokens,
@@ -53,9 +66,16 @@ export async function runAgentTurn(opts: AgentTurnOptions): Promise<AgentTurnRes
     }
 
     fullText += turnText;
+    turnTrace.push({
+      turn: turns,
+      durationMs: Date.now() - turnStarted,
+      textChars: turnText.length,
+      toolCalls: finishToolCalls.map((c) => c.name),
+      usage: turnUsage,
+    });
 
     if (finishToolCalls.length === 0) {
-      return { text: fullText, toolCalls, durationMs: Date.now() - started, turns, usage };
+      return { text: fullText, toolCalls, durationMs: Date.now() - started, turns, usage, turnTrace };
     }
 
     // 回写 assistant（含 tool_calls 原始形态）

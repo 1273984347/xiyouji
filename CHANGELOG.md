@@ -1,3 +1,17 @@
+### W1339（2026-11-27）：方案 D 主体：本地问答 trace 与 OBS-19
+
+> **来源**：用户 2026-11-27 指令「先执行 P0 推送，再 P1 之后再 P2 P3 P4」——P2 = 可观测性决策方案 D 主体（D-1~D-5）。
+> - **D-1 本地 trace 写入器**：新建 `server/trace.ts`——`data/trace.jsonl` 只追加（`AGENT_WEB_TRACE_LOG` 可覆盖），与 `audit.ts` **分表**（audit=合规留证 L4 / trace=高频观测元数据），留存期复用 audit 的 180 天硬下限（`purgeExpiredTrace`），写入 fail-open 但 `traceDegradation()` 可见（计数 + 最后错误，不静默）。
+> - **D-2 引擎落 trace**：`AgentTurnResult.turnTrace` 逐轮记录轮次/耗时/正文字符数/工具名/该轮 usage（缺 usage 记 null 不记 0）；`chat.ts` 成功与失败路径各落一条 trace（只记元数据，不落 prompt/回答正文；错误消息脱敏 sk-* 并截断 300 字符）。
+> - **D-3 读取面**：`GET /api/trace?limit=100&session=<id>` 返回 `{ok,limit,total,skipped,degraded,failures,entries}`（与 /api/audit 同受 token 与限流保护）。
+> - **D-4 聚合脚本**：`xiyouji-agent-web/scripts/trace-report.mjs` + `npm run trace:report`——按模型/会话/工具聚合，token 缺样本不计入均值，成本仅在配置 `AGENT_WEB_TOKEN_PRICE_INPUT_PER_1K`/`_OUTPUT_PER_1K` 时估算（未配不估算）。
+> - **D-5 OBS 挂钩**：架构方案 v1 表与 v2 目标态表各增 **OBS-19 问答 token 用量与成本**（告警级·W1339 起可算）。
+> - **同批根治 P-11（W1338 复盘 A-02）**：`preflight_check.py` 终态前缀表补「占位空号」——W1262 空号行曾被判在途 ⇒ touches 假交集拒绝新批开工（W1339 开工实证）；单测 +2 断言。
+> - **验证**：agent-web `npm run test:server` 167 例（163 pass / 4 skip PG 不可达 / 0 fail）· `npx tsc -b` exit 0 · `trace:report` 冒烟两态（有/无数据）· pytest `test_preflight_check.py` 41 例全过。
+> - **过程记录（如实）**：① 收官链 gate 步第 43 槽在长链压力下偶发 probe_error（单跑 2 次均 0 FAIL·228 页 / 47s）⇒ 判为探针环境性抖动，未放宽判据；② 第 45 槽在新件未入 Git 索引时 refresh 必漏（E-269 类）⇒ 按门禁自带处方「先 add 再 refresh」复跑 0 FAIL。
+> - **文件**：见 file-index W1339 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1338（2026-11-27）：复盘批 T1：W1312-W1337 二十六批全区间复盘
 
 > **来源**：preflight T1 触发（距上篇复盘 3 天 ≥ 3 天；后续 26 批 / 56 提交，T2 ≥30 批与 T3 ≥80 提交未触发）——用户指令「先等 CI 跑完再开始 P1」，P1 即复盘批。
@@ -845,7 +859,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1338），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1339），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

@@ -88,6 +88,10 @@ def test_inflight_recognizes_merged_status():
     assert not preflight_check.is_inflight("已合并")
     assert not preflight_check.is_inflight("**已让号（W895 先落地）**")
     assert not preflight_check.is_inflight("**已撤销（撞号停手）**")
+    # W1339（P-11 根修）：占位空号是终态（W1228 起的空号登记形态）——不得判在途，
+    # 否则其 touches 会对新批产生假交集（W1262 实证：阻塞 W1339 开工）。
+    assert not preflight_check.is_inflight("占位空号（成果已并入 W1263 收官）")
+    assert not preflight_check.is_inflight("**占位空号**")
     # 真在途形态仍判在途（判据强度不降）
     assert preflight_check.is_inflight("在途（认领·未收官）")
     assert preflight_check.is_inflight("进行中（剩余=联调）")

@@ -10,6 +10,7 @@
  *   GET    /api/health                { status, timestamp }
  *   GET    /api/ready                 { status, checks, compliance }   ← W808 新增（就绪探针）·W1207 补 compliance
  *   GET    /api/audit                 { ok, limit, total, skipped, entries }
+ *   GET    /api/trace                 { ok, limit, total, skipped, degraded, failures, entries } ← W1339（方案 D D-3）
  *   GET    /api/metrics               { ok, first_token:{count,window,p50,p95,min,max,sloMs} } ← W844 新增（OBS-14）
  *   GET    /api/check-login           LoginStatusResponse（apiKey 脱敏 `****` + 末四位）
  *   GET    /api/models                { models:[{modelId,name}], defaultModel }
@@ -30,6 +31,7 @@ import type { Express, Request, Response } from "express";
 import { v4 as uuidv4 } from "uuid";
 import * as db from "./db.js";
 import { readAudit, auditDegradation } from "./audit.js";
+import { readTrace, traceDegradation } from "./trace.js";
 import { firstTokenSummary } from "./metrics.js";
 import { NotFoundError } from "./errors.js";
 import { logger } from "./logger.js";
@@ -155,6 +157,25 @@ export function registerApiRoutes(app: Express, permissions: PendingPermissionSt
   // **不落盘、不外发**——长期分布看结构化日志（logger 已记 first_token_ms）。
   app.get("/api/metrics", (_req, res) => {
     res.json({ ok: true, first_token: firstTokenSummary() });
+  });
+
+  // W1339（方案 D D-3）：问答 trace 只读回放（最近 limit 条，可按 session 过滤）。
+  // 与 /api/audit 同族：受 token 中间件与限流保护；trace 文件本体不在 LLM 可读白名单内。
+  app.get("/api/trace", (req, res) => {
+    const raw = Number(req.query.limit);
+    const limit = Number.isFinite(raw) && raw > 0 ? Math.min(Math.floor(raw), 1000) : 100;
+    const session = typeof req.query.session === "string" ? req.query.session.trim() : "";
+    const result = readTrace(limit, session ? { sessionId: session } : undefined);
+    const { degraded, failures } = traceDegradation();
+    res.json({
+      ok: true,
+      limit,
+      total: result.total,
+      skipped: result.skipped,
+      degraded,
+      failures,
+      entries: result.entries,
+    });
   });
 
   app.get("/api/check-login", (req, res) => {

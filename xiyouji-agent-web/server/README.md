@@ -8,7 +8,7 @@
 
 ## 这个目录装什么
 
-生成时点含 31 个直属文件（JavaScript / TypeScript）；下辖 3 个子目录。详见同目录 `INDEX.md` 的逐文件清单。
+生成时点含 33 个直属文件（JavaScript / TypeScript）；下辖 3 个子目录。详见同目录 `INDEX.md` 的逐文件清单。
 
 ## 子目录
 

@@ -81,6 +81,15 @@ export interface ToolCallRecord {
   isError?: boolean;
 }
 
+/** 单轮引擎 trace（W1339 · 方案 D D-2：轮次 / 耗时 / 工具名 / 该轮 usage）。 */
+export interface TurnTrace {
+  turn: number;
+  durationMs: number;
+  textChars: number;
+  toolCalls: string[];
+  usage: TokenUsage | null;
+}
+
 /** agent 循环的流式处理器（index.ts 据此发 SSE）。 */
 export interface AgentTurnHandlers {
   onText: (delta: string) => void;
@@ -108,4 +117,6 @@ export interface AgentTurnResult {
   turns: number;
   /** 各轮 usage 累计；全程无一轮回传 usage 时为 null（缺样本，非 0）。 */
   usage: TokenUsage | null;
+  /** 逐轮明细（W1339·方案 D D-2）；仅含元数据，不含正文。 */
+  turnTrace: TurnTrace[];
 }

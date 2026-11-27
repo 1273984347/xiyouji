@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-26T23:18:51.216Z",
+ "generated_at": "2026-11-27T00:18:58.466Z",
  "threshold": 3,
  "scope": "data,en",
  "bg_mode": "body",
@@ -40,7 +40,6 @@
   "data/concept-device.html": "4a0133c9fbec",
   "data/counterfactual.html": "7f3f5807a65f",
   "data/criticism-history.html": "f7a356261ce2",
-  "data/cross-time-danmaku.html": "fee3b872e742",
   "data/cultural-misreading.html": "d7e126eab439",
   "data/customs-pass-route.html": "90f0ceff127c",
   "data/data-explorer.html": "49fbbd5e971d",
@@ -183,7 +182,8 @@
   "en/timeline.html": "12f05f4db318",
   "en/underworld-power-network.html": "fb90b0d56d42",
   "en/visual-art.html": "3b0eb2768bbe",
-  "en/workplace.html": "697bb1b73c40"
+  "en/workplace.html": "697bb1b73c40",
+  "data/cross-time-danmaku.html": "142b16d4c478"
  },
  "by_page": {}
 }

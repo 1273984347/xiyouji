@@ -1,3 +1,25 @@
+## W1339 方案 D 主体：本地问答 trace 与 OBS-19（2026-11-27）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/（1 件） | W1339 | 头部版本与里程碑区间行升版 |
+| archive/docs/（1 件） | W1339 | 台账行窗归档目标 |
+| docs/00-导读/（2 件） | W1339 | 认领行 + 行窗归档（迁出 W1262-W1280） |
+| docs/11-方案报告/（2 件） | W1339 | OBS-19 行 |
+| docs/agent/（1 件） | W1339 | trace 机制条目 |
+| scripts/（1 件） | W1339 | 终态前缀表补占位空号（P-11 根修） |
+| scripts/output/（5 件） | W1339 | 本批 spec |
+| site/（1 件） | W1339 | 页脚链前插 W1339（脚本生成） |
+| tests/unit/（1 件） | W1339 | 占位空号负样本断言 +2 |
+| xiyouji-agent-web/（1 件） | W1339 | test:server 登记 trace.test.ts + trace:rep |
+| xiyouji-agent-web/scripts/（2 件） | W1339 | 新增：trace 聚合报告脚本 |
+| xiyouji-agent-web/server/（7 件） | W1339 | 新增：本地问答 trace 写入器（分表 JSONL·留存销毁·fail-ope |
+| CHANGELOG.md | W1339 | 新增 W1339 段 + 编号规则上限同步 |
+| HANDOVER.md | W1339 | HEAD + 进度段 + 最后更新行（概要块滚动） |
+| README.md | W1339 | 当前批次行升版 |
+| STRUCTURE.md | W1339 | 当前批次行升版 |
+| CITATION.cff | W1339 | 版本字段升版 |
+
 ## W1338 复盘批 T1：W1312-W1337 二十六批全区间复盘（2026-11-27）
 
 | 文件 | W | 说明 |

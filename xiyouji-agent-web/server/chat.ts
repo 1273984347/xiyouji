@@ -19,6 +19,7 @@ import { applyCitationGuard } from "./citationGuard.js";
 import { runAgentTurn } from "./engine/agent-loop.js";
 import { createToolset, TOOL_PERMISSION_KIND } from "./engine/tools.js";
 import { appendAudit, auditTarget } from "./audit.js";
+import { appendTrace } from "./trace.js";
 import type { ChatMessage } from "./engine/types.js";
 import { sanitizePermissionMode, resolveWorkingDir, createSseGuard } from "./security.js";
 import { sendError } from "./http.js";
@@ -329,6 +330,24 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
         total_tokens: result.usage?.totalTokens ?? null,
       });
 
+      // W1339（方案 D D-2）：问答 trace 落盘——只记元数据（轮次/耗时/token/工具名），
+      // 不落 prompt 与回答正文；写入失败 fail-open（trace.ts 内部告警计数，不阻断问答）。
+      appendTrace({
+        session_id: session.id,
+        request_id: req.requestId || "",
+        model: selectedModel,
+        level: "info",
+        turns: result.turns,
+        duration_ms: result.durationMs,
+        usage_reported: result.usage !== null,
+        input_tokens: result.usage?.inputTokens ?? null,
+        output_tokens: result.usage?.outputTokens ?? null,
+        total_tokens: result.usage?.totalTokens ?? null,
+        tool_calls: result.toolCalls.map((t) => ({ name: t.name, status: t.isError ? "error" : "completed" })),
+        turn_trace: result.turnTrace,
+        error: null,
+      });
+
       // 完成时兜底：仍未终结的工具标记完成（对齐旧 result 分支语义）
       toolCalls.forEach((tool) => {
         if (tool.status === "running") {
@@ -374,6 +393,22 @@ export function registerChatRoute(app: express.Express, permissions: PendingPerm
     } catch (error) {
       sseGuard.clearTimer(); // P2-3：异常路径同样清理定时器与 close 监听
       res.off("close", abortStream); // W791：注销侧修正为 res（监听注册在 res·W568 改挂时漏改注销）
+      // W1339（方案 D D-2）：失败也落一条 error trace（只留错误名与截断消息；trace.ts 内脱敏）。
+      appendTrace({
+        session_id: session?.id ?? sessionId ?? "",
+        request_id: req.requestId || "",
+        model: selectedModel,
+        level: "error",
+        turns: 0,
+        duration_ms: Date.now() - reqStartedAt,
+        usage_reported: false,
+        input_tokens: null,
+        output_tokens: null,
+        total_tokens: null,
+        tool_calls: [],
+        turn_trace: [],
+        error: { name: (error as Error)?.name || "Error", message: String((error as Error)?.message ?? error) },
+      });
       logger.error("聊天请求失败", {
         request_id: req.requestId,
         error_name: (error as Error)?.name,

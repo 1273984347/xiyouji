@@ -60,7 +60,9 @@ def run(args, timeout=60):
 
 # W1160 根修：补「已合并」——兄弟会话以 PR 合并收官的登记形态（W1137/W1147 实证：状态列
 # 已写「**已合并（PR #142·8f724d1f）**」而 is_inflight 不识别 ⇒ preflight 每批误报「登记滞后」WARN）。
-DONE_PREFIXES = ("已收官", "已闭环", "已合并", "已让号", "已撤销")
+# W1339（P-11 根修）：补「占位空号」——W1228 起引入的**空号终态**登记形态（W1262 实证：
+# 状态列写「占位空号（成果已并入 W1263 收官）」被误判在途 ⇒ touches 假交集拒绝新批开工）。
+DONE_PREFIXES = ("已收官", "已闭环", "已合并", "已让号", "已撤销", "占位空号")
 
 # W1315：状态列 / touches 列的内容定位与台账解析已下沉 `utils/gate_common.py`
 # （`_locate_status_idx` / `_locate_status` / `_locate_touches` / `_split_touches` /
