@@ -188,13 +188,13 @@ def family_registry_fails(htmls, design_path):
     seg = design_segment(design_path)
     if seg is None:
         return [('§4B 章缺失', 0)]
+    fam_key = {f: k for f, _s, k in FAMILY_SIGS}
     hits = {}
     for html in htmls:
         for fam, sig, _key in FAMILY_SIGS:
             if sig.search(html):
                 hits[fam] = hits.get(fam, 0) + 1
-    return [(fam, n) for fam, n in sorted(hits.items())
-            if next(k for f, _s, k in FAMILY_SIGS if f == fam) not in seg]
+    return [(fam, n) for fam, n in sorted(hits.items()) if fam_key[fam] not in seg]
 
 
 def radar_scale_fails(rel, html, baseline):

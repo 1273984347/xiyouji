@@ -133,7 +133,7 @@
     },
     {
       "page": "site/data/81-hardships.html",
-      "sha": "c9cfd8ceebeb",
+      "sha": "1fc0a52cd708",
       "static": {
         "svg": true,
         "cls": true,
@@ -203,7 +203,7 @@
     },
     {
       "page": "site/data/ai-dialogue.html",
-      "sha": "8640f768ae16",
+      "sha": "b044ef030ba5",
       "static": {
         "svg": false,
         "cls": true,
@@ -233,7 +233,7 @@
     },
     {
       "page": "site/data/century-dialogue.html",
-      "sha": "9d07fd6a0c97",
+      "sha": "228b26d35964",
       "static": {
         "svg": false,
         "cls": true,
@@ -383,7 +383,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "afeae91a6ce9",
+      "sha": "fc90a50dbf4e",
       "static": {
         "svg": true,
         "cls": false,
@@ -782,7 +782,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "3112f987f032",
+      "sha": "31c7941dd17c",
       "static": {
         "svg": true,
         "cls": false,

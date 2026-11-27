@@ -54,7 +54,8 @@ def test_p1_live_tree_passes():
     r = _run()
     assert r.returncode == 0, "图表自洽门禁在现网树上 FAIL：\n%s" % r.stdout[-1500:]
     assert "FAIL 0 页" in r.stdout, "缺 0 FAIL 汇总行（疑似未真正执行）：\n%s" % r.stdout[-800:]
-    assert "基线豁免 27 页" in r.stdout, "基线豁免页数与预期不符：\n%s" % r.stdout[-800:]
+    expect = "基线豁免 %d 页" % len(ccd.load_baseline())
+    assert expect in r.stdout, "基线豁免页数与基线文件不符（期望「%s」）：\n%s" % (expect, r.stdout[-800:])
 
 
 def test_p2_spec_rows_match_constant():
@@ -110,11 +111,18 @@ def test_p4_radar_scale():
 
 
 def test_p5_baseline_file_shape():
-    """P5：基线文件存在、可解析、条数与 W1341 附录 B 一致（27 页）。"""
+    """P5：基线可解析、路径合法、页面存在、无重复，且每行仍对应带雷达签名的页面（防陈旧豁免）。
+
+    条数不写死：W1343-W1346 把存量逐页改造后基线已自然清零，任何固定条数都会变成
+    「改页面就要改测试」的假红源；真正的判据是「基线与现网一致」。
+    """
     lines = ccd.load_baseline()
-    assert len(lines) == 27, "基线条数 %d ≠ 27（W1341 审查实测）" % len(lines)
+    assert len(set(lines)) == len(lines), "基线含重复路径"
     assert all(x.startswith("site/data/") and x.endswith(".html") for x in lines), "基线含非法路径"
     assert os_path_exists(lines), "基线含磁盘上不存在的页面"
+    stale = [p for p in lines
+             if not ccd.RADAR_SIG.search((ROOT / p).read_text(encoding="utf-8"))]
+    assert not stale, "基线含已无雷达签名的页面（应删行）：%r" % (stale,)
 
 
 def os_path_exists(lines):

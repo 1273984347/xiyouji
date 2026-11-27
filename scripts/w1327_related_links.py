@@ -106,15 +106,21 @@ FOOTER = re.compile(r'(<footer class="site-footer">)(.*?)(</footer>)', re.S)
 
 
 def _page_title(page):
-    """页面标题：取 h1 首个标签前的文本，退化到 <title> 的首段。"""
+    """导航标签：优先取 <title> 的专题名（W1347 标题结论化后 h1 已换成结论句，不再适合做链接名）。
+
+    <title> 现役两种形态：「专题名：结论 · 详解西游记」与旧的「专题名 · 详解西游记」，
+    统一剥掉「 · 详解西游记」后缀与「：结论」段；解析失败才退化到 h1 首段。
+    """
     txt = (DATA / page).read_text(encoding="utf-8")
+    tm = re.search(r"<title>(.*?)</title>", txt, re.S)
+    if tm:
+        t = re.sub(r"\s*[·|]\s*详解西游记\s*$", "", tm.group(1).strip()).strip()
+        t = t.split("：", 1)[0].strip()
+        if t and "<" not in t:
+            return t
     m = re.search(r"<h1[^>]*>(.*?)</h1>", txt, re.S)
     raw = m.group(1) if m else ""
     title = re.split(r"<", raw, maxsplit=1)[0].strip()
-    if not title:
-        tm = re.search(r"<title>(.*?)</title>", txt, re.S)
-        raw2 = tm.group(1) if tm else page
-        title = re.split(r"<|·", raw2, maxsplit=1)[0].strip()
     return title or page
 
 
