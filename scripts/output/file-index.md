@@ -1,3 +1,17 @@
+## W1344 narratology 12/16 轴雷达改热力矩阵 + 三简单页脚前插（2026-11-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| site/data/（2 件） | W1344 | 雷达改热力矩阵 + 族签名迁移（chart-radar→chart-heatmap / renderRadar→renderHeatmap） |
+| scripts/output/radar-family-baseline.txt | W1344 | 两页出基线（23 → 21 页） |
+| site/（4 件） | W1344 | 四页脚链头齐平 W1344（index / cross-time-danmaku / tag-cloud / dukou-engine） |
+| scripts/output/（1 件） | W1344 | 本批 spec + 探针报告刷新 |
+| CHANGELOG.md | W1344 | 新增 W1344 段 + 编号规则上限同步 |
+| HANDOVER.md | W1344 | HEAD + 进度段 + 最后更新行（概要块滚动：W1338 块淘汰） |
+| archive/docs/（1 件） | W1344 | 台账行窗归档（迁出 W1284-W1285） |
+| README.md / STRUCTURE.md / docs-00-导读/ | W1344 | 当前批次行升版 + 台账认领行 |
+| CITATION.cff / .github/workflows/README.md | W1344 | 版本与里程碑区间行升版 |
+
 ## W1343 雷达 P0 四页改造：单选实体雷达 + 全量排序点图（2026-11-28）
 
 | 文件 | W | 说明 |

@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-SeaqHUBnMfgbZwO3b0+4I52z+LkzOi7iu9VCYRYxXnc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-+1wdyOtJWVEWXF0d+ESnrglLfkvm/60FBZhbfPgE1nc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>十六维叙事学关系图谱 · 详解西游记</title>
@@ -241,6 +241,8 @@ header.hero .meta {
 }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
+/* 热力矩阵：顺序色阶条（颜色越深=得分越高） */
+.heatmap-legend-bar { width: 180px; height: 14px; border-radius: var(--radius-sm); }
 
 /* Tooltip */
 /* 墨韵（W461）：tooltip 统一采用 system.css .chart-tooltip（页面私有样式已移除） */
@@ -437,7 +439,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   <a href="#overview">概览</a>
   <a href="#force">力导向图</a>
   <a href="#sankey">桑基图</a>
-  <a href="#radar">雷达图</a>
+  <a href="#heatmap">热力矩阵</a>
   <a href="#timeline">时间线</a>
   <a href="#summary">汇总表</a>
 </nav>
@@ -491,18 +493,18 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   </div>
 </section>
 
-<!-- Section 4: 雷达图 -->
-<section class="section" id="radar">
-  <h2 class="section-title">肆 · 十六维叙事学雷达图（4 指标）</h2>
-  <div class="section-sub">RADAR: 16 DIMENSIONS × 4 METRICS</div>
+<!-- Section 4: 热力矩阵 -->
+<section class="section" id="heatmap">
+  <h2 class="section-title">肆 · 十六维叙事学热力矩阵（4 指标）</h2>
+  <div class="section-sub">HEATMAP: 16 DIMENSIONS × 4 METRICS</div>
   <div class="definition">
-    <strong>定义：</strong>雷达图从四个指标评估每个叙事学维度：理论深度（理论体系成熟度）、西游应用（西游记文本分析覆盖面）、术语数（核心术语规模）、学术影响（研究贡献与影响力）。雷达面积越大，该维度在十六维叙事学框架中的综合地位越强。互文性（文）、时间叙事学（时）、不可靠叙述综合表现最强，触觉与嗅觉维度为新兴增长点。
+    <strong>定义：</strong>热力矩阵从四个指标评估每个叙事学维度：理论深度（理论体系成熟度）、西游应用（西游记文本分析覆盖面）、术语数（核心术语规模）、学术影响（研究贡献与影响力）。行为维度、列为指标，颜色越深表示该指标得分越高，横向比较即可看出单个维度的强弱结构，纵向比较可看出全部维度的同一指标水平。互文性（文）、时间叙事学（时）、不可靠叙述综合表现最强，触觉与嗅觉维度为新兴增长点。
   </div>
   <div class="chart-block">
-    <div class="chart-title">十六维度×四指标雷达图（理论深度+西游应用+术语数+学术影响）</div>
-    <div class="chart-caption">16 维度 × 4 指标 · 数值 1-10 · hover 查看详情</div>
-    <svg id="chart-radar" class="chart-svg" width="100%" height="640"></svg>
-    <div class="legend-row" id="radar-legend"></div>
+    <div class="chart-title">十六维度×四指标热力矩阵（理论深度+西游应用+术语数+学术影响）</div>
+    <div class="chart-caption">行：16 维度 · 列：4 指标 · 数值 1-10 · 颜色越深表示该指标得分越高 · hover 查看详情</div>
+    <svg id="chart-heatmap" class="chart-svg" width="100%" height="640"></svg>
+    <div class="legend-row" id="heatmap-legend"></div>
   </div>
 </section>
 
@@ -542,7 +544,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
         <!-- W1286 · 结论区块（第 82 门禁 C2）：结论语义由区块 class 与标题双重承担 -->
         <section class="section">
             <h2 class="section-title">柒 · 关键洞察</h2>
-            <div class="section-sub">KEY INSIGHTS · 取自十六维框架总览 / 关系图 / 三层桑基 / 雷达 / 演化时间线的实际取值</div>
+            <div class="section-sub">KEY INSIGHTS · 取自十六维框架总览 / 关系图 / 三层桑基 / 热力矩阵 / 演化时间线的实际取值</div>
             <div class="insight-list">
                 <div class="insight-item"><strong>十六维的扩展：</strong>16 个维度里七感叙事学占 7、文本叙事学占 3、元叙事学占 2，性别、文化、情感、历史各 1；新增的 W182 至 W185 四个维度全部落在 2026 年 6 月 15 日至 7 月 5 日之间。</div>
                 <div class="insight-item"><strong>「文」仍是峰值：</strong>W169 互文性叙事学理论深度 10、西游应用 9、学术影响 10、术语数 9，四项都居十六维之首；「嗅」W164 理论深度 6、学术影响 6 垫底，「触」W165 的西游应用只有 5。</div>
@@ -1201,10 +1203,23 @@ function renderSankey(sankeyLinkData, dimensions, theoristColors) {
 }
 
 // ============================================================
-// Section 4: 雷达图（16 维度 × 4 指标）
+// Section 4: 热力矩阵（16 维度 × 4 指标）
+//   原「16 轴雷达图」按 DESIGN.md §4B 第 10 族禁用条件（维度 >8 改热力矩阵）改写；
+//   数据字段与取值完全沿用 dimensions，未做任何改动。
 // ============================================================
-function renderRadar(dimensions) {
-  const svg = d3.select('#chart-radar');
+function heatLabelColor(fill) {
+  // 依底色相对亮度选深/浅字，保证数值与底色对比度 ≥3:1（WCAG 1.4.11 非文本对比度）
+  const c = d3.color(fill);
+  const lin = v => { v /= 255; return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4); };
+  const Lc = 0.2126 * lin(c.r) + 0.7152 * lin(c.g) + 0.0722 * lin(c.b);
+  const LInk = 0.0064; // 墨字 #1a1410 的相对亮度
+  const cWhite = 1.05 / (Lc + 0.05);
+  const cInk = (Math.max(Lc, LInk) + 0.05) / (Math.min(Lc, LInk) + 0.05);
+  return cInk >= cWhite ? '#1a1410' : '#ffffff';
+}
+
+function renderHeatmap(dimensions) {
+  const svg = d3.select('#chart-heatmap');
   svg.selectAll('*').remove();
   if (!dimensions || dimensions.length === 0) {
     svg.append('text').attr('x', 200).attr('y', 320).attr('fill', '#8a7a5a').text('暂无数据');
@@ -1216,121 +1231,118 @@ function renderRadar(dimensions) {
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
   const metrics = ['理论深度', '西游应用', '术语数', '学术影响'];
-  const dimColors = {};
-  dimensions.forEach(d => { dimColors[d.维度] = d.color; });
+  const margin = { top: 56, right: 28, bottom: 22, left: 116 };
+  const innerW = Math.max(160, width - margin.left - margin.right);
+  const innerH = height - margin.top - margin.bottom;
 
-  const cx = width / 2;
-  const cy = height / 2 + 10;
-  const radius = Math.max(0, Math.min(width, height) / 2 - 120);
-  const levels = 10;
+  // 行 = 维度（保持数据原序）· 列 = 指标
+  const x = d3.scaleBand().domain(metrics).range([0, innerW]).paddingInner(0.05).paddingOuter(0.02);
+  const y = d3.scaleBand().domain(dimensions.map(d => d.code)).range([0, innerH]).paddingInner(0.12);
+  // 单色顺序色阶（1-10）：深色=高分。禁用 turbo/rainbow 彩虹色阶
+  const color = d3.scaleSequential(d3.interpolateBlues).domain([1, 10]);
 
-  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-  // 背景同心多边形
-  for (let lvl = 1; lvl <= levels; lvl++) {
-    const r = radius * lvl / levels;
-    const points = metrics.map((dim, i) => {
-      const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
-      return [Math.cos(angle) * r, Math.sin(angle) * r];
-    });
-    gBg.append('polygon')
-      .attr('points', points.map(p => p.join(',')).join(' '))
-      .attr('fill', 'none')
-      .attr('stroke', '#d4c5a9')
-      .attr('stroke-width', 1)
-      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
-  }
-
-  // 轴线 + 标签
-  metrics.forEach((metric, i) => {
-    const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
-    gBg.append('line')
-      .attr('x1', 0).attr('y1', 0)
-      .attr('x2', Math.cos(angle) * radius)
-      .attr('y2', Math.sin(angle) * radius)
-      .attr('stroke', '#d4c5a9')
-      .attr('stroke-width', 1);
-    const labelR = radius + 32;
-    gBg.append('text')
-      .attr('x', Math.cos(angle) * labelR)
-      .attr('y', Math.sin(angle) * labelR)
-      .attr('text-anchor', 'middle')
-      .attr('dy', '0.35em')
-      .attr('font-size', '13px')
-      .attr('font-weight', '600')
-      .attr('fill', '#1a1410')
-      .text(metric);
+  const cells = [];
+  dimensions.forEach(dim => {
+    metrics.forEach(metric => { cells.push({ dim: dim, metric: metric, value: dim[metric] }); });
   });
-
-  // 数值刻度
-  for (let lvl = 2; lvl <= levels; lvl += 2) {
-    const r = radius * lvl / levels;
-    gBg.append('text')
-      .attr('x', -6).attr('y', -r)
-      .attr('text-anchor', 'end')
-      .attr('font-size', '9px')
-      .attr('fill', '#8a7a5a')
-      .text(lvl);
-  }
 
   const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
     ? d3.select('body').append('div').attr('class', 'chart-tooltip')
     : d3.select('.chart-tooltip');
 
-  // 每个维度一个多边形
-  dimensions.forEach(dim => {
-    const points = metrics.map((metric, i) => {
-      const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
-      const val = dim[metric] || 0;
-      const rr = radius * (val / 10);
-      return [Math.cos(angle) * rr, Math.sin(angle) * rr];
+  // 单元格
+  g.append('g').selectAll('rect')
+    .data(cells)
+    .enter().append('rect')
+    .attr('x', d => x(d.metric))
+    .attr('y', d => y(d.dim.code))
+    .attr('width', x.bandwidth())
+    .attr('height', y.bandwidth())
+    .attr('rx', 2)
+    .attr('fill', d => color(d.value))
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
+      tooltip.classed('visible', true);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.dim.code + ' · ' + d.dim.维度 + '</strong>');
+      tooltip.append('div').text(d.metric + '：' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.classed('visible', false);
     });
-    const color = dimColors[dim.维度] || '#8b4513';
 
-    gBg.append('polygon')
-      .attr('points', points.map(p => p.join(',')).join(' '))
-      .attr('fill', color)
-      .attr('fill-opacity', 0.06)
-      .attr('stroke', color)
-      .attr('stroke-width', 1.5)
-      .style('cursor', 'pointer')
-      .on('mouseover', function(e) {
-        d3.select(this).attr('fill-opacity', 0.25);
-        tooltip.classed('visible', true);
-        tooltip.html('');
-        tooltip.append('div').html('<strong>' + dim.code + ' · ' + dim.维度 + '（' + dim.name + '）</strong>');
-        metrics.forEach(metric => {
-          tooltip.append('div').text(metric + '：' + dim[metric]);
-        });
-      })
-      .on('mousemove', function(e) {
-        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
-      })
-      .on('mouseout', function() {
-        d3.select(this).attr('fill-opacity', 0.06);
-        tooltip.classed('visible', false);
-      });
+  // 数值底衬（固定白底浅不透明·抵消暗色态色阶整体提亮导致的字色误判·W1344）
+  g.append('g').selectAll('rect.chip')
+    .data(cells)
+    .enter().append('rect')
+    .attr('x', d => x(d.metric) + x.bandwidth() / 2 - 10)
+    .attr('y', d => y(d.dim.code) + y.bandwidth() / 2 - 7)
+    .attr('width', 20)
+    .attr('height', 14)
+    .attr('rx', 3)
+    .attr('fill', '#fff')
+    .attr('opacity', 0.86)
+    .attr('pointer-events', 'none');
 
-    // 顶点圆
-    points.forEach((p) => {
-      gBg.append('circle')
-        .attr('cx', p[0]).attr('cy', p[1])
-        .attr('r', 2.5)
-        .attr('fill', color)
-        .attr('stroke', '#fff')
-        .attr('stroke-width', 1)
-        .attr('pointer-events', 'none');
-    });
-  });
+  // 单元格数值（字号 11px ≥10px·字色随底深浅自动切换）
+  g.append('g').selectAll('text')
+    .data(cells)
+    .enter().append('text')
+    .attr('x', d => x(d.metric) + x.bandwidth() / 2)
+    .attr('y', d => y(d.dim.code) + y.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .style('fill', '#1a1410')
+    .attr('pointer-events', 'none')
+    .text(d => d.value);
 
-  // 图例
-  const legend = d3.select('#radar-legend');
+  // 行标签（维度名·水平排列·全名走 title）
+  g.append('g').selectAll('text')
+    .data(dimensions)
+    .enter().append('text')
+    .attr('x', -10)
+    .attr('y', d => y(d.code) + y.bandwidth() / 2)
+    .attr('text-anchor', 'end')
+    .attr('dy', '0.35em')
+    .attr('font-size', '12px')
+    .attr('fill', 'var(--ink)')
+    .text(d => d.code + ' ' + d.维度)
+    .append('title')
+    .text(d => d.code + ' ' + d.维度 + '（' + d.name + '）');
+
+  // 列标签（4 指标·置于顶部）
+  g.append('g').selectAll('text')
+    .data(metrics)
+    .enter().append('text')
+    .attr('x', d => x(d) + x.bandwidth() / 2)
+    .attr('y', -14)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .attr('fill', 'var(--ink)')
+    .text(d => d);
+
+  // 图例：顺序色阶条 + 两端数值
+  const legend = d3.select('#heatmap-legend');
   legend.html('');
-  dimensions.forEach(dim => {
-    const item = legend.append('div').attr('class', 'legend-item');
-    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', dimColors[dim.维度] || '#8b4513'); });
-    item.append('span').text(dim.code + ' ' + dim.维度);
-  });
+  const stops = [1, 3.25, 5.5, 7.75, 10].map(v => color(v)).join(', ');
+  const item = legend.append('div').attr('class', 'legend-item');
+  item.append('span').text('1');
+  item.append('div').attr('class', 'heatmap-legend-bar')
+    .each(function() { d3.select(this).style('background', 'linear-gradient(to right, ' + stops + ')'); });
+  item.append('span').text('10');
+  legend.append('div').attr('class', 'legend-item').append('span').text('颜色越深表示该指标得分越高');
 }
 
 // ============================================================
@@ -1644,7 +1656,7 @@ async function main() {
   renderOverview(data.dimensions);
   renderForce(data.dimensions, data.externalNodes, data.links);
   renderSankey(data.sankey, data.dimensions, data.sankeyTheoristColors);
-  renderRadar(data.dimensions);
+  renderHeatmap(data.dimensions);
   renderTimeline(data.timeline);
   renderSummary(data.dimensions, data.theorists);
 }
@@ -1659,7 +1671,7 @@ window.addEventListener('resize', () => {
       renderOverview(data.dimensions);
       renderForce(data.dimensions, data.externalNodes, data.links);
       renderSankey(data.sankey, data.dimensions, data.sankeyTheoristColors);
-      renderRadar(data.dimensions);
+      renderHeatmap(data.dimensions);
       renderTimeline(data.timeline);
       renderSummary(data.dimensions, data.theorists);
     }

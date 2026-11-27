@@ -20,8 +20,6 @@ site/data/risk-project.html                  # 4 轴 × 8 系列（超标·P1）
 site/data/language-style-radar.html          # 5 轴 × 7 系列（超标·P1·§4B 雷达行代表页）
 site/data/intertextuality-network.html       # 5 轴 × 7 系列（超标·P1）
 site/data/four-dimensional-research-network.html  # 4 轴 × 5 系列（超标·P1）
-site/data/narratology-16d-network.html       # 16 轴 × 4 系列（轴超限·P1）
-site/data/narratology-12d-network.html       # 12 轴 × 4 系列（轴超限·P1）
 site/data/mbti-evolution.html                # 8 轴 × 5 系列（轴达上限·观察）
 site/data/guanyin-six-roles-network.html     # 5 轴 × 6 系列（超系列上限·观察）
 site/data/cognitive-psychology.html          # 6 轴 × 5 系列（观察）

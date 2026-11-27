@@ -1,3 +1,15 @@
+### W1344（2026-11-28）：narratology 12/16 轴雷达改热力矩阵 + 三简单页脚前插
+
+> **来源**：用户 2026-11-28「做」——W1343 遗留项（W1341 报告 §九第 2 档最后两页 + 页脚链滞后）。
+> - **双页图型改造**：narratology-12d（12 轴）/ narratology-16d（16 轴）→ **行=维度、列=4 指标的热力矩阵**（`scaleBand` 双轴 + `d3.interpolateBlues` 单色顺序色阶 + 色阶条图例 + 行标挂全名 `<title>`）。数值字色按底色相对亮度自动切墨/白，抽样对比度 5.82–17.91:1。数据零改动，原「雷达面积越大…」解释句改为「颜色越深表示得分越高」。
+> - **族签名迁移（关键）**：`svg id="chart-radar"` → `chart-heatmap`、`renderRadar` → `renderHeatmap`，全页残留计数 0 —— 否则 R5 仍按 `id="*radar"` 认作雷达族，改造等于没改。两页同步从基线删行（23 → **21** 页）。
+> - **页脚链收口**：`site/index.html` / `cross-time-danmaku` / `tag-cloud` 三简单页脚前插 W1344（复用 `batch_cascade._foot_upsert` 单一写入逻辑，不自建第二套插链实现），`dukou-engine.html` 由 `gen_version_footer.py --apply` 同批升到 W1344 —— 四页脚链头自此一致。
+> - **验证**：`check_chart_data` 239 页 · 基线 21 · **FAIL 0**；`check_js_syntax` 873 文件通过；`generate_csp` 注入 2 页后 `--check` **0 漂移**；`check_structure` 2047 style 块平衡；第 80/82 槽探针重跑后 `verify_delivery --scope full` 见本批收官记录。
+> - **过程记录（对比度探针抓出的真缺陷·三态收敛）**：首轮对比度探针（graphic 底色口径）报 **12 处 < 3:1 · 1 页**（narratology-16d 暗色态单元格数字继承页面 `--ink-soft`，根因是渲染用 `.attr('fill')` 表现属性、被样式表规则盖掉）⇒ 改 `.style('fill')` 内联样式后降到 **2 处**（仍是暗色态最高值格：暗色把蓝色阶整体提亮，浅色字对白底亮蓝仅 2.95）⇒ 最终给数值加**固定白底浅衬片**（20×14·opacity .86）+ 字色恒墨，两口径均 **0 处违例**。教训：热力矩阵的数值字色不能靠"按亮色阶算一次"决定，暗色态会整体改色阶。
+> - **边界（如实）**：本批仍无浏览器运行期取证（仓库无 node_modules/Playwright）；热力矩阵的行列标签在 320px 窄屏下的换行表现建议巡检时看一眼（`chart-degrade: scroll-x` 已声明）。
+> - **文件**：见 file-index W1344 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1343（2026-11-28）：雷达 P0 四页改造（单选实体雷达 + 全量排序点图）
 
 > **来源**：用户 2026-11-28「继续」——W1341 报告 §九第 2 档，先做系列过载四页（P0）。
@@ -846,7 +858,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1343），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1344），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

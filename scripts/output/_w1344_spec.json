@@ -1,0 +1,24 @@
+{
+ "batch": "W1344",
+ "date": "2026-11-28",
+ "title": "W1344 narratology 12/16 轴雷达改热力矩阵 + 三简单页脚前插",
+ "desc": "narratology双页雷达改热力矩阵 族签名迁移 四页脚链齐平 基线23→21",
+ "head_entry": "2026-11-28（W1344 narratology 双页热力矩阵 + 四页脚链齐平）",
+ "head_sentence": "narratology 双页雷达改热力矩阵 四页脚链齐平",
+ "changelog_body": "\n\n> **来源**：用户 2026-11-28「做」——W1343 遗留项（W1341 报告 §九第 2 档最后两页 + 页脚链滞后）。\n> - **双页图型改造**：narratology-12d（12 轴）/ narratology-16d（16 轴）→ 行=维度、列=4 指标的热力矩阵（scaleBand 双轴 + interpolateBlues 单色顺序色阶 + 色阶条图例 + 行标挂全名 title）。数值字色按底色相对亮度自适配，抽样对比度 5.82–17.91:1。数据零改动。\n> - **族签名迁移**：chart-radar → chart-heatmap、renderRadar → renderHeatmap，残留 0（否则 R5 仍认作雷达族）。两页出基线 23 → 21 页。\n> - **页脚链收口**：index / cross-time-danmaku / tag-cloud 三简单页脚前插 W1344（复用 batch_cascade._foot_upsert），dukou-engine 由 gen_version_footer 同批升 W1344。\n> - **验证**：check_chart_data 239 页 · 基线 21 · FAIL 0；check_js_syntax 873 文件通过；CSP 0 漂移；第 80/82 槽探针重跑后 verify full 见收官记录。\n> - **文件**：见 file-index W1344 段。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n",
+ "milestone_block": "- **W1344 narratology 12/16 轴雷达改热力矩阵 + 页脚链收口**：两页改「行=维度 × 列=4 指标」热力矩阵（单色顺序色阶·色阶图例·行标挂全名·字色自适配）· `chart-radar`/`renderRadar` → `chart-heatmap`/`renderHeatmap`（残留 0）· 出基线 23→21 · 四页脚链头齐平 W1344\n",
+ "file_index_rows": [
+  "| site/data/（2 件） | W1344 | 雷达改热力矩阵 + 族签名迁移（chart-radar→chart-heatmap / renderRadar→renderHeatmap） |",
+  "| scripts/output/radar-family-baseline.txt | W1344 | 两页出基线（23 → 21 页） |",
+  "| site/（4 件） | W1344 | 四页脚链头齐平 W1344（index / cross-time-danmaku / tag-cloud / dukou-engine） |",
+  "| scripts/output/（1 件） | W1344 | 本批 spec + 探针报告刷新 |",
+  "| CHANGELOG.md | W1344 | 新增 W1344 段 + 编号规则上限同步 |",
+  "| HANDOVER.md | W1344 | HEAD + 进度段 + 最后更新行（概要块滚动：W1338 块淘汰） |",
+  "| archive/docs/（1 件） | W1344 | 台账行窗归档（迁出 W1284-W1285） |",
+  "| README.md | W1344 | 当前批次行升版 |",
+  "| STRUCTURE.md | W1344 | 当前批次行升版 |",
+  "| docs/00-导读/（2 件） | W1344 | 项目说明批次行升版 + 台账认领行 |",
+  "| CITATION.cff | W1344 | 版本字段升版 |",
+  "| .github/workflows/README.md | W1344 | 头部版本与里程碑区间行升版 |"
+ ]
+}

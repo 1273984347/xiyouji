@@ -90,7 +90,7 @@
    "counts": {}
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "6561d701d381f405b9a314f8715d3c2edf966d9a",
+   "sha1": "0fd8c78e35b1471b105d3c6dcd6e1048b76d25ba",
    "counts": {}
   },
   "data/cultural-misreading.html": {
@@ -270,11 +270,11 @@
    "counts": {}
   },
   "data/narratology-12d-network.html": {
-   "sha1": "c719db7a3c779c175ef03d9f46c13555b1b29839",
+   "sha1": "396173bcc4d9942b2e535eb720916f1272b8dc81",
    "counts": {}
   },
   "data/narratology-16d-network.html": {
-   "sha1": "4d4dcd4789ec0e185c36094379b692251b9dd4c7",
+   "sha1": "90004eb05f434349fb45142ccd19a876084c3169",
    "counts": {}
   },
   "data/perf-canvas-rendering.html": {
@@ -330,7 +330,7 @@
    "counts": {}
   },
   "data/tag-cloud.html": {
-   "sha1": "e3addd430dec3bd4eb6e8be3572d72441b10ee0a",
+   "sha1": "679e7a21615e0177352420d1a1914541a6fd23be",
    "counts": {}
   },
   "data/text-evolution.html": {
@@ -382,7 +382,7 @@
    "counts": {}
   },
   "dukou-engine.html": {
-   "sha1": "69c970204606cf1596f38936d492fc2ee50418c7",
+   "sha1": "5126855e090f12bf1bb8e87b1a2678c85f7eda12",
    "counts": {}
   },
   "guide.html": {
@@ -390,7 +390,7 @@
    "counts": {}
   },
   "index.html": {
-   "sha1": "d3034635ba801a0d7b0c18a2875fcb3663fe05b5",
+   "sha1": "0fb03169a88a289e8bcf540b3c8d6de7dcaa9546",
    "counts": {}
   },
   "rum-viewer.html": {
@@ -954,5 +954,5 @@
    "counts": {}
   }
  },
- "generated_at": "2026-11-27T17:52:04.896Z"
+ "generated_at": "2026-11-27T18:38:41.907Z"
 }
