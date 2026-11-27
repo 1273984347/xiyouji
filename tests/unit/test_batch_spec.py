@@ -108,7 +108,9 @@ def test_refresh_window_ok_and_fail(capsys):
 
 
 def test_window_constants_match_doc_window():
-    """窗口常量必须与文档规范 §8 一致（110 段 / 60 行）——改了窗口要同步改这里。"""
+    """窗口常量必须与文档规范 §8 一致（W1340 起段数窗 = 字节窗推导 SEG_WINDOW / 60 行）——
+    改了窗口要同步改这里。"""
     import batch_cascade as bc
-    assert bc.WIN_SEGMENTS == 110
+    import check_doc_size_budget as dsb
+    assert bc.WIN_SEGMENTS == dsb.SEG_WINDOW
     assert bc.WIN_LEDGER == 60

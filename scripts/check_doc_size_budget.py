@@ -6,9 +6,12 @@ verify 54 段零体积判据、CI 零检查、级联每批只插不问，结果 
 （超旧线 9.6 倍）、file-index 431KB/247 段（自 W511 后从未归档）。这与 W824 干扰日志断档、
 第 43 篇复盘断档同族：**靠自觉的机制必掉档**（W824 实证），本门禁是同族第三个触发器。
 
-判据（W960 立窗·W921「正本 110 段」先例沉淀为正式口径·W1120 补体积第二阈值）：
-  C1 CHANGELOG 正本段数 ≤ 110（超窗 FAIL）
-  C2 file-index 正本段数 ≤ 110（超窗 FAIL）
+判据（W960 立窗·W921「正本 110 段」先例沉淀为正式口径·W1120 补体积第二阈值·
+W1340 把段数窗改为**由字节窗推导**——原固定 110 段在 3.7KB/段的实态下约 430KB ≫ 262KB
+⇒ 段数判据永不先触发（「名存实亡」）；现段数窗 = MAX_DOC_BYTES ÷ 每段设计上限 4KB = 64 段，
+与体积窗同源且**先于**体积窗触发，恢复「条数」维度的真实保护）：
+  C1 CHANGELOG 正本段数 ≤ SEG_WINDOW（超窗 FAIL）
+  C2 file-index 正本段数 ≤ SEG_WINDOW（超窗 FAIL）
   C8 正本体积字节 ≤ MAX_DOC_BYTES（262144·单一事实源在 utils/gate_common·W1315 下沉）
      —— **双阈值「先到者为准」**：段数窗与字节窗任一超即红（W1120 立）
      —— 字节阈值常量自 W1315 起由共享层持有（原寄居 batch_closeout 顶层 ⇒ 入口互引成环）
@@ -49,11 +52,21 @@ RE_CL_SEG = re.compile(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*�
 RE_FI_SEG = re.compile(r"^## (W\d+) ", re.M)
 RE_HANDOVER_BLOCK = re.compile(r"^- \*\*(?:v[\d.]+ )?W\d+[^*]*\*+：", re.M)
 
-# 正本窗口（文档规范 §8·W960 立窗）
+# 正本窗口（文档规范 §8·W960 立窗·W1340 段数窗由字节窗推导）
 # 台账行窗口单一事实源 = utils/gate_common.LEDGER_WINDOW（W1315 下沉）
+#
+# W1340（P2 根修）：段数窗原为固定 110，而实测段均 ≈3.7KB ⇒ 110 段 ≈ 430KB，
+# 体积窗（262144B）恒先触发 ⇒ 段数判据形同虚设。现按「每段设计上限 4KB」反推：
+#   SEG_WINDOW = 262144 ÷ 4096 = 64 段
+# 该值 < 体积窗可容纳的段数（按当前段均 ≈69 段）⇒ 段数窗**先于**体积窗生效，
+# 恢复「条数爆炸」维度的保护；同时给体积窗留出约 25KB 水位。
+SEG_WINDOW_BYTES_FLOOR = 4096
+SEG_WINDOW = MAX_DOC_BYTES // SEG_WINDOW_BYTES_FLOOR
+assert SEG_WINDOW * SEG_WINDOW_BYTES_FLOOR <= MAX_DOC_BYTES, "段数窗与体积窗推导关系被破坏"
+
 WINDOWS = {
-    os.path.join("CHANGELOG.md"): 110,
-    os.path.join("scripts", "output", "file-index.md"): 110,
+    os.path.join("CHANGELOG.md"): SEG_WINDOW,
+    os.path.join("scripts", "output", "file-index.md"): SEG_WINDOW,
     os.path.join("docs", "00-导读", "W批次编号对账表.md"): LEDGER_WINDOW,
 }
 # W1278 瘦身治理挂窗（用户批准挂载）：pitfalls/AGENTS 独立字节上限
@@ -399,17 +412,18 @@ def _self_test() -> int:
     if count_segments(fi, "file-index") != 2:
         fails.append("file-index 段计数应 2")
 
-    # evaluate：窗口边界（110 过 / 111 红）+ 缺文件 fail-closed
-    if evaluate({"CHANGELOG.md": 110, os.path.join("scripts", "output", "file-index.md"): 110, os.path.join("docs", "00-导读", "W批次编号对账表.md"): 60}) != []:
+    # evaluate：窗口边界（SEG_WINDOW 过 / +1 红）+ 缺文件 fail-closed
+    w = SEG_WINDOW
+    if evaluate({"CHANGELOG.md": w, os.path.join("scripts", "output", "file-index.md"): w, os.path.join("docs", "00-导读", "W批次编号对账表.md"): 60}) != []:
         fails.append("负样本：恰在窗口上必须 0 FAIL")
-    out = evaluate({"CHANGELOG.md": 111, os.path.join("scripts", "output", "file-index.md"): 5, os.path.join("docs", "00-导读", "W批次编号对账表.md"): 60})
-    if len(out) != 1 or "111" not in out[0]:
-        fails.append("111 段必须恰好产出 1 条 FAIL 且带计数")
+    out = evaluate({"CHANGELOG.md": w + 1, os.path.join("scripts", "output", "file-index.md"): 5, os.path.join("docs", "00-导读", "W批次编号对账表.md"): 60})
+    if len(out) != 1 or str(w + 1) not in out[0]:
+        fails.append("窗口 +1 段必须恰好产出 1 条 FAIL 且带计数")
     if evaluate({}) == []:
         fails.append("负样本：文件缺失必须 fail-closed 判红（禁静默跳过）")
 
     # 修法指引分治（W976）：台账超窗必须指向 archive_ledger_rows（段式工具不管台账）
-    out_led = evaluate({"CHANGELOG.md": 110, os.path.join("scripts", "output", "file-index.md"): 110,
+    out_led = evaluate({"CHANGELOG.md": w, os.path.join("scripts", "output", "file-index.md"): w,
                         os.path.join("docs", "00-导读", "W批次编号对账表.md"): 61})
     if len(out_led) != 1 or "61" not in out_led[0] or "archive_ledger_rows" not in out_led[0]:
         fails.append("台账超窗必须恰好 1 条 FAIL 且指引 archive_ledger_rows")

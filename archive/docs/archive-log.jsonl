@@ -1,0 +1,1 @@
+{"event": "init", "ts": "2026-11-27T23:39:18+08:00", "tool": "archive_segments.py", "note": "迁移台账建立（W1340·P1-2）：此后每次 --apply 迁移追加一条 migrate 记录（每面一条）；本文件只追加不改写。"}

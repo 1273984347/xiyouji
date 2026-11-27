@@ -30,16 +30,22 @@ from __future__ import annotations
 
 import argparse
 import datetime
+import json
 import os
 import re
 import sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import batch_cascade as bc  # noqa: E402 — 复用 load()（混行尾 fail-closed）与段正则
+from utils import gate_common as gc  # noqa: E402 — 体积上限单一事实源（W1315 下沉）
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RE_CL_SEG = re.compile(r"^### (?:v[\d.]+（[^）]*）：W(\d+)|W(\d+)（[^）]*）：)", re.M)
 RE_FI_SEG = re.compile(r"^## (W\d+) ", re.M)
+
+# W1340（P1-2）：迁移台账——每次 --apply 追加（每面一条），用于回答「这批段是什么时候、
+# 按什么水位迁走的」。只追加不改写；与归档容器同目录，随批入库。
+ARCHIVE_LOG = os.path.join("archive", "docs", "archive-log.jsonl")
 
 TARGETS = {
     "changelog": {
@@ -330,8 +336,49 @@ def _plan_for_face(s, re_seg, keep, max_bytes, chunk, boundary, align_min):
     return plan(s, re_seg, keep)
 
 
-def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None, align_min=None):
-    """执行单面迁移。返回 (迁出段号清单, 描述行清单)。dry-run 时零落盘。"""
+def _write_all_or_rollback(writes):
+    """跨面事务写（W1340·P1-1）：全部内容先在内存算定，再逐件写；任一写失败回滚已写件。
+
+    病根：原实现每面 move() 内直接落盘 ⇒ 第一面写成功后第二面断言失败会留下**半迁移**
+    （正本少了段、归档没多段，或两面下界不一致）⇒ 下次运行断言必红且无法自愈。
+    """
+    originals = {}
+    done = []
+    try:
+        for path_, content in writes:
+            if path_ not in originals:
+                with open(path_, "rb") as f:
+                    originals[path_] = f.read()
+            with open(path_, "w", encoding="utf-8", newline="") as f:
+                f.write(content)
+            done.append(path_)
+    except Exception:
+        for path_ in done:
+            try:
+                with open(path_, "wb") as f:
+                    f.write(originals[path_])
+            except OSError:
+                pass
+        raise
+
+
+def _append_archive_log(records, batch_tag):
+    """迁移台账追加（W1340·P1-2）：每条记录一行 JSON（只追加·LF）。"""
+    if not records:
+        return
+    log_path = os.path.join(ROOT, ARCHIVE_LOG)
+    os.makedirs(os.path.dirname(log_path), exist_ok=True)
+    ts = datetime.datetime.now().astimezone().isoformat(timespec="seconds")
+    with open(log_path, "a", encoding="utf-8", newline="\n") as f:
+        for rec in records:
+            line = {"ts": ts, "event": "migrate", "batch": batch_tag}
+            line.update(rec)
+            f.write(json.dumps(line, ensure_ascii=False) + "\n")
+
+
+def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None, align_min=None,
+         defer=False):
+    """执行单面迁移。返回 {moved_ws, writes, record}；defer=True 时不落盘（由调用方统一写）。"""
     cfg = TARGETS[target]
     src_rel, arc_rel, re_seg, arc_mode = cfg["src"], cfg["arc"], cfg["re_seg"], cfg["arc_mode"]
     src_path = os.path.join(ROOT, src_rel)
@@ -348,7 +395,7 @@ def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None
             print("[SKIP] %s 段数 %d·体积未超阈值·无段可迁" % (src_rel, n_seg))
         else:
             print("[SKIP] %s 段数 %d ≤ keep %d——未超窗·无段可迁" % (src_rel, n_seg, keep))
-        return []
+        return {"moved_ws": [], "writes": [], "record": None}
     # W1130 根修：迁出块不得吞掉正本末尾文件级块（含编号规则串）=> 否则版本面推进器 fail-closed
     moved_text, kept_text, _tail = _split_for_move(s, cut)
 
@@ -429,64 +476,91 @@ def move(target, keep, apply, batch_tag, max_bytes=None, chunk=50, boundary=None
     print("  %s：迁出 %d 段（W%d-W%d）·留存 %d 段·%s"
           % (src_rel, len(moved_ws), min(moved_ws), max(moved_ws), src_after, insert_desc))
 
-    if apply:
-        with open(src_path, "w", encoding="utf-8", newline="") as f:
-            f.write(new_src)
-        with open(arc_path, "w", encoding="utf-8", newline="") as f:
-            f.write(new_arc)
+    writes = [(src_path, new_src), (arc_path, new_arc)] if (apply and defer) else []
+    if apply and not defer:
+        _write_all_or_rollback([(src_path, new_src), (arc_path, new_arc)])
         print("  已落盘 %s + %s" % (src_rel, arc_rel))
-    return moved_ws
+    record = {
+        "target": target,
+        "src": src_rel.replace(os.sep, "/"),
+        "archive": arc_rel.replace(os.sep, "/"),
+        "moved_count": len(moved_ws),
+        "w_min": min(moved_ws),
+        "w_max": max(moved_ws),
+        "src_segments_before": src_before,
+        "src_segments_after": src_after,
+        "src_bytes_before": len(s.encode("utf-8")),
+        "src_bytes_after": len(new_src.encode("utf-8")),
+    }
+    return {"moved_ws": moved_ws, "writes": writes, "record": record}
 
 
 def main() -> int:
-    ap = argparse.ArgumentParser(description="治理文档版段滚动归档（W960）")
+    ap = argparse.ArgumentParser(description="治理文档版段滚动归档（W960·W1340 起默认体积档）")
     ap.add_argument("--target", choices=["changelog", "file-index", "both"], default="both")
-    ap.add_argument("--keep", type=int, default=109,
-                    help="正本保留段数（默认 109 = 窗口 110 - 本批级联将插入的 1 段）")
+    ap.add_argument("--keep", type=int, default=None,
+                    help="段数档：正本保留段数（仅显式指定时生效；不给则默认体积档）")
     ap.add_argument("--max-bytes", type=int, default=None,
-                    help="正本体积上限（字节）·给了即按体积阈值迁出·每批 --chunk 段·循环到达标·未超阈值零动作")
+                    help="正本体积硬上限（字节）·默认 %d（utils/gate_common.MAX_DOC_BYTES）" % gc.MAX_DOC_BYTES)
+    ap.add_argument("--headroom", type=int, default=8192,
+                    help="体积水位（字节）：实际迁移目标 = max-bytes - headroom（默认 8192）")
     ap.add_argument("--chunk", type=int, default=50,
-                    help="体积模式每次迁出的段数（默认 50·最后一批可不足）")
+                    help="体积模式段数评估粒度（兼容参数·W1308 起迁出量由体积二分决定）")
     ap.add_argument("--apply", action="store_true")
     ap.add_argument("--dry-run", action="store_true")
     ap.add_argument("--batch-tag", default="W960", help="归档注记的批次号")
     args = ap.parse_args()
     if not (args.apply or args.dry_run):
         ap.error("必须指定 --dry-run 或 --apply")
-    targets = ["changelog", "file-index"] if args.target == "both" else [args.target]
-    moved_all = {}
+    # W1340（P0-1）：默认走**体积档**——原默认 --keep 109 是段数档，与真实约束（字节窗）错位。
+    if args.keep is None and args.max_bytes is None:
+        args.max_bytes = gc.MAX_DOC_BYTES
+    budget = None
     if args.max_bytes is not None:
-        moved_all = {}
-        faces = [t for t in ("changelog", "file-index") if args.target in (t, "both")]
+        if args.headroom < 0 or args.headroom >= args.max_bytes:
+            ap.error("--headroom 必须 >=0 且 < --max-bytes")
+        budget = args.max_bytes - args.headroom  # W1340（P0-2）：留水位，不迁到贴线
+
+    faces = [t for t in ("changelog", "file-index") if args.target in (t, "both")]
+    results = {}
+    if budget is not None:
         ws_all = {t: _face_ws(t) for t in faces}
         vol_plans = {}
         for t in faces:
             s, _nl = bc.load(TARGETS[t]["src"])
-            vol_plans[t] = plan_by_size(s, TARGETS[t]["re_seg"], args.max_bytes, args.chunk)
+            vol_plans[t] = plan_by_size(s, TARGETS[t]["re_seg"], budget, args.chunk)
         after = {}
         for t in faces:
             mv = vol_plans[t][1]
             after[t] = _min_after(ws_all[t], mv) if mv else min(ws_all[t])
         target = max(after.values())
         for t in faces:
-            moved_all[t] = move(t, None, args.apply, args.batch_tag, align_min=target)
-        final = {t: _min_after(ws_all[t], moved_all[t] or []) for t in faces}
+            results[t] = move(t, None, args.apply, args.batch_tag, align_min=target, defer=True)
+        final = {t: _min_after(ws_all[t], results[t]["moved_ws"]) for t in faces}
         assert len(set(final.values())) == 1, (
             "两面未迁到同一 W 号下界：%s" % " ".join("%s=W%s" % (t, final[t]) for t in faces))
         for t in faces:
             s, _nl = bc.load(TARGETS[t]["src"])
             cut, _mv = plan_align_below(s, TARGETS[t]["re_seg"], target)
             size = len(s[:cut].encode('utf-8')) if cut is not None else len(s.encode('utf-8'))
-            assert size <= args.max_bytes, (
-                "%s 按 target=W%d 迁出后体积 %d 仍超窗 %d——须提高对齐下界或压缩登记面"
-                % (t, target, size, args.max_bytes))
+            assert size <= budget, (
+                "%s 按 target=W%d 迁出后体积 %d 仍超水位 %d（硬上限 %d - 水位 %d）——"
+                "须提高对齐下界或压缩登记面"
+                % (t, target, size, budget, args.max_bytes, args.headroom))
         print("[ALIGN] 两面同下界 W%d（正本均保留 W 号 >= %d）" % (final[faces[0]], final[faces[0]]))
     else:
-        for t in targets:
-            moved_all[t] = move(t, args.keep, args.apply, args.batch_tag)
+        for t in faces:
+            results[t] = move(t, args.keep, args.apply, args.batch_tag, defer=True)
+
+    moved_all = {t: results[t]["moved_ws"] for t in faces}
     if not args.apply:
         print("[DRY-RUN] 未落盘。加 --apply 写回。")
     else:
+        # W1340（P1-1）：跨面事务写——全部断言通过后才落盘，任一写失败回滚已写件。
+        writes = [w for t in faces for w in results[t]["writes"]]
+        _write_all_or_rollback(writes)
+        # W1340（P1-2）：迁移台账（每面一条·只追加）。
+        _append_archive_log([results[t]["record"] for t in faces if results[t]["record"]], args.batch_tag)
         print("[APPLY] 归档完成：%s" % ", ".join("%s→%d 段" % (t, len(w)) for t, w in moved_all.items()))
     return 0
 

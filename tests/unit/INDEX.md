@@ -10,7 +10,7 @@
 
 - （无）
 
-## 文件（152）
+## 文件（154）
 
 ### Python 脚本
 
@@ -20,6 +20,7 @@
 - `test_archive_segments.py`
 - `test_archive_segments_migration_plan.py`
 - `test_archive_segments_plan_scope.py`
+- `test_archive_segments_transaction.py`
 - `test_audit_trigger.py`
 - `test_backlog_review.py`
 - `test_batch_cascade_status_wnum.py`
@@ -61,6 +62,7 @@
 - `test_folder_docs_gate.py`
 - `test_folder_docs_summary.py`
 - `test_four_digit_wnum.py`
+- `test_history_grep.py`
 - `test_inline_css_resync.py`
 - `test_inlined_css_source.py`
 - `test_ledger_first_hash.py`

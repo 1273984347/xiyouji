@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-27T00:18:58.466Z",
+ "generated_at": "2026-11-27T15:40:51.267Z",
  "threshold": 3,
  "scope": "data,en",
  "bg_mode": "body",
@@ -183,7 +183,7 @@
   "en/underworld-power-network.html": "fb90b0d56d42",
   "en/visual-art.html": "3b0eb2768bbe",
   "en/workplace.html": "697bb1b73c40",
-  "data/cross-time-danmaku.html": "142b16d4c478"
+  "data/cross-time-danmaku.html": "0f3aa3324836"
  },
  "by_page": {}
 }

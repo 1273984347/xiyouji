@@ -1292,7 +1292,11 @@ def main():
 
 
 # 体积窗口（文档规范 §8·W960 立窗）：CHANGELOG / file-index 各 110 段、台账 60 行。
-WIN_SEGMENTS = 110
+# W1340（P2 跟随面）：段数窗不再写死 110——与门禁同源（check_doc_size_budget.SEG_WINDOW
+# 由字节窗推导，现 64）。原 110 与门禁 64 脱钩会让「门禁判红而 cascade 回窗不迁」死锁。
+import check_doc_size_budget as _dsb_mod  # noqa: E402
+
+WIN_SEGMENTS = _dsb_mod.SEG_WINDOW
 WIN_LEDGER = 60
 _WINDOW_RUNNER = lambda cmd: __import__("subprocess").run(  # noqa: E731 — 单测注入点
     cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")

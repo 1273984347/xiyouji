@@ -1,3 +1,17 @@
+### W1340（2026-11-27）：腾窗工具链六项收口：体积档默认与跨面事务
+
+> **来源**：用户 2026-11-27 P3 清单六项（评估中仅 P0-3 已批，其余六项本次一并收口）。
+> - **P0-1 默认体积档**：`archive_segments.py` 的 `--keep` 默认由 109（段数档）改为 None；未显式给 `--keep`/`--max-bytes` 时自动走体积档（`MAX_DOC_BYTES=262144`，单一事实源 utils/gate_common）——原段数档与真实约束（字节窗）错位。
+> - **P0-2 水位**：新增 `--headroom`（默认 8192 字节），实际迁移目标 = 硬上限 − 水位，不再每次腾到贴线；最终对齐断言同用水位口径。
+> - **P1-1 跨面事务**：`move()` 增 `defer` 模式——两面内容先在内存算定、全部守恒断言通过后才统一落盘（`_write_all_or_rollback`），任一写失败回滚已写件，消除「changelog 写成功、file-index 断言失败」的半迁移。
+> - **P1-2 迁移台账**：新增 `archive/docs/archive-log.jsonl`（只追加 JSONL·每面一条 migrate 记录：批次/迁出段数/W 区间/迁前后段数与字节），并登记进维护手册单一写入者表。
+> - **P1-3 归档检索**：新增 `scripts/history_grep.py`——一次覆盖一级卷/tier2/清单/迁移台账，支持字面量/正则/忽略大小写/每文件上限/JSON；退出码 0 有命中、1 无命中；维护手册场景 E 改以它为首选。
+> - **P2 段数窗**：`check_doc_size_budget.py` 的段数窗由固定 110 改为**由字节窗推导** `SEG_WINDOW = 262144 ÷ 4096 = 64`（附一致性断言）——原 110 段在段均 ≈3.7KB 时约 430KB ≫ 262KB，段数判据永不先触发；现段数窗先于体积窗生效并留 ≈25KB 水位。**属判据收紧（非放宽）**，文档规范 §8 与维护手册同步。**跟随面**：`batch_cascade.WIN_SEGMENTS` 改为引用 `SEG_WINDOW`（回窗与门禁同源；否则门禁 64 而回窗 110 ⇒ 越窗不迁的死锁）；`test_batch_spec` 窗口断言改为与 `SEG_WINDOW` 对拍；`check_doc_size_budget --self-test` 的窗口边界样本改用 `SEG_WINDOW`（原硬编码 110）。
+> - **验证**：pytest 归档工具链 42 例全过（含新增事务回滚 3 例 + history_grep 5 例 + 段数窗推导 1 例）；`archive_segments --dry-run` 默认档零迁移（61 段·226KB）；`check_archive_health` T5/T6 0 FAIL；`gen_archive_manifest --check` 与磁盘一致；第 74 槽窗口 `{CHANGELOG:64, file-index:64, 台账:60}` 0 FAIL；`history_grep W1340` 命中迁移台账。
+> - **过程记录（如实）**：收官链首轮 gate 红 3 项，均为「判据跟随面」而非功能缺陷——① 第 42 槽要求新脚本四面引用，测试面只认 `import <stem>` / `from <stem> import` 形态（`import … as` 不算）⇒ `test_history_grep` 改 from-import；② `check_doc_size_budget --self-test` 与 `test_batch_spec` 硬编码 110 ⇒ 改用 `SEG_WINDOW` 对拍；③ ruff 结构档嵌套深度 6>4 ⇒ 抽 `_scan_file`。修后 verify 全量与 pytest 全量复跑绿。
+> - **文件**：见 file-index W1340 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1339（2026-11-27）：方案 D 主体：本地问答 trace 与 OBS-19
 
 > **来源**：用户 2026-11-27 指令「先执行 P0 推送，再 P1 之后再 P2 P3 P4」——P2 = 可观测性决策方案 D 主体（D-1~D-5）。
@@ -859,7 +873,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1339），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1340），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

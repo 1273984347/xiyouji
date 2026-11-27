@@ -30,11 +30,19 @@ def test_count_segments_two_forms():
 
 
 def test_evaluate_window_boundary():
-    counts = {"CHANGELOG.md": 110, "scripts/output/file-index.md": 110, "docs/00-导读/W批次编号对账表.md": 60}
+    w = dsb.SEG_WINDOW  # W1340：段数窗由字节窗推导（262144 ÷ 4096 = 64）
+    counts = {"CHANGELOG.md": w, "scripts/output/file-index.md": w, "docs/00-导读/W批次编号对账表.md": 60}
     assert dsb.evaluate(counts) == []
-    counts2 = {"CHANGELOG.md": 111, "scripts/output/file-index.md": 5, "docs/00-导读/W批次编号对账表.md": 60}
+    counts2 = {"CHANGELOG.md": w + 1, "scripts/output/file-index.md": 5, "docs/00-导读/W批次编号对账表.md": 60}
     out = dsb.evaluate(counts2)
-    assert len(out) == 1 and "111" in out[0] and "archive_segments" in out[0]
+    assert len(out) == 1 and str(w + 1) in out[0] and "archive_segments" in out[0]
+
+
+def test_seg_window_derived_from_byte_cap():
+    """W1340（P2）：段数窗必须由体积窗推导，不得回退为与字节脱钩的固定值。"""
+    assert dsb.SEG_WINDOW == dsb.MAX_DOC_BYTES // dsb.SEG_WINDOW_BYTES_FLOOR
+    assert dsb.SEG_WINDOW * dsb.SEG_WINDOW_BYTES_FLOOR <= dsb.MAX_DOC_BYTES
+    assert dsb.WINDOWS["CHANGELOG.md"] == dsb.SEG_WINDOW
 
 
 def test_evaluate_missing_file_fails_closed():
@@ -44,14 +52,14 @@ def test_evaluate_missing_file_fails_closed():
 def test_evaluate_ledger_hint_points_to_ledger_tool():
     """台账超窗的修法指引必须指向台账行归档工具（W976）——段式 archive_segments.py
     不管台账，旧统一文案对 C3 是死路指引（超窗期恰逢台账修剪器 A5 崩溃=双重断链）。"""
-    counts = {"CHANGELOG.md": 110, "scripts/output/file-index.md": 110,
+    counts = {"CHANGELOG.md": dsb.SEG_WINDOW, "scripts/output/file-index.md": dsb.SEG_WINDOW,
               "docs/00-导读/W批次编号对账表.md": 61}
     out = dsb.evaluate(counts)
     assert len(out) == 1 and "61" in out[0] and "archive_ledger_rows" in out[0]
 
 
 def test_real_files_within_window():
-    """现网树必须在窗内（归档批后 109+级联=110）+ 脚注 ≤4KB——防回退锚。"""
+    """现网树必须在窗内（W1340 起段数窗 64·体积窗 262144B 双判）+ 脚注 ≤4KB——防回退锚。"""
     counts, _, extra_fails = dsb.collect()
     assert dsb.evaluate(counts) == []
     assert extra_fails == []
