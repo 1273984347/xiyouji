@@ -10,7 +10,7 @@
 
 - （无）
 
-## 文件（155）
+## 文件（156）
 
 ### Python 脚本
 
@@ -73,6 +73,7 @@
 - `test_new_page.py`
 - `test_obs_sample.py`
 - `test_page_css_deps.py`
+- `test_page_h1_unique.py`
 - `test_page_router.py`
 - `test_path_guard.py`
 - `test_perf_optimize.py`

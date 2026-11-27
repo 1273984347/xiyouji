@@ -1,3 +1,14 @@
+### W1349（2026-11-28）：页面 H1 唯一性：两页删正文重复标题 + 全站单例判据
+
+> **来源**：用户 2026-11-28「先修复那两个 h1 重复问题」——W1347 已披露、W1348 登记为遗留的存量缺陷。
+> - **缺陷**：`character-semantic-network.html` 与 `theological-intervention-network.html` 的正文 `<header>` 各复制了一份 hero 的 `<h1>`（同句）。后果有两层：读屏与抓取会把标题念/收两次；W1347 批量改标题时必须两处同步改，漏一处的形态是静默的「标题与正文不一致」。
+> - **修法**：删正文 `<header>` 里的 `<h1>`，hero 的 `<h1>` 保留为页面唯一标题；副标题 / 元信息行 / 面包屑原样保留（这两页的 header 块仍承载版本与方向注记，不做整块删除）。CSS 里既有的 `header h1` 规则不动（对站点 header 无影响，属可留的死规则，另批清理）。
+> - **判据落地（教训转机器判据）**：新增 `tests/unit/test_page_h1_unique.py`——扫描 `site/data/*.html`（排除模板壳），每页**恰好 1 个** `<h1>` 且非空；**先剥 HTML 注释再数**（模板注释里写着 `<h1>`/`<title>` 字样，不剥会假红，W1348 实证）。两例现过。
+> - **验证**：两页 `<h1>` 计数 grep 实测各 1；`pytest tests/unit/test_page_h1_unique.py` 2 passed；`verify_delivery --scope full` 与提交后 `pre_push_gate` 结果见收官记录。
+> - **边界**：只处理 `site/data/` 中文可视化页；`site/en/` 镜像页与 `site/reader/**` 未纳入本判据（reader 侧已有 `check_reader_integrity` 的双 H1 判据），如需全站化另批扩面。
+> - **文件**：见 file-index W1349 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1348（2026-11-28）：对抗审查 P0 修复：页脚标签去注释污染 + title 消费者收口
 
 > **来源**：W1347 派出的对抗式审查判定**不通过**——6 个页面的页脚「同类可视化推荐」链接文字变成模板注释残句（如「、.hero 内标题 / 副标题 / tagline 3. 在 EMBEDDED_DATA…」），用户可见面已污染。
@@ -884,7 +895,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1348），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1349），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
