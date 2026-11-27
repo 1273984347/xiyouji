@@ -483,7 +483,7 @@
     },
     {
       "page": "site/data/chapter-structure-graph.html",
-      "sha": "0b909a90ea8c",
+      "sha": "5652a8921d48",
       "static": {
         "svg": true,
         "cls": true,
@@ -1267,7 +1267,7 @@
       "visibleLegend": false,
       "seriesEvidence": 4,
       "seriesDesc": "填充色组 4·描边色组 3·同 x 堆叠段 1",
-      "consoleErrors": 15,
+      "consoleErrors": 17,
       "verdict": "multi_nolegend",
       "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
     },
@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "7f0a6ebdc47c",
+      "sha": "25d31261351d",
       "static": {
         "svg": true,
         "cls": true,
@@ -2113,7 +2113,7 @@
     },
     {
       "page": "site/data/four-heavenly-kings-artifacts.html",
-      "sha": "ae9a16dbddba",
+      "sha": "dcde4f7b58e8",
       "static": {
         "svg": true,
         "cls": true,
@@ -3633,7 +3633,7 @@
     },
     {
       "page": "site/data/ming-political-thought-comparison.html",
-      "sha": "9a1c69993c4c",
+      "sha": "58373295a2e4",
       "static": {
         "svg": true,
         "cls": true,
@@ -3773,7 +3773,7 @@
     },
     {
       "page": "site/data/monster-capability-radar.html",
-      "sha": "2f6bf4a78a49",
+      "sha": "28410afe301b",
       "static": {
         "svg": true,
         "cls": true,
@@ -4363,7 +4363,7 @@
     },
     {
       "page": "site/data/narrative-rhythm-curve.html",
-      "sha": "8ed04cbefe5b",
+      "sha": "b7ffcf124bae",
       "static": {
         "svg": true,
         "cls": true,
@@ -5333,7 +5333,7 @@
     },
     {
       "page": "site/data/story-timeline.html",
-      "sha": "62a5c9571770",
+      "sha": "8e8c14d0f1b6",
       "static": {
         "svg": false,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "68caa03ec7ea",
+      "sha": "bd074f074728",
       "static": {
         "svg": false,
         "cls": true,
@@ -5960,7 +5960,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
       "svgKinds": [
         {
           "cls": "",
@@ -5968,9 +5968,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 30,
+          "texts": 29,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 30"
+          "basis": "1100x480·图元 13·文本 29"
         },
         {
           "cls": "",
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "fc90a50dbf4e",
+      "sha": "75a21eade37c",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "31c7941dd17c",
+      "sha": "ccccc7c0322c",
       "static": {
         "svg": true,
         "cls": false,
@@ -7565,11 +7565,11 @@
           "cls": "string-svg",
           "id": "stringSvg",
           "w": 1022,
-          "h": 1290,
+          "h": 1272,
           "marks": 9,
           "texts": 0,
           "kind": "chart",
-          "basis": "1022x1290·图元 9·文本 0"
+          "basis": "1022x1272·图元 9·文本 0"
         },
         {
           "cls": "ic-moon",
@@ -7586,7 +7586,7 @@
       "visibleLegend": false,
       "seriesEvidence": 4,
       "seriesDesc": "填充色组 4·描边色组 3·同 x 堆叠段 1",
-      "consoleErrors": 15,
+      "consoleErrors": 17,
       "verdict": "multi_nolegend",
       "basis": "渲染后无可见图例·但系列证据 4 ⇒ 多系列却无图例"
     },
@@ -12209,7 +12209,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
       "svgKinds": [
         {
           "cls": "",
@@ -12217,9 +12217,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 29,
+          "texts": 30,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 29"
+          "basis": "1100x480·图元 13·文本 30"
         },
         {
           "cls": "",

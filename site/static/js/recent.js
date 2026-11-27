@@ -16,6 +16,8 @@
     if (parts.length > 1 && (title === '详解西游记' || title === 'JTTW Notes')) {
       title = (parts[1] || '').trim();
     }
+    // W1348：标题已改「专题名：结论」⇒ 最近浏览只留专题名（不带结论段）
+    title = title.split('：')[0].trim();
     if (!title) return;
     var item = { href: 'data/' + name, title: title };
     var list = [];

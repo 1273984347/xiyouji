@@ -38,7 +38,7 @@
    "counts": {}
   },
   "data/chapter-structure-graph.html": {
-   "sha1": "2ce84b25fdda1bdcaa25d0ac181db1cd9a940e9d",
+   "sha1": "59bc57e86c89a001fda7e0b98c357522693fed27",
    "counts": {}
   },
   "data/character-appearance.html": {
@@ -90,7 +90,7 @@
    "counts": {}
   },
   "data/cross-time-danmaku.html": {
-   "sha1": "fbb74f4311d31a40138ec139ef46dc7541e965ae",
+   "sha1": "dc36c30535c0db911e7710354fcb38f2e2f77d89",
    "counts": {}
   },
   "data/cultural-misreading.html": {
@@ -134,7 +134,7 @@
    "counts": {}
   },
   "data/four-heavenly-kings-artifacts.html": {
-   "sha1": "43a6bf1bd3526d893f53d73617407159f6d887c6",
+   "sha1": "44f74c1cc024a1f04afb109ac57bda97f016b1c0",
    "counts": {}
   },
   "data/game-webnovel.html": {
@@ -226,7 +226,7 @@
    "counts": {}
   },
   "data/ming-political-thought-comparison.html": {
-   "sha1": "4768e2c964f6b571f828a2b8462d4e0f6ab46fcd",
+   "sha1": "80d2b3126c75a64d8e0dbe51706789c32d914aa7",
    "counts": {}
   },
   "data/monster-background.html": {
@@ -234,7 +234,7 @@
    "counts": {}
   },
   "data/monster-capability-radar.html": {
-   "sha1": "a068a76b03aae7e943373b2421104b4dbfb6d811",
+   "sha1": "294d0a257b24cc7ee1456a241a345414d707baf5",
    "counts": {}
   },
   "data/monster-ecology-network.html": {
@@ -266,7 +266,7 @@
    "counts": {}
   },
   "data/narrative-rhythm-curve.html": {
-   "sha1": "e028be40b32e6cfa124c0480aa9cb3f2e888998c",
+   "sha1": "0d6f53a85a84de160c39b3eeb926a8fe29c7937e",
    "counts": {}
   },
   "data/narratology-12d-network.html": {
@@ -326,11 +326,11 @@
    "counts": {}
   },
   "data/story-timeline.html": {
-   "sha1": "a39978753d27f0d6f840accf77083ce2d8672f4f",
+   "sha1": "9c32a7c3600f64e0d28e554d589a74ab5d5a168f",
    "counts": {}
   },
   "data/tag-cloud.html": {
-   "sha1": "c38ff341eb038358a6ddb646b773de60120842ac",
+   "sha1": "b1a9a7bff22fff656fcaadbfcb0a954c7de4cd9b",
    "counts": {}
   },
   "data/text-evolution.html": {
@@ -382,7 +382,7 @@
    "counts": {}
   },
   "dukou-engine.html": {
-   "sha1": "fdc0f3324e05d4f066cae70bb835c9be80933a30",
+   "sha1": "919838396fcd32e9aed34bb119922c34fa3e5197",
    "counts": {}
   },
   "guide.html": {
@@ -390,7 +390,7 @@
    "counts": {}
   },
   "index.html": {
-   "sha1": "9f27d096a66f576fe87e1f9c8640cee2154354cf",
+   "sha1": "5f3d401a201feddd7bbf6cd0c8b014c9550b763b",
    "counts": {}
   },
   "rum-viewer.html": {
@@ -954,5 +954,5 @@
    "counts": {}
   }
  },
- "generated_at": "2026-11-27T20:46:46.714Z"
+ "generated_at": "2026-11-27T22:08:55.629Z"
 }

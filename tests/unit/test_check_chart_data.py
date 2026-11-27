@@ -54,7 +54,11 @@ def test_p1_live_tree_passes():
     r = _run()
     assert r.returncode == 0, "图表自洽门禁在现网树上 FAIL：\n%s" % r.stdout[-1500:]
     assert "FAIL 0 页" in r.stdout, "缺 0 FAIL 汇总行（疑似未真正执行）：\n%s" % r.stdout[-800:]
-    expect = "基线豁免 %d 页" % len(ccd.load_baseline())
+    # 期望值由基线**文件本身**独立推导（不走 ccd.load_baseline，避免「加载器坏 ⇒ 期望也变 0」的自指）
+    base = SCRIPTS / "output" / "radar-family-baseline.txt"
+    n = sum(1 for ln in base.read_text(encoding="utf-8").splitlines()
+            if ln.strip() and not ln.lstrip().startswith("#"))
+    expect = "基线豁免 %d 页" % n
     assert expect in r.stdout, "基线豁免页数与基线文件不符（期望「%s」）：\n%s" % (expect, r.stdout[-800:])
 
 

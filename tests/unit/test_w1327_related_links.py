@@ -119,6 +119,27 @@ def test_dashboard_deeplink_code_present():
     assert "#cat=" in html
 
 
+def test_title_ignores_template_comment():
+    """W1348 P0 回归：模板注释里的 `<title>` 字样不得被当成标题（poetry-density / glossary 实证）。"""
+    html = ("<!-- 使用步骤：2. 修改 <title>、.hero 内标题 / 副标题 / tagline\n"
+            "     3. 在 EMBEDDED_DATA 区块替换 -->\n"
+            "<html><head><title>百回诗词密度：第9回韵文密度17.3%全书最高 · 详解西游记</title></head></html>")
+    assert rl._title_from_html(html) == "百回诗词密度"
+
+
+def test_title_strips_conclusion_segment():
+    """W1348：标题形态「专题名：结论 · 详解西游记」⇒ 标签只取专题名。"""
+    html = "<title>语言风格雷达图：八戒口语化9.2最高，如来最低 · 详解西游记</title>"
+    assert rl._title_from_html(html) == "语言风格雷达图"
+
+
+def test_title_rejects_garbage_falls_back_to_h1():
+    """W1348：无合法 `<title>` 时回退 h1；含 `、`/`<` 的残句判非法，不写进标签。"""
+    assert rl._title_from_html("<h1>术语表 · 名物典故速查</h1>") == "术语表 · 名物典故速查"
+    assert rl._title_from_html("<title>、.hero 内标题 / 副标题</title><h1>真标题</h1>") == "真标题"
+    assert rl._title_from_html("<title>、.hero 内标题</title>") == ""
+
+
 def test_cli_check_pass():
     r = subprocess.run(
         [sys.executable, str(SCRIPT), "--check"],

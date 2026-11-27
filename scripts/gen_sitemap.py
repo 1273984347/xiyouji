@@ -66,7 +66,8 @@ def main() -> None:
             f"<changefreq>monthly</changefreq><priority>{prio}</priority></url>"
         )
     lines.append("</urlset>")
-    SITEMAP.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    # W1348：显式 newline="\n"——默认平台换行会让工作树留 CRLF（与 eol=lf 契约背离·每次重跑留脏）
+    SITEMAP.write_text("\n".join(lines) + "\n", encoding="utf-8", newline="\n")
     print(f"[OK] {SITEMAP.relative_to(ROOT)} {len(pages)} URLs")
 
 

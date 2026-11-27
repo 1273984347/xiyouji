@@ -56,7 +56,8 @@
   var T = I18N[LANG];
 
   function docTitle() {
-    var t = (document.title || '').split(/[·|—]/)[0].trim();
+    // W1348：标题现役形态「专题名：结论 · 详解西游记」⇒ 读屏标签只取专题名
+    var t = (document.title || '').split(/[：·|—]/)[0].trim();
     return t || T.fallbackTitle;
   }
 

@@ -1,3 +1,18 @@
+### W1348（2026-11-28）：对抗审查 P0 修复：页脚标签去注释污染 + title 消费者收口
+
+> **来源**：W1347 派出的对抗式审查判定**不通过**——6 个页面的页脚「同类可视化推荐」链接文字变成模板注释残句（如「、.hero 内标题 / 副标题 / tagline 3. 在 EMBEDDED_DATA…」），用户可见面已污染。
+> - **根因（同一错误修了一半）**：W1347 把页脚标签源从 h1 改为 `<title>`，但 `scripts/w1327_related_links.py::_page_title` 用 `<title>(.*?)</title>` 直接扫原文、**未屏蔽注释**。`poetry-density.html` 与 `glossary.html` 顶部模板注释里写着「2. 修改 `<title>`、.hero 内标题…」，正则跨行吃到注释尾部 ⇒ 引用这两页的 6 条链接被写坏。W1347 的临时批处理脚本已用「注释掩码」修过同一形态，**却只修了临时脚本、没修生产生成器**——这是本批最该记的教训：同根因多载体，修一处等于没修。
+> - **修法**：新增 `_title_from_html()`——先 `re.sub` 剥 `<!--…-->` 再取 `<title>`；标签含 `、 < > & "` 或超 28 字判非法，依次回退 h1、文件名，绝不把残句写进页面。`_page_title` 改为其薄封装。
+> - **判据补洞（假绿根因）**：`--check` 原来只核对 href 数量/自页/分组，**不看链接文字** ⇒ 垃圾标签照样 `CHECK PASS`，W1347 还把它当验收证据写进了 CHANGELOG。现新增「链接文本 == 本组标签源」（看板类别取卡片 `.label`·文件名族取页面专题名）比对：修复前精确报出 6 条，`--apply` 实际改动 6 页，再跑 `CHECK PASS 问题 0 条`。
+> - **title 消费者收口（同族未收口项）**：`site/static/js/recent.js`（最近浏览）按 ` · ` 切标题、`site/static/js/chart-a11y.js`（图表 aria-label）按 `· | —` 切，标题改「专题名：结论」后会带出结论句 ⇒ 两处补 `：` 切分，标签回到专题名。
+> - **行尾契约**：`scripts/gen_sitemap.py` 的 `write_text` 缺 `newline="\n"` ⇒ 每次重跑工作树留 CRLF（`git ls-files --eol` = `i/lf w/crlf`）⇒ 显式 LF 后重生成，现为 `i/lf w/lf`。
+> - **判据去自指**：`tests/unit/test_check_chart_data.py` 的基线期望原由 `ccd.load_baseline()` 给出（加载器坏 ⇒ 期望也变 0，自己比自己）⇒ 改为直接数基线文件非注释行；`tests/unit/test_w1327_related_links.py` 新增 3 例（注释内 `<title>` 不被误取 / 「：结论」段剥离 / 垃圾标签回退 h1）。
+> - **审查订正（如实回写）**：① W1347 段写的「check_chart_data 嵌套推导式根修」实为 guardrails 风格档判据（`next(...)` 在 Python 3 合法，非语法缺陷），属等价重构；② W1347「8 个工具页不动」指标题不动，`tag-cloud.html` 的页脚版本行由级联维护属正常。
+> - **遗留未修**：`character-semantic-network.html` 与 `theological-intervention-network.html` 各含 2 个 `<h1>`（现为同一结论句，页内重复），属页面结构改造，另批处理。
+> - **验证**：`w1327_related_links.py --check` PASS（修复前 6 条·修复后 0 条）；两测 19 passed；两个对比度探针（body / graphic）各 0 处违例；图例渲染档案刷新；`verify_delivery --scope full` 与提交后 `pre_push_gate` 结果见收官记录。
+> - **文件**：见 file-index W1348 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1347（2026-11-28）：P3 标题结论化：分析页改专题名加结论双段式
 
 > **来源**：用户 2026-11-28「P3 的标题主题化」→ 追问格式后裁决「专题名：结论（推荐）」+「全量改完」。W1341 报告 §七.1：90 页 `<title>` 全是主题名（如「语言风格雷达图」），读者需读完图才知道要点。
@@ -869,7 +884,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1347），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1348），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

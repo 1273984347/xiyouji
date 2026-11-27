@@ -103,25 +103,36 @@ CARD = re.compile(r'<a class="kpi-card"[^>]*?href="data/([^"]+\.html)"[^>]*?data
 LABEL = re.compile(r'<div class="label">(.*?)</div>', re.S)
 IDX = re.compile(r'^[A-Z]{1,2}\+{0,3}\s*·\s*')
 FOOTER = re.compile(r'(<footer class="site-footer">)(.*?)(</footer>)', re.S)
+COMMENT_RE = re.compile(r"<!--.*?-->", re.S)
+_BAD_LABEL = re.compile(r'[<>&"、]')
 
 
-def _page_title(page):
-    """导航标签：优先取 <title> 的专题名（W1347 标题结论化后 h1 已换成结论句，不再适合做链接名）。
+def _title_from_html(txt):
+    """页面导航标签（专题名）：**先剥注释**再取 `<title>`，失败退化 h1，最后是「非法字符/过长 ⇒ 空」。
 
-    <title> 现役两种形态：「专题名：结论 · 详解西游记」与旧的「专题名 · 详解西游记」，
-    统一剥掉「 · 详解西游记」后缀与「：结论」段；解析失败才退化到 h1 首段。
+    W1348 根修：`poetry-density` 与 `glossary` 顶部模板注释里写着「2. 修改 `<title>`…」，
+    不剥注释则正则跨行吃到注释残句 ⇒ 6 页页脚链接变成「、.hero 内标题 / 副标题 / tagline…」
+    （W1347 引入的 P0）。合法标签不含 `、<>&"`，过长（>28）也判非法，宁可回退 h1/文件名。
     """
-    txt = (DATA / page).read_text(encoding="utf-8")
+    txt = COMMENT_RE.sub("", txt)
     tm = re.search(r"<title>(.*?)</title>", txt, re.S)
     if tm:
         t = re.sub(r"\s*[·|]\s*详解西游记\s*$", "", tm.group(1).strip()).strip()
         t = t.split("：", 1)[0].strip()
-        if t and "<" not in t:
+        if t and not _BAD_LABEL.search(t) and len(t) <= 28:
             return t
     m = re.search(r"<h1[^>]*>(.*?)</h1>", txt, re.S)
     raw = m.group(1) if m else ""
-    title = re.split(r"<", raw, maxsplit=1)[0].strip()
-    return title or page
+    t = re.split(r"<", raw, maxsplit=1)[0].strip()
+    if t and not _BAD_LABEL.search(t) and len(t) <= 28:
+        return t
+    return ""
+
+
+def _page_title(page):
+    """导航标签：取专题名（`<title>` 去「 · 详解西游记」与「：结论」段），退化 h1，再退化文件名。"""
+    t = _title_from_html((DATA / page).read_text(encoding="utf-8"))
+    return t or page.rsplit(".html", 1)[0]
 
 
 def parse_cards():
@@ -304,10 +315,18 @@ def _check_one(page, cat, expect, page_cat):
     if not m:
         return [f"{page}: MARK 后无 </nav>（块结构损坏）"]
     blk = m.group(0)
-    hrefs = re.findall(r'<a class="footer-related-link" href="([^"]+)">', blk)
+    pairs = re.findall(r'<a class="footer-related-link" href="([^"]+)">(.*?)</a>', blk, re.S)
+    hrefs = [h for h, _t in pairs]
     fail = []
     if len(hrefs) != expect:
         fail.append(f"{page}: 链接 {len(hrefs)} 条（应 {expect}）")
+    # W1348：标签内容必须等于**本组标签源**（看板类别取卡片 .label·族取页面专题名）——
+    # 原判据不看文字，注释污染的垃圾标签照样 PASS。
+    label_map = dict(parse_cache.get(cat, []))
+    for href, text in pairs:
+        want = label_map.get(href) or _page_title(href)
+        if text.strip() != want:
+            fail.append(f"{page}: {href} 链接文本「{text.strip()}」≠ 目标标签「{want}」")
     if page in hrefs:
         fail.append(f"{page}: 含自页链接")
     fail.extend(_check_hrefs(page, cat, hrefs, page_cat))
