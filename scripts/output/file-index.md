@@ -1,3 +1,18 @@
+## W1341 图表选型审查报告落盘：雷达族选型裸区（2026-11-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| docs/11-方案报告/审查与评审/（1 件） | W1341 | 新增：图表选型审查报告（10 章 + 2 附录·只读审计） |
+| docs/11-方案报告/README.md | W1341 | 篇数 27→28·编号 156 登记行 |
+| docs/00-导读/（1 件） | W1341 | 认领行（ledger_backfill --append-claim） |
+| scripts/output/（1 件） | W1341 | 本批 spec |
+| CHANGELOG.md | W1341 | 新增 W1341 段 + 编号规则上限同步 |
+| HANDOVER.md | W1341 | HEAD + 进度段 + 最后更新行（概要块滚动：W1335 块淘汰） |
+| scripts/output/file-index.md | W1341 | 本段 |
+| .github/workflows/README.md | W1341 | 头部版本与里程碑区间行升版 |
+| CITATION.cff | W1341 | 版本字段升版 |
+| site/data/search-index-docs.js | W1341 | 站内搜索索引刷新（docs 998→999·生成器产出） |
+
 ## W1340 腾窗工具链六项收口：体积档默认与跨面事务（2026-11-27）
 
 | 文件 | W | 说明 |
