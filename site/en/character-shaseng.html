@@ -289,7 +289,7 @@
   <script defer src="../js/visit-log.js"></script>
 <link rel="preload" href="../static/fonts/NotoSansSC-Regular.subset.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../static/fonts/noto-serif-sc-shared.subset.woff2" as="font" type="font/woff2" crossorigin>
-<!-- chart-degrade: n/a -->
+<!-- chart-degrade: simplified -->
 <link rel="icon" type="image/png" sizes="192x192" href="../static/icons/icon-192.png">
 <link rel="icon" type="image/svg+xml" href="../static/icons/logo-mark-light.svg">
 <link rel="apple-touch-icon" href="../static/icons/icon-192.png">
@@ -319,7 +319,7 @@
 
     <main class="container">
         <div class="source-note">
-A long-form English portrait of Sha Wujing, grounded in the canonical narrative and the project's team/psychology datasets (<code>pilgrim-team-dynamic-network</code>, <code>pilgrim-team-psychology-arc</code>, <code>character-relationship-3d</code>). Belbin and radar figures are taken directly from those datasets.
+A long-form English portrait of Sha Wujing, grounded in the canonical narrative and the project's team/psychology datasets (<code>pilgrim-team-dynamic-network</code>, <code>pilgrim-team-psychology-arc</code>, <code>character-relationship-3d</code>). Belbin and radar figures are taken directly from those datasets. The radar chart on this page reads its five scores from <code>dataset/pilgrim-team-psychology-arc.json</code> (radar array), with no numbers invented.
         </div>
 
         <article>
@@ -341,8 +341,54 @@ A long-form English portrait of Sha Wujing, grounded in the canonical narrative 
 
             <h2>Psychology Profile <span class="anchor">&#8596; radar: the calm axis</span></h2>
             <p>
-                His five-axis radar reads <strong>Fear 4</strong>, <strong>Resolve 7</strong>, <strong>Anger 2</strong>, <strong>Wisdom 6</strong>, <strong>Obedience 9</strong>. The profile is strikingly flat and moderate — no spike, no deficit. That flatness is the point: Sha is the emotional baseline against which the others' storms are measured.
+                The radar below plots his five-axis profile: <strong>Fear 4</strong>, <strong>Resolve 7</strong>, <strong>Anger 2</strong>, <strong>Wisdom 6</strong>, <strong>Obedience 9</strong>. The profile is strikingly flat and moderate — no spike, no deficit. That flatness is the point: Sha is the emotional baseline against which the others' storms are measured.
             </p>
+
+            <div class="chart-block">
+                <h3>Five-dimension psychology profile: Sha Wujing</h3>
+                <div class="chart-sub">Single entity &middot; five axes, 0&ndash;10 &middot; Fear / Resolve / Anger / Wisdom / Obedience &middot; values from <code>dataset/pilgrim-team-psychology-arc.json</code></div>
+                <!-- chart-radar-meta: axes=5 series=1 -->
+                <svg id="chart-radar" viewBox="0 0 460 400" width="100%" role="img" aria-label="Sha Wujing psychology radar: Fear 4, Resolve 7, Anger 2, Wisdom 6, Obedience 9">
+                    <g style="fill:none;stroke:var(--grid-line)" stroke-width="1">
+                        <polygon points="230.0,172.0 260.4,194.1 248.8,229.9 211.2,229.9 199.6,194.1"/>
+                        <polygon points="230.0,140.0 290.9,184.2 267.6,255.8 192.4,255.8 169.1,184.2"/>
+                        <polygon points="230.0,108.0 321.3,174.3 286.4,281.7 173.6,281.7 138.7,174.3"/>
+                        <polygon points="230.0,76.0 351.7,164.4 305.2,307.6 154.8,307.6 108.3,164.4"/>
+                    </g>
+                    <g style="stroke:var(--axis-line)" stroke-width="1">
+                        <line x1="230.0" y1="204.0" x2="230.0" y2="76.0"/>
+                        <line x1="230.0" y1="204.0" x2="351.7" y2="164.4"/>
+                        <line x1="230.0" y1="204.0" x2="305.2" y2="307.6"/>
+                        <line x1="230.0" y1="204.0" x2="154.8" y2="307.6"/>
+                        <line x1="230.0" y1="204.0" x2="108.3" y2="164.4"/>
+                    </g>
+                    <g style="fill:var(--text-secondary)" font-size="13" text-anchor="middle" dominant-baseline="middle">
+                        <text x="230.0" y="36.0">Fear</text>
+                        <text x="384.1" y="153.9">Resolve</text>
+                        <text x="325.2" y="335.1">Anger</text>
+                        <text x="134.8" y="335.1">Wisdom</text>
+                        <text x="75.9" y="153.9">Obedience</text>
+                    </g>
+                    <polygon points="230.0,152.8 315.2,176.3 245.0,224.7 184.9,266.1 120.4,168.4" style="fill:var(--accent-primary);fill-opacity:0.16;stroke:var(--accent-primary)" stroke-width="2"/>
+                    <g style="fill:var(--accent-primary)">
+                        <circle cx="230.0" cy="152.8" r="3.5"><title>Fear: 4 / 10</title></circle>
+                        <circle cx="315.2" cy="176.3" r="3.5"><title>Resolve: 7 / 10</title></circle>
+                        <circle cx="245.0" cy="224.7" r="3.5"><title>Anger: 2 / 10</title></circle>
+                        <circle cx="184.9" cy="266.1" r="3.5"><title>Wisdom: 6 / 10</title></circle>
+                        <circle cx="120.4" cy="168.4" r="3.5"><title>Obedience: 9 / 10</title></circle>
+                    </g>
+                    <g style="fill:var(--text-primary)" font-size="11" font-weight="600" text-anchor="middle" dominant-baseline="middle">
+                        <text x="230.0" y="139.8">4</text>
+                        <text x="327.6" y="172.3">7</text>
+                        <text x="252.7" y="235.2">2</text>
+                        <text x="177.2" y="276.6">6</text>
+                        <text x="108.1" y="164.4">9</text>
+                    </g>
+                </svg>
+                <div class="legend"><span class="legend-item"><span class="legend-swatch" style="background:var(--accent-primary)"></span>Five-dimension profile, score 0&ndash;10 &middot; one entity</span></div>
+            </div>
+
+            <p class="takeaway"><strong>Takeaway:</strong> No axis above 9 and none below 2 — Sha is the team's baseline, and that flatness is what makes everyone else's swings legible.</p>
 
             <h2>Why the Third Disciple Matters <span class="anchor">&#8596; the unshown labour</span></h2>
             <p>

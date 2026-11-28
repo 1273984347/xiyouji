@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "e4f22dbb2eee",
+      "sha": "749ba7b490c7",
       "static": {
         "svg": true,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "da2d6480e4cd",
+      "sha": "3e1262f3fc48",
       "static": {
         "svg": false,
         "cls": true,
@@ -5960,7 +5960,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
       "svgKinds": [
         {
           "cls": "",
@@ -5968,9 +5968,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 30,
+          "texts": 29,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 30"
+          "basis": "1100x480·图元 13·文本 29"
         },
         {
           "cls": "",
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "58a6284e1240",
+      "sha": "5777b0b1dc9d",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "555105a1a252",
+      "sha": "e5e61c0ccf87",
       "static": {
         "svg": true,
         "cls": false,
@@ -6991,6 +6991,86 @@
       "basis": "渲染后可见图例 15 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
+      "page": "site/en/character-bailongma.html",
+      "sha": "d46c61143495",
+      "static": {
+        "svg": true,
+        "cls": true,
+        "lib": false
+      },
+      "pageVerdict": "has_chart",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：584x508·图元 14·文本 10·命中图表词表）",
+      "svgKinds": [
+        {
+          "cls": "",
+          "id": "chart-radar",
+          "w": 584,
+          "h": 508,
+          "marks": 14,
+          "texts": 10,
+          "kind": "chart",
+          "basis": "584x508·图元 14·文本 10·命中图表词表"
+        },
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 1,
+      "visibleLegend": true,
+      "seriesEvidence": 3,
+      "seriesDesc": "填充色组 2·描边色组 3·同 x 堆叠段 0",
+      "consoleErrors": 4,
+      "verdict": "single",
+      "basis": "渲染后可见图例仅 1 项 ⇒ 单系列"
+    },
+    {
+      "page": "site/en/character-bajie.html",
+      "sha": "ca835234b151",
+      "static": {
+        "svg": true,
+        "cls": true,
+        "lib": false
+      },
+      "pageVerdict": "has_chart",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：584x508·图元 14·文本 10·命中图表词表）",
+      "svgKinds": [
+        {
+          "cls": "",
+          "id": "chart-radar",
+          "w": 584,
+          "h": 508,
+          "marks": 14,
+          "texts": 10,
+          "kind": "chart",
+          "basis": "584x508·图元 14·文本 10·命中图表词表"
+        },
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 1,
+      "visibleLegend": true,
+      "seriesEvidence": 3,
+      "seriesDesc": "填充色组 2·描边色组 3·同 x 堆叠段 0",
+      "consoleErrors": 4,
+      "verdict": "single",
+      "basis": "渲染后可见图例仅 1 项 ⇒ 单系列"
+    },
+    {
       "page": "site/en/character-dynamic-network.html",
       "sha": "25eb014190c7",
       "static": {
@@ -7299,6 +7379,86 @@
       "consoleErrors": 4,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 30 项（≥2 ⇒ 多系列且图例齐备）"
+    },
+    {
+      "page": "site/en/character-shaseng.html",
+      "sha": "0cc74d1d29fd",
+      "static": {
+        "svg": true,
+        "cls": true,
+        "lib": false
+      },
+      "pageVerdict": "has_chart",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：584x508·图元 14·文本 10·命中图表词表）",
+      "svgKinds": [
+        {
+          "cls": "",
+          "id": "chart-radar",
+          "w": 584,
+          "h": 508,
+          "marks": 14,
+          "texts": 10,
+          "kind": "chart",
+          "basis": "584x508·图元 14·文本 10·命中图表词表"
+        },
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 1,
+      "visibleLegend": true,
+      "seriesEvidence": 3,
+      "seriesDesc": "填充色组 2·描边色组 3·同 x 堆叠段 0",
+      "consoleErrors": 4,
+      "verdict": "single",
+      "basis": "渲染后可见图例仅 1 项 ⇒ 单系列"
+    },
+    {
+      "page": "site/en/character-tangseng.html",
+      "sha": "cc19c5ac2660",
+      "static": {
+        "svg": true,
+        "cls": true,
+        "lib": false
+      },
+      "pageVerdict": "has_chart",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：584x508·图元 14·文本 10·命中图表词表）",
+      "svgKinds": [
+        {
+          "cls": "",
+          "id": "chart-radar",
+          "w": 584,
+          "h": 508,
+          "marks": 14,
+          "texts": 10,
+          "kind": "chart",
+          "basis": "584x508·图元 14·文本 10·命中图表词表"
+        },
+        {
+          "cls": "ic-moon",
+          "id": "",
+          "w": 18,
+          "h": 18,
+          "marks": 1,
+          "texts": 0,
+          "kind": "icon",
+          "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
+        }
+      ],
+      "legendItems": 1,
+      "visibleLegend": true,
+      "seriesEvidence": 3,
+      "seriesDesc": "填充色组 2·描边色组 3·同 x 堆叠段 0",
+      "consoleErrors": 4,
+      "verdict": "single",
+      "basis": "渲染后可见图例仅 1 项 ⇒ 单系列"
     },
     {
       "page": "site/en/chart-design.html",
@@ -8347,9 +8507,9 @@
           "w": 1002,
           "h": 620,
           "marks": 24,
-          "texts": 22,
+          "texts": 21,
           "kind": "chart",
-          "basis": "1002x620·图元 24·文本 22·命中图表词表"
+          "basis": "1002x620·图元 24·文本 21·命中图表词表"
         },
         {
           "cls": "",
@@ -12209,7 +12369,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
       "svgKinds": [
         {
           "cls": "",
@@ -12217,9 +12377,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 29,
+          "texts": 30,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 29"
+          "basis": "1100x480·图元 13·文本 30"
         },
         {
           "cls": "",

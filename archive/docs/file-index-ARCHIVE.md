@@ -2,7 +2,7 @@
 
 > 本文件归档 file-index.md 中 W031-W087（v2.0.4-v2.0.60）的早期反向索引条目。
 > 现役索引见 [file-index.md](file-index.md)。
-> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987） + 2026-11-03（W960 迁入 W988-W988） + 2026-11-03（W960 迁入 W989-W989） + 2026-11-03（W1113 迁入 W990-W990） + 2026-11-03（W960 迁入 W991-W991） + 2026-11-04（W960 迁入 W992-W992） + 2026-11-04（W960 迁入 W993-W993） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W995-W995） + 2026-11-04（W960 迁入 W996-W996） + 2026-11-04（W960 迁入 W997-W1048） + 2026-11-04（W960 迁入 W1001-W1107） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-09（W1192 迁入 W1108-W1109） + 2026-11-09（W1192 迁入 W1110-W1116） + 2026-11-10（W960 迁入 W1117-W1169） + 2026-11-10（W960 迁入 W1170-W1170） + 2026-11-15（W960 迁入 W1171-W1176） + 2026-11-15（W960 迁入 W1177-W1178） + 2026-11-15（W960 迁入 W1179-W1179） + 2026-11-15（W960 迁入 W1180-W1180） + 2026-11-15（W960 迁入 W1181-W1182） + 2026-11-15（W960 迁入 W1183-W1183） + 2026-11-15（W960 迁入 W1184-W1184） + 2026-11-16（W1251 迁入 W1185-W1205） + 2026-11-16（W960 迁入 W1206-W1206） + 2026-11-16（W960 迁入 W1207-W1207） + 2026-11-19（W960 迁入 W1208-W1223） + 2026-11-21（W1286 迁入 W1224-W1224） + 2026-11-21（W1287 迁入 W1225-W1226） + 2026-11-21（W1287 迁入 W1227-W1227） + 2026-11-21（W1287 迁入 W1228-W1228） + 2026-11-21（W1288 迁入 W1229-W1252） + 2026-11-23（W960 迁入 W1253-W1255） + 2026-11-23（W960 迁入 W1256-W1257） + 2026-11-23（W960 迁入 W1258-W1259） + 2026-11-23（W960 迁入 W1260-W1264） + 2026-11-25（W960 迁入 W1265-W1265） + 2026-11-26（W960 迁入 W1266-W1266） + 2026-11-27（W960 迁入 W1271-W1278） + 2026-11-28（W1343 迁入 W1279-W1282） + 2026-11-28（W1345 迁入 W1283-W1285） + 2026-11-28（W960 迁入 W1286-W1286）
+> 归档时间：2026-07-25（v2.0.35 文件优化时迁移 W031-W046）+ 2026-07-27（v2.0.72 文件重度优化时迁移 W047-W087）+ 2026-08-10（W422 再归档 W393-W416）+ 2026-08-25（W511 归档 W417-W448 + W449-W463 损坏区尾部清理） + 2026-10-26（W965 迁入 W846-W847） + 2026-10-26（W968 迁入 W848-W849） + 2026-10-26（W971 迁入 W850-W853） + 2026-10-26（W973 迁入 W854-W855） + 2026-10-27（W960 迁入 W856-W857） + 2026-10-27（W960 迁入 W858-W859） + 2026-10-27（W960 迁入 W860-W861） + 2026-10-27（W960 迁入 W862-W863） + 2026-10-27（W983 迁入 W864-W865） + 2026-10-27（W960 迁入 W866-W867） + 2026-10-27（W987 迁入 W868-W869） + 2026-10-27（W960 迁入 W870-W872） + 2026-10-27（W993 迁入 W873-W875） + 2026-10-28（W997 迁入 W876-W878） + 2026-10-28（W999 迁入 W879-W880） + 2026-10-29（W960 迁入 W881-W884） + 2026-10-29（W960 迁入 W885-W886） + 2026-10-29（W960 迁入 W887-W889） + 2026-10-29（W960 迁入 W890-W890） + 2026-10-29（W960 迁入 W891-W891） + 2026-10-29（W960 迁入 W892-W892） + 2026-10-29（W960 迁入 W893-W893） + 2026-10-29（W1013 迁入 W895-W895） + 2026-10-29（W1013 迁入 W896-W896） + 2026-10-29（W960 迁入 W897-W897） + 2026-10-29（W960 迁入 W898-W898） + 2026-10-29（W960 迁入 W899-W899） + 2026-10-30（W960 迁入 W900-W902） + 2026-10-30（W960 迁入 W903-W903） + 2026-10-30（W960 迁入 W904-W904） + 2026-10-30（W960 迁入 W905-W905） + 2026-10-30（W960 迁入 W906-W906） + 2026-10-30（W960 迁入 W909-W909） + 2026-10-30（W960 迁入 W912-W912） + 2026-10-30（W960 迁入 W913-W913） + 2026-10-30（W960 迁入 W914-W914） + 2026-10-30（W960 迁入 W915-W915） + 2026-10-30（W960 迁入 W916-W916） + 2026-10-30（W960 迁入 W917-W917） + 2026-10-30（W960 迁入 W918-W918） + 2026-10-30（W960 迁入 W919-W919） + 2026-10-30（W960 迁入 W920-W920） + 2026-10-30（W960 迁入 W921-W921） + 2026-10-30（W960 迁入 W922-W922） + 2026-10-30（W960 迁入 W923-W923） + 2026-10-30（W960 迁入 W924-W924） + 2026-10-30（W960 迁入 W925-W925） + 2026-10-30（W960 迁入 W926-W926） + 2026-10-30（W960 迁入 W927-W927） + 2026-10-31（W960 迁入 W928-W928） + 2026-10-31（W960 迁入 W930-W930） + 2026-10-31（W960 迁入 W931-W931） + 2026-10-31（W960 迁入 W932-W932） + 2026-10-31（W960 迁入 W933-W933） + 2026-10-31（W960 迁入 W935-W935） + 2026-10-31（W960 迁入 W936-W936） + 2026-10-31（W960 迁入 W937-W937） + 2026-10-31（W960 迁入 W938-W938） + 2026-10-31（W960 迁入 W940-W940） + 2026-10-31（W960 迁入 W941-W941） + 2026-10-31（W960 迁入 W942-W942） + 2026-10-31（W960 迁入 W943-W943） + 2026-10-31（W960 迁入 W944-W944） + 2026-10-31（W960 迁入 W945-W945） + 2026-10-31（W960 迁入 W946-W946） + 2026-10-31（W960 迁入 W947-W947） + 2026-10-31（W960 迁入 W948-W950） + 2026-10-31（W960 迁入 W951-W952） + 2026-10-31（W960 迁入 W953-W953） + 2026-10-31（W960 迁入 W954-W954） + 2026-11-01（W960 迁入 W955-W955） + 2026-11-01（W960 迁入 W956-W956） + 2026-11-01（W960 迁入 W957-W957） + 2026-11-01（W960 迁入 W959-W959） + 2026-11-01（W960 迁入 W960-W960） + 2026-11-01（W960 迁入 W961-W961） + 2026-11-01（W960 迁入 W963-W963） + 2026-11-02（W960 迁入 W964-W965） + 2026-11-02（W960 迁入 W966-W966） + 2026-11-02（W960 迁入 W967-W967） + 2026-11-02（W960 迁入 W968-W968） + 2026-11-02（W960 迁入 W969-W969） + 2026-11-02（W960 迁入 W970-W970） + 2026-11-02（W960 迁入 W971-W971） + 2026-11-02（W960 迁入 W972-W972） + 2026-11-02（W960 迁入 W973-W973） + 2026-11-02（W960 迁入 W974-W974） + 2026-11-02（W960 迁入 W975-W975） + 2026-11-02（W960 迁入 W976-W976） + 2026-11-02（W960 迁入 W977-W977） + 2026-11-02（W960 迁入 W978-W978） + 2026-11-02（W960 迁入 W979-W979） + 2026-11-02（W960 迁入 W980-W980） + 2026-11-03（W960 迁入 W981-W981） + 2026-11-03（W1105 迁入 W982-W982） + 2026-11-03（W1105 迁入 W982-W983） + 2026-11-03（W1105 迁入 W983-W983） + 2026-11-03（W960 迁入 W984-W984） + 2026-11-03（W960 迁入 W985-W985） + 2026-11-03（W960 迁入 W986-W986） + 2026-11-03（W960 迁入 W987-W987） + 2026-11-03（W960 迁入 W988-W988） + 2026-11-03（W960 迁入 W989-W989） + 2026-11-03（W1113 迁入 W990-W990） + 2026-11-03（W960 迁入 W991-W991） + 2026-11-04（W960 迁入 W992-W992） + 2026-11-04（W960 迁入 W993-W993） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W994-W994） + 2026-11-04（W960 迁入 W995-W995） + 2026-11-04（W960 迁入 W996-W996） + 2026-11-04（W960 迁入 W997-W1048） + 2026-11-04（W960 迁入 W1001-W1107） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-06（W960 迁入 W1108-W1138） + 2026-11-09（W1192 迁入 W1108-W1109） + 2026-11-09（W1192 迁入 W1110-W1116） + 2026-11-10（W960 迁入 W1117-W1169） + 2026-11-10（W960 迁入 W1170-W1170） + 2026-11-15（W960 迁入 W1171-W1176） + 2026-11-15（W960 迁入 W1177-W1178） + 2026-11-15（W960 迁入 W1179-W1179） + 2026-11-15（W960 迁入 W1180-W1180） + 2026-11-15（W960 迁入 W1181-W1182） + 2026-11-15（W960 迁入 W1183-W1183） + 2026-11-15（W960 迁入 W1184-W1184） + 2026-11-16（W1251 迁入 W1185-W1205） + 2026-11-16（W960 迁入 W1206-W1206） + 2026-11-16（W960 迁入 W1207-W1207） + 2026-11-19（W960 迁入 W1208-W1223） + 2026-11-21（W1286 迁入 W1224-W1224） + 2026-11-21（W1287 迁入 W1225-W1226） + 2026-11-21（W1287 迁入 W1227-W1227） + 2026-11-21（W1287 迁入 W1228-W1228） + 2026-11-21（W1288 迁入 W1229-W1252） + 2026-11-23（W960 迁入 W1253-W1255） + 2026-11-23（W960 迁入 W1256-W1257） + 2026-11-23（W960 迁入 W1258-W1259） + 2026-11-23（W960 迁入 W1260-W1264） + 2026-11-25（W960 迁入 W1265-W1265） + 2026-11-26（W960 迁入 W1266-W1266） + 2026-11-27（W960 迁入 W1271-W1278） + 2026-11-28（W1343 迁入 W1279-W1282） + 2026-11-28（W1345 迁入 W1283-W1285） + 2026-11-28（W960 迁入 W1286-W1286） + 2026-11-28（W960 迁入 W1287-W1287）
  + 2026-10-26（W960 迁入 W843-W845）
  + 2026-10-26（W960 迁入 W700-W842）
 
@@ -5192,6 +5192,192 @@
 | scripts/output/_vermilion_solid_cache.json | W1286 | 朱砂实底缓存（门禁副产物） |
 | scripts/output/_w1266_render_legend.py | W1286 | 级联产物（本批收官链写入） |
 | scripts/output/_w1286_spec.json | W1286 | 本批 spec |
+| scripts/output/chart-content-baseline.txt | W1286 | 第82/83槽基线与豁免清单收紧 |
+| scripts/output/chart-label-clipping-baseline.txt | W1286 | 第82/83槽基线与豁免清单收紧 |
+| scripts/output/chart-legend-exemptions.txt | W1286 | 第82/83槽基线与豁免清单收紧 |
+| scripts/output/chart-legend-render-audit.json | W1286 | 第82/83槽基线与豁免清单收紧 |
+| scripts/output/chart-legend-render-audit.md | W1286 | 第82/83槽基线与豁免清单收紧 |
+| scripts/output/chart_label_clipping_report.json | W1286 | 级联版本面机械联动 |
+| scripts/output/file-index.md | W1286 | file-index 新增 W1286 段（级联产物） |
+| scripts/output/render-state-audit.jsonl | W1286 | 级联产物（本批收官链写入） |
+| scripts/output/stats-changelog.json | W1286 | 级联版本面机械联动 |
+| scripts/output/stats-index.md | W1286 | 级联版本面机械联动 |
+| scripts/output/stats.json | W1286 | 级联版本面机械联动 |
+| scripts/output/svg_text_contrast_graphic_report.json | W1286 | 第80槽探针报告刷新（page_sha 随页面改动同步） |
+| scripts/output/svg_text_contrast_report.json | W1286 | 第80槽探针报告刷新（page_sha 随页面改动同步） |
+| scripts/output/tools-inventory.md | W1286 | 级联版本面机械联动 |
+| scripts/svg_text_contrast_probe.js | W1286 | 探针增量参数（--pages/--no-tool） |
+| site/dashboard.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/81-hardships-view.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/cave-estate.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/chapter-stats.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/chapter-structure-graph.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/character-relationship-3d.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/chart-design.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/counterfactual.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/criticism-history.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/cross-time-danmaku.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/customs-pass-route.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/data-explorer.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/deconstruction.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/ethics-consumption.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/famous-time-travel.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/four-dimensional-research-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/game-webnovel.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/global-pattern.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/graph-explorer.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/intertextuality-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/journey-geo-3d.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/journey-geo-semiotics.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/journey-map-interactive.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/jurisprudence.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/karma-reincarnation.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/language-style-radar.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/mbti-evolution.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/monster-ecology-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/monster-female-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/monster-victims-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/narrative-experiment.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/narrative-rhythm-curve.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/narratology-12d-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/narratology-16d-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/pilgrim-team-dynamic-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/poetry-density.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/search-index-zh.js | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/six-senses-narratology-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/social-media.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/story-timeline.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/tag-cloud.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/theological-intervention-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/timeline.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/visual-art.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/workplace.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/data/wukong-tangseng-benchmark.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/dukou-engine.html | W1286 | 版本脚注联动（级联产物） |
+| site/en/81-hardships.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/aesthetics.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/business-model.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/cave-estate.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/chapter-stats.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/chapter-structure-graph.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/character-appearance.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/character-dynamic-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/character-presence-timeline.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/character-relationship-3d.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/character-semantic-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/character-sentiment-arc.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/chart-design.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/concept-device.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/counterfactual.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/criticism-history.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/cross-time-danmaku.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/cultural-misreading.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/customs-pass-route.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/deconstruction.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/dialogue-sentiment.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/ecology.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/emotional-heatmap.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/ethics-consumption.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/famous-time-travel.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/four-dimensional-research-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/game-webnovel.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/global-pattern.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/graph-explorer.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/hardship-difficulty-heatmap.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/hardship-heatmap.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/intertextuality-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/journey-geo-semiotics.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/journey-map-interactive.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/journey-route.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/journey-spacetime.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/jurisprudence.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/karma-reincarnation.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/language-style-radar.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/linguistics.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/magic-system.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/material-archaeology.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/mbti-evolution.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/methodology-matrix.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/ming-political-thought-comparison.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/monster-background.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/monster-capability-radar.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/monster-ecology-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/monster-female-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/monster-victims-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/music-structure.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/narrative-experiment.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/narrative-rhythm-curve.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/narratology-12d-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/narratology-16d-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/perf-canvas-rendering.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/philosophy.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/pilgrim-team-dynamic-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/pilgrim-team-psychology-arc.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/poetry-rhythm-analysis.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/power-resources.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/relationships.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/risk-project.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/search-index-en.js | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/six-senses-narratology-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/social-media.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/tag-cloud.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/text-evolution.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/theological-intervention-network.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/timeline.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/visual-art.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/en/workplace.html | W1286 | 内容层四缺口清偿（来源标注/结论段/tooltip/图例）+ 静态描边源级保障 |
+| site/index.html | W1286 | 版本脚注联动（级联产物） |
+| site/rss.xml | W1286 | 级联产物（本批收官链写入） |
+| site/tokens.css | W1286 | 级联产物（本批收官链写入） |
+## W1287 CI 侧教训机器化 - 工作树干净断言 + 本地仿真复现 CI 步骤序列（2026-11-21）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .agent/skills/puti-shouye/SKILL.md | W1286 | 级联版本面机械联动 |
+| .githooks/pre-push | W1286 | 仓内 pre-push 闸门（版本化·一次性 git config core.hooksPath 启用） |
+| .github/workflows/README.md | W1286 | 级联产物（本批收官链写入） |
+| .github/workflows/ci.yml | W1286 | 级联产物（本批收官链写入） |
+| AGENTS.md | W1286 | 级联版本面机械联动 |
+| CHANGELOG.md | W1286 | 本批版段 |
+| CITATION.cff | W1286 | 级联产物（本批收官链写入） |
+| HANDOVER.md | W1286 | 级联版本面机械联动 |
+| README.md | W1286 | 级联产物（本批收官链写入） |
+| STRUCTURE.md | W1286 | 级联版本面机械联动 |
+| archive/docs/AGENTS-ARCHIVE.md | W1286 | AGENTS 历史段归档（级联迁出） |
+| archive/docs/CHANGELOG-ARCHIVE.md | W1286 | 级联产物（本批收官链写入） |
+| archive/docs/W\346\211\271\346\254\241\347\274\226\345\217\267\345\257\271\350\264\246\350\241\250-ARCHIVE.md | W1286 | 级联版本面机械联动 |
+| archive/docs/W批次编号对账表-ARCHIVE.md | W1286 | 台账腾窗归档（W1222-W1223 迁出） |
+| archive/docs/file-index-ARCHIVE.md | W1286 | 级联产物（本批收官链写入） |
+| archive/docs/pitfalls-detail-ARCHIVE.md | W1286 | 坑表新增 E-300~E-302 |
+| archive/docs/workflows-readme-history.md | W1286 | 工作流 README 历史段归档（级联迁出） |
+| docs/00-\345\257\274\350\257\273/W\346\211\271\346\254\241\347\274\226\345\217\267\345\257\271\350\264\246\350\241\250.md | W1286 | 级联版本面机械联动 |
+| docs/00-导读/W批次编号对账表.md | W1286 | 台账 W1286 行回填 + 腾窗归档 |
+| docs/00-导读/项目说明.md | W1286 | 版本面联动（级联） |
+| docs/11-\346\226\271\346\241\210\346\212\245\345\221\212/README.md | W1286 | 级联版本面机械联动 |
+| docs/11-\346\226\271\346\241\210\346\212\245\345\221\212/\350\256\241\345\210\222\346\226\271\346\241\210/T119-\344\273\273\345\212\241\350\256\241\345\210\222\346\211\247\350\241\214\344\270\216\347\273\217\351\252\214\346\262\211\346\267\200\346\212\245\345\221\212-2026-11-21.md | W1286 | T119 报告落盘 |
+| docs/11-方案报告/README.md | W1286 | 报告索引登记 T119（§六 135 → 136 件） |
+| docs/11-方案报告/计划方案/T119-任务计划执行与经验沉淀报告-2026-11-21.md | W1286 | T119 报告落盘（任务计划执行与经验沉淀框架） |
+| docs/11-方案报告/计划方案/T120-任务计划执行与经验沉淀报告-2026-11-21.md | W1286 | 级联产物（本批收官链写入） |
+| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1286 | 版本面联动（级联产物） |
+| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1286 | 版本面联动（级联产物） |
+| docs/INDEX.md | W1286 | 文档索引刷新 |
+| docs/agent/gates.md | W1286 | 第82槽口径同步本批实测数字 |
+| docs/agent/pitfalls.md | W1286 | 级联版本面机械联动 |
+| pitfalls.md | W1286 | 坑表新增 E-300~E-302 |
+| scripts/_audit_render_states.js | W1286 | 级联产物（本批收官链写入） |
+| scripts/check_chart_content_completeness.py | W1286 | 级联产物（本批收官链写入） |
+| scripts/check_svg_text_contrast.py | W1286 | 级联产物（本批收官链写入） |
+| scripts/ci_sim.py | W1286 | CI 侧教训机器化：--ci-steps 复现 CI 步骤序列 + 工作树干净断言（E-309） |
+| scripts/lint_links.py | W1286 | 级联产物（本批收官链写入） |
+| scripts/output/INDEX.md | W1286 | 级联产物（本批收官链写入） |
+| scripts/output/README.md | W1286 | 级联产物（本批收官链写入） |
+| scripts/output/_cascade_files_W1286.txt | W1286 | 级联文件清单（级联产物） |
+| scripts/output/_cascade_files_W1287.txt | W1286 | 级联产物（本批收官链写入） |
+| scripts/output/_vermilion_solid_cache.json | W1286 | 朱砂实底缓存（门禁副产物） |
+| scripts/output/_w1266_allrender.json | W1287 | 第82槽渲染档案全量刷新（页脚推进后 page_sha 跟随·防绕过闸） |
+| scripts/output/_w1266_render_legend.py | W1286 | 级联产物（本批收官链写入） |
+| scripts/output/_w1287_spec.json | W1286 | 本批 spec |
+| scripts/output/chart-content-audit.json | W1286 | 第82/83槽基线与豁免清单收紧 |
 | scripts/output/chart-content-baseline.txt | W1286 | 第82/83槽基线与豁免清单收紧 |
 | scripts/output/chart-label-clipping-baseline.txt | W1286 | 第82/83槽基线与豁免清单收紧 |
 | scripts/output/chart-legend-exemptions.txt | W1286 | 第82/83槽基线与豁免清单收紧 |

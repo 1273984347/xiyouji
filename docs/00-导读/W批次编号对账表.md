@@ -177,7 +177,6 @@
 
 
 
-| W1291 | 治理面追平（N1/N2/N5 数字追平 + N3/N4 判据侧追平 + verify A1-A6 计数段 fallback 修复）+ T4 豁免簿清偿 + T1 复盘批 | df8bab1c9 | —（待回填） | 已收官（治理断言 7→0 FAIL + 硬门禁恢复实跑 + 豁免簿 259→0 清偿且第 49 槽反证 + 坑表 E-315 + 计数链跟随面根治 + T1 复盘/T124 报告落盘·CI 六作业全绿 1219s/944s/271s/239s/58s/32s） | mavis | — | 本会话（W1291） | — |
 | W1292 | 遗留清偿：归档工具 plan() 段表口径根修 + 回归锁 + 台账 W1291 hash 回填 + 两面下界不可达待裁决 | 9ca2cb809 | —（待回填） | 已收官（归档工具 plan() 段表口径根修·断言消解 + 回归锁 3 例 + 台账 W1291 hash 回填 df8bab1c9 + 两面下界不可达待裁决·hash 待下一批回填·自指不可知） | mavis | — | 本会话（W1292） | — |
 | W1293 | CHANGELOG 结构治本：末尾文件级块归位到文件末尾 + 两面下界对齐到 W1253 + 归档断言消解 | f299bd7dd | —（待回填） | 已收官（CHANGELOG 结构治本·末尾文件级块归位·字节逐字守恒 + 两面下界同为 W1253 + rebuild 自检通过 + 收官链零跳过·hash 待下一批回填·自指不可知） | mavis | — | 本会话（W1293） | — |
 | W1294 | CI 提速与门禁补盲: 快档补第80槽探针新鲜度 + page.goto 超时加固 + 归档二级分片 | 694fae2e5be70f6d33ecc86a41df437abab24b52 | —（待回填） | 已收官（快档补第 80 槽探针新鲜度 + 三处采集 page.goto 超时 20000→60000 + 归档二级分片 1051KB→896KB·hash 待下一批回填·自指不可知） | mavis | — | 本会话（W1294） | — |
@@ -237,3 +236,4 @@
 | W1348 | 对抗审查 P0 修复：注释内 title 污染页脚标签 + title 消费者收口 | 9ffd6a0ec | —（待回填） | **已收官**（9ffd6a0ec·git 反填·共 1 笔·P-43-01） | 主会话 2026-11-28 | — | 本会话（W1348） | scripts/w1327_related_links.py,site/static/js/recent.js,site/static/js/chart-a11y.js,scripts/gen_sitemap.py |
 | W1349 | h1 唯一性修复：两页正文重复 h1 删除 + 全站 h1 单例判据 | 6cbfaed98 | —（待回填） | **已收官**（6cbfaed98·git 反填·共 1 笔·P-43-01） | 主会话 2026-11-28 | — | 本会话（W1349） | site/data/character-semantic-network.html,site/data/theological-intervention-network.html,tests/unit/test_page_h1_unique.py |
 | W1350 | EN 雷达族收口：27 页对齐 ZH 形态 + R5 判据扩面至 EN | 784eb155d | —（待回填） | **已收官**（784eb155d·git 反填·共 3 笔·P-43-01） | 主会话 2026-11-28 | — | 本会话（W1350） | site/en/*.html,scripts/check_chart_data.py |
+| W1351 | EN 四人物页补五轴雷达（静态预渲染）+ 文案指向图 + 内容完备度四项 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 2026-11-28 | — | 本会话（W1351） | site/en/character-*.html |

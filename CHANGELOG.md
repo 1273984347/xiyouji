@@ -1,3 +1,17 @@
+### W1351（2026-11-28）：EN 人物画像四页补五轴雷达（静态预渲染）+ 文案指向图
+
+> **来源**：用户 2026-11-28「按方案 ① 修复那 4 个页面的文案；按方案 ② 给那 4 个页面补上雷达图」。两方案本是替代关系（①去掉 radar 指涉 / ②让指涉成真），本批按「②补图 + ①改文案指向图」合流——只做①会把读者引向一张永不存在图，只做②则句子仍是「radar reads」式无图指涉。
+> - **补图（方案②·静态预渲染）**：四个英文人物页（bajie / tangseng / shaseng / bailongma）各在 Psychology Profile 段后插入一个 `.chart-block`，内含**预渲染 SVG**（4 圈网格 + 5 轴 + 5 轴标 + 数据多边形 + 5 个顶点 + 5 个数值），每个顶点带原生 `<title>`（如「Fear: 8 / 10」）；`id="chart-radar"` + `<!-- chart-radar-meta: axes=5 series=1 -->`（W1350 起 R5 辖区含 EN）。另有 `.legend` 一行注明「Five-dimension profile, score 0–10 · one entity」。
+> - **第一版走错并已回退（过程记录）**：初版写成共享渲染器 `site/static/js/psych-radar.js`（外部 JS 按 data-* 契约绘制）。第 82 槽（图表内容完备度）C3 判红——该判据只认**页内静态 `<title>`** 或**页内联脚本**绑定的 tooltip，外部 js 渲染的图在门禁眼里是空壳（静态 SVG 无图元）。⇒ 改为静态预渲染并删除该 js：既过判据，也换来 file:// 无脚本可读、零 JS 依赖。教训：**图表内容类判据读的是页面静态文本，不是运行期 DOM**。
+> - **补齐第 82 槽四项（新图表页必须自证内容完备）**：C1 来源注补 `dataset/pilgrim-team-psychology-arc.json` 路径（原注只有数据集代号）；C2 每页新增一段 `class="takeaway"` 结论（如八戒「team's warmth rather than its brake」）；C3 由顶点静态 `<title>` 满足；C4/C5 由 `.legend` 单系列图例行满足（**不登记豁免**，不靠白名单放过）。修后第 82 槽：违例 32 = 存量基线 32 · 基线外新增 0 · OK。
+> - **数据不出新值**：五维分值逐条取自 `dataset/pilgrim-team-psychology-arc.json` 的 `radar` 数组——八戒 8/4/6/4/5、唐僧 7/8/3/8/9、沙僧 4/7/2/6/9、白龙马 3/8/4/7/8，与四页原文所列数值逐项一致。
+> - **改文案（方案①）**：四页「His five-axis radar reads …」「His five-axis profile is …」统一改为「The radar below plots his five-axis profile…」，让句子指向页内真实存在的图；并删去八戒页与数据矛盾的「He is not especially afraid」（该页 Fear=8 属高值，原句与自身数据相反，属本次一并纠正的存量错误）。
+> - **降级声明**：四页原 `<!-- chart-degrade: n/a -->`（按无图页声明）改为 `simplified`；第 30 槽 `--scope en` 实测 138 页 · 违例 0。
+> - **验证**：第 82 槽 0 FAIL（修前 14 条新增）；`check_chart_data` 239 页 FAIL 0（并已用负样本证明四页进 R5 视野）；`check_chart_degrade --scope en` 0 违例；`validate_en` 四页 OK（零中日韩字符）；`check_js_syntax` 873 文件通过；`verify_delivery --scope full` 与提交后 `pre_push_gate` 见收官记录。
+> - **边界（如实）**：本仓无 Playwright 运行期档案，四页未做浏览器截图实测；图为静态 SVG，数值直接标在顶点旁并以 `<title>` 提供悬停细节，`chart-a11y.js` 仍在页内承载读屏替代。
+> - **文件**：见 file-index W1351 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1350（2026-11-28）：EN 雷达族收口：27 页对齐 ZH 形态 + R5 判据扩面至 EN
 
 > **来源**：用户 2026-11-28「继续处理剩余的 21 页雷达族图表」——中文站 21 页欠账已在 W1343-W1346 清零（基线 0），实测后确认真正的同类剩余面在英文站：`site/en/` 27 页仍带雷达签名且**全部无规模声明、单图系列 4–17**。
@@ -871,14 +885,6 @@
 > - **状态**：本批把「已完成」变成「已登记」——W1287 收官链闭合、4 批登记滞后清偿、四条遗留落成仓内可执行形态；下一批起台账滞后告警为零。
 > - **文件**： docs/00-导读/W批次编号对账表.md, pitfalls.md, archive/docs/pitfalls-detail-ARCHIVE.md, AGENTS.md, HANDOVER.md, docs/10-方法论沉淀/批次交付流水线.md, docs/11-方案报告/计划方案/T121-任务计划执行与经验沉淀报告-2026-11-21.md, docs/11-方案报告/README.md, scripts/output/_w1288_spec.json, scripts/output/stats.json, scripts/output/stats-index.md, scripts/output/stats-changelog.json
 
-### W1287（2026-11-21）：CI 侧教训机器化 - 工作树干净断言 + 本地仿真复现 CI 步骤序列
-
-> - **来源**：用户 2026-11-21 17:46 直接质疑「你自己看看 CI 跑了多少次，项目内有多少关于 CI 的为什么还是有问题？」⇒ 立项 W1287（流程层追问·非单点缺陷）。
-> - **执行**：① **CI 内建断言**——ci.yml 的 Delivery Gate 前加「工作树干净断言」（git status --porcelain 非空即红）⇒ 任何 CI 步骤改动了入库文件而未还原**当场红**，不再以「漏 add」形态延后到门禁阶段（症状离根因远·排查成本高）；② **仿真器覆盖 CI 步骤**——scripts/ci_sim.py 增 --ci-steps（复现 CI 前置序列：重生成输出数据 → graphic/body 探针现跑 → 还原产物 → 干净断言）且 worktree 检出改 **LF**（core.autocrlf=false）对齐 CI blob ⇒ 本地可提前暴露 CI 侧缺陷；③ 台账登记 W1287 认领行（touches 预检 PASS·无冲突）；④ 坑表新增 **E-309**（CI/门禁类教训须分「文本层」与「机器层」·可机器化者一律升级为断言）+ 腾窗压缩 E-306/E-307。｜⑤ **红队复核后的最高杠杆补做（第一性推演）**：**断言补盲区**（git diff --name-only 不覆盖未跟踪文件 ⇒ 并上 git ls-files --others --exclude-standard·实测由 rc=0 改 rc=1）＋ **推前闸门**（ci_sim.py 增 --push-gate：未推送提交数<=1 + 工作树干净含未跟踪 + 关键槽位 + 本批已推笔数告警；仓内 .githooks/pre-push 版本化·一次性 git config core.hooksPath .githooks 启用 ⇒ 把「一批 = 一轮 CI」从纪律变成**物理约束**·闸门红 ⇒ push 被拒）＋ **回落解析加严**（lint_links 的仓库根回落改为「去掉全部上跳后的纯相对路径须在仓内存在」⇒ 区分语境错位与真外部路径·命中输出 [NOTE] 可见）｜⑥ **第一性结论**：CI 轮数的根因是**反馈回路的位置与延迟**（唯一反馈通道是「推 ⇒ 等 20-30 分钟 ⇒ 看结果」⇒ 该延迟反向塑造「一改一推」的行为）⇒ 修法主体是**把验证搬回本地并保证等价**，断言与仿真器只是配套
-> - **验证**：断言**正负样本自测**——干净 worktree ⇒ rc=0「工作树干净」；人为弄脏 ⇒ rc=1「工作树非干净： M pitfalls.md」⇒ 断言真能拦（非摆设）；ci.yml YAML 解析通过且断言步骤在位；ci_sim.py --help 出现 --ci-steps；端到端 ci_sim --ci-steps 跑通。；**断言补盲区实测**（造未跟踪文件 ⇒ rc=1 判红·原为 rc=0 漏检）；**产物幂等性实测**（run_all.py 连跑两次 diff 均为空 ⇒ 断言不会因产物非确定性恒红）；**回落加严实测**（lint_links 31079 链接 · 0 broken · 回落命中处打 NOTE）
-> - **状态**：本批把「CI 侧教训」从文本层升级为机器层——CI 侧缺陷可在本地被仿真、被当场拦截，不再依赖人工排查 40 分钟；并把提交节奏钉回「一批 = 一轮 CI」（本批一次推送带齐·不再多笔追加）。
-> - **文件**： .github/workflows/ci.yml,scripts/ci_sim.py,scripts/output/_w1287_spec.json,docs/00-导读/W批次编号对账表.md,docs/agent/gates.md,pitfalls.md,archive/docs/pitfalls-detail-ARCHIVE.md,docs/11-方案报告/计划方案/T120-任务计划执行与经验沉淀报告-2026-11-21.md,docs/11-方案报告/README.md
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -886,7 +892,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1350），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1351），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
