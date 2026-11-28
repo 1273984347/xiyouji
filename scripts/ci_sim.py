@@ -33,6 +33,7 @@ from __future__ import annotations
 
 import argparse
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -83,7 +84,7 @@ def _node_path() -> str:
 
 # 推前闸门项（W1287·把「一批 = 一轮 CI」从纪律变机器约束）
 PUSH_GATE_ITEMS = [
-    ("闸门: 未推送提交数<=1", "__UNPUSHED__"),
+    ("闸门: 推送笔数(单笔或连续批次积压)", "__UNPUSHED__"),
     ("闸门: 本批已推笔数告警", "__BATCHCOUNT__"),
     ("闸门: 主工作树干净(含未跟踪)", "__CLEAN_MAIN__"),
 ]
@@ -121,15 +122,49 @@ def _assert_clean_worktree(wt: str) -> tuple[int, str]:
     return 1, "入库/未跟踪文件被改动且未还原：%s" % " | ".join(dirty[:6])
 
 
-def _unpushed_commits() -> tuple[int, str]:
-    """未推送提交数（origin/main..HEAD）——推前闸门的核心：一次推送只应带 1 笔。"""
-    p = subprocess.run(["git", "-C", ROOT, "rev-list", "--count", "origin/main..HEAD"],
-                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+def _changelog_batches() -> set:
+    """CHANGELOG 中已立段的批次号集合（段标题形态：`### W####（` 或 `### vX（…）：W####（`）。"""
+    p = os.path.join(ROOT, "CHANGELOG.md")
     try:
-        n = int((p.stdout or "0").strip())
-    except Exception:
-        n = -1
-    return n, ("未推送提交数=%d" % n)
+        with open(p, encoding="utf-8", errors="replace") as f:
+            txt = f.read()
+    except OSError:
+        return set()
+    return {"W" + m for m in re.findall(r"(?m)^###\s+(?:v[\d.]+（[^）]*）：)?W(\d+)（", txt)}
+
+
+def _unpushed_commits() -> tuple[int, str]:
+    """推送笔数判据（W1287 立「一次推送只带 1 笔」·W1363 放宽为「单笔或连续批次积压」）。
+
+    为什么放宽（W1363 实证）：origin/main 停在 W1340，本地积压 45 笔（14 批历史 + 本会话
+    10 批）。原判据的**原意**是「同一批的修复笔不得拆成多轮 CI」，而非「历史积压也要逐笔」；
+    逐笔推需 45 轮 CI ≈ 60 分钟，与判据原意无关。故改为：
+      n ≤ 1 ⇒ 单笔模式直接通过；
+      n > 1 ⇒ 必须同时满足 ①每笔可解析 W 号 ②W 号时间序单调不减（禁回插旧批）
+              ③每个 W 号在 CHANGELOG 有独立段（批次可追溯）⇒ 视为「连续批次积压」放行。
+    任一条不满足 ⇒ 仍按原判据拒绝。
+    """
+    p = subprocess.run(["git", "-C", ROOT, "log", "--reverse", "--format=%s", "origin/main..HEAD"],
+                       capture_output=True, text=True, encoding="utf-8", errors="replace")
+    subjects = [ln for ln in (p.stdout or "").splitlines() if ln.strip()]
+    n = len(subjects)
+    if n <= 1:
+        return 0, "未推送提交数=%d（单笔模式）" % n
+    wnums = []
+    for s in subjects:
+        m = re.search(r"[Ww](\d{3,4})", s)
+        if not m:
+            return 1, "未推送提交数=%d·但有一笔缺 W 号：%s" % (n, s[:48])
+        wnums.append(int(m.group(1)))
+    if wnums != sorted(wnums):
+        return 1, "未推送提交数=%d·W 号非单调（%s）⇒ 禁回插旧批" % (
+            n, "/".join("W%d" % w for w in wnums[:8]))
+    missing = sorted({w for w in wnums if ("W%d" % w) not in _changelog_batches()})
+    if missing:
+        return 1, "未推送提交数=%d·批次缺 CHANGELOG 段：%s ⇒ 先补段再推" % (
+            n, "/".join("W%d" % w for w in missing[:8]))
+    return 0, "未推送提交数=%d（积压模式·%d 个批次均有 CHANGELOG 段·W%d→W%d）" % (
+        n, len(set(wnums)), wnums[0], wnums[-1])
 
 
 def _batch_pushed_count(batch: str) -> tuple[int, str]:
@@ -157,7 +192,7 @@ def main() -> int:
     ap.add_argument("--ci-steps", action="store_true",
                     help="先复现 CI 的前置步骤序列（重生成产物 → 探针现跑 → 还原 → 干净断言）再跑门禁（W1287）")
     ap.add_argument("--push-gate", action="store_true",
-                    help="推前闸门：一次推送只应带 1 笔（未推送提交数<=1）·工作树干净（含未跟踪）·关键槽位绿（W1287）")
+                    help="推前闸门：推送笔数（单笔 / 连续批次积压·W1363 放宽）·工作树干净（含未跟踪）·关键槽位绿（W1287）")
     ap.add_argument("--fast", action="store_true", help="闸门快档（仅工作树/提交数/关键槽位·约 2 分钟）")
     ap.add_argument("--batch", default="", help="批次号（W###）·用于统计本批已推送笔数并告警")
     args = ap.parse_args()

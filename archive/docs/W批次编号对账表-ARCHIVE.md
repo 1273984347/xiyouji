@@ -1210,3 +1210,5 @@
 | W1301 | L-02 探针跨run增量缓存: 页级sha+探针版本+口径元数据三重键 + CI actions/cache跨run携带 | 0c926a0aac0054f81f32dd9818e553ffcf394034 | —（待回填） | 已收官（提交待推送·hash 待下一批回填·自指不可知） | mavis | — | 本会话（W1301） | scripts/svg_text_contrast_probe.js, .github/workflows/ci.yml, .gitignore |
 - 2026-11-28（修剪迁入 1 行·W1302-W1302·号序切分）
 | W1302 | hero-batch 高分辨率绢本源件入站（8 张 webp 1920×1078 → site/static/images/silk-src/·补站内缺失组·成品已在校验命中不入） | 0c926a0aa | —（待回填） | 已收官（hero-batch 绢本源件入站 8 张 1920×1078 webp 落 site/static/images/silk-src/·哈希+目视双证甄别·八件 blob 级完整性 8/8 核验通过·原提交 fba876347 经压缩推送并入 0c926a0aa·本行 hash 统一改指合并承载 commit） | mavis | — | 本会话（W1302） | docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md, docs/11-方案报告/README.md, HANDOVER.md |
+- 2026-11-28（修剪迁入 1 行·W1303-W1303·号序切分）
+| W1303 | 西游小游戏三合一与十八款合集入口（assets/game 多文件·音效/移动端/战绩/修罗/无尽/十八难/事件/五阵/行者） | 0c926a0aac0054f81f32dd9818e553ffcf394034 | —（待回填） | 已收官（提交待推送·hash 待下一批回填·自指不可知） | mavis | — | 本会话（W1303） | assets/game/ |

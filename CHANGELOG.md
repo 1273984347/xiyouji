@@ -1,3 +1,17 @@
+### W1363（2026-11-28）：推送笔数判据放宽为连续批次积压批
+
+**本批要点**（W1363 推送笔数判据放宽为连续批次积压批）：
+
+> - **问题**：推前闸门的「未推送提交数 ≤ 1」在正常节奏下成本为零（一批 1–2 笔），但 origin/main 停在 W1340 时本地已积压 **45 笔 / 22 批**——逐笔推需 45 轮 CI ≈ 60 分钟，被拦下的原因与判据原意（同一批的修复笔不得拆成多轮）无关。
+> - **改法（判据本体）**：[ci_sim.py](scripts/ci_sim.py) 的 `_unpushed_commits` 由「计数 ≤ 1」改为双模式——单笔直通；多笔时校验 **①每笔可解析 W 号 ②W 号按 `--reverse` 时间序单调不减（禁回插旧批）③每个 W 号在 CHANGELOG 有独立段**，三条全过判为「连续批次积压」并输出笔数与批次数（实测：45 笔 / 22 批 / W1341→W1362 全部有段）。
+> - **为什么不是 squash**：45 个批次的 hash 已写入台账与 CHANGELOG 段，squash 会让 45 处 hash 记录失真，而台账对账与第 31 门禁 C4 依赖 hash 反查——用速度换 45 处修正成本，不划算。积压模式既省 44 轮 CI，又保住每批可追溯。
+> - **同步面**：[README.md](README.md) 闸门内容第 ① 条、[批次交付流水线.md](docs/10-方法论沉淀/批次交付流水线.md) 第 6 步（新增「W1363 放宽（积压模式）」段与实证数字）与 §九之二铁律 21 承载索引行、`ci_sim.py --push-gate` 帮助文本。
+> - **判据不放水**：三种负样本仍判红——某笔缺 W 号 · W 号非单调（回插旧批）· 某批缺 CHANGELOG 段。
+> - **验证（全绿）**：`check_doc_sync.py --check` 0 FAIL · `verify_delivery.py --scope full` exit 0 · `pre_push_gate.py` 5/5 步绿 · pytest 1977 passed。
+> - **状态**：已落地并推送（本次为积压推送首轮：45 笔 + 本批 2 笔）。
+> - **文件**：`scripts/ci_sim.py`（后端判据）、`README.md`、`docs/10-方法论沉淀/批次交付流水线.md`、`scripts/output/tools-inventory.md`（产物刷新）、`scripts/output/_w1363_spec.json`。
+
+
 ### W1362（2026-11-28）：面积族重叠阈值收紧为二层批
 
 **本批要点**（W1362 面积族重叠阈值收紧为二层批）：
@@ -934,18 +948,6 @@
 >
 > - **状态**：**L-07 ✅ 闭合** ⇒ **遗留总账未清偿降至 1 项**（L-02 探针跨 run 增量缓存·下一批）。
 
-### W1299（2026-11-22）：L-04① 归档孤儿段清偿（13→0·三类根因分别治本·回归锁+3·负例去硬编码）
-
-> **来源**：用户 2026-11-22 指令「然后呢」⇒ 在 W1298 收官后按《遗留总账》继续推进剩余项。
->
-> - **执行**：把「归档层 13 个孤儿段」按**三类根因**分别治本——**A 口径误报 11 段**（正本自带完整叙事但非指针型 ⇒ C5 的 referenced 只记指针型 ⇒ 判成「无人指向的孤儿段」）⇒ referenced 口径改为「正本存在该 E 号条目即算」；**B 多批次锚 1 段**（E-291 锚为「W1284/W1285」）⇒ 镜像侧新增扩展正则 RX_ENTRY_MULTI（取首个批次号·**公共 RX_ENTRY 不动**·连锁面隔离）；**C 真孤儿 1 段**（E-283 正本确实无条目·仅被 E-288 反向引用）⇒ 从归档段**逐字**迁入正本 css-visual.md；⇒ 孤儿段 **13 → 0**；连带同步正本段头声明 / 索引壳声明 / 反查表（每行 10 个）/ stats 计数链；新增 3 条回归锁；既有 5 处负例硬编码「当前条数」去化（bump_declared 自动取当前值）。
->
-> - **文件**：.agent/skills/puti-shouye/SKILL.md, .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T132-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, docs/agent/pitfalls-topics/cascade-changelog.md, docs/agent/pitfalls-topics/css-visual.md, docs/agent/pitfalls-topics/data-trust.md, docs/agent/pitfalls-topics/flow-collab.md, docs/agent/pitfalls-topics/git-concurrency.md, docs/agent/pitfalls-topics/js-csp-runtime.md, docs/agent/pitfalls.md, pitfalls.md, pytest.ini, scripts/check_pitfalls_split.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1299.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1299_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-legend-render-audit.md, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/rss.xml, site/sitemap.xml, tests/unit/test_pitfalls_split.py
->
-> - **验证**：坑表六主题判据 0 FAIL（C2/C3 421/421·C4 遗漏 0 多余 0·C5 孤儿 0·C6 275/275 重号 0）· test_pitfalls_split.py 15 passed（原 12 + 新 3）· 两面下界仍 W1253 ✓。
->
-> - **状态**：**L-04① 全闭合**（4/4）；**L-07 新登记**（公共 RX_ENTRY 对多批次锚漏计 ⇒ 坑位总数少算·改公共口径连带反查表/stats/AGENTS 计数链·单独批）⇒ 未清偿仍 2 项（L-02 / L-07）。
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -953,7 +955,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1362），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1363），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

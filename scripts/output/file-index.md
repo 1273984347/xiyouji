@@ -1,3 +1,16 @@
+## W1363 推送笔数判据放宽为连续批次积压批（2026-11-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/docs/（1 件） | W1363 | AGENTS 脚注滚动归档（cascade 写入） |
+| docs/10-方法论沉淀/（1 件） | W1363 | 第 6 步新增「W1363 放宽（积压模式）」段 + §九之二铁律 21 承载索 |
+| scripts/（1 件） | W1363 | 推送笔数判据放宽：单笔直通 / 多笔须 W 号可解析 + 单调不减 + 每批有  |
+| scripts/output/（5 件） | W1363 | 工具盘点产物刷新 |
+| README.md | W1363 | 闸门内容第 ① 条改为「推送笔数（单笔 / 连续批次积压）」 |
+| CHANGELOG.md | W1363 | 推送笔数判据放宽为连续批次积压批 |
+| HANDOVER.md | W1363 | 里程碑块（cascade 写入） |
+| AGENTS.md | W1363 | 版本脚注滚动（cascade 写入） |
+
 ## W1362 面积族重叠阈值收紧为二层批（2026-11-28）
 
 | 文件 | W | 说明 |
@@ -1461,63 +1474,5 @@
 | site/rss.xml | W1300 | 本批改动（收官链级联/规范面产物） |
 | site/sitemap.xml | W1300 | sitemap 重建（收官链 index 步） |
 | tests/unit/test_pitfalls_split.py | W1300 | 本批改动（收官链级联/规范面产物） |
-
-## W1299 L-04① 归档孤儿段清偿（2026-11-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .agent/skills/puti-shouye/SKILL.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| .github/workflows/README.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| AGENTS.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| CHANGELOG.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| CITATION.cff | W1299 | 本批改动（收官链级联/规范面产物） |
-| HANDOVER.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| README.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| STRUCTURE.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| archive/docs/AGENTS-ARCHIVE.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| archive/docs/workflows-readme-history.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/00-导读/W批次编号对账表.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/00-导读/遗留总账.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/00-导读/项目说明.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/11-方案报告/README.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/11-方案报告/计划方案/T132-任务计划执行与经验沉淀报告-2026-11-22.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/INDEX.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/agent/pitfalls-topics/cascade-changelog.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/agent/pitfalls-topics/css-visual.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/agent/pitfalls-topics/data-trust.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/agent/pitfalls-topics/flow-collab.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/agent/pitfalls-topics/git-concurrency.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/agent/pitfalls-topics/js-csp-runtime.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| docs/agent/pitfalls.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| pitfalls.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| pytest.ini | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/check_pitfalls_split.py | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/INDEX.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/README.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/_cascade_files_W1299.txt | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/_vermilion_solid_cache.json | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/_w1266_allrender.json | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/_w1299_spec.json | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/chart-legend-render-audit.json | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/chart-legend-render-audit.md | W1299 | 渲染档案可读副本刷新 |
-| scripts/output/file-index.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/stats-changelog.json | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/stats-index.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/stats.json | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/svg_text_contrast_graphic_report.json | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/svg_text_contrast_report.json | W1299 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/tools-inventory.md | W1299 | 本批改动（收官链级联/规范面产物） |
-| site/data/cross-time-danmaku.html | W1299 | 本批改动（收官链级联/规范面产物） |
-| site/data/search-index-zh.js | W1299 | 本批改动（收官链级联/规范面产物） |
-| site/data/tag-cloud.html | W1299 | 本批改动（收官链级联/规范面产物） |
-| site/dukou-engine.html | W1299 | 本批改动（收官链级联/规范面产物） |
-| site/en/search-index-en.js | W1299 | 本批改动（收官链级联/规范面产物） |
-| site/index.html | W1299 | 本批改动（收官链级联/规范面产物） |
-| site/rss.xml | W1299 | 本批改动（收官链级联/规范面产物） |
-| site/sitemap.xml | W1299 | sitemap 重建（收官链 index 步） |
-| tests/unit/test_pitfalls_split.py | W1299 | 本批改动（收官链级联/规范面产物） |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。
