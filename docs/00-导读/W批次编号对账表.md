@@ -177,7 +177,6 @@
 
 
 
-| W1301 | L-02 探针跨run增量缓存: 页级sha+探针版本+口径元数据三重键 + CI actions/cache跨run携带 | 0c926a0aac0054f81f32dd9818e553ffcf394034 | —（待回填） | 已收官（提交待推送·hash 待下一批回填·自指不可知） | mavis | — | 本会话（W1301） | scripts/svg_text_contrast_probe.js, .github/workflows/ci.yml, .gitignore |
 | W1302 | hero-batch 高分辨率绢本源件入站（8 张 webp 1920×1078 → site/static/images/silk-src/·补站内缺失组·成品已在校验命中不入） | 0c926a0aa | —（待回填） | 已收官（hero-batch 绢本源件入站 8 张 1920×1078 webp 落 site/static/images/silk-src/·哈希+目视双证甄别·八件 blob 级完整性 8/8 核验通过·原提交 fba876347 经压缩推送并入 0c926a0aa·本行 hash 统一改指合并承载 commit） | mavis | — | 本会话（W1302） | docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md, docs/11-方案报告/README.md, HANDOVER.md |
 | W1303 | 西游小游戏三合一与十八款合集入口（assets/game 多文件·音效/移动端/战绩/修罗/无尽/十八难/事件/五阵/行者） | 0c926a0aac0054f81f32dd9818e553ffcf394034 | —（待回填） | 已收官（提交待推送·hash 待下一批回填·自指不可知） | mavis | — | 本会话（W1303） | assets/game/ |
 | W1304 | 修 W1301 遗留根因：actions/cache restore+save 未钉 40-hex full SHA（Workflow Lint 红灯·两处） | 2a123f53b | —（待回填） | 已收官（两处 actions/cache 引用钉 40-hex full SHA·本地判据 PASS 97/97·YAML OK 12 jobs·远端 CI 6 workflow 全绿） | mavis | — | 本会话（W1304） | .github/workflows/ci.yml, docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md |
@@ -237,3 +236,4 @@
 | W1358 | 三族声明位与窄屏降级耦合判据 | 117cd664f | —（待回填） | **已收官**（117cd664f·与 W1359 合并一笔提交·三族声明位+降级耦合） | 主会话 2026-11-28 | — | 本会话（W1358） | DESIGN.md · scripts/check_chart_degrade.py · site/data · site/en |
 | W1359 | 区间复盘批（W1353-W1358 六批） | 117cd664f | —（待回填） | **已收官**（117cd664f·与 W1358 合并一笔提交·区间复盘） | 主会话 2026-11-28 | — | 本会话（W1359） | docs/11-方案报告 |
 | W1360 | 面积族形态分类清单（复盘 P1） | 551b023f6 | —（待回填） | **已收官**（551b023f6·面积族形态分类清单） | 主会话 2026-11-28 | — | 本会话（W1360） | docs/11-方案报告 |
+| W1361 | 面积族阈值实测与堆叠形态订正 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 2026-11-28 | — | 本会话（W1361） | docs/11-方案报告 |

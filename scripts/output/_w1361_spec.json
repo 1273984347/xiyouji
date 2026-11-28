@@ -1,0 +1,23 @@
+{
+  "batch": "W1361",
+  "date": "2026-11-28",
+  "title": "W1361 面积族阈值实测与堆叠形态订正批",
+  "desc": "面积族阈值实测与堆叠形态订正：色差合成证明三偏宽 柱形堆叠十页勘误 瀑布零页",
+  "head_entry": "2026-11-28（W1361 面积族阈值实测与堆叠形态订正批）",
+  "head_sentence": "面积族阈值实测与堆叠形态订正：色差合成 柱形堆叠勘误 瀑布零页",
+  "agents_note": "2026-11-28（W1361）阈值实测 + stack 去向勘误 + 瀑布零页",
+  "milestone_block": "- **W1361 面积族阈值实测与堆叠形态订正批**：\n  - **阈值实测**：用站内 8 槽序列色 + 实测 alpha（0.15/0.25/0.35）做自底向上 alpha 合成，算相邻色带 CIEDE2000 ⇒ α≥0.25 时**第 3 层**即跌破 ΔE≥10、α=0.15 时第 2 层即跌破 ⇒ **「>3 层」偏宽松，实测可辨上限约 2 层**\n  - **形态勘误（V1.0→V1.1）**：逐页查 `d3.stack(` 产物的**去向**，确认 12 页 stack 中 **10 页是柱形堆叠**（rect + y(d[1])/height），仅 2 页为面积堆叠 ⇒ V1.0「stack 12 页＝面积堆叠」为误记\n  - **扩展分类**：新增 bar-stack 形态登记（10 页）；瀑布图候选 12 页经上下文核验**全部是「水帘洞瀑布」文本误命中 ⇒ 站内瀑布图 0 页**\n  - **建议**：§4B「>3 层」改「>2 层」（动判据本体须用户批准，另批施工）；本批不改 DESIGN\n  - site/ 零改动",
+  "changelog_body": "\n\n**本批要点**（W1361 面积族阈值实测与堆叠形态订正批）：\n\n> - **阈值实测（回答「>3 层站不站得住」）**：以 `DESIGN §2.1b` 的 8 槽序列色与底色 `#F5F0E4` 为输入，取站内实测的 `fill-opacity` 三档（0.15 / 0.25 / 0.35）做自底向上 alpha 合成，相邻可见色带算 **CIEDE2000**，门槛取站内既有的 **ΔE ≥ 10**。结果：**α=0.15 时第 2 层即跌破（ΔE 6.01→2.20）；α=0.25 / 0.35 时第 3 层跌破（10.61→4.23 / 15.64→6.92）**。⇒ **「>3 层」偏宽松而非偏严，实测可辨上限约 2 层**；若立判据应按「>2 层」并说明代理指标限制（常视 ΔE，未做色盲矩阵）。\n> - **形态勘误（V1.0 → V1.1）**：V1.0 把 12 页含 `d3.stack(` 的页面统记为「面积堆叠」。本批逐页查**产物去向**——`dialogue-sentiment` / `hardship-heatmap` / `linguistics` / `poetry-rhythm-analysis` / `text-evolution` 均为 `append('rect')` + `y(d[1])` + `height=y(d[0])-y(d[1])` 的**柱形堆叠**（10 页含中英镜像），只有 `four-dimensional-research-network` 是 `d3.area` + `y0/y1` 的面积堆叠（2 页）。根因：只查 `d3.stack(` **存在**、未查**去向**——E-A1「先分形态」的第二次踩坑。\n> - **扩展分类**：`bar-stack` 单列形态（10 页，归柱形族，不受面积族本条约束）；瀑布图 12 个候选页经上下文核验**全部为「水帘洞瀑布」景点描写或数据字段**（material-archaeology / cave-estate / visual-art / search 等），**站内瀑布图 0 页**，无需登记形态位。\n> - **结论与建议**：0 页触发 overlay-multi ⇒ 仍**不立 R10**；但 §4B 的「>3 层」应改「>2 层」——这是唯一建议动宪法章节的一处，**须用户批准后另批施工**，本批不改 `DESIGN.md`。\n> - **验证（全绿）**：`verify_delivery.py --scope full` exit 0 · `check_chart_data.py` 239 页 0 FAIL · `check_chart_degrade.py` 237 页 0 违规。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n> - **文件**：`docs/11-方案报告/审查与评审/面积族形态分类清单-2026-11-28.md`（V1.0→V1.1）、`docs/11-方案报告/README.md`（第 157 行描述同步）、`scripts/output/_w1361_spec.json`。\n\n",
+  "file_index_rows": [
+    "| docs/11-方案报告/审查与评审/面积族形态分类清单-2026-11-28.md | W1361 | V1.0→V1.1：阈值实测（>3 偏宽·实测 2 层）+ stack 去向勘误（10 页柱形堆叠）+ 瀑布 0 页 |",
+    "| docs/11-方案报告/README.md | W1361 | 第 157 行登记描述同步 V1.1 |",
+    "| scripts/output/_w1361_spec.json | W1361 | 本批 spec |",
+    "| scripts/output/stats.json | W1361 | stats 重跑 |",
+    "| CHANGELOG.md | W1361 | 面积族阈值实测与堆叠形态订正批 |",
+    "| HANDOVER.md | W1361 | 里程碑块（cascade 写入） |",
+    "| AGENTS.md | W1361 | 版本脚注滚动（cascade 写入） |",
+    "| archive/docs/AGENTS-ARCHIVE.md | W1361 | AGENTS 脚注滚动归档（cascade 写入） |",
+    "| scripts/output/file-index.md | W1361 | 本批 file-index 段（cascade 写入） |",
+    "| scripts/output/_cascade_files_W1361.txt | W1361 | 级联落盘清单（cascade 生成） |"
+  ]
+}

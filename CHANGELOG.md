@@ -1,3 +1,16 @@
+### W1361（2026-11-28）：面积族阈值实测与堆叠形态订正批
+
+**本批要点**（W1361 面积族阈值实测与堆叠形态订正批）：
+
+> - **阈值实测（回答「>3 层站不站得住」）**：以 `DESIGN §2.1b` 的 8 槽序列色与底色 `#F5F0E4` 为输入，取站内实测的 `fill-opacity` 三档（0.15 / 0.25 / 0.35）做自底向上 alpha 合成，相邻可见色带算 **CIEDE2000**，门槛取站内既有的 **ΔE ≥ 10**。结果：**α=0.15 时第 2 层即跌破（ΔE 6.01→2.20）；α=0.25 / 0.35 时第 3 层跌破（10.61→4.23 / 15.64→6.92）**。⇒ **「>3 层」偏宽松而非偏严，实测可辨上限约 2 层**；若立判据应按「>2 层」并说明代理指标限制（常视 ΔE，未做色盲矩阵）。
+> - **形态勘误（V1.0 → V1.1）**：V1.0 把 12 页含 `d3.stack(` 的页面统记为「面积堆叠」。本批逐页查**产物去向**——`dialogue-sentiment` / `hardship-heatmap` / `linguistics` / `poetry-rhythm-analysis` / `text-evolution` 均为 `append('rect')` + `y(d[1])` + `height=y(d[0])-y(d[1])` 的**柱形堆叠**（10 页含中英镜像），只有 `four-dimensional-research-network` 是 `d3.area` + `y0/y1` 的面积堆叠（2 页）。根因：只查 `d3.stack(` **存在**、未查**去向**——E-A1「先分形态」的第二次踩坑。
+> - **扩展分类**：`bar-stack` 单列形态（10 页，归柱形族，不受面积族本条约束）；瀑布图 12 个候选页经上下文核验**全部为「水帘洞瀑布」景点描写或数据字段**（material-archaeology / cave-estate / visual-art / search 等），**站内瀑布图 0 页**，无需登记形态位。
+> - **结论与建议**：0 页触发 overlay-multi ⇒ 仍**不立 R10**；但 §4B 的「>3 层」应改「>2 层」——这是唯一建议动宪法章节的一处，**须用户批准后另批施工**，本批不改 `DESIGN.md`。
+> - **验证（全绿）**：`verify_delivery.py --scope full` exit 0 · `check_chart_data.py` 239 页 0 FAIL · `check_chart_degrade.py` 237 页 0 违规。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：`docs/11-方案报告/审查与评审/面积族形态分类清单-2026-11-28.md`（V1.0→V1.1）、`docs/11-方案报告/README.md`（第 157 行描述同步）、`scripts/output/_w1361_spec.json`。
+
+
 ### W1360（2026-11-28）：面积族形态分类清单批
 
 **本批要点**（W1360 面积族形态分类清单批）：
@@ -928,14 +941,6 @@
 > - **状态**：**遗留总账未清偿由 6 项降至 2 项**——L-03（机器化）、L-05（普查无盲区）、L-04②③④ 闭合；剩余 **L-02**（探针跨 run 增量缓存——探针**现无任何缓存机制**·脚本级从零实现 + CI 双验）与 **L-04①**（归档 13 个孤儿段·多批次锚形态需改 `RX_ENTRY` 判据口径）**如实留账**于总账⇒ 单独批执行。
 > - **文件**： .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/pitfalls-detail-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T131-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, docs/agent/pitfalls-topics/flow-collab.md, pytest.ini, scripts/batch_closeout.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1298.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1298_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-legend-render-audit.md, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/rss.xml, site/sitemap.xml, tests/unit/test_w1102_batch_closeout.py, tests/unit/test_w1114_version_surface.py
 
-### W1297（2026-11-22）：L-01 治本: 刷新步固化进收官链 + 页面变更来源根因定位
-
-> - **来源**：用户 2026-11-22 指令「执行 W1297 清零批：**先定位页面变更来源**，再按遗留总账一次完成 L-01～L-06 并验证 CI 终态」⇒ 立项 W1297。
-> - **执行**：① **根因定位（git 历史级证据·非假设）**——`git log -- site/` 显示 W1295/W1296 两笔**各改 4 个页面页脚各 1 行**（cross-time-danmaku / tag-cloud / dukou-engine / index + 2 个搜索索引）⇒ **版本面推进 = 改页来源** ⇒ 页面 sha 必变 ⇒ 入库探针报告 + 渲染档案**每批必过期** ⇒ 第 80/82 槽 fail-closed 新鲜度检测**必然判红**（W1292→W1296 连续五批实证·此前每批靠人记得重跑）；**两个假设被证伪**：① 跨平台行尾口径（`.gitattributes` 已是 `* text=auto eol=lf` ⇒ 工作树恒 LF 且判据侧 `page_sha` 已 LF 归一）② 报告结构缺字段（两份报告均含 `page_sha`·graphic 168 / body 162）；**上一轮的反证本身不成立**（据「工作树 site/ 与 HEAD 一致」称假设被证伪——实为 amend 已把刷新产物一并提交⇒工作树干净）⇒ 已据实更正报告与总账；② **L-01 治本落地**——`batch_closeout.py` 新增 `_run_refresh_artifacts`（graphic 探针 → body 探针 → 渲染复核豁免页模式 → 渲染复核 --all → git add 5 产物 → **校验第 80/82 槽新鲜度**·任一红即 fail-closed 中断链）+ 插入点 **versions 之后**（页脚定稿后·自带 add·dry 跳过）⇒ **此后收官后入库产物必然新鲜**；③ 报告 T130 落盘 + README §六 登记（145→146 件）。
-> - **验证**：根因有 git 历史实证（W1295/W1296 两笔各改 4 页页脚各 1 行）· 两个替代假设被证伪并留证 · 刷新步新函数 L595 + 调用点 L677（versions 之后）· `py_compile` 语法 OK · dry 跳过分支在位 · 遗留总账 L-01 已据实更正；两面下界仍 **W1253 ✓**；收官链零跳过完成（**本批链内自动跑了刷新步**⇒治本生效的直接验证）+ 全量门禁 0 FAIL + pytest 全绿 + 一次推送带齐 1 笔 ⇒ 1 轮 CI。
-> - **状态**：**L-01（唯一的流水线自产类欠账）已治本**——刷新步固化进收官链后，收官完成时入库产物必然新鲜 ⇒ 「本地全绿 CI 恒红」这一类红灯不再可能靠人记忆避免；代价已如实登记：收官链 **+约 20 分钟**（本地跑两个浏览器探针 + 渲染复核）⇒ 换掉「每批一次陈旧红灯 + 一轮返工 CI」；根因描述与上一轮的错误反证已据实更正。
-> - **文件**： .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T130-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/batch_closeout.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1297.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1297_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-legend-render-audit.md, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -943,7 +948,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1360），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1361），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

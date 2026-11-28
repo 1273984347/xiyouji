@@ -1206,3 +1206,5 @@
 | W1299 | L-04① 归档孤儿段清偿: referenced 口径修正 + RX_ENTRY 多批次锚 + E-283 正本补齐 | c25b3a7a2 | —（待回填） | 已收官（W1299 登记滞后已订正·hash c25b3a7a2·git 已有该 W 提交） | mavis | — | 本会话（W1299） | scripts/check_pitfalls_split.py, docs/agent/pitfalls-topics/css-visual.md, archive/docs/pitfalls-detail-ARCHIVE.md, tests/unit/test_pitfalls_split.py |
 - 2026-11-28（修剪迁入 1 行·W1300-W1300·号序切分）
 | W1300 | L-07 公共RX_ENTRY多批次锚漏计治本 + 口径收敛单一事实源 + 反查表补E-291 | 48621ae3a | —（待回填） | 已收官（W1300 登记滞后已订正·hash 48621ae3a·git 已有该 W 提交） | mavis | — | 本会话（W1300） | scripts/check_pitfall_id_unique.py, scripts/check_pitfalls_split.py, pitfalls.md, tests/unit/test_pitfalls_split.py, tests/unit/test_pitfall_id_unique.py |
+- 2026-11-28（修剪迁入 1 行·W1301-W1301·号序切分）
+| W1301 | L-02 探针跨run增量缓存: 页级sha+探针版本+口径元数据三重键 + CI actions/cache跨run携带 | 0c926a0aac0054f81f32dd9818e553ffcf394034 | —（待回填） | 已收官（提交待推送·hash 待下一批回填·自指不可知） | mavis | — | 本会话（W1301） | scripts/svg_text_contrast_probe.js, .github/workflows/ci.yml, .gitignore |
