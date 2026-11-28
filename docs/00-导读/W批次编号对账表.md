@@ -235,5 +235,5 @@
 | W1353 | 可视化插件三批（A/B/C）执行前计划落库 | 3fd01cb56 | —（待回填） | **已收官**（3fd01cb56·与 W1354 合并一笔提交·执行前计划落库） | 主会话 2026-11-28 | — | 本会话（W1353） | docs/11-方案报告/计划方案/执行前计划-T141-可视化插件三批落地方案.md · docs/11-方案报告/README.md · docs/00-导读/W批次编号对账表.md · scripts/output/_w1353_spec.json · CHANGELOG.md · HANDOVER.md |
 | W1354 | DESIGN §4B 力导向行轻量登记（形态 + 实测基线 + 判定口径） | 3fd01cb56 | —（待回填） | **已收官**（3fd01cb56·与 W1353 合并一笔提交·口径行+R7+取证登记） | 主会话 2026-11-28 | — | 本会话（W1354） | DESIGN.md |
 | W1355 | 雷达族口径英文补齐与等分盘措辞整改 | e7fcf68b4 | —（待回填） | **已收官**（e7fcf68b4·git 反填·共 1 笔·P-43-01） | 主会话 2026-11-28 | — | 本会话（W1355） | DESIGN.md · scripts/check_chart_data.py · site/data/karma-reincarnation.html · site/en |
-| W1356 | 图表无障碍键盘路径与数据表回退 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 2026-11-28 | — | 本会话（W1356） | site/static/js/chart-a11y.js |
-| W1357 | 地图族口径声明与三维语义取证 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 2026-11-28 | — | 本会话（W1357） | DESIGN.md · scripts/check_chart_data.py · site/data · site/en |
+| W1356 | 图表无障碍键盘路径与数据表回退 | 3d8ba5c13 | —（待回填） | **已收官**（3d8ba5c13·与 W1357 合并一笔提交·键盘路径+数据表回退） | 主会话 2026-11-28 | — | 本会话（W1356） | site/static/js/chart-a11y.js |
+| W1357 | 地图族口径声明与三维语义取证 | 3d8ba5c13 | —（待回填） | **已收官**（3d8ba5c13·与 W1356 合并一笔提交·地图口径+R9+3D 语义） | 主会话 2026-11-28 | — | 本会话（W1357） | DESIGN.md · scripts/check_chart_data.py · site/data · site/en |
