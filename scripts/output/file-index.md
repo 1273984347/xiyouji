@@ -1,3 +1,15 @@
+## W1362 面积族重叠阈值收紧为二层批（2026-11-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/docs/（1 件） | W1362 | AGENTS 脚注滚动归档（cascade 写入） |
+| docs/11-方案报告/（2 件） | W1362 | V1.1→V1.2（口径表头/形态表/结论 2/勘误行同步 >2 层） |
+| scripts/output/（4 件） | W1362 | 本批 spec |
+| DESIGN.md | W1362 | §4B 面积行重叠阈值 3→2 + 实测注 ②改题与新增 ⑤（实验与代理限制） |
+| CHANGELOG.md | W1362 | 面积族重叠阈值收紧为二层批 |
+| HANDOVER.md | W1362 | 里程碑块（cascade 写入） |
+| AGENTS.md | W1362 | 版本脚注滚动（cascade 写入） |
+
 ## W1361 面积族阈值实测与堆叠形态订正批（2026-11-28）
 
 | 文件 | W | 说明 |
@@ -1507,57 +1519,5 @@
 | site/rss.xml | W1299 | 本批改动（收官链级联/规范面产物） |
 | site/sitemap.xml | W1299 | sitemap 重建（收官链 index 步） |
 | tests/unit/test_pitfalls_split.py | W1299 | 本批改动（收官链级联/规范面产物） |
-
-## W1298 清零批续: L-03 台账hash自动回填 + L-04② E-185正文补齐 + L-05 verify断言源普查（2026-11-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1298 | W1298 |
-| AGENTS.md | W1298 | W1298 |
-| CHANGELOG.md | W1298 | W1298 |
-| CITATION.cff | W1298 | W1298 |
-| HANDOVER.md | W1298 | W1298 |
-| README.md | W1298 | W1298 |
-| STRUCTURE.md | W1298 | W1298 |
-| archive/docs/AGENTS-ARCHIVE.md | W1298 | W1298 |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1298 | W1298 |
-| archive/docs/pitfalls-detail-ARCHIVE.md | W1298 | W1298 |
-| archive/docs/workflows-readme-history.md | W1298 | W1298 |
-| docs/00-导读/W批次编号对账表.md | W1298 | W1298 |
-| docs/00-导读/遗留总账.md | W1298 | W1298 |
-| docs/00-导读/项目说明.md | W1298 | W1298 |
-| docs/11-方案报告/README.md | W1298 | W1298 |
-| docs/11-方案报告/计划方案/T131-任务计划执行与经验沉淀报告-2026-11-22.md | W1298 | W1298 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1298 | W1298 |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1298 | W1298 |
-| docs/INDEX.md | W1298 | W1298 |
-| docs/agent/pitfalls-topics/flow-collab.md | W1298 | W1298 |
-| pytest.ini | W1298 | W1298 |
-| scripts/batch_closeout.py | W1298 | W1298 |
-| scripts/output/INDEX.md | W1298 | W1298 |
-| scripts/output/README.md | W1298 | W1298 |
-| scripts/output/_cascade_files_W1298.txt | W1298 | W1298 |
-| scripts/output/_vermilion_solid_cache.json | W1298 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/_w1266_allrender.json | W1298 | W1298 |
-| scripts/output/_w1298_spec.json | W1298 | W1298 |
-| scripts/output/chart-legend-render-audit.json | W1298 | W1298 |
-| scripts/output/chart-legend-render-audit.md | W1298 | W1298 |
-| scripts/output/file-index.md | W1298 | W1298 |
-| scripts/output/stats-changelog.json | W1298 | W1298 |
-| scripts/output/stats-index.md | W1298 | W1298 |
-| scripts/output/stats.json | W1298 | W1298 |
-| scripts/output/svg_text_contrast_graphic_report.json | W1298 | W1298 |
-| scripts/output/svg_text_contrast_report.json | W1298 | W1298 |
-| scripts/output/tools-inventory.md | W1298 | W1298 |
-| site/data/cross-time-danmaku.html | W1298 | W1298 |
-| site/data/search-index-zh.js | W1298 | W1298 |
-| site/data/tag-cloud.html | W1298 | W1298 |
-| site/dukou-engine.html | W1298 | W1298 |
-| site/en/search-index-en.js | W1298 | W1298 |
-| site/index.html | W1298 | W1298 |
-| site/rss.xml | W1298 | W1298 |
-| site/sitemap.xml | W1298 | W1298 |
-| tests/unit/test_w1102_batch_closeout.py | W1298 | W1298 |
-| tests/unit/test_w1114_version_surface.py | W1298 | W1298 |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。

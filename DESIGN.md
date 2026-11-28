@@ -537,7 +537,7 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 | 占比构成（部分与整体·类别 ≤8） | 弧形图（d3.pie+d3.arc·含环形） | 类别 >8 禁用（改条形）；负值/零值占比禁用；多环嵌套禁用；**等分索引盘（`d3.pie().value(1)`）不适用本条，但禁以「占比 N%」措辞描述（R8）** | site/data/character-semantic-network.html | degrade: stacked |
 | 多分类网络关系（节点 20-200·边有语义） | 力导向图（d3.forceSimulation）·分层+力混合（forceX/forceY 按类型锚定） | 节点 >200 禁用（改分层分页）；纯层级数据禁用（改树图）；**「>200」须渲染态判定**（静态解析 3/22 页失效且高估·见下方力导向族实测注） | site/data/character-dynamic-network.html | degrade: simplified |
 | 多源汇聚-分发流量（左中右分层·无环路） | 桑基图（d3.sankey+插件脚本） | 环路数据禁用；节点 >60 禁用（窄屏不可读） | site/data/guanyin-six-roles-network.html | degrade: scroll-x |
-| 时序强度叠加（连续量·需趋势强调） | 面积图（d3.area；**堆叠**用 d3.stack） | 多序列**半透明重叠** >3 层禁用（透明度不可辨）；**本条只管重叠（overlay），`d3.stack` 堆叠分段不适用** | site/data/cognitive-psychology.html | degrade: simplified |
+| 时序强度叠加（连续量·需趋势强调） | 面积图（d3.area；**堆叠**用 d3.stack） | 多序列**半透明重叠** >2 层禁用（实测：α≥0.25 时第 3 层相邻色带 CIEDE2000 已 <10·W1361 合成实验）；**本条只管重叠（overlay），`d3.stack` 堆叠分段不适用** | site/data/cognitive-psychology.html | degrade: simplified |
 | 层级包含关系 + 数值面积编码 | 矩形树图（d3.treemap） | 层级 >3 层禁用（标签放不下）；要求精确数值对比禁用 | site/data/aesthetics.html | degrade: scroll-x |
 | 双向成对关系矩阵（实体 × 实体对称流量） | 和弦图（d3.chord） | 实体 >30 禁用（弧重叠）；非对称关系禁用 | site/data/four-heavenly-kings-artifacts.html | degrade: scroll-x |
 | 三维场景 / 高密度边渲染（性能兜底） | 画布 / 3D（canvas 2D + THREE.WebGL） | WebGL 不可用必须回退（三页先例）；无交互需求禁用（改 SVG） | site/data/character-relationship-3d.html | degrade: simplified |
@@ -551,7 +551,8 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 
 > **弧形/面积规模实测（W1354 取证 · W1355 结论订正）**：
 > ① **弧形「类别 ≤8」**：21 页渲染态实测，多数 ≤8；`chart-design` 12 等分日晷与 **karma-reincarnation `chart-karma-pie` 10 类**同为 `d3.pie().value(1)` 的**等分索引盘**（每类恰 1 例）⇒ **不属占比构成·不适用本条**。W1354 曾判其为「类别超限违规」属**误判**——真正的缺陷在文案（以「占比 10%」描述等分排布）；W1355 已订正文案为「等分索引·非占比构成」并立 **R8 判据**（等分盘禁称「占比 N%」）。
-> ② **面积「多序列重叠 >3 层」**：13 页渲染态实测；`four-dimensional-research-network` 的 `timeline-svg` 用 `d3.stack()` + `stackOffsetNone` ⇒ **真堆叠**（分段互不重叠）⇒ **不属本条**。W1354 判其「4 层违规」同为**误判**——本条禁用理由是**半透明重叠不可辨**，堆叠不涉及透明叠加。
+> ② **面积「多序列重叠」**：13 页渲染态实测；`four-dimensional-research-network` 的 `timeline-svg` 用 `d3.stack()` + `stackOffsetNone` ⇒ **真堆叠**（分段互不重叠）⇒ **不属本条**。W1354 判其「4 层违规」同为**误判**——本条禁用理由是**半透明重叠不可辨**，堆叠不涉及透明叠加。
+> ⑤ **阈值由 3 收紧为 2（W1362 · 依 W1361 实测）**：以本站 8 槽序列色 + 底色 `#F5F0E4` + 实测 `fill-opacity` 三档（0.15/0.25/0.35）做自底向上 alpha 合成并算相邻色带 CIEDE2000——**α=0.15 时第 2 层即跌破本站门槛 ΔE≥10（6.01→2.20）；α=0.25/0.35 时第 3 层跌破（10.61→4.23 / 15.64→6.92）** ⇒ 原「>3 层」**偏宽松**，实测可辨上限约 2 层，故本行禁用条件改为 **>2 层**。**代理指标限制**：ΔE00 为常视计算（未做 Machado 色盲矩阵），且未计入图例/直接标注的补偿效应 ⇒ 该实验能证明「3 偏宽」，不能证明「2 最优」；若后续有真实 3 层叠加页出现，须先做人眼可辨实验再定夺。复算：`python tmpe/_w1361_threshold_exp.py`。
 > ③ **判定口径（防再犯）**：弧形族先分辨 **占比构成（受类别 ≤8 约束）** 与 **等分索引盘（不受本条约束·受 R8 措辞约束）**；面积族先分辨 **overlay 半透明重叠（受本条约束）** 与 **stack 堆叠（`d3.stack` 出现即归 stack·不受约束）**。W1354 两条误判的共同根因是「未先分形态、直接按页级计数判红」——补任何族规模判据前必须先过分辨。
 > ④ 口径提醒：以 `path` 弧线命令 `A` 计类别、以闭合填充路径计面积层，**会把桑基/雷达的多段路径误并入面积桶**（实测 karma 桑基被计 10 层）——复算时须按 svg id 区分，勿以页级合计下结论。
 
