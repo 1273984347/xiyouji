@@ -1,3 +1,30 @@
+### W1359（2026-11-28）：区间复盘批（W1353-W1358 六批）
+
+**本批要点**（W1359 区间复盘批）：
+
+> - **区间**：W1353–W1358 六批、六笔提交（4 笔内容 + 2 笔回填）。产出结构：18 个插件子技能 → A/B/C 三批 → 全部落地；判据净增 **3 条**（R7 口径 / R8 等分盘措辞 / R9 地图口径）+ **2 处扩面**（R5 辖区至 EN、第 30 门禁族↔降级耦合）。
+> - **五条结论反转**（本区间最重要的产出）：① 雷达族不在 §4B —— 已由 W1342 闭合；② `character-relationship-3d` 的 z 自 W1343 起为 `depthOf`；③ `journey-geo-3d` 为 x=lon / z=lat / y=heightOf；④ `karma-reincarnation` 10 类实为等分索引盘（真缺陷是文案自称占比）；⑤ `four-dimensional` 4 层实为 `d3.stack` 真堆叠。②③ 推翻 W1341 P2 前提，④⑤ 推翻**本 Agent 自己在 W1354 写下的判定**——均由下一批自查改正。
+> - **六条可复用结论**：E-A1 判据前先分形态 · E-A2 算不稳的量不写进声明位 · E-A3 新判据首轮必跑全站并用首轮红反推判据宽度 · E-A4 声明位判据最窄有效形态是「拦假声明」· E-A5 判据扩面即自动暴露镜像站缺口 · E-A6 页面数据在全局词法环境（`const` 不是 `window` 属性）。
+> - **未闭合 4 项**：弧形类别数/面积层数仍无机器判据（R10 待立，须先分形态）· `chart-force-meta` 无计数字段（口径不稳）· 数据表回退覆盖 8/11 有图页 · 第 43 槽全量跑偶发假红两次。
+> - **登记面**：[docs/11-方案报告/README.md](docs/11-方案报告/README.md) 五节补第 158 行并按磁盘实算由 22 件同步为 23 件。
+> - **验证（全绿）**：`verify_delivery.py --scope full` exit 0 · `check_chart_data.py` 239 页 0 FAIL · `check_chart_degrade.py` 237 页 0 违规 · 搜索索引 1001 条与生成器一致。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：`docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-28.md`（新增）、`docs/11-方案报告/README.md`（五节登记 + 件数）、`scripts/output/_w1359_spec.json`。
+
+
+### W1358（2026-11-28）：三族声明位与窄屏降级耦合判据批
+
+**本批要点**（W1358 三族声明位与窄屏降级耦合判据批）：
+
+> - **三族声明位齐备**：38 个力导向页补 `<!-- chart-force-meta: family=force -->`；地图族 6 页（`chart-map-meta`）与 3D 族 3 页（`chart-3d-meta`）已在 W1357 齐备 ⇒ **力导向 / 地图 / 3D 三类图元现在都有页级声明位**，与 `chart-degrade`、`chart-radar-meta` 同一形态。
+> - **判据（第 30 门禁扩面）**：[check_chart_degrade.py](scripts/check_chart_degrade.py) 增「**族 ↔ 降级档耦合**」——凡力导向（`d3.forceSimulation` 或声明位）/ 地图（`d3.geo*` 或声明位）/ 3D（`THREE.` 或声明位）页面，`chart-degrade` **不得为 `n/a`**（n/a＝「本页无需降级」，对这三族即**假声明**）；`stacked` / `scroll-x` / `simplified` 均为真降级方案，放行。自测由 9 例扩至 **13 例**（含力导向 n/a 必红、地图 stacked 放行、3D n/a 必红、非族页面 n/a 放行）。
+> - **判据口径的一次自我收敛**：首版把地图族限定为 `simplified|scroll-x`，首轮扫出 `journey-route` 的 `stacked` —— 复核后判定 `stacked`（地图与文字上下堆叠）对该页是**合法降级**，故判据收敛为「只拦 n/a」而不限定字面量。**判据宁窄勿假**：能零误报拦住的只有「n/a」这一种真缺口。
+> - **力导向声明位不写节点数（铁律 15）**：本批先按静态形状扫描写了 38 页 `nodes=N edges=M`，随后交叉复核发现**同一页出现三个互斥值**（`heaven-power` 静态 27 / 渲染 27 / 另一次静态 23，而页面 `source:` 对象实为 41）——静态解析受多数组与正则字面量干扰、渲染态受可筛选视图影响（`character-dynamic-network` 静态 35 / 渲染 14）。⇒ **改写为不写数字的族标记**，把「数字字段」留到口径稳定后再补，不做迎合判据的假数据。
+> - **验证（全绿）**：`check_chart_degrade.py --self-test` 13/13 · 全站 **237 页 0 违规** · `check_chart_data.py` 239 页 0 FAIL · `--spec-check` 表体行 10 空格 0 · `verify_delivery.py --scope full` exit 0。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：`scripts/check_chart_degrade.py`（族↔降级耦合 + 自测 5 例）、`DESIGN.md`（§4B 三族声明位注）、`site/data/` 19 页与 `site/en/` 19 页（chart-force-meta）、`scripts/output/_w1358_spec.json`。
+
+
 ### W1357（2026-11-28）：地图族口径声明与三维语义取证批
 
 **本批要点**（W1357 地图族口径声明与三维语义取证批）：
@@ -903,22 +930,6 @@
 > - **状态**：**把「为什么每批都有遗留」从模糊感受变成可核对的三类归因 + 一个仓内总账 + 一个清零承诺**——真正需要「一直修」的只有一类**流水线自产**（收官链固化刷新）与一类**物理必然**（hash 自指·只能自动化）；其余一次性欠账已在 W1291–W1295 清偿完毕；**下一批（W1297·清零批）按总账一次做完 L-01~L-06** ⇒ 清零后常态只剩 L-03 一条机器动作。
 > - **文件**： .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/INDEX.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T129-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1296.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1296_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml
 
-### W1295（2026-11-22）：探针两口径在 CI 内并行化
-
-> - **来源**：用户 2026-11-22 引用 W1294 遗留清单并指示「**现在做**」⇒ 立项 W1295（CI 提速批）。
-> - **执行**：① **先测量再优化**——取 W1290 run 的 step 级耗时（gh api 取 jobs）：Delivery Gate **1109s（占 63%）**、其中 graphic 探针 **343s** + body 探针 **339s** = **682s（占全 CI 39%）**，而**依赖安装合计仅 55s（3%）**、单测已分 3 shard、6 个 workflow 已有 paths 过滤 ⇒ 通用优化清单（缓存/并行/路径过滤）**本仓早已到位·照抄会完全错过真大头**；② **两口径并行化**——graphic（--scope all）与 body（--scope data,en）**互不依赖**（扫不同页集）且**写不同报告文件** ⇒ 原先两个 step 串行 ⇒ 合并为**单 step 内 bash `&` + `wait`** ⇒ 墙钟从和变 max ⇒ **省 ≈5m43s**；**判据强度一字未动**（page_sha 覆盖与口径判定未动·第 80 槽 fail-closed 仍由入库产物承担）；③ **ci_sim 仿真序列同步**——CI_STEPS 两条探针项加注「串行等价·真实 CI 为并行」（Windows 本地无 POSIX `&`/`wait` ⇒ 仿真验证的是「产物 + page_sha 覆盖」这条**正确性链**·加速形态属 CI 墙钟面）；④ **顺带核实遗留③已完备**——快档已含第 80 槽（探针新鲜度）与第 82 槽（渲染档案 sha）⇒ **实证：W1294 的 push 正被快档第 82 槽当场拦下** ⇒ 快档对「陈旧类红灯」确有实效 ⇒ 无需再补；⑤ 报告 T128 落盘 + README §六 登记（143→144 件）。
-> - **验证**：ci.yml **YAML 解析 OK**（12 jobs）· 并行段含两条 node 探针 & + wait · ci_sim CI_STEPS 已同步并注释差异 · 探针参数（--scope/--out/--bg-mode）与判据文本未动 ⇒ 判据强度不变 · 两面下界仍 **W1253 ✓** · 收官链零跳过完成 + 全量门禁 0 FAIL + pytest 全绿 + 一次推送带齐 1 笔 ⇒ 1 轮 CI。
-> - **状态**：CI 的最大单项（探针 682s·39%）由**串行改并行**，预期省 ≈5m43s；通用清单里本仓已到位的三项（缓存/并行/路径过滤）**不动**（避免无效改动）；遗留③经核实**早已完备**（快档两个新鲜度档齐备且当场拦下过真实陈旧）。
-> - **文件**： .github/workflows/README.md, .github/workflows/ci.yml, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T128-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/ci_sim.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1295.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1295_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml
-
-### W1294（2026-11-22）：CI 提速补盲与门禁自检加固 + 归档二级分片
-
-> - **来源**：用户 2026-11-22 引用 W1293 遗留清单并指示「**现在做**」⇒ 立项 W1294（CI 提速补盲与门禁自检加固批）。
-> - **执行**：① **快档补第 80 槽（探针新鲜度）**——取证 `ci_sim.py` 的 `FAST_GATES` 仅 4 项（第 31/82/83 槽 + CSP 零漂移）⇒ **无「入库探针报告 page_sha 是否与当前页一致」这一档** ⇒ 与 W1292/W1293 连续两批「本地快档 7/7 PASS 而线上第 80 槽红」**完全吻合**（本地对 CI 红灯结构性失明）⇒ FAST_GATES 增项 ⇒ **探针报告陈旧在推前即被拦**；② **采集超时加固**——全仓 grep `timeout: 20000` 定位 W1289 假红真身 `_audit_render_states.js:342`（暗色审计）＋ 同型 `chart_label_clipping_probe.js:351` / `svg_text_contrast_probe.js:843` ⇒ 三处 20000→**60000**（**只给页面更多加载时间·判据强度不变**）；③ **归档二级分片**——`archive_tier2.py --file changelog --apply` 迁出 **68 段（W875-W950·209 KB）** 至 `CHANGELOG-ARCHIVE-tier2-W875-W950.md` ⇒ 一级 CHANGELOG-ARCHIVE **1051KB → 896KB**（破 1MB 线解除）；④ 报告 T127 落盘 + README §六 登记（142→143 件）。
-> - **验证**：快档实跑出现「SVG 文字对比度(第80槽·探针新鲜度)」且 **PASS**（违例 0 条）⇒ 快档与线上全量**逐档对齐**了这一档；三处超时替换各 1 处；一级归档件 **896KB < 1MB**；两面下界仍 **W1253 ✓**；收官链零跳过完成 + 全量门禁 0 FAIL + pytest 全绿 + 一次推送带齐 1 笔 ⇒ 1 轮 CI。
-> - **状态**：把「本地全绿 ≠ CI 会绿」从一条教训变成**闸门能力**——快档新增第 80 槽 ⇒ 探针报告陈旧在推前即被拦；W1289 假红的采集侧根因（20s 超时）消除；归档层 1MB 破线告警一次清偿。
-> - **文件**： .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/CHANGELOG-ARCHIVE-tier2-W875-W950.md, archive/docs/CHANGELOG-ARCHIVE.md, archive/docs/INDEX.md, archive/docs/README.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T127-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/_audit_render_states.js, scripts/chart_label_clipping_probe.js, scripts/ci_sim.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1294.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1294_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, scripts/svg_text_contrast_probe.js, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -926,7 +937,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1357），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1359），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

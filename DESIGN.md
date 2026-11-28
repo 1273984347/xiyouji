@@ -547,6 +547,8 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 
 > **力导向族实测基线（W1354 · A-1 取证）**：22 个命中 `d3.forceSimulation` / `THREE.` / `d3.geo*` 签名的页面逐页实测——节点最多 **35**（character-dynamic-network）· 边最多 **131**（relationships）· **0 页触及 >200 阈值**（余量 5.7 倍）⇒ 该禁用条件为**前瞻性条款**，现役无存量超限页、**不设基线冻结文件**；**且不立 R6 门禁**（W1355 决策：无超限页时新增一条恒不触发的红线，只增维护面与误判风险，阈值余量已在本注留证）。**受控出口（W1357）**：若未来出现 >200 节点的页面，出口为 **Canvas 2D + 分页/聚合**（先例 `site/data/perf-canvas-rendering.html` 已跑通离屏缓冲），**不得砍数据**；出口不预先立判据，按首批实际出现时再定阈值与降级声明。**判定口径**：`>200` 须以**渲染态**实测为准——① 静态数组字面量解析在 **3/22 页失效**（relationships / monster-female-network / intertextuality-network 的 node/link 由运行时构造，无字面数组）；② 同一静态解析会把注释与正则里的方括号当成数组跨度而**高估**（relationships 静态算 40 节点/383 边·渲染实测 23/131）。故**禁以静态解析结果判红**。
 
+> **三族声明位与降级耦合（W1358）**：力导向 / 地图 / 3D 三类图元现在各有页级声明位——`<!-- chart-force-meta: family=force -->`（38 页）、`<!-- chart-map-meta: projection=geo|schematic basemap=self -->`（6 页）、`<!-- chart-3d-meta: … -->`（3 页）。第 30 门禁增「族 ↔ 降级档耦合」：**这三族页面的 `chart-degrade` 不得为 `n/a`**（n/a＝本页无需降级，对它们即假声明）；`stacked` / `scroll-x` / `simplified` 均为真降级方案，放行。**力导向声明位只标族不标节点数**——静态解析与渲染态两次实测都无法稳定复算同页节点/边数（同一页出现 27/23/41 三值），按铁律 15 不写迎合判据的数字；待口径稳定后再补计数字段。
+
 > **弧形/面积规模实测（W1354 取证 · W1355 结论订正）**：
 > ① **弧形「类别 ≤8」**：21 页渲染态实测，多数 ≤8；`chart-design` 12 等分日晷与 **karma-reincarnation `chart-karma-pie` 10 类**同为 `d3.pie().value(1)` 的**等分索引盘**（每类恰 1 例）⇒ **不属占比构成·不适用本条**。W1354 曾判其为「类别超限违规」属**误判**——真正的缺陷在文案（以「占比 10%」描述等分排布）；W1355 已订正文案为「等分索引·非占比构成」并立 **R8 判据**（等分盘禁称「占比 N%」）。
 > ② **面积「多序列重叠 >3 层」**：13 页渲染态实测；`four-dimensional-research-network` 的 `timeline-svg` 用 `d3.stack()` + `stackOffsetNone` ⇒ **真堆叠**（分段互不重叠）⇒ **不属本条**。W1354 判其「4 层违规」同为**误判**——本条禁用理由是**半透明重叠不可辨**，堆叠不涉及透明叠加。

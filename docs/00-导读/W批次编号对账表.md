@@ -177,8 +177,6 @@
 
 
 
-| W1298 | 清零批续: L-03自动回填hash + L-04②E-185正文补齐 + L-05verify断言源普查结论 | a206ec8ae | —（待回填） | 已收官（L-03 台账hash自动回填机器化 + L-04②E-185正文补齐 + L-04③双壳保留 + L-04④反查表定策 + L-05 verify断言源普查无盲区 + 根治W1297引入的4个失败单测·刷新步mock+禁全量暂存判据形态锚定 + 收官链4次失败根因逐一修复 + 全量门禁核心全过 + 提交a206ec8ae + CI六workflow全绿） | mavis | — | 本会话（W1298） | — |
-| W1299 | L-04① 归档孤儿段清偿: referenced 口径修正 + RX_ENTRY 多批次锚 + E-283 正本补齐 | c25b3a7a2 | —（待回填） | 已收官（W1299 登记滞后已订正·hash c25b3a7a2·git 已有该 W 提交） | mavis | — | 本会话（W1299） | scripts/check_pitfalls_split.py, docs/agent/pitfalls-topics/css-visual.md, archive/docs/pitfalls-detail-ARCHIVE.md, tests/unit/test_pitfalls_split.py |
 | W1300 | L-07 公共RX_ENTRY多批次锚漏计治本 + 口径收敛单一事实源 + 反查表补E-291 | 48621ae3a | —（待回填） | 已收官（W1300 登记滞后已订正·hash 48621ae3a·git 已有该 W 提交） | mavis | — | 本会话（W1300） | scripts/check_pitfall_id_unique.py, scripts/check_pitfalls_split.py, pitfalls.md, tests/unit/test_pitfalls_split.py, tests/unit/test_pitfall_id_unique.py |
 | W1301 | L-02 探针跨run增量缓存: 页级sha+探针版本+口径元数据三重键 + CI actions/cache跨run携带 | 0c926a0aac0054f81f32dd9818e553ffcf394034 | —（待回填） | 已收官（提交待推送·hash 待下一批回填·自指不可知） | mavis | — | 本会话（W1301） | scripts/svg_text_contrast_probe.js, .github/workflows/ci.yml, .gitignore |
 | W1302 | hero-batch 高分辨率绢本源件入站（8 张 webp 1920×1078 → site/static/images/silk-src/·补站内缺失组·成品已在校验命中不入） | 0c926a0aa | —（待回填） | 已收官（hero-batch 绢本源件入站 8 张 1920×1078 webp 落 site/static/images/silk-src/·哈希+目视双证甄别·八件 blob 级完整性 8/8 核验通过·原提交 fba876347 经压缩推送并入 0c926a0aa·本行 hash 统一改指合并承载 commit） | mavis | — | 本会话（W1302） | docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md, docs/11-方案报告/README.md, HANDOVER.md |
@@ -237,3 +235,5 @@
 | W1355 | 雷达族口径英文补齐与等分盘措辞整改 | e7fcf68b4 | —（待回填） | **已收官**（e7fcf68b4·git 反填·共 1 笔·P-43-01） | 主会话 2026-11-28 | — | 本会话（W1355） | DESIGN.md · scripts/check_chart_data.py · site/data/karma-reincarnation.html · site/en |
 | W1356 | 图表无障碍键盘路径与数据表回退 | 3d8ba5c13 | —（待回填） | **已收官**（3d8ba5c13·与 W1357 合并一笔提交·键盘路径+数据表回退） | 主会话 2026-11-28 | — | 本会话（W1356） | site/static/js/chart-a11y.js |
 | W1357 | 地图族口径声明与三维语义取证 | 3d8ba5c13 | —（待回填） | **已收官**（3d8ba5c13·与 W1356 合并一笔提交·地图口径+R9+3D 语义） | 主会话 2026-11-28 | — | 本会话（W1357） | DESIGN.md · scripts/check_chart_data.py · site/data · site/en |
+| W1358 | 三族声明位与窄屏降级耦合判据 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 2026-11-28 | — | 本会话（W1358） | DESIGN.md · scripts/check_chart_degrade.py · site/data · site/en |
+| W1359 | 区间复盘批（W1353-W1358 六批） | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 2026-11-28 | — | 本会话（W1359） | docs/11-方案报告 |

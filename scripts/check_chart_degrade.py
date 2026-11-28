@@ -4,6 +4,8 @@
 判据（DESIGN.md §4B 选型章配套）：site/data 每个可视化页必须在页内声明窄屏降级形态——
   <!-- chart-degrade: stacked | scroll-x | simplified | n/a -->
 四值枚举（与 §4B 表「窄屏降级方案」列一致）。缺声明或值非法 = FAIL。
+W1358 增「族 ↔ 降级档耦合」：力导向 / 地图 / 3D 三类图元所在页面不得声明 n/a
+  （n/a = 本页无需降级，对这三族即假声明）；stacked / scroll-x / simplified 均为真降级，放行。
 实现为静态解析，不启浏览器（PD-1 交付物 3）。
 
 范围：site/data 90 + site 根页 9 + site/en 138 = 237 页（_shell/_template 模板壳跳过·与其余门禁 SKIP_STEMS 同口径）。
@@ -38,6 +40,16 @@ MARKER = "---- 第 30 门禁 降级声明："
 SKIP_STEMS = ("_shell", "_template")
 VALID = ("stacked", "scroll-x", "simplified", "n/a")
 RE_DECL = re.compile(r"chart-degrade:\s*(stacked|scroll-x|simplified|n/a)\b")
+
+# 族 ↔ 窄屏降级档耦合（W1358）：力导向 / 地图 / 3D 三类图元的降级档位不得为 n/a。
+#   依据：DESIGN §4B 各族行已写「窄屏降级方案」，但此前只校验「声明存在 + 值合法」，
+#   不校验「族的声明是否真的能降级」——出现「有声明、但声明成 n/a」即等于没声明。
+#   族识别同时认渲染签名与族声明位（chart-force-meta / chart-map-meta / chart-3d-meta），
+#   保证「声明位」与「真实用图」两条路径都受同一判据约束。
+RE_FORCE = re.compile(r"d3\.forceSimulation|chart-force-meta:")
+RE_MAP = re.compile(r"d3\.geo[A-Z]|chart-map-meta:")
+RE_3D = re.compile(r"new THREE\.|THREE\.WebGLRenderer|chart-3d-meta:")
+FAMILY_RES = [("force", RE_FORCE), ("map", RE_MAP), ("3d", RE_3D)]
 
 
 def scan_pages(scope: str = "all") -> list[Path]:
@@ -78,6 +90,13 @@ def check_page(path: Path) -> str | None:
         if loose:
             return f"声明写法非法：{loose.group(0)[:40]!r}（须 <!-- chart-degrade: stacked|scroll-x|simplified|n/a -->）"
         return "缺 chart-degrade 声明"
+    # W1358：族 ↔ 降级档耦合（声明合法 ≠ 声明可用）。三族页面的图元都无法在窄屏原样呈现，
+    #   n/a（"本页无需降级"）对它们即假声明 ⇒ 一律判红；stacked/scroll-x/simplified 均为真降级方案，放行。
+    val = m.group(1)
+    if val == "n/a":
+        fams = [fam for fam, rx in FAMILY_RES if rx.search(html)]
+        if fams:
+            return "族 %s 的降级档位为 n/a，须为真降级方案（stacked|scroll-x|simplified）" % "/".join(fams)
     return None
 
 
@@ -99,6 +118,13 @@ def self_test() -> int:
         ("正样本-四值枚举均可", "<!-- chart-degrade: scroll-x -->", 0),
         ("负样本-缺声明", "<p>无声明</p>", 1),
         ("负样本-非法值", "<!-- chart-degrade: banana -->", 1),
+        # W1358：族 ↔ 降级档耦合
+        ("负样本-力导向声明为 n/a", "<script>d3.forceSimulation()</script><!-- chart-degrade: n/a -->", 1),
+        ("正样本-力导向已降级", "<script>d3.forceSimulation()</script><!-- chart-degrade: simplified -->", 0),
+        ("正样本-地图用 stacked", "<script>d3.geoMercator()</script><!-- chart-degrade: stacked -->", 0),
+        ("负样本-3D 声明为 n/a", "<script>new THREE.Scene()</script><!-- chart-degrade: n/a -->", 1),
+        ("正样本-3D 用 simplified", "<script>new THREE.Scene()</script><!-- chart-degrade: simplified -->", 0),
+        ("正样本-非族页面 n/a", "<p>纯文本页</p><!-- chart-degrade: n/a -->", 0),
     ]
     tmp = ROOT / "scripts" / "output" / "_w1265_degrade_selftest.html"
     tmp.parent.mkdir(parents=True, exist_ok=True)
