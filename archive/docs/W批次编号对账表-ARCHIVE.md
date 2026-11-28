@@ -1204,3 +1204,5 @@
 | W1298 | 清零批续: L-03自动回填hash + L-04②E-185正文补齐 + L-05verify断言源普查结论 | a206ec8ae | —（待回填） | 已收官（L-03 台账hash自动回填机器化 + L-04②E-185正文补齐 + L-04③双壳保留 + L-04④反查表定策 + L-05 verify断言源普查无盲区 + 根治W1297引入的4个失败单测·刷新步mock+禁全量暂存判据形态锚定 + 收官链4次失败根因逐一修复 + 全量门禁核心全过 + 提交a206ec8ae + CI六workflow全绿） | mavis | — | 本会话（W1298） | — |
 - 2026-11-28（修剪迁入 1 行·W1299-W1299·号序切分）
 | W1299 | L-04① 归档孤儿段清偿: referenced 口径修正 + RX_ENTRY 多批次锚 + E-283 正本补齐 | c25b3a7a2 | —（待回填） | 已收官（W1299 登记滞后已订正·hash c25b3a7a2·git 已有该 W 提交） | mavis | — | 本会话（W1299） | scripts/check_pitfalls_split.py, docs/agent/pitfalls-topics/css-visual.md, archive/docs/pitfalls-detail-ARCHIVE.md, tests/unit/test_pitfalls_split.py |
+- 2026-11-28（修剪迁入 1 行·W1300-W1300·号序切分）
+| W1300 | L-07 公共RX_ENTRY多批次锚漏计治本 + 口径收敛单一事实源 + 反查表补E-291 | 48621ae3a | —（待回填） | 已收官（W1300 登记滞后已订正·hash 48621ae3a·git 已有该 W 提交） | mavis | — | 本会话（W1300） | scripts/check_pitfall_id_unique.py, scripts/check_pitfalls_split.py, pitfalls.md, tests/unit/test_pitfalls_split.py, tests/unit/test_pitfall_id_unique.py |

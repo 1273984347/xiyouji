@@ -1,5 +1,5 @@
 {
- "generated_at": "2026-11-28T04:51:51.231Z",
+ "generated_at": "2026-11-28T10:54:46.472Z",
  "threshold": 3,
  "scope": "all",
  "bg_mode": "body",
@@ -191,9 +191,9 @@
   "curated.html": "317e50128e64",
   "dashboard.html": "c3648b85df06",
   "guide.html": "9324bb32ec2b",
-  "dukou-engine.html": "4118b5c048f6",
-  "index.html": "ac23fb03e83e",
-  "data/cross-time-danmaku.html": "15d884b3750e"
+  "dukou-engine.html": "ca0d5104fcc0",
+  "index.html": "f74320333667",
+  "data/cross-time-danmaku.html": "f5c400f85aba"
  },
  "by_page": {}
 }

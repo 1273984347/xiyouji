@@ -1,3 +1,14 @@
+## W1360 面积族形态分类清单批（2026-11-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/docs/（1 件） | W1360 | AGENTS 脚注滚动归档（cascade 写入） |
+| docs/11-方案报告/（2 件） | W1360 | 26 页形态三分（stack 12 / overlay-single 14 /  |
+| scripts/output/（4 件） | W1360 | 本批 spec |
+| CHANGELOG.md | W1360 | 面积族形态分类清单批 |
+| HANDOVER.md | W1360 | 里程碑块（cascade 写入） |
+| AGENTS.md | W1360 | 版本脚注滚动（cascade 写入） |
+
 ## W1359 区间复盘批（2026-11-28）
 
 | 文件 | W | 说明 |
@@ -1582,49 +1593,5 @@
 | docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1293 | 本批改动面（级联产物/门禁产物） |
 | docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1293 | 本批改动面（级联产物/门禁产物） |
 | scripts/output/file-index.md | W1293 | 本批改动面（级联产物/门禁产物） |
-
-## W1296 建立遗留总账 + 欠账根因三分类 + 清零批立项（2026-11-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/00-导读/遗留总账.md | W1296 | 新建：全仓未清偿项唯一可见账本（三类归因 + 已清偿机器证据 + 清零承诺 + 维护纪律） |
-| docs/00-导读/W批次编号对账表.md | W1296 | W1296 认领行 + 收官回填 |
-| docs/11-方案报告/计划方案/T129-任务计划执行与经验沉淀报告-2026-11-22.md | W1296 | T129 报告落盘 |
-| docs/11-方案报告/README.md | W1296 | 报告索引登记（§六 144→145 件） |
-| CHANGELOG.md | W1296 | 本批版段（收官链写入） |
-| HANDOVER.md | W1296 | 本批概要与遗留登记 |
-| README.md | W1296 | 版本面级联（收官链写入） |
-| STRUCTURE.md | W1296 | 版本面级联（收官链写入） |
-| CITATION.cff | W1296 | 版本面级联（收官链写入） |
-| docs/00-导读/项目说明.md | W1296 | 版本面级联（收官链写入） |
-| .github/workflows/README.md | W1296 | 版本面级联（收官链写入） |
-| site/index.html | W1296 | 版本脚注联动（级联产物） |
-| site/dukou-engine.html | W1296 | 版本脚注联动（级联产物） |
-| site/data/tag-cloud.html | W1296 | 版本脚注联动（级联产物） |
-| site/data/cross-time-danmaku.html | W1296 | 版本脚注联动（级联产物） |
-| scripts/output/stats.json | W1296 | 统计计数链刷新 |
-| scripts/output/stats-index.md | W1296 | 统计索引刷新 |
-| scripts/output/stats-changelog.json | W1296 | 统计变更史追加 |
-| docs/INDEX.md | W1296 | 目录件重建（收官链 refresh/index） |
-| scripts/output/INDEX.md | W1296 | 目录件重建（收官链 refresh） |
-| scripts/output/README.md | W1296 | 目录件重建（收官链 refresh） |
-| scripts/output/tools-inventory.md | W1296 | 工具清单刷新（收官链 refresh） |
-| site/data/search-index-zh.js | W1296 | 搜索索引重建（收官链 index） |
-| site/en/search-index-en.js | W1296 | 搜索索引重建（收官链 index） |
-| site/sitemap.xml | W1296 | sitemap 重建（收官链 index） |
-| scripts/output/_w1296_spec.json | W1296 | 本批 spec |
-| scripts/output/_cascade_files_W1296.txt | W1296 | 级联件清单（收官链 cascade） |
-| AGENTS.md | W1293 | 本批改动面（级联产物/门禁产物） |
-| archive/docs/AGENTS-ARCHIVE.md | W1293 | 本批改动面（级联产物/门禁产物） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1293 | 本批改动面（级联产物/门禁产物） |
-| archive/docs/workflows-readme-history.md | W1293 | 本批改动面（级联产物/门禁产物） |
-| docs/00-导读/INDEX.md | W1293 | 本批改动面（级联产物/门禁产物） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1293 | 本批改动面（级联产物/门禁产物） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1293 | 本批改动面（级联产物/门禁产物） |
-| scripts/output/file-index.md | W1293 | 本批改动面（级联产物/门禁产物） |
-| scripts/output/_w1266_allrender.json | W1293 | 本批改动面（级联产物/门禁产物） |
-| scripts/output/chart-legend-render-audit.json | W1293 | 本批改动面（级联产物/门禁产物） |
-| scripts/output/svg_text_contrast_graphic_report.json | W1293 | 本批改动面（级联产物/门禁产物） |
-| scripts/output/svg_text_contrast_report.json | W1293 | 本批改动面（级联产物/门禁产物） |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。
