@@ -1,3 +1,21 @@
+## W1364 宣纸淡彩插画族 48 张成套（2026-11-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/（1 件） | W1364 | 版本滚动（cascade 写入） |
+| archive/docs/（6 件） | W1364 | 版本滚动归档（cascade 写入） |
+| assets/promo/（2 件） | W1364 | 宣纸淡彩插画族 48 张成套 + 4 张目视拼版预览 + 风格锚点 + 族 RE |
+| docs/00-导读/（2 件） | W1364 | 本批认领行（W1364） |
+| scripts/output/（10 件） | W1364 | 本批 file-index 段（cascade 写入） |
+| site/（2 件） | W1364 | 页脚批次版本行滚动（cascade 写入） |
+| site/data/（2 件） | W1364 | 页脚批次版本行滚动（cascade 写入） |
+| CHANGELOG.md | W1364 | 宣纸淡彩插画族 48 张成套批 |
+| HANDOVER.md | W1364 | 里程碑块（cascade 写入） |
+| AGENTS.md | W1364 | 版本脚注滚动（cascade 写入） |
+| README.md | W1364 | 版本脚注滚动（cascade 写入） |
+| STRUCTURE.md | W1364 | 结构文档滚动（cascade 写入） |
+| CITATION.cff | W1364 | 版本滚动（cascade 写入） |
+
 ## W1363 推送笔数判据放宽为连续批次积压批（2026-11-28）
 
 | 文件 | W | 说明 |
@@ -1424,55 +1442,5 @@
 | site/data/search-index-zh.js | W1301 | 搜索索引重建（收官链 index 步） |
 | site/en/search-index-en.js | W1301 | 搜索索引重建（收官链 index 步） |
 | site/sitemap.xml | W1301 | sitemap 重建（收官链 index 步） |
-
-## W1300 L-07 公共口径多批次锚漏计治本（2026-11-22）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| AGENTS.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| CHANGELOG.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| CITATION.cff | W1300 | 本批改动（收官链级联/规范面产物） |
-| HANDOVER.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| README.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| STRUCTURE.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| archive/docs/AGENTS-ARCHIVE.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| archive/docs/workflows-readme-history.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| docs/00-导读/W批次编号对账表.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| docs/00-导读/遗留总账.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| docs/00-导读/项目说明.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| docs/11-方案报告/README.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| docs/11-方案报告/计划方案/T133-任务计划执行与经验沉淀报告-2026-11-22.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| docs/INDEX.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| pitfalls.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/check_pitfall_id_unique.py | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/check_pitfalls_split.py | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/INDEX.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/README.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/_cascade_files_W1300.txt | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/_vermilion_solid_cache.json | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/_w1266_allrender.json | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/_w1291_exemption_audit.json | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/_w1300_spec.json | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/chart-legend-render-audit.json | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/chart-legend-render-audit.md | W1300 | 渲染档案可读副本刷新 |
-| scripts/output/file-index.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/stats-changelog.json | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/stats-index.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/stats.json | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/svg_text_contrast_graphic_report.json | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/svg_text_contrast_report.json | W1300 | 本批改动（收官链级联/规范面产物） |
-| scripts/output/tools-inventory.md | W1300 | 本批改动（收官链级联/规范面产物） |
-| site/data/cross-time-danmaku.html | W1300 | 本批改动（收官链级联/规范面产物） |
-| site/data/search-index-zh.js | W1300 | 本批改动（收官链级联/规范面产物） |
-| site/data/tag-cloud.html | W1300 | 本批改动（收官链级联/规范面产物） |
-| site/dukou-engine.html | W1300 | 本批改动（收官链级联/规范面产物） |
-| site/en/search-index-en.js | W1300 | 本批改动（收官链级联/规范面产物） |
-| site/index.html | W1300 | 本批改动（收官链级联/规范面产物） |
-| site/rss.xml | W1300 | 本批改动（收官链级联/规范面产物） |
-| site/sitemap.xml | W1300 | sitemap 重建（收官链 index 步） |
-| tests/unit/test_pitfalls_split.py | W1300 | 本批改动（收官链级联/规范面产物） |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。

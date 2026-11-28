@@ -25,6 +25,18 @@
 
 > **2026-11-22（W994 迁出 68 段·W875-W950 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W1300（2026-11-22）：L-07 公共口径多批次锚漏计治本（本体275→276·反查表补E-291·私有正则退役）
+
+> **来源**：用户 2026-11-22 指令「先开工 L-07 之后再开工 L-02」⇒ 立项 W1300（L-07 治本批）。
+>
+> - **执行**：① **公共本体口径治本**——check_pitfall_id_unique.RX_ENTRY 扩为支持**并列多批次锚**（锚内多个批次号·取**首个**·与归档段头同序）⇒ 多批次锚条目（实测 E-291）不再被漏判 ⇒ 本体 E 号 **275 → 276**（重号 0）；② **口径收敛为单一事实源**——check_pitfalls_split 的私有扩展正则 RX_ENTRY_MULTI **退役**（W1299 为隔离连锁面而立的临时分叉·公共口径修好后必须退役·防两份正则各自漂移）⇒ 镜像侧改引公共 RX_ENTRY；③ **反查表补齐**——CSS 小节在 E-289 与 E-292 之间插入 E-291（该行 8 → 9 个·守「每行 10 个」约定）⇒ 反查表 333 → 334 条 / 去重 276（遗漏 0 多余 0）；④ **回归锁改口径**——W1299 那条用例改断言「公共口径认并列锚且取首个批次号 + 私有正则已退役」（**函数名不动**·api_diff 判据把 tests/ 下 test 函数当公开 API）；⑤ **更正上一批表述**——W1299 称「stats 421 ⇒ 真实 422」**不成立**（stats 实测口径＝数「- **」行·本就含 E-291 ⇒ 421 无误）⇒ 真正问题是「本体 E 号集合」与「条目行实测」两套坑位身份口径不一致。
+>
+> - **文件**：.github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T133-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, pitfalls.md, scripts/check_pitfall_id_unique.py, scripts/check_pitfalls_split.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1300.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1291_exemption_audit.json, scripts/output/_w1300_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-legend-render-audit.md, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/rss.xml, site/sitemap.xml, tests/unit/test_pitfalls_split.py
+>
+> - **验证**：坑表六主题判据 0 FAIL（C2/C3 421/421·C4 遗漏 0 多余 0·C5 孤儿 0·C6 276/276 重号 0）· 第 31 槽 0 FAIL · test_pitfalls_split.py 15 passed · test_w1106_pitfall_id_unique.py 3 passed· 两面下界仍 W1253 ✓。
+>
+> - **状态**：**L-07 ✅ 闭合** ⇒ **遗留总账未清偿降至 1 项**（L-02 探针跨 run 增量缓存·下一批）。
+
 ### W1299（2026-11-22）：L-04① 归档孤儿段清偿（13→0·三类根因分别治本·回归锁+3·负例去硬编码）
 
 > **来源**：用户 2026-11-22 指令「然后呢」⇒ 在 W1298 收官后按《遗留总账》继续推进剩余项。

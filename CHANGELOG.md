@@ -1,3 +1,17 @@
+### W1364（2026-11-28）：宣纸淡彩插画族 48 张成套（4 画幅 × 12 题材）
+
+**本批要点**（W1364 宣纸淡彩插画族 48 张成套批）：
+
+> - **产出**：`assets/promo/ink-set/` 新增 **48 张宣纸淡彩插画**——12 个题材（火焰山 / 五行山 / 女儿国 / 白骨精 / 山中行旅 / 云海仙山 / 风铃 / 数据河流 / 分节 / 春景 / 夏景 / 秋景）各出四画幅：Hero 16:9（5472×3072）、题图 3:4（1760×2368）、方图 1:1（2048×2048）、分享图 19:10（1408×736）；另附 4 张每族目视拼版预览与 1 张风格锚点样例。
+> - **画风契约**：宣纸底（真实纸纹）+ 焦墨退为淡灰的湿笔晕染 + 矿物色点染（石青/石绿/赭石三选一）+ **全图仅一枚朱砂点** + 大留白 + **零印章零文字**；与仓内另三族画风与画幅均不同，**不可混排**。
+> - **量化验收**：机械探针实测 **焦墨（亮度<60）像素占比 ≤0.69%**（最浓的一张为 hero-03 屋檐墨线 1.35%，属建筑线条而非块面）、**文字安全区留白 ≤2.92%**（hero 左 1/3 / og 左 40% / plate 下 1/3 / card 四边 12% 环带）、**朱砂单点 ≤0.35%**（唯一例外 og-09-fenjie 为 1.03%——该题材本身以「一根朱砂带标记峰值」为设计）；四族拼版逐张目检，主体可辨且同档。
+> - **迭代收敛**：v1 文字风格块 ⇒ 朱砂多点多色、留白被侵占、主体跑位（整批作废）；v2 加「朱砂单点 + 稀疏构图 + 留白硬规则」⇒ 朱砂单点达成但主体偏左；v3 换「右置构图」锚点 + 位置规则前置 ⇒ 位置与留白达标；v4 加「体量坐底 + 去噪点」⇒ hero-11 / og-06 违规且风格漂移，回退；**v5 定稿 = 换淡墨锚点 + 墨色压淡硬约束**（焦墨占比 5.98%→0.33%，降 18×）；全量 48 张后逐张复核再返工 8 张（焦墨超标 4 / 多色灯笼 2 / 留白不足 1 / 朱砂成簇 1）⇒ 48/48 达标。
+> - **两条教训**（已写入族 README「迭代收敛记录」）：① **风格锚点会连带迁移构图**，不只是画风——锚点须与目标版式同构图，否则成套一致性被带偏；② **量化判据全绿 ≠ 风格成立**——一致性指标证明不了「好看、主体可辨、能用」，那部分只能靠目视，故本批把「逐张目检」列为硬步骤而非可选项。
+> - **目录文档**：因该族初始被 `.git/info/exclude` 本地忽略，目录文档工具的「在管目录」（索引口径 W894）不认它 ⇒ 5 份 INDEX.md 手工按工具产物格式补齐；解除忽略并暂存后已重跑 `gen_folder_docs.py --refresh`，族内 10 份目录文档与 `assets/promo/INDEX.md` 均由工具生成，工具产物与手工稿一致（幂等）。
+> - **状态**：**未上线**——暂存 `assets/promo/`，站内 `site/static/images/` 现无本族文件；接入需复制 + 按族规登记 alt 文本与容器类名，属另批工作；另本族无 webp 轻量版（模型直出 jpg），转码不在本批范围。
+> - **文件**：`assets/promo/ink-set/`（48 张 + 4 预览 + 1 锚点 + 族 README + 5 份目录文档）、`assets/promo/INDEX.md`、`docs/00-导读/W批次编号对账表.md`（认领行）、`scripts/output/_w1364_spec.json`。
+
+
 ### W1363（2026-11-28）：推送笔数判据放宽为连续批次积压批
 
 **本批要点**（W1363 推送笔数判据放宽为连续批次积压批）：
@@ -936,18 +950,6 @@
 >
 > - **状态**：**L-02 ✅ 闭合** ⇒ **遗留总账未清偿归零**（L-01～L-07 全闭合·自 W1296 建立以来首次归零）；本轮 CI 因探针脚本变更仍走全量·增量收益自下一轮 CI 起显现。
 
-### W1300（2026-11-22）：L-07 公共口径多批次锚漏计治本（本体275→276·反查表补E-291·私有正则退役）
-
-> **来源**：用户 2026-11-22 指令「先开工 L-07 之后再开工 L-02」⇒ 立项 W1300（L-07 治本批）。
->
-> - **执行**：① **公共本体口径治本**——check_pitfall_id_unique.RX_ENTRY 扩为支持**并列多批次锚**（锚内多个批次号·取**首个**·与归档段头同序）⇒ 多批次锚条目（实测 E-291）不再被漏判 ⇒ 本体 E 号 **275 → 276**（重号 0）；② **口径收敛为单一事实源**——check_pitfalls_split 的私有扩展正则 RX_ENTRY_MULTI **退役**（W1299 为隔离连锁面而立的临时分叉·公共口径修好后必须退役·防两份正则各自漂移）⇒ 镜像侧改引公共 RX_ENTRY；③ **反查表补齐**——CSS 小节在 E-289 与 E-292 之间插入 E-291（该行 8 → 9 个·守「每行 10 个」约定）⇒ 反查表 333 → 334 条 / 去重 276（遗漏 0 多余 0）；④ **回归锁改口径**——W1299 那条用例改断言「公共口径认并列锚且取首个批次号 + 私有正则已退役」（**函数名不动**·api_diff 判据把 tests/ 下 test 函数当公开 API）；⑤ **更正上一批表述**——W1299 称「stats 421 ⇒ 真实 422」**不成立**（stats 实测口径＝数「- **」行·本就含 E-291 ⇒ 421 无误）⇒ 真正问题是「本体 E 号集合」与「条目行实测」两套坑位身份口径不一致。
->
-> - **文件**：.github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T133-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, pitfalls.md, scripts/check_pitfall_id_unique.py, scripts/check_pitfalls_split.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1300.txt, scripts/output/_vermilion_solid_cache.json, scripts/output/_w1266_allrender.json, scripts/output/_w1291_exemption_audit.json, scripts/output/_w1300_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-legend-render-audit.md, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/rss.xml, site/sitemap.xml, tests/unit/test_pitfalls_split.py
->
-> - **验证**：坑表六主题判据 0 FAIL（C2/C3 421/421·C4 遗漏 0 多余 0·C5 孤儿 0·C6 276/276 重号 0）· 第 31 槽 0 FAIL · test_pitfalls_split.py 15 passed · test_w1106_pitfall_id_unique.py 3 passed· 两面下界仍 W1253 ✓。
->
-> - **状态**：**L-07 ✅ 闭合** ⇒ **遗留总账未清偿降至 1 项**（L-02 探针跨 run 增量缓存·下一批）。
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -955,7 +957,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1363），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1364），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

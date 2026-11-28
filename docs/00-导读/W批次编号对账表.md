@@ -177,7 +177,6 @@
 
 
 
-| W1304 | 修 W1301 遗留根因：actions/cache restore+save 未钉 40-hex full SHA（Workflow Lint 红灯·两处） | 2a123f53b | —（待回填） | 已收官（两处 actions/cache 引用钉 40-hex full SHA·本地判据 PASS 97/97·YAML OK 12 jobs·远端 CI 6 workflow 全绿） | mavis | — | 本会话（W1304） | .github/workflows/ci.yml, docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md |
 | W1305 | 台账 hash 合并口径回填（W1302 改指合并承载 commit 0c926a0aa·W1304 填真值 2a123f53b）+ 修复 W1303/W1304 黏行（按原文无损还原结构） | 104f54b60 | —（待回填） | 已收官（W1305 登记滞后已订正·hash 104f54b60·对抗审查已派发·git 已有该 W 提交） | mavis | — | 本会话（W1305） | docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md |
 | W1306 | 遗留收敛落机器判据（C4-g 台账 hash 历史链有效性·存量豁免基线 + C4-h 审查 P2 编号化登记 + 判据单测 5 例） | a62b3cc54 | —（待回填） | 已收官（W1306 遗留收敛落机器判据：C4-g 台账 hash 历史链有效性 + C4-h 审查 P2 编号化登记 + 收官模板遗留两分类声明·判据单测 5 例·CI 8/8 预演 PASS） | mavis | — | 本会话（W1306） | scripts/check_doc_sync.py, docs/00-导读/遗留总账.md, tests/unit/test_doc_sync_ledger_hash.py, docs/agent/adversarial-audit-prompt.md, docs/agent/closeout-agent-prompt.md |
 | W1307 | 遗留清偿批：L-08 目录件伪血缘治本（生成器不写死日期·全仓 409 件一次清且此后 refresh 幂等）+ L-09/L-10 W1304 spec 与实际提交对齐（去越界行·补文件清单）+ W1306 行 hash 回填 a62b3cc54 | b5f9fb774bed50cedc2e6a84d1e0f0e2983a290c | —（待回填） | 已收官（W1307 登记滞后已订正·hash b5f9fb774·git 已有该 W 提交） | mavis | — | 本会话（W1307） | scripts/gen_folder_docs.py, scripts/output/_w1304_spec.json, docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md, docs/00-导读/遗留总账.md, docs/11-方案报告/计划方案/T136-任务计划执行与经验沉淀报告-2026-11-23.md |
@@ -237,3 +236,4 @@
 | W1361 | 面积族阈值实测与堆叠形态订正 | 3a6a92243 | —（待回填） | **已收官**（3a6a92243·阈值实测与堆叠勘误） | 主会话 2026-11-28 | — | 本会话（W1361） | docs/11-方案报告 |
 | W1362 | 面积族重叠阈值收紧为二层 | 2f9f8968e | —（待回填） | **已收官**（2f9f8968e·§4B 面积阈值 3→2） | 主会话 2026-11-28 | — | 本会话（W1362） | DESIGN.md · docs/11-方案报告 |
 | W1363 | 推送笔数判据放宽为连续批次积压 | 0ca49de14 | —（待回填） | **已收官**（0ca49de14·git 反填·共 4 笔·P-43-01） | 主会话 2026-11-28 | — | 本会话（W1363） | scripts/ci_sim.py · README.md · docs/10-方法论沉淀/批次交付流水线.md |
+| W1364 | 宣纸淡彩插画族 48 张成套（4 画幅 × 12 题材） | —（待回填） | —（待回填） | **在途** | 主会话 2026-11-28 | assets/promo/ink-set/ · assets/promo/INDEX.md | 本会话（W1364） | assets/promo/ink-set/ · assets/promo/INDEX.md |
