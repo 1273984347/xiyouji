@@ -184,6 +184,16 @@ def _run(cmd: str, cwd: str) -> tuple[int, str]:
         return 99, "超时（1800s）"
 
 
+def _cleanup_worktree(wt: str, tmp: str, keep: bool) -> None:
+    """收尾：保留或移除临时 worktree（拆出仅为压 main() 的分支数·行为不变）。"""
+    if keep:
+        print("（--keep：保留 worktree 于 %s，手动清理：git worktree remove --force %s）" % (wt, wt))
+        return
+    subprocess.run(["git", "-C", ROOT, "worktree", "remove", "--force", wt],
+                   capture_output=True, text=True)
+    shutil.rmtree(tmp, ignore_errors=True)
+
+
 def main() -> int:
     ap = argparse.ArgumentParser(description="CI 侧预演（worktree 干净检出跑关键门禁）")
     ap.add_argument("--ref", default="HEAD", help="预演目标（默认 HEAD）")
@@ -245,12 +255,7 @@ def main() -> int:
             results.append((label, rc, tail))
             print("%-28s %s  %s" % (label, "PASS" if rc == 0 else "FAIL(%d)" % rc, tail[:120]))
     finally:
-        if args.keep:
-            print("（--keep：保留 worktree 于 %s，手动清理：git worktree remove --force %s）" % (wt, wt))
-        else:
-            subprocess.run(["git", "-C", ROOT, "worktree", "remove", "--force", wt],
-                           capture_output=True, text=True)
-            shutil.rmtree(tmp, ignore_errors=True)
+        _cleanup_worktree(wt, tmp, args.keep)
 
     failed = [r for r in results if r[1] != 0]
     print("---- CI 侧预演：%d 项，PASS %d，FAIL %d ----" % (len(results), len(results) - len(failed), len(failed)))
