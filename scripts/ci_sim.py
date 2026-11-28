@@ -228,10 +228,7 @@ def main() -> int:
             elif tmpl == "__CLEAN_MAIN__":
                 rc, out = _assert_clean_worktree(ROOT)
             elif tmpl == "__UNPUSHED__":
-                n, msg = _unpushed_commits()
-                rc = 0 if (0 <= n <= 1) else 1
-                out = msg + ("　⇒ 一次推送只应带 1 笔（>1 说明同批多笔待推 ⇒ 先 squash 成 1 笔）"
-                             if rc else "　⇒ 满足「一批 = 一轮 CI」")
+                rc, out = _unpushed_commits()
             elif tmpl == "__BATCHCOUNT__":
                 n, msg = _batch_pushed_count(args.batch)
                 out = msg + ("　⇒ 告警：本批已推多笔 ⇒ CI 轮数被放大，后续批次须合并推送"
