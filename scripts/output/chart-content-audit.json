@@ -1,7 +1,7 @@
 {
  "total_pages": 237,
- "chart_pages": 171,
- "charts": 721,
+ "chart_pages": 175,
+ "charts": 725,
  "rows": [
   {
    "page": "404.html",
@@ -1013,21 +1013,21 @@
   },
   {
    "page": "en/character-bailongma.html",
-   "charts": 0,
+   "charts": 1,
    "source_note": 0,
    "insight": 0,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 3786
+   "text_len": 4477
   },
   {
    "page": "en/character-bajie.html",
-   "charts": 0,
+   "charts": 1,
    "source_note": 0,
    "insight": 0,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 3395
+   "text_len": 4054
   },
   {
    "page": "en/character-dynamic-network.html",
@@ -1085,21 +1085,21 @@
   },
   {
    "page": "en/character-shaseng.html",
-   "charts": 0,
+   "charts": 1,
    "source_note": 0,
    "insight": 0,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 3062
+   "text_len": 3745
   },
   {
    "page": "en/character-tangseng.html",
-   "charts": 0,
+   "charts": 1,
    "source_note": 0,
-   "insight": 2,
+   "insight": 3,
    "tooltip": 0,
    "legend": 0,
-   "text_len": 4169
+   "text_len": 4892
   },
   {
    "page": "en/character-wukong.html",
