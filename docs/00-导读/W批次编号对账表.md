@@ -236,4 +236,4 @@
 | W1348 | 对抗审查 P0 修复：注释内 title 污染页脚标签 + title 消费者收口 | 9ffd6a0ec | —（待回填） | **已收官**（9ffd6a0ec·git 反填·共 1 笔·P-43-01） | 主会话 2026-11-28 | — | 本会话（W1348） | scripts/w1327_related_links.py,site/static/js/recent.js,site/static/js/chart-a11y.js,scripts/gen_sitemap.py |
 | W1349 | h1 唯一性修复：两页正文重复 h1 删除 + 全站 h1 单例判据 | 6cbfaed98 | —（待回填） | **已收官**（6cbfaed98·git 反填·共 1 笔·P-43-01） | 主会话 2026-11-28 | — | 本会话（W1349） | site/data/character-semantic-network.html,site/data/theological-intervention-network.html,tests/unit/test_page_h1_unique.py |
 | W1350 | EN 雷达族收口：27 页对齐 ZH 形态 + R5 判据扩面至 EN | 784eb155d | —（待回填） | **已收官**（784eb155d·git 反填·共 3 笔·P-43-01） | 主会话 2026-11-28 | — | 本会话（W1350） | site/en/*.html,scripts/check_chart_data.py |
-| W1351 | EN 四人物页补五轴雷达（静态预渲染）+ 文案指向图 + 内容完备度四项 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 2026-11-28 | — | 本会话（W1351） | site/en/character-*.html |
+| W1351 | EN 四人物页补五轴雷达（静态预渲染）+ 文案指向图 + 内容完备度四项 | 138818337 | —（待回填） | **已收官**（138818337·git 反填·共 1 笔·P-43-01） | 主会话 2026-11-28 | — | 本会话（W1351） | site/en/character-*.html |
