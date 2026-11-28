@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qGDhA2/icWfXqdoQzWMOTvhqFvbXiXeJ/bjGwy6x3wQ=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-4rR8MRt/h/GX59Gf859XGBYYES9kV6RmnM6TbARTsn4=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>取经团队心理变化曲线：第27回凝聚力跌到4.6最低 · 详解西游记</title>
@@ -959,7 +959,9 @@ if (MOYUN_RM) { try { (function () { var tp = d3.transition.prototype, od = tp.d
 
         const colorScale = d3.scaleSequential()
             .domain([0, 10])
-            .interpolator(d3.interpolateRgbBasis(["#fff8e7", "#e9b885", "#C0392B", "#8c2a2a"]));
+            .interpolator(document.documentElement.dataset.theme === 'dark'
+            ? d3.interpolateRgbBasis(["#eac4ae", "#ddaa90", "#d09274", "#c07a5c"])
+            : d3.interpolateRgbBasis(["#fff8e7", "#e9b885", "#C0392B", "#8c2a2a"]));
 
         // X 轴
         g.append("g")

@@ -10,7 +10,7 @@
 
 - （无）
 
-## 文件（156）
+## 文件（157）
 
 ### Python 脚本
 
@@ -54,6 +54,7 @@
 - `test_cross_line_rewrite.py`
 - `test_css_inline_residue.py`
 - `test_d3_data_processors.py`
+- `test_dark_heatmap_ramps.py`
 - `test_dismiss_pillow_alerts.py`
 - `test_dismiss_scorecard_alerts.py`
 - `test_doc_size_budget.py`

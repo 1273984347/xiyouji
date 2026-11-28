@@ -1,0 +1,20 @@
+# 暗色热力图色阶存量豁免（W1365 登记）
+# 口径：色阶无暗色分支 ⇒ 暗底上深端可能不可见（暗色门禁第 80 槽）。
+#       存量页分批收敛；本清单只登记不计红，**新改页不得入清单**。
+# 格式：<仓库相对页面路径>
+site/data/aesthetics.html
+site/data/character-appearance.html
+site/data/character-semantic-network.html
+site/data/cultural-misreading.html
+site/data/dialogue-sentiment.html
+site/data/intertextuality-network.html
+site/data/mbti-evolution.html
+site/data/poetry-rhythm-analysis.html
+site/en/aesthetics.html
+site/en/character-appearance.html
+site/en/character-semantic-network.html
+site/en/cultural-misreading.html
+site/en/dialogue-sentiment.html
+site/en/intertextuality-network.html
+site/en/mbti-evolution.html
+site/en/poetry-rhythm-analysis.html

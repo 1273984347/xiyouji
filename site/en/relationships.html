@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-93LBG2oYa7ixk/CCqgSR8Jn8stErXRjovtebhfuYT/g=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-IvOmkKkdCOT5TNmr2sPe+KLBwhpSU4wN2FVksaEYt2I=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-XCgUqXfBYKy8dP3uNu4tT0A1oWrN/6yugMy0qj2f3QM=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-IvOmkKkdCOT5TNmr2sPe+KLBwhpSU4wN2FVksaEYt2I=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Relationship Network · Annotated Journey to the West</title>
@@ -5024,7 +5024,9 @@ const link = g.append('g').selectAll('line')
         // single-hue sequential ramp: pale hazel to deep cinnabar (no turbo/rainbow; high score = deeper)
         const color = d3.scaleSequential()
             .domain([0, 10])
-            .interpolator(d3.interpolateRgb('#f5e9d4', '#8C2F1B'));
+            .interpolator(document.documentElement.dataset.theme === 'dark'
+            ? d3.interpolateRgbBasis(['#eac4ae', '#ddaa90', '#d09274', '#c07a5c'])
+            : d3.interpolateRgb('#f5e9d4', '#8C2F1B'));
         // cell text flips with the backing luminance so it stays readable on every ramp step
         const textOn = (fill) => {
             const c = d3.rgb(fill);
@@ -5822,7 +5824,9 @@ const link = svg.append('g').selectAll('line')
         });
 
         const maxWeight = d3.max(cells, d => d.weight) || 1;
-        const color = d3.scaleSequential(d3.interpolateYlOrRd).domain([0, maxWeight]);
+        const color = d3.scaleSequential(document.documentElement.dataset.theme === 'dark'
+                    ? d3.interpolateRgbBasis(['#f0d8bc', '#ddaa90', '#d09274', '#c07a5c'])
+                    : d3.interpolateYlOrRd).domain([0, maxWeight]);
 
         g.selectAll('rect')
             .data(cells)

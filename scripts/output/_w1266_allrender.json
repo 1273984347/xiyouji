@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "5e5f441e516f",
+      "sha": "7eee7dfefe8a",
       "static": {
         "svg": true,
         "cls": true,
@@ -4433,7 +4433,7 @@
     },
     {
       "page": "site/data/narratology-12d-network.html",
-      "sha": "cfab3637c6ce",
+      "sha": "79f26eff2cb5",
       "static": {
         "svg": true,
         "cls": true,
@@ -4503,7 +4503,7 @@
     },
     {
       "page": "site/data/narratology-16d-network.html",
-      "sha": "f7ae5a1dc200",
+      "sha": "7b1d5a497689",
       "static": {
         "svg": true,
         "cls": true,
@@ -4683,7 +4683,7 @@
     },
     {
       "page": "site/data/pilgrim-team-dynamic-network.html",
-      "sha": "1ff68dd83324",
+      "sha": "374dbab4cd58",
       "static": {
         "svg": true,
         "cls": true,
@@ -4733,7 +4733,7 @@
     },
     {
       "page": "site/data/pilgrim-team-psychology-arc.html",
-      "sha": "1562f355ae81",
+      "sha": "10d02d725b4f",
       "static": {
         "svg": true,
         "cls": true,
@@ -5023,7 +5023,7 @@
     },
     {
       "page": "site/data/relationships.html",
-      "sha": "9c418e7bf1dc",
+      "sha": "2412d54b6828",
       "static": {
         "svg": true,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "6482848c0d4e",
+      "sha": "025751253111",
       "static": {
         "svg": false,
         "cls": true,
@@ -5960,7 +5960,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
       "svgKinds": [
         {
           "cls": "",
@@ -5968,9 +5968,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 30,
+          "texts": 29,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 30"
+          "basis": "1100x480·图元 13·文本 29"
         },
         {
           "cls": "",
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "e0dbe5b48598",
+      "sha": "67668780f19e",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "bb3979ed7ee1",
+      "sha": "1ded69c2d8fa",
       "static": {
         "svg": true,
         "cls": false,
@@ -8507,9 +8507,9 @@
           "w": 1002,
           "h": 620,
           "marks": 24,
-          "texts": 22,
+          "texts": 21,
           "kind": "chart",
-          "basis": "1002x620·图元 24·文本 22·命中图表词表"
+          "basis": "1002x620·图元 24·文本 21·命中图表词表"
         },
         {
           "cls": "",
@@ -10922,7 +10922,7 @@
     },
     {
       "page": "site/en/narratology-12d-network.html",
-      "sha": "6b6bf347af54",
+      "sha": "3e04f631267d",
       "static": {
         "svg": true,
         "cls": true,
@@ -10992,7 +10992,7 @@
     },
     {
       "page": "site/en/narratology-16d-network.html",
-      "sha": "5b6d7b0e7a96",
+      "sha": "c0cca01e9ba0",
       "static": {
         "svg": true,
         "cls": true,
@@ -11172,7 +11172,7 @@
     },
     {
       "page": "site/en/pilgrim-team-dynamic-network.html",
-      "sha": "ee3413dfcf4e",
+      "sha": "c2a4f51c5a5b",
       "static": {
         "svg": true,
         "cls": true,
@@ -11222,7 +11222,7 @@
     },
     {
       "page": "site/en/pilgrim-team-psychology-arc.html",
-      "sha": "fa726f041006",
+      "sha": "a7dff190b1e9",
       "static": {
         "svg": true,
         "cls": true,
@@ -11472,7 +11472,7 @@
     },
     {
       "page": "site/en/relationships.html",
-      "sha": "f921f59f3bc1",
+      "sha": "6a390d164eef",
       "static": {
         "svg": true,
         "cls": true,
@@ -12369,7 +12369,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
       "svgKinds": [
         {
           "cls": "",
@@ -12377,9 +12377,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 29,
+          "texts": 30,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 29"
+          "basis": "1100x480·图元 13·文本 30"
         },
         {
           "cls": "",

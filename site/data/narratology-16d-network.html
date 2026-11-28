@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-+1wdyOtJWVEWXF0d+ESnrglLfkvm/60FBZhbfPgE1nc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-cwH9y9PUEEGmUirgBRzpnQEqn++M8ZVE4Rrx5MoSbIQ=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>十六维叙事学关系图谱：十六维里文仍居首，跨域边占半 · 详解西游记</title>
@@ -1240,7 +1240,9 @@ function renderHeatmap(dimensions) {
   const x = d3.scaleBand().domain(metrics).range([0, innerW]).paddingInner(0.05).paddingOuter(0.02);
   const y = d3.scaleBand().domain(dimensions.map(d => d.code)).range([0, innerH]).paddingInner(0.12);
   // 单色顺序色阶（1-10）：深色=高分。禁用 turbo/rainbow 彩虹色阶
-  const color = d3.scaleSequential(d3.interpolateBlues).domain([1, 10]);
+  const color = d3.scaleSequential(document.documentElement.dataset.theme === 'dark'
+                    ? d3.interpolateRgbBasis(['#b3d4e8', '#8fbfdd', '#6ba3c9', '#4a83ad'])
+                    : d3.interpolateBlues).domain([1, 10]);
 
   const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 

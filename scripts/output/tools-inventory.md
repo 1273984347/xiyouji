@@ -4,11 +4,11 @@
 > 范围=git 跟踪态顶层 `*.py|*.js|*.mjs`（子目录与 gitignore 本地件不在内）；用途=模块 docstring 首行。
 > 场景化路由（要做什么→用哪个）见 [../README.md](../README.md) 场景速查表。
 
-生成时间：2026-11-28 21:37
+生成时间：2026-11-29 03:18
 
-共 **241** 件（门禁与校验 115 · 批次与登记 12 · 统计与对账 3 · 生成与索引 10 · 运维与临时区 1 · 工具 93 · 一次性（下划线前缀） 7）
+共 **242** 件（门禁与校验 116 · 批次与登记 12 · 统计与对账 3 · 生成与索引 10 · 运维与临时区 1 · 工具 93 · 一次性（下划线前缀） 7）
 
-## 门禁与校验（115）
+## 门禁与校验（116）
 
 | 脚本 | 用途 |
 |:---|:---|
@@ -43,6 +43,7 @@
 | `check_css_orphan_selectors.py` | 孤立选择器门禁（第 36 门禁 · W673/WP-2.6）——防选择器残缀/裸标签残缺行。 |
 | `check_css_var_refs.py` | CSS 变量引用门禁（第 34 门禁 · W672/WP-1.4）——防 style 块引用未定义 CSS 变量。 |
 | `check_css_var_selfref.py` | check_css_var_selfref.py — CSS 变量**自引用**判据（W1110 新增·随第 54/55/56 槽同批建置）。 |
+| `check_dark_heatmap_ramps.py` | check_dark_heatmap_ramps.py — 热力图暗色态色阶可见性守卫（暗色门禁第 80 槽的离线前置判据）。 |
 | `check_dark_state_gate.js` | scripts/check_dark_state_gate.js — W579：暗色态门禁（O2 常驻化，挂 screenshot-review |
 | `check_dashboard_kpi.py` | check_dashboard_kpi.py — 第 68 门禁 · 首页 KPI 与统计快照对拍（W1170） |
 | `check_data_badge_coverage.py` | check_data_badge_coverage.py — 第 66 门禁 · 数据徽标覆盖（W1167 · MVP 迁移批③） |

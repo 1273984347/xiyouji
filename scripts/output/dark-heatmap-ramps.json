@@ -1,0 +1,184 @@
+[
+ {
+  "page": "site/data/aesthetics.html",
+  "status": "EXEMPT",
+  "n": 2,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/data/character-appearance.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/data/character-semantic-network.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/data/cultural-misreading.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/data/dialogue-sentiment.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/data/intertextuality-network.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/data/mbti-evolution.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/data/narratology-12d-network.html",
+  "status": "PASS",
+  "n": 1,
+  "minY": 0.2071,
+  "worstText": 4.46
+ },
+ {
+  "page": "site/data/narratology-16d-network.html",
+  "status": "PASS",
+  "n": 1,
+  "minY": 0.2071,
+  "worstText": 4.46
+ },
+ {
+  "page": "site/data/pilgrim-team-dynamic-network.html",
+  "status": "PASS",
+  "n": 1,
+  "minY": 0.259,
+  "worstText": 5.37
+ },
+ {
+  "page": "site/data/pilgrim-team-psychology-arc.html",
+  "status": "PASS",
+  "n": 1,
+  "minY": 0.259,
+  "worstText": 5.37
+ },
+ {
+  "page": "site/data/poetry-rhythm-analysis.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/data/relationships.html",
+  "status": "PASS",
+  "n": 2,
+  "minY": 0.259,
+  "worstText": 5.37
+ },
+ {
+  "page": "site/en/aesthetics.html",
+  "status": "EXEMPT",
+  "n": 2,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/en/character-appearance.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/en/character-semantic-network.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/en/cultural-misreading.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/en/dialogue-sentiment.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/en/intertextuality-network.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/en/mbti-evolution.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/en/narratology-12d-network.html",
+  "status": "PASS",
+  "n": 1,
+  "minY": 0.2071,
+  "worstText": 4.46
+ },
+ {
+  "page": "site/en/narratology-16d-network.html",
+  "status": "PASS",
+  "n": 1,
+  "minY": 0.2071,
+  "worstText": 4.46
+ },
+ {
+  "page": "site/en/pilgrim-team-dynamic-network.html",
+  "status": "PASS",
+  "n": 1,
+  "minY": 0.259,
+  "worstText": 5.37
+ },
+ {
+  "page": "site/en/pilgrim-team-psychology-arc.html",
+  "status": "PASS",
+  "n": 1,
+  "minY": 0.259,
+  "worstText": 5.37
+ },
+ {
+  "page": "site/en/poetry-rhythm-analysis.html",
+  "status": "EXEMPT",
+  "n": 1,
+  "minY": 9.9,
+  "worstText": 9.9
+ },
+ {
+  "page": "site/en/relationships.html",
+  "status": "PASS",
+  "n": 2,
+  "minY": 0.259,
+  "worstText": 5.37
+ }
+]

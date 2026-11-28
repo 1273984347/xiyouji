@@ -1,3 +1,17 @@
+### W1365（2026-11-28）：热力图暗色态色阶不可见修复（10 页·ZH/EN 各 5）
+
+**本批要点**（W1365 热力图暗色态色阶不可见修复批）：
+
+> - **根因（CI 实证）**：暗色门禁（`check_dark_state_gate.js`）判「深底上相对亮度 **Y<0.16** 的填充图形为 invisible」。命中 8 页 × 10 处，全部是**热力图色阶的深端**——YlOrRd 深红端 rgb(163,1,38) 的 Y=0.076、Blues 深端 rgb(9,69,137) 的 Y=0.062，在暗底 rgb(26,23,20) 上不可见。**与本批无关的存量页另有 10 页**（未进 charts 面或未渲染）。
+> - **修法（对齐仓内 W993 既有范式）**：暗色态换**中明度同族色阶**——贝尔宾/凝聚度热力图用暖纸色阶 `['#eac4ae','#ddaa90','#d09274','#c07a5c']`、叙事学 12d/16d 用蓝阶 `['#b3d4e8','#8fbfdd','#6ba3c9','#4a83ad']`。两条色阶保持**「浅=低分、深=高分」方向**，故页面文案「颜色越深=越高」不必改。
+> - **数值证明（离线，256 步采样）**：暖纸色阶 minY=0.259、灰字最差对比 5.37；蓝阶 minY=0.207、灰字最差对比 4.46 —— 均过门禁阈值（Y≥0.16）与 WCAG 1.4.11（≥3:1）。**端点不约束相对亮度**，故按 d3.interpolateRgbBasis 的分段线性 RGB 插值逐点采样，不只看端点。
+> - **连带修（根因不是色阶本身）**：ZH 两页的格内数值色原用 `var(--ink)`，而暗色态 `--ink: var(--text-primary)` 已**反转为浅色** ⇒ 高亮格子用浅字压浅底 ⇒ 改为暗色态固定深墨 #1a1410；EN 两页本就硬编码深墨 #23201A ⇒ 天然达标，不动。
+> - **守卫落地（教训转机器判据）**：新增 `scripts/check_dark_heatmap_ramps.py`——离线复算第 80 槽判据，全仓扫 `d3.scaleSequential` 调用点并逐点判定（暗色分支存在性 + 色阶 256 步 minY + 格内灰字对比）；配套 `tests/unit/test_dark_heatmap_ramps.py` **14 项单测**（含 2 项**负样本自检**：无暗色分支的色阶必须被标隐患、暗色分支但深端过暗必须判不达标 ⇒ 守卫不得恒绿）+ 16 页存量豁免清单（登记不计红，后续分批收敛）。
+> - **过程实测踩坑（已固化为单测）**：批量替换时把替换模板里的 \1 当八进制转义 ⇒ 写入 **U+0001 控制字符** ⇒ 内联脚本语法错误。修法：**改完先跑 `node --check` 抽块语法校验 + 控制字符扫描**，再进收官链（本次 8/8 页语法 PASS、控制字符 0 残留）。
+> - **验证**：`verify_delivery.py --scope full` 核心全绿 · `pre_push_gate.py` pytest **1977 + 14 = 1991 passed** · **本地无 playwright ⇒ 暗色态渲染级验证以 CI Screenshot Review 为准**；本地证明是色阶数学与语法级。
+> - **文件**：10 个页面（site/data|en × relationships / pilgrim-team-dynamic-network / pilgrim-team-psychology-arc / narratology-12d-network / narratology-16d-network）、`scripts/check_dark_heatmap_ramps.py`、`scripts/output/dark-heatmap-exemptions.txt`、`tests/unit/test_dark_heatmap_ramps.py`、`scripts/output/_w1365_spec.json`。
+
+
 ### W1364（2026-11-28）：宣纸淡彩插画族 48 张成套（4 画幅 × 12 题材）
 
 **本批要点**（W1364 宣纸淡彩插画族 48 张成套批）：
@@ -938,18 +952,6 @@
 >
 > - **状态**：**素材唯一副本已保住并入公开仓**；本批同时**纠正了上一轮评估的过宽表述**——「hero-batch 含未入仓唯一成品」实为「成品已在校验命中，缺的是源件组」；其余 38 张评审拼版 + 18 张迭代版 + 8 张 JPG 原图按用户裁决不入库（留 tmpe 待清理）。
 
-### W1301（2026-11-22）：L-02 探针跨run增量缓存（332s→0s·三重键·判据零改动·CI跨run携带）
-
-> **来源**：用户 2026-11-22 指令「先开工 L-07 之后再开工 L-02」⇒ 立项 W1301（L-02 治本批）。
->
-> - **执行**：探针新增**页级增量缓存**，键为**三重闸**（页内容 sha + 探针脚本自身 sha + 口径元数据：阈值/底色口径/扫描面/状态集/工具开关）⇒ 页面未变即复用该页采集结果；**口径或探针逻辑一变即全量失效重采**（fail-closed·防假绿）；**报告结构一字未改 ⇒ 第 80 槽判据零改动**；缓存**只收稳定行**（fatal/unstable 不入缓存·不固化坏状态）；CI 用 actions/cache restore + **显式 save**（命中不更新·须强制写回）跨 run 携带；缓存件**不入库**（.gitignore 排除·本地与 CI 互不污染·且天然规避跨环境渲染差异被跨环境复用）。
->
-> - **文件**：.github/workflows/ci.yml, .gitignore, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T134-任务计划执行与经验沉淀报告-2026-11-22.md, docs/INDEX.md, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1301.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1301_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-legend-render-audit.md, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, scripts/svg_text_contrast_probe.js, site/data/search-index-zh.js, site/en/search-index-en.js, site/sitemap.xml
->
-> - **验证**：本地 graphic 口径全站 **332s → 0s**（第二次命中 672 行·浏览器未启动）· 第 80 槽 **0 FAIL** · 探针自测 **13/13** · 工作树干净（缓存件已排除）。
->
-> - **状态**：**L-02 ✅ 闭合** ⇒ **遗留总账未清偿归零**（L-01～L-07 全闭合·自 W1296 建立以来首次归零）；本轮 CI 因探针脚本变更仍走全量·增量收益自下一轮 CI 起显现。
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -957,7 +959,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1364），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1365），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

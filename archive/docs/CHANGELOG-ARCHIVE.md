@@ -25,6 +25,18 @@
 
 > **2026-11-22（W994 迁出 68 段·W875-W950 至 CHANGELOG-ARCHIVE-tier2.md·§11.2 tier-2）**：一级归档超 1MB 触发二级归档，最老段按键序前缀迁出（archive_tier2.py·守恒五道）。
 
+### W1301（2026-11-22）：L-02 探针跨run增量缓存（332s→0s·三重键·判据零改动·CI跨run携带）
+
+> **来源**：用户 2026-11-22 指令「先开工 L-07 之后再开工 L-02」⇒ 立项 W1301（L-02 治本批）。
+>
+> - **执行**：探针新增**页级增量缓存**，键为**三重闸**（页内容 sha + 探针脚本自身 sha + 口径元数据：阈值/底色口径/扫描面/状态集/工具开关）⇒ 页面未变即复用该页采集结果；**口径或探针逻辑一变即全量失效重采**（fail-closed·防假绿）；**报告结构一字未改 ⇒ 第 80 槽判据零改动**；缓存**只收稳定行**（fatal/unstable 不入缓存·不固化坏状态）；CI 用 actions/cache restore + **显式 save**（命中不更新·须强制写回）跨 run 携带；缓存件**不入库**（.gitignore 排除·本地与 CI 互不污染·且天然规避跨环境渲染差异被跨环境复用）。
+>
+> - **文件**：.github/workflows/ci.yml, .gitignore, docs/00-导读/W批次编号对账表.md, docs/00-导读/遗留总账.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T134-任务计划执行与经验沉淀报告-2026-11-22.md, docs/INDEX.md, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1301.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1301_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/chart-legend-render-audit.md, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, scripts/svg_text_contrast_probe.js, site/data/search-index-zh.js, site/en/search-index-en.js, site/sitemap.xml
+>
+> - **验证**：本地 graphic 口径全站 **332s → 0s**（第二次命中 672 行·浏览器未启动）· 第 80 槽 **0 FAIL** · 探针自测 **13/13** · 工作树干净（缓存件已排除）。
+>
+> - **状态**：**L-02 ✅ 闭合** ⇒ **遗留总账未清偿归零**（L-01～L-07 全闭合·自 W1296 建立以来首次归零）；本轮 CI 因探针脚本变更仍走全量·增量收益自下一轮 CI 起显现。
+
 ### W1300（2026-11-22）：L-07 公共口径多批次锚漏计治本（本体275→276·反查表补E-291·私有正则退役）
 
 > **来源**：用户 2026-11-22 指令「先开工 L-07 之后再开工 L-02」⇒ 立项 W1300（L-07 治本批）。

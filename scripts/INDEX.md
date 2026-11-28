@@ -51,7 +51,7 @@
 - `rag/`
 - `utils/`
 
-## 文件（250）
+## 文件（251）
 
 ### Python 脚本
 
@@ -109,6 +109,7 @@
 - `check_css_orphan_selectors.py`
 - `check_css_var_refs.py`
 - `check_css_var_selfref.py`
+- `check_dark_heatmap_ramps.py`
 - `check_dashboard_kpi.py`
 - `check_data_badge_coverage.py`
 - `check_data_copy_chain.py`
