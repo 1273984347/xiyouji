@@ -1080,8 +1080,8 @@
    "source_note": 0,
    "insight": 8,
    "tooltip": 20,
-   "legend": 40,
-   "text_len": 7162
+   "legend": 42,
+   "text_len": 7211
   },
   {
    "page": "en/character-shaseng.html",
@@ -1134,8 +1134,8 @@
    "source_note": 2,
    "insight": 34,
    "tooltip": 21,
-   "legend": 1,
-   "text_len": 11159
+   "legend": 11,
+   "text_len": 11138
   },
   {
    "page": "en/concept-device.html",
@@ -1602,8 +1602,8 @@
    "source_note": 1,
    "insight": 11,
    "tooltip": 3,
-   "legend": 11,
-   "text_len": 4284
+   "legend": 18,
+   "text_len": 4109
   },
   {
    "page": "en/four-heavenly-kings-artifacts.html",
@@ -1611,8 +1611,8 @@
    "source_note": 0,
    "insight": 8,
    "tooltip": 52,
-   "legend": 19,
-   "text_len": 5633
+   "legend": 20,
+   "text_len": 5724
   },
   {
    "page": "en/game-webnovel.html",
@@ -1648,7 +1648,7 @@
    "insight": 8,
    "tooltip": 71,
    "legend": 38,
-   "text_len": 7045
+   "text_len": 7089
   },
   {
    "page": "en/guide.html",
@@ -1683,8 +1683,8 @@
    "source_note": 0,
    "insight": 13,
    "tooltip": 63,
-   "legend": 38,
-   "text_len": 10365
+   "legend": 41,
+   "text_len": 10409
   },
   {
    "page": "en/index.html",
@@ -1702,7 +1702,7 @@
    "insight": 16,
    "tooltip": 82,
    "legend": 41,
-   "text_len": 7339
+   "text_len": 7484
   },
   {
    "page": "en/journey-geo-semiotics.html",
@@ -1765,7 +1765,7 @@
    "insight": 1,
    "tooltip": 19,
    "legend": 7,
-   "text_len": 2697
+   "text_len": 2874
   },
   {
    "page": "en/linguistics.html",
@@ -1774,7 +1774,7 @@
    "insight": 35,
    "tooltip": 21,
    "legend": 17,
-   "text_len": 7535
+   "text_len": 7701
   },
   {
    "page": "en/magic-system.html",
@@ -1800,8 +1800,8 @@
    "source_note": 0,
    "insight": 13,
    "tooltip": 4,
-   "legend": 31,
-   "text_len": 2306
+   "legend": 32,
+   "text_len": 2629
   },
   {
    "page": "en/methodology-matrix.html",
@@ -1846,7 +1846,7 @@
    "insight": 5,
    "tooltip": 4,
    "legend": 7,
-   "text_len": 5975
+   "text_len": 6178
   },
   {
    "page": "en/monster-ecology-network.html",
@@ -1854,8 +1854,8 @@
    "source_note": 0,
    "insight": 1,
    "tooltip": 2,
-   "legend": 4,
-   "text_len": 5872
+   "legend": 2,
+   "text_len": 5981
   },
   {
    "page": "en/monster-female-network.html",
@@ -1864,7 +1864,7 @@
    "insight": 5,
    "tooltip": 62,
    "legend": 32,
-   "text_len": 7047
+   "text_len": 7160
   },
   {
    "page": "en/monster-hierarchy-network.html",
@@ -1872,8 +1872,8 @@
    "source_note": 0,
    "insight": 10,
    "tooltip": 63,
-   "legend": 37,
-   "text_len": 7012
+   "legend": 41,
+   "text_len": 7119
   },
   {
    "page": "en/monster-sociology.html",
@@ -1881,8 +1881,8 @@
    "source_note": 1,
    "insight": 46,
    "tooltip": 17,
-   "legend": 15,
-   "text_len": 18501
+   "legend": 22,
+   "text_len": 18442
   },
   {
    "page": "en/monster-victims-network.html",
@@ -1891,7 +1891,7 @@
    "insight": 8,
    "tooltip": 63,
    "legend": 27,
-   "text_len": 7555
+   "text_len": 7673
   },
   {
    "page": "en/music-structure.html",
@@ -1926,8 +1926,8 @@
    "source_note": 0,
    "insight": 16,
    "tooltip": 67,
-   "legend": 31,
-   "text_len": 7151
+   "legend": 33,
+   "text_len": 7362
   },
   {
    "page": "en/narratology-16d-network.html",
@@ -1935,8 +1935,8 @@
    "source_note": 0,
    "insight": 16,
    "tooltip": 69,
-   "legend": 27,
-   "text_len": 7933
+   "legend": 30,
+   "text_len": 8101
   },
   {
    "page": "en/perf-canvas-rendering.html",
@@ -1961,9 +1961,9 @@
    "charts": 2,
    "source_note": 0,
    "insight": 1,
-   "tooltip": 4,
-   "legend": 6,
-   "text_len": 7092
+   "tooltip": 5,
+   "legend": 7,
+   "text_len": 7465
   },
   {
    "page": "en/pilgrim-team-psychology-arc.html",
@@ -1971,8 +1971,8 @@
    "source_note": 0,
    "insight": 13,
    "tooltip": 4,
-   "legend": 20,
-   "text_len": 7090
+   "legend": 21,
+   "text_len": 7235
   },
   {
    "page": "en/poetry-rhythm-analysis.html",
@@ -1997,9 +1997,9 @@
    "charts": 8,
    "source_note": 1,
    "insight": 81,
-   "tooltip": 26,
-   "legend": 36,
-   "text_len": 18822
+   "tooltip": 28,
+   "legend": 35,
+   "text_len": 18976
   },
   {
    "page": "en/risk-project.html",
@@ -2007,8 +2007,8 @@
    "source_note": 1,
    "insight": 53,
    "tooltip": 19,
-   "legend": 1,
-   "text_len": 12891
+   "legend": 8,
+   "text_len": 12811
   },
   {
    "page": "en/search.html",
@@ -2035,7 +2035,7 @@
    "insight": 16,
    "tooltip": 66,
    "legend": 31,
-   "text_len": 5446
+   "text_len": 5548
   },
   {
    "page": "en/social-media.html",
@@ -2043,8 +2043,8 @@
    "source_note": 2,
    "insight": 19,
    "tooltip": 4,
-   "legend": 15,
-   "text_len": 2146
+   "legend": 14,
+   "text_len": 2205
   },
   {
    "page": "en/tag-cloud.html",
@@ -2106,8 +2106,8 @@
    "source_note": 0,
    "insight": 15,
    "tooltip": 63,
-   "legend": 38,
-   "text_len": 9056
+   "legend": 41,
+   "text_len": 9167
   },
   {
    "page": "en/visual-art.html",

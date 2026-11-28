@@ -376,7 +376,14 @@ def r5_scope_pages(pages):
     """
     site = os.path.realpath(os.path.join(ROOT, 'site'))
     dirs = [os.path.join(site, 'data') + os.sep, os.path.join(site, 'en') + os.sep]
-    return [p for p in pages if any(os.path.realpath(p).startswith(d) for d in dirs)]
+    out = []
+    for p in pages:
+        real = os.path.realpath(p)
+        for d in dirs:
+            if real.startswith(d):
+                out.append(p)
+                break
+    return out
 
 
 def main():
