@@ -1,0 +1,22 @@
+{
+  "batch": "W1356",
+  "date": "2026-11-28",
+  "title": "W1356 图表无障碍键盘路径与数据表回退批",
+  "desc": "图表无障碍键盘路径与数据表回退：方向键巡图 Enter 开表 运行时注入零页面改动",
+  "head_entry": "2026-11-28（W1356 图表无障碍键盘路径与数据表回退批）",
+  "head_sentence": "图表无障碍键盘路径与数据表回退：方向键巡图 Enter 开表",
+  "agents_note": "2026-11-28（W1356）图表键盘路径 + 数据表回退（运行时注入·零页面改动）",
+  "milestone_block": "- **W1356 图表无障碍键盘路径与数据表回退批**：\n  - `site/static/js/chart-a11y.js` 扩两项：**方向键巡图**（Arrow 在页内 a11y 图表间循环聚焦）+ **Enter/空格开本页数据表 · Esc 关闭**；**数据表回退**在运行时依 `EMBEDDED_DATA`/`window.__lastData` 生成 `<details>` 表格（≤50 行 × 6 列·caption 标注数据路径）\n  - **零页面静态改动**：外部本地脚本形态 ⇒ 无内联哈希、无页面 sha 变化、无 CSP 重算；`window.EMBEDDED_DATA` 恒 undefined（页面用 `const` 顶层声明属全局词法环境）⇒ 以裸标识符 + typeof 守卫取值\n  - **实测**：12 页抽样（含 EN 镜像）0 JS 错误；键盘巡图 5/5 页 moved；数据表覆盖 8/11 个有图页（`character-dynamic-network` 用裸 `const NODES`、`hardship-difficulty-heatmap` 无可达数组 ⇒ 无表，fail-open 不报错）\n  - 覆盖率缺口按「无表不报错」处理并登记，未强行伪造表格（避免把无关数组当该图数据）",
+  "changelog_body": "\n\n**本批要点**（W1356 图表无障碍键盘路径与数据表回退批）：\n\n> - **B-1 键盘可达路径**：[chart-a11y.js](site/static/js/chart-a11y.js) 为每个已标注图表绑 keydown——`ArrowLeft/ArrowUp` 与 `ArrowRight/ArrowDown` 在页内 a11y 图表间**循环聚焦**，`Enter`/空格打开本页数据表并把焦点移到 `summary`，`Esc` 关闭并焦点回图；`:focus-visible` 描边用 `--accent-primary` 令牌。W701 既有行为（tabindex/role/aria-label/aria-describedby/摘要块/i18n）逐字未改。\n> - **B-2 数据表回退**：运行时生成 `<details class=\"chart-a11y-data\">`——从 `window.__lastData` 或 `EMBEDDED_DATA` 深度 ≤3 搜索首个「对象数组」，表头取首行标量键（≤6 列）、正文 ≤50 行，`figcaption` 明写**数据路径**（如 `EMBEDDED_DATA.timeline`）与截断说明；插入位置优先 `#dataSource` 之前，缺该块则落 `body` 末尾。\n> - **取值陷阱（本批实测）**：页面多以 `const EMBEDDED_DATA = {...}` 在经典脚本顶层声明——那是**全局词法环境绑定，不是 window 属性**，故 `window.EMBEDDED_DATA` 恒 `undefined`（首版探针数据表覆盖 1/5 页即此因）；改为裸标识符 + `typeof` 守卫后覆盖升至 8/11。此坑已写入模块注释。\n> - **零页面改动**：外部本地脚本（CSP `script-src 'self'` 放行）⇒ 无内联哈希、无页面 sha 变化、无需重跑 CSP 与渲染探针；`node --check` 通过、12 页 Playwright 抽样 0 JS 错误。\n> - **覆盖率与边界**：键盘巡图 5/5 页 `moved`（含 EN 镜像）；数据表覆盖 **8/11** 个有图页——未覆盖两页为 `character-dynamic-network`（数据在裸 `const NODES` 绑定，非对象属性）与 `hardship-difficulty-heatmap`（无可达对象数组），`poetry-density` 无图表故不适用。**不做伪造**：宁可无表也不把无关数组当作该图数据。\n> - **B-3 视觉回归口径订正**：本批**无静态页面改动**（DOM 全部运行时注入）⇒ 全站 computed-style 对拍预期零差异，未另建矩阵基线；表块为新增节点，若日后建基线应把 `.chart-a11y-data` 排除在差异判据外。\n> - **验证（全绿）**：`node --check` 过 · 12 页抽样 0 错误 · `verify_delivery.py --scope full` exit 0。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n> - **文件**：`site/static/js/chart-a11y.js`（键盘路径 + 数据表 + 取值陷阱注释）、`scripts/output/_w1356_spec.json`。\n\n",
+  "file_index_rows": [
+    "| site/static/js/chart-a11y.js | W1356 | 键盘巡图（方向键）+ Enter 开表/Esc 关 + 运行时数据表回退（≤50 行×6 列） |",
+    "| scripts/output/_w1356_spec.json | W1356 | 本批 spec |",
+    "| scripts/output/stats.json | W1356 | stats 重跑 |",
+    "| CHANGELOG.md | W1356 | 图表无障碍键盘路径与数据表回退批 |",
+    "| HANDOVER.md | W1356 | 里程碑块（cascade 写入） |",
+    "| AGENTS.md | W1356 | 版本脚注滚动（cascade 写入） |",
+    "| archive/docs/AGENTS-ARCHIVE.md | W1356 | AGENTS 脚注滚动归档（cascade 写入） |",
+    "| scripts/output/file-index.md | W1356 | 本批 file-index 段（cascade 写入） |",
+    "| scripts/output/_cascade_files_W1356.txt | W1356 | 级联落盘清单（cascade 生成） |"
+  ]
+}

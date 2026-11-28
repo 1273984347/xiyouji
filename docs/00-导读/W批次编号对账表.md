@@ -177,8 +177,6 @@
 
 
 
-| W1296 | 建立遗留总账+清零批立项: 全局剩余一次可见·流水线自产欠账归因·清零计划 | c51794db9b18cece8d0819d56ed9698e18ec8ca9 | —（待回填） | 已收官（遗留总账建立 + 欠账根因三分类 + 清零批立项 + L-01 治本落点定稿·hash 待下一批回填·自指不可知） | mavis | — | 本会话（W1296） | — |
-| W1297 | L-01 治本: 刷新步固化进收官链(versions之后) + 根因定位(版本面改页脚·git历史实证) | 437f39699 | —（待回填） | 已收官（L-01 治本：batch_closeout 新增 _run_refresh_artifacts（刷新步固化进收官链·versions 之后·自带 add·校验第 80/82 槽新鲜度）⇒ 链内跑通·链尾 80/82 槽直接 0 FAIL + 页面变更来源根因定位（版本面推进改页脚 4 页·git 历史实证）·两假设证伪（.gitattributes 已 eol=lf / 两报告均含 page_sha）·报告 T130 落盘·全量门禁 0 FAIL·一次推送带齐 1 笔⇒1 轮 CI） | mavis | — | 本会话（W1297） | — |
 | W1298 | 清零批续: L-03自动回填hash + L-04②E-185正文补齐 + L-05verify断言源普查结论 | a206ec8ae | —（待回填） | 已收官（L-03 台账hash自动回填机器化 + L-04②E-185正文补齐 + L-04③双壳保留 + L-04④反查表定策 + L-05 verify断言源普查无盲区 + 根治W1297引入的4个失败单测·刷新步mock+禁全量暂存判据形态锚定 + 收官链4次失败根因逐一修复 + 全量门禁核心全过 + 提交a206ec8ae + CI六workflow全绿） | mavis | — | 本会话（W1298） | — |
 | W1299 | L-04① 归档孤儿段清偿: referenced 口径修正 + RX_ENTRY 多批次锚 + E-283 正本补齐 | c25b3a7a2 | —（待回填） | 已收官（W1299 登记滞后已订正·hash c25b3a7a2·git 已有该 W 提交） | mavis | — | 本会话（W1299） | scripts/check_pitfalls_split.py, docs/agent/pitfalls-topics/css-visual.md, archive/docs/pitfalls-detail-ARCHIVE.md, tests/unit/test_pitfalls_split.py |
 | W1300 | L-07 公共RX_ENTRY多批次锚漏计治本 + 口径收敛单一事实源 + 反查表补E-291 | 48621ae3a | —（待回填） | 已收官（W1300 登记滞后已订正·hash 48621ae3a·git 已有该 W 提交） | mavis | — | 本会话（W1300） | scripts/check_pitfall_id_unique.py, scripts/check_pitfalls_split.py, pitfalls.md, tests/unit/test_pitfalls_split.py, tests/unit/test_pitfall_id_unique.py |
@@ -237,3 +235,5 @@
 | W1353 | 可视化插件三批（A/B/C）执行前计划落库 | 3fd01cb56 | —（待回填） | **已收官**（3fd01cb56·与 W1354 合并一笔提交·执行前计划落库） | 主会话 2026-11-28 | — | 本会话（W1353） | docs/11-方案报告/计划方案/执行前计划-T141-可视化插件三批落地方案.md · docs/11-方案报告/README.md · docs/00-导读/W批次编号对账表.md · scripts/output/_w1353_spec.json · CHANGELOG.md · HANDOVER.md |
 | W1354 | DESIGN §4B 力导向行轻量登记（形态 + 实测基线 + 判定口径） | 3fd01cb56 | —（待回填） | **已收官**（3fd01cb56·与 W1353 合并一笔提交·口径行+R7+取证登记） | 主会话 2026-11-28 | — | 本会话（W1354） | DESIGN.md |
 | W1355 | 雷达族口径英文补齐与等分盘措辞整改 | e7fcf68b4 | —（待回填） | **已收官**（e7fcf68b4·git 反填·共 1 笔·P-43-01） | 主会话 2026-11-28 | — | 本会话（W1355） | DESIGN.md · scripts/check_chart_data.py · site/data/karma-reincarnation.html · site/en |
+| W1356 | 图表无障碍键盘路径与数据表回退 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 2026-11-28 | — | 本会话（W1356） | site/static/js/chart-a11y.js |
+| W1357 | 地图族口径声明与三维语义取证 | —（待回填） | —（待回填） | 在途（认领·未收官） | 主会话 2026-11-28 | — | 本会话（W1357） | DESIGN.md · scripts/check_chart_data.py · site/data · site/en |

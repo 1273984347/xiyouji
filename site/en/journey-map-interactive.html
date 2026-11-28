@@ -192,6 +192,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <div class="kpi-row" id="kpiRow"></div>
 
         <p class="text-sm text-muted"><strong>Data source:</strong> the published dataset <code>dataset/journey-map-interactive.json</code> — 17 route nodes with their coordinates, leg durations and ordeal annotations, plus the 5 KPI readings — embedded in-page as <code>EMBEDDED_DATA</code> so the map stays readable offline.</p>
+        <!-- chart-map-meta: projection=geo basemap=self -->
+        <p class="text-sm text-muted"><strong>Map caliber:</strong> geographic projection (<code>d3.geoMercator</code>); the outline and route are self-drawn schematic vectors, not a surveyed basemap; no external tile service is used.</p>
 
         <!-- 控制面板 -->
         <section class="section">

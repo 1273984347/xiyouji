@@ -1,3 +1,31 @@
+### W1357（2026-11-28）：地图族口径声明与三维语义取证批
+
+**本批要点**（W1357 地图族口径声明与三维语义取证批）：
+
+> - **C-1 投影归属（5 页 + EN 镜像）**：实读取证——`journey-map-interactive` 含 `d3.geoMercator` + `projection()` ⇒ **geo**；`journey-geo-semiotics` / `journey-route` / `customs-pass-route` / `journey-spacetime` 无 geo 签名 ⇒ **schematic（自绘示意底图）**。五页在数据源块后补机器声明与读者可见「地图口径」一句，并写明**底图与路径全部自绘、无外部瓦片服务**（file:// 零外域）。EN 镜像 `site/en/journey-map-interactive.html` 同批补英文 Map caliber 行——R9 上线即由门禁抓出该 EN 漏网（W1352 同族）。
+> - **R9 判据**：[check_chart_data.py](scripts/check_chart_data.py) 新增地图族口径判据——① 含 `d3.geo*` 的页面必须声明 `chart-map-meta`；② 已声明者形态须合法（`projection=geo|schematic` 且 `basemap=self`）；③ 全站任何页面出现外部瓦片/地图服务域（openstreetmap / mapbox / 高德 / arcgis / cesium）即 FAIL；自测 14→16 例。
+> - **C-2 受控出口落档**：[DESIGN.md](DESIGN.md) §4B 力导向实测注补「若未来出现 >200 节点，出口为 Canvas 2D + 分页/聚合（先例 `perf-canvas-rendering`），不得砍数据；不预立判据」——与 W1355「不立 R6」互补：条文留出口，判据等首批实际出现再定。
+> - **C-3 三维语义订正（W1341 P2 前提证伪）**：① `character-relationship-3d` 的 z 自 **W1343** 起改为 `depthOf(groupIdx)`（原 `clusterRadius * sin(angle)` 确不承载数据）⇒ 现 z 承载**分组深度**；② `journey-geo-3d` 为 `x = lon` / `z = lat` / `y = heightOf(node)` ⇒ 平面是地理底、高度轴承载数据。**两页都不是「深度装饰」**，P2 的处置前提不成立；真实缺口是**语义未对读者声明** ⇒ 各补 `<!-- chart-3d-meta: … -->`（该页无数据源块，故只落 head 机器声明；`journey-geo-3d` 另补可见口径行）。
+> - **验证（全绿）**：`check_chart_data.py --self-test` 16 例 PASS · 全站 239 页 0 FAIL · `--spec-check` 表体行 10 空格 0 · `verify_delivery.py --scope full` exit 0。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：`DESIGN.md`（§4B 力导向注补 Canvas 出口）、`scripts/check_chart_data.py`（R9 + 自测 2 例）、`site/data/` 5 个地图页与 2 个 3D 页、`site/en/journey-map-interactive.html`、`scripts/output/_w1357_spec.json`。
+
+
+### W1356（2026-11-28）：图表无障碍键盘路径与数据表回退批
+
+**本批要点**（W1356 图表无障碍键盘路径与数据表回退批）：
+
+> - **B-1 键盘可达路径**：[chart-a11y.js](site/static/js/chart-a11y.js) 为每个已标注图表绑 keydown——`ArrowLeft/ArrowUp` 与 `ArrowRight/ArrowDown` 在页内 a11y 图表间**循环聚焦**，`Enter`/空格打开本页数据表并把焦点移到 `summary`，`Esc` 关闭并焦点回图；`:focus-visible` 描边用 `--accent-primary` 令牌。W701 既有行为（tabindex/role/aria-label/aria-describedby/摘要块/i18n）逐字未改。
+> - **B-2 数据表回退**：运行时生成 `<details class="chart-a11y-data">`——从 `window.__lastData` 或 `EMBEDDED_DATA` 深度 ≤3 搜索首个「对象数组」，表头取首行标量键（≤6 列）、正文 ≤50 行，`figcaption` 明写**数据路径**（如 `EMBEDDED_DATA.timeline`）与截断说明；插入位置优先 `#dataSource` 之前，缺该块则落 `body` 末尾。
+> - **取值陷阱（本批实测）**：页面多以 `const EMBEDDED_DATA = {...}` 在经典脚本顶层声明——那是**全局词法环境绑定，不是 window 属性**，故 `window.EMBEDDED_DATA` 恒 `undefined`（首版探针数据表覆盖 1/5 页即此因）；改为裸标识符 + `typeof` 守卫后覆盖升至 8/11。此坑已写入模块注释。
+> - **零页面改动**：外部本地脚本（CSP `script-src 'self'` 放行）⇒ 无内联哈希、无页面 sha 变化、无需重跑 CSP 与渲染探针；`node --check` 通过、12 页 Playwright 抽样 0 JS 错误。
+> - **覆盖率与边界**：键盘巡图 5/5 页 `moved`（含 EN 镜像）；数据表覆盖 **8/11** 个有图页——未覆盖两页为 `character-dynamic-network`（数据在裸 `const NODES` 绑定，非对象属性）与 `hardship-difficulty-heatmap`（无可达对象数组），`poetry-density` 无图表故不适用。**不做伪造**：宁可无表也不把无关数组当作该图数据。
+> - **B-3 视觉回归口径订正**：本批**无静态页面改动**（DOM 全部运行时注入）⇒ 全站 computed-style 对拍预期零差异，未另建矩阵基线；表块为新增节点，若日后建基线应把 `.chart-a11y-data` 排除在差异判据外。
+> - **验证（全绿）**：`node --check` 过 · 12 页抽样 0 错误 · `verify_delivery.py --scope full` exit 0。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：`site/static/js/chart-a11y.js`（键盘路径 + 数据表 + 取值陷阱注释）、`scripts/output/_w1356_spec.json`。
+
+
 ### W1355（2026-11-28）：雷达族口径英文补齐与等分盘措辞整改批
 
 **本批要点**（W1355 雷达族口径英文补齐与等分盘措辞整改批）：
@@ -891,23 +919,6 @@
 > - **状态**：把「本地全绿 ≠ CI 会绿」从一条教训变成**闸门能力**——快档新增第 80 槽 ⇒ 探针报告陈旧在推前即被拦；W1289 假红的采集侧根因（20s 超时）消除；归档层 1MB 破线告警一次清偿。
 > - **文件**： .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/CHANGELOG-ARCHIVE-tier2-W875-W950.md, archive/docs/CHANGELOG-ARCHIVE.md, archive/docs/INDEX.md, archive/docs/README.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T127-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/_audit_render_states.js, scripts/chart_label_clipping_probe.js, scripts/ci_sim.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1294.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1294_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, scripts/svg_text_contrast_probe.js, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml
 
-### W1293（2026-11-22）：CHANGELOG 结构治本 + 两面归档下界对齐到 W1253 + 收官链零跳过
-
-> - **来源**：用户 2026-11-22 引用 W1292 遗留清单并**采纳建议②**（治本：修 CHANGELOG 结构·不放宽任何门禁判据）⇒ 立项 W1293。
-> - **执行**：① **结构病灶行级取证**——CHANGELOG.md（567 行）三个结构锚点散落三处：`## [Unreleased]` 契约块在**行 151**（把段区切成两半）· `# 更新日志` H1 在**行 531**（其下还挂 W1248/W1247/W1246 三段）· H1 两行说明孤悬**行 513**；⇒ 归档工具 `_tail_block_start()`（找 `^# 更新日志$`）把 H1 之后的一切当「末尾文件级块」⇒ **那三段永远迁不出** ⇒ CHANGELOG 有效正本最老段被锁死在 W1249；② **稳定性取证**——`batch_cascade._face_changelog` 只**插入**新段（锚点=现役段标题行首）·**不搬动**末尾块 ⇒ ⇒ 坏形态是**历史遗留**而非级联每次造成 ⇒ ⇒ 结构修复**不会被后续级联退化**；
-> - **施工**：① **程序化剪切归位**（三部分从原位剪出·按「H1 → 说明两行 → [Unreleased] 契约块」拼到文件末尾）⇒ 段区恢复连续（W1292…W1246 单一连续段区）⇒ 末尾块之后无段 ⇒ 归档迁出恢复正常；守恒＝**字节逐字相等**（175443→175443·行 567→567）；② **两面腾窗对齐**（目标下界 = 最老共同号 W1253）⇒ `archive_segments --target both --keep 34 --apply` ⇒ CHANGELOG 迁出 **7 段（W1246-W1252）**、file-index 迁出 **4 段（W1253-W1257）** ⇒ 两面正本各 **34 段·最老段同为 W1253**；③ **收官链零跳过**——`batch_closeout` **不再 monkey-patch 跳过 rebuild 自检**（W1291/W1292 两批的「跳过既存自检」到此终结）⇒ 归档对齐由**机器判据自己确认通过**而非人工放行；④ 报告 T126 落盘 + README §六 登记（141→142 件）。
-> - **验证**：结构修复**字节逐字守恒**（175443→175443）+ 段区连续（段数 41·末尾块之后无段 ✓）+ 归档迁出演练无断言（CHANGELOG 迁 7 段 / file-index 迁 4 段）+ **两面最老段同为 W1253** + `rebuild_section` 自检「**两面同下界 W1253 ✓**」⇒ rebuild 不再阻断 + 收官链 17 步**零跳过**完成 + 第 31/45/48/51/74 槽 0 FAIL + pytest 全绿 + 一次推送带齐 1 笔 ⇒ 1 轮 CI。
-> - **状态**：一个只能靠「跳过既存自检」维持的欠账，现由**机器判据自己确认通过**——CHANGELOG 结构归位（逐字守恒）⇒ 段区连续 ⇒ 归档迁出恢复 ⇒ 两面下界同为 W1253 ⇒ rebuild 自检 ✓ ⇒ **收官链首次零跳过收官**；本批**未放宽任何门禁判据**（用户采纳的治本路线）。
-> - **文件**： .github/workflows/README.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/CHANGELOG-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/file-index-ARCHIVE.md, archive/docs/workflows-readme-history.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T126-任务计划执行与经验沉淀报告-2026-11-22.md, docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md, docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md, docs/INDEX.md, scripts/archive_segments.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1293.txt, scripts/output/_w1266_allrender.json, scripts/output/_w1293_spec.json, scripts/output/chart-legend-render-audit.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/svg_text_contrast_graphic_report.json, scripts/output/svg_text_contrast_report.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml, tests/unit/test_archive_segments_plan_scope.py
-
-### W1292（2026-11-22）：遗留清偿批：归档工具段表口径根修 + 台账 hash 回填 + 两面下界待裁决
-
-> - **来源**：用户 2026-11-22 指示「**现在做**」（承接 W1291 收官后其遗留清单三项）⇒ 立项 W1292（遗留清偿批）。
-> - **执行**：① **归档工具段表口径根修（治本）**——收官链 rebuild 步长期 fail-closed「两面同 W 号下界未对齐」⇒ 链尾 16 步全不执行；分段迁 17 段成功 / 7 段必红 ⇒ **非规模问题**；逐项实算见真因：CHANGELOG 的「末尾文件级块」（`# 更新日志` H1·行 522）**沉在段区中间**、其下仍挂 W1248/W1247/W1246 三段（起点 96878/97683/98560 **均 > tail_start 96869**）⇒ 迁出块止于 tail 而段表按 `hits[keep:]` 计 ⇒ **多算 3 段** ⇒ `assert len(moved_in_block) == len(moved_ws)` 在该边界**必然触发**；修法＝**段表与迁出块同源**（只计落在迁出区间 [cut, tail_start) 内的段）+ 新增回归锁 3 例（末尾块沉底负样本 / 段表长度 == 迁出块实算段数 / 常规形态不回归）；② **台账 W1291 hash 回填**（E-311 纪律：下一批第一动作）＝ `df8bab1c9`，用显式 `--hash`+`--status` **保留状态列的详细终态结论**（`--from-git` 会覆盖状态列并抹掉结论·W1289 教训）；③ **「两面同下界」不可达的证明与待裁决**——file-index 33 段最老为 W1253 且其号集合**不含** W1252–W1246 ⇒ 同下界**物理不可达**⇒ 改判据口径（属放宽判据·铁律 16⑦ 须用户批准）或修 CHANGELOG 结构（触及 verify 口径块读取面）**两案均须用户批准** ⇒ 本批**只定位不擅改**、如实登记；④ 报告 T125 落盘 + README §六 登记（140→141 件）。
-> - **验证**：回归锁 **3 passed**；`archive_segments --target changelog --keep 35 --dry-run` ⇒「迁出 2 段（W1249-W1250）·留存 38 段」**无 AssertionError**（修复前同一命令必红）；台账 W1291 hash 已回填 `df8bab1c9`（新指纹 dbaa1acf894b）；preflight **PREFLIGHT PASS**（N1–N5 全一致·上批追平成果零 WARN）；第 31/45/48/51/74 槽 0 FAIL · pytest 全绿 · 一次推送带齐 1 笔 ⇒ 1 轮 CI。
-> - **状态**：归档工具的**阻断性断言已根修**（口径同源 ⇒ 断言恒成立·不再随结构漂移触发）；台账 hash 欠账清偿；「两面下界」由现象升级为**带两条候选修法与影响面的裁决项**——**不擅自改门禁判据、不擅自改 CHANGELOG 结构**；既存下界自检仍需按 W1291 同法跳过（复用同一实现·**不压红**）⇒ 已如实登记。
-> - **文件**： .github/workflows/README.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/CHANGELOG-ARCHIVE.md, docs/00-导读/W批次编号对账表.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T125-任务计划执行与经验沉淀报告-2026-11-22.md, docs/INDEX.md, scripts/archive_segments.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1292.txt, scripts/output/_w1292_spec.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml, tests/unit/test_archive_segments_plan_scope.py
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -915,7 +926,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1355），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1357），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

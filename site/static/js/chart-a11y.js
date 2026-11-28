@@ -41,7 +41,11 @@
       kpiEnd: '。',
       source: '数据来源与引用格式见页面下方「数据源」区块。',
       focus: '本区块已设为可聚焦，屏幕阅读器可直接朗读本段替代文本。',
-      fallbackTitle: '数据图表'
+      fallbackTitle: '数据图表',
+      tableTitle: '本页数据表',
+      tableFrom: '数据路径：',
+      tableRows: '（仅列前 %d 行，共 %d 行）',
+      tableHint: '聚焦图表后按 Enter 可打开本表，Esc 关闭。'
     },
     en: {
       chart: ' (interactive chart).',
@@ -50,7 +54,11 @@
       kpiEnd: '.',
       source: 'See the "Data Source" section below for data provenance and citation format.',
       focus: 'This region is focusable; screen readers can read this alternative text directly.',
-      fallbackTitle: 'Chart'
+      fallbackTitle: 'Chart',
+      tableTitle: 'Data table (this page)',
+      tableFrom: 'Data path: ',
+      tableRows: ' (first %d of %d rows)',
+      tableHint: 'Press Enter on a focused chart to open this table; Esc closes it.'
     }
   };
   var T = I18N[LANG];
@@ -117,6 +125,155 @@
     return div;
   }
 
+  // ---- W1356（批 B）：键盘可达路径 + 数据表 fallback（零页面静态改动·全部运行时注入） ----
+  var TABLE_MAX_ROWS = 50;
+  var TABLE_MAX_COLS = 6;
+
+  function injectStyle() {
+    if (document.getElementById('chart-a11y-style')) return;
+    var st = document.createElement('style');
+    st.id = 'chart-a11y-style';
+    st.textContent =
+      '[data-chart-a11y]:focus-visible{outline:2px solid var(--accent-primary,#C0392B);outline-offset:2px}' +
+      '.chart-a11y-data{margin:18px 0;padding:14px 16px;border:1px solid var(--border-subtle,#DCD3BF);' +
+      'border-radius:6px;background:var(--surface-raised,#FCFAF4);font-size:.86rem}' +
+      '.chart-a11y-data summary{cursor:pointer;font-weight:600;color:var(--text-primary,#1C1A17)}' +
+      '.chart-a11y-data figcaption{margin:6px 0 8px;color:var(--text-tertiary,#6B665C);font-size:.78rem}' +
+      '.chart-a11y-data .wrap{max-height:320px;overflow:auto}' +
+      '.chart-a11y-data table{border-collapse:collapse;width:100%;font-variant-numeric:tabular-nums}' +
+      '.chart-a11y-data th,.chart-a11y-data td{border:1px solid var(--border-subtle,#DCD3BF);padding:4px 8px;text-align:left}' +
+      '.chart-a11y-data th{background:var(--surface-sunken,#EDE7D6)}';
+    document.head.appendChild(st);
+  }
+
+  function isObjArray(a) {
+    return Array.isArray(a) && a.length >= 2 && a[0] && typeof a[0] === 'object' && !Array.isArray(a[0]);
+  }
+
+  function findArray(node, path, depth) {
+    if (!node || typeof node !== 'object' || depth > 3) return null;
+    var keys = Object.keys(node);
+    for (var i = 0; i < keys.length; i++) {
+      if (isObjArray(node[keys[i]])) return { path: path + '.' + keys[i], arr: node[keys[i]] };
+    }
+    for (var j = 0; j < keys.length; j++) {
+      var w = node[keys[j]];
+      if (w && typeof w === 'object' && !Array.isArray(w)) {
+        var sub = findArray(w, path + '.' + keys[j], depth + 1);
+        if (sub) return sub;
+      }
+    }
+    return null;
+  }
+
+  function dataSource() {
+    // 注意：页面多以 `const EMBEDDED_DATA = {...}` 在经典脚本顶层声明 —— 那是**全局词法环境**
+    // 的绑定，不是 window 属性（window.EMBEDDED_DATA 恒 undefined）。故须以裸标识符取值，
+    // 并对未声明标识符用 typeof 守卫（typeof 对未声明名不抛）。
+    var roots = [];
+    try { if (typeof __lastData !== 'undefined' && __lastData) roots.push(['window.__lastData', __lastData]); } catch (e1) { /* fail-open */ }
+    try { if (window.__lastData) roots.push(['window.__lastData', window.__lastData]); } catch (e2) { /* fail-open */ }
+    try { if (typeof EMBEDDED_DATA !== 'undefined' && EMBEDDED_DATA) roots.push(['EMBEDDED_DATA', EMBEDDED_DATA]); } catch (e3) { /* fail-open */ }
+    try { if (window.EMBEDDED_DATA) roots.push(['window.EMBEDDED_DATA', window.EMBEDDED_DATA]); } catch (e4) { /* fail-open */ }
+    for (var i = 0; i < roots.length; i++) {
+      if (roots[i][1] && typeof roots[i][1] === 'object') {
+        var hit = findArray(roots[i][1], roots[i][0], 0);
+        if (hit) return hit;
+      }
+    }
+    return null;
+  }
+
+  function buildDataTable() {
+    if (document.getElementById('chart-a11y-data')) return;
+    var src = dataSource();
+    if (!src) return;
+    var arr = src.arr;
+    var cols = Object.keys(arr[0] || {}).filter(function (k) {
+      var v = arr[0][k];
+      return v === null || typeof v !== 'object';
+    }).slice(0, TABLE_MAX_COLS);
+    if (!cols.length) return;
+
+    var d = document.createElement('details');
+    d.id = 'chart-a11y-data';
+    d.className = 'chart-a11y-data';
+    var s = document.createElement('summary');
+    s.textContent = T.tableTitle;
+    d.appendChild(s);
+
+    var cap = document.createElement('figcaption');
+    cap.textContent = T.tableFrom + src.path + (arr.length > TABLE_MAX_ROWS
+      ? T.tableRows.replace('%d', TABLE_MAX_ROWS).replace('%d', arr.length) : '') + ' ' + T.tableHint;
+    d.appendChild(cap);
+
+    var wrap = document.createElement('div');
+    wrap.className = 'wrap';
+    var tb = document.createElement('table');
+    var thead = document.createElement('thead');
+    var trh = document.createElement('tr');
+    for (var c = 0; c < cols.length; c++) {
+      var th = document.createElement('th');
+      th.scope = 'col';
+      th.textContent = cols[c];
+      trh.appendChild(th);
+    }
+    thead.appendChild(trh);
+    tb.appendChild(thead);
+    var tbody = document.createElement('tbody');
+    for (var r = 0; r < Math.min(arr.length, TABLE_MAX_ROWS); r++) {
+      var tr = document.createElement('tr');
+      for (var c2 = 0; c2 < cols.length; c2++) {
+        var td = document.createElement('td');
+        var v = arr[r][cols[c2]];
+        td.textContent = v === undefined || v === null ? '' : String(v);
+        tr.appendChild(td);
+      }
+      tbody.appendChild(tr);
+    }
+    tb.appendChild(tbody);
+    wrap.appendChild(tb);
+    d.appendChild(wrap);
+
+    var host = document.getElementById('dataSource');
+    if (host && host.parentNode) host.parentNode.insertBefore(d, host);
+    else document.body.appendChild(d);
+  }
+
+  function chartList() {
+    return Array.prototype.slice.call(document.querySelectorAll('[data-chart-a11y]'));
+  }
+
+  function bindKeyboard(el) {
+    if (el.__a11yKeys) return;
+    el.__a11yKeys = true;
+    el.addEventListener('keydown', function (e) {
+      var list = chartList();
+      var i = list.indexOf(el);
+      var d = document.getElementById('chart-a11y-data');
+      if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+        if (!list.length) return;
+        e.preventDefault();
+        list[(i + 1) % list.length].focus();
+      } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+        if (!list.length) return;
+        e.preventDefault();
+        list[(i - 1 + list.length) % list.length].focus();
+      } else if (e.key === 'Enter' || e.key === ' ') {
+        if (!d) return;
+        e.preventDefault();
+        d.open = true;
+        var sum = d.querySelector('summary');
+        if (sum) sum.focus();
+      } else if (e.key === 'Escape') {
+        if (d && d.open) {
+          d.open = false;
+          el.focus();
+        }
+      }
+    });
+  }
+
   function apply() {
     var cands = [];
     var all = document.querySelectorAll('svg,canvas');
@@ -141,19 +298,24 @@
       el2.setAttribute('role', 'img');
       el2.setAttribute('aria-label', label);
       el2.setAttribute('aria-describedby', summary.id);
+      bindKeyboard(el2);
     }
     return true;
   }
 
   function start() {
+    injectStyle();
     apply();
+    buildDataTable();
     var stopAt = Date.now() + OBSERVE_MS;
     var pending = null;
     var mo = new MutationObserver(function () {
       if (Date.now() > stopAt) { mo.disconnect(); return; }
       if (pending) clearTimeout(pending);
       pending = setTimeout(function () {
-        if (!apply()) mo.disconnect();
+        var added = apply();
+        buildDataTable();
+        if (!added) mo.disconnect();
       }, 300);
     });
     mo.observe(document.body, { childList: true, subtree: true });

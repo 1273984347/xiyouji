@@ -25,13 +25,16 @@
   R8  （W1355）等分索引盘 × 占比措辞错配：`d3.pie()...value(1)` 是**等分排布**（索引语义），
       不承载占比；若页面同时以「占比 N%」形式主张占比 ⇒ FAIL（实测来源：karma-reincarnation
       10 类各 1 例被写成「占比 10%」）。否定式（非占比/不代表占比）不命中。
+  R9  （W1357·批 C-1）地图族口径判据：① 含 `d3.geo*` 的页面须声明
+      `<!-- chart-map-meta: projection=geo|schematic basemap=self -->`；② 已声明者形态须合法；
+      ③ 任何页面出现外部瓦片/地图服务域即 FAIL（file:// 零外域·铁律 5）。
 
   设计取舍（W551）：连线画布遮挡、桑基空渲染、reveal 空带、横向溢出等需要真实渲染
   状态的缺陷由 check_screenshot_gates.js（Playwright 动态门禁）覆盖——静态代理
   （CSS 声明/DOM 顺序）经实证不可靠（monster-hierarchy 有不透明背景但边可见，
   canvas 与 svg 的先后顺序 CSS 无法表达）。
 
---self-test：对内置负样本断言 R1/R2/R3 各自命中、R4/R5/R7/R8 各自命中与放行、好样本与
+--self-test：对内置负样本断言 R1/R2/R3 各自命中、R4/R5/R7/R8/R9 各自命中与放行、好样本与
 R3 正样本不命中（W654 扩至 6 例·W1342 扩至 10 例）。
 --spec-check DESIGN.md：解析 §4B 选型章表体行与空单元格（AC-4：行 10·空格 0）。
 """
@@ -102,6 +105,14 @@ CALIBER = re.compile(r'口径：|Caliber:')
 #   措辞：必须带数字的占比主张（「占比 10%」）才算主张；「非占比/不代表占比」等否定式不命中。
 RE_EQUAL_PIE = re.compile(r'd3\.pie\(\)[\s\S]{0,240}?\.value\(\s*(?:d\s*=>\s*)?1\s*\)')
 RE_SHARE_WORD = re.compile(r'占比\s*[：:]?\s*\d')
+
+# R9（W1357·批 C-1）：地图族口径判据
+#   ① 含 d3.geo* 的页面必须声明 chart-map-meta（projection=geo basemap=self）
+#   ② 凡声明 chart-map-meta 的页面，形态必须合法（projection ∈ geo|schematic，且 basemap=self）
+#   ③ 任何页面引用外部瓦片/地图服务域 = 违反 file:// 零外域铁律（铁律 5）
+RE_MAP_META = re.compile(r'chart-map-meta:\s*projection=(geo|schematic)\s+basemap=self\b')
+RE_GEO_SIG = re.compile(r'd3\.geo[A-Z]')
+RE_MAP_EXT = re.compile(r'tile\.openstreetmap|api\.mapbox|webapi\.amap|arcgisonline|cesium\.ion', re.I)
 
 
 def strip_invisible(html):
@@ -186,6 +197,13 @@ def check_page(path, r3_scope=None):
     # R7（W1354）已在 main 的雷达辖区循环里判；R8（W1355）：等分索引盘不得自称「占比」
     if RE_EQUAL_PIE.search(strip_js_comments(js_all)) and RE_SHARE_WORD.search(visible):
         fails.append('R8 等分索引盘自称占比（d3.pie().value(1) 的等分只承载排布语义·不承载占比）')
+    # R9（W1357·批 C-1）：地图族口径
+    if RE_GEO_SIG.search(html) and not RE_MAP_META.search(html):
+        fails.append('R9 地图族页面缺 chart-map-meta 声明（须 projection=geo basemap=self）')
+    if 'chart-map-meta:' in html and not RE_MAP_META.search(html):
+        fails.append('R9 chart-map-meta 形态非法（须 projection=geo|schematic 且 basemap=self）')
+    if RE_MAP_EXT.search(html):
+        fails.append('R9 引用外部瓦片/地图服务域（file:// 零外域铁律禁外部底图）')
 
     return fails
 
@@ -413,6 +431,13 @@ def self_test():
     if RE_SHARE_WORD.search('等分排列（等分仅为索引排布，不代表占比）'):
         print('SELF-TEST FAIL: R8 否定式措辞被误报')
         ok = False
+    # W1357 新增两例（R9 地图口径的可证伪锁）：
+    if not RE_MAP_META.search('<!-- chart-map-meta: projection=geo basemap=self -->'):
+        print('SELF-TEST FAIL: R9 合法声明未识别')
+        ok = False
+    if RE_MAP_META.search('<!-- chart-map-meta: projection=schematic basemap=osm -->'):
+        print('SELF-TEST FAIL: R9 外部底图被误判为合规')
+        ok = False
     print('self-test:', 'PASS（负样本命中 · 好样本放行）' if ok else 'FAIL')
     return ok
 
@@ -438,7 +463,7 @@ def r5_scope_pages(pages):
 
 def main():
     ap = argparse.ArgumentParser(description='图表静态自洽门禁（W551 挂载·R3 于 W654 扩充）')
-    ap.add_argument('--self-test', action='store_true', help='内置负样本自检（14 例）')
+    ap.add_argument('--self-test', action='store_true', help='内置负样本自检（16 例）')
     ap.add_argument('--spec-check', metavar='DESIGN_MD', help='AC-4：解析 §4B 选型章表体行与空单元格')
     args = ap.parse_args()
 
