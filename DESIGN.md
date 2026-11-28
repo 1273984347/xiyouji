@@ -535,7 +535,7 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 | 分类型频次/计数对比（类别 ≤20·单值） | 柱/条形图（d3 rect+scaleBand） | 类别为连续数值区间时禁用（改面积/折线）；标签超 8 字横排禁用 | site/data/character-presence-timeline.html | degrade: stacked |
 | 连续时序/有序维度趋势（≥2 序列） | 折线图（d3.line） | 无序类别维度禁用；单点数据禁用 | site/data/aesthetics.html | degrade: simplified |
 | 占比构成（部分与整体·类别 ≤8） | 弧形图（d3.pie+d3.arc·含环形） | 类别 >8 禁用（改条形）；负值/零值占比禁用；多环嵌套禁用 | site/data/character-semantic-network.html | degrade: stacked |
-| 多分类网络关系（节点 20-200·边有语义） | 力导向图（d3.forceSimulation） | 节点 >200 禁用（改分层分页）；纯层级数据禁用（改树图） | site/data/character-dynamic-network.html | degrade: simplified |
+| 多分类网络关系（节点 20-200·边有语义） | 力导向图（d3.forceSimulation）·分层+力混合（forceX/forceY 按类型锚定） | 节点 >200 禁用（改分层分页）；纯层级数据禁用（改树图）；**「>200」须渲染态判定**（静态解析 3/22 页失效且高估·见下方力导向族实测注） | site/data/character-dynamic-network.html | degrade: simplified |
 | 多源汇聚-分发流量（左中右分层·无环路） | 桑基图（d3.sankey+插件脚本） | 环路数据禁用；节点 >60 禁用（窄屏不可读） | site/data/guanyin-six-roles-network.html | degrade: scroll-x |
 | 时序强度叠加（连续量·需趋势强调） | 面积图（d3.area） | 多序列重叠 >3 层禁用（透明度不可辨） | site/data/cognitive-psychology.html | degrade: simplified |
 | 层级包含关系 + 数值面积编码 | 矩形树图（d3.treemap） | 层级 >3 层禁用（标签放不下）；要求精确数值对比禁用 | site/data/aesthetics.html | degrade: scroll-x |
@@ -544,6 +544,14 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 | 多实体 × 多维度同构评分（维度 ≤8·单图实体 ≤3） | 雷达图（自绘 polygon + 径向刻度） | 维度 >8 禁用（改热力矩阵·相邻轴不可分辨）；单图系列 >3 禁用（改「单选实体雷达 + 全量排序点图」）；多数轴取值齐平禁用（常量轴无信息）；无精确比较需求禁用（改点图/表） | site/data/language-style-radar.html | degrade: simplified |
 
 > **雷达族辖区（W1350）**：R5（雷达规模）判据同时覆盖 `site/en/` 镜像页——EN 页与 ZH 同受「维度 ≤8 / 单图实体 ≤3」约束；R4（族注册）仍限 `site/data/`（选型章登记对象是中文数据图表页）。
+
+> **力导向族实测基线（W1354 · A-1 取证）**：22 个命中 `d3.forceSimulation` / `THREE.` / `d3.geo*` 签名的页面逐页实测——节点最多 **35**（character-dynamic-network）· 边最多 **131**（relationships）· **0 页触及 >200 阈值**（余量 5.7 倍）⇒ 该禁用条件为**前瞻性条款**，现役无存量超限页、不设基线冻结文件。**判定口径**：`>200` 须以**渲染态**实测为准——① 静态数组字面量解析在 **3/22 页失效**（relationships / monster-female-network / intertextuality-network 的 node/link 由运行时构造，无字面数组）；② 同一静态解析会把注释与正则里的方括号当成数组跨度而**高估**（relationships 静态算 40 节点/383 边·渲染实测 23/131）。故**禁以静态解析结果判红**。
+
+> **弧形/面积规模实测（W1354 · A-4 取证 · 两条存量违规待另批整改）**：
+> ① **弧形「类别 ≤8」**：21 页渲染态实测，多数 ≤8；**karma-reincarnation 的 `chart-karma-pie` = 10 类**（每类恰 1 例、文案自称"占比 10%"·实为等分）⇒ **违规**，待整改为条形或分组；`chart-design` 的 12 等分日晷属表盘布局（W1341 §八 第 4 条已证伪为占比图，不适用本条）。
+> ② **面积「多序列重叠 >3 层」**：13 页渲染态实测；**four-dimensional-research-network 的 `timeline-svg`（100 回四维强度堆叠面积图）= 4 层** ⇒ **违规**，待改小倍数或分层淡出。
+> ③ 两条违规**均无机器判据**（现役 R1–R7 都不查类别数/层数）⇒ 根因是判据缺口，非单页失误；补判据须用户批准后另批（同 R6 处理方式）。
+> ④ 口径提醒：以 `path` 弧线命令 `A` 计类别、以闭合填充路径计面积层，**会把桑基/雷达的多段路径误并入面积桶**（实测 karma 桑基被计 10 层）——复算时须按 svg id 区分，勿以页级合计下结论。
 
 ## 4A. 纸感轻立体体系（Phase E · W476 宪改）
 

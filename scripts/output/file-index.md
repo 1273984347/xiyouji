@@ -1,3 +1,33 @@
+## W1354 雷达族口径行补齐与族规模实测取证批（2026-11-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| archive/docs/（2 件） | W1354 | 台账迁出 2 行归档 |
+| docs/00-导读/（1 件） | W1354 | 认领行 + 台账腾窗迁出 W1294-W1295 |
+| scripts/（1 件） | W1354 | R7 雷达族口径判据 + 自测 2 例（10→12 例）·辖区限 site/da |
+| scripts/output/（4 件） | W1354 | 本批 spec |
+| site/data/（17 件） | W1354 | 补口径行（5 轴 × 1 系列） |
+| DESIGN.md | W1354 | §4B 力导向行补分层+力混合与渲染态判定口径 + 力导向/弧形/面积三条实测注 |
+| CHANGELOG.md | W1354 | 雷达族口径行补齐与族规模实测取证批 |
+| HANDOVER.md | W1354 | 里程碑块（cascade 写入） |
+| AGENTS.md | W1354 | 版本脚注滚动（cascade 写入） |
+
+## W1353 可视化插件三批（2026-11-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/（1 件） | W1353 | 版本面推进（version_surface） |
+| archive/docs/（2 件） | W1353 | AGENTS 脚注滚动归档（cascade 写入） |
+| docs/00-导读/（2 件） | W1353 | W1353 认领行 |
+| docs/11-方案报告/（2 件） | W1353 | 三批判据级执行前计划（site/ 零改动·施工另占号） |
+| scripts/output/（4 件） | W1353 | 本批 spec |
+| CHANGELOG.md | W1353 | 可视化插件三批执行前计划落库批 |
+| HANDOVER.md | W1353 | 里程碑块（cascade 写入） |
+| AGENTS.md | W1353 | 版本脚注滚动（cascade 写入） |
+| README.md | W1353 | 版本面推进（version_surface） |
+| STRUCTURE.md | W1353 | 版本面推进（version_surface） |
+| CITATION.cff | W1353 | 版本面推进（version_surface） |
+
 ## W1352 H1 单例判据全站化：EN 两页去重 + 判据扩至 site 全量（2026-11-28）
 
 | 文件 | W | 说明 |
@@ -1751,122 +1781,5 @@
 | site/data/tag-cloud.html | W1291 | 版本脚注联动（级联产物） |
 | site/dukou-engine.html | W1291 | 版本脚注联动（级联产物） |
 | site/index.html | W1291 | 版本脚注联动（级联产物） |
-
-## W1290 坑表正本六主题拆分 + 根级索引壳 + 脚本口径跨文件聚合 + 重号清偿（2026-11-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .agent/skills/huoyan-jinjing/SKILL.md | W1290 | 本批改动面 |
-| .agent/skills/puti-shouye/SKILL.md | W1290 | 本批改动面 |
-| .github/workflows/README.md | W1290 | 级联产物（本批收官链写入） |
-| AGENTS.md | W1290 | 本批改动面 |
-| CHANGELOG.md | W1290 | 本批版段 |
-| CITATION.cff | W1290 | 级联产物（本批收官链写入） |
-| HANDOVER.md | W1290 | §四 遗留登记块（W1290：坑表写窗枯竭 + 探针固定成本 + 复核纪律） |
-| README.md | W1290 | 级联产物（本批收官链写入） |
-| STRUCTURE.md | W1290 | 级联产物（本批收官链写入） |
-| archive/docs/AGENTS-ARCHIVE.md | W1290 | AGENTS 历史段归档（级联迁出） |
-| archive/docs/pitfalls-detail-ARCHIVE.md | W1290 | E-301/E-302 段恢复叙事全文 + 段内追加正本判据层 |
-| archive/docs/workflows-readme-history.md | W1290 | 级联产物（本批收官链写入） |
-| docs/00-导读/W批次编号对账表.md | W1290 | 台账 10 行 hash 回填 + W1290 认领行 + 段数腾窗后正本 |
-| docs/00-导读/项目说明.md | W1290 | 级联产物（本批收官链写入） |
-| docs/11-方案报告/README.md | W1290 | 报告索引登记 T122（§六 137→138 件） |
-| docs/11-方案报告/计划方案/T122-任务计划执行与经验沉淀报告-2026-11-21.md | W1290 | T122 报告落盘 |
-| docs/11-方案报告/计划方案/T123-任务计划执行与经验沉淀报告-2026-11-21.md | W1290 | 本批改动面 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1290 | 级联产物（本批收官链写入） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1290 | 级联产物（本批收官链写入） |
-| docs/INDEX.md | W1290 | 本批改动面 |
-| docs/agent/INDEX.md | W1290 | 本批改动面 |
-| docs/agent/MAINTAINING.md | W1290 | 本批改动面 |
-| docs/agent/README.md | W1290 | 本批改动面 |
-| docs/agent/pitfalls-topics/INDEX.md | W1290 | 本批改动面 |
-| docs/agent/pitfalls-topics/README.md | W1290 | 本批改动面 |
-| docs/agent/pitfalls-topics/cascade-changelog.md | W1290 | 本批改动面 |
-| docs/agent/pitfalls-topics/css-visual.md | W1290 | 本批改动面 |
-| docs/agent/pitfalls-topics/data-trust.md | W1290 | 本批改动面 |
-| docs/agent/pitfalls-topics/flow-collab.md | W1290 | 本批改动面 |
-| docs/agent/pitfalls-topics/git-concurrency.md | W1290 | 本批改动面 |
-| docs/agent/pitfalls-topics/js-csp-runtime.md | W1290 | 本批改动面 |
-| docs/agent/pitfalls.md | W1290 | 本批改动面 |
-| pitfalls.md | W1290 | E-301 扩写（并入豁免登记 sha 失效面）+ E-302 压缩回判据层腾窗 |
-| pytest.ini | W1290 | 本批改动面 |
-| scripts/INDEX.md | W1290 | 本批改动面 |
-| scripts/agent_start.py | W1290 | 本批改动面 |
-| scripts/check_doc_size_budget.py | W1290 | 本批改动面 |
-| scripts/check_doc_sync.py | W1290 | 本批改动面 |
-| scripts/check_gov_doc_claims.py | W1290 | 本批改动面 |
-| scripts/check_pitfall_id_unique.py | W1290 | 本批改动面 |
-| scripts/check_pitfalls_split.py | W1290 | 本批改动面 |
-| scripts/output/INDEX.md | W1290 | 本批改动面 |
-| scripts/output/README.md | W1290 | 本批改动面 |
-| scripts/output/_cascade_files_W1290.txt | W1290 | 本批改动面 |
-| scripts/output/_vermilion_solid_cache.json | W1290 | 本批改动面 |
-| scripts/output/_w1266_allrender.json | W1290 | 本批改动面 |
-| scripts/output/_w1290_spec.json | W1290 | 本批 spec |
-| scripts/output/chart-legend-render-audit.json | W1290 | 本批改动面 |
-| scripts/output/file-index.md | W1290 | file-index 新增 W1290 段 |
-| scripts/output/stats-changelog.json | W1290 | 统计变更史追加 |
-| scripts/output/stats-index.md | W1290 | 统计索引刷新 |
-| scripts/output/stats.json | W1290 | 统计计数链刷新 |
-| scripts/output/svg_text_contrast_graphic_report.json | W1290 | 本批改动面 |
-| scripts/output/svg_text_contrast_report.json | W1290 | 本批改动面 |
-| scripts/output/tools-inventory.md | W1290 | 工具清单刷新 |
-| site/data/cross-time-danmaku.html | W1290 | 版本脚注联动（级联产物） |
-| site/data/search-index-zh.js | W1290 | 本批改动面 |
-| site/data/tag-cloud.html | W1290 | 版本脚注联动（级联产物） |
-| site/dukou-engine.html | W1290 | 版本脚注联动（级联产物） |
-| site/en/search-index-en.js | W1290 | 本批改动面 |
-| site/index.html | W1290 | 版本脚注联动（级联产物） |
-| tests/unit/INDEX.md | W1290 | 本批改动面 |
-| tests/unit/README.md | W1290 | 本批改动面 |
-| tests/unit/test_pitfalls_split.py | W1290 | 本批改动面 |
-
-## W1289 登记滞后判据补全 + 台账 hash 全量回填 + 坑表 E-301 扩写与 E-302 压缩（2026-11-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| .github/workflows/README.md | W1289 | 级联产物（本批收官链写入） |
-| AGENTS.md | W1289 | 本批改动面 |
-| CHANGELOG.md | W1289 | 本批版段 |
-| CITATION.cff | W1289 | 级联产物（本批收官链写入） |
-| HANDOVER.md | W1289 | §四 遗留登记块（W1289：坑表写窗枯竭 + 探针固定成本 + 复核纪律） |
-| README.md | W1289 | 级联产物（本批收官链写入） |
-| STRUCTURE.md | W1289 | 级联产物（本批收官链写入） |
-| archive/docs/AGENTS-ARCHIVE.md | W1289 | AGENTS 历史段归档（级联迁出） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1289 | 台账腾窗归档（迁出 W1225-W1226） |
-| archive/docs/pitfalls-detail-ARCHIVE.md | W1289 | E-301/E-302 段恢复叙事全文 + 段内追加正本判据层 |
-| archive/docs/workflows-readme-history.md | W1289 | 级联产物（本批收官链写入） |
-| docs/00-导读/W批次编号对账表.md | W1289 | 台账 10 行 hash 回填 + W1289 认领行 + 段数腾窗后正本 |
-| docs/00-导读/项目说明.md | W1289 | 级联产物（本批收官链写入） |
-| docs/11-方案报告/README.md | W1289 | 报告索引登记 T122（§六 137→138 件） |
-| docs/11-方案报告/计划方案/T122-任务计划执行与经验沉淀报告-2026-11-21.md | W1289 | T122 报告落盘 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1289 | 级联产物（本批收官链写入） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1289 | 级联产物（本批收官链写入） |
-| docs/INDEX.md | W1289 | 本批改动面 |
-| pitfalls.md | W1289 | E-301 扩写（并入豁免登记 sha 失效面）+ E-302 压缩回判据层腾窗 |
-| pytest.ini | W1289 | 本批改动面 |
-| scripts/output/INDEX.md | W1289 | 本批改动面 |
-| scripts/output/README.md | W1289 | 本批改动面 |
-| scripts/output/_cascade_files_W1289.txt | W1289 | 本批改动面 |
-| scripts/output/_vermilion_solid_cache.json | W1289 | 本批改动面 |
-| scripts/output/_w1266_allrender.json | W1289 | 本批改动面 |
-| scripts/output/_w1289_spec.json | W1289 | 本批 spec |
-| scripts/output/chart-legend-render-audit.json | W1289 | 本批改动面 |
-| scripts/output/file-index.md | W1289 | file-index 新增 W1289 段 |
-| scripts/output/stats-changelog.json | W1289 | 统计变更史追加 |
-| scripts/output/stats-index.md | W1289 | 统计索引刷新 |
-| scripts/output/stats.json | W1289 | 统计计数链刷新 |
-| scripts/output/svg_text_contrast_graphic_report.json | W1289 | 本批改动面 |
-| scripts/output/svg_text_contrast_report.json | W1289 | 本批改动面 |
-| scripts/output/tools-inventory.md | W1289 | 工具清单刷新 |
-| scripts/preflight_check.py | W1289 | preflight 新增「hash 未回填」告警判据（状态锚点定位 hash 列·WARN 级·不进拒绝集） |
-| site/data/cross-time-danmaku.html | W1289 | 版本脚注联动（级联产物） |
-| site/data/search-index-zh.js | W1289 | 本批改动面 |
-| site/data/tag-cloud.html | W1289 | 版本脚注联动（级联产物） |
-| site/dukou-engine.html | W1289 | 版本脚注联动（级联产物） |
-| site/en/search-index-en.js | W1289 | 本批改动面 |
-| site/index.html | W1289 | 版本脚注联动（级联产物） |
-| site/rss.xml | W1289 | 本批改动面 |
-| tests/unit/test_preflight_check.py | W1289 | 新判据回归锁 6 例（含无提交不命中·self 行排除两条负样本） |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。

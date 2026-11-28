@@ -1,0 +1,30 @@
+{
+  "batch": "W1353",
+  "date": "2026-11-28",
+  "title": "W1353 可视化插件三批（A/B/C）执行前计划落库批",
+  "desc": "可视化插件三批执行前计划落库：A 判据与口径 B 无障碍与测试 C 地图族与高密度渲染",
+  "head_entry": "2026-11-28（W1353 可视化插件三批（A/B/C）执行前计划落库批）",
+  "head_sentence": "可视化插件三批执行前计划落库：A 判据与口径 B 无障碍与测试 C 地图族与高密度渲染",
+  "agents_note": "2026-11-28（W1353）插件三批执行前计划落库：A 判据 B 无障碍 C 地图",
+  "milestone_block": "- **W1353 可视化插件三批（A/B/C）执行前计划落库批**：\n  - 产出 `docs/11-方案报告/计划方案/执行前计划-T141-可视化插件三批落地方案.md`，把 skill 套装 18 子技能收敛为三批可执行方案（A 判据与口径 / B 无障碍与测试 / C 地图族与高密度渲染）\n  - 方案明写**已闭合面不得重做**：W1342 的 §4B 雷达族入表 + R4 族注册 + R5 雷达规模（轴 ≤8 系列 ≤3）+ 27 页基线，W1350 的辖区扩至 site/en\n  - 方案列 **4 项须用户批准**：新门禁 R6 / 新基线 / 27 页批量补口径行 / 放宽 §4B 力导向禁用条件\n  - `docs/11-方案报告/README.md` §六 补登记 T-141 行，件数按磁盘实算由 150 订正为 158\n  - site/ 零改动（本批为方案落库，三批施工另占号）",
+  "changelog_body": "\n\n**本批要点**（W1353 可视化插件三批（A/B/C）执行前计划落库批）：\n\n> - **来源（T1）**：用户令「先把批 A 批 B 批 C 的方案写出来」——先对齐方案再动工，禁边做边改方向。\n> - **产出**：[执行前计划-T141-可视化插件三批落地方案.md](docs/11-方案报告/计划方案/执行前计划-T141-可视化插件三批落地方案.md)——把 `trae-remote-official:build-web-data-visualization` 的 18 个子技能按项目实况收敛为三批：**批 A 判据与口径**（力导向规模 R6、布局形态登记、27 页评分口径行、W1341 四项未验证面清偿）、**批 B 无障碍与测试**（图表键盘路径、数据表 fallback、视觉回归基线）、**批 C 地图族与高密度渲染**（5 页编码治理、>200 节点 Canvas 出口、3D 两页裁决）。\n> - **已闭合面显式排除**：W1342 已落 §4B 雷达族入表（`EXPECT_SPEC_ROWS` 9→10）+ R4 族注册 + R5 雷达规模 + `scripts/output/radar-family-baseline.txt` 27 页基线，W1350 已把 R5 辖区扩至 `site/en/`——三批均不得重做。\n> - **需用户批准 4 项**（铁律 16-⑦）：新门禁 R6 / 新基线 `force-family-baseline.txt` / 27 页雷达批量补口径行 / 放宽 §4B 力导向「>200 禁用」为受控 Canvas 出口。\n> - **登记面订正**：`docs/11-方案报告/README.md` §六 补登记行并同步件数——按 W1285 裁决口径（件数＝目录磁盘实算·编号列另成体系）由 150 订正为 **158**，其中前 7 件为存量登记缺口，本批不补（不越权改他方历史登记）。\n> - **验证（全绿）**：`check_doc_sync` 与 `verify_delivery --scope docs` 实跑 exit 0；`site/` 零改动；批号经 `reserve_w.py` 预约取得。\n> - **状态**：已落地（级联+提交后以 gh run list 为准）。\n> - **文件**：`docs/11-方案报告/计划方案/执行前计划-T141-可视化插件三批落地方案.md`（新增）、`docs/11-方案报告/README.md`（§六 登记 + 件数订正）、`docs/00-导读/W批次编号对账表.md`（认领行）、`scripts/output/_w1353_spec.json`（本批 spec）。\n\n",
+  "file_index_rows": [
+    "| docs/11-方案报告/计划方案/执行前计划-T141-可视化插件三批落地方案.md | W1353 | 三批判据级执行前计划（site/ 零改动·施工另占号） |",
+    "| docs/11-方案报告/README.md | W1353 | §六 补登记 T-141 行 + 件数磁盘实算 150→158 |",
+    "| docs/00-导读/W批次编号对账表.md | W1353 | W1353 认领行 |",
+    "| scripts/output/_w1353_spec.json | W1353 | 本批 spec |",
+    "| scripts/output/stats.json | W1353 | stats 重跑 |",
+    "| CHANGELOG.md | W1353 | 可视化插件三批执行前计划落库批 |",
+    "| HANDOVER.md | W1353 | 里程碑块（cascade 写入） |",
+    "| AGENTS.md | W1353 | 版本脚注滚动（cascade 写入） |",
+    "| archive/docs/AGENTS-ARCHIVE.md | W1353 | AGENTS 脚注滚动归档（cascade 写入） |",
+    "| scripts/output/file-index.md | W1353 | 本批 file-index 段（cascade 写入） |",
+    "| scripts/output/_cascade_files_W1353.txt | W1353 | 级联落盘清单（cascade 生成） |",
+    "| README.md | W1353 | 版本面推进（version_surface） |",
+    "| STRUCTURE.md | W1353 | 版本面推进（version_surface） |",
+    "| CITATION.cff | W1353 | 版本面推进（version_surface） |",
+    "| docs/00-导读/项目说明.md | W1353 | 版本面推进（version_surface） |",
+    "| .github/workflows/README.md | W1353 | 版本面推进（version_surface） |",
+    "| archive/docs/workflows-readme-history.md | W1353 | workflows README 历史归档（version_surface） |"
+  ]
+}

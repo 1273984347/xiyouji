@@ -1,3 +1,31 @@
+### W1354（2026-11-28）：雷达族口径行补齐与族规模实测取证批
+
+**本批要点**（W1354 雷达族口径行补齐与族规模实测取证批）：
+
+> - **A-3 口径行（23 页）**：雷达族页面此前全族未声明「评分从哪来」——W1341 P1 实证 `six-senses-narratology-network` 单图 4 轴中 3 轴取值恒等却无处说明口径。本批按 `#dataSource` 区块既有自述（run_all.py 由 dataset 同名 JSON 生成·快照 2026-10-04）为 23 页补 `口径：` 行，轴/系列数取页内 `chart-radar-meta` 机器声明（与 R5 同源），不引入任何新数据表。
+> - **A-3 判据**：[check_chart_data.py](scripts/check_chart_data.py) 新增 **R7 雷达族口径判据**（存在性判据·基线豁免与 R5 同名单·**辖区限 site/data**）+ 两个自测例（无口径必红·有口径放行），自测由 10 例扩至 12 例。EN 侧 27 个雷达镜像页需英文等价行，属 i18n 面，**显式登记为辖区留白**而非默认跳过（W1350 扩面教训同源）。
+> - **A-1 取证回收**：[DESIGN.md](DESIGN.md) §4B 力导向行补「分层+力混合」形态与实测注——22 页逐页实测节点最多 35 / 边最多 131，**0 页触及 >200**（余量 5.7 倍）⇒ 该禁用条件为前瞻性条款，**不设基线冻结文件**；并写明判定须渲染态（静态数组解析 3/22 页失效、且会因注释与正则里的方括号高估：relationships 静态 40/383 vs 实测 23/131）。
+> - **A-4 取证回收（两条存量违规）**：渲染态实测 21 个弧形页 + 13 个面积页——① **karma-reincarnation `chart-karma-pie` 10 类**超「类别 ≤8」（每类恰 1 例·文案自称占比）；② **four-dimensional-research-network `timeline-svg` 四维堆叠 = 4 层**超「多序列 >3 层」。两条均**只登记不整改**——根因是 R1–R7 都不查类别数/层数（判据缺口），补判据须用户批准后另批。
+> - **口径提醒入档**：以 path 弧线命令计类别、以闭合填充路径计层，会把桑基/雷达多段路径误并入面积桶（karma 桑基被计 10 层）⇒ 复算须按 svg id 区分，禁以页级合计下结论。
+> - **验证（全绿）**：`check_chart_data.py --self-test` 12 例 PASS · 全站 239 页 0 FAIL · `--spec-check` 表体行 10 空格 0 · `verify_delivery.py --scope full` exit 0。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：`DESIGN.md`（§4B 力导向行两列 + 两条实测注）、`scripts/check_chart_data.py`（R7 + 自测 2 例）、`site/data/` 17 页（口径行插入）、`docs/00-导读/W批次编号对账表.md`（认领行 + 归档迁出 2 行）、`scripts/output/_w1354_spec.json`。
+
+
+### W1353（2026-11-28）：可视化插件三批（A/B/C）执行前计划落库批
+
+**本批要点**（W1353 可视化插件三批（A/B/C）执行前计划落库批）：
+
+> - **来源（T1）**：用户令「先把批 A 批 B 批 C 的方案写出来」——先对齐方案再动工，禁边做边改方向。
+> - **产出**：[执行前计划-T141-可视化插件三批落地方案.md](docs/11-方案报告/计划方案/执行前计划-T141-可视化插件三批落地方案.md)——把 `trae-remote-official:build-web-data-visualization` 的 18 个子技能按项目实况收敛为三批：**批 A 判据与口径**（力导向规模 R6、布局形态登记、27 页评分口径行、W1341 四项未验证面清偿）、**批 B 无障碍与测试**（图表键盘路径、数据表 fallback、视觉回归基线）、**批 C 地图族与高密度渲染**（5 页编码治理、>200 节点 Canvas 出口、3D 两页裁决）。
+> - **已闭合面显式排除**：W1342 已落 §4B 雷达族入表（`EXPECT_SPEC_ROWS` 9→10）+ R4 族注册 + R5 雷达规模 + `scripts/output/radar-family-baseline.txt` 27 页基线，W1350 已把 R5 辖区扩至 `site/en/`——三批均不得重做。
+> - **需用户批准 4 项**（铁律 16-⑦）：新门禁 R6 / 新基线 `force-family-baseline.txt` / 27 页雷达批量补口径行 / 放宽 §4B 力导向「>200 禁用」为受控 Canvas 出口。
+> - **登记面订正**：`docs/11-方案报告/README.md` §六 补登记行并同步件数——按 W1285 裁决口径（件数＝目录磁盘实算·编号列另成体系）由 150 订正为 **158**，其中前 7 件为存量登记缺口，本批不补（不越权改他方历史登记）。
+> - **验证（全绿）**：`check_doc_sync` 与 `verify_delivery --scope docs` 实跑 exit 0；`site/` 零改动；批号经 `reserve_w.py` 预约取得。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：`docs/11-方案报告/计划方案/执行前计划-T141-可视化插件三批落地方案.md`（新增）、`docs/11-方案报告/README.md`（§六 登记 + 件数订正）、`docs/00-导读/W批次编号对账表.md`（认领行）、`scripts/output/_w1353_spec.json`（本批 spec）。
+
+
 ### W1352（2026-11-28）：H1 单例判据全站化：EN 两页去重 + 判据扩至 site 全量
 
 > **来源**：用户 2026-11-28「执行吧」→ 选定「H1 判据全站化」——把 W1349 的「每页恰 1 个 `<h1>`」从 `site/data` 扩到 `site/**`（含 `site/en`、`site/reader`、站根页）。
@@ -873,22 +901,6 @@
 > - **状态**：N1–N5 五条治理数字断言**归零**且两条的根因在判据侧已修（不是把数改绿）；同族 4 面清扫完毕；一道自 W1279 起静默失效的硬门禁**恢复实跑**；坑表计数链**跟随面随结构迁移**（加条目零手工同步）；豁免簿「只增不减」防线**清偿到 0 条**并由门禁复跑反证；复盘与报告双落盘 ⇒ preflight 五条 WARN + T1/T4 双触发器**本批清零**。
 > - **文件**： .agent/skills/puti-shouye/SKILL.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/pitfalls-detail-ARCHIVE.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/协议边界速查.md, docs/00-导读/文档规范.md, docs/00-导读/新Agent启动Prompt.md, docs/00-导读/统计口径说明.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-21.md, docs/11-方案报告/计划方案/T123-任务计划执行与经验沉淀报告-2026-11-21.md, docs/11-方案报告/计划方案/T124-任务计划执行与经验沉淀报告-2026-11-21.md, docs/agent/pitfalls-topics/cascade-changelog.md, docs/agent/pitfalls-topics/css-visual.md, docs/agent/pitfalls-topics/data-trust.md, docs/agent/pitfalls-topics/flow-collab.md, docs/agent/pitfalls-topics/git-concurrency.md, docs/agent/pitfalls-topics/js-csp-runtime.md, pitfalls.md, scripts/check_gov_doc_claims.py, scripts/output/_vermilion_solid_report.json, scripts/output/_w1291_exemption_audit.json, scripts/output/_w864_accent_exemptions.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/stats.py, site/data/cross-time-danmaku.html, site/data/tag-cloud.html, site/dukou-engine.html, site/index.html
 
-### W1290（2026-11-21）：坑表正本六主题拆分 + 根级索引壳 + 脚本口径跨文件聚合 + 重号清偿
-
-> - **来源**：用户 2026-11-21 22:0x 明确指令「**坑表先做结构性方案。坑表的问题必须彻底解决了才能进归档**」⇒ 立项 W1290（坑表结构性治理批）。**裁决两问**：① 方案形态＝**按主题拆分为多文件 + 根级索引壳**（推荐项·写窗按主题独立·彻底解除单文件天花板）；② 归档目标＝**先治好坑表结构，双层设计保留**（正本仍是判据层、归档仍是叙事层·只把写窗与检索面分开）⇒ **授权依据**：用户裁决明确「写窗按主题独立」⇒ 体积窗由「单文件 262144」改为「每主题文件各 262144·总量不设闸」属**用户批准的窗口口径变更**（非自行放宽）。
-> - **执行**：① **正本拆分（程序化·零改写）**——根 `pitfalls.md`（261,263 字节·余量仅 881）按六主题拆为 `docs/agent/pitfalls-topics/{css-visual,js-csp-runtime,git-concurrency,cascade-changelog,data-trust,flow-collab}.md`（90/13/39/26/28/223 条·各含契约段 + 原段头 `### <主题>（N 条）` + 条目逐字保留）⇒ **419 条逐字校验 0 缺失**；根 `pitfalls.md` 降级为**索引壳**（4,794 字节：契约 + 六主题表 + `E-NN → 主题` 反查表）⇒ **写窗天花板彻底解除**（最大主题 123,587 < 262,144）；② **重号清偿**——扫描发现 **2 组既有重号**（E-04 两条 / E-43 两条 ⇒ 按 E-NN 检索会静默取到错条）⇒ 后出现者重编号为 **E-313 / E-314** + 归档层**只追加**两个新段（旧 `#### E-04`/`#### E-43` 段逐字不动·archive 只追加不修改）⇒ 本体 E 号 **273/273 唯一**；③ **脚本口径跨文件聚合**——`check_doc_sync.pitfall_theme_counts`（六主题计数的单一事实源·生产路径改读六文件·注入路径保持旧形态⇒自测零改动）、`check_gov_doc_claims._pitfalls_count`（N4 对拍）、`check_pitfall_id_unique`（唯一性扫描 + diff 路径六文件化）、`check_agents_layers`（L2 清单含六主题文件 + 「何时读」校验）、`check_doc_size_budget`（字节窗按主题独立·授权依据入注释）、`agent_start`（路由文案指向主题文件）；④ **引用面同步**——AGENTS 路由表、docs/agent/pitfalls.md（二级跳转壳）、HANDOVER×2、两个 SKILL（含**功能性失效的 `grep -n "关键词" pitfalls.md`** ⇒ 拆分后搜不到条目，已改为 `grep -rn … docs/agent/pitfalls-topics/`）、MAINTAINING §一 体量预算；⑤ **跨文件一致性校验**——新增 `scripts/check_pitfalls_split.py`（7 项：文件存在/段头声明=实算/索引壳表与聚合一致/反查表无遗漏无多余/**双层镜像**（每条整行 ∈ 归档全文）/E 号唯一/写窗）+ 对应单测（门禁效果由 CI 的 pytest job 承担·**不挂 verify_delivery**（禁改清单·门禁本体））；⑥ **连带回填**——W1289 的 CI 终态与归因（见验证栏）并入本批（口径「回填并入下一在途批」）。
-> - **验证**：坑表拆分 **419 条逐字迁移 0 缺失**（脚本逐条断言「原行 ∈ 新文件」）· 六主题文件各 ≤262144 字节（最大 123,587）· 根壳 4,794 字节且**不含 `- **` 条目行** · **本体 E 号 273/273 唯一**（重号归零）· 归档 diff **16 增 0 删**（纯追加合规）· 反查表覆盖全部本体 E 号 · 双层镜像逐条成立 · 第 31/45/51/74 槽 0 FAIL · 全量门禁 0 FAIL · pytest 全绿 · 一次推送带齐 1 笔⇒1 轮 CI。**W1289 CI 终态**：六作业 5 success + Screenshot Review 失败——**已归因**为 CI 采集器 `page.goto` **20s 超时**（下载 artifact 逐行核对：该页记录 `fatal: page.goto: Timeout 20000ms exceeded` ⇒ 采集不完整 ⇒ 「暗色未应用 + pageError 0→1」是**超时假象**；同批 `en/character-appearance.html` 完全正常 ⇒ **非内容缺陷**）⇒ 根因已定位、加固项（提高 goto 超时 / 超时重试）列入下一批待办，**未按「先红后记」放过**。
-> - **状态**：坑表写窗天花板**彻底解除**（按主题独立）· 检索面**保留**（索引壳 + 反查表 + 六主题正本 + 归档全文）· 双层设计保留（正本判据层 / 归档叙事层·归档只追加）· 既有重号已清零 ⇒ 满足「坑表的问题彻底解决后才能进归档」的前置条件。
-> - **文件**： pitfalls.md, docs/agent/pitfalls-topics/css-visual.md, docs/agent/pitfalls-topics/js-csp-runtime.md, docs/agent/pitfalls-topics/git-concurrency.md, docs/agent/pitfalls-topics/cascade-changelog.md, docs/agent/pitfalls-topics/data-trust.md, docs/agent/pitfalls-topics/flow-collab.md, archive/docs/pitfalls-detail-ARCHIVE.md, docs/agent/pitfalls.md, docs/agent/MAINTAINING.md, AGENTS.md, HANDOVER.md, .agent/skills/puti-shouye/SKILL.md, .agent/skills/huoyan-jinjing/SKILL.md, scripts/check_doc_sync.py, scripts/check_gov_doc_claims.py, scripts/check_pitfall_id_unique.py, scripts/check_agents_layers.py, scripts/check_doc_size_budget.py, scripts/agent_start.py, scripts/check_pitfalls_split.py, tests/unit/test_pitfalls_split.py, docs/00-导读/W批次编号对账表.md, docs/11-方案报告/计划方案/T123-任务计划执行与经验沉淀报告-2026-11-21.md, docs/11-方案报告/README.md, scripts/output/_w1290_spec.json
-
-### W1289（2026-11-21）：登记滞后判据补全 + 台账 hash 全量回填 + 坑表 E-301 扩写与 E-302 压缩
-
-> - **来源**：用户 2026-11-21 21:08 选中 W1288 收尾回复中「仍留给下一批带入的两项」⇒ 立项 W1289（**直接做掉**，不留待办）。
-> - **执行**：① **判据补全**——preflight 原有滞后判据只以状态列为锚（在途 + git 有提交）⇒ 台账行「状态已收官但 hash 列仍空缺」时**完全不可见**（静默失效）⇒ 新增 `hash_is_unfilled` + `find_hash_unfilled`（三要素同时成立：状态非在途·**复用 is_inflight** + hash 占位 + 该 W 在 git 批次标签提交 ⇒ **WARN 级·不改退出码·不进拒绝集**）＋ `parse_ledger` 增解析 hash 列（**状态格内容锚点**反推·禁固定下标）+ 6 例回归锁（含**无提交不命中**与**self 行排除**负样本）；② **台账 hash 全量归位**——存量 **8 行**（W1260/W1275/W1276/W1280-W1284）+ 新判据实证 **2 行**（W1247 `70b8bf412` / W1248 `5f7f19549`·hash 列真为「待回填」）= **10 行**；全程用**显式 `--hash`**（`--from-git` 会覆盖状态列并抹掉详细终态结论 ⇒ 禁用）；③ **坑表面不新增条目**——「豁免登记/基线引用的 sha 也会过期」与 E-301 同族 ⇒ 并入 **E-301 扩写**（症状＝第 82 槽「基线外新增」而非「报告陈旧」；修法＝渲染复核**豁免页模式**与 `--all` **两态都跑**——全量模式只更新 `_w1266_allrender.json`·不更新豁免档案 `chart-legend-render-audit.json`）＋ 压缩 **E-302** 腾窗（1101→654 字节·叙事留归档）；④ **连带清偿**——台账加认领行 ⇒ 61 段超窗口 60 ⇒ 归档腾窗（迁出 W1225-W1226⇒正本 60 段）＋ 归档层结构修正（恢复「`#### E-NN` 段 = 该条叙事全文」并在段内追加「正本判据层」⇒ 正本整行 ∈ 归档段）；⑤ **报告**——T122 落盘 + 方案报告 README §六 登记（137→138 件）。
-> - **验证**：新判据现场实测——已回填行（含**反引号 / 多笔组合 / 带说明**三种 hash 形态）全部不命中；W1247/W1248 命中且经**内容核验**确认其 hash 列真为「待回填」（状态列里的 commit hash 不等于 hash 列）⇒ **真缺口**；台账「已收官 + hash 占位」行数 **= 0**；10 行状态列详细结论逐字保留；坑表 261316→261263 字节（硬窗 262144·余量 881）；E-301/E-302 正本整行 ∈ 归档对应段 = True 且两段仍含原叙事全文；台账 60 段（窗口 60）；全量门禁 EXIT=0 · pytest 全绿。
-> - **状态**：本批把「已收官但 hash 空缺」从**静默失效**变成**机器可判**（告警级），并把存量 10 行一次清偿归零；用户点名的第二项以**并入同族 E-301** 落地（不新增碎片条目）⇒ 坑表写窗余量 881 字节即现状上限，已登记结构性方案待办。
-> - **文件**： scripts/preflight_check.py, tests/unit/test_preflight_check.py, docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md, pitfalls.md, archive/docs/pitfalls-detail-ARCHIVE.md, HANDOVER.md, docs/11-方案报告/计划方案/T122-任务计划执行与经验沉淀报告-2026-11-21.md, docs/11-方案报告/README.md, scripts/output/_w1289_spec.json
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -896,7 +908,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1352），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1354），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

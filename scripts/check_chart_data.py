@@ -18,13 +18,17 @@
       `scripts/output/radar-family-baseline.txt` 冻结存量 27 页（W1341 审查实测的超载面）
       辖区（W1350 扩面）：site/data + site/en——EN 镜像页与 ZH 同受规模约束（R4 仍限
       site/data，选型章的登记对象是中文数据图表页）
+  R7  （W1354）雷达族口径判据：雷达族页面须在页内写明 `口径：`（轴值来源与可复算入口），
+      防「评分从哪来」整族留白（W1341 P1 实证：单图 3/4 轴取值恒等却无处说明口径）。
+      基线内页面豁免（与 R5 同名单）；**辖区限 site/data**——EN 镜像页需英文等价行，
+      属 i18n 面（W1350 R5 扩面的教训是「辖区留白须显式登记」，故此处写明而非默认）。
 
   设计取舍（W551）：连线画布遮挡、桑基空渲染、reveal 空带、横向溢出等需要真实渲染
   状态的缺陷由 check_screenshot_gates.js（Playwright 动态门禁）覆盖——静态代理
   （CSS 声明/DOM 顺序）经实证不可靠（monster-hierarchy 有不透明背景但边可见，
   canvas 与 svg 的先后顺序 CSS 无法表达）。
 
---self-test：对内置负样本断言 R1/R2/R3 各自命中、R4/R5 各自命中与放行、好样本与
+--self-test：对内置负样本断言 R1/R2/R3 各自命中、R4/R5/R7 各自命中与放行、好样本与
 R3 正样本不命中（W654 扩至 6 例·W1342 扩至 10 例）。
 --spec-check DESIGN.md：解析 §4B 选型章表体行与空单元格（AC-4：行 10·空格 0）。
 """
@@ -86,6 +90,9 @@ RADAR_META = re.compile(r'chart-radar-meta:\s*axes=(\d+)\s+series=(\d+)')
 RADAR_MAX_AXES = 8
 RADAR_MAX_SERIES = 3
 RADAR_BASELINE = os.path.join(ROOT, 'scripts', 'output', 'radar-family-baseline.txt')
+
+# R7（W1354）：雷达族口径判据——页内须有「口径：」行（轴值来源 + 可复算入口）
+CALIBER = re.compile(r'口径：')
 
 
 def strip_invisible(html):
@@ -215,6 +222,21 @@ def radar_scale_fails(rel, html, baseline):
     if series > RADAR_MAX_SERIES:
         fails.append(f'R5 雷达系列数 {series} > §4B 上限 {RADAR_MAX_SERIES}（禁用条件：改单选雷达 + 排序点图）')
     return fails
+
+
+def radar_caliber_fails(rel, html, baseline):
+    """R7（W1354）：雷达族口径判据——页内须写明「口径：」（轴值来源与可复算入口）。
+
+    只判存在性（文本级），不判口径内容正确与否——内容正确性由批 A-3 逐页取证与
+    数据源区块对拍保证；存在性判据负责「新页与改动页不得再留白」。
+    """
+    if not RADAR_SIG.search(html):
+        return []
+    if rel.replace('\\', '/') in baseline:
+        return []
+    if html.count('口径：') == 0:
+        return ['R7 雷达族页面缺「口径：」行（须写明轴值来源与可复算入口·存量页入基线）']
+    return []
 
 
 def load_baseline(path=None):
@@ -363,6 +385,13 @@ def self_test():
                          {'site/data/x.html'}):
         print('SELF-TEST FAIL: R5 基线内页面未豁免')
         ok = False
+    # W1354 新增两例（R7 口径判据的可证伪锁）：
+    if not radar_caliber_fails('site/data/x.html', radar_html + meta_ok, set()):
+        print('SELF-TEST FAIL: R7 无口径行未检出')
+        ok = False
+    if radar_caliber_fails('site/data/x.html', radar_html + meta_ok + '口径：轴值取自 dataset/x.json', set()):
+        print('SELF-TEST FAIL: R7 合规口径行被误报')
+        ok = False
     print('self-test:', 'PASS（负样本命中 · 好样本放行）' if ok else 'FAIL')
     return ok
 
@@ -388,7 +417,7 @@ def r5_scope_pages(pages):
 
 def main():
     ap = argparse.ArgumentParser(description='图表静态自洽门禁（W551 挂载·R3 于 W654 扩充）')
-    ap.add_argument('--self-test', action='store_true', help='内置负样本自检（10 例）')
+    ap.add_argument('--self-test', action='store_true', help='内置负样本自检（12 例）')
     ap.add_argument('--spec-check', metavar='DESIGN_MD', help='AC-4：解析 §4B 选型章表体行与空单元格')
     args = ap.parse_args()
 
@@ -424,6 +453,9 @@ def main():
     for p in r5_pages:
         rel = os.path.relpath(p, ROOT)
         fails = radar_scale_fails(rel, texts[p], baseline)
+        # R7 辖区限 site/data：口径行是中文文案，EN 镜像须英文等价行（i18n 面·另批）
+        if os.path.realpath(p).startswith(os.path.realpath(data_dir) + os.sep):
+            fails += radar_caliber_fails(rel, texts[p], baseline)
         if fails:
             n_fail += 1
             print('FAIL %s — %s' % (rel, '；'.join(fails)))
