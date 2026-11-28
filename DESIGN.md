@@ -543,6 +543,8 @@ font-family: "Noto Serif SC", "Source Han Serif SC", "Songti SC", serif;
 | 三维场景 / 高密度边渲染（性能兜底） | 画布 / 3D（canvas 2D + THREE.WebGL） | WebGL 不可用必须回退（三页先例）；无交互需求禁用（改 SVG） | site/data/character-relationship-3d.html | degrade: simplified |
 | 多实体 × 多维度同构评分（维度 ≤8·单图实体 ≤3） | 雷达图（自绘 polygon + 径向刻度） | 维度 >8 禁用（改热力矩阵·相邻轴不可分辨）；单图系列 >3 禁用（改「单选实体雷达 + 全量排序点图」）；多数轴取值齐平禁用（常量轴无信息）；无精确比较需求禁用（改点图/表） | site/data/language-style-radar.html | degrade: simplified |
 
+> **雷达族辖区（W1350）**：R5（雷达规模）判据同时覆盖 `site/en/` 镜像页——EN 页与 ZH 同受「维度 ≤8 / 单图实体 ≤3」约束；R4（族注册）仍限 `site/data/`（选型章登记对象是中文数据图表页）。
+
 ## 4A. 纸感轻立体体系（Phase E · W476 宪改）
 
 > 本章为 Phase E 视觉高级感升级（W476–W483）的**宪法层**，2026-08-18 经用户确认三项前提：① 采纳「纸感轻立体」方向 ② 暗色模式纳入 E7 ③ 归档闸门冻结边界 E1。

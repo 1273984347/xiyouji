@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-X8dlav7hjO4Iw4Tko8Y/YyU7iUwB6vCAB7yF4IUlpSc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-bvfZ/FeUkWRte7u2VOKmAYauhvek7mv/JzT0wAddr2o=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Risk Assessment &amp; Project Management · Annotated Journey to the West</title>
@@ -789,19 +789,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </p>
 
             <div class="chart-block">
-                <div class="chart-title">Fig. 5 · 8-Role MBTI Fit Radar (4 Dimensions · 8 Overlapping Profiles)</div>
-                <div class="chart-caption">4 axes: E (Extraversion) / N (Intuition) / F (Feeling) / P (Perceiving) · values 0-10 · 8 overlapping role polygons · the fuller the shape, the more extraverted and intuitive</div>
+                <div class="chart-title">Fig. 5 · 8-Role MBTI Fit Radar (4 Dimensions · Single Selected Role · Ranked Dot Plot Below)</div>
+                <div class="chart-caption">4 axes: E (Extraversion) / N (Intuition) / F (Feeling) / P (Perceiving) · values 0-10 · the radar plots one role at a time (§4B: at most 1 series per chart) · the dot plot is ranked by the four-axis mean</div>
+                <!-- chart-radar-meta: axes=4 series=1 -->
+                <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
                 <svg id="chart-mbti-radar" class="chart-svg" width="100%" height="540"></svg>
-                <div class="legend-row" id="mbti-legend">
-                    <span class="legend-item"><span class="legend-swatch" style="background:#C0392B;"></span>Tang Sanzang INFJ</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#40619E;"></span>Wukong ENTP</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#e9b885;"></span>Zhu Bajie ESFP</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#3A473A;"></span>Sha Wujing ISFJ</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#8E7D62;"></span>White Dragon Horse ISTP</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#a04060;"></span>Guanyin ENFJ</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#4a3a6b;"></span>Tathāgata INTJ</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:#8a7a3a;"></span>Jade Emperor ESTJ</span>
-                </div>
+                <div class="legend-row" id="mbti-legend"></div>
+                <div id="radar-dotplot" style="margin-top:12px"></div>
             </div>
 
             <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">8-Role MBTI Detail Table</h3>
@@ -1127,7 +1121,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         renderKpiInsights(kpi);
 
         // Section 3: MBTI Personality Atlas
-        renderMbtiRadar(mbti);
+        renderMbtiRadarPanel(mbti);
         renderMbtiTable(mbti);
         renderMbtiCharCards(mbti);
         renderMbtiInsights(mbti);
@@ -1639,8 +1633,68 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         list.selectAll('li').data(insights).enter().append('li').text(d => d);
     }
 
-    // ===== Section 3.1: MBTI 雷达图 =====
-    function renderMbtiRadar(data) {
+    // ===== Section 3.1: MBTI radar =====
+    // ===== §4B radar panel (one series per chart + ranked dot plot of the full set) =====
+    // the radar dimensions live inside the dimensions object (E/N/F/P, 0-10); the mean is the arithmetic average of the four
+    const RADAR_DIMS = ['E', 'N', 'F', 'P'];
+    let radarSelected = null;
+    let radarPanelData = null;   // panel data cache (this page's __lastData is an aggregate object · mbti lives in its .mbti)
+
+    function radarMean(d) {
+        const dim = d.dimensions || {};
+        const vals = RADAR_DIMS.map(k => dim[k]).filter(v => typeof v === 'number');
+        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    }
+
+    function renderMbtiRadarPanel(data) {
+        radarPanelData = data;
+        const list = ((data && data.character_mbti) || []).slice();
+        const avgFit = data && data.mbti_stats ? data.mbti_stats.avg_fit_score : 0;
+        if (!list.length) { renderMbtiRadar(list, avgFit); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.character === radarSelected)) radarSelected = sorted[0].character;
+
+        const ctrl = d3.select('#radar-controls');
+        ctrl.selectAll('*').remove();
+        ctrl.append('span').text('Radar entity:')
+            .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+        const sel = ctrl.append('select')
+            .style('font-size', '0.8rem').style('padding', '3px 8px')
+            .style('border', '1px solid var(--line)').style('border-radius', '4px')
+            .style('background', 'var(--paper)').style('color', 'var(--ink)');
+        sel.selectAll('option').data(sorted).enter().append('option')
+            .attr('value', d => d.character).property('selected', d => d.character === radarSelected)
+            .text(d => d.character);
+        sel.on('change', function () { radarSelected = this.value; renderMbtiRadarPanel(radarPanelData); });
+
+        renderMbtiRadar(list.filter(d => d.character === radarSelected), avgFit);
+
+        const host = d3.select('#radar-dotplot');
+        host.selectAll('*').remove();
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+            .attr('class', 'dot-row')
+            .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+            .style('padding', '2px 0').style('cursor', 'pointer')
+            .style('opacity', d => (d.character === radarSelected ? 1 : 0.72))
+            .on('click', (e, d) => { radarSelected = d.character; renderMbtiRadarPanel(radarPanelData); });
+        rows.append('span').text(d => d.character)
+            .style('flex', '0 0 118px').style('text-align', 'right').style('font-size', '0.74rem')
+            .style('color', 'var(--ink-soft)');
+        const track = rows.append('span')
+            .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+            .style('background', 'var(--line)').style('border-radius', '4px');
+        track.append('span')
+            .style('position', 'absolute').style('top', '-3px')
+            .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+            .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+            .style('background', d => (d.character === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+            .style('transform', 'translateX(-7px)');
+        rows.append('span').text(d => radarMean(d).toFixed(1))
+            .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+    }
+
+    function renderMbtiRadar(radarData, avgFit) {
         const svg = d3.select('#chart-mbti-radar');
         svg.selectAll('*').remove();
         const containerW = svg.node().clientWidth || 700;
@@ -1708,10 +1762,10 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .text(dimLabels[i]);
         });
 
-        // 数据多边形
+        // data polygon (single selected series only)
         const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
 
-        data.character_mbti.forEach(member => {
+        radarData.forEach(member => {
             const pts = dims.map((d, i) => {
                 const v = member.dimensions[d];
                 return [rScale(v) * Math.cos(angle(i)), rScale(v) * Math.sin(angle(i))];
@@ -1746,8 +1800,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             });
         });
 
-        // 平均适配度圆
-        const avgR = rScale(data.mbti_stats.avg_fit_score);
+        // mean fit circle
+        const avgR = rScale(avgFit);
         gridG.append('circle')
             .attr('cx', 0).attr('cy', 0)
             .attr('r', avgR)
@@ -1759,7 +1813,16 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr('x', avgR * Math.SQRT1_2 + 4)
             .attr('y', -avgR * Math.SQRT1_2 - 4)
             .style('font-size', '10px').style('fill', '#6B6455')
-            .text(`avg fit ${data.mbti_stats.avg_fit_score}`);
+            .text(`avg fit ${avgFit}`);
+
+        // legend (a single drawn series has nothing to compare against)
+        const legend = d3.select('#mbti-legend');
+        legend.selectAll('*').remove();
+        radarData.forEach(member => {
+            legend.append('span').attr('class', 'legend-item')
+                .html('<span class="legend-swatch" style="background:' + colorMap[member.character] + ';"></span>' +
+                      member.character + ' ' + member.mbti_type);
+        });
     }
 
     function renderMbtiTable(data) {

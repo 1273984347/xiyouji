@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-JbdK75XjdCjjfgKi2kTejtZoENGKEY39r26nkZZLwHs=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-a6AZBT3y2O7qStHGVeARbq+JLMY8xyFW3geB8JQY4VI=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-RUcUVgvwlQDagvp/zxV95xtb74lYp9fb0aIk2ss3wb0=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-a6AZBT3y2O7qStHGVeARbq+JLMY8xyFW3geB8JQY4VI=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Hierarchy Visualization · Annotated Journey to the West</title>
@@ -430,10 +430,13 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     The larger the radar area, the higher the monster’s overall rank. The Golden-Winged Roc and Bull Demon King have the largest areas; White Bone Demon has the smallest area but stands out on Cunning — revealing the two survival strategies: "the lone wolf survives on cunning, the bureaucrat survives on their post."
   </div>
   <div class="chart-block">
-    <div class="chart-title">Monster Five-Dimension Ability Radar (14 monsters overlaid)</div>
-    <div class="chart-caption">Values 0-10 · Click legend to toggle · Hover for details</div>
+    <div class="chart-title">Monster Five-Dimension Ability Radar (single entity · full ranking in the dot plot below)</div>
+    <div class="chart-caption">Values 0-10 · the radar plots 1 entity (§4B ≤3 per chart) · dot plot sorted by the five-dimension mean descending · hover for details</div>
+    <!-- chart-radar-meta: axes=5 series=1 -->
+    <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
     <svg id="chart-radar" class="chart-svg" width="100%" height="540" role="img" aria-label="Monster ability radar chart"></svg>
     <div class="legend-row" id="radar-legend"></div>
+    <div id="radar-dotplot" style="margin-top:12px"></div>
   </div>
 </section>
 
@@ -1140,6 +1143,61 @@ function renderSankey(sankeyData) {
 // ============================================================
 // Section 4: 妖怪能力雷达图
 // ============================================================
+// ===== §4B radar-row compliant panel (only 1 series per chart + full-ranking dot plot) =====
+const RADAR_DIMS = ['Combat', 'Magic', 'Cunning', 'Influence', 'Outcome'];
+let radarSelected = null;
+
+function radarMean(d) {
+  const vals = RADAR_DIMS.map(k => d[k]).filter(v => typeof v === 'number');
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+
+function renderRadarPanel(data) {
+  const list = (data.radar || []).slice();
+  if (!list.length) { renderRadar(list); return; }
+  const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+  if (!radarSelected || !list.some(d => d.name === radarSelected)) radarSelected = sorted[0].name;
+
+  const ctrl = d3.select('#radar-controls');
+  ctrl.selectAll('*').remove();
+  ctrl.append('span').text('Radar entity:')
+    .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+  const sel = ctrl.append('select')
+    .style('font-size', '0.8rem').style('padding', '3px 8px')
+    .style('border', '1px solid var(--line)').style('border-radius', '4px')
+    .style('background', 'var(--paper)').style('color', 'var(--ink)');
+  sel.selectAll('option').data(sorted).enter().append('option')
+    .attr('value', d => d.name).property('selected', d => d.name === radarSelected)
+    .text(d => d.name);
+  sel.on('change', function () { radarSelected = this.value; renderRadarPanel(window.__lastData || data); });
+
+  renderRadar(list.filter(d => d.name === radarSelected));
+
+  const host = d3.select('#radar-dotplot');
+  host.selectAll('*').remove();
+  const maxV = d3.max(sorted, radarMean) || 1;
+  const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+    .attr('class', 'dot-row')
+    .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+    .style('padding', '2px 0').style('cursor', 'pointer')
+    .style('opacity', d => (d.name === radarSelected ? 1 : 0.72))
+    .on('click', (e, d) => { radarSelected = d.name; renderRadarPanel(window.__lastData || data); });
+  rows.append('span').text(d => d.name)
+    .style('flex', '0 0 150px').style('text-align', 'right').style('font-size', '0.74rem')
+    .style('color', 'var(--ink-soft)');
+  const track = rows.append('span')
+    .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+    .style('background', 'var(--line)').style('border-radius', '4px');
+  track.append('span')
+    .style('position', 'absolute').style('top', '-3px')
+    .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+    .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+    .style('background', d => (d.name === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+    .style('transform', 'translateX(-7px)');
+  rows.append('span').text(d => radarMean(d).toFixed(1))
+    .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+}
+
 function renderRadar(radarData) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
@@ -1268,9 +1326,16 @@ function renderRadar(radarData) {
     });
   });
 
-  // 图例（按类型聚合，可点击切换显示）
+  // Legend (aggregated by type, click to toggle; a single entity only labels its type — one series has nothing to toggle)
   const legend = d3.select('#radar-legend');
   legend.html('');
+  if (radarData.length === 1) {
+    const only = radarData[0];
+    const single = legend.append('div').attr('class', 'legend-item');
+    single.append('div').attr('class', 'legend-swatch').style('background', typeColors[only.type] || '#8a7c6a');
+    single.append('span').text(only.type + ' · ' + only.name);
+    return;
+  }
   const typeAgg = {};
   radarData.forEach(m => {
     if (!typeAgg[m.type]) typeAgg[m.type] = { count: 0, color: typeColors[m.type] };
@@ -1662,7 +1727,7 @@ async function main() {
   renderTiers(data.tiers);
   renderForce(data.network);
   renderSankey(data.sankey);
-  renderRadar(data.radar);
+  renderRadarPanel(data);
   renderTimeline(data.timeline);
   renderDashboard(data.summary);
 }
@@ -1677,7 +1742,7 @@ window.addEventListener('resize', () => {
       renderTiers(data.tiers);
       renderForce(data.network);
       renderSankey(data.sankey);
-      renderRadar(data.radar);
+      renderRadarPanel(data);
       renderTimeline(data.timeline);
       renderDashboard(data.summary);
     }

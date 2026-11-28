@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-Y5ZQPL2xmjofhM2GIPZaFLk3BQyupLsM6YJSzbqfrFw=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-/m5Tu74A6p01VHrDiuNNLzRiYFo3xwxnJ8jeJMTvF+g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-ThY1aZ/dVICXj+uBO2mkJAx0Pyue0UsKKR6u8nrDyrM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-6FUm7powwydajG1NEb6KMweVjdlhWL6mgi/vHCjYI64=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-/m5Tu74A6p01VHrDiuNNLzRiYFo3xwxnJ8jeJMTvF+g=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-ThY1aZ/dVICXj+uBO2mkJAx0Pyue0UsKKR6u8nrDyrM=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Female Network · Annotated Journey to the West</title>
@@ -322,10 +322,13 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <strong>Definition:</strong> Each female figure (including the collectors) is assessed on four dimensions: autonomy (capacity for independent action and decision), combat (martial and magical strength), wisdom (stratagem and adaptability), and tragedy (degree of misfortune). The larger the radar area, the more pronounced the overall profile. Princess Iron Fan is the most balanced and highly tragic; the Scorpion Demon is the strongest in combat (88); Bodhisattva Guanyin has the highest wisdom (98) and the lowest tragedy (15).
   </div>
   <div class="chart-block">
-    <div class="chart-title">Four-Dimension Radar Chart of 17 Female Figures (Autonomy / Combat / Wisdom / Tragedy)</div>
-    <div class="chart-caption">17 figures × 4 dimensions · values 0–100 · hover for details</div>
+    <div class="chart-title">Four-Dimension Radar Chart of 17 Female Figures (single entity · full ranking in the dot plot below)</div>
+    <div class="chart-caption">17 figures × 4 dimensions · values 0–100 · the radar plots 1 figure (§4B series ≤3) · dot plot sorted by the four-dimension mean descending · hover for details</div>
+    <!-- chart-radar-meta: axes=4 series=1 -->
+    <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
     <svg id="chart-radar" class="chart-svg" width="100%" height="620"></svg>
     <div class="legend-row" id="radar-legend"></div>
+    <div id="radar-dotplot" style="margin-top:12px"></div>
   </div>
 </section>
 
@@ -942,6 +945,61 @@ function renderSankey(sankeyLinkData, monsterNodes) {
 // ============================================================
 // Section 4: Radar chart (17 roles × 4 dimensions)
 // ============================================================
+// ===== §4B radar-row compliant panel (only 1 series per chart + full-ranking dot plot) =====
+const RADAR_DIMS = ['autonomy', 'combat', 'wisdom', 'tragedy'];
+let radarSelected = null;
+
+function radarMean(d) {
+  const vals = RADAR_DIMS.map(k => d[k]).filter(v => typeof v === 'number');
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+
+function renderRadarPanel(data) {
+  const list = (data.radar || []).slice();
+  if (!list.length) { renderRadar(list, data.nodes); return; }
+  const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+  if (!radarSelected || !list.some(d => d.name === radarSelected)) radarSelected = sorted[0].name;
+
+  const ctrl = d3.select('#radar-controls');
+  ctrl.selectAll('*').remove();
+  ctrl.append('span').text('Radar entity:')
+    .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+  const sel = ctrl.append('select')
+    .style('font-size', '0.8rem').style('padding', '3px 8px')
+    .style('border', '1px solid var(--line)').style('border-radius', '4px')
+    .style('background', 'var(--paper)').style('color', 'var(--ink)');
+  sel.selectAll('option').data(sorted).enter().append('option')
+    .attr('value', d => d.name).property('selected', d => d.name === radarSelected)
+    .text(d => d.name);
+  sel.on('change', function () { radarSelected = this.value; renderRadarPanel(window.__lastData || data); });
+
+  renderRadar(list.filter(d => d.name === radarSelected), data.nodes);
+
+  const host = d3.select('#radar-dotplot');
+  host.selectAll('*').remove();
+  const maxV = d3.max(sorted, radarMean) || 1;
+  const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+    .attr('class', 'dot-row')
+    .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+    .style('padding', '2px 0').style('cursor', 'pointer')
+    .style('opacity', d => (d.name === radarSelected ? 1 : 0.72))
+    .on('click', (e, d) => { radarSelected = d.name; renderRadarPanel(window.__lastData || data); });
+  rows.append('span').text(d => d.name)
+    .style('flex', '0 0 170px').style('text-align', 'right').style('font-size', '0.74rem')
+    .style('color', 'var(--ink-soft)');
+  const track = rows.append('span')
+    .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+    .style('background', 'var(--line)').style('border-radius', '4px');
+  track.append('span')
+    .style('position', 'absolute').style('top', '-3px')
+    .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+    .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+    .style('background', d => (d.name === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+    .style('transform', 'translateX(-7px)');
+  rows.append('span').text(d => radarMean(d).toFixed(1))
+    .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+}
+
 function renderRadar(radarData, monsterNodes) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
@@ -1441,7 +1499,7 @@ async function main() {
 
   renderForce(data.network);
   renderSankey(data.sankey, data.nodes);
-  renderRadar(data.radar, data.nodes);
+  renderRadarPanel(data);
   renderTimeline(data.timeline);
   renderSummary(data.nodes);
 }
@@ -1455,7 +1513,7 @@ window.addEventListener('resize', () => {
       const data = window.__lastData;
       renderForce(data.network);
       renderSankey(data.sankey, data.nodes);
-      renderRadar(data.radar, data.nodes);
+      renderRadarPanel(data);
       renderTimeline(data.timeline);
       renderSummary(data.nodes);
     }

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-lJJqI6iDlrm8kl58jAsKTvzf6Ea1sCWVwxM9lEsVrWo=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-XmknnH2XFbFXxCBNmnYH0NsEDNc39/TrCs9miUEa950=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Character Sentiment Arc · 详解西游记</title>
@@ -370,10 +370,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 <strong>Definition:</strong>The four pilgrims (White Dragon Horse excluded with 0 quotations) on a six-dimension sentiment-profile radar: positive ratio · negative ratio · conflict involvement · mediation frequency · command frequency · emotional stability. The radar reveals each pilgrim’s role and affective traits.
             </div>
             <div class="chart-block">
-                <div class="chart-title">The Four Pilgrims’ Sentiment Profile Radar</div>
-                <div class="chart-caption">6 dimensions: positive · negative · conflict · mediation · command · stability / four colours compare the four pilgrims / values normalised 0–1</div>
+                <div class="chart-title">Sentiment Profile Radar (single entity · full ranking in the dot plot below)</div>
+                <div class="chart-caption">6 dimensions: positive · negative · conflict · mediation · command · stability / values normalised 0–1 · the radar plots 1 entity · mean-ranked dot plot below</div>
+                <!-- chart-radar-meta: axes=6 series=1 -->
+                <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
                 <svg id="chart-radar" class="chart-svg" width="100%" height="500"></svg>
                 <div class="legend-row" id="radar-legend"></div>
+                <div id="radar-dotplot" style="margin-top:12px"></div>
             </div>
         </section>
 
@@ -754,9 +757,72 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 '<span class="legend-swatch" style="background:#e5ede0"></span>Rise');
         })();
 
-        // ===== Section 5: Radar =====
-        (function renderRadar() {
+        // ===== Section 5: Radar (single-entity radar + mean-ranked dot plot) =====
+        const RADAR_CHARS = [
+            { id: 'wukong', name: 'Sun Wukong', color: 'var(--chart-1)' },
+            { id: 'tangseng', name: 'Tripitaka', color: 'var(--chart-2)' },
+            { id: 'bajie', name: 'Zhu Bajie', color: '#8E7D62' },
+            { id: 'shaseng', name: 'Sha Wujing', color: 'var(--chart-4)' }
+        ];
+        let radarSelected = null;
+
+        // Mean basis: arithmetic mean of the entity's six normalised dimension values (0-1)
+        function radarMean(d) {
+            const vals = (EMBEDDED.radar.values[d.id] || []).filter(v => typeof v === 'number');
+            return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+        }
+
+        function renderRadarPanel() {
+            const sorted = RADAR_CHARS.slice().sort((a, b) => radarMean(b) - radarMean(a));
+            if (!radarSelected || !RADAR_CHARS.some(c => c.id === radarSelected)) radarSelected = sorted[0].id;
+
+            // Entity selector (dropdown)
+            const ctrl = d3.select('#radar-controls');
+            ctrl.selectAll('*').remove();
+            ctrl.append('span').text('Radar entity:')
+                .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+            const sel = ctrl.append('select')
+                .style('font-size', '0.8rem').style('padding', '3px 8px')
+                .style('border', '1px solid var(--line)').style('border-radius', '4px')
+                .style('background', 'var(--paper)').style('color', 'var(--ink)');
+            sel.selectAll('option').data(sorted).enter().append('option')
+                .attr('value', d => d.id).property('selected', d => d.id === radarSelected)
+                .text(d => d.name);
+            sel.on('change', function () { radarSelected = this.value; renderRadarPanel(); });
+
+            // The radar draws the selected entity only
+            renderRadar(RADAR_CHARS.filter(c => c.id === radarSelected));
+
+            // Full mean-ranked dot plot (click a row to switch the radar)
+            const host = d3.select('#radar-dotplot');
+            host.selectAll('*').remove();
+            const maxV = d3.max(sorted, radarMean) || 1;
+            const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+                .attr('class', 'dot-row')
+                .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+                .style('padding', '2px 0').style('cursor', 'pointer')
+                .style('opacity', d => (d.id === radarSelected ? 1 : 0.72))
+                .on('click', (e, d) => { radarSelected = d.id; renderRadarPanel(); });
+            rows.append('span').text(d => d.name)
+                .style('flex', '0 0 auto').style('min-width', '96px').style('max-width', '46%')
+                .style('text-align', 'right').style('font-size', '0.74rem')
+                .style('color', 'var(--ink-soft)');
+            const track = rows.append('span')
+                .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+                .style('background', 'var(--line)').style('border-radius', '4px');
+            track.append('span')
+                .style('position', 'absolute').style('top', '-3px')
+                .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+                .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+                .style('background', d => (d.id === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+                .style('transform', 'translateX(-7px)');
+            rows.append('span').text(d => radarMean(d).toFixed(2))
+                .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+        }
+
+        function renderRadar(radarChars) {
             const svg = d3.select('#chart-radar');
+            svg.selectAll('*').remove();
             const containerWidth = svg.node().getBoundingClientRect().width;
             const size = Math.min(containerWidth, 500);
             const margin = 40;
@@ -789,13 +855,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     .style('font-size', '0.88rem').style('fill', 'var(--ink)').text(a);
             });
 
-            // Polygons per character
-            const radarChars = [
-                { id: 'wukong', name: 'Sun Wukong', color: 'var(--chart-1)' },
-                { id: 'tangseng', name: 'Tripitaka', color: 'var(--chart-2)' },
-                { id: 'bajie', name: 'Zhu Bajie', color: '#8E7D62' },
-                { id: 'shaseng', name: 'Sha Wujing', color: 'var(--chart-4)' }
-            ];
+            // Single entity only: one series per chart
             radarChars.forEach(c => {
                 const values = EMBEDDED.radar.values[c.id];
                 const points = values.map((v, i) => [
@@ -816,12 +876,18 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 });
             });
 
+            // Legend: single entity, so only the current one is annotated
             const legend = d3.select('#radar-legend');
+            legend.html('');
             radarChars.forEach(c => {
-                legend.append('span').attr('class', 'legend-item').html(
-                    `<span class="legend-swatch" style="background:${c.color}"></span>${c.name}`);
+                const item = legend.append('span').attr('class', 'legend-item');
+                item.append('span').attr('class', 'legend-swatch')
+                    .each(function () { d3.select(this).style('background', c.color); });
+                item.append('span').text(c.name + ' · mean ' + radarMean(c).toFixed(2));
             });
-        })();
+        }
+
+        renderRadarPanel();
     </script>
 <script id="audit-axisfix">
 (function(){

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-syN5zuDhzshcWEMXxls+anHIS8Lq3M8uZMPTfGkSUyU=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-wEiaEoK+XPLncMeLhBRE2uhk8LnalmrMtNix1KH0NJQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Pilgrimage Team MBTI Evolution · Annotated Journey to the West</title>
@@ -245,19 +245,22 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <!-- 板块 1：阶段切换雷达图 -->
         <section class="section">
             <h2>Panel 1 · Stage-Switching Radar</h2>
-            <p>Click a button below to switch narrative stage; the five-person radar overlay smoothly transitions to that stage's personality snapshot. Defaults to "Formation".</p>
-            <div class="stage-switcher" role="tablist" aria-label="阶段切换">
+            <p>Click a button below to switch narrative stage; the radar draws the currently selected character only, smoothly transitioning to that stage's personality snapshot. Switch character with the dropdown or the dot plot below; the dot plot ranks all 5 characters by preference intensity for the current stage — the mean of the four pair differences |E-I| / |S-N| / |T-F| / |J-P|, since each MBTI pair sums to 10 and its plain mean would be a flat 5.0 for everyone. Defaults to "Formation".</p>
+            <div class="stage-switcher" role="tablist" aria-label="Stage switcher">
                 <button class="stage-btn active" data-stage="0" role="tab" aria-controls="mbti-radar-panel" aria-selected="true">Formation (Ch. 8-22)</button>
                 <button class="stage-btn" data-stage="1" role="tab" aria-controls="mbti-radar-panel" aria-selected="false">Conflict (Ch. 27-58)</button>
                 <button class="stage-btn" data-stage="2" role="tab" aria-controls="mbti-radar-panel" aria-selected="false">Harmony (Ch. 59-90)</button>
                 <button class="stage-btn" data-stage="3" role="tab" aria-controls="mbti-radar-panel" aria-selected="false">Consummation (Ch. 91-100)</button>
             </div>
             <div class="radar-wrap" id="mbti-radar-panel" role="tabpanel" aria-label="Stage personality radar">
+                <!-- chart-radar-meta: axes=8 series=1 -->
+                <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px;grid-column:1/-1"></div>
                 <div class="radar-container">
-                    <svg id="radar-svg" role="img" aria-label="5 人 MBTI 雷达叠加图"></svg>
+                    <svg id="radar-svg" role="img" aria-label="Single-character MBTI radar"></svg>
                     <div class="radar-tip" id="radar-tip"></div>
                 </div>
                 <div class="legend" id="radar-legend"></div>
+                <div id="radar-dotplot" style="margin-top:12px;grid-column:1/-1"></div>
             </div>
         </section>
 
@@ -374,12 +377,71 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // 全局：reduced-motion 检测
     // ============================================================
     const REDUCE_MOTION = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const DUR = REDUCE_MOTION ? 0 : 800;
+    const DUR = REDUCE_MOTION ? 0 : 600;
 
     // ============================================================
     // 板块 1：阶段切换雷达图
     // ============================================================
     const radarState = { paths: [], vertexGroups: [], stageIdx: 0 };
+
+    // §4B radar panel: one entity per radar (series <=3) + full-set descending mean dot plot
+    let radarSelected = null;
+
+    // rank metric: MBTI pairs sum to 10 by construction, so the eight-dimension mean is always 5.0
+    // (a constant axis carrying no information); rank by preference intensity instead =
+    // mean of |E-I|, |S-N|, |T-F|, |J-P| (0-5), computed for the current stage
+    function radarMean(d, stageIdx) {
+        const sd = d.stages[stageIdx || 0];
+        if (!sd) return 0;
+        const pairs = [["E", "I"], ["S", "N"], ["T", "F"], ["J", "P"]];
+        const sum = pairs.reduce((s, pr) => s + Math.abs(sd.dims[pr[0]] - sd.dims[pr[1]]), 0);
+        return sum / pairs.length;
+    }
+
+    function renderRadarPanel() {
+        const stageIdx = radarState.stageIdx;
+        const list = EMBEDDED.characters.slice();
+        if (!list.length) return;
+        const sorted = list.slice().sort((a, b) => radarMean(b, stageIdx) - radarMean(a, stageIdx));
+        if (!radarSelected || !list.some(d => d.name === radarSelected)) radarSelected = sorted[0].name;
+
+        const ctrl = d3.select("#radar-controls");
+        ctrl.selectAll("*").remove();
+        ctrl.append("span").text("Radar entity: ")
+            .style("font-size", "0.78rem").style("color", "var(--ink-soft)");
+        const sel = ctrl.append("select")
+            .style("font-size", "0.8rem").style("padding", "3px 8px")
+            .style("border", "1px solid var(--line)").style("border-radius", "4px")
+            .style("background", "var(--paper)").style("color", "var(--ink)");
+        sel.selectAll("option").data(sorted).enter().append("option")
+            .attr("value", d => d.name).property("selected", d => d.name === radarSelected)
+            .text(d => d.name);
+        sel.on("change", function () { radarSelected = this.value; initRadar(); renderRadarPanel(); });
+
+        const host = d3.select("#radar-dotplot");
+        host.selectAll("*").remove();
+        const maxV = d3.max(sorted, d => radarMean(d, stageIdx)) || 1;
+        const rows = host.selectAll(".dot-row").data(sorted).enter().append("div")
+            .attr("class", "dot-row")
+            .style("display", "flex").style("align-items", "center").style("gap", "8px")
+            .style("padding", "2px 0").style("cursor", "pointer")
+            .style("opacity", d => (d.name === radarSelected ? 1 : 0.72))
+            .on("click", (e, d) => { radarSelected = d.name; initRadar(); renderRadarPanel(); });
+        rows.append("span").text(d => d.name)
+            .style("flex", "0 0 120px").style("text-align", "right").style("font-size", "0.74rem")
+            .style("color", "var(--ink-soft)");
+        const track = rows.append("span")
+            .style("position", "relative").style("flex", "1 1 auto").style("height", "8px")
+            .style("background", "var(--line)").style("border-radius", "4px");
+        track.append("span")
+            .style("position", "absolute").style("top", "-3px")
+            .style("left", d => (radarMean(d, stageIdx) / maxV * 100).toFixed(2) + "%")
+            .style("width", "14px").style("height", "14px").style("border-radius", "50%")
+            .style("background", d => (d.name === radarSelected ? "var(--accent-primary)" : "var(--series-2)"))
+            .style("transform", "translateX(-7px)");
+        rows.append("span").text(d => radarMean(d, stageIdx).toFixed(1))
+            .style("flex", "0 0 44px").style("font-size", "0.72rem").style("color", "var(--ink)");
+    }
 
     function initRadar() {
         const svg = d3.select("#radar-svg");
@@ -434,8 +496,15 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const tip = d3.select("#radar-tip");
         const elParent = el.parentElement;
 
+        // single entity (§4B: one series per chart): draw only the selected character; reset refs before redraw
+        radarState.paths = [];
+        radarState.vertexGroups = [];
+        const selectedName = radarSelected || EMBEDDED.characters[0].name;
+        const currentStageIdx = radarState.stageIdx;
+
         EMBEDDED.characters.forEach((char, idx) => {
-            const values = dims.map(d => char.stages[0].dims[d]);
+            if (char.name !== selectedName) return;
+            const values = dims.map(d => char.stages[currentStageIdx].dims[d]);
             const color = char.color;
 
             const path = svg.append("path")
@@ -478,8 +547,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 tip.style("opacity", 0);
             });
 
-            radarState.paths.push(path);
-            radarState.vertexGroups.push(vg);
+            radarState.paths[idx] = path;
+            radarState.vertexGroups[idx] = vg;
         });
 
         radarState.angle = angle;
@@ -488,7 +557,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         radarState.cy = cy;
         radarState.lineGen = lineGen;
 
-        renderLegend(0);
+        renderLegend(radarState.stageIdx);
     }
 
     function updateRadar(stageIdx) {
@@ -499,14 +568,18 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         const cx = radarState.cx, cy = radarState.cy;
 
         EMBEDDED.characters.forEach((char, idx) => {
+            // single entity: non-selected characters have no path — skip them so switching stage does not redraw all 5
+            const path = radarState.paths[idx];
+            const vg = radarState.vertexGroups[idx];
+            if (!path || !vg) return;
             const values = dims.map(d => char.stages[stageIdx].dims[d]);
-            radarState.paths[idx]
+            path
                 .datum(values)
                 .transition()
                 .duration(REDUCE_MOTION?0:DUR)
                 .attr("d", radarState.lineGen);
 
-            radarState.vertexGroups[idx].selectAll("circle")
+            vg.selectAll("circle")
                 .data(values)
                 .transition()
                 .duration(REDUCE_MOTION?0:DUR)
@@ -515,13 +588,17 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         });
 
         renderLegend(stageIdx);
+        // the dot plot mean follows the stage (keeps the single-entity highlight)
+        renderRadarPanel();
     }
 
     function renderLegend(stageIdx) {
         const legend = d3.select("#radar-legend");
         legend.selectAll("*").remove();
-        legend.append("h4").text("Character legend · 5 members");
+        legend.append("h4").text("Character legend · 1 at a time");
         EMBEDDED.characters.forEach((char, idx) => {
+            // single series: the legend lists only the selected character
+            if (char.name !== (radarSelected || EMBEDDED.characters[0].name)) return;
             const sd = char.stages[stageIdx];
             const item = legend.append("div").attr("class", "legend-item")
                 .attr("tabindex", "0")
@@ -793,7 +870,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     // 初始化 + 事件绑定
     // ============================================================
     function init() {
-        initRadar();
+        renderRadarPanel();   // resolve the default selected entity first (dropdown + dot plot)
+        initRadar();          // draw only that one character
         renderSmallMultiples();
         renderHeatmap();
         renderInsights();

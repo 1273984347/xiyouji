@@ -16,6 +16,8 @@
   R5  （W1342）雷达族规模判据：基线外页面（新页/改动页）须声明
       `<!-- chart-radar-meta: axes=N series=M -->`，且轴 ≤8、单图系列 ≤3；基线名单
       `scripts/output/radar-family-baseline.txt` 冻结存量 27 页（W1341 审查实测的超载面）
+      辖区（W1350 扩面）：site/data + site/en——EN 镜像页与 ZH 同受规模约束（R4 仍限
+      site/data，选型章的登记对象是中文数据图表页）
 
   设计取舍（W551）：连线画布遮挡、桑基空渲染、reveal 空带、横向溢出等需要真实渲染
   状态的缺陷由 check_screenshot_gates.js（Playwright 动态门禁）覆盖——静态代理
@@ -365,6 +367,18 @@ def self_test():
     return ok
 
 
+def r5_scope_pages(pages):
+    """R5 辖区（W1350）：site/data + site/en。
+
+    R4 族注册仍限 site/data（选型章登记对象=中文数据图表页）；但雷达规模是**图型契约**，
+    EN 镜像页与 ZH 同构、同受「维度 ≤8 / 单图实体 ≤3」约束——W1350 收口前 EN 侧 27 页
+    全部无声明且单图系列 4–17，属辖区留白（ZH 已清零、EN 仍旧形态），不是合规差异。
+    """
+    site = os.path.realpath(os.path.join(ROOT, 'site'))
+    dirs = [os.path.join(site, 'data') + os.sep, os.path.join(site, 'en') + os.sep]
+    return [p for p in pages if any(os.path.realpath(p).startswith(d) for d in dirs)]
+
+
 def main():
     ap = argparse.ArgumentParser(description='图表静态自洽门禁（W551 挂载·R3 于 W654 扩充）')
     ap.add_argument('--self-test', action='store_true', help='内置负样本自检（10 例）')
@@ -386,19 +400,21 @@ def main():
             n_fail += 1
             print('FAIL %s — %s' % (os.path.relpath(p, ROOT), '；'.join(fails)))
 
-    # R4/R5（W1342）：辖区 site/data（与 R3 同辖·选型章管数据图表页）
+    # R4 辖区 site/data（选型章管数据图表页）；R5 辖区 site/data + site/en（W1350 扩面）
     data_dir = os.path.join(ROOT, 'site', 'data')
     data_pages = [p for p in pages
                   if os.path.realpath(p).startswith(os.path.realpath(data_dir) + os.sep)]
+    r5_pages = r5_scope_pages(pages)
     texts = {}
-    for p in data_pages:
+    for p in r5_pages:
         with open(p, encoding='utf-8', errors='ignore') as f:
             texts[p] = f.read()
-    for fam, n in family_registry_fails(texts.values(), os.path.join(ROOT, 'DESIGN.md')):
+    for fam, n in family_registry_fails([texts[p] for p in data_pages],
+                                        os.path.join(ROOT, 'DESIGN.md')):
         n_fail += 1
         print('FAIL R4 族未在 DESIGN §4B 注册：%s（%d 页在用·先入表再改页）' % (fam, n))
     baseline = load_baseline()
-    for p in data_pages:
+    for p in r5_pages:
         rel = os.path.relpath(p, ROOT)
         fails = radar_scale_fails(rel, texts[p], baseline)
         if fails:

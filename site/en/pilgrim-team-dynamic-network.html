@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-YgNyahOQdYepnZqi9x/A35qpWZqdS1yZIgF2HUKT+uI=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-UREDoGoGvDH67fVKv++yfMwk8ZtF8/GixDpIZICapMs=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Pilgrim Team Dynamics Network · Annotated Journey to the West</title>
@@ -274,20 +274,20 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
         </section>
 
-        <p class="text-sm text-muted"><strong>Data source:</strong> the published dataset <code>dataset/pilgrim-team-dynamic-network.json</code> — the 5-member Belbin radar, the 10-edge relationship network and the 5-stage Tuckman timeline — embedded in-page as <code>EMBEDDED_DATA</code> so the charts stay readable offline.</p>
+        <p class="text-sm text-muted"><strong>Data source:</strong> the published dataset <code>dataset/pilgrim-team-dynamic-network.json</code> — the 5-member Belbin heat matrix, the 10-edge relationship network and the 5-stage Tuckman timeline — embedded in-page as <code>EMBEDDED_DATA</code> so the charts stay readable offline.</p>
 
-        <!-- 板块 1：Belbin 角色雷达图 -->
+        <!-- 板块 1：Belbin 角色热力矩阵 -->
         <section class="section" aria-labelledby="sec-belbin">
-            <h2 id="sec-belbin">① Belbin Nine-Role Coverage Radar</h2>
-            <p>The pilgrim team's 5 members cover 8 of the 9 Belbin roles, missing only the "Monitor Evaluator" — precisely the root cause of the team repeatedly falling into the "Wukong decides, Tang Sanzang vetoes" conflict. No one calmly evaluates options, causing decision-making to oscillate.</p>
+            <h2 id="sec-belbin">① Belbin Nine-Role Coverage Heat Matrix</h2>
+            <p>The pilgrim team's 5 members cover 8 of the 9 Belbin roles, missing only the "Monitor Evaluator" — precisely the root cause of the team repeatedly falling into the "Wukong decides, Tang Sanzang vetoes" conflict. No one calmly evaluates options, causing decision-making to oscillate. The matrix below lays the 5 members × 9 roles fit scores out as a grid: rows are the five members, columns the nine roles, and the number in each cell is that member's coverage score for the role (0–10); the deeper the colour, the higher the coverage.</p>
             <div class="chart-wrap">
-                <svg id="belbin-radar" width="100%" height="460" role="img" aria-labelledby="belbin-title belbin-desc">
-                    <title id="belbin-title">Belbin Nine-Role Coverage Radar Chart</title>
-                    <desc id="belbin-desc">A radar comparison of the five pilgrim team members' coverage across the nine Belbin roles.</desc>
+                <svg id="belbin-heatmap" width="100%" height="460" role="img" aria-labelledby="belbin-title belbin-desc">
+                    <title id="belbin-title">Belbin Nine-Role Coverage Heat Matrix</title>
+                    <desc id="belbin-desc">A heat matrix of the five pilgrim team members' coverage across the nine Belbin roles: rows are the five members, columns the nine roles, and the deeper the colour the higher the coverage.</desc>
                 </svg>
                 <div class="svg-tooltip" id="belbin-tip"></div>
             </div>
-            <div class="legend-row" id="belbin-legend" aria-label="Role legend"></div>
+            <div class="legend-row" id="belbin-legend" aria-label="Coverage legend"></div>
         </section>
 
         <!-- 板块 2：五成员关系网络 force-directed -->
@@ -377,7 +377,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             <p>The four-direction integration outputs:</p>
             <ul style="margin-left:var(--space-5); color:var(--ink-soft); font-size:0.9em;">
                 <li><strong>W269 A direction</strong>: <a href="https://github.com/1273984347/xiyouji/blob/main/docs/02-人物深度分析/取经团队动力学深化专题.md">Pilgrim Team Dynamics Deep-Dive</a> · Belbin + Tuckman + group-dynamics frameworks</li>
-                <li><strong>W270 V direction</strong>: this page · force-directed relationship network + nine-role radar + five-stage timeline</li>
+                <li><strong>W270 V direction</strong>: this page · force-directed relationship network + nine-role heat matrix + five-stage timeline</li>
                 <li><strong>W271 E direction</strong>: a11y deepening (WCAG 2.2 SC 2.4.13 visible focus + screen reader + keyboard navigation)</li>
                 <li><strong>W272 S direction</strong>: psychology interdisciplinary analysis essay (team-dynamics perspective · 2000 characters)</li>
             </ul>
@@ -386,7 +386,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
         <section class="section">
             <h2 class="section-title">Key Insights</h2>
-            <div class="section-sub">The Belbin radar shows a team that is strong in execution and blind in evaluation: five members cover 8 of the 9 roles, and the role they never cover is the Monitor Evaluator — Wukong tops Shaper (9) and Specialist (9), Tang Sanzang tops Coordinator (9) and Completer (7), Bajie tops Resource Investigator (8) and Team Worker (8), Sha Wujing tops Implementer (9) and the White Dragon Horse tops Specialist (8), yet nobody scores above 3 on Monitor Evaluator. That gap is what the Tuckman split measures: Storming runs 38 chapters (Ch. 22–59), the longest phase by far against Forming’s 15 (Ch. 8–22), Norming’s 23 (Ch. 59–81) and Performing’s 19 (Ch. 81–99), so more than a third of the book is spent in conflict. The alignment table closes the loop — only Tang Sanzang’s goal alignment is High (all five share the pilgrimage on the surface), Bajie’s is Low, and the three major conflicts (the White Bone Demon, the Real vs. Fake Monkey King, the Six Robbers) all break out exactly where Wukong decides and Tang Sanzang vetoes.</div>
+            <div class="section-sub">The Belbin heat matrix shows a team that is strong in execution and blind in evaluation: five members cover 8 of the 9 roles, and the role they never cover is the Monitor Evaluator — Wukong tops Shaper (9) and Specialist (9), Tang Sanzang tops Coordinator (9) and Completer (7), Bajie tops Resource Investigator (8) and Team Worker (8), Sha Wujing tops Implementer (9) and the White Dragon Horse tops Specialist (8), yet nobody scores above 3 on Monitor Evaluator. That gap is what the Tuckman split measures: Storming runs 38 chapters (Ch. 22–59), the longest phase by far against Forming’s 15 (Ch. 8–22), Norming’s 23 (Ch. 59–81) and Performing’s 19 (Ch. 81–99), so more than a third of the book is spent in conflict. The alignment table closes the loop — only Tang Sanzang’s goal alignment is High (all five share the pilgrimage on the surface), Bajie’s is Low, and the three major conflicts (the White Bone Demon, the Real vs. Fake Monkey King, the Six Robbers) all break out exactly where Wukong decides and Tang Sanzang vetoes.</div>
         </section>
     </main>
 
@@ -450,65 +450,132 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         }
     };
 
-    // ============= Belbin 雷达图 =============
-    (function renderBelbinRadar() {
-        const svg = d3.select("#belbin-radar");
+    // ============= Belbin 角色热力矩阵（9 角色 > §4B 维度上限 8 → 雷达改热力矩阵） =============
+    (function renderBelbinHeatmap() {
+        const svg = d3.select("#belbin-heatmap");
         const tip = d3.select("#belbin-tip");
-        const width = +svg.attr("width") || 800;
-        const height = +svg.attr("height");
-        const cx = width / 2, cy = height / 2;
-        const radius = Math.min(width, height) / 2 - 60;
+        const width = svg.node().clientWidth || 800;
+        const height = +svg.attr("height") || 460;
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+        const m = {top: 62, right: 18, bottom: 58, left: 138};
+        const w = width - m.left - m.right;
+        const h = height - m.top - m.bottom;
         const roles = ["coordinator", "completer", "shaper", "plant", "specialist", "ri", "tw", "me", "implementer"];
-        const roleLabels = ["Coordinator", "Completer", "Shaper", "Plant", "Specialist", "Resource Investigator", "Teamworker", "Monitor Evaluator", "Implementer"];
-        const colors = {"Tang Sanzang": "#C0392B", "Wukong": "#8c2a2a", "Bajie": "#8E7D62", "Sha Wujing": "#3A473A", "White Dragon Horse": "#40619E"};
-        const levels = [2, 4, 6, 8, 10];
-        const g = svg.append("g").attr("transform", `translate(${cx},${cy})`);
+        const roleLabels = ["Coordinator", "Completer", "Shaper", "Plant", "Specialist", "Resource Inv.", "Team Worker", "Monitor Eval.", "Implementer"];
+        const roleFull = ["Coordinator", "Completer", "Shaper", "Plant", "Specialist", "Resource Investigator", "Team Worker", "Monitor Evaluator", "Implementer"];
+        const rows = EMBEDDED_DATA.belbin;
+        const members = rows.map(d => d.character);
+        const g = svg.append("g").attr("transform", `translate(${m.left},${m.top})`);
 
-        // 网格圆
-        levels.forEach(lv => {
-            const r = (lv / 10) * radius;
-            g.append("circle").attr("r", r).attr("fill", "none").attr("stroke", "#d9cdb8").attr("stroke-dasharray", "3,3");
-            g.append("text").attr("y", -r).attr("text-anchor", "middle").attr("font-size", "10px").attr("fill", "#6B6455").text(lv);
-        });
+        // 布局：行 = 5 位成员 · 列 = 9 种角色
+        const x = d3.scaleBand().domain(roles).range([0, w]).padding(0.06);
+        const y = d3.scaleBand().domain(members).range([0, h]).padding(0.06);
 
-        // 轴线 + 标签
-        roles.forEach((role, i) => {
-            const angle = (i / roles.length) * 2 * Math.PI - Math.PI / 2;
-            const x2 = Math.cos(angle) * radius, y2 = Math.sin(angle) * radius;
-            g.append("line").attr("x1", 0).attr("y1", 0).attr("x2", x2).attr("y2", y2).attr("stroke", "#d9cdb8");
-            const lx = Math.cos(angle) * (radius + 24), ly = Math.sin(angle) * (radius + 24);
-            g.append("text").attr("x", lx).attr("y", ly).attr("text-anchor", "middle").attr("dominant-baseline", "middle")
-                .attr("font-size", "11px").attr("fill", "#23201A").text(roleLabels[i]);
-        });
+        // 单色顺序色阶：宣纸浅赭 → 朱砂深赭（禁 turbo/rainbow；覆盖度高则色深）
+        const color = d3.scaleSequential()
+            .domain([0, 10])
+            .interpolator(d3.interpolateRgb("#f5e9d4", "#8C2F1B"));
+        // 格内数值色按底色亮度翻转，暗色模式下同样可读
+        const textOn = function (fill) {
+            const c = d3.rgb(fill);
+            const lum = (0.299 * c.r + 0.587 * c.g + 0.114 * c.b) / 255;
+            return lum > 0.62 ? "#23201A" : "#fdf8ee";
+        };
 
-        // 角色多边形
-        EMBEDDED_DATA.belbin.forEach(d => {
-            const points = roles.map((role, i) => {
-                const angle = (i / roles.length) * 2 * Math.PI - Math.PI / 2;
-                const val = d[role];
-                const r = (val / 10) * radius;
-                return [Math.cos(angle) * r, Math.sin(angle) * r];
+        const cells = [];
+        rows.forEach(function (row) {
+            roles.forEach(function (role, i) {
+                cells.push({member: row.character, role: role, roleLabel: roleLabels[i], roleFull: roleFull[i], value: row[role]});
             });
-            g.append("polygon").attr("points", points.map(p => p.join(",")).join(" "))
-                .attr("fill", colors[d.character]).attr("fill-opacity", 0.12)
-                .attr("stroke", colors[d.character]).attr("stroke-width", 1.8)
-                .style("cursor", "pointer")
-                .on("mouseover", (e) => {
-                    tip.classed("visible", true).html(`<strong>${d.character}</strong>`);
-                })
-                .on("mousemove", (e) => {
-                    tip.style("left", (e.pageX + 10) + "px").style("top", (e.pageY - 10) + "px");
-                })
-                .on("mouseout", () => tip.classed("visible", false));
         });
 
-        // 图例
-        const legend = d3.select("#belbin-legend");
-        Object.entries(colors).forEach(([name, color]) => {
-            legend.append("div").attr("class", "legend-item").html(
-                `<span class="legend-dot" style="background:${color}"></span>${name}`
-            );
+        const cellG = g.append("g").selectAll("g")
+            .data(cells).join("g")
+            .attr("transform", d => `translate(${x(d.role)},${y(d.member)})`);
+
+        cellG.append("rect")
+            .attr("width", x.bandwidth()).attr("height", y.bandwidth())
+            .attr("rx", 3)
+            .attr("fill", d => color(d.value))
+            .attr("stroke", "#d9cdb8").attr("stroke-opacity", 0.55).attr("stroke-width", 1)
+            .style("cursor", "pointer");
+
+        cellG.append("text")
+            .attr("x", x.bandwidth() / 2).attr("y", y.bandwidth() / 2)
+            .attr("dy", "0.35em").attr("text-anchor", "middle")
+            .attr("font-size", "13px").attr("font-weight", "600")
+            .style("pointer-events", "none")
+            .attr("fill", d => textOn(color(d.value)))
+            .text(d => d.value);
+
+        // 悬停：沿用页内 .svg-tooltip（classed("visible") 契约）
+        cellG.on("mouseover", function (e, d) {
+            d3.select(this).select("rect")
+                .attr("stroke", "var(--accent)").attr("stroke-opacity", 1).attr("stroke-width", 2);
+            tip.classed("visible", true)
+                .html(`<strong>${d.member}</strong> · ${d.roleFull}: ${d.value}/10`);
+        }).on("mousemove", function (e) {
+            tip.style("left", (e.pageX + 10) + "px").style("top", (e.pageY - 10) + "px");
+        }).on("mouseout", function () {
+            d3.select(this).select("rect")
+                .attr("stroke", "#d9cdb8").attr("stroke-opacity", 0.55).attr("stroke-width", 1);
+            tip.classed("visible", false);
         });
+
+        // 列标签（九角色）
+        g.append("g").selectAll("text")
+            .data(roles).join("text")
+            .attr("x", d => x(d) + x.bandwidth() / 2)
+            .attr("y", -12)
+            .attr("text-anchor", "middle")
+            .attr("font-size", "11px")
+            .attr("font-weight", "600")
+            .style("fill", "var(--ink)")
+            .text((d, i) => roleLabels[i])
+            .append("title")
+            .text((d, i) => roleFull[i]);
+
+        // 行标签（五成员）
+        g.append("g").selectAll("text")
+            .data(members).join("text")
+            .attr("x", -12)
+            .attr("y", d => y(d) + y.bandwidth() / 2)
+            .attr("dy", "0.35em")
+            .attr("text-anchor", "end")
+            .attr("font-size", "11px")
+            .attr("font-weight", "600")
+            .style("fill", "var(--ink)")
+            .text(d => d);
+
+        g.append("text")
+            .attr("x", 0).attr("y", -34)
+            .attr("text-anchor", "start")
+            .attr("font-size", "11px")
+            .style("fill", "var(--ink-soft)")
+            .text("Rows: 5 members · Columns: 9 roles");
+
+        // 色阶图例：颜色越深 = 覆盖度越高
+        const lg = svg.append("g").attr("transform", `translate(${m.left},${m.top + h + 20})`);
+        const lgW = 130, lgH = 10, steps = 26;
+        for (let i = 0; i < steps; i++) {
+            lg.append("rect")
+                .attr("x", i * lgW / steps).attr("y", 0)
+                .attr("width", lgW / steps + 0.6).attr("height", lgH)
+                .attr("fill", color(i / (steps - 1) * 10));
+        }
+        lg.append("text").attr("x", 0).attr("y", lgH + 13)
+            .attr("font-size", "10px").style("fill", "var(--ink-soft)").text("0");
+        lg.append("text").attr("x", lgW).attr("y", lgH + 13).attr("text-anchor", "end")
+            .attr("font-size", "10px").style("fill", "var(--ink-soft)").text("10");
+        lg.append("text").attr("x", lgW + 12).attr("y", lgH)
+            .attr("font-size", "11px").style("fill", "var(--ink-soft)").text("Deeper = higher coverage");
+
+        // 图例：单色顺序色阶（成员色不再承载编码）
+        const legend = d3.select("#belbin-legend");
+        legend.selectAll("*").remove();
+        legend.append("div").attr("class", "legend-item").html(
+            '<span class="legend-dot" style="border-radius:3px;width:90px;height:12px;background:linear-gradient(90deg,#f5e9d4 0%,#e0b89a 40%,#b5654a 75%,#8C2F1B 100%);"></span>Coverage 0 to 10 (deeper = higher)'
+        );
     })();
 
     // ============= 关系网络 force-directed =============

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-mHEBdBml6PCpAJfJYn7uECWt9zxjzCnBwSA7WguSN3I=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-4/Jh7ZEFG+acLTNha0mCOU7YrkAbVd7t3JPKLjlZcxk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Four Heavenly Kings Artifact Semiotic Atlas · Annotated Journey to the West</title>
@@ -328,10 +328,13 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     <strong>Definition: </strong>A five-dimension assessment — Power (combat efficacy) / Memory (sedimentation of time) / Wound (proof of failure) / Signature (mark of existence) / Silence (state of speechlessness). The larger the radar area, the heavier the artifact’s symbolic load.
   </div>
   <div class="chart-block">
-    <div class="chart-title">Four Artifacts Five-Dimension Radar</div>
-    <div class="chart-caption">Four artifacts × 5 dimensions (Power/Memory/Wound/Signature/Silence) · values 0–10 · hover for details</div>
+    <div class="chart-title">Artifact Symbolic Dimensions Radar (single entity · full ranking in the dot plot below)</div>
+    <div class="chart-caption">5 dimensions (Power/Memory/Wound/Signature/Silence) · values 0–10 · the radar plots 1 entity · mean-ranked dot plot below · hover for details</div>
+    <!-- chart-radar-meta: axes=5 series=1 -->
+    <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
     <svg id="chart-radar" class="chart-svg" width="100%" height="480"></svg>
     <div class="legend-row" id="radar-legend"></div>
+    <div id="radar-dotplot" style="margin-top:12px"></div>
   </div>
 </section>
 
@@ -573,8 +576,67 @@ function showKingTooltip(event, d) {
 }
 
 // ============================================================
-// Section 2: 雷达图
+// Section 2: Radar (single-entity radar + mean-ranked dot plot)
 // ============================================================
+const KING_RADAR_DIMS = ['Power', 'Memory', 'Wound', 'Signature', 'Silence'];
+let radarSelected = null;
+
+// Mean basis: arithmetic mean of the artifact's five symbolic dimension scores (0-10)
+function radarMean(d) {
+  const vals = KING_RADAR_DIMS.map(k => d[k]).filter(v => typeof v === 'number');
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+
+function renderRadarPanel(radarList) {
+  const list = (radarList || []).slice();
+  if (!list.length) { renderRadar([]); return; }
+  const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+  if (!radarSelected || !list.some(d => d.king === radarSelected)) radarSelected = sorted[0].king;
+
+  // Entity selector (dropdown)
+  const ctrl = d3.select('#radar-controls');
+  ctrl.selectAll('*').remove();
+  ctrl.append('span').text('Radar artifact:')
+    .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+  const sel = ctrl.append('select')
+    .style('font-size', '0.8rem').style('padding', '3px 8px')
+    .style('border', '1px solid var(--line)').style('border-radius', '4px')
+    .style('background', 'var(--paper)').style('color', 'var(--ink)');
+  sel.selectAll('option').data(sorted).enter().append('option')
+    .attr('value', d => d.king).property('selected', d => d.king === radarSelected)
+    .text(d => d.king + ' · ' + d.artifact);
+  sel.on('change', function () { radarSelected = this.value; renderRadarPanel(list); });
+
+  // The radar draws the selected entity only
+  renderRadar(list.filter(d => d.king === radarSelected));
+
+  // Full mean-ranked dot plot (click a row to switch the radar)
+  const host = d3.select('#radar-dotplot');
+  host.selectAll('*').remove();
+  const maxV = d3.max(sorted, radarMean) || 1;
+  const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+    .attr('class', 'dot-row')
+    .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+    .style('padding', '2px 0').style('cursor', 'pointer')
+    .style('opacity', d => (d.king === radarSelected ? 1 : 0.72))
+    .on('click', (e, d) => { radarSelected = d.king; renderRadarPanel(list); });
+  rows.append('span').text(d => d.king)
+    .style('flex', '0 0 auto').style('min-width', '96px').style('max-width', '46%')
+    .style('text-align', 'right').style('font-size', '0.74rem')
+    .style('color', 'var(--ink-soft)');
+  const track = rows.append('span')
+    .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+    .style('background', 'var(--line)').style('border-radius', '4px');
+  track.append('span')
+    .style('position', 'absolute').style('top', '-3px')
+    .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+    .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+    .style('background', d => (d.king === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+    .style('transform', 'translateX(-7px)');
+  rows.append('span').text(d => radarMean(d).toFixed(1))
+    .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+}
+
 function renderRadar(radarData) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
@@ -696,13 +758,13 @@ function renderRadar(radarData) {
     });
   });
 
-  // 图例
+  // Legend: single entity, so only the current one is annotated
   const legend = d3.select('#radar-legend');
   legend.html('');
   radarData.forEach(king => {
     const item = legend.append('div').attr('class', 'legend-item');
     item.append('div').attr('class', 'legend-swatch').style('background', kingColors[king.king]);
-    item.append('span').text(king.king + ' · ' + king.artifact);
+    item.append('span').text(king.king + ' · ' + king.artifact + ' · mean ' + radarMean(king).toFixed(1));
   });
 }
 
@@ -1069,7 +1131,7 @@ async function main() {
   }
 
   renderOverview(data.kings);
-  renderRadar(data.radar);
+  renderRadarPanel(data.radar);
   renderMatrix(data.kings);
   renderChord(data.chord);
   renderTimeline(data.timeline);
@@ -1083,7 +1145,7 @@ window.addEventListener('resize', () => {
     if (window.__lastData) {
       const data = window.__lastData;
       renderOverview(data.kings);
-      renderRadar(data.radar);
+      renderRadarPanel(data.radar);
       renderMatrix(data.kings);
       renderChord(data.chord);
       renderTimeline(data.timeline);

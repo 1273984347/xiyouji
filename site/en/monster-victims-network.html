@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-H24ipIdFttt0mK0RD2KomIQ6+89usIRVP+aX1+zNQaU=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-2MYAJLwgMHgDT69nvLwTOjlM1RHgYZyGxye9i4ULvRk=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster-Victim Network · Annotated Journey to the West</title>
@@ -335,10 +335,13 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <strong>Definition:</strong> Five dimensions assess the four victims — Body (intensity of physical harm) / Mind (psychic deprivation) / Society (ruptured bonds) / Law (absence of accountability and trial) / Narrative (visibility of being told). The larger the radar area, the heavier the victim's trauma load. The boy and girl score highest on bodily trauma; the Golden Sage Lady scores highest on psychological trauma.
   </div>
   <div class="chart-block">
-    <div class="chart-title">Four Victims, Five-Dimension Radar Chart (Body / Mind / Society / Law / Narrative)</div>
-    <div class="chart-caption">Four victims × 5 dimensions · values 0-10 · hover for details</div>
+    <div class="chart-title">Four Victims, Five-Dimension Radar Chart (single entity · Body / Mind / Society / Law / Narrative)</div>
+    <div class="chart-caption">Four victims × 5 dimensions · values 0-10 · the radar plots 1 victim (§4B ≤3 per chart) · dot plot sorted by the five-dimension mean descending · hover for details</div>
+    <!-- chart-radar-meta: axes=5 series=1 -->
+    <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
     <svg id="chart-radar" class="chart-svg" width="100%" height="500"></svg>
     <div class="legend-row" id="radar-legend"></div>
+    <div id="radar-dotplot" style="margin-top:12px"></div>
   </div>
 </section>
 
@@ -939,8 +942,69 @@ function renderSankey(sankeyData, victims) {
 }
 
 // ============================================================
-// Section 4: 四受害者创伤维度雷达图
+// Section 4: 四受害者创伤维度雷达图（§4B single-entity radar + full-ranking mean-sorted dot plot）
 // ============================================================
+const VICTIM_RADAR_DIMS = ['Body', 'Mind', 'Society', 'Law', 'Narrative'];
+let radarSelected = null;
+
+// Mean basis: arithmetic mean of the victim's five trauma scores (0-10)
+function radarMean(d) {
+  const vals = VICTIM_RADAR_DIMS.map(k => d[k]).filter(v => typeof v === 'number');
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+
+function renderRadarPanel(data) {
+  const list = (data.radar || []).slice();
+  if (!list.length) { renderRadar([], data.victims); return; }
+  const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+  if (!radarSelected || !list.some(d => d.victim === radarSelected)) radarSelected = sorted[0].victim;
+
+  // Entity selector
+  const ctrl = d3.select('#radar-controls');
+  ctrl.selectAll('*').remove();
+  ctrl.append('span').text('Radar entity:')
+    .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+  const sel = ctrl.append('select')
+    .style('font-size', '0.8rem').style('padding', '3px 8px')
+    .style('border', '1px solid var(--line)').style('border-radius', '4px')
+    .style('background', 'var(--paper)').style('color', 'var(--ink)');
+  sel.selectAll('option').data(sorted).enter().append('option')
+    .attr('value', d => d.victim).property('selected', d => d.victim === radarSelected)
+    .text(d => d.victim);
+  sel.on('change', function () {
+    radarSelected = this.value;
+    renderRadarPanel(window.__lastData || data);
+  });
+
+  // The radar draws only the currently selected entity
+  renderRadar(list.filter(d => d.victim === radarSelected), data.victims);
+
+  // Full-ranking dot plot (mean descending · click syncs the radar)
+  const host = d3.select('#radar-dotplot');
+  host.selectAll('*').remove();
+  const maxV = d3.max(sorted, radarMean) || 1;
+  const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+    .attr('class', 'dot-row')
+    .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+    .style('padding', '2px 0').style('cursor', 'pointer')
+    .style('opacity', d => (d.victim === radarSelected ? 1 : 0.72))
+    .on('click', (e, d) => { radarSelected = d.victim; renderRadarPanel(window.__lastData || data); });
+  rows.append('span').text(d => d.victim)
+    .style('flex', '0 0 200px').style('text-align', 'right').style('font-size', '0.74rem')
+    .style('color', 'var(--ink-soft)');
+  const track = rows.append('span')
+    .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+    .style('background', 'var(--line)').style('border-radius', '4px');
+  track.append('span')
+    .style('position', 'absolute').style('top', '-3px')
+    .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+    .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+    .style('background', d => (d.victim === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+    .style('transform', 'translateX(-7px)');
+  rows.append('span').text(d => radarMean(d).toFixed(1))
+    .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+}
+
 function renderRadar(radarData, victims) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
@@ -1066,7 +1130,7 @@ function renderRadar(radarData, victims) {
   radarData.forEach(victim => {
     const item = legend.append('div').attr('class', 'legend-item');
     item.append('div').attr('class', 'legend-swatch').style('background', victimColors[victim.victim]);
-    item.append('span').text(victim.victim);
+    item.append('span').text(victim.victim + ' · mean ' + radarMean(victim).toFixed(1));
   });
 }
 
@@ -1281,7 +1345,7 @@ async function main() {
   renderOverview(data.victims);
   renderForce(data.network, data.victims);
   renderSankey(data.sankey, data.victims);
-  renderRadar(data.radar, data.victims);
+  renderRadarPanel(data);
   renderTimeline(data.timeline, data.victims);
 }
 
@@ -1295,7 +1359,7 @@ window.addEventListener('resize', () => {
       renderOverview(data.victims);
       renderForce(data.network, data.victims);
       renderSankey(data.sankey, data.victims);
-      renderRadar(data.radar, data.victims);
+      renderRadarPanel(data);
       renderTimeline(data.timeline, data.victims);
     }
   }, 250);

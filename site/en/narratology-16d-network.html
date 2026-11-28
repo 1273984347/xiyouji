@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-owCPh+dB6aOZXkBVUcyA2wmFkMUcQaRwnPZBzlQnfew=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-8emZoahTHpUAhpq7YvhpyAzffPb0RowsFT/bbo07pjA=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Sixteen-Dimension Narratology Network · Annotated Journey to the West</title>
@@ -232,6 +232,7 @@ header.hero .meta {
 }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
+.heatmap-legend-bar { width: 180px; height: 14px; border-radius: var(--radius-sm); }
 
 /* Tooltip */
 
@@ -416,7 +417,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   <a href="#overview">Overview</a>
   <a href="#force">Force-Directed Graph</a>
   <a href="#sankey">Sankey Diagram</a>
-  <a href="#radar">Radar Chart</a>
+  <a href="#heatmap">Heat Matrix</a>
   <a href="#timeline">Timeline</a>
   <a href="#summary">Summary Table</a>
 </nav>
@@ -470,18 +471,18 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   </div>
 </section>
 
-<!-- Section 4: 雷达图 -->
-<section class="section" id="radar">
-  <h2 class="section-title">IV · Sixteen-Dimension Narratology Radar Chart (4 Metrics)</h2>
-  <div class="section-sub">RADAR: 16 DIMENSIONS × 4 METRICS</div>
+<!-- Section 4: heat matrix -->
+<section class="section" id="heatmap">
+  <h2 class="section-title">IV · Sixteen-Dimension Narratology Heat Matrix (4 Metrics)</h2>
+  <div class="section-sub">HEAT MATRIX: 16 DIMENSIONS × 4 METRICS</div>
   <div class="definition">
-    <strong>Definition:</strong>The radar chart evaluates each narratology dimension on four metrics: theoretical depth (maturity of the theoretical system), JTTW application (coverage of Journey to the West textual analysis), term count (size of the core terminology), and academic impact (research contribution and influence). The larger the radar area, the stronger the dimension’s overall standing in the thirteen-dimension narratology framework. Intertextuality (Intertext), Temporal Narratology (Time), and Unreliable Narration perform most strongly overall, while the tactile and olfactory dimensions are emerging growth points.
+    <strong>Definition:</strong>The heat matrix evaluates each narratology dimension on four metrics: theoretical depth (maturity of the theoretical system), JTTW application (coverage of Journey to the West textual analysis), term count (size of the core terminology), and academic impact (research contribution and influence). Rows are dimensions and columns are metrics; the deeper the color, the higher that metric scores, so reading a row across shows one dimension’s strength profile while reading a column down compares all dimensions on the same metric. Intertextuality (Intertext), Temporal Narratology (Time), and Unreliable Narration perform most strongly overall, while the tactile and olfactory dimensions are emerging growth points.
   </div>
   <div class="chart-block">
-    <div class="chart-title">Sixteen-Dimension × Four-Metric Radar Chart (theoretical depth + JTTW application + term count + academic impact)</div>
-    <div class="chart-caption">16 dimensions × 4 metrics · values 1–10 · hover for details</div>
-    <svg id="chart-radar" class="chart-svg" width="100%" height="640"></svg>
-    <div class="legend-row" id="radar-legend"></div>
+    <div class="chart-title">Sixteen-Dimension × Four-Metric Heat Matrix (theoretical depth + JTTW application + term count + academic impact)</div>
+    <div class="chart-caption">Rows: 16 dimensions · columns: 4 metrics · values 1–10 · deeper color = higher score · hover for details</div>
+    <svg id="chart-heatmap" class="chart-svg" width="100%" height="640"></svg>
+    <div class="legend-row" id="heatmap-legend"></div>
   </div>
 </section>
 
@@ -521,7 +522,7 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   <!-- W1286 · conclusion block (gate 82 / C2): conclusion semantics carried by both the block class and its heading -->
   <section class="section">
     <h2 class="section-title">VII · Key Insights</h2>
-    <div class="section-sub">KEY INSIGHTS · Read from the actual values in the sixteen-dimension overview, force graph, three-layer Sankey, radar and evolution timeline</div>
+    <div class="section-sub">KEY INSIGHTS · Read from the actual values in the sixteen-dimension overview, force graph, three-layer Sankey, heat matrix and evolution timeline</div>
     <div class="insight-list">
       <div class="insight-item"><strong>How the sixteen dimensions divide:</strong> seven belong to seven-sense narratology, three to textual narratology, two to meta-narratology, and gender, culture, affect, history take one each; the four newest dimensions W182 to W185 were all created between 2026-06-15 and 2026-07-05.</div>
       <div class="insight-item"><strong>Intertext is still the peak:</strong> W169 Intertextual Narratology keeps the highest theoretical depth at 10, JTTW application at 9 and academic impact at 10, with the most terms at 9, while Olfactory W164 bottoms out at 6 for depth and impact and Tactile W165 falls to 5 for application.</div>
@@ -1166,10 +1167,12 @@ function renderSankey(sankeyLinkData, dimensions, theoristColors) {
 }
 
 // ============================================================
-// Section 4: 雷达图（16 维度 × 4 指标）
+// Section 4: heat matrix (16 dimensions x 4 metrics)
+//   The former 16-axis radar exceeds the DESIGN.md §4B radar limit
+//   (dimensions > 8 => heat matrix); data fields and values are unchanged.
 // ============================================================
-function renderRadar(dimensions) {
-  const svg = d3.select('#chart-radar');
+function renderHeatmap(dimensions) {
+  const svg = d3.select('#chart-heatmap');
   svg.selectAll('*').remove();
   if (!dimensions || dimensions.length === 0) {
     svg.append('text').attr('x', 200).attr('y', 320).attr('fill', '#8a7a5a').text('No data');
@@ -1186,121 +1189,119 @@ function renderRadar(dimensions) {
     { key: 'termCount', label: 'Term Count' },
     { key: 'academicValue', label: 'Academic Impact' }
   ];
-  const dimColors = {};
-  dimensions.forEach(d => { dimColors[d.dim] = d.color; });
+  const metricLabels = metrics.map(m => m.label);
 
-  const cx = width / 2;
-  const cy = height / 2 + 10;
-  const radius = Math.min(width, height) / 2 - 120;
-  const levels = 10;
+  const margin = { top: 56, right: 28, bottom: 22, left: 96 };
+  const innerW = Math.max(200, width - margin.left - margin.right);
+  const innerH = height - margin.top - margin.bottom;
 
-  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+  // rows = dimensions (data order) · columns = metrics
+  const x = d3.scaleBand().domain(metricLabels).range([0, innerW]).paddingInner(0.05).paddingOuter(0.02);
+  const y = d3.scaleBand().domain(dimensions.map(d => d.code)).range([0, innerH]).paddingInner(0.12);
+  // single-hue sequential ramp (1-10): darker = higher score (no rainbow scale)
+  const color = d3.scaleSequential(d3.interpolateBlues).domain([1, 10]);
 
-  // 背景同心多边形
-  for (let lvl = 1; lvl <= levels; lvl++) {
-    const r = radius * lvl / levels;
-    const points = metrics.map((dim, i) => {
-      const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
-      return [Math.cos(angle) * r, Math.sin(angle) * r];
-    });
-    gBg.append('polygon')
-      .attr('points', points.map(p => p.join(',')).join(' '))
-      .attr('fill', 'none')
-      .attr('stroke', '#d4c5a9')
-      .attr('stroke-width', 1)
-      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
-  }
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-  // 轴线 + 标签
-  metrics.forEach((metric, i) => {
-    const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
-    gBg.append('line')
-      .attr('x1', 0).attr('y1', 0)
-      .attr('x2', Math.cos(angle) * radius)
-      .attr('y2', Math.sin(angle) * radius)
-      .attr('stroke', '#d4c5a9')
-      .attr('stroke-width', 1);
-    const labelR = radius + 32;
-    gBg.append('text')
-      .attr('x', Math.cos(angle) * labelR)
-      .attr('y', Math.sin(angle) * labelR)
-      .attr('text-anchor', 'middle')
-      .attr('dy', '0.35em')
-      .attr('font-size', '13px')
-      .attr('font-weight', '600')
-      .attr('fill', '#1a1410')
-      .text(metric.label);
+  const cells = [];
+  dimensions.forEach(dim => {
+    metrics.forEach(metric => { cells.push({ dim: dim, metric: metric, value: dim[metric.key] }); });
   });
-
-  // 数值刻度
-  for (let lvl = 2; lvl <= levels; lvl += 2) {
-    const r = radius * lvl / levels;
-    gBg.append('text')
-      .attr('x', -6).attr('y', -r)
-      .attr('text-anchor', 'end')
-      .attr('font-size', '9px')
-      .attr('fill', '#8a7a5a')
-      .text(lvl);
-  }
 
   const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
     ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
     : d3.select('.chart-tooltip');
 
-  // 每个维度一个多边形
-  dimensions.forEach(dim => {
-    const points = metrics.map((metric, i) => {
-      const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
-      const val = dim[metric.key] || 0;
-      const rr = radius * (val / 10);
-      return [Math.cos(angle) * rr, Math.sin(angle) * rr];
+  // cells
+  g.append('g').selectAll('rect')
+    .data(cells)
+    .enter().append('rect')
+    .attr('x', d => x(d.metric.label))
+    .attr('y', d => y(d.dim.code))
+    .attr('width', x.bandwidth())
+    .attr('height', y.bandwidth())
+    .attr('rx', 2)
+    .attr('fill', d => color(d.value))
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
+      tooltip.classed('visible', true).transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.dim.code + ' · ' + d.dim.dim + ' (' + d.dim.name + ')</strong>');
+      tooltip.append('div').text(d.metric.label + ': ' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.classed('visible', false).transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
-    const color = dimColors[dim.dim] || '#8b4513';
 
-    gBg.append('polygon')
-      .attr('points', points.map(p => p.join(',')).join(' '))
-      .attr('fill', color)
-      .attr('fill-opacity', 0.06)
-      .attr('stroke', color)
-      .attr('stroke-width', 1.5)
-      .style('cursor', 'pointer')
-      .on('mouseover', function(e) {
-        d3.select(this).attr('fill-opacity', 0.25);
-        tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
-        tooltip.html('');
-        tooltip.append('div').html('<strong>' + dim.code + ' · ' + dim.dim + ' (' + dim.name + ')</strong>');
-        metrics.forEach(metric => {
-          tooltip.append('div').text(metric.label + ': ' + dim[metric.key]);
-        });
-      })
-      .on('mousemove', function(e) {
-        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
-      })
-      .on('mouseout', function() {
-        d3.select(this).attr('fill-opacity', 0.06);
-        tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
-      });
+  // value chips (fixed light backing keeps the numbers readable on every ramp step)
+  g.append('g').selectAll('rect.chip')
+    .data(cells)
+    .enter().append('rect')
+    .attr('x', d => x(d.metric.label) + x.bandwidth() / 2 - 10)
+    .attr('y', d => y(d.dim.code) + y.bandwidth() / 2 - 7)
+    .attr('width', 20)
+    .attr('height', 14)
+    .attr('rx', 3)
+    .attr('fill', '#fff')
+    .attr('opacity', 0.86)
+    .attr('pointer-events', 'none');
 
-    // 顶点圆
-    points.forEach((p) => {
-      gBg.append('circle')
-        .attr('cx', p[0]).attr('cy', p[1])
-        .attr('r', 2.5)
-        .attr('fill', color)
-        .attr('stroke', '#fff')
-        .attr('stroke-width', 1)
-        .attr('pointer-events', 'none');
-    });
-  });
+  g.append('g').selectAll('text')
+    .data(cells)
+    .enter().append('text')
+    .attr('x', d => x(d.metric.label) + x.bandwidth() / 2)
+    .attr('y', d => y(d.dim.code) + y.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '11px')
+    .attr('font-weight', '600')
+    .style('fill', '#1a1410')
+    .attr('pointer-events', 'none')
+    .text(d => d.value);
 
-  // 图例
-  const legend = d3.select('#radar-legend');
+  // row labels (dimensions)
+  g.append('g').selectAll('text')
+    .data(dimensions)
+    .enter().append('text')
+    .attr('x', -10)
+    .attr('y', d => y(d.code) + y.bandwidth() / 2)
+    .attr('text-anchor', 'end')
+    .attr('dy', '0.35em')
+    .attr('font-size', '12px')
+    .attr('fill', 'var(--ink)')
+    .text(d => d.code + ' ' + d.dim)
+    .append('title')
+    .text(d => d.code + ' ' + d.dim + ' (' + d.name + ')');
+
+  // column labels (4 metrics, top aligned)
+  g.append('g').selectAll('text')
+    .data(metricLabels)
+    .enter().append('text')
+    .attr('x', d => x(d) + x.bandwidth() / 2)
+    .attr('y', -14)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .attr('fill', 'var(--ink)')
+    .text(d => d);
+
+  // legend: sequential ramp bar + endpoints
+  const legend = d3.select('#heatmap-legend');
   legend.html('');
-  dimensions.forEach(dim => {
-    const item = legend.append('div').attr('class', 'legend-item');
-    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', dimColors[dim.dim] || '#8b4513'); });
-    item.append('span').text(dim.code + ' ' + dim.dim);
-  });
+  const stops = [1, 3.25, 5.5, 7.75, 10].map(v => color(v)).join(', ');
+  const item = legend.append('div').attr('class', 'legend-item');
+  item.append('span').text('1');
+  item.append('div').attr('class', 'heatmap-legend-bar')
+    .each(function() { d3.select(this).style('background', 'linear-gradient(to right, ' + stops + ')'); });
+  item.append('span').text('10');
+  legend.append('div').attr('class', 'legend-item').append('span').text('Deeper color = higher score');
 }
 
 // ============================================================
@@ -1614,7 +1615,7 @@ async function main() {
   renderOverview(data.dimensions);
   renderForce(data.dimensions, data.externalNodes, data.links);
   renderSankey(data.sankey, data.dimensions, data.sankeyTheoristColors);
-  renderRadar(data.dimensions);
+  renderHeatmap(data.dimensions);
   renderTimeline(data.timeline);
   renderSummary(data.dimensions, data.theorists);
 }
@@ -1629,7 +1630,7 @@ window.addEventListener('resize', () => {
       renderOverview(data.dimensions);
       renderForce(data.dimensions, data.externalNodes, data.links);
       renderSankey(data.sankey, data.dimensions, data.sankeyTheoristColors);
-      renderRadar(data.dimensions);
+      renderHeatmap(data.dimensions);
       renderTimeline(data.timeline);
       renderSummary(data.dimensions, data.theorists);
     }

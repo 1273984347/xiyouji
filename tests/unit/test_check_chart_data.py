@@ -133,6 +133,17 @@ def os_path_exists(lines):
     return all((ROOT / p).exists() for p in lines)
 
 
+def test_r5_scope_covers_en_mirrors_not_root():
+    """W1350：R5 辖区 = site/data + site/en；根页不纳（选型章管数据图表页）。"""
+    data = str(ROOT / "site" / "data" / "x.html")
+    en = str(ROOT / "site" / "en" / "x.html")
+    root_page = str(ROOT / "site" / "index.html")
+    scope = ccd.r5_scope_pages([data, en, root_page])
+    assert data in scope, "site/data 页应受 R5 约束"
+    assert en in scope, "site/en 镜像页应受 R5 约束（W1350 扩面）"
+    assert root_page not in scope, "站点根页不属 R5 辖区"
+
+
 def test_p6_self_test_passes():
     """P6：脚本内置 10 例自检全过。"""
     r = _run("--self-test")

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-+ukWIM2/m5ALOMtoLMI+VhBAhQBI2jBtp3QXJ649h6M=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-t0SKwGSI1Yz5ny7kcNidimmtWu5ZLyeLk8WVo/hTQ2U=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Twelve-Dimension Narratology Network · Annotated Journey to the West</title>
@@ -186,6 +186,8 @@ header.hero .meta {
 }
 .legend-item { display: flex; align-items: center; gap: 6px; }
 .legend-swatch { width: 14px; height: 14px; border-radius: var(--radius-sm) }
+/* Heat matrix: sequential scale bar (darker = higher score) */
+.heatmap-legend-bar { width: 180px; height: 14px; border-radius: var(--radius-sm); }
 
 /* Tooltip */
 
@@ -416,18 +418,18 @@ table.data-table th, table.data-table td { white-space: nowrap; }
   </div>
 </section>
 
-<!-- Section 4: Radar -->
-<section class="section" id="radar">
-  <h2 class="section-title">IV · Twelve-Dimension Narratology Radar (4 metrics)</h2>
-  <div class="section-sub">RADAR: 12 DIMENSIONS × 4 METRICS</div>
+<!-- Section 4: Heat matrix -->
+<section class="section" id="heatmap">
+  <h2 class="section-title">IV · Twelve-Dimension Narratology Heat Matrix (4 metrics)</h2>
+  <div class="section-sub">HEATMAP: 12 DIMENSIONS × 4 METRICS</div>
   <div class="definition">
-    <strong>Definition:</strong>The radar chart evaluates each narratology dimension on four metrics: theory depth (maturity of the theoretical system), text coverage (breadth of Journey to the West textual analysis), cross-topic links (degree of linkage with other dimensions), and academic value (research contribution and influence). The larger the radar area, the stronger the dimension’s overall standing within the twelve-dimension narratology framework. Intertextuality (Intertext), temporal narratology (Time), and cognitive narratology (Cognitive) show the strongest composite performance, while the tactile and olfactory dimensions are emerging growth points.
+    <strong>Definition:</strong>The heat matrix evaluates each narratology dimension on four metrics: theory depth (maturity of the theoretical system), text coverage (breadth of Journey to the West textual analysis), cross-topic links (degree of linkage with other dimensions), and academic value (research contribution and influence). Rows are dimensions and columns are metrics; the darker the color, the higher that metric scores. A horizontal reading shows the strength profile of a single dimension, while a vertical reading compares the same metric across all twelve dimensions. Intertextuality (Intertext), temporal narratology (Time), and cognitive narratology (Cognitive) show the strongest composite performance, while the tactile and olfactory dimensions are emerging growth points.
   </div>
   <div class="chart-block">
-    <div class="chart-title">Twelve Dimensions × Four Metrics Radar (theory depth + text coverage + cross-topic links + academic value)</div>
-    <div class="chart-caption">12 dimensions × 4 metrics · values 0–100 · hover for details</div>
-    <svg id="chart-radar" class="chart-svg" width="100%" height="620"></svg>
-    <div class="legend-row" id="radar-legend"></div>
+    <div class="chart-title">Twelve Dimensions × Four Metrics Heat Matrix (theory depth + text coverage + cross-topic links + academic value)</div>
+    <div class="chart-caption">Rows: 12 dimensions · columns: 4 metrics · values 0–100 · the darker the color, the higher the score · hover for details</div>
+    <svg id="chart-heatmap" class="chart-svg" width="100%" height="620"></svg>
+    <div class="legend-row" id="heatmap-legend"></div>
   </div>
 </section>
 
@@ -467,10 +469,10 @@ table.data-table th, table.data-table td { white-space: nowrap; }
   <!-- W1286 · conclusion block (gate 82 / C2): conclusion semantics carried by both the block class and its heading -->
   <section class="section">
     <h2 class="section-title">VII · Key Insights</h2>
-    <div class="section-sub">KEY INSIGHTS · Read from the actual values in the twelve-dimension overview, force graph, three-layer Sankey, radar and evolution timeline</div>
+    <div class="section-sub">KEY INSIGHTS · Read from the actual values in the twelve-dimension overview, force graph, three-layer Sankey, heat matrix and evolution timeline</div>
     <div class="insight-list">
       <div class="insight-item"><strong>How the twelve dimensions divide:</strong> five of them are sensory (hearing, smell, touch, sight, taste), three are theoretical (intertext, rhetoric, cognitive), two are spatio-temporal (time, space), and gender plus postcolonial take one each.</div>
-      <div class="insight-item"><strong>Intertext leads on every metric:</strong> W169 Intertextual Narratology tops all four radar scores (theoretical depth 95, text coverage 92, cross-topic linkage 90, academic value 94) and also carries the most terms at 9, while W165 Tactile sits last on all four (70 / 60 / 65 / 72).</div>
+      <div class="insight-item"><strong>Intertext leads on every metric:</strong> W169 Intertextual Narratology tops all four heat-matrix scores (theoretical depth 95, text coverage 92, cross-topic linkage 90, academic value 94) and also carries the most terms at 9, while W165 Tactile sits last on all four (70 / 60 / 65 / 72).</div>
       <div class="insight-item"><strong>Edges cluster at the two ends:</strong> of the 22 edges the strongest are time↔space at 88 and intertext↔rhetoric at 88, the strongest purely sensory pair is hearing↔sight at 85, and the weakest is smell↔cognition at 68.</div>
       <div class="insight-item"><strong>The evolution line runs one way:</strong> the timeline moves from W161 Temporal Narratology (2025-03-10) to W175 Twelve-Dimension Narratology Network (2025-07-28), growing from sensory dimensions to an integrated visualization in just over four months.</div>
     </div>
@@ -1058,10 +1060,12 @@ function renderSankey(sankeyLinkData, dimensions, theoristColors) {
 }
 
 // ============================================================
-// Section 4: Radar (12 dimensions × 4 metrics)
+// Section 4: Heat matrix (12 dimensions × 4 metrics)
+//   The former 12-axis star-polygon chart was rewritten per DESIGN.md §4B family 10
+//   disabling condition (axes >8 ⇒ heat matrix); data fields and values are unchanged.
 // ============================================================
-function renderRadar(dimensions) {
-  const svg = d3.select('#chart-radar');
+function renderHeatmap(dimensions) {
+  const svg = d3.select('#chart-heatmap');
   svg.selectAll('*').remove();
   if (!dimensions || dimensions.length === 0) {
     svg.append('text').attr('x', 200).attr('y', 300).attr('fill', '#8a7a5a').text('No data');
@@ -1078,121 +1082,118 @@ function renderRadar(dimensions) {
     { key: 'crossTopic', label: 'Cross-topic links' },
     { key: 'academicValue', label: 'Academic value' }
   ];
-  const dimColors = {};
-  dimensions.forEach(d => { dimColors[d.dim] = d.color; });
+  const margin = { top: 56, right: 28, bottom: 22, left: 132 };
+  const innerW = Math.max(160, width - margin.left - margin.right);
+  const innerH = height - margin.top - margin.bottom;
 
-  const cx = width / 2;
-  const cy = height / 2 + 10;
-  const radius = Math.min(width, height) / 2 - 120;
-  const levels = 5;
+  // Rows = dimensions (original data order) · columns = metrics
+  const x = d3.scaleBand().domain(metrics.map(m => m.key)).range([0, innerW]).paddingInner(0.05).paddingOuter(0.02);
+  const y = d3.scaleBand().domain(dimensions.map(d => d.code)).range([0, innerH]).paddingInner(0.1);
+  // Single-hue sequential scale (0-100): darker = higher. Rainbow scales are disallowed.
+  const color = d3.scaleSequential(d3.interpolateBlues).domain([0, 100]);
 
-  const gBg = svg.append('g').attr('transform', `translate(${cx},${cy})`);
+  const g = svg.append('g').attr('transform', `translate(${margin.left},${margin.top})`);
 
-  // Background concentric polygons
-  for (let lvl = 1; lvl <= levels; lvl++) {
-    const r = radius * lvl / levels;
-    const points = metrics.map((m, i) => {
-      const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
-      return [Math.cos(angle) * r, Math.sin(angle) * r];
-    });
-    gBg.append('polygon')
-      .attr('points', points.map(p => p.join(',')).join(' '))
-      .attr('fill', 'none')
-      .attr('stroke', '#d4c5a9')
-      .attr('stroke-width', 1)
-      .attr('stroke-dasharray', lvl === levels ? '0' : '3,3');
-  }
-
-  // Axes + labels
-  metrics.forEach((m, i) => {
-    const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
-    gBg.append('line')
-      .attr('x1', 0).attr('y1', 0)
-      .attr('x2', Math.cos(angle) * radius)
-      .attr('y2', Math.sin(angle) * radius)
-      .attr('stroke', '#d4c5a9')
-      .attr('stroke-width', 1);
-    const labelR = radius + 32;
-    gBg.append('text')
-      .attr('x', Math.cos(angle) * labelR)
-      .attr('y', Math.sin(angle) * labelR)
-      .attr('text-anchor', 'middle')
-      .attr('dy', '0.35em')
-      .attr('font-size', '13px')
-      .attr('font-weight', '600')
-      .attr('fill', '#1a1410')
-      .text(m.label);
+  const cells = [];
+  dimensions.forEach(dim => {
+    metrics.forEach(metric => { cells.push({ dim: dim, metric: metric, value: dim[metric.key] }); });
   });
-
-  // Value ticks
-  for (let lvl = 1; lvl <= levels; lvl++) {
-    const r = radius * lvl / levels;
-    gBg.append('text')
-      .attr('x', -6).attr('y', -r)
-      .attr('text-anchor', 'end')
-      .attr('font-size', '10px')
-      .attr('fill', '#8a7a5a')
-      .text(lvl * 20);
-  }
 
   const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
     ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
     : d3.select('.chart-tooltip');
 
-  // One polygon per dimension
-  dimensions.forEach(dim => {
-    const points = metrics.map((m, i) => {
-      const angle = (i / metrics.length) * 2 * Math.PI - Math.PI / 2;
-      const normalized = (dim[m.key] / 100) * 10;
-      const rr = radius * (normalized / 10);
-      return [Math.cos(angle) * rr, Math.sin(angle) * rr];
+  // Cells
+  g.append('g').selectAll('rect')
+    .data(cells)
+    .enter().append('rect')
+    .attr('x', d => x(d.metric.key))
+    .attr('y', d => y(d.dim.code))
+    .attr('width', x.bandwidth())
+    .attr('height', y.bandwidth())
+    .attr('rx', 2)
+    .attr('fill', d => color(d.value))
+    .attr('stroke', '#fff')
+    .attr('stroke-width', 1)
+    .style('cursor', 'pointer')
+    .on('mouseover', function(e, d) {
+      d3.select(this).attr('stroke', '#8b4513').attr('stroke-width', 2);
+      tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
+      tooltip.html('');
+      tooltip.append('div').html('<strong>' + d.dim.code + ' · ' + d.dim.dim + '</strong>');
+      tooltip.append('div').text(d.metric.label + ': ' + d.value);
+    })
+    .on('mousemove', function(e) {
+      tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
+    })
+    .on('mouseout', function() {
+      d3.select(this).attr('stroke', '#fff').attr('stroke-width', 1);
+      tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
     });
-    const color = dimColors[dim.dim] || '#8b4513';
 
-    gBg.append('polygon')
-      .attr('points', points.map(p => p.join(',')).join(' '))
-      .attr('fill', color)
-      .attr('fill-opacity', 0.08)
-      .attr('stroke', color)
-      .attr('stroke-width', 1.8)
-      .style('cursor', 'pointer')
-      .on('mouseover', function(e) {
-        d3.select(this).attr('fill-opacity', 0.28);
-        tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
-        tooltip.html('');
-        tooltip.append('div').html('<strong>' + dim.code + ' · ' + dim.dim + ' (' + dim.topic + ')</strong>');
-        metrics.forEach(m => {
-          tooltip.append('div').text(m.label + ': ' + dim[m.key]);
-        });
-      })
-      .on('mousemove', function(e) {
-        tooltip.style('left', (e.pageX + 12) + 'px').style('top', (e.pageY - 28) + 'px');
-      })
-      .on('mouseout', function() {
-        d3.select(this).attr('fill-opacity', 0.08);
-        tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
-      });
+  // Value chips (fixed white backing so the text stays legible over any scale step)
+  g.append('g').selectAll('rect.chip')
+    .data(cells)
+    .enter().append('rect')
+    .attr('x', d => x(d.metric.key) + x.bandwidth() / 2 - 10)
+    .attr('y', d => y(d.dim.code) + y.bandwidth() / 2 - 7)
+    .attr('width', 20)
+    .attr('height', 14)
+    .attr('rx', 3)
+    .attr('fill', '#fff')
+    .attr('opacity', 0.86)
+    .attr('pointer-events', 'none');
 
-    // Vertex circles
-    points.forEach((p) => {
-      gBg.append('circle')
-        .attr('cx', p[0]).attr('cy', p[1])
-        .attr('r', 3)
-        .attr('fill', color)
-        .attr('stroke', '#fff')
-        .attr('stroke-width', 1)
-        .attr('pointer-events', 'none');
-    });
-  });
+  // Cell values (12px, ink text on the fixed chip)
+  g.append('g').selectAll('text')
+    .data(cells)
+    .enter().append('text')
+    .attr('x', d => x(d.metric.key) + x.bandwidth() / 2)
+    .attr('y', d => y(d.dim.code) + y.bandwidth() / 2)
+    .attr('text-anchor', 'middle')
+    .attr('dy', '0.35em')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .style('fill', '#1a1410')
+    .attr('pointer-events', 'none')
+    .text(d => d.value);
 
-  // Legend
-  const legend = d3.select('#radar-legend');
+  // Row labels (dimension name, horizontal, full name via title)
+  g.append('g').selectAll('text')
+    .data(dimensions)
+    .enter().append('text')
+    .attr('x', -10)
+    .attr('y', d => y(d.code) + y.bandwidth() / 2)
+    .attr('text-anchor', 'end')
+    .attr('dy', '0.35em')
+    .attr('font-size', '12px')
+    .attr('fill', 'var(--ink)')
+    .text(d => d.code + ' ' + d.dim)
+    .append('title')
+    .text(d => d.code + ' ' + d.dim + ' (' + d.topic + ')');
+
+  // Column labels (4 metrics, on top)
+  g.append('g').selectAll('text')
+    .data(metrics)
+    .enter().append('text')
+    .attr('x', d => x(d.key) + x.bandwidth() / 2)
+    .attr('y', -14)
+    .attr('text-anchor', 'middle')
+    .attr('font-size', '12px')
+    .attr('font-weight', '600')
+    .attr('fill', 'var(--ink)')
+    .text(d => d.label);
+
+  // Legend: sequential scale bar + both end values
+  const legend = d3.select('#heatmap-legend');
   legend.html('');
-  dimensions.forEach(dim => {
-    const item = legend.append('div').attr('class', 'legend-item');
-    item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', dimColors[dim.dim] || '#8b4513'); });
-    item.append('span').text(dim.code + ' ' + dim.dim);
-  });
+  const stops = [0, 25, 50, 75, 100].map(v => color(v)).join(', ');
+  const item = legend.append('div').attr('class', 'legend-item');
+  item.append('span').text('0');
+  item.append('div').attr('class', 'heatmap-legend-bar')
+    .each(function() { d3.select(this).style('background', 'linear-gradient(to right, ' + stops + ')'); });
+  item.append('span').text('100');
+  legend.append('div').attr('class', 'legend-item').append('span').text('The darker the color, the higher the score');
 }
 
 // ============================================================
@@ -1487,7 +1488,7 @@ async function main() {
   renderOverview(data.dimensions);
   renderForce(data.dimensions, data.links);
   renderSankey(data.sankey, data.dimensions, data.sankeyTheoristColors);
-  renderRadar(data.dimensions);
+  renderHeatmap(data.dimensions);
   renderTimeline(data.timeline);
   renderSummary(data.dimensions, data.theorists);
 }
@@ -1502,7 +1503,7 @@ window.addEventListener('resize', () => {
       renderOverview(data.dimensions);
       renderForce(data.dimensions, data.links);
       renderSankey(data.sankey, data.dimensions, data.sankeyTheoristColors);
-      renderRadar(data.dimensions);
+      renderHeatmap(data.dimensions);
       renderTimeline(data.timeline);
       renderSummary(data.dimensions, data.theorists);
     }

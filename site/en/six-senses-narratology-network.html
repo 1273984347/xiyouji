@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-SSrv/rElj4YSpAuvjUqBG7Vw/EdYCdZ1t6dPQOuAiQo=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-9uEOWlJR0DrbEFCVmaWK39wI4/NGaMM0XlWtaxQclTk=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-eDMPNXKzO/O7E9vKMiNLWAamwRZaBpyQ78aZOkBBn5c=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-9uEOWlJR0DrbEFCVmaWK39wI4/NGaMM0XlWtaxQclTk=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Six-Senses Narratology Network · Annotated Journey to the West</title>
@@ -396,10 +396,13 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <strong>Definition:</strong>Seven dimensions evaluate the seven senses — term count, case count, theorist count, and cross-reference degree. The larger the radar area, the heavier that sense’s narratological load. Sight and space have the highest reference degrees and taste the lowest, reflecting the gradient of signifier density across the senses in the narrative.
   </div>
   <div class="chart-block">
-    <div class="chart-title">Seven Senses × Four Dimensions Radar (terms/cases/theorists/citations)</div>
-    <div class="chart-caption">7 senses × 4 dimensions · values normalized 0–10 · hover for details</div>
+    <div class="chart-title">Seven Senses × Four Dimensions Radar (single entity · full ranking in the dot plot below)</div>
+    <div class="chart-caption">4 dimensions (terms/cases/theorists/citations) · values normalized 0–10 · radar plots 1 entity · full ranking in the dot plot below · hover for details</div>
+    <!-- chart-radar-meta: axes=4 series=1 -->
+    <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
     <svg id="chart-radar" class="chart-svg" width="100%" height="540"></svg>
     <div class="legend-row" id="radar-legend"></div>
+    <div id="radar-dotplot" style="margin-top:12px"></div>
   </div>
 </section>
 
@@ -938,8 +941,71 @@ const structLink = svg.append('g').selectAll('.struct-link')
 }
 
 // ============================================================
-// Section 3: Radar (7 senses × 4 dimensions)
+// Section 3: Radar (7 senses × 4 dimensions · single-entity radar + mean-sorted dot plot)
 // ============================================================
+const SENSE_RADAR_DIMS = ['Terms', 'Cases', 'Theorists', 'Citations'];
+let radarSelected = null;
+// Baseline = per-dimension max over all seven senses; if it collapsed to the selected entity only,
+// the four axes would all reach full radius and the shape would carry no information.
+let radarMaxes = {};
+
+// Mean = arithmetic mean of the four normalized (0-10) dimension values
+function radarMean(d) {
+  const vals = SENSE_RADAR_DIMS.map(k => (radarMaxes[k] ? (d[k] / radarMaxes[k]) * 10 : 0));
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+
+function renderRadarPanel(radarList) {
+  const list = (radarList || []).slice();
+  if (!list.length) { renderRadar([]); return; }
+  radarMaxes = {};
+  SENSE_RADAR_DIMS.forEach(dim => { radarMaxes[dim] = d3.max(list, d => d[dim]) || 1; });
+  const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+  if (!radarSelected || !list.some(d => d.sense === radarSelected)) radarSelected = sorted[0].sense;
+
+  // Entity selector
+  const ctrl = d3.select('#radar-controls');
+  ctrl.selectAll('*').remove();
+  ctrl.append('span').text('Radar sense:')
+    .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+  const sel = ctrl.append('select')
+    .style('font-size', '0.8rem').style('padding', '3px 8px')
+    .style('border', '1px solid var(--line)').style('border-radius', '4px')
+    .style('background', 'var(--paper)').style('color', 'var(--ink)');
+  sel.selectAll('option').data(sorted).enter().append('option')
+    .attr('value', d => d.sense).property('selected', d => d.sense === radarSelected)
+    .text(d => d.sense);
+  sel.on('change', function () { radarSelected = this.value; renderRadarPanel(list); });
+
+  // The radar draws the selected entity only
+  renderRadar(list.filter(d => d.sense === radarSelected));
+
+  // Full ranking dot plot (descending mean · click to drive the radar)
+  const host = d3.select('#radar-dotplot');
+  host.selectAll('*').remove();
+  const maxV = d3.max(sorted, radarMean) || 1;
+  const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+    .attr('class', 'dot-row')
+    .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+    .style('padding', '2px 0').style('cursor', 'pointer')
+    .style('opacity', d => (d.sense === radarSelected ? 1 : 0.72))
+    .on('click', (e, d) => { radarSelected = d.sense; renderRadarPanel(list); });
+  rows.append('span').text(d => d.sense)
+    .style('flex', '0 0 96px').style('text-align', 'right').style('font-size', '0.74rem')
+    .style('color', 'var(--ink-soft)');
+  const track = rows.append('span')
+    .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+    .style('background', 'var(--line)').style('border-radius', '4px');
+  track.append('span')
+    .style('position', 'absolute').style('top', '-3px')
+    .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+    .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+    .style('background', d => (d.sense === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+    .style('transform', 'translateX(-7px)');
+  rows.append('span').text(d => radarMean(d).toFixed(1))
+    .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+}
+
 function renderRadar(radarData) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
@@ -952,14 +1018,11 @@ function renderRadar(radarData) {
   const height = 540;
   svg.attr('viewBox', `0 0 ${width} ${height}`);
 
-  const dimensions = ['Terms', 'Cases', 'Theorists', 'Citations'];
+  const dimensions = SENSE_RADAR_DIMS;
   const senseColors = senseColorMap(EMBEDDED_DATA.sixSenses.senses);
 
-  // Normalize: map each dimension to 0-10
-  const maxes = {};
-  dimensions.forEach(dim => {
-    maxes[dim] = d3.max(radarData, d => d[dim]) || 1;
-  });
+  // Normalize: each dimension maps to 0-10 against the full-batch baseline (computed in renderRadarPanel)
+  const maxes = radarMaxes;
 
   const cx = width / 2;
   const cy = height / 2 + 10;
@@ -1016,10 +1079,10 @@ function renderRadar(radarData) {
   }
 
   const tooltip = d3.select('body').selectAll('.chart-tooltip').empty()
-    ? d3.select('body').append('div').attr('class', 'chart-tooltip').style('opacity', 0)
+    ? d3.select('body').append('div').attr('class', 'chart-tooltip')
     : d3.select('.chart-tooltip');
 
-  // One polygon per sense
+  // Single entity (§4B: one series per chart) — only the selected sense is drawn
   radarData.forEach(role => {
     const points = dimensions.map((dim, i) => {
       const angle = (i / dimensions.length) * 2 * Math.PI - Math.PI / 2;
@@ -1039,7 +1102,7 @@ function renderRadar(radarData) {
       .style('cursor', 'pointer')
       .on('mouseover', function(e) {
         d3.select(this).attr('fill-opacity', 0.35);
-        tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
+        tooltip.classed('visible', true);
         tooltip.html('');
         tooltip.append('div').html('<strong>' + role.sense + ' Narratology</strong>');
         dimensions.forEach(dim => {
@@ -1051,7 +1114,7 @@ function renderRadar(radarData) {
       })
       .on('mouseout', function() {
         d3.select(this).attr('fill-opacity', 0.12);
-        tooltip.transition().duration(MOYUN_RM?0:400).style('opacity', 0);
+        tooltip.classed('visible', false);
       });
 
     // Vertex circles
@@ -1065,13 +1128,13 @@ function renderRadar(radarData) {
     });
   });
 
-  // Legend
+  // Legend: with a single entity only the current sense is labelled (no sibling series to switch)
   const legend = d3.select('#radar-legend');
   legend.html('');
   radarData.forEach(role => {
     const item = legend.append('div').attr('class', 'legend-item');
     item.append('div').attr('class', 'legend-swatch').each(function() { d3.select(this).style('background', senseColors[role.sense] || '#8b4513'); });
-    item.append('span').text(role.sense);
+    item.append('span').text(role.sense + ' · mean ' + radarMean(role).toFixed(1));
   });
 }
 
@@ -1480,7 +1543,7 @@ async function main() {
 
   renderOverview(data.senses);
   renderForce(data.network);
-  renderRadar(data.radar);
+  renderRadarPanel(data.radar);
   renderSankey(data.sankey);
   renderTimeline(data.timeline);
   renderSummary(data.senses, data.network);
@@ -1495,7 +1558,7 @@ window.addEventListener('resize', () => {
       const data = window.__lastData;
       renderOverview(data.senses);
       renderForce(data.network);
-      renderRadar(data.radar);
+      renderRadarPanel(data.radar);
       renderSankey(data.sankey);
       renderTimeline(data.timeline);
       renderSummary(data.senses, data.network);

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-M0+UIXLJVlNwXzy8QFYsyQTZ585gzRRGhsYFnxDePJo=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-bsKjLeU1U5RDUHQ9b1CtESslGQF+5DeWAKWjtb2rmWA=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Guanyin’s Six-Role Relationship Network · Annotated Journey to the West</title>
@@ -346,9 +346,12 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
   </div>
   <div class="chart-block">
     <div class="chart-title">Six-Role Five-Dimension Radar (compassion / calculation / power / concealment / intervention)</div>
-    <div class="chart-caption">Six roles × 5 dimensions · values 0–10 · hover for details</div>
+    <div class="chart-caption">5 dimensions · values 0–10 · the radar plots 1 entity · mean-ranked dot plot below · hover for details</div>
+    <!-- chart-radar-meta: axes=5 series=1 -->
+    <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
     <svg id="chart-radar" class="chart-svg" width="100%" height="500"></svg>
     <div class="legend-row" id="radar-legend"></div>
+    <div id="radar-dotplot" style="margin-top:12px"></div>
   </div>
 </section>
 
@@ -1136,8 +1139,67 @@ function renderSankey(sankeyData) {
 }
 
 // ============================================================
-// Section 4: radar
+// Section 4: radar (single-entity radar + mean-ranked dot plot)
 // ============================================================
+const RADAR_DIMS = ['compassion', 'calculation', 'power', 'concealment', 'intervention'];
+let radarSelected = null;
+
+// Mean basis: arithmetic mean of the role's five dimension scores (0-10)
+function radarMean(d) {
+  const vals = RADAR_DIMS.map(k => d[k]).filter(v => typeof v === 'number');
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+
+function renderRadarPanel(data) {
+  const list = (data.radar || []).slice();
+  if (!list.length) { renderRadar(list); return; }
+  const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+  if (!radarSelected || !list.some(d => d.role === radarSelected)) radarSelected = sorted[0].role;
+
+  // Entity selector (dropdown)
+  const ctrl = d3.select('#radar-controls');
+  ctrl.selectAll('*').remove();
+  ctrl.append('span').text('Radar entity:')
+    .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+  const sel = ctrl.append('select')
+    .style('font-size', '0.8rem').style('padding', '3px 8px')
+    .style('border', '1px solid var(--line)').style('border-radius', '4px')
+    .style('background', 'var(--paper)').style('color', 'var(--ink)');
+  sel.selectAll('option').data(sorted).enter().append('option')
+    .attr('value', d => d.role).property('selected', d => d.role === radarSelected)
+    .text(d => d.role);
+  sel.on('change', function () { radarSelected = this.value; renderRadarPanel(data); });
+
+  // The radar draws the selected entity only
+  renderRadar(list.filter(d => d.role === radarSelected));
+
+  // Full mean-ranked dot plot (click a row to switch the radar)
+  const host = d3.select('#radar-dotplot');
+  host.selectAll('*').remove();
+  const maxV = d3.max(sorted, radarMean) || 1;
+  const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+    .attr('class', 'dot-row')
+    .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+    .style('padding', '2px 0').style('cursor', 'pointer')
+    .style('opacity', d => (d.role === radarSelected ? 1 : 0.72))
+    .on('click', (e, d) => { radarSelected = d.role; renderRadarPanel(data); });
+  rows.append('span').text(d => d.role)
+    .style('flex', '0 0 auto').style('min-width', '96px').style('max-width', '46%')
+    .style('text-align', 'right').style('font-size', '0.74rem')
+    .style('color', 'var(--ink-soft)');
+  const track = rows.append('span')
+    .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+    .style('background', 'var(--line)').style('border-radius', '4px');
+  track.append('span')
+    .style('position', 'absolute').style('top', '-3px')
+    .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+    .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+    .style('background', d => (d.role === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+    .style('transform', 'translateX(-7px)');
+  rows.append('span').text(d => radarMean(d).toFixed(1))
+    .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+}
+
 function renderRadar(radarData) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
@@ -1234,7 +1296,7 @@ function renderRadar(radarData) {
         tooltip.html('');
         tooltip.append('div').html('<strong>' + role.role + '</strong>');
         dimensions.forEach(dim => {
-          tooltip.append('div').text(dim + '：' + role[dim] + ' / 10');
+          tooltip.append('div').text(dim + ': ' + role[dim] + ' / 10');
         });
       })
       .on('mousemove', function(e) {
@@ -1256,13 +1318,13 @@ function renderRadar(radarData) {
     });
   });
 
-  // legend
+  // legend: single entity, so only the current role is annotated
   const legend = d3.select('#radar-legend');
   legend.html('');
   radarData.forEach(role => {
     const item = legend.append('div').attr('class', 'legend-item');
     item.append('div').attr('class', 'legend-swatch').style('background', roleColors[role.role]);
-    item.append('span').text(role.role);
+    item.append('span').text(role.role + ' · mean ' + radarMean(role).toFixed(1));
   });
 }
 
@@ -1431,7 +1493,7 @@ async function main() {
   renderIntensity(data.intensity);
   renderForce(data.network);
   renderSankey(data.sankey);
-  renderRadar(data.radar);
+  renderRadarPanel(data);
   renderTimeline(data.timeline);
 }
 
@@ -1446,7 +1508,7 @@ window.addEventListener('resize', () => {
       renderIntensity(data.intensity);
       renderForce(data.network);
       renderSankey(data.sankey);
-      renderRadar(data.radar);
+      renderRadarPanel(data);
       renderTimeline(data.timeline);
     }
   }, 250);

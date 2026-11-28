@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "9d0679ded1ce",
+      "sha": "e4f22dbb2eee",
       "static": {
         "svg": true,
         "cls": true,
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "2529e2a136a6",
+      "sha": "da2d6480e4cd",
       "static": {
         "svg": false,
         "cls": true,
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "05ec43a7f4a3",
+      "sha": "58a6284e1240",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "6a5b18eb7a2c",
+      "sha": "555105a1a252",
       "static": {
         "svg": true,
         "cls": false,
@@ -7222,7 +7222,7 @@
     },
     {
       "page": "site/en/character-sentiment-arc.html",
-      "sha": "8df4a0cdd297",
+      "sha": "a2992067b13b",
       "static": {
         "svg": true,
         "cls": true,
@@ -7276,10 +7276,10 @@
           "id": "chart-radar",
           "w": 966,
           "h": 966,
-          "marks": 37,
+          "marks": 16,
           "texts": 6,
           "kind": "chart",
-          "basis": "966x966·图元 37·文本 6·命中图表词表"
+          "basis": "966x966·图元 16·文本 6·命中图表词表"
         },
         {
           "cls": "ic-moon",
@@ -7292,13 +7292,13 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 36,
+      "legendItems": 30,
       "visibleLegend": true,
       "seriesEvidence": 7,
       "seriesDesc": "填充色组 5·描边色组 7·同 x 堆叠段 0",
       "consoleErrors": 4,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 36 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 30 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/chart-design.html",
@@ -7412,7 +7412,7 @@
     },
     {
       "page": "site/en/cognitive-psychology.html",
-      "sha": "491e3c432b66",
+      "sha": "e8cae1c67985",
       "static": {
         "svg": true,
         "cls": true,
@@ -7486,10 +7486,10 @@
           "id": "chart-radar",
           "w": 978,
           "h": 520,
-          "marks": 45,
+          "marks": 17,
           "texts": 12,
           "kind": "chart",
-          "basis": "978x520·图元 45·文本 12·命中图表词表"
+          "basis": "978x520·图元 17·文本 12·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -7522,13 +7522,13 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 28,
+      "legendItems": 20,
       "visibleLegend": true,
-      "seriesEvidence": 8,
-      "seriesDesc": "填充色组 6·描边色组 8·同 x 堆叠段 0",
+      "seriesEvidence": 4,
+      "seriesDesc": "填充色组 3·描边色组 4·同 x 堆叠段 1",
       "consoleErrors": 8,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 28 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 20 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/concept-device.html",
@@ -8312,24 +8312,24 @@
     },
     {
       "page": "site/en/four-dimensional-research-network.html",
-      "sha": "b0eccf4192d3",
+      "sha": "9c8655d78490",
       "static": {
         "svg": true,
         "cls": true,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 5 个（最大者：1002x500·图元 33·文本 7·命中图表词表）",
+      "pageBasis": "渲染后有图表 svg 5 个（最大者：1002x500·图元 15·文本 7·命中图表词表）",
       "svgKinds": [
         {
           "cls": "",
           "id": "radar-svg",
           "w": 1002,
           "h": 500,
-          "marks": 33,
+          "marks": 15,
           "texts": 7,
           "kind": "chart",
-          "basis": "1002x500·图元 33·文本 7·命中图表词表"
+          "basis": "1002x500·图元 15·文本 7·命中图表词表"
         },
         {
           "cls": "",
@@ -8382,34 +8382,34 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 18,
+      "legendItems": 12,
       "visibleLegend": true,
       "seriesEvidence": 12,
       "seriesDesc": "填充色组 8·描边色组 1·同 x 堆叠段 12",
       "consoleErrors": 4,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 18 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 12 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/four-heavenly-kings-artifacts.html",
-      "sha": "ae698e142678",
+      "sha": "93dc48dfc814",
       "static": {
         "svg": true,
         "cls": true,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 3 个（最大者：1046x482·图元 33·文本 10·命中图表词表）",
+      "pageBasis": "渲染后有图表 svg 3 个（最大者：1046x482·图元 15·文本 10·命中图表词表）",
       "svgKinds": [
         {
           "cls": "chart-svg",
           "id": "chart-radar",
           "w": 1046,
           "h": 482,
-          "marks": 33,
+          "marks": 15,
           "texts": 10,
           "kind": "chart",
-          "basis": "1046x482·图元 33·文本 10·命中图表词表"
+          "basis": "1046x482·图元 15·文本 10·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -8442,13 +8442,13 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 26,
+      "legendItems": 20,
       "visibleLegend": true,
-      "seriesEvidence": 6,
-      "seriesDesc": "填充色组 5·描边色组 6·同 x 堆叠段 0",
+      "seriesEvidence": 5,
+      "seriesDesc": "填充色组 4·描边色组 5·同 x 堆叠段 0",
       "consoleErrors": 5,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 26 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 20 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/game-webnovel.html",
@@ -8622,7 +8622,7 @@
     },
     {
       "page": "site/en/guanyin-six-roles-network.html",
-      "sha": "7f6c7d0f4cd5",
+      "sha": "65ff7d985e22",
       "static": {
         "svg": true,
         "cls": true,
@@ -8666,10 +8666,10 @@
           "id": "chart-radar",
           "w": 1046,
           "h": 502,
-          "marks": 45,
+          "marks": 15,
           "texts": 10,
           "kind": "chart",
-          "basis": "1046x502·图元 45·文本 10·命中图表词表"
+          "basis": "1046x502·图元 15·文本 10·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -8692,13 +8692,13 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 46,
+      "legendItems": 36,
       "visibleLegend": true,
       "seriesEvidence": 12,
       "seriesDesc": "填充色组 6·描边色组 7·同 x 堆叠段 12",
       "consoleErrors": 5,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 46 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 36 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/guide.html",
@@ -8942,7 +8942,7 @@
     },
     {
       "page": "site/en/heaven-power-network.html",
-      "sha": "4376fe5c5b4d",
+      "sha": "4f0e20916ed8",
       "static": {
         "svg": true,
         "cls": true,
@@ -8976,10 +8976,10 @@
           "id": "chart-radar",
           "w": 1046,
           "h": 562,
-          "marks": 105,
+          "marks": 15,
           "texts": 10,
           "kind": "chart",
-          "basis": "1046x562·图元 105·文本 10·命中图表词表"
+          "basis": "1046x562·图元 15·文本 10·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -9022,17 +9022,17 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 58,
+      "legendItems": 48,
       "visibleLegend": true,
       "seriesEvidence": 7,
       "seriesDesc": "填充色组 6·描边色组 5·同 x 堆叠段 7",
       "consoleErrors": 5,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 58 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 48 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/intertextuality-network.html",
-      "sha": "5ccfad27ce1d",
+      "sha": "6b56fdf29ba5",
       "static": {
         "svg": true,
         "cls": true,
@@ -9066,10 +9066,10 @@
           "id": "chart-radar",
           "w": 1046,
           "h": 582,
-          "marks": 51,
+          "marks": 15,
           "texts": 10,
           "kind": "chart",
-          "basis": "1046x582·图元 51·文本 10·命中图表词表"
+          "basis": "1046x582·图元 15·文本 10·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -9102,13 +9102,13 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 52,
+      "legendItems": 40,
       "visibleLegend": true,
       "seriesEvidence": 11,
       "seriesDesc": "填充色组 5·描边色组 5·同 x 堆叠段 11",
       "consoleErrors": 5,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 52 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 40 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/journey-geo-semiotics.html",
@@ -9482,24 +9482,24 @@
     },
     {
       "page": "site/en/language-style-radar.html",
-      "sha": "672d8dba3d06",
+      "sha": "6f87422435ad",
       "static": {
         "svg": true,
         "cls": true,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1046x744·图元 51·文本 10·命中图表词表）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1046x744·图元 15·文本 10·命中图表词表）",
       "svgKinds": [
         {
           "cls": "",
           "id": "chart-radar",
           "w": 1046,
           "h": 744,
-          "marks": 51,
+          "marks": 15,
           "texts": 10,
           "kind": "chart",
-          "basis": "1046x744·图元 51·文本 10·命中图表词表"
+          "basis": "1046x744·图元 15·文本 10·命中图表词表"
         },
         {
           "cls": "",
@@ -9522,17 +9522,17 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 20,
+      "legendItems": 8,
       "visibleLegend": true,
-      "seriesEvidence": 7,
-      "seriesDesc": "填充色组 7·描边色组 7·同 x 堆叠段 0",
+      "seriesEvidence": 6,
+      "seriesDesc": "填充色组 6·描边色组 2·同 x 堆叠段 0",
       "consoleErrors": 4,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 20 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 8 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/linguistics.html",
-      "sha": "e2f4e1d1c78d",
+      "sha": "41fc8d52c5f0",
       "static": {
         "svg": true,
         "cls": true,
@@ -9586,10 +9586,10 @@
           "id": "chart-identity-radar",
           "w": 978,
           "h": 560,
-          "marks": 44,
+          "marks": 10,
           "texts": 9,
           "kind": "chart",
-          "basis": "978x560·图元 44·文本 9·命中图表词表"
+          "basis": "978x560·图元 10·文本 9·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -9612,13 +9612,13 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 54,
+      "legendItems": 40,
       "visibleLegend": true,
       "seriesEvidence": 6,
       "seriesDesc": "填充色组 4·描边色组 6·同 x 堆叠段 0",
       "consoleErrors": 8,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 54 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 40 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/magic-system.html",
@@ -9812,24 +9812,24 @@
     },
     {
       "page": "site/en/mbti-evolution.html",
-      "sha": "4126f0b8c066",
+      "sha": "faa5bb2e406f",
       "static": {
         "svg": true,
         "cls": false,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 7 个（最大者：796x460·图元 54·文本 13·命中图表词表）",
+      "pageBasis": "渲染后有图表 svg 7 个（最大者：796x460·图元 18·文本 13·命中图表词表）",
       "svgKinds": [
         {
           "cls": "",
           "id": "radar-svg",
           "w": 796,
           "h": 460,
-          "marks": 54,
+          "marks": 18,
           "texts": 13,
           "kind": "chart",
-          "basis": "796x460·图元 54·文本 13·命中图表词表"
+          "basis": "796x460·图元 18·文本 13·命中图表词表"
         },
         {
           "cls": "",
@@ -9902,13 +9902,13 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 5,
+      "legendItems": 1,
       "visibleLegend": true,
-      "seriesEvidence": 7,
-      "seriesDesc": "填充色组 6·描边色组 7·同 x 堆叠段 0",
+      "seriesEvidence": 6,
+      "seriesDesc": "填充色组 5·描边色组 1·同 x 堆叠段 6",
       "consoleErrors": 4,
-      "verdict": "multi_legend",
-      "basis": "渲染后可见图例 5 项（≥2 ⇒ 多系列且图例齐备）"
+      "verdict": "single",
+      "basis": "渲染后可见图例仅 1 项 ⇒ 单系列"
     },
     {
       "page": "site/en/methodology-matrix.html",
@@ -9962,7 +9962,7 @@
     },
     {
       "page": "site/en/ming-political-thought-comparison.html",
-      "sha": "eb4873237897",
+      "sha": "e2b39648a683",
       "static": {
         "svg": true,
         "cls": true,
@@ -10102,24 +10102,24 @@
     },
     {
       "page": "site/en/monster-capability-radar.html",
-      "sha": "43222743d34a",
+      "sha": "ca5e24483ce5",
       "static": {
         "svg": true,
         "cls": true,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 4 个（最大者：1100x560·图元 30·文本 5·命中图表词表）",
+      "pageBasis": "渲染后有图表 svg 4 个（最大者：1100x560·图元 16·文本 5·命中图表词表）",
       "svgKinds": [
         {
           "cls": "",
           "id": "radar-svg",
           "w": 1100,
           "h": 560,
-          "marks": 30,
+          "marks": 16,
           "texts": 5,
           "kind": "chart",
-          "basis": "1100x560·图元 30·文本 5·命中图表词表"
+          "basis": "1100x560·图元 16·文本 5·命中图表词表"
         },
         {
           "cls": "",
@@ -10165,14 +10165,14 @@
       "legendItems": 0,
       "visibleLegend": false,
       "seriesEvidence": 8,
-      "seriesDesc": "填充色组 8·描边色组 8·同 x 堆叠段 0",
+      "seriesDesc": "填充色组 8·描边色组 2·同 x 堆叠段 0",
       "consoleErrors": 4,
       "verdict": "multi_nolegend",
       "basis": "渲染后无可见图例·但系列证据 8 ⇒ 多系列却无图例"
     },
     {
       "page": "site/en/monster-ecology-network.html",
-      "sha": "884924ae3a93",
+      "sha": "2a717d0ad11a",
       "static": {
         "svg": true,
         "cls": true,
@@ -10206,10 +10206,10 @@
           "id": "radar-svg",
           "w": 1020,
           "h": 500,
-          "marks": 33,
-          "texts": 17,
+          "marks": 15,
+          "texts": 10,
           "kind": "chart",
-          "basis": "1020x500·图元 33·文本 17·命中图表词表"
+          "basis": "1020x500·图元 15·文本 10·命中图表词表"
         },
         {
           "cls": "",
@@ -10234,15 +10234,15 @@
       ],
       "legendItems": 22,
       "visibleLegend": true,
-      "seriesEvidence": 12,
-      "seriesDesc": "填充色组 8·描边色组 8·同 x 堆叠段 12",
+      "seriesEvidence": 5,
+      "seriesDesc": "填充色组 5·描边色组 3·同 x 堆叠段 1",
       "consoleErrors": 4,
       "verdict": "multi_legend",
       "basis": "渲染后可见图例 22 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/monster-female-network.html",
-      "sha": "11e170e1379a",
+      "sha": "2f40104d9b37",
       "static": {
         "svg": true,
         "cls": true,
@@ -10276,10 +10276,10 @@
           "id": "chart-radar",
           "w": 1046,
           "h": 622,
-          "marks": 90,
+          "marks": 10,
           "texts": 9,
           "kind": "chart",
-          "basis": "1046x622·图元 90·文本 9·命中图表词表"
+          "basis": "1046x622·图元 10·文本 9·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -10312,7 +10312,7 @@
     },
     {
       "page": "site/en/monster-hierarchy-network.html",
-      "sha": "072a382f50fb",
+      "sha": "df5840a832b2",
       "static": {
         "svg": true,
         "cls": true,
@@ -10346,10 +10346,10 @@
           "id": "chart-radar",
           "w": 1046,
           "h": 542,
-          "marks": 93,
+          "marks": 15,
           "texts": 10,
           "kind": "chart",
-          "basis": "1046x542·图元 93·文本 10·命中图表词表"
+          "basis": "1046x542·图元 15·文本 10·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -10392,17 +10392,17 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 58,
+      "legendItems": 52,
       "visibleLegend": true,
-      "seriesEvidence": 6,
-      "seriesDesc": "填充色组 5·描边色组 6·同 x 堆叠段 0",
+      "seriesEvidence": 5,
+      "seriesDesc": "填充色组 5·描边色组 1·同 x 堆叠段 0",
       "consoleErrors": 5,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 58 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 52 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/monster-sociology.html",
-      "sha": "ac9bd06cc038",
+      "sha": "0908d1f9ff5c",
       "static": {
         "svg": true,
         "cls": true,
@@ -10436,10 +10436,10 @@
           "id": "chart-mount-radar",
           "w": 978,
           "h": 560,
-          "marks": 70,
+          "marks": 16,
           "texts": 11,
           "kind": "chart",
-          "basis": "978x560·图元 70·文本 11·命中图表词表"
+          "basis": "978x560·图元 16·文本 11·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -10502,17 +10502,17 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 46,
+      "legendItems": 28,
       "visibleLegend": true,
       "seriesEvidence": 10,
       "seriesDesc": "填充色组 5·描边色组 2·同 x 堆叠段 10",
       "consoleErrors": 8,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 46 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 28 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/monster-victims-network.html",
-      "sha": "f24c02f6cc33",
+      "sha": "0141bcf1b479",
       "static": {
         "svg": true,
         "cls": true,
@@ -10546,10 +10546,10 @@
           "id": "chart-radar",
           "w": 1046,
           "h": 502,
-          "marks": 33,
+          "marks": 15,
           "texts": 10,
           "kind": "chart",
-          "basis": "1046x502·图元 33·文本 10·命中图表词表"
+          "basis": "1046x502·图元 15·文本 10·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -10572,13 +10572,13 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 32,
+      "legendItems": 26,
       "visibleLegend": true,
       "seriesEvidence": 6,
       "seriesDesc": "填充色组 6·描边色组 1·同 x 堆叠段 0",
       "consoleErrors": 5,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 32 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 26 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/music-structure.html",
@@ -10762,7 +10762,7 @@
     },
     {
       "page": "site/en/narratology-12d-network.html",
-      "sha": "c644612c7684",
+      "sha": "a6059015607b",
       "static": {
         "svg": true,
         "cls": true,
@@ -10793,13 +10793,13 @@
         },
         {
           "cls": "chart-svg",
-          "id": "chart-radar",
+          "id": "chart-heatmap",
           "w": 1046,
           "h": 622,
-          "marks": 65,
-          "texts": 9,
+          "marks": 96,
+          "texts": 64,
           "kind": "chart",
-          "basis": "1046x622·图元 65·文本 9·命中图表词表"
+          "basis": "1046x622·图元 96·文本 64·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -10822,17 +10822,17 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 50,
+      "legendItems": 28,
       "visibleLegend": true,
       "seriesEvidence": 15,
       "seriesDesc": "填充色组 8·描边色组 8·同 x 堆叠段 15",
       "consoleErrors": 5,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 50 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 28 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/narratology-16d-network.html",
-      "sha": "556998289f51",
+      "sha": "a625cbd405b7",
       "static": {
         "svg": true,
         "cls": true,
@@ -10863,13 +10863,13 @@
         },
         {
           "cls": "chart-svg",
-          "id": "chart-radar",
+          "id": "chart-heatmap",
           "w": 1046,
           "h": 642,
-          "marks": 90,
-          "texts": 9,
+          "marks": 128,
+          "texts": 84,
           "kind": "chart",
-          "basis": "1046x642·图元 90·文本 9·命中图表词表"
+          "basis": "1046x642·图元 128·文本 84·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -10892,13 +10892,13 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 76,
+      "legendItems": 46,
       "visibleLegend": true,
       "seriesEvidence": 16,
       "seriesDesc": "填充色组 8·描边色组 1·同 x 堆叠段 16",
       "consoleErrors": 4,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 76 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 46 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/perf-canvas-rendering.html",
@@ -11012,24 +11012,24 @@
     },
     {
       "page": "site/en/pilgrim-team-dynamic-network.html",
-      "sha": "90eab68a4b61",
+      "sha": "665a1497faed",
       "static": {
         "svg": true,
         "cls": true,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1066x460·图元 18·文本 14·命中图表词表）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1066x460·图元 71·文本 63·命中图表词表）",
       "svgKinds": [
         {
           "cls": "",
-          "id": "belbin-radar",
+          "id": "belbin-heatmap",
           "w": 1066,
           "h": 460,
-          "marks": 18,
-          "texts": 14,
+          "marks": 71,
+          "texts": 63,
           "kind": "chart",
-          "basis": "1066x460·图元 18·文本 14·命中图表词表"
+          "basis": "1066x460·图元 71·文本 63·命中图表词表"
         },
         {
           "cls": "",
@@ -11052,34 +11052,34 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 5,
+      "legendItems": 1,
       "visibleLegend": true,
-      "seriesEvidence": 6,
-      "seriesDesc": "填充色组 6·描边色组 6·同 x 堆叠段 0",
+      "seriesEvidence": 8,
+      "seriesDesc": "填充色组 8·描边色组 1·同 x 堆叠段 5",
       "consoleErrors": 4,
-      "verdict": "multi_legend",
-      "basis": "渲染后可见图例 5 项（≥2 ⇒ 多系列且图例齐备）"
+      "verdict": "single",
+      "basis": "渲染后可见图例仅 1 项 ⇒ 单系列"
     },
     {
       "page": "site/en/pilgrim-team-psychology-arc.html",
-      "sha": "f413e13b04bc",
+      "sha": "758ce9031f38",
       "static": {
         "svg": true,
         "cls": true,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 5 个（最大者：1100x520·图元 39·文本 10·命中图表词表）",
+      "pageBasis": "渲染后有图表 svg 5 个（最大者：1100x520·图元 15·文本 10·命中图表词表）",
       "svgKinds": [
         {
           "cls": "",
           "id": "radar-svg",
           "w": 1100,
           "h": 520,
-          "marks": 39,
+          "marks": 15,
           "texts": 10,
           "kind": "chart",
-          "basis": "1100x520·图元 39·文本 10·命中图表词表"
+          "basis": "1100x520·图元 15·文本 10·命中图表词表"
         },
         {
           "cls": "ico ico-t",
@@ -11312,7 +11312,7 @@
     },
     {
       "page": "site/en/relationships.html",
-      "sha": "fc139ee83e04",
+      "sha": "e21f85aa5bf5",
       "static": {
         "svg": true,
         "cls": true,
@@ -11353,13 +11353,13 @@
         },
         {
           "cls": "chart-svg",
-          "id": "chart-belbin-radar",
+          "id": "chart-belbin-heatmap",
           "w": 978,
           "h": 560,
-          "marks": 64,
-          "texts": 15,
+          "marks": 75,
+          "texts": 63,
           "kind": "chart",
-          "basis": "978x560·图元 64·文本 15·命中图表词表"
+          "basis": "978x560·图元 75·文本 63·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -11412,17 +11412,17 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 50,
+      "legendItems": 42,
       "visibleLegend": true,
       "seriesEvidence": 10,
       "seriesDesc": "填充色组 8·描边色组 2·同 x 堆叠段 10",
       "consoleErrors": 4,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 50 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 42 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/risk-project.html",
-      "sha": "014a70d0b6b2",
+      "sha": "07d08e49b55b",
       "static": {
         "svg": true,
         "cls": true,
@@ -11476,10 +11476,10 @@
           "id": "chart-mbti-radar",
           "w": 978,
           "h": 540,
-          "marks": 46,
+          "marks": 11,
           "texts": 10,
           "kind": "chart",
-          "basis": "978x540·图元 46·文本 10·命中图表词表"
+          "basis": "978x540·图元 11·文本 10·命中图表词表"
         },
         {
           "cls": "ic-moon",
@@ -11492,17 +11492,17 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 44,
+      "legendItems": 30,
       "visibleLegend": true,
       "seriesEvidence": 8,
       "seriesDesc": "填充色组 8·描边色组 3·同 x 堆叠段 0",
       "consoleErrors": 8,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 44 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 30 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/six-senses-narratology-network.html",
-      "sha": "81b3b5e52f5d",
+      "sha": "d32093c998cd",
       "static": {
         "svg": true,
         "cls": true,
@@ -11526,10 +11526,10 @@
           "id": "chart-radar",
           "w": 1046,
           "h": 542,
-          "marks": 40,
+          "marks": 10,
           "texts": 9,
           "kind": "chart",
-          "basis": "1046x542·图元 40·文本 9·命中图表词表"
+          "basis": "1046x542·图元 10·文本 9·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -11562,34 +11562,34 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 40,
+      "legendItems": 28,
       "visibleLegend": true,
       "seriesEvidence": 28,
       "seriesDesc": "填充色组 8·描边色组 8·同 x 堆叠段 28",
       "consoleErrors": 5,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 40 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 28 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/social-media.html",
-      "sha": "b57a121a5f83",
+      "sha": "4c0aec83672b",
       "static": {
         "svg": true,
         "cls": false,
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：796x460·图元 57·文本 8·命中图表词表）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：796x460·图元 22·文本 8·命中图表词表）",
       "svgKinds": [
         {
           "cls": "",
           "id": "radar-svg",
           "w": 796,
           "h": 460,
-          "marks": 57,
+          "marks": 22,
           "texts": 8,
           "kind": "chart",
-          "basis": "796x460·图元 57·文本 8·命中图表词表"
+          "basis": "796x460·图元 22·文本 8·命中图表词表"
         },
         {
           "cls": "",
@@ -11612,13 +11612,13 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 8,
+      "legendItems": 1,
       "visibleLegend": true,
       "seriesEvidence": 16,
       "seriesDesc": "填充色组 3·描边色组 2·同 x 堆叠段 16",
       "consoleErrors": 7,
-      "verdict": "multi_legend",
-      "basis": "渲染后可见图例 8 项（≥2 ⇒ 多系列且图例齐备）"
+      "verdict": "single",
+      "basis": "渲染后可见图例仅 1 项 ⇒ 单系列"
     },
     {
       "page": "site/en/tag-cloud.html",
@@ -11772,7 +11772,7 @@
     },
     {
       "page": "site/en/theological-intervention-network.html",
-      "sha": "a8794a38ba85",
+      "sha": "edc4254c8278",
       "static": {
         "svg": true,
         "cls": true,
@@ -12112,7 +12112,7 @@
     },
     {
       "page": "site/en/underworld-power-network.html",
-      "sha": "fb90b0d56d42",
+      "sha": "7da2e5fe45d9",
       "static": {
         "svg": true,
         "cls": true,
@@ -12146,10 +12146,10 @@
           "id": "chart-radar",
           "w": 1046,
           "h": 542,
-          "marks": 105,
+          "marks": 15,
           "texts": 10,
           "kind": "chart",
-          "basis": "1046x542·图元 105·文本 10·命中图表词表"
+          "basis": "1046x542·图元 15·文本 10·命中图表词表"
         },
         {
           "cls": "chart-svg",
@@ -12192,13 +12192,13 @@
           "basis": "18x18·图元 1·无文本（小尺寸·无文本 ⇒ 图标）"
         }
       ],
-      "legendItems": 58,
+      "legendItems": 48,
       "visibleLegend": true,
-      "seriesEvidence": 7,
-      "seriesDesc": "填充色组 6·描边色组 7·同 x 堆叠段 0",
+      "seriesEvidence": 6,
+      "seriesDesc": "填充色组 6·描边色组 1·同 x 堆叠段 0",
       "consoleErrors": 5,
       "verdict": "multi_legend",
-      "basis": "渲染后可见图例 58 项（≥2 ⇒ 多系列且图例齐备）"
+      "basis": "渲染后可见图例 48 项（≥2 ⇒ 多系列且图例齐备）"
     },
     {
       "page": "site/en/visual-art.html",

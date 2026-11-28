@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-F1GIltecoV8CUfQYGKG1znZgNAbPB9PxoHGPiNRwoHk=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-MN7XNblxeh/O2wKgdi55wxiJeCi9DY55lIFzE4q5FGQ=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Social Media Persona · MBTI Personality Map · Annotated Journey to the West</title>
@@ -606,16 +606,19 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
         <!-- 板块 2：MBTI 雷达图 -->
         <section class="section">
             <h2 class="section-title">MBTI Eight-Dimension Radar Chart</h2>
-            <div class="section-sub">Splits the four MBTI letters into 8 independent axes (E/I/S/N/T/F/J/P); each axis scores 0 or 1, with 8 characters overlaid for comparison.</div>
+            <div class="section-sub">Splits the four MBTI letters into 8 independent axes (E/I/S/N/T/F/J/P); each axis scores 0 or 1 · the radar plots 1 character (§4B: at most 3 series per chart) · full ranking in the dot plot below.</div>
+            <!-- chart-radar-meta: axes=8 series=1 -->
+            <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
             <div class="radar-wrap">
                 <div style="position:relative;">
                     <svg id="radar-svg"></svg>
                     <div class="radar-tip" id="radar-tip"></div>
                 </div>
                 <div class="radar-legend" id="radar-legend">
-                    <h4>Character legend</h4>
+                    <h4>Current character</h4>
                 </div>
             </div>
+            <div id="radar-dotplot" style="margin-top:12px"></div>
         </section>
 
         <!-- 板块 3：职场适配度条形图 -->
@@ -1170,6 +1173,66 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
     // ============================================================
     // 渲染：MBTI 八维雷达图
     // ============================================================
+    // ===== §4B radar compliance panel: one series per chart + full-ranking dot plot =====
+    let radarSelected = null;
+    let radarPanelData = null;   // panel data cache (this page keeps data on window.__data, mbti under .mbti)
+
+    // The eight axes are always 0/1 here (each type hits exactly 4 of them) ⇒ the axis mean is a constant
+    // 0.5 across all 8 characters and cannot rank them. The sort key is the page's existing workplace_fit
+    // (same source as the Workplace Fit bar chart below), so the ordering is not arbitrary.
+    function radarMean(d) {
+        return typeof d.workplace_fit === "number" ? d.workplace_fit : 0;
+    }
+
+    function renderRadarPanel(mbtiList) {
+        radarPanelData = mbtiList;
+        const list = (mbtiList || []).slice();
+        if (!list.length) { renderRadar(list); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.character === radarSelected)) radarSelected = sorted[0].character;
+
+        const ctrl = d3.select("#radar-controls");
+        ctrl.selectAll("*").remove();
+        ctrl.append("span").text("Radar entity:")
+            .style("font-size", "0.78rem").style("color", "var(--ink-soft)");
+        const sel = ctrl.append("select")
+            .style("font-size", "0.8rem").style("padding", "3px 8px")
+            .style("border", "1px solid var(--line)").style("border-radius", "4px")
+            .style("background", "var(--paper)").style("color", "var(--ink)");
+        sel.selectAll("option").data(sorted).enter().append("option")
+            .attr("value", d => d.character).property("selected", d => d.character === radarSelected)
+            .text(d => d.character);
+        sel.on("change", function () { radarSelected = this.value; renderRadarPanel(radarPanelData); });
+
+        renderRadar(list.filter(d => d.character === radarSelected));
+
+        const host = d3.select("#radar-dotplot");
+        host.selectAll("*").remove();
+        host.append("div").text("Dot-plot sort key: workplace fit (workplace_fit) — the eight axes score 0/1, so the axis mean cannot rank characters")
+            .style("font-size", "0.72rem").style("color", "var(--ink-soft)").style("margin-bottom", "4px");
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll(".dot-row").data(sorted).enter().append("div")
+            .attr("class", "dot-row")
+            .style("display", "flex").style("align-items", "center").style("gap", "8px")
+            .style("padding", "2px 0").style("cursor", "pointer")
+            .style("opacity", d => (d.character === radarSelected ? 1 : 0.72))
+            .on("click", (e, d) => { radarSelected = d.character; renderRadarPanel(radarPanelData); });
+        rows.append("span").text(d => d.character)
+            .style("flex", "0 0 96px").style("text-align", "right").style("font-size", "0.74rem")
+            .style("color", "var(--ink-soft)");
+        const track = rows.append("span")
+            .style("position", "relative").style("flex", "1 1 auto").style("height", "8px")
+            .style("background", "var(--line)").style("border-radius", "4px");
+        track.append("span")
+            .style("position", "absolute").style("top", "-3px")
+            .style("left", d => (radarMean(d) / maxV * 100).toFixed(2) + "%")
+            .style("width", "14px").style("height", "14px").style("border-radius", "50%")
+            .style("background", d => (d.character === radarSelected ? "var(--accent-primary)" : "var(--series-2)"))
+            .style("transform", "translateX(-7px)");
+        rows.append("span").text(d => radarMean(d).toFixed(1))
+            .style("flex", "0 0 44px").style("font-size", "0.72rem").style("color", "var(--ink)");
+    }
+
     function renderRadar(mbtiList) {
         const svg = d3.select("#radar-svg");
         svg.selectAll("*").remove();
@@ -1310,10 +1373,10 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             });
         });
 
-        // 渲染图例
+        // 渲染图例（single entity: only the current character is labelled — no sibling series to switch）
         const legend = d3.select("#radar-legend");
         legend.selectAll("*").remove();
-        legend.append("h4").text("Character legend · 8 characters");
+        legend.append("h4").text("Current character");
         mbtiList.forEach((m, idx) => {
             const color = MBTI_COLORS[m.character] || "#8E7D62";
             const item = legend.append("div").attr("class", "legend-item")
@@ -1574,7 +1637,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         }
 
         renderProfiles(data.profiles);
-        renderRadar(data.mbti);
+        renderRadarPanel(data.mbti);
         renderFitChart(data.mbti);
         renderMbtiTable(data.mbti);
         renderInsights();
@@ -1589,7 +1652,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         clearTimeout(resizeTimer);
         resizeTimer = setTimeout(() => {
             if (window.__data) {
-                renderRadar(window.__data.mbti);
+                renderRadarPanel(window.__data.mbti);
                 renderFitChart(window.__data.mbti);
             }
         }, 250);

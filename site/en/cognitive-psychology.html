@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-duIL6JimLsdIDBV8DLdkyIcwzVwqf9qAfYzSxMqUHd0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-51EgX4Tw9bTAFBxpF9xhH6IAsZ71iWobTZiSc+83M0o=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Cognitive Psychology · Annotated Journey to the West</title>
@@ -642,17 +642,13 @@ table.data-table th, table.data-table td { white-space: nowrap; }
             </p>
 
             <div class="chart-block">
-                <div class="chart-title">5-Member × 6-Dimension Cognitive Flexibility Radar Chart</div>
-                <div class="chart-caption">6 dimensions: Hypothesis diversity / Switching speed / Information integration / Cognitive inhibition / Experience transfer / Abstract thinking (each 0–10 points)</div>
+                <div class="chart-title">Cognitive Flexibility Radar (single entity · full ranking in the dot plot below)</div>
+                <div class="chart-caption">6 dimensions: Hypothesis diversity / Switching speed / Information integration / Cognitive inhibition / Experience transfer / Abstract thinking (each 0–10 points) · the radar plots 1 entity · mean-ranked dot plot below</div>
+                <!-- chart-radar-meta: axes=6 series=1 -->
+                <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
                 <svg id="chart-radar" class="chart-svg" width="100%" height="520"></svg>
-                <div class="legend-row" id="radar-legend">
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent);"></span>Sun Wukong 9.0</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-2);"></span>Tang Sanzang 4.3</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-soft);"></span>Zhu Bajie 3.5</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-4);"></span>Sha Wujing 5.0</span>
-                    <span class="legend-item"><span class="legend-swatch" style="background:var(--accent-3);"></span>White Dragon Horse 6.2</span>
-                    <span class="legend-item"><span class="legend-swatch line" style="background:var(--ink-soft);"></span>Team average 5.6</span>
-                </div>
+                <div class="legend-row" id="radar-legend"></div>
+                <div id="radar-dotplot" style="margin-top:12px"></div>
             </div>
 
             <h3 style="font-size:1.05rem;margin:18px 0 var(--space-3);color:var(--ink);">5-Character Cognitive Profile Cards</h3>
@@ -1009,7 +1005,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
         renderCasesTable(availability);
         renderInsights(availability);
         renderPhaseTable(availability);
-        renderRadar(flexibility);
+        renderRadarPanel(flexibility);
         renderCharCards(flexibility);
         renderFlexInsights(flexibility);
         renderFlexTable(flexibility);
@@ -1157,17 +1153,85 @@ table.data-table th, table.data-table td { white-space: nowrap; }
         list.selectAll('li').data(data.cognitive_insights).enter().append('li').text(d => d);
     }
 
-    // ===== Section 2: 雷达图 =====
-    function renderRadar(data) {
+    // ===== Section 2: Radar (single-entity radar + mean-ranked dot plot) =====
+    let radarSelected = null;
+
+    // Mean basis: arithmetic mean of the entity's dimension scores (0-10)
+    function radarMean(d) {
+        const vals = Object.values(d.dimensions || {}).filter(v => typeof v === 'number');
+        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    }
+
+    function renderRadarPanel(data) {
+        const list = (data.team_members || []).slice();
+        if (!list.length) { renderRadar([], data); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.character === radarSelected)) radarSelected = sorted[0].character;
+
+        // Entity selector (dropdown)
+        const ctrl = d3.select('#radar-controls');
+        ctrl.selectAll('*').remove();
+        ctrl.append('span').text('Radar entity:')
+            .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+        const sel = ctrl.append('select')
+            .style('font-size', '0.8rem').style('padding', '3px 8px')
+            .style('border', '1px solid var(--line)').style('border-radius', '4px')
+            .style('background', 'var(--paper)').style('color', 'var(--ink)');
+        sel.selectAll('option').data(sorted).enter().append('option')
+            .attr('value', d => d.character).property('selected', d => d.character === radarSelected)
+            .text(d => d.character);
+        sel.on('change', function () {
+            radarSelected = this.value;
+            renderRadarPanel((window.__lastData && window.__lastData.flexibility) || data);
+        });
+
+        // The radar draws the selected entity only
+        renderRadar(list.filter(d => d.character === radarSelected), data);
+
+        // Full mean-ranked dot plot (click a row to switch the radar)
+        const host = d3.select('#radar-dotplot');
+        host.selectAll('*').remove();
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+            .attr('class', 'dot-row')
+            .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+            .style('padding', '2px 0').style('cursor', 'pointer')
+            .style('opacity', d => (d.character === radarSelected ? 1 : 0.72))
+            .on('click', (e, d) => {
+                radarSelected = d.character;
+                renderRadarPanel((window.__lastData && window.__lastData.flexibility) || data);
+            });
+        rows.append('span').text(d => d.character)
+            .style('flex', '0 0 auto').style('min-width', '96px').style('max-width', '46%')
+            .style('text-align', 'right').style('font-size', '0.74rem')
+            .style('color', 'var(--ink-soft)');
+        const track = rows.append('span')
+            .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+            .style('background', 'var(--line)').style('border-radius', '4px');
+        track.append('span')
+            .style('position', 'absolute').style('top', '-3px')
+            .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+            .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+            .style('background', d => (d.character === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+            .style('transform', 'translateX(-7px)');
+        rows.append('span').text(d => radarMean(d).toFixed(1))
+            .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+    }
+
+    function renderRadar(radarData, flexData) {
         const svg = d3.select('#chart-radar');
         svg.selectAll('*').remove();
+        if (!radarData || radarData.length === 0) {
+            svg.append('text').attr('x', 200).attr('y', 260).attr('fill', '#8a7a5a').text('No data');
+            return;
+        }
         const containerW = svg.node().clientWidth || 700;
         const W = Math.max(containerW, 500), H = 520;
         svg.attr('viewBox', `0 0 ${W} ${H}`);
         const cx = W / 2, cy = H / 2 + 10;
         const radius = Math.max(0, Math.min(W, H) / 2 - 70);
         const levels = 5;
-        const dims = Object.keys(data.team_members[0].dimensions);
+        const dims = Object.keys(radarData[0].dimensions);
         const nDims = dims.length;
 
         const colorMap = {
@@ -1178,10 +1242,10 @@ table.data-table th, table.data-table td { white-space: nowrap; }
             'White Dragon Horse': '#8E7D62'
         };
 
-        // 角度
+        // Angle per dimension
         const angle = (i) => (i * 2 * Math.PI / nDims) - Math.PI / 2;
 
-        // 网格圆
+        // Grid polygons
         const gridG = svg.append('g').attr('transform', `translate(${cx},${cy})`);
         for (let lv = 1; lv <= levels; lv++) {
             const r = radius * lv / levels;
@@ -1192,7 +1256,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
                 .attr('stroke', '#d9cdb8')
                 .attr('stroke-dasharray', lv === levels ? '0' : '3,3');
         }
-        // 刻度数字
+        // Scale ticks
         for (let lv = 1; lv <= levels; lv++) {
             const r = radius * lv / levels;
             gridG.append('text')
@@ -1202,7 +1266,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
                 .text((lv * 2).toString());
         }
 
-        // 轴线
+        // Axis spokes + labels
         dims.forEach((d, i) => {
             const x2 = radius * Math.cos(angle(i));
             const y2 = radius * Math.sin(angle(i));
@@ -1210,7 +1274,6 @@ table.data-table th, table.data-table td { white-space: nowrap; }
                 .attr('x1', 0).attr('y1', 0)
                 .attr('x2', x2).attr('y2', y2)
                 .attr('stroke', '#d9cdb8');
-            // 轴标签
             const lx = (radius + 28) * Math.cos(angle(i));
             const ly = (radius + 28) * Math.sin(angle(i));
             gridG.append('text')
@@ -1223,10 +1286,11 @@ table.data-table th, table.data-table td { white-space: nowrap; }
                 .text(d);
         });
 
-        // 数据多边形
+        // Data polygons
         const rScale = d3.scaleLinear().domain([0, 10]).range([0, radius]);
 
-        data.team_members.forEach(member => {
+        // Single entity only: one series per chart
+        radarData.forEach(member => {
             const pts = dims.map((d, i) => {
                 const v = member.dimensions[d];
                 return [rScale(v) * Math.cos(angle(i)), rScale(v) * Math.sin(angle(i))];
@@ -1249,7 +1313,7 @@ table.data-table th, table.data-table td { white-space: nowrap; }
                 poly.attr('fill-opacity', 0.18);
                 tooltip.hide();
             });
-            // 顶点
+            // Vertices
             pts.forEach((p, i) => {
                 gridG.append('circle')
                     .attr('cx', p[0]).attr('cy', p[1])
@@ -1260,20 +1324,39 @@ table.data-table th, table.data-table td { white-space: nowrap; }
             });
         });
 
-        // 团队均值圆
-        const avgR = rScale(data.team_avg_flexibility);
-        gridG.append('circle')
-            .attr('cx', 0).attr('cy', 0)
-            .attr('r', avgR)
-            .attr('fill', 'none')
-            .attr('stroke', '#6B6455')
-            .attr('stroke-dasharray', '6,4')
-            .attr('stroke-width', 1.5);
-        gridG.append('text')
-            .attr('x', avgR * Math.SQRT1_2 + 4)
-            .attr('y', -avgR * Math.SQRT1_2 - 4)
-            .style('font-size', '10px').style('fill', '#6B6455')
-            .text(`Team average ${data.team_avg_flexibility}`);
+        // Team-average reference circle (not a series)
+        const avgVal = (flexData && typeof flexData.team_avg_flexibility === 'number') ? flexData.team_avg_flexibility : 0;
+        if (avgVal) {
+            const avgR = rScale(avgVal);
+            gridG.append('circle')
+                .attr('cx', 0).attr('cy', 0)
+                .attr('r', avgR)
+                .attr('fill', 'none')
+                .attr('stroke', '#6B6455')
+                .attr('stroke-dasharray', '6,4')
+                .attr('stroke-width', 1.5);
+            gridG.append('text')
+                .attr('x', avgR * Math.SQRT1_2 + 4)
+                .attr('y', -avgR * Math.SQRT1_2 - 4)
+                .style('font-size', '10px').style('fill', '#6B6455')
+                .text(`Team average ${avgVal}`);
+        }
+
+        // Legend: single entity, so only the current one is annotated
+        const legend = d3.select('#radar-legend');
+        legend.html('');
+        radarData.forEach(member => {
+            const item = legend.append('span').attr('class', 'legend-item');
+            item.append('span').attr('class', 'legend-swatch')
+                .each(function () { d3.select(this).style('background', colorMap[member.character] || 'var(--ink-soft)'); });
+            item.append('span').text(member.character + ' · mean ' + radarMean(member).toFixed(1));
+        });
+        if (avgVal) {
+            const avgItem = legend.append('span').attr('class', 'legend-item');
+            avgItem.append('span').attr('class', 'legend-swatch line')
+                .each(function () { d3.select(this).style('background', 'var(--ink-soft)'); });
+            avgItem.append('span').text('Team average ' + avgVal);
+        }
     }
 
     function renderCharCards(data) {

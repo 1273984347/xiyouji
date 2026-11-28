@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-1IyQkldCIUatXOhbHtOuFMPB83mHpvKjc8adlFQSwUs=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-09CRsP2DGLKPFOXGvCPpwrpGWrCE2TL/DCzQ/m+vo+k=' 'sha256-+OR6HfFXaETip6Qc2ax0vrsANCaHjCbV+7hrwnttzs0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-+3Mozsa8Lp/XGBTsLkEBA4J1ypqh4OMOGsOt/iBLGQM='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Four-dimensional Research Network · Annotated Journey to the West</title>
@@ -278,17 +278,15 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
     <!-- 1. Four-dimensional radar chart -->
     <section class="section">
-        <h2>1. Four-dimensional Research Radar Overlay <span class="badge cinnabar">Mind</span><span class="badge indigo">Power</span><span class="badge gold">Memory</span><span class="badge jade">Time</span><span class="en">Radar Overlay</span></h2>
-        <p class="lead">4 dimensions × 5 indicators (Theoretical Depth / Textual Evidence / Modern Relevance / Cross-dimension Resonance / Pedagogical Value) · radar overlay comparison</p>
+        <h2>1. Four-dimensional Research Radar <span class="badge cinnabar">Mind</span><span class="badge indigo">Power</span><span class="badge gold">Memory</span><span class="badge jade">Time</span><span class="en">Radar (single entity)</span></h2>
+        <p class="lead">5 indicators (Theoretical Depth / Textual Evidence / Modern Relevance / Cross-dimension Resonance / Pedagogical Value) · the radar plots 1 entity · mean-ranked dot plot below</p>
+        <!-- chart-radar-meta: axes=5 series=1 -->
+        <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
         <div class="chart-box">
-            <svg width="100%" height="500" id="radar-svg" role="img" aria-label="Four-dimensional research radar overlay"></svg>
+            <svg width="100%" height="500" id="radar-svg" role="img" aria-label="Four-dimensional research radar (single entity)"></svg>
         </div>
-        <div class="legend">
-            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent)"></div>Cultivation-Mind (Wang Yangming / Freud / Jung)</div>
-            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-2)"></div>Power-Politics (Foucault / Weber / Machiavelli)</div>
-            <div class="legend-item"><div class="legend-swatch" style="background:var(--chart-3)"></div>Cultural-Memory (Assmann / Halbwachs / Jauss)</div>
-            <div class="legend-item"><div class="legend-swatch" style="background:var(--accent-4)"></div>Time-Narrative (Heidegger / Genette / Ricoeur)</div>
-        </div>
+        <div class="legend" id="radar-legend"></div>
+        <div id="radar-dotplot" style="margin-top:12px"></div>
     </section>
 
     <!-- 2. 12 theorists × 4 dimensions matrix heatmap -->
@@ -496,15 +494,76 @@ const EMBEDDED_DATA = {
 };
 
 // ============= 1. Radar Chart =============
-(function renderRadar() {
+// Section 4B compliant panel: one series per chart + full mean-ranked dot plot
+let radarSelected = null;
+
+function radarMean(d) {
+    return (d.values || []).length ? d.values.reduce((a, b) => a + b, 0) / d.values.length : 0;
+}
+
+function renderRadarPanel() {
+    const list = EMBEDDED_DATA.radar.slice();
+    if (!list.length) { renderRadar(list); return; }
+    const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+    if (!radarSelected || !list.some(d => d.name === radarSelected)) radarSelected = sorted[0].name;
+
+    // Entity selector (dropdown)
+    const ctrl = d3.select("#radar-controls");
+    ctrl.selectAll("*").remove();
+    ctrl.append("span").text("Radar entity:")
+        .style("font-size", "0.78rem").style("color", "var(--ink-soft)");
+    const sel = ctrl.append("select")
+        .style("font-size", "0.8rem").style("padding", "3px 8px")
+        .style("border", "1px solid var(--line)").style("border-radius", "4px")
+        .style("background", "var(--paper)").style("color", "var(--ink)");
+    sel.selectAll("option").data(sorted).enter().append("option")
+        .attr("value", d => d.name).property("selected", d => d.name === radarSelected)
+        .text(d => d.name);
+    sel.on("change", function () { radarSelected = this.value; renderRadarPanel(); });
+
+    // The radar draws the selected entity only
+    renderRadar(list.filter(d => d.name === radarSelected));
+
+    // Full mean-ranked dot plot (click a row to switch the radar)
+    const host = d3.select("#radar-dotplot");
+    host.selectAll("*").remove();
+    const maxV = d3.max(sorted, radarMean) || 1;
+    const rows = host.selectAll(".dot-row").data(sorted).enter().append("div")
+        .attr("class", "dot-row")
+        .style("display", "flex").style("align-items", "center").style("gap", "8px")
+        .style("padding", "2px 0").style("cursor", "pointer")
+        .style("opacity", d => (d.name === radarSelected ? 1 : 0.72))
+        .on("click", (e, d) => { radarSelected = d.name; renderRadarPanel(); });
+    rows.append("span").text(d => d.name)
+        .style("flex", "0 0 auto").style("min-width", "96px").style("max-width", "46%")
+        .style("text-align", "right").style("font-size", "0.74rem")
+        .style("color", "var(--ink-soft)");
+    const track = rows.append("span")
+        .style("position", "relative").style("flex", "1 1 auto").style("height", "8px")
+        .style("background", "var(--line)").style("border-radius", "4px");
+    track.append("span")
+        .style("position", "absolute").style("top", "-3px")
+        .style("left", d => (radarMean(d) / maxV * 100).toFixed(2) + "%")
+        .style("width", "14px").style("height", "14px").style("border-radius", "50%")
+        .style("background", d => (d.name === radarSelected ? "var(--accent-primary)" : "var(--series-2)"))
+        .style("transform", "translateX(-7px)");
+    rows.append("span").text(d => radarMean(d).toFixed(1))
+        .style("flex", "0 0 44px").style("font-size", "0.72rem").style("color", "var(--ink)");
+}
+
+function renderRadar(radarList) {
+    const series = (radarList && radarList.length) ? radarList : [];
     const svg = d3.select("#radar-svg");
     const width = svg.node().clientWidth;
     const height = 500;
     svg.attr("viewBox", `0 0 ${width} ${height}`);
     const cx = width / 2, cy = height / 2;
-    const r = Math.min(width, height) / 2 - 70;
+    const r = Math.max(0, Math.min(width, height) / 2 - 70);
     const axes = EMBEDDED_DATA.indicators;
     const levels = 5;
+
+    // Switching entities redraws the canvas, so clear it first
+    svg.selectAll("*").remove();
 
     // Background polygons
     for (let lv = 1; lv <= levels; lv++) {
@@ -536,8 +595,8 @@ const EMBEDDED_DATA = {
             .attr("fill", "#2c2416")
             .text(ax);
     });
-    // Data polygons
-    EMBEDDED_DATA.radar.forEach(m => {
+    // Data polygons (single entity: only the selected series is drawn)
+    series.forEach(m => {
         const pts = m.values.map((v, i) => {
             const a = (i / axes.length) * 2 * Math.PI - Math.PI / 2;
             const scale = v / 5;
@@ -556,7 +615,7 @@ const EMBEDDED_DATA = {
                 .attr("fill", m.color)
                 .attr("stroke", "#fff")
                 .attr("stroke-width", 1)
-                /* W1286：图元原生 title（hover 可查：维度·指标·分值） */
+                /* W1286: native SVG title (hover shows dimension, indicator and score) */
                 .append("title")
                 .text(m.name + " · " + axes[i] + ": " + m.values[i] + "/5");
         });
@@ -574,8 +633,23 @@ const EMBEDDED_DATA = {
         .attr("font-size", "10px")
         .attr("fill", "#6B6455")
         .attr("font-family", "JetBrains Mono, monospace")
-        .text("5 indicators × 4 dims");
-})();
+        .text("5 indicators · single entity");
+
+    // Legend (single entity, so only the current series is annotated)
+    const legend = d3.select("#radar-legend");
+    legend.selectAll("*").remove();
+    const only = series[0];
+    if (only) {
+        const dimObj = EMBEDDED_DATA.dimensions.find(d => d.name === only.name);
+        const members = EMBEDDED_DATA.theorists.filter(t => t.dim === (dimObj && dimObj.key)).map(t => t.name).join(" / ");
+        const item = legend.append("div").attr("class", "legend-item");
+        item.append("div").attr("class", "legend-swatch").style("background", only.color);
+        item.append("span").text(members ? only.name + " (" + members + ")" : only.name);
+    }
+}
+
+// Start the radar panel (single entity + full mean-ranked dot plot)
+renderRadarPanel();
 
 // ============= 2. Heatmap (12 theorists × 4 dimensions) =============
 (function renderHeatmap() {

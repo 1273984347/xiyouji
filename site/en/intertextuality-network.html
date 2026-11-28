@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-rrmUGv7/885kvPc9EmKvIcGgmYzbIW8sfbnchhHZ/fY=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-Z0B//sjerG+fzteuaNez6N3kcdmhU9f1BjcUAE1QJGw=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-P31NLOvEmBg4dPF8oU3Qd9I7/iIcBNhgbSmwfALx+Gc=' 'sha256-dBtFn5tBso+ATcB1pQZxiuIW3xncV9i+hrXH8As/F5o=' 'sha256-nRjbac60+71X7qCihZTYrhSLkLwRXcCNdMcXCWQ1OTc=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-P1Jdt2w9S9OaohQBzDUeeYhwLOcPa4jUfB++wC5gEXg=' 'sha256-Z0B//sjerG+fzteuaNez6N3kcdmhU9f1BjcUAE1QJGw=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-k9b4nad2XW00swvJQZe0rFweHpXrftK4/7JiypfZ4FA=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Intertextuality Network · Annotated Journey to the West</title>
@@ -411,10 +411,13 @@ canvas[class*="link-canvas"] + svg { background: transparent !important; }
     <strong>Definition: </strong>Each precursor text's intertextual strength relative to <em>Journey to the West</em> is assessed on five dimensions: Structure (narrative framework), Theme (core ideas), Character (characterization), Plot (story events), and Language (word and phrase allusions). The larger the radar area, the more strongly the text shaped Journey to the West. The Scripture-Fetching Tale and the Journey to the West Zaju are strongest on "Character" and "Plot", while Paktongsa Ŏnhae stands out on "Language".
   </div>
   <div class="chart-block">
-    <div class="chart-title">Seven Precursor Texts Intertextual-Strength Radar (5 dimensions)</div>
-    <div class="chart-caption">7 texts × 5 dimensions · values normalized 0–100 · hover for details</div>
+    <div class="chart-title">Seven Precursor Texts Intertextual-Strength Radar (one text at a time; full ranking in the dot plot below)</div>
+    <div class="chart-caption">values normalized 0–100 · the radar draws 1 entity at a time (§4B single-chart series ≤3) · the dot plot ranks texts by five-dimension mean, descending · hover for details</div>
+    <!-- chart-radar-meta: axes=5 series=1 -->
+    <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
     <svg id="chart-radar" class="chart-svg" width="100%" height="580"></svg>
     <div class="legend-row" id="radar-legend"></div>
+    <div id="radar-dotplot" style="margin-top:12px"></div>
   </div>
 </section>
 
@@ -1124,6 +1127,61 @@ function renderMatrix(matrixData) {
 // ============================================================
 // Section 3: intertextual-strength radar (7 precursor texts × 5 dimensions)
 // ============================================================
+// §4B radar panel: one entity per radar (series <=3) + full-set descending mean dot plot
+const RADAR_DIMS = ['Structure', 'Theme', 'Character', 'Plot', 'Language'];
+let radarSelected = null;
+
+function radarMean(d) {
+  const vals = RADAR_DIMS.map(k => d[k]).filter(v => typeof v === 'number');
+  return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+}
+
+function renderRadarPanel(data) {
+  const list = ((data && data.radar) || []).slice();
+  if (!list.length) { renderRadar(list); return; }
+  const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+  if (!radarSelected || !list.some(d => d.text === radarSelected)) radarSelected = sorted[0].text;
+
+  const ctrl = d3.select('#radar-controls');
+  ctrl.selectAll('*').remove();
+  ctrl.append('span').text('Radar entity: ')
+    .style('font-size', '0.78rem').style('color', 'var(--ink-soft)');
+  const sel = ctrl.append('select')
+    .style('font-size', '0.8rem').style('padding', '3px 8px')
+    .style('border', '1px solid var(--line)').style('border-radius', '4px')
+    .style('background', 'var(--paper)').style('color', 'var(--ink)');
+  sel.selectAll('option').data(sorted).enter().append('option')
+    .attr('value', d => d.text).property('selected', d => d.text === radarSelected)
+    .text(d => d.text);
+  sel.on('change', function () { radarSelected = this.value; renderRadarPanel(data); });
+
+  renderRadar(list.filter(d => d.text === radarSelected));
+
+  const host = d3.select('#radar-dotplot');
+  host.selectAll('*').remove();
+  const maxV = d3.max(sorted, radarMean) || 1;
+  const rows = host.selectAll('.dot-row').data(sorted).enter().append('div')
+    .attr('class', 'dot-row')
+    .style('display', 'flex').style('align-items', 'center').style('gap', '8px')
+    .style('padding', '2px 0').style('cursor', 'pointer')
+    .style('opacity', d => (d.text === radarSelected ? 1 : 0.72))
+    .on('click', (e, d) => { radarSelected = d.text; renderRadarPanel(data); });
+  rows.append('span').text(d => d.text)
+    .style('flex', '0 0 260px').style('text-align', 'right').style('font-size', '0.74rem')
+    .style('color', 'var(--ink-soft)');
+  const track = rows.append('span')
+    .style('position', 'relative').style('flex', '1 1 auto').style('height', '8px')
+    .style('background', 'var(--line)').style('border-radius', '4px');
+  track.append('span')
+    .style('position', 'absolute').style('top', '-3px')
+    .style('left', d => (radarMean(d) / maxV * 100).toFixed(2) + '%')
+    .style('width', '14px').style('height', '14px').style('border-radius', '50%')
+    .style('background', d => (d.text === radarSelected ? 'var(--accent-primary)' : 'var(--series-2)'))
+    .style('transform', 'translateX(-7px)');
+  rows.append('span').text(d => radarMean(d).toFixed(1))
+    .style('flex', '0 0 44px').style('font-size', '0.72rem').style('color', 'var(--ink)');
+}
+
 function renderRadar(radarData) {
   const svg = d3.select('#chart-radar');
   svg.selectAll('*').remove();
@@ -1225,7 +1283,7 @@ function renderRadar(radarData) {
         d3.select(this).attr('fill-opacity', 0.3);
         tooltip.transition().duration(MOYUN_RM?0:200).style('opacity', 0.95);
         tooltip.html('');
-        tooltip.append('div').html('<strong>《' + role.text + '》</strong>');
+        tooltip.append('div').html('<strong>' + role.text + '</strong>');
         dimensions.forEach(dim => {
           tooltip.append('div').text(dim + ': ' + role[dim]);
         });
@@ -1747,7 +1805,7 @@ async function main() {
   renderOverview(data.texts);
   renderForce(data.network);
   renderMatrix(data.matrix);
-  renderRadar(data.radar);
+  renderRadarPanel(data);
   renderTimeline(data.timeline);
   renderSankey(data.sankey);
   renderSummary(data.texts, data.theorists, data.radar);
@@ -1763,7 +1821,7 @@ window.addEventListener('resize', () => {
       renderOverview(data.texts);
       renderForce(data.network);
       renderMatrix(data.matrix);
-      renderRadar(data.radar);
+      renderRadarPanel(data);
       renderTimeline(data.timeline);
       renderSankey(data.sankey);
       renderSummary(data.texts, data.theorists, data.radar);

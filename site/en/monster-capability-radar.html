@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-dpB5by5jSXE38natf45THSg4Ft3W9PUb+tvdF7VSrf0=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-VOWj+bdJHiCKYl2sQ2so46dXebvBFtKXgVa/pGeS8RI=' 'sha256-N3ASWYloajELOw/nhG2ybAGcMmf+Uo3NViKmkhdX2Vg=' 'sha256-s+sz7bbgl2AG0nrX+GmUnxMkN04f1u+4Lb7t8k2LJyo=' 'sha256-6jQV/Um6LwB/I2Wq1wO/MwgK17tuz453RE00TtIYgIo=' 'sha256-/rC/RZjK1Pi99poVd0g7Tf717Mt63D4gA+N3nkizTow=' 'sha256-nVTDew7P5hWk/Naiwxwqtoot9Zsu5DzDJEMC1ypqr8M=' 'sha256-6uhRTVMPpoePYbjXSvvoouuCKLwCc44KVM4FhLmngdg='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>Monster Capability Radar · Annotated Journey to the West</title>
@@ -297,19 +297,22 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </div>
         </section>
 
-        <!-- Section 1：15 妖怪雷达图叠加 -->
+        <!-- Section 1: single-entity demon capability radar + ranked dot plot -->
         <section class="section" aria-labelledby="sec-radar">
-            <h2 id="sec-radar">① 15-Demon Capability Radar Overlay</h2>
-            <p>Rendered with D3.js radarChart. The 5-dimensional capabilities of 15 demons (Magic Power / Strategy / Artifact / Background / Ending) are overlaid as translucent polygons; click a demon name to toggle highlighting. The overlay reveals two archetypal demon types: "high-strategy, no-background" (White Bone Demon / Six-Eared Macaque) and "high-background, all-dimension" (Golden-Winged Roc / Yellow Brow King).</p>
+            <h2 id="sec-radar">① Demon Capability Radar (one demon at a time; full ranking in the dot plot below)</h2>
+            <p>Rendered with D3.js. Each draw shows one demon's 5 capability dimensions (Magic Power / Strategy / Artifact / Background / Ending); switch entity with the dropdown below, the demon switcher, the legend, or the dot plot. All 15 demons are ranked by five-dimension mean, descending, in the dot plot below. The single-entity view reads each axis precisely and separates two archetypal demon types: "high-strategy, no-background" (White Bone Demon / Six-Eared Macaque) and "high-background, all-dimension" (Golden-Winged Roc / Yellow Brow King).</p>
             <div class="monster-switcher" id="radar-switcher" role="group" aria-label="Demon switcher"></div>
+            <!-- chart-radar-meta: axes=5 series=1 -->
+            <div id="radar-controls" style="display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:0 0 10px"></div>
             <div class="chart-wrap">
                 <svg id="radar-svg" width="100%" height="560" role="img" aria-labelledby="radar-title radar-desc">
-                    <title id="radar-title">15-Demon Capability Radar Overlay</title>
-                    <desc id="radar-desc">Radar overlay of 15 demons across 5 capability dimensions, shown as translucent polygons.</desc>
+                    <title id="radar-title">Demon Capability Radar (single entity)</title>
+                    <desc id="radar-desc">Shows the 5 capability scores of one demon at a time; switch entity with the dropdown or the dot plot below.</desc>
                 </svg>
                 <div class="radar-tip" id="radar-tip" role="tooltip"></div>
             </div>
             <div class="legend-row" id="radar-legend" aria-label="Demon legend"></div>
+            <div id="radar-dotplot" style="margin-top:12px"></div>
         </section>
 
         <!-- Section 2：能力对比柱状图 -->
@@ -489,6 +492,68 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
     let highlightedMonster = null;
 
     // ============= Section 1：雷达图叠加 =============
+    // §4B radar panel: one entity per radar (series <=3) + full-set descending mean dot plot
+    let radarSelected = null;
+
+    function radarMean(d) {
+        const vals = DIMENSIONS.map(dim => d[dim.key]).filter(v => typeof v === "number");
+        return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : 0;
+    }
+
+    function renderRadarPanel() {
+        const list = EMBEDDED_DATA.radar.slice();
+        if (!list.length) { renderRadar(); return; }
+        const sorted = list.slice().sort((a, b) => radarMean(b) - radarMean(a));
+        if (!radarSelected || !list.some(d => d.monster === radarSelected)) radarSelected = sorted[0].monster;
+        highlightedMonster = radarSelected;
+
+        const ctrl = d3.select("#radar-controls");
+        ctrl.selectAll("*").remove();
+        ctrl.append("span").text("Radar entity: ")
+            .style("font-size", "0.78rem").style("color", "var(--ink-soft)");
+        const sel = ctrl.append("select")
+            .style("font-size", "0.8rem").style("padding", "3px 8px")
+            .style("border", "1px solid var(--line)").style("border-radius", "4px")
+            .style("background", "var(--paper)").style("color", "var(--ink)");
+        sel.selectAll("option").data(sorted).enter().append("option")
+            .attr("value", d => d.monster).property("selected", d => d.monster === radarSelected)
+            .text(d => d.monster);
+        sel.on("change", function() {
+            radarSelected = this.value;
+            renderRadarPanel();
+        });
+
+        renderRadar();
+        renderSwitcher();
+
+        const host = d3.select("#radar-dotplot");
+        host.selectAll("*").remove();
+        const maxV = d3.max(sorted, radarMean) || 1;
+        const rows = host.selectAll(".dot-row").data(sorted).enter().append("div")
+            .attr("class", "dot-row")
+            .style("display", "flex").style("align-items", "center").style("gap", "8px")
+            .style("padding", "2px 0").style("cursor", "pointer")
+            .style("opacity", d => (d.monster === radarSelected ? 1 : 0.72))
+            .on("click", (e, d) => {
+                radarSelected = d.monster;
+                renderRadarPanel();
+            });
+        rows.append("span").text(d => d.monster)
+            .style("flex", "0 0 160px").style("text-align", "right").style("font-size", "0.74rem")
+            .style("color", "var(--ink-soft)");
+        const track = rows.append("span")
+            .style("position", "relative").style("flex", "1 1 auto").style("height", "8px")
+            .style("background", "var(--line)").style("border-radius", "4px");
+        track.append("span")
+            .style("position", "absolute").style("top", "-3px")
+            .style("left", d => (radarMean(d) / maxV * 100).toFixed(2) + "%")
+            .style("width", "14px").style("height", "14px").style("border-radius", "50%")
+            .style("background", d => (d.monster === radarSelected ? "var(--accent-primary)" : "var(--series-2)"))
+            .style("transform", "translateX(-7px)");
+        rows.append("span").text(d => radarMean(d).toFixed(1))
+            .style("flex", "0 0 44px").style("font-size", "0.72rem").style("color", "var(--ink)");
+    }
+
     function renderRadar() {
         const svg = d3.select("#radar-svg");
         svg.selectAll("*").remove();
@@ -546,12 +611,14 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             .attr("cx", cx).attr("cy", cy).attr("r", 2)
             .attr("fill", "#8E7D62");
 
-        // 15 妖怪多边形叠加
+        // single entity (§4B: one series per chart): draw only the selected demon, falling back to the first row
         const tip = d3.select("#radar-tip");
         const wrapEl = wrap.parentElement;
         const monsterPolys = [];
 
-        EMBEDDED_DATA.radar.forEach((m, mi) => {
+        const series = EMBEDDED_DATA.radar.filter(d => d.monster === radarSelected);
+        (series.length ? series : EMBEDDED_DATA.radar.slice(0, 1)).forEach((m) => {
+            const mi = EMBEDDED_DATA.radar.indexOf(m);
             const pts = DIMENSIONS.map((dim, di) => {
                 const ang = -Math.PI / 2 + di * 2 * Math.PI / DIMENSIONS.length;
                 const r = radius * m[dim.key] / 10;
@@ -589,9 +656,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                     tip.style("opacity", 0);
                 })
                 .on("click", function() {
-                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
-                    renderRadar();
-                    renderSwitcher();
+                    radarSelected = m.monster;
+                    renderRadarPanel();
                 });
             monsterPolys.push(poly);
         });
@@ -608,9 +674,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("background", highlightedMonster === m.monster ? MONSTER_COLORS[mi] : "#fff8e7")
                 .style("color", highlightedMonster === m.monster ? "#fff" : "var(--ink-soft)")
                 .on("click", function() {
-                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
-                    renderRadar();
-                    renderSwitcher();
+                    radarSelected = m.monster;
+                    renderRadarPanel();
                 });
             item.append("span").attr("class", "lg-swatch").style("background", MONSTER_COLORS[mi]);
             item.append("span").text(m.monster);
@@ -626,9 +691,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
                 .style("border-left", `3px solid ${MONSTER_COLORS[mi]}`)
                 .text(m.monster)
                 .on("click", function() {
-                    highlightedMonster = highlightedMonster === m.monster ? null : m.monster;
-                    renderRadar();
-                    renderSwitcher();
+                    radarSelected = m.monster;
+                    renderRadarPanel();
                 });
         });
     }
@@ -1006,8 +1070,7 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
 
     // ============= 初始化 =============
     function renderAll() {
-        renderSwitcher();
-        renderRadar();
+        renderRadarPanel();
         renderBar();
         renderScatter();
         renderSankey();
