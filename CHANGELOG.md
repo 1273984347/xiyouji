@@ -1,3 +1,15 @@
+### W1352（2026-11-28）：H1 单例判据全站化：EN 两页去重 + 判据扩至 site 全量
+
+> **来源**：用户 2026-11-28「执行吧」→ 选定「H1 判据全站化」——把 W1349 的「每页恰 1 个 `<h1>`」从 `site/data` 扩到 `site/**`（含 `site/en`、`site/reader`、站根页）。
+> - **先取证再补漏**：全站 873 页（排除模板壳 `site/_template.html` 与 `site/data/_shell.html`）逐页剥注释后计数——872 页恰 1 个、**2 页双 h1**、**1 页 0 个**。
+> - **补漏（2 页）**：`site/en/character-semantic-network.html` 与 `site/en/theological-intervention-network.html` 各含 hero 与正文 `<header>` 两份同句 `<h1>`——与 W1349 修掉的两张中文页是**同一镜像缺陷**，W1349 只覆盖 `site/data` 故漏网。修法同前：删正文那份，hero 标题保留为唯一 h1（副标题、元信息行、tagline 均留存）。
+> - **0-h1 那页不改页面（判据侧吸收）**：`site/reader/themes/index.html` 是 `build_reader.py` 生成的**重定向存根**（`<meta http-equiv="refresh">` 跳 themes-hub），无正文。按「内容页才判标题」的既有口径，判据对重定向存根豁免——与第 62 槽 `check_reader_integrity` C3 完全同口径（该槽同时内置 `REDIRECT_RE` 豁免）。这样既不逼生成器给跳转壳加标题，也不让判定口径在两条门禁间分叉。
+> - **判据全站化**：`tests/unit/test_page_h1_unique.py` 扫描面由 `site/data/*.html` 改为 `site/**/*.html`，排除两模板壳、豁免重定向存根、先剥 HTML 注释再计数（防 W1348 那类「模板注释里写 `<h1>`」的假红），断言每页恰 1 个非空 `<h1>`；两例现过。
+> - **验证**：全站复扫 873 页 → `h1>1` **0 页**、`h1=0` 仅剩存根 1 页（豁免）；`pytest tests/unit/test_page_h1_unique.py` 2 passed；`check_reader_integrity` 636 页 0 FAIL；`validate_en` 两页 OK；`verify_delivery --scope full` 与提交后 `pre_push_gate` 见收官记录。
+> - **边界**：豁免面仅「重定向存根」一类且与第 62 槽同判据，未新增其它白名单；若后续出现新的跳转壳页，自动落入同一豁免，无需改判据。
+> - **文件**：见 file-index W1352 段。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+
 ### W1351（2026-11-28）：EN 人物画像四页补五轴雷达（静态预渲染）+ 文案指向图
 
 > **来源**：用户 2026-11-28「按方案 ① 修复那 4 个页面的文案；按方案 ② 给那 4 个页面补上雷达图」。两方案本是替代关系（①去掉 radar 指涉 / ②让指涉成真），本批按「②补图 + ①改文案指向图」合流——只做①会把读者引向一张永不存在图，只做②则句子仍是「radar reads」式无图指涉。
@@ -877,14 +889,6 @@
 > - **状态**：本批把「已收官但 hash 空缺」从**静默失效**变成**机器可判**（告警级），并把存量 10 行一次清偿归零；用户点名的第二项以**并入同族 E-301** 落地（不新增碎片条目）⇒ 坑表写窗余量 881 字节即现状上限，已登记结构性方案待办。
 > - **文件**： scripts/preflight_check.py, tests/unit/test_preflight_check.py, docs/00-导读/W批次编号对账表.md, archive/docs/W批次编号对账表-ARCHIVE.md, pitfalls.md, archive/docs/pitfalls-detail-ARCHIVE.md, HANDOVER.md, docs/11-方案报告/计划方案/T122-任务计划执行与经验沉淀报告-2026-11-21.md, docs/11-方案报告/README.md, scripts/output/_w1289_spec.json
 
-### W1288（2026-11-21）：收官回填与遗留落仓 - 台账四批登记滞后清偿 + 坑表腾窗与三条新坑 + hook 启用指引三处落位
-
-> - **来源**：用户 2026-11-21 19:26「做完」+ 四条遗留如实登记（① 本批实际推了 2 笔 ② 坑表正本余量仅 234 字节 ③ hook 需每个克隆一次性 git config core.hooksPath 启用 ④ assets/game 他方在途未跟踪件已用本地 .git/info/exclude 忽略）⇒ 立项 W1288（收官闭合与遗留落仓批）。
-> - **执行**：① **台账回填**——W1287 行状态翻「已收官(hash)」+ 提交列回填 4def11901 + 8c369d416 + 584a92899（收官链第 7 步闭合·代码已推而台账未收）·W1277/W1278/W1279 三行用 `ledger_backfill.py --from-git` 反填（**4 批登记滞后归零**）·登记 W1288 认领行；② **坑表腾窗 + 二层化补齐**——按仓内契约（正本判据层 + 归档叙事层）把 8 条过长正本条目压回判据层（E-291/E-298/E-304/E-301/E-303/E-300）·E-285/E-287 的归档段**回灌为正本当前全文**（原归档为较早版本 ⇒「零内容丢失」契约未成立）⇒ 正本 261910→261059 字节（硬窗 262144）·余量 234→1085；③ **三条新坑**——E-310（CI 轮数被放大 = 反馈回路的位置与延迟·非纪律松）/ E-311（收官第 7 步缺席 ⇒ 登记滞后累积·告警成噪音）/ E-312（仓内版本化 hook ≠ 已生效·core.hooksPath 不随 clone 走 ⇒ 静默失效的假机制）·正本与归档双命中；④ **计数链**——`stats.py --w W1288` ⇒ pitfalls_total 416→419 · pitfalls_flow 220→223 · 9 处标记面跟随 · `--check` 与磁盘实算零差异（33 键）；⑤ **遗留落仓**——hook 启用指引落 AGENTS 常用命令 + 批次交付流水线第 6 步 + E-312 归档三处可见位置（每会话可见 / 流程必读）·「下一批压 1 笔」由 push-gate 的「未推送提交数 ≤ 1」物理约束兜底 · 坑表余量与复盘触发器 T1/T4 与 preflight N1-N5 计数链漂移登记待偿 · assets/game 本地 exclude 且提交一律显式 pathspec 禁 git add -A；⑥ **报告**——T121 落盘 + 方案报告 README §六 登记（136→137 件）。
-> - **验证**：台账 4 条滞后行回填后 preflight 滞后告警归零 · 坑表条目 416→419 且正本字节在 262144 内（余量 1085）· E-310/E-311/E-312 正本与归档双命中 · 被剪条目的旧正本全文逐条断言仍在归档段内（零信息丢失）· stats.json 与磁盘实算零差异（33 键）· 全量门禁 EXIT=0 · pytest 1804 passed。
-> - **状态**：本批把「已完成」变成「已登记」——W1287 收官链闭合、4 批登记滞后清偿、四条遗留落成仓内可执行形态；下一批起台账滞后告警为零。
-> - **文件**： docs/00-导读/W批次编号对账表.md, pitfalls.md, archive/docs/pitfalls-detail-ARCHIVE.md, AGENTS.md, HANDOVER.md, docs/10-方法论沉淀/批次交付流水线.md, docs/11-方案报告/计划方案/T121-任务计划执行与经验沉淀报告-2026-11-21.md, docs/11-方案报告/README.md, scripts/output/_w1288_spec.json, scripts/output/stats.json, scripts/output/stats-index.md, scripts/output/stats-changelog.json
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -892,7 +896,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1351），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1352），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >

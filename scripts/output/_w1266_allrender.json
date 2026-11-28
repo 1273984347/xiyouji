@@ -1403,7 +1403,7 @@
     },
     {
       "page": "site/data/cross-time-danmaku.html",
-      "sha": "749ba7b490c7",
+      "sha": "d54b410f9b47",
       "static": {
         "svg": true,
         "cls": true,
@@ -4580,17 +4580,17 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1500·文本 0）",
+      "pageBasis": "渲染后有图表 svg 1 个（最大者：511x307·图元 1499·文本 0）",
       "svgKinds": [
         {
           "cls": "",
           "id": "svg-render",
           "w": 511,
           "h": 307,
-          "marks": 1500,
+          "marks": 1499,
           "texts": 0,
           "kind": "chart",
-          "basis": "511x307·图元 1500·文本 0"
+          "basis": "511x307·图元 1499·文本 0"
         },
         {
           "cls": "ic-moon",
@@ -5373,7 +5373,7 @@
     },
     {
       "page": "site/data/tag-cloud.html",
-      "sha": "3e1262f3fc48",
+      "sha": "ba1c2fef622f",
       "static": {
         "svg": false,
         "cls": true,
@@ -6233,7 +6233,7 @@
     },
     {
       "page": "site/dukou-engine.html",
-      "sha": "5777b0b1dc9d",
+      "sha": "5a5902e3fc22",
       "static": {
         "svg": true,
         "cls": false,
@@ -6352,7 +6352,7 @@
     },
     {
       "page": "site/index.html",
-      "sha": "e5e61c0ccf87",
+      "sha": "94770b05cc12",
       "static": {
         "svg": true,
         "cls": false,
@@ -7222,7 +7222,7 @@
     },
     {
       "page": "site/en/character-semantic-network.html",
-      "sha": "add60dc06b7b",
+      "sha": "5e1875f55baf",
       "static": {
         "svg": true,
         "cls": true,
@@ -8507,9 +8507,9 @@
           "w": 1002,
           "h": 620,
           "marks": 24,
-          "texts": 21,
+          "texts": 22,
           "kind": "chart",
-          "basis": "1002x620·图元 24·文本 21·命中图表词表"
+          "basis": "1002x620·图元 24·文本 22·命中图表词表"
         },
         {
           "cls": "",
@@ -11932,7 +11932,7 @@
     },
     {
       "page": "site/en/theological-intervention-network.html",
-      "sha": "edc4254c8278",
+      "sha": "00bde606514d",
       "static": {
         "svg": true,
         "cls": true,
@@ -12369,7 +12369,7 @@
         "lib": true
       },
       "pageVerdict": "has_chart",
-      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 30）",
+      "pageBasis": "渲染后有图表 svg 2 个（最大者：1100x480·图元 13·文本 29）",
       "svgKinds": [
         {
           "cls": "",
@@ -12377,9 +12377,9 @@
           "w": 1100,
           "h": 480,
           "marks": 13,
-          "texts": 30,
+          "texts": 29,
           "kind": "chart",
-          "basis": "1100x480·图元 13·文本 30"
+          "basis": "1100x480·图元 13·文本 29"
         },
         {
           "cls": "",

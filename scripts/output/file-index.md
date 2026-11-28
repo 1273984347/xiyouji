@@ -1,3 +1,22 @@
+## W1352 H1 单例判据全站化：EN 两页去重 + 判据扩至 site 全量（2026-11-28）
+
+| 文件 | W | 说明 |
+|---|---|---|
+| .github/workflows/（1 件） | W1352 | 版本/统计/归档面随批刷新 |
+| archive/docs/（6 件） | W1352 | 版本/统计/归档面随批刷新 |
+| docs/00-导读/（2 件） | W1352 | 台账认领与回填行 |
+| scripts/output/（12 件） | W1352 | 版本/统计/归档面随批刷新 |
+| site/（3 件） | W1352 | 版本/统计/归档面随批刷新 |
+| site/data/（2 件） | W1352 | 版本/统计/归档面随批刷新 |
+| site/en/（2 件） | W1352 | 删正文重复 h1（hero 标题唯一） |
+| tests/unit/（1 件） | W1352 | 判据扩到 site 全站（剥注释 + 重定向存根豁免） |
+| AGENTS.md | W1352 | 版本/统计/归档面随批刷新 |
+| CHANGELOG.md | W1352 | 版本/统计/归档面随批刷新 |
+| CITATION.cff | W1352 | 版本/统计/归档面随批刷新 |
+| HANDOVER.md | W1352 | 版本/统计/归档面随批刷新 |
+| README.md | W1352 | 版本/统计/归档面随批刷新 |
+| STRUCTURE.md | W1352 | 版本/统计/归档面随批刷新 |
+
 ## W1351 EN 人物画像四页补五轴雷达（2026-11-28）
 
 | 文件 | W | 说明 |
@@ -1849,54 +1868,5 @@
 | site/index.html | W1289 | 版本脚注联动（级联产物） |
 | site/rss.xml | W1289 | 本批改动面 |
 | tests/unit/test_preflight_check.py | W1289 | 新判据回归锁 6 例（含无提交不命中·self 行排除两条负样本） |
-
-## W1288 收官回填与遗留落仓 - 台账四批登记滞后清偿 + 坑表腾窗与三条新坑 + hook 启用指引三处落位（2026-11-21）
-
-| 文件 | W | 说明 |
-|---|---|---|
-| docs/00-导读/W批次编号对账表.md | W1288 | 台账 W1287 收官回填 + W1277/W1278/W1279 三批登记滞后反填 + W1288 认领行 |
-| pitfalls.md | W1288 | 坑表新增 E-310/E-311/E-312 + 八条条目压回判据层腾窗（余量 234→1085） |
-| archive/docs/pitfalls-detail-ARCHIVE.md | W1288 | E-285/E-287 归档镜像回灌为正本全文 + E-310/E-311/E-312 叙事全文 |
-| AGENTS.md | W1288 | 常用命令加 hook 启用一行（级联版本脚注另计） |
-| HANDOVER.md | W1288 | §三 方法论 + §四 遗留登记块（级联里程碑块另计） |
-| docs/10-方法论沉淀/批次交付流水线.md | W1288 | 第 6 步 hook 启用 + 第 7 步台账回填的物理边界 |
-| docs/11-方案报告/计划方案/T121-任务计划执行与经验沉淀报告-2026-11-21.md | W1288 | T121 报告落盘 |
-| docs/11-方案报告/README.md | W1288 | 报告索引登记 T121（§六 136→137 件） |
-| scripts/output/_w1288_spec.json | W1288 | 本批 spec |
-| scripts/output/_cascade_files_W1288.txt | W1288 | 级联落盘清单（提交时按清单逐面 add） |
-| CHANGELOG.md | W1288 | 本批版段 |
-| README.md | W1288 | 级联产物（本批收官链写入） |
-| STRUCTURE.md | W1288 | 级联产物（本批收官链写入） |
-| docs/00-导读/项目说明.md | W1288 | 级联产物（本批收官链写入） |
-| .github/workflows/README.md | W1288 | 级联产物（本批收官链写入） |
-| archive/docs/workflows-readme-history.md | W1288 | 级联产物（本批收官链写入） |
-| CITATION.cff | W1288 | 级联产物（本批收官链写入） |
-| archive/docs/AGENTS-ARCHIVE.md | W1288 | AGENTS 历史段归档（级联迁出） |
-| archive/docs/W批次编号对账表-ARCHIVE.md | W1288 | 台账腾窗归档（级联迁出） |
-| archive/docs/file-index-ARCHIVE.md | W1288 | file-index 旧段归档腾窗（迁出 W1229-W1252） |
-| scripts/output/file-index.md | W1288 | file-index 新增 W1288 段（腾窗后正本） |
-| scripts/output/stats.json | W1288 | 统计计数链刷新（pitfalls_total 419） |
-| scripts/output/stats-index.md | W1288 | 统计索引刷新 |
-| scripts/output/stats-changelog.json | W1288 | 统计变更史追加 |
-| scripts/output/tools-inventory.md | W1288 | 工具清单刷新 |
-| scripts/output/INDEX.md | W1288 | 目录件刷新（新增报告与清单） |
-| scripts/output/README.md | W1288 | 目录件刷新（新增报告与清单） |
-| .agent/skills/puti-shouye/SKILL.md | W1288 | 坑表计数标记跟随（416→419） |
-| docs/agent/pitfalls.md | W1288 | 坑表计数标记跟随（416→419） |
-| docs/INDEX.md | W1288 | docs 目录索引刷新（新增 T121 报告） |
-| site/index.html | W1288 | 版本脚注联动（级联产物） |
-| site/dukou-engine.html | W1288 | 版本脚注联动（级联产物） |
-| site/data/tag-cloud.html | W1288 | 版本脚注联动（级联产物） |
-| site/data/cross-time-danmaku.html | W1288 | 版本脚注联动（级联产物） |
-| site/data/search-index-zh.js | W1288 | 站内搜索索引刷新（新增 T121 报告） |
-| site/en/search-index-en.js | W1288 | 站内搜索索引刷新（新增 T121 报告） |
-| site/rss.xml | W1288 | RSS 随索引刷新 |
-| docs/11-方案报告/设计与架构方案/系统架构方案-分层模块与部署-2026-10-20.md | W1288 | 级联产物（本批收官链写入） |
-| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1288 | 级联产物（本批收官链写入） |
-| scripts/output/svg_text_contrast_graphic_report.json | W1288 | 第80槽 graphic 口径探针报告刷新（页脚推进后 page_sha 跟随） |
-| scripts/output/svg_text_contrast_report.json | W1288 | 第80槽 body 口径探针报告刷新（页脚推进后 page_sha 跟随） |
-| scripts/output/_w1266_allrender.json | W1288 | 第82槽渲染档案全量刷新（页脚推进后 page_sha 跟随） |
-| scripts/output/chart-legend-render-audit.json | W1288 | 第82槽图例渲染档案刷新（页脚推进后豁免 sha 跟随） |
-| scripts/output/_vermilion_solid_cache.json | W1288 | 朱砂实底缓存刷新（页面 sha 跟随页脚推进·确定性产物） |
 
 > **维护契约**：本索引按 W 追加登记（每文件 1 行 + 一句摘要），历史段禁改；新增/变更文件必须先有 CHANGELOG 对应 W 段再登记（双索引铁律），禁止无 W 段单独登记。
