@@ -342,6 +342,50 @@ GOOD_R3 = '''<html><body>
 </body></html>'''
 
 
+def _st_strip():
+    """W1047 剥标签两处根因的可证伪锁（JS 比较符 / 注释内 script 字面量）。返回 ok。"""
+    ok = True
+    # ① JS 比较符 `<=` 不是标签 ⇒ 不得把「标签之间的正文」整段吞掉
+    cmp_sample = ('<html><body><p>前文</p><script>var a = 1; if (a <= 2) {}</script>'
+                  '<p>中段文字</p><p>后段文字</p></body></html>')
+    vis1 = strip_invisible(cmp_sample)
+    if '中段文字' not in vis1 or '后段文字' not in vis1:
+        print('SELF-TEST FAIL: JS 比较符 `<=` 被当成标签起点⇒正文被吞:', vis1[:160])
+        ok = False
+    # ② 注释里的 `<script>` 字面量不得触发 script 剥离（否则一路吞到真 `</script>`）
+    cmt_sample = ('<html><body><!-- 脚本区说明：页面内 <script> 内嵌数据 -->\n'
+                  '<p>可见正文</p>\n<script>var b = 2;</script></body></html>')
+    vis2 = strip_invisible(cmt_sample)
+    if '可见正文' not in vis2:
+        print('SELF-TEST FAIL: 注释内 `<script>` 字面量触发误剥离⇒可见正文被吞:', vis2[:160])
+        ok = False
+    return ok
+
+
+def _st_regex_rules():
+    """W1355/W1357 的纯正则判据自证（R8 等分盘措辞 / R9 地图口径）。返回 ok。
+
+    拆出独立函数只为把 self_test 的圈复杂度压回 guardrails 宽档阈值（19>15 会阻断推送）。
+    """
+    ok = True
+    # R8：等分索引盘 × 占比措辞
+    if not (RE_EQUAL_PIE.search('const p = d3.pie().value(d => 1).sort(null);')
+            and RE_SHARE_WORD.search('每类 1 例 · 占比 10%')):
+        print('SELF-TEST FAIL: R8 等分盘自称占比未检出')
+        ok = False
+    if RE_SHARE_WORD.search('等分排列（等分仅为索引排布，不代表占比）'):
+        print('SELF-TEST FAIL: R8 否定式措辞被误报')
+        ok = False
+    # R9：地图口径声明
+    if not RE_MAP_META.search('<!-- chart-map-meta: projection=geo basemap=self -->'):
+        print('SELF-TEST FAIL: R9 合法声明未识别')
+        ok = False
+    if RE_MAP_META.search('<!-- chart-map-meta: projection=schematic basemap=osm -->'):
+        print('SELF-TEST FAIL: R9 外部底图被误判为合规')
+        ok = False
+    return ok
+
+
 def self_test():
     import tempfile
     ok = True
@@ -372,20 +416,8 @@ def self_test():
     if fails:
         print('SELF-TEST FAIL: R3 正样本（措辞+实现匹配）被误报:', fails)
         ok = False
-    # W1047 新增两例（剥标签两处根因的可证伪锁）：
-    # ① JS 比较符 `<=` 不是标签 ⇒ 不得把「标签之间的正文」整段吞掉
-    cmp_sample = ('<html><body><p>前文</p><script>var a = 1; if (a <= 2) {}</script>'
-                  '<p>中段文字</p><p>后段文字</p></body></html>')
-    vis1 = strip_invisible(cmp_sample)
-    if '中段文字' not in vis1 or '后段文字' not in vis1:
-        print('SELF-TEST FAIL: JS 比较符 `<=` 被当成标签起点⇒正文被吞:', vis1[:160])
-        ok = False
-    # ② 注释里的 `<script>` 字面量不得触发 script 剥离（否则一路吞到真 `</script>`）
-    cmt_sample = ('<html><body><!-- 脚本区说明：页面内 <script> 内嵌数据 -->\n'
-                  '<p>可见正文</p>\n<script>var b = 2;</script></body></html>')
-    vis2 = strip_invisible(cmt_sample)
-    if '可见正文' not in vis2:
-        print('SELF-TEST FAIL: 注释内 `<script>` 字面量触发误剥离⇒可见正文被吞:', vis2[:160])
+    # W1047 剥标签两例拆到 _st_strip：
+    if not _st_strip():
         ok = False
     # W1342 新增四例（R4/R5 的可证伪锁——判据放宽或写歪都会在这里红）：
     radar_html = '<html><body><svg id="chart-radar"></svg></body></html>'
@@ -423,20 +455,8 @@ def self_test():
     if radar_caliber_fails('site/data/x.html', radar_html + meta_ok + '口径：轴值取自 dataset/x.json', set()):
         print('SELF-TEST FAIL: R7 合规口径行被误报')
         ok = False
-    # W1355 新增两例（R8 等分盘×占比措辞的可证伪锁）：
-    if not (RE_EQUAL_PIE.search('const p = d3.pie().value(d => 1).sort(null);')
-            and RE_SHARE_WORD.search('每类 1 例 · 占比 10%')):
-        print('SELF-TEST FAIL: R8 等分盘自称占比未检出')
-        ok = False
-    if RE_SHARE_WORD.search('等分排列（等分仅为索引排布，不代表占比）'):
-        print('SELF-TEST FAIL: R8 否定式措辞被误报')
-        ok = False
-    # W1357 新增两例（R9 地图口径的可证伪锁）：
-    if not RE_MAP_META.search('<!-- chart-map-meta: projection=geo basemap=self -->'):
-        print('SELF-TEST FAIL: R9 合法声明未识别')
-        ok = False
-    if RE_MAP_META.search('<!-- chart-map-meta: projection=schematic basemap=osm -->'):
-        print('SELF-TEST FAIL: R9 外部底图被误判为合规')
+    # W1355/W1357 的纯正则例（R8 等分盘措辞 / R9 地图口径）拆到 _st_regex_rules：
+    if not _st_regex_rules():
         ok = False
     print('self-test:', 'PASS（负样本命中 · 好样本放行）' if ok else 'FAIL')
     return ok
