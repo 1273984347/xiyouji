@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-qUULYoAGnV/YQtai+U6doWGX8lFiJCny2L7r3qT0ta8=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-brRscppF8ftA9cOBXrzNqb75Uqloy7nglbWHUgcNPzc=' 'sha256-vXs7SYa2ROtRITbCV8lqVZedKIeYwMB9H1YNNJqYCyI='; script-src-attr 'none'; style-src 'self' 'unsafe-inline'; img-src 'self'; font-src 'self'; connect-src 'self' https://1273984347.goatcounter.com; object-src 'none'; base-uri 'self'; form-action 'self'; frame-src 'none'">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#FAF7F0">
     <title>命运与轮回：生死簿8案7改，漏洞率87.5% · 详解西游记</title>
@@ -675,8 +675,8 @@ svg text.dark-halo { stroke: rgba(20,20,30,0.85); }
             </p>
 
             <div class="chart-block">
-                <div class="chart-title">因果报应类型分布饼图（10 案例·按 karma_type 分组·占比）</div>
-                <div class="chart-caption">10 类 karma_type 各 1 例·占比 10%·不同颜色区分·hover 显示案例详情</div>
+                <div class="chart-title">因果报应类型索引盘（10 类各 1 例·等分排列·非占比构成）</div>
+                <div class="chart-caption">10 类 karma_type 各 1 例·等分排列（等分仅为索引排布，不代表占比）·不同颜色区分·hover 显示案例详情</div>
                 <svg id="chart-karma-pie" class="chart-svg" width="100%" height="460"></svg>
                 <div class="legend-row" id="karma-pie-legend"></div>
             </div>
@@ -1108,7 +1108,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
         list.selectAll('li').data(data.registry_insights).enter().append('li').text(d => d);
     }
 
-    // ===== Section 2: 因果报应饼图 =====
+    // ===== Section 2: 因果报应类型索引盘（等分排列·非占比构成） =====
     function renderKarmaPie(data) {
         const svg = d3.select('#chart-karma-pie');
         svg.selectAll('*').remove();
@@ -1207,7 +1207,7 @@ var MOYUN_RM = false; try { MOYUN_RM = !!(window.matchMedia && matchMedia('(pref
             .attr('y', 14)
             .style('font-size', '11px')
             .style('fill', 'var(--ink-soft)')
-            .text('每类 1 例 · 占比 10%');
+            .text('每类 1 例 · 等分索引');
 
         // legend
         const legend = d3.select('#karma-pie-legend');

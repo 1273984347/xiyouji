@@ -1,3 +1,18 @@
+### W1355（2026-11-28）：雷达族口径英文补齐与等分盘措辞整改批
+
+**本批要点**（W1355 雷达族口径英文补齐与等分盘措辞整改批）：
+
+> - **口径英文补齐（EN 27 页）**：`site/en/` 27 个雷达页在 `<!-- chart-radar-meta -->` 后各补一段 `<p>Caliber: axis values are read from the dataset described in this page's data-source note (not from the chart itself); chart scale N axes × M series.</p>`——EN 页 data-source note 有 annotated / embedded snapshot / 派生自原文三种自述形态，故只声明「取自数据源自述的数据集」不复制中文页的「可复算」主张（EN 侧无 run_all 自述）。
+> - **R7 扩面**：[check_chart_data.py](scripts/check_chart_data.py) 的 R7 标记扩为「口径：」或「Caliber:」，**辖区由 site/data 扩至 site/data + site/en**（与 R5 一致）——W1354 登记的「EN 辖区留白」本批清零。
+> - **R8 新判据**：**等分索引盘 × 占比措辞错配**——`d3.pie()...value(1)` 的等分只承载排布语义，若同页以「占比 N%」形式主张占比即 FAIL（否定式「非占比 / 不代表占比」不命中）；自测由 12 例扩至 14 例。
+> - **A-4 两条误判订正（自我修正 · W1341 §八 同族纪律）**：① `karma-reincarnation` 的 10 类与 `chart-design` 的 12 类同为 `d3.pie().value(1)` **等分索引盘**（每类恰 1 例）⇒ 不适用「类别 ≤8」；真实缺陷是**文案**以「占比 10%」描述等分排布 ⇒ 本批订正该页 4 处文案（chart-title / chart-caption / 段注释 / 圆心文字）。② `four-dimensional-research-network` 的 `timeline-svg` 用 `d3.stack()` + `stackOffsetNone` ⇒ **真堆叠**（分段互不重叠），不适用「多序列重叠 >3 层」（该条禁用理由是半透明重叠不可辨）。
+> - **判定口径入档**：[DESIGN.md](DESIGN.md) §4B 弧形行与面积行各补一句形态分辨（等分盘／占比构成；stack 堆叠／overlay 重叠），并在实测注里写明「未先分形态、直接按页级计数判红」是本批两条误判的共同根因。
+> - **R6 决策落档**：力导向「>200」判定须渲染态且现役 0 页超限（22 页最大 35 节点）⇒ **不立 R6 门禁**——无超限页时新增恒不触发的红线只增维护面与误判风险，阈值余量已在 §4B 注留证。
+> - **验证（全绿）**：`check_chart_data.py --self-test` 14 例 PASS · 全站 239 页 0 FAIL · `--spec-check` 表体行 10 空格 0 · `verify_delivery.py --scope full` exit 0 · CSP 重算 1 页（karma 内联脚本改动）。
+> - **状态**：已落地（级联+提交后以 gh run list 为准）。
+> - **文件**：`DESIGN.md`（§4B 弧形/面积两行 + 三条注订正）、`scripts/check_chart_data.py`（R8 + R7 扩面 + 自测 2 例）、`site/data/karma-reincarnation.html`（文案 4 处）、`site/en/` 27 个雷达页（Caliber 行）、`scripts/output/_w1355_spec.json`。
+
+
 ### W1354（2026-11-28）：雷达族口径行补齐与族规模实测取证批
 
 **本批要点**（W1354 雷达族口径行补齐与族规模实测取证批）：
@@ -893,14 +908,6 @@
 > - **状态**：归档工具的**阻断性断言已根修**（口径同源 ⇒ 断言恒成立·不再随结构漂移触发）；台账 hash 欠账清偿；「两面下界」由现象升级为**带两条候选修法与影响面的裁决项**——**不擅自改门禁判据、不擅自改 CHANGELOG 结构**；既存下界自检仍需按 W1291 同法跳过（复用同一实现·**不压红**）⇒ 已如实登记。
 > - **文件**： .github/workflows/README.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/CHANGELOG-ARCHIVE.md, docs/00-导读/W批次编号对账表.md, docs/11-方案报告/README.md, docs/11-方案报告/计划方案/T125-任务计划执行与经验沉淀报告-2026-11-22.md, docs/INDEX.md, scripts/archive_segments.py, scripts/output/INDEX.md, scripts/output/README.md, scripts/output/_cascade_files_W1292.txt, scripts/output/_w1292_spec.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/output/tools-inventory.md, site/data/cross-time-danmaku.html, site/data/search-index-zh.js, site/data/tag-cloud.html, site/dukou-engine.html, site/en/search-index-en.js, site/index.html, site/sitemap.xml, tests/unit/test_archive_segments_plan_scope.py
 
-### W1291（2026-11-21）：治理面追平 + 复盘/豁免清偿批
-
-> - **来源**：用户 2026-11-21 指示「**按照优先级顺序开工**」并采信 T123 §九 推荐——下一批开 **B+C 合并的「治理面追平 + 复盘/豁免清偿批」**（治理面·有明确机器判据·可并行·preflight 现在就在红）；E 面（CI 采集器加固）涉及 CI 行为变更 ⇒ 另起一批。⇒ 立项 W1291。
-> - **执行**：① **判据侧追平（N3/N4）**——AGENTS 于 W1279 地图化、W1290 坑表拆六主题后判据仍在找**已退役的散文复述形态**（「内含 N 槽，五组」/「N 条坑位按六主题迁」）⇒ 报错形态是「断言形态缺失」≠「数值漂移」⇒ 判据锚迁**同源事实面**：N3 = gates.md 标题「（N 槽」自声明 == 编号条目实数（83==83）；N4 = stats.json pitfalls_total == 六主题正本聚合实数（419==419）+ AGENTS 标记存在性检查 ⇒ **不补回退役散文**（那会造第二份可漂移复述面）；② **文档侧追平（N1/N2/N5 + 同族面）**——速查 A6 13→19；文档规范 76→88 段 + 「615==615」→「629==629」；启动Prompt 三键 623/89/90→629/90/91 + 第 5 步「616 篇」→629 篇（判据新增第 4 对使第 1/5 步同族数都在对拍面）；同族清扫 4 面（统计口径说明 A6 13→19 / N=615→629 / 88→91 / 87→90 + 校验行 87→90 · HANDOVER A5 34→42）——统计口径说明.md 原**单文件内自相矛盾**（§2 标题已 90 vs 正文 88/87）已消除；③ **修根因：恢复静默失效的硬门禁**——verify_delivery 的 A1-A6 计数段在 README 无「共 N 篇」时 fallback 到 AGENTS 的 a1_a6_docs 标记，而 AGENTS §1「核心内容规模」随地图化被删 ⇒ fallback 双重落空 ⇒ 该段自 W1279 起退化为 WARN 跳过（**不红被读成绿**）⇒ 修在**断言源承载面**（AGENTS 定位段补 stats 标记·不动禁改清单本体）；④ **教训落仓 E-315**（判据锚点随上游重构漂移）+ **计数链跟随面根治**——W1290 拆分后 stats.py 的 sweep 窄域仍只认「路径恰为 pitfalls.md」⇒ 六主题正本段头与根壳表格行永不被跟随 ⇒ 段头声明永久滞后 ⇒ 坑表 C2/C3 判红；本批迁移三处面（sweep files 面 + narrow_pred 判定 + 窄域行集合定稿为「行内含 <!--stats:pitfalls_*>」）+ 六正本契约段硬写分项数改标记形态⇒ **今后加坑条目零手工同步**；⑤ **T4 豁免簿清偿**——按第 49 槽实测（238 页·0 FAIL·129 页报陈旧豁免）三阶段收缩 **259 → 0 条**（v1 原始键 259→7 · v2 实测同源归一口径 7→4 · v3 空页兜底 4→0）+ `updated_at` 2026-10-22→2026-11-21 + 审计留痕 `_w1291_exemption_audit.json`；⑥ **T1 复盘**——`工作复盘与优化分析报告-2026-11-21.md` 落盘（目录面）+ 本段认领「复盘批」角色（登记面）⇒ 触发器双源可见；⑦ 台账腾窗（加认领行致 61 段超 60 ⇒ 迁出 W1227–W1228 ⇒ 正本 59 行）+ spec 一次定形 + 收官链落段/回填。
-> - **验证**：治理数字断言 **7 FAIL → 0 FAIL**（`check_gov_doc_claims.py`）+ 自测 4 类负样本通过 + ruff 全绿；**verify A1-A6 计数段恢复实跑**（WARN 跳过 → OK 629 == 629）；**坑表 7 项判据 0 FAIL**（声明 420 == 实算 420 · 反查表 274/274 · 本体唯一 274 · 镜像段缺失 0 · 写窗各 ≤262144）；**豁免簿 259→0 + 陈旧豁免清零 + 第 49 槽 0 FAIL EXIT=0**（删光后仍绿 ⇒ 反证每条都不再需要）；第 41/74 槽 0 FAIL（台账 59 行）；第 31 槽 C4-f 的「未提交残留」为提交前必然态·add 后消解；全量门禁 0 FAIL · pytest 全绿 · 一次推送带齐 1 笔 ⇒ 1 轮 CI。
-> - **状态**：N1–N5 五条治理数字断言**归零**且两条的根因在判据侧已修（不是把数改绿）；同族 4 面清扫完毕；一道自 W1279 起静默失效的硬门禁**恢复实跑**；坑表计数链**跟随面随结构迁移**（加条目零手工同步）；豁免簿「只增不减」防线**清偿到 0 条**并由门禁复跑反证；复盘与报告双落盘 ⇒ preflight 五条 WARN + T1/T4 双触发器**本批清零**。
-> - **文件**： .agent/skills/puti-shouye/SKILL.md, AGENTS.md, CHANGELOG.md, CITATION.cff, HANDOVER.md, README.md, STRUCTURE.md, archive/docs/AGENTS-ARCHIVE.md, archive/docs/W批次编号对账表-ARCHIVE.md, archive/docs/pitfalls-detail-ARCHIVE.md, docs/00-导读/W批次编号对账表.md, docs/00-导读/协议边界速查.md, docs/00-导读/文档规范.md, docs/00-导读/新Agent启动Prompt.md, docs/00-导读/统计口径说明.md, docs/00-导读/项目说明.md, docs/11-方案报告/README.md, docs/11-方案报告/工作复盘与优化分析报告/工作复盘与优化分析报告-2026-11-21.md, docs/11-方案报告/计划方案/T123-任务计划执行与经验沉淀报告-2026-11-21.md, docs/11-方案报告/计划方案/T124-任务计划执行与经验沉淀报告-2026-11-21.md, docs/agent/pitfalls-topics/cascade-changelog.md, docs/agent/pitfalls-topics/css-visual.md, docs/agent/pitfalls-topics/data-trust.md, docs/agent/pitfalls-topics/flow-collab.md, docs/agent/pitfalls-topics/git-concurrency.md, docs/agent/pitfalls-topics/js-csp-runtime.md, pitfalls.md, scripts/check_gov_doc_claims.py, scripts/output/_vermilion_solid_report.json, scripts/output/_w1291_exemption_audit.json, scripts/output/_w864_accent_exemptions.json, scripts/output/file-index.md, scripts/output/stats-changelog.json, scripts/output/stats-index.md, scripts/output/stats.json, scripts/stats.py, site/data/cross-time-danmaku.html, site/data/tag-cloud.html, site/dukou-engine.html, site/index.html
-
 # 更新日志
 
 📖 阅读契约（W707）**：查表型——判断「当前版本/最近批次」时只读**顶段 1 个版本段**；查历史段用 grep（`grep -A 30 "### vX"`）；完整通读非预期用法（历史细节在 archive/docs/CHANGELOG-ARCHIVE*.md·grep 单段查勿打开通读）。
@@ -908,7 +915,7 @@
 
 ## [Unreleased]
 
-> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1354），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
+> **W### 编号规则**：每个版本段标注唯一 W### ID（W001-W1355），v0.8 内部细分 W008.1-W008.7（B0-B7）。每个 W 附四件套字段（来源/文件/验证/状态）。反向索引见 [scripts/output/file-index.md](scripts/output/file-index.md)（给定文件查改几次）。
 >
 > **v/W 双键口径（W706）**：时间点查询以 W 号为准（单调键）；v 号在 W659-W667 合并段/并行批次区间不单调（v2.3.262〔W661〕列于 v2.3.261〔W666〕后）；v 号形态演化（阶段标签化·方案 D）经盘点 docs/superpowers/plans/2026-10-11-version-space-inventory.md 后另批实施。
 >
