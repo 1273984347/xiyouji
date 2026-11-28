@@ -60,6 +60,7 @@
     "| scripts/output/stats-changelog.json | W1365 | stats 产物刷新 |",
     "| scripts/output/stats-index.md | W1365 | stats 产物刷新 |",
     "| tests/unit/INDEX.md | W1365 | 目录文档索引刷新（新增守卫单测） |",
-    "| tests/unit/README.md | W1365 | 目录文档导读刷新 |"
+    "| tests/unit/README.md | W1365 | 目录文档导读刷新 |",
+    "| docs/11-方案报告/设计与架构方案/系统架构方案v2-目标态与落地路线-2026-10-25.md | W1365 | 聚合数字对账同步（pytest collected 标记跟随 stats 实算刷新） |"
   ]
 }
