@@ -6,8 +6,8 @@
 | archive/docs/（6 件） | W1364 | 版本滚动归档（cascade 写入） |
 | assets/promo/（2 件） | W1364 | 宣纸淡彩插画族 48 张成套 + 4 张目视拼版预览 + 风格锚点 + 族 RE |
 | docs/00-导读/（2 件） | W1364 | 本批认领行（W1364） |
-| scripts/output/（10 件） | W1364 | 本批 file-index 段（cascade 写入） |
-| site/（2 件） | W1364 | 页脚批次版本行滚动（cascade 写入） |
+| scripts/output/（13 件） | W1364 | 本批 file-index 段（cascade 写入） |
+| site/（4 件） | W1364 | 页脚批次版本行滚动（cascade 写入） |
 | site/data/（2 件） | W1364 | 页脚批次版本行滚动（cascade 写入） |
 | CHANGELOG.md | W1364 | 宣纸淡彩插画族 48 张成套批 |
 | HANDOVER.md | W1364 | 里程碑块（cascade 写入） |

@@ -39,6 +39,11 @@
     "| scripts/output/chart-legend-render-audit.md | W1364 | 图例渲染复核报告刷新 |",
     "| scripts/output/_w1266_allrender.json | W1364 | 全站渲染复核档案刷新 |",
     "| scripts/output/_cascade_files_W1364.txt | W1364 | 级联落盘清单（cascade 生成） |",
-    "| scripts/output/_w1364_spec.json | W1364 | 本批 spec |"
+    "| scripts/output/_w1364_spec.json | W1364 | 本批 spec |",
+    "| site/rss.xml | W1364 | 批次动态 RSS 条目（新增 W1364 段） |",
+    "| site/sitemap.xml | W1364 | sitemap lastmod 刷新（cascade 写入） |",
+    "| scripts/output/tools-inventory.md | W1364 | 工具盘点产物刷新 |",
+    "| scripts/output/INDEX.md | W1364 | 目录文档索引刷新 |",
+    "| scripts/output/README.md | W1364 | 目录文档导读刷新 |"
   ]
 }
